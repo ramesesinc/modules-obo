@@ -1,5 +1,0 @@
-<workunit>
-    <invokers>
-        <invoker type="obo_application:section" caption="Plumbing" section="plumbing" index="3"/>
-    </invokers>
-</workunit>

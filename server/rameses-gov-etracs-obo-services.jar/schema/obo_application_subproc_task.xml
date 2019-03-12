@@ -1,9 +1,7 @@
 <schema adapter="obodb">
-
-	<element tablename="obo_application_task">
-		<field name="taskid" primary="true"  prefix="OBOTSK" visible="true"/>
-		<complex name="app" ref="obo_application" jointype="many-to-one" required="false"
-			includefields="appno,apptype,appdate,owner.name,description,estimatedcost"> 
+	<element tablename="obo_application_subproc_task">
+		<field name="taskid" primary="true"  prefix="OBOSUBPROCTSK" visible="true"/>
+		<complex name="ref" ref="obo_application_subproc" jointype="many-to-one" required="false"> 
 			<key field="refid" target="objid"/>
 		</complex>
 		<field name="parentprocessid" />
@@ -18,6 +16,5 @@
 		<field name="message" />	
 		<field name="prevtaskid" />	
 	</element>
-
 </schema>
 		

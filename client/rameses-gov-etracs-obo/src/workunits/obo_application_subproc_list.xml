@@ -1,0 +1,10 @@
+<workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
+          processName="obo_application_subproc" schemaName="obo_application_subproc"
+          allowDelete="false" allowNotify="false">
+    <invokers>
+        <invoker type="obo_application_subproc:list" caption="View Sub Process List"
+             cols="app.appno,app.owner.name,section.title,type.org.name"
+                action="init" index="-1" srole="SHARED"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationSubprocListModel" />
+</workunit>

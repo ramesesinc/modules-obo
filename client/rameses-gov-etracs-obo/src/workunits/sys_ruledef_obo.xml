@@ -1,0 +1,8 @@
+<workunit extends="wtemplates/RulesetList.xml">
+    <invokers>
+        
+        <invoker folderid="/explorer/developer/rulemgmt" caption="OBO" 
+                 action="init" index="10" role="RULE_AUTHOR"/>
+
+    </invokers>
+</workunit>

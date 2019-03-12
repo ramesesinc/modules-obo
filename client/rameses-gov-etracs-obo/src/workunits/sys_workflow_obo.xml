@@ -1,0 +1,6 @@
+<workunit extends="wtemplates/WorkflowList.xml">
+    <invokers>
+        <invoker folderid="/explorer/developer/workflow" caption="OBO Workflows" 
+                 action="init" index="31" role="RULE_AUTHOR"/>
+    </invokers>
+</workunit>

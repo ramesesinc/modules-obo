@@ -34,15 +34,10 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         xTabbedPane1 = new com.rameses.rcp.control.XTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        oboVariableInfoItemList1 = new com.rameses.gov.etracs.obo.components.OboVariableInfoItemList();
         jPanel4 = new javax.swing.JPanel();
-        oboVariableInfoItemList2 = new com.rameses.gov.etracs.obo.components.OboVariableInfoItemList();
         jPanel3 = new javax.swing.JPanel();
-        oboVariableInfoItemList3 = new com.rameses.gov.etracs.obo.components.OboVariableInfoItemList();
         jPanel5 = new javax.swing.JPanel();
-        oboVariableInfoItemList4 = new com.rameses.gov.etracs.obo.components.OboVariableInfoItemList();
         jPanel8 = new javax.swing.JPanel();
-        oboVariableInfoItemList5 = new com.rameses.gov.etracs.obo.components.OboVariableInfoItemList();
         jPanel9 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -56,113 +51,67 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
         xIntegerField2 = new com.rameses.rcp.control.XIntegerField();
         xDecimalField4 = new com.rameses.rcp.control.XDecimalField();
 
-        oboVariableInfoItemList1.setName("electricalPermit"); // NOI18N
-        oboVariableInfoItemList1.setSection("electrical");
-        oboVariableInfoItemList1.setShowCaption(false);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList1, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 801, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 303, Short.MAX_VALUE)
         );
 
         xTabbedPane1.addTab("Electrical", jPanel2);
-
-        oboVariableInfoItemList2.setName("mechanicalPermit"); // NOI18N
-        oboVariableInfoItemList2.setSection("mechanical");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList2, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 801, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList2, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 303, Short.MAX_VALUE)
         );
 
         xTabbedPane1.addTab("Mechanical", jPanel4);
-
-        oboVariableInfoItemList3.setName("plumbingPermit"); // NOI18N
-        oboVariableInfoItemList3.setSection("plumbing");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList3, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 801, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList3, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 303, Short.MAX_VALUE)
         );
 
         xTabbedPane1.addTab("Plumbing", jPanel3);
-
-        oboVariableInfoItemList4.setName("electronicPermit"); // NOI18N
-        oboVariableInfoItemList4.setSection("electronic");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList4, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 801, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList4, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 303, Short.MAX_VALUE)
         );
 
         xTabbedPane1.addTab("Electronic", jPanel5);
-
-        oboVariableInfoItemList5.setName("buildingInfos"); // NOI18N
-        oboVariableInfoItemList5.setSection("building");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList5, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 801, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(oboVariableInfoItemList5, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(121, Short.MAX_VALUE))
+            .addGap(0, 303, Short.MAX_VALUE)
         );
 
         xTabbedPane1.addTab("Building Structure Accessories", jPanel8);
@@ -315,11 +264,6 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private com.rameses.enterprise.components.LOVList lOVList1;
     private com.rameses.enterprise.components.LOVList lOVList2;
-    private com.rameses.gov.etracs.obo.components.OboVariableInfoItemList oboVariableInfoItemList1;
-    private com.rameses.gov.etracs.obo.components.OboVariableInfoItemList oboVariableInfoItemList2;
-    private com.rameses.gov.etracs.obo.components.OboVariableInfoItemList oboVariableInfoItemList3;
-    private com.rameses.gov.etracs.obo.components.OboVariableInfoItemList oboVariableInfoItemList4;
-    private com.rameses.gov.etracs.obo.components.OboVariableInfoItemList oboVariableInfoItemList5;
     private com.rameses.rcp.control.XDecimalField xDecimalField3;
     private com.rameses.rcp.control.XDecimalField xDecimalField4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;

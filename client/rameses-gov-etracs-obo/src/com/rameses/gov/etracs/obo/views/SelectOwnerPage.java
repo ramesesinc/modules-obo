@@ -33,7 +33,6 @@ public class SelectOwnerPage extends javax.swing.JPanel {
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         orgTypeList1 = new com.rameses.entity.components.OrgTypeList();
         entityLookup1 = new com.rameses.entity.components.EntityLookup();
-        cTCIndividualEntryPage2 = new com.rameses.etracs.components.CTCIndividualEntryPage();
 
         xFormPanel1.setCaptionWidth(150);
 
@@ -46,12 +45,6 @@ public class SelectOwnerPage extends javax.swing.JPanel {
         entityLookup1.setName("entity.owner"); // NOI18N
         entityLookup1.setPreferredSize(new java.awt.Dimension(0, 21));
         xFormPanel1.add(entityLookup1);
-
-        cTCIndividualEntryPage2.setCaption("Community Tax Certificate");
-        cTCIndividualEntryPage2.setDepends(new String[] {"entity.owner"});
-        cTCIndividualEntryPage2.setName("entity.owner.ctc"); // NOI18N
-        cTCIndividualEntryPage2.setPreferredSize(new java.awt.Dimension(0, 69));
-        xFormPanel1.add(cTCIndividualEntryPage2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,7 +64,6 @@ public class SelectOwnerPage extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.etracs.components.CTCIndividualEntryPage cTCIndividualEntryPage2;
     private com.rameses.entity.components.EntityLookup entityLookup1;
     private com.rameses.entity.components.OrgTypeList orgTypeList1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;

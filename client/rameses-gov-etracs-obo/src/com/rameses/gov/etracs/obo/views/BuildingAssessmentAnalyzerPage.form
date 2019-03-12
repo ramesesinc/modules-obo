@@ -89,32 +89,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList1" pref="805" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="801" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList1" pref="302" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="303" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="com.rameses.gov.etracs.obo.components.OboVariableInfoItemList" name="oboVariableInfoItemList1">
-                      <Properties>
-                        <Property name="name" type="java.lang.String" value="electricalPermit" noResource="true"/>
-                        <Property name="section" type="java.lang.String" value="electrical"/>
-                        <Property name="showCaption" type="boolean" value="false"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel4">
                   <Constraints>
@@ -128,31 +111,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList2" pref="805" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="801" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList2" pref="302" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="303" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="com.rameses.gov.etracs.obo.components.OboVariableInfoItemList" name="oboVariableInfoItemList2">
-                      <Properties>
-                        <Property name="name" type="java.lang.String" value="mechanicalPermit" noResource="true"/>
-                        <Property name="section" type="java.lang.String" value="mechanical"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel3">
                   <Constraints>
@@ -166,31 +133,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList3" pref="805" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="801" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList3" pref="302" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="303" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="com.rameses.gov.etracs.obo.components.OboVariableInfoItemList" name="oboVariableInfoItemList3">
-                      <Properties>
-                        <Property name="name" type="java.lang.String" value="plumbingPermit" noResource="true"/>
-                        <Property name="section" type="java.lang.String" value="plumbing"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel5">
                   <Constraints>
@@ -204,31 +155,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList4" pref="805" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="801" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList4" pref="302" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="303" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="com.rameses.gov.etracs.obo.components.OboVariableInfoItemList" name="oboVariableInfoItemList4">
-                      <Properties>
-                        <Property name="name" type="java.lang.String" value="electronicPermit" noResource="true"/>
-                        <Property name="section" type="java.lang.String" value="electronic"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel8">
                   <Constraints>
@@ -242,31 +177,15 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList5" pref="805" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="801" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="oboVariableInfoItemList5" min="-2" pref="192" max="-2" attributes="0"/>
-                              <EmptySpace pref="121" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="0" pref="303" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
-                  <SubComponents>
-                    <Component class="com.rameses.gov.etracs.obo.components.OboVariableInfoItemList" name="oboVariableInfoItemList5">
-                      <Properties>
-                        <Property name="name" type="java.lang.String" value="buildingInfos" noResource="true"/>
-                        <Property name="section" type="java.lang.String" value="building"/>
-                      </Properties>
-                    </Component>
-                  </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel9">
                   <Constraints>

@@ -1,0 +1,43 @@
+import com.rameses.annotations.*; 
+
+class OboApplicationWorkflowInterceptor { 
+
+	@Service("WorkflowTaskService")
+	def wfSvc;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("obo_application_subproc")
+	def subProc;
+
+	@DataContext("obo_requirement_type")
+	def reqType;
+
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_application' }") 
+	public void triggerSubprocRequirements( def evt ) {
+		def p = evt.args[0];
+		def r = evt.result;
+
+		def list = reqType.find([processname:'obo_application', activationstate:r.state]).select("objid").list();
+		if(list) {
+			list.each {
+				def m = [:];
+				m.maintaskid = r.taskid;
+				m.refid = p.refid;
+				m.typeid = it.objid;
+				def t = subProc.create( m );
+
+				//fire the sub proc task
+				def dt = dateSvc.getServerDate();
+				def f = [:];
+				f.processname = 'obo_application_subproc';
+				f.refid = m.objid;
+				f.startdate = dt;
+				f.info = m;
+				wfSvc.start(f);	
+			}	
+		}
+	} 
+
+} 

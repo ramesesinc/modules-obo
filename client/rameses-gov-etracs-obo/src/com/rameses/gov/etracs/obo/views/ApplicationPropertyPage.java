@@ -36,7 +36,6 @@ public class ApplicationPropertyPage extends javax.swing.JPanel {
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
         xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
-        cTCIndividualEntryPage1 = new com.rameses.etracs.components.CTCIndividualEntryPage();
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder1.setPadding(new java.awt.Insets(30, 10, 10, 10));
@@ -79,15 +78,6 @@ public class ApplicationPropertyPage extends javax.swing.JPanel {
         xCheckBox1.setText("Lot Owned");
         xFormPanel2.add(xCheckBox1);
 
-        cTCIndividualEntryPage1.setCaption("Lot Owner CTC");
-        cTCIndividualEntryPage1.setDepends(new String[] {"entity.lotowned"});
-        cTCIndividualEntryPage1.setEntityName("entity.lotowner");
-        cTCIndividualEntryPage1.setName("entity.lotowner.ctc"); // NOI18N
-        cTCIndividualEntryPage1.setOpaque(false);
-        cTCIndividualEntryPage1.setPreferredSize(new java.awt.Dimension(0, 69));
-        cTCIndividualEntryPage1.setVisibleWhen("#{ entity.lotowned == false }");
-        xFormPanel2.add(cTCIndividualEntryPage1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,7 +96,6 @@ public class ApplicationPropertyPage extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.etracs.components.CTCIndividualEntryPage cTCIndividualEntryPage1;
     private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XLabel xLabel1;

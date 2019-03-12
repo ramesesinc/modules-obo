@@ -44,12 +44,10 @@ public class ApplicationInitialPage extends javax.swing.JPanel {
         xDecimalField1 = new com.rameses.rcp.control.XDecimalField();
         xDateField1 = new com.rameses.rcp.control.XDateField();
         xDateField2 = new com.rameses.rcp.control.XDateField();
-        oboAddress1 = new com.rameses.gov.etracs.obo.components.OboAddress();
         jPanel2 = new javax.swing.JPanel();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         entityLookup1 = new com.rameses.entity.components.EntityLookup();
         xLabel4 = new com.rameses.rcp.control.XLabel();
-        cTCIndividualEntryPage2 = new com.rameses.etracs.components.CTCIndividualEntryPage();
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder1.setPadding(new java.awt.Insets(30, 10, 10, 10));
@@ -129,14 +127,8 @@ public class ApplicationInitialPage extends javax.swing.JPanel {
         xFormPanel1.add(xDateField2);
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder3 = new com.rameses.rcp.control.border.XTitledBorder();
-        xTitledBorder3.setPadding(new java.awt.Insets(30, 10, 10, 10));
-        xTitledBorder3.setTitle("Project Location");
-        oboAddress1.setBorder(xTitledBorder3);
-        oboAddress1.setName("entity.location"); // NOI18N
-
-        com.rameses.rcp.control.border.XTitledBorder xTitledBorder4 = new com.rameses.rcp.control.border.XTitledBorder();
-        xTitledBorder4.setTitle("Owner Information");
-        jPanel2.setBorder(xTitledBorder4);
+        xTitledBorder3.setTitle("Owner Information");
+        jPanel2.setBorder(xTitledBorder3);
 
         xFormPanel2.setCaptionWidth(150);
 
@@ -153,22 +145,13 @@ public class ApplicationInitialPage extends javax.swing.JPanel {
         xLabel4.setVisibleWhen("#{entity.owner.orgtype != null }");
         xFormPanel2.add(xLabel4);
 
-        cTCIndividualEntryPage2.setCaption("Community Tax Certificate");
-        cTCIndividualEntryPage2.setDepends(new String[] {"entity.owner"});
-        cTCIndividualEntryPage2.setEntityName("entity.owner");
-        cTCIndividualEntryPage2.setName("entity.owner.ctc"); // NOI18N
-        cTCIndividualEntryPage2.setOpaque(false);
-        cTCIndividualEntryPage2.setPreferredSize(new java.awt.Dimension(0, 69));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cTCIndividualEntryPage2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -176,9 +159,7 @@ public class ApplicationInitialPage extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cTCIndividualEntryPage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -187,9 +168,7 @@ public class ApplicationInitialPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(xFormPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
-                    .addComponent(oboAddress1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(xFormPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -204,19 +183,15 @@ public class ApplicationInitialPage extends javax.swing.JPanel {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(xFormPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(oboAddress1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(182, 182, 182))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.etracs.components.CTCIndividualEntryPage cTCIndividualEntryPage2;
     private com.rameses.entity.components.EntityLookup entityLookup1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private com.rameses.enterprise.components.LOVList lOVList1;
-    private com.rameses.gov.etracs.obo.components.OboAddress oboAddress1;
     private com.rameses.rcp.control.XDateField xDateField1;
     private com.rameses.rcp.control.XDateField xDateField2;
     private com.rameses.rcp.control.XDecimalField xDecimalField1;

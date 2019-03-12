@@ -1,0 +1,7 @@
+<schema adapter="obodb">
+	<element tablename="obo_application">
+		<field name="objid" primary="true"/>
+		<field name="controlno" />
+		<field name="appid" />
+	</element>
+</schema>	

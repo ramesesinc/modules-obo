@@ -1,29 +1,17 @@
 <workunit schemaName="obo_application">
     <invokers>
-        <invoker folderid="menucategory/obo/application" caption="New Construction"
-                action="startOnline" index="1"/>
-
-        <invoker folderid="menucategory/obo/application" caption="Renewal"
-                action="startOnline" index="1"/>
-        
-        <invoker folderid="menucategory/obo/application" caption="Demolition"
-                action="startOnline" index="1"/>
-
-        <invoker folderid="menucategory/obo/application" caption="Addition"
-                action="startOnline" index="1"/>
-
-        <invoker folderid="menucategory/obo/application" caption="Occupancy Permit"
-                action="startOnline" index="1"/>
-
+        <invoker folderid="menucategory/obo/application" caption="New OBO Application"
+                action="start" index="1"/>
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.NewOboApplicationModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationEntryModel" />
     <pageflow>
         <start>
-            <transition to="initial" />
+            <transition to="initial" action="initNew"/>
         </start>
         <page name="initial" title="OBO Application Initial">
-            <transition to="specify-property" caption="Next" immediate="false"/>
+            <transition to="end" caption="Save" immediate="false" action="save"/>
         </page> 
+        <!--
         <page name="specify-property" title="Property Information">
             <transition to="initial" caption="Back" />
             <transition to="specify-professional" caption="Next" immediate="false"/>
@@ -36,13 +24,16 @@
             <transition to="specify-professional" caption="Back" />
             <transition to="end" caption="Submit" action="saveCreate" immediate="false"
                  confirm="You are about to submit this entry. Proceed?"/>
-        </page> 
+        </page>
+        -->  
         <end/>
     </pageflow>
     <pages>
-        <page name="initial" template="com.rameses.gov.etracs.obo.views.ApplicationInitialPage" />
+        <page name="initial" template="com.rameses.gov.etracs.obo.views.OboApplicationEntryPage" />
+        <!--
         <page name="specify-property" template="com.rameses.gov.etracs.obo.views.ApplicationPropertyPage" />
         <page name="specify-professional" template="com.rameses.gov.etracs.obo.views.ApplicationSpecifyProfessionalPage" />
         <page name="confirm" template="com.rameses.gov.etracs.obo.views.NewApplicationPage" />
+        -->
     </pages>
 </workunit>

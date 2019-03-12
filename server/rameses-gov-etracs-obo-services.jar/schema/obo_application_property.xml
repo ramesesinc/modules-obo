@@ -1,5 +1,5 @@
 <schema adapter="obodb">
-	<element tablename="obo_application_lot">
+	<element tablename="obo_application_property">
 		<field name="objid" primary="true" prefix="OBOAPP"/>
 		<field name="appid" caption="App No"/>
 
@@ -11,16 +11,5 @@
 		<field name="owner_ctc_dateissued" />
 		<field name="owner_ctc_placeissued" />
 
-		<field name="lotno" />
-		<field name="blockno" />
-		<field name="bldgno" />
-		<field name="street" />
-		<field name="subdivision" />
-		<field name="barangay_objid" required="true"/>
-		<field name="barangay_name"  required="true"/>
-
-		<field name="tdno" />
-		<field name="rptid" />
-		<field name="titleno" />
 	</element>
 </schema>

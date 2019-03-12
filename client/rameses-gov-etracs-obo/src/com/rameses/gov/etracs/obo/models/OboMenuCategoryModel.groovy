@@ -16,18 +16,44 @@ class OboMenuCategoryModel  extends MenuCategoryModel {
     @Service("QueryService")
     def querySvc;
     
+    
+    
     void loadDynamicItems( String _id, def subitems, def invokers ) {
-        if(_id.matches("pc|aux")) {
-            def m = [_schemaname: "obo_section_type" ];
-            m.findBy = [type: _id.toUpperCase()];
-            m.orderBy = "sortindex";
-            def list = querySvc.getList( m )
+        def secProvider = clientContext.getSecurityProvider();
+        if(_id == 'application' ) {
+            def m = [_schemaname: "obo_section" ];
+            m.orderBy = "idx";
+            m._limit = 200;
+            def list = querySvc.getList( m );
+            list.each {
+                if(it.role) {
+                    boolean b = secProvider.checkPermission( workunit.workunit.module.domain, it.role, ".*" );
+                    if(!b) return;
+                }
+                def id = _id + "/" + it.objid;
+                subitems << [ id: id, caption: it.title, index: (100+ it.idx) ];
+                def op = Inv.lookupOpener("obo_subapplication:list", ['sectionid': it.objid, 'title': it.title ]);
+                op.target = 'window';
+                invokers.put( id, op);
+            }
+            
+            //load also subprocesses
+            m.clear();
+            m = [_schemaname: "obo_requirement_type" ];
+            m.findBy = [type:'SUBPROC'];
+            m._limit = 100;
+            //m.where = ["org.objid = :"]
+            list = querySvc.getList( m );
+            int i = 100;
             list.each {
                 def id = _id + "/" + it.objid;
-                subitems << [ id: id, caption: it.title, index: it.sortindex ];
-                invokers.put( id, Inv.lookupOpener("obo_application_section:list", ['query.type': it.objid, 'query.title': it.title ]));
+                subitems << [ id: id, caption: it.title, index: (i++) ];
+                def op = Inv.lookupOpener("obo_application_subproc:list", [typeid: it.objid, 'title': it.title ]);
+                op.target = 'window';
+                invokers.put( id, op );
             }
         }
+        
     }
     
 }

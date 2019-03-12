@@ -1,11 +1,7 @@
 <schema adapter="obodb">
-
-	<element tablename="obo_application_task">
-		<field name="taskid" primary="true"  prefix="OBOTSK" visible="true"/>
-		<complex name="app" ref="obo_application" jointype="many-to-one" required="false"
-			includefields="appno,apptype,appdate,owner.name,description,estimatedcost"> 
-			<key field="refid" target="objid"/>
-		</complex>
+	<element tablename="obo_subapplication_task">
+		<field name="taskid" primary="true"  prefix="OBOSUBAPPTSK" visible="true"/>
+		<field name="refid" />		
 		<field name="parentprocessid" />
 		<field name="state" required="true"/>
 		<field name="dtcreated" required="true"/>
@@ -18,6 +14,5 @@
 		<field name="message" />	
 		<field name="prevtaskid" />	
 	</element>
-
 </schema>
 		
