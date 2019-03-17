@@ -3,9 +3,7 @@
 		<field name="objid" primary="true" prefix="OBOSUBAPP"/>
 		<field name="appid" />
 		<field name="sectionid" />
-
-		<field name="taskid" />
-
+		<!--
 		<complex name="section" ref="obo_section" required="false" jointype="many-to-one">
 			<key field="sectionid" target="objid" />
 		</complex>	
@@ -17,6 +15,6 @@
 		<complex name="task" ref="obo_subapplication_task" required="false" jointype="many-to-one">
 			<key field="taskid" target="taskid" />
 		</complex>
-
+		-->
 	</element>
 </schema>

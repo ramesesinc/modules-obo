@@ -8,36 +8,72 @@ class OboApplicationWorkflowInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-	@DataContext("obo_application_subproc")
-	def subProc;
+	@DataContext("obo_application_workitem")
+	def workItemEm;
+
+	@DataContext("obo_application_requirement")
+	def appReqEm;
 
 	@DataContext("obo_requirement_type")
 	def reqType;
 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_application' }") 
-	public void triggerSubprocRequirements( def evt ) {
+	@DataContext("obo_application")
+	def appEm;
+
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_application' }") 
+	public void checkApplicationWorkItems( def evt ) {
+		//check if documents and workitems status <> 0
+		def p = evt.args[0];
+		def r = [appid:p.refid, processname:'obo_application', validationstate: p.taskstate];
+		def list = appEm.getUnvalidateRequirements( r );
+		if( list ) {
+			def buff = new StringBuilder();
+			def docs = list.findAll{ it.type == 'DOC' };
+			if( docs ) {
+				buff.append("The ff. are unvalidated document requirements: \n")
+				buff.append( docs.collect{"  "+it.title}.join("\n") );
+			}
+			def procs = list.findAll{ it.type == 'PROC' };
+			if( procs ) {
+				buff.append("\nThere are still unapproved transactions as follows: \n")
+				buff.append( procs.collect{"  "+it.title}.join("\n") );
+			}
+			throw new Exception( buff.toString() );			
+		}
+	}
+
+	@After(pattern="WorkflowTaskService.(start|signal)", eval="#{args[0].processname == 'obo_application' }") 
+	public void triggerApplicationWorkItems( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
 
-		def list = reqType.find([processname:'obo_application', activationstate:r.state]).select("objid").list();
-		if(list) {
-			list.each {
-				def m = [:];
-				m.maintaskid = r.taskid;
-				m.refid = p.refid;
-				m.typeid = it.objid;
-				def t = subProc.create( m );
+		def list = reqType.find([processname:'obo_application', activationstate:r.state]).list();
 
-				//fire the sub proc task
+		list?.each {
+			if( it.type == 'PROC') {
+				def wi = [:];
+				wi.appid = p.info.objid;
+				wi.typeid = it.objid;
+				wi.status = 0;
+				workItemEm.create( wi );
+
+				//fire the workitem task
 				def dt = dateSvc.getServerDate();
 				def f = [:];
-				f.processname = 'obo_application_subproc';
-				f.refid = m.objid;
+				f.processname = 'obo_application_workitem';
+				f.refid = wi.objid;
 				f.startdate = dt;
-				f.info = m;
+				f.info = [ type: it, app: p.info ];
 				wfSvc.start(f);	
-			}	
-		}
+			}
+			else {
+				def dr = [:];
+				dr.typeid = it.objid;
+				dr.appid = p.info.objid;
+				dr.status = 0;
+				appReqEm.create( dr );
+			}
+		}	
 	} 
 
 } 

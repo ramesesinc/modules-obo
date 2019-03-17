@@ -23,7 +23,7 @@ class OboApplicationModel extends WorkflowTaskModel {
     }
     
     public String getTitle() {
-        return entity.appno + " - " + task?.title;
+        return entity.appno + "[ " +  task?.title + "]" ;
     }
     
     public String getWindowTitle() {
@@ -34,5 +34,11 @@ class OboApplicationModel extends WorkflowTaskModel {
         return entity.objid;
     }
     
+    
+    def subApplicationListModel = [
+        fetchList: { o->
+            return [];
+        }
+    ] as BasicListModel;
     
 }

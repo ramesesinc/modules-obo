@@ -1,5 +1,5 @@
 <schema adapter="obodb">
-	<element tablename="obo_application">
+	<element tablename="obo_account">
 		<field name="objid" primary="true"/>
 		<field name="controlno" />
 		<field name="appid" />

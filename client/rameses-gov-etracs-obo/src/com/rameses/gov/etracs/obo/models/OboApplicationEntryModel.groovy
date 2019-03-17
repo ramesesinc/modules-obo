@@ -45,7 +45,13 @@ class OboApplicationEntryModel extends PageFlowController {
         entity.subapplications = sectionList.selectedValue.collect{
             [sectionid: it.objid]
         }
-        appService.create( entity );
+        entity = appService.create( entity );
+    }
+    
+    public def onComplete() {
+        def op =  Inv.lookupOpener("vw_obo_application:open", [entity: entity ] );
+        op.target = "topwindow";
+        return op;
     }
     
 }

@@ -39,12 +39,6 @@ public class OboApplicationPage extends javax.swing.JPanel {
         xLabel8 = new com.rameses.rcp.control.XLabel();
         xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel9 = new com.rameses.rcp.control.XLabel();
-        xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
-        xLabel3 = new com.rameses.rcp.control.XLabel();
-        xLabel10 = new com.rameses.rcp.control.XLabel();
-        xLabel11 = new com.rameses.rcp.control.XLabel();
-        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
         xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
         xLabel5 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
@@ -66,30 +60,26 @@ public class OboApplicationPage extends javax.swing.JPanel {
 
         xLabel4.setCaption("XX Owner");
         xLabel4.setExpression("#{entity.owner.name}");
-        xLabel4.setName("entity.rptinfo.text"); // NOI18N
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
 
         xLabel6.setCaption("Work Type");
         xLabel6.setExpression("#{entity.worktype}");
-        xLabel6.setName("entity.rptinfo.text"); // NOI18N
         xLabel6.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel6);
 
         xLabel7.setCaption("Project Description");
         xLabel7.setExpression("#{entity.description}");
-        xLabel7.setName("entity.rptinfo.text"); // NOI18N
         xLabel7.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel7);
 
         xLabel8.setCaption("Building Use");
-        xLabel8.setExpression("#{entity.buildingkind.name}");
-        xLabel8.setName("entity.rptinfo.text"); // NOI18N
+        xLabel8.setExpression("#{entity.classificationid}");
         xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel8);
 
         xLabel2.setCaption("Bldg Use Type");
-        xLabel2.setExpression("#{entity.buildingkind.use.objid}");
+        xLabel2.setExpression("#{entity.occupancyuseid}");
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel2);
 
@@ -98,47 +88,11 @@ public class OboApplicationPage extends javax.swing.JPanel {
         xLabel9.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel9);
 
-        xFormPanel2.setCaption("");
+        xFormPanel3.setCaption("");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder2.setPadding(new java.awt.Insets(20, 10, 10, 10));
-        xTitledBorder2.setTitle("Real Property");
-        xFormPanel2.setBorder(xTitledBorder2);
-        xFormPanel2.setPreferredSize(new java.awt.Dimension(0, 100));
-
-        xLabel1.setCaption("PIN");
-        xLabel1.setExpression("#{entity.rptinfo.fullpin}");
-        xLabel1.setName("entity.rptinfo.text"); // NOI18N
-        xLabel1.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel2.add(xLabel1);
-
-        xLabel3.setCaption("Title No");
-        xLabel3.setExpression("#{entity.rptinfo.titleno}");
-        xLabel3.setName("entity.rptinfo.text"); // NOI18N
-        xLabel3.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel2.add(xLabel3);
-
-        xLabel10.setCaption("Lot Owner");
-        xLabel10.setExpression("#{entity.lotowner.name}");
-        xLabel10.setName("entity.rptinfo.text"); // NOI18N
-        xLabel10.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel2.add(xLabel10);
-
-        xLabel11.setCaption("TD No");
-        xLabel11.setExpression("#{entity.rptinfo.tdno}");
-        xLabel11.setName("entity.rptinfo.text"); // NOI18N
-        xLabel11.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel2.add(xLabel11);
-
-        xCheckBox1.setCaption("");
-        xCheckBox1.setName("entity.lotowned"); // NOI18N
-        xCheckBox1.setText("Lot Owned");
-        xFormPanel2.add(xCheckBox1);
-
-        xFormPanel3.setCaption("");
-        com.rameses.rcp.control.border.XTitledBorder xTitledBorder3 = new com.rameses.rcp.control.border.XTitledBorder();
-        xTitledBorder3.setPadding(new java.awt.Insets(20, 10, 10, 10));
-        xTitledBorder3.setTitle("Application");
-        xFormPanel3.setBorder(xTitledBorder3);
+        xTitledBorder2.setTitle("Application");
+        xFormPanel3.setBorder(xTitledBorder2);
         xFormPanel3.setPreferredSize(new java.awt.Dimension(0, 100));
 
         xLabel5.setCaption("App No");
@@ -159,7 +113,7 @@ public class OboApplicationPage extends javax.swing.JPanel {
         xLabel14.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel14);
 
-        xLabel13.setCaption("Status");
+        xLabel13.setCaption("Task State");
         xLabel13.setExpression("#{entity.task.state}");
         xLabel13.setName("entity.rptinfo.text"); // NOI18N
         xLabel13.setPreferredSize(new java.awt.Dimension(0, 16));
@@ -173,9 +127,7 @@ public class OboApplicationPage extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(178, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -185,14 +137,12 @@ public class OboApplicationPage extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(271, Short.MAX_VALUE))
         );
 
         xTabbedPane1.addTab("General Info", jPanel1);
 
-        xDataTable1.setItems("entity.subapplications");
+        xDataTable1.setHandler("subApplicationListModel");
         xDataTable1.setName("selectedSubApplication"); // NOI18N
         xDataTable1.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
@@ -296,19 +246,13 @@ public class OboApplicationPage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
-    private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
-    private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
-    private com.rameses.rcp.control.XLabel xLabel1;
-    private com.rameses.rcp.control.XLabel xLabel10;
-    private com.rameses.rcp.control.XLabel xLabel11;
     private com.rameses.rcp.control.XLabel xLabel12;
     private com.rameses.rcp.control.XLabel xLabel13;
     private com.rameses.rcp.control.XLabel xLabel14;
     private com.rameses.rcp.control.XLabel xLabel2;
-    private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel6;

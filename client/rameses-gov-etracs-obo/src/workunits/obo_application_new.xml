@@ -1,6 +1,6 @@
 <workunit schemaName="obo_application">
     <invokers>
-        <invoker folderid="menucategory/obo/application" caption="New OBO Application"
+        <invoker folderid="menucategory/obo/building" caption="New Building Permit Application"
                 action="start" index="1"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboApplicationEntryModel" />
@@ -9,7 +9,7 @@
             <transition to="initial" action="initNew"/>
         </start>
         <page name="initial" title="OBO Application Initial">
-            <transition to="end" caption="Save" immediate="false" action="save"/>
+            <transition to="end" caption="Submit" immediate="false" action="save"/>
         </page> 
         <!--
         <page name="specify-property" title="Property Information">

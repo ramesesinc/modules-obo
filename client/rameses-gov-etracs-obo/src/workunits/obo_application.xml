@@ -1,6 +1,6 @@
-<workunit schemaName="obo_application" processName="obo_application">
+<workunit schemaName="vw_obo_application" processName="obo_application">
     <invokers>
-        <invoker type="obo_application:open" caption="OBO Application"
+        <invoker type="vw_obo_application:open" caption="OBO Application"
                 action="open" index="1"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboApplicationModel" />

@@ -1,0 +1,10 @@
+<workunit schemaName="obo_requirement_type">
+    <invokers>       
+        <invoker type="obo_requirement_type:open" action="open" caption="OBO Requirement Type" role="MASTER" target="popup"/>
+        <invoker type="obo_requirement_type:create" action="create" caption="OBO Requirement Type" role="MASTER"  target="popup"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboRequirementTypeModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboRequirementTypePage"/>
+    </pages>
+</workunit>

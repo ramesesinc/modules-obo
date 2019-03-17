@@ -16,11 +16,9 @@ class OboMenuCategoryModel  extends MenuCategoryModel {
     @Service("QueryService")
     def querySvc;
     
-    
-    
     void loadDynamicItems( String _id, def subitems, def invokers ) {
         def secProvider = clientContext.getSecurityProvider();
-        if(_id == 'application' ) {
+        if(_id.matches('building|occupancy') ) {
             def m = [_schemaname: "obo_section" ];
             m.orderBy = "idx";
             m._limit = 200;
@@ -40,7 +38,7 @@ class OboMenuCategoryModel  extends MenuCategoryModel {
             //load also subprocesses
             m.clear();
             m = [_schemaname: "obo_requirement_type" ];
-            m.findBy = [type:'SUBPROC'];
+            m.findBy = [type:'PROC'];
             m._limit = 100;
             //m.where = ["org.objid = :"]
             list = querySvc.getList( m );

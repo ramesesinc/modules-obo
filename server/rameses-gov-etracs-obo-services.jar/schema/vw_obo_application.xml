@@ -1,0 +1,34 @@
+<schema adapter="obodb">
+	<element tablename="vw_obo_application">
+		<field name="objid" primary="true"/>
+		<field name="acctid"/>
+		<field name="appno"/>
+		<field name="appdate"/>
+		<field name="apptype"/>
+		<field name="description"/>
+		<field name="owner_objid"/>
+		<field name="owner_name"/>
+		<field name="owner_address_text"/>
+		<field name="owner_ctcid"/>
+		<field name="scope"/>
+		<field name="scopeparticulars"/>
+		<field name="occupancyuseid"/>
+		<field name="classificationid"/>
+		<field name="numunits"/>
+		<field name="floorarea"/>
+		<field name="estimatedcost"/>
+		<field name="projectcost"/>
+		<field name="dtproposedconstruction"/>
+		<field name="dtexpectedcompletion"/>
+		<field name="supervisorid"/>
+		<field name="taskid"/>
+		<field name="task_state" />	
+		<field name="task_title" />	
+		<field name="task_startdate" />	
+		<field name="task_enddate" />	
+		<field name="task_assignee_objid" />	
+		<field name="task_assignee_name" caption="Assign To"/>	
+		<field name="task_actor_objid" />	
+		<field name="task_actor_name" />	
+	</element>
+</schema>	

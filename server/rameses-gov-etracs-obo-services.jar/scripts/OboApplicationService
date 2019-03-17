@@ -20,14 +20,17 @@ public class OboApplicationService  {
 	@DataContext("obo_account")
 	def acctEm;
 
+	@DataContext("obo_subapplication")
+	def subAppEm;
+
 	@ProxyMethod
 	public def create(o) {
 		//if acctid does not exist create a new account
 		if(!o.subapplications) throw new Exception("There must be at least one subapplication");
 
 		if(!o.acctid) {
-			def m = [objid: "OBOACCT" + new UID() ];
-			acctEm.create( m );
+			def m = [controlno: "OBOACCT" + new UID() ];
+			m = acctEm.create( m );
 			o.acctid = m.objid;
 		}
 
@@ -44,7 +47,6 @@ public class OboApplicationService  {
 		wfSvc.start(p);		
 
 		return app;
-
 	}
 
 	

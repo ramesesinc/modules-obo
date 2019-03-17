@@ -7,7 +7,7 @@ import treasury.utils.*;
 import treasury.facts.*;
 import enterprise.utils.*;
 
-public class BuildingAssessmentService  {
+public class OboAssessmentService  {
 
 	@Service("AssessmentRuleService")
 	def assmtSvc;
