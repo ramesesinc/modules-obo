@@ -1,0 +1,19 @@
+<schema adapter="obodb">
+	<element tablename="obo_building_subapplication">
+		<field name="objid" primary="true" prefix="OBOSUBAPP"/>
+		<field name="appid" />
+		<field name="typeid" />
+		<field name="contractorid" />
+		<field name="workitemid" />
+
+		<!--
+		<complex name="section" ref="obo_section" required="false" jointype="many-to-one">
+			<key field="sectionid" target="objid" />
+		</complex>	
+
+		<complex name="app" ref="obo_application" required="false" jointype="many-to-one">
+			<key field="appid" target="objid" />
+		</complex>	
+		-->
+	</element>
+</schema>

@@ -1,20 +1,12 @@
-<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="obovariable" multiSelect="true" 
-          cols="caption" hiddenCols="objid,name,category,datatype">
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" 
+          schemaName="obo_variable" 
+          multiSelect="true">
     <invokers>
-         <invoker type="obovariable_electrical:picklist" caption="Electrical Pick List" action="init" 
-                 customFilter="section = 'ELECTRICAL' "/>
-         
-        <invoker type="obovariable_mechanical:picklist" caption="Mechanical Pick List" action="init" 
-                 customFilter="section = 'MECHANICAL' "/>
-        
-         <invoker type="obovariable_plumbing:picklist" caption="Plumbing Pick List" action="init" 
-                 customFilter="section = 'PLUMBING' "/>
-        
-         <invoker type="obovariable_electronic:picklist" caption="Electronic Pick List" action="init" 
-                 customFilter="section = 'ELECTRONIC' "/>
-
-        <invoker type="obovariable_building:picklist" caption="Building Pick List" action="init" 
-                customFilter="section = 'BUILDING' "/>
-
+         <invoker type="obo_variable:picklist" caption="Pick Item" 
+                cols="caption,unit"
+                hiddenCols="name,datatype,category,sortorder,arrayvalues"
+                target="popup"
+                action="init" orderBy="sortorder" />
     </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboVariablePickListModel"/>
 </workunit>

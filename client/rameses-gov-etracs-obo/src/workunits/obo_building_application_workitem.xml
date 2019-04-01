@@ -1,0 +1,10 @@
+<workunit schemaName="vw_obo_building_application_workitem" processName="obo_building_application_workitem">
+    <invokers>
+        <invoker type="vw_obo_building_application_workitem:open" caption="Building Workitem"
+                action="open" index="1"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboBuildingApplicationWorkitemModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboBuildingApplicationWorkitemPage" />
+    </pages>
+</workunit>

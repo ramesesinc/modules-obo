@@ -25,5 +25,12 @@
             <folder id="master" caption="Master Files" index="5" icon="home/icons/master.png"/>
             <folder id="tools" caption="Tools" index="7" />
         </folder>
+        
+        <!-- temporary for BFP -->
+        <folder id="bfp" caption="BFP">
+            <folder id="building" caption="Building Permit" index="0" icon="home/icons/folder.png"/>
+            <folder id="occupancy" caption="Occupancy Permit" index="0" icon="home/icons/folder.png"/>
+            <folder id="business" caption="Business Permit" index="0" icon="home/icons/folder.png"/>
+        </folder>
     </folder>
 </folders>    

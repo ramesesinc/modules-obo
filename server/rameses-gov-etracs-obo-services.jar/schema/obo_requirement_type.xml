@@ -1,3 +1,9 @@
+<!--
+ selection type: 
+   0 = always required
+   1 = optional. To be provided by applicant
+
+-->
 <schema adapter="obodb">
 	<element tablename="obo_requirement_type">
 		<field name="objid" prefix="OBOREQTYP" primary="true"/>
@@ -11,5 +17,6 @@
 		<field name="validationstate" />
 		<field name="processname" />
 		<field name="sortindex" />
+		<field name="selectiontype" />
 	</element>
 </schema>

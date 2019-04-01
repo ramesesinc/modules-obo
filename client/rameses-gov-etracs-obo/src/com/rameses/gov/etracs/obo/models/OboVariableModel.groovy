@@ -14,14 +14,18 @@ class OboVariableModel extends CrudFormModel {
     
     def datatypes = ['integer','decimal','boolean']
         
+    void afterCreate() {
+        entity.typeid =  caller.selectedNode.id;
+    }
+    
     @PropertyChangeListener
     def listener = [
-        "entity.section" : { o->
-            entity.classfication = null;
-            binding.refresh("entity.classification");
+        "entity.name" : { o->
+            entity.objid = o;
         }
     ];
     
+    /*
     def getLookupClassifcations() {
         if(!entity.section) 
             throw new Exception("Entity section is required");
@@ -30,10 +34,7 @@ class OboVariableModel extends CrudFormModel {
         }
         return Inv.lookupOpener( "obovariable_classification_" +entity.section+ ":lookup", [onselect: h] );
     }
-    
-    void beforeSave(def mode) {
-        entity.objid = entity.name;
-    }
-    
+    */
+   
     
 }

@@ -12,10 +12,10 @@ import com.rameses.seti2.models.*;
 
 public class OboRequirementTypeModel extends CrudFormModel {
     
-    def types = ["DOC", "PROC"];
+    def types = ["DOC", "PROC", "PERMIT"];
     def workflowStates;
     
-    def processNames  = ["obo_application", "obo_subapplication"];
+    def processNames  = ["obo_building_application", "obo_building_subapplication"];
     
     @PropertyChangeListener
     def listener = [

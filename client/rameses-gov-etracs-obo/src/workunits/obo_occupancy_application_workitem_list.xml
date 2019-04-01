@@ -1,0 +1,9 @@
+<workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
+          processName="obo_occupancy_application_workitem" schemaName="vw_obo_occupancy_application_workitem"
+          allowDelete="false" allowNotify="false">
+    <invokers>
+        <invoker type="obo_occupancy_application_workitem:list" caption="Workitem List"
+             cols="appno,appdate,owner.name,title,projectcost,task.state,task.assignee.name"
+                action="init" index="-1" srole="SHARED"/>
+    </invokers>
+</workunit>

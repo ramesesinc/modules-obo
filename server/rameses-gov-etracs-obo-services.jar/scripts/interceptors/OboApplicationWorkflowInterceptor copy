@@ -1,0 +1,102 @@
+import com.rameses.annotations.*; 
+
+class OboApplicationWorkflowInterceptor { 
+
+	@Service("WorkflowTaskService")
+	def wfSvc;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("obo_building_application_workitem")
+	def workItemEm;
+
+	@DataContext("obo_building_application_requirement")
+	def appReqEm;
+
+	@DataContext("obo_requirement_type")
+	def reqType;
+
+	@DataContext("obo_building_application")
+	def appEm;
+
+	@DataContext("obo_building_subapplication")
+	def subAppEm;
+
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_application' }") 
+	public void checkApplicationWorkItems( def evt ) {
+		//check if documents and workitems status <> 0
+		def p = evt.args[0];
+		def r = [appid:p.refid, processname:'obo_building_application', validationstate: p.taskstate];
+
+		def list = appEm.getUnvalidateRequirements( r );
+		if( list ) {
+			def buff = new StringBuilder();
+			def docs = list.findAll{ it.type == 'DOC' };
+			if( docs ) {
+				buff.append("The ff. are unvalidated document requirements: \n")
+				buff.append( docs.collect{"  "+it.title}.join("\n") );
+			}
+			def procs = list.findAll{ it.type != 'DOC' };
+			if( procs ) {
+				buff.append("\nThere are still unapproved transactions as follows: \n")
+				buff.append( procs.collect{"  "+it.title}.join("\n") );
+			}
+			throw new Exception( buff.toString() );			
+		}
+	}
+
+	@After(pattern="WorkflowTaskService.(start|signal)", eval="#{args[0].processname == 'obo_building_application' }") 
+	public void triggerApplicationWorkItems( def evt ) {
+		def p = evt.args[0];
+		def r = evt.result;
+		def list = reqType.find([processname:'obo_building_application', activationstate:r.state]).list();
+		def appid = p.refid;
+
+		list?.each {
+			if( it.type.matches('PROC|PERMIT')) {
+				def subappid = null;
+				boolean addWorkitem = true;
+				if( it.type == 'PERMIT' ) {
+					def sa = subAppEm.find([appid:appid, typeid:it.objid] ).first();
+					if(!sa) {
+						addWorkitem = false;
+					}	
+					else {
+						subappid = sa.objid;
+					}	
+				}
+				if(addWorkitem) {
+					def wi = [:];
+					wi.appid = appid;
+					wi.typeid = it.objid;
+					wi.status = 0;
+					wi.subappid = subappid;
+					wi = workItemEm.create( wi );
+
+					//if there is a subapplication found, attach the workitem.
+					if( subappid != null ) {
+						subAppEm.find( [objid: subappid ] ).update([workitemid: wi.objid ]);
+					}
+
+					//fire the workitem task
+					def dt = dateSvc.getServerDate();
+					def f = [:];
+					f.processname = 'obo_building_application_workitem';
+					f.refid = wi.objid;
+					f.startdate = dt;
+					f.info = [ type: it, app: p.info ];
+					wfSvc.start(f);	
+				}
+			}
+			else {
+				def dr = [:];
+				dr.typeid = it.objid;
+				dr.appid = p.info.objid;
+				dr.status = 0;
+				appReqEm.create( dr );
+			}
+		}	
+	} 
+
+} 

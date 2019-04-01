@@ -10,18 +10,13 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class OboVariablePickListModel extends CrudLookupModel  {
+class OboBuildingApplicationWorkitemListModel extends WorkflowTaskListModel {
     
     def typeid;
+    String title;
     
     def getCustomFilter() {
-        return [ "typeid = :type", [type: typeid] ];
-    }
-    
-    def doOk() {
-        def h = listHandler.getSelectedValue(); 
-        if(!h) return "_close";
-        return Inv.lookupOpener("obo_detail_info", [items: h, onselect: onselect ]);
+        return [ "reqtype.objid = :typeid", [typeid: typeid] ];
     }
     
 }

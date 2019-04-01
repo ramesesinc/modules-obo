@@ -1,0 +1,14 @@
+<schema adapter="obodb">
+	<element tablename="vw_obo_building_subapplication">
+		<field name="objid" primary="true"/>
+		<field name="appid"/>
+		<field name="title"/>		
+		<field name="task_state" />	
+		<field name="task_startdate" />	
+		<field name="task_enddate" />	
+		<field name="task_assignee_objid" />	
+		<field name="task_assignee_name" caption="Assign To"/>	
+		<field name="task_actor_objid" />	
+		<field name="task_actor_name" />	
+	</element>
+</schema>	

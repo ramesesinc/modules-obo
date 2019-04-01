@@ -31,19 +31,24 @@ public class OboVariablePage extends javax.swing.JPanel {
     private void initComponents() {
 
         formPanel1 = new com.rameses.rcp.util.FormPanel();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
         xTextField1 = new com.rameses.rcp.control.XTextField();
         xTextField2 = new com.rameses.rcp.control.XTextField();
         xTextField3 = new com.rameses.rcp.control.XTextField();
+        xTextField4 = new com.rameses.rcp.control.XTextField();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xTextField5 = new com.rameses.rcp.control.XTextField();
-        lOVList1 = new com.rameses.enterprise.components.LOVList();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        xList1 = new com.rameses.rcp.control.XList();
 
-        formPanel1.setCaptionWidth(100);
+        formPanel1.setCaptionWidth(130);
         formPanel1.setPadding(new java.awt.Insets(5, 5, 5, 0));
+
+        xLabel1.setCaption("Type");
+        xLabel1.setExpression("#{ entity.typeid }");
+        xLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
+        formPanel1.add(xLabel1);
 
         xTextField1.setCaption("Name");
         xTextField1.setName("entity.name"); // NOI18N
@@ -64,6 +69,13 @@ public class OboVariablePage extends javax.swing.JPanel {
         xTextField3.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         formPanel1.add(xTextField3);
 
+        xTextField4.setCaption("Unit of Measure");
+        xTextField4.setName("entity.unit"); // NOI18N
+        xTextField4.setPreferredSize(new java.awt.Dimension(80, 20));
+        xTextField4.setRequired(true);
+        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        formPanel1.add(xTextField4);
+
         xComboBox1.setCaption("Data Type");
         xComboBox1.setItems("datatypes");
         xComboBox1.setName("entity.datatype"); // NOI18N
@@ -82,11 +94,6 @@ public class OboVariablePage extends javax.swing.JPanel {
         xTextField5.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         formPanel1.add(xTextField5);
 
-        lOVList1.setCaption("Section");
-        lOVList1.setListName("OBO_SECTION");
-        lOVList1.setName("entity.section"); // NOI18N
-        formPanel1.add(lOVList1);
-
         xLookupField1.setCaption("Classification");
         xLookupField1.setExpression("#{entity.classification.title}");
         xLookupField1.setHandler("lookupClassifcations");
@@ -94,38 +101,33 @@ public class OboVariablePage extends javax.swing.JPanel {
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         formPanel1.add(xLookupField1);
 
-        jScrollPane1.setViewportView(xList1);
-
-        formPanel1.add(jScrollPane1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(formPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(formPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(formPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addComponent(formPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(83, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.rcp.util.FormPanel formPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private com.rameses.enterprise.components.LOVList lOVList1;
     private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
-    private com.rameses.rcp.control.XList xList1;
+    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLookupField xLookupField1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
     private com.rameses.rcp.control.XTextField xTextField3;
+    private com.rameses.rcp.control.XTextField xTextField4;
     private com.rameses.rcp.control.XTextField xTextField5;
     // End of variables declaration//GEN-END:variables
 }

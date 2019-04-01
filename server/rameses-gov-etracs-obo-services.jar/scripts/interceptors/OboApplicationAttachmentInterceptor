@@ -6,7 +6,7 @@ class OboApplicationAttachmentInterceptor {
 	def pSvc;
 
 	@After(pattern="FileUploadService.upload", 
-		eval="#{args[0].info._schemaname == 'obo_application_attachment' }") 
+		eval="#{args[0].info._schemaname == 'obo_building_application_attachment' }") 
 	public void afterAttachment( def evt ) {
 		def r = evt.result;
 		def p = evt.args[0];

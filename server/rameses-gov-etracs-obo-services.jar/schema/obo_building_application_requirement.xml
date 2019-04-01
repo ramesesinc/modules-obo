@@ -1,0 +1,8 @@
+<schema adapter="obodb">
+	<element tablename="obo_building_application_requirement">
+		<field name="objid" primary="true" prefix="OBOAPPREQ"/>
+		<field name="appid" required="true"/>
+		<field name="typeid" />
+		<field name="status" datatype="integer"/>
+	</element>
+</schema>

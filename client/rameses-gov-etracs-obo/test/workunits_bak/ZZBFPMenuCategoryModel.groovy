@@ -11,40 +11,48 @@ import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 import com.rameses.menu.models.MenuCategoryModel;
 
-class OboMenuCategoryModel  extends MenuCategoryModel {
+class ZZBFPMenuCategoryModel  extends MenuCategoryModel {
 
     @Service("QueryService")
     def querySvc;
     
+    /*
     void loadDynamicItems( String _id, def subitems, def invokers ) {
         def secProvider = clientContext.getSecurityProvider();
         if(_id.matches('building|occupancy') ) {
-            boolean isRoot = (OsirisContext.env.ORGROOT == 1)
-            def m = [_schemaname: "obo_requirement_type" ];
+            def m = [_schemaname: "obo_section" ];
+            m.orderBy = "idx";
             m._limit = 200;
-            m.orderBy = "sortindex";
-            if(isRoot) {
-                m.where = ["type IN ('PROC','PERMIT') AND org.objid IS NULL"];
-            }
-            else {
-                m.where = ["type IN ('PROC','PERMIT') AND org.objid = :orgid", [orgid: OsirisContext.env.ORGID] ];
-            }
             def list = querySvc.getList( m );
-            int i = 100;
             list.each {
                 if(it.role) {
                     boolean b = secProvider.checkPermission( workunit.workunit.module.domain, it.role, ".*" );
                     if(!b) return;
                 }
                 def id = _id + "/" + it.objid;
+                subitems << [ id: id, caption: it.title, index: (100+ it.idx) ];
+                def op = Inv.lookupOpener("obo_subapplication:list", ['sectionid': it.objid, 'title': it.title ]);
+                op.target = 'window';
+                invokers.put( id, op);
+            }
+            
+            //load also subprocesses
+            m.clear();
+            m = [_schemaname: "obo_requirement_type" ];
+            m.findBy = [type:'PROC'];
+            m._limit = 100;
+            //m.where = ["org.objid = :"]
+            list = querySvc.getList( m );
+            int i = 100;
+            list.each {
+                def id = _id + "/" + it.objid;
                 subitems << [ id: id, caption: it.title, index: (i++) ];
-                def sinv = "obo_" + _id + "_application_workitem:list"
-                def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
+                def op = Inv.lookupOpener("obo_building_application_subproc:list", [typeid: it.objid, 'title': it.title ]);
                 op.target = 'window';
                 invokers.put( id, op );
             }
         }
         
     }
-    
+    */
 }
