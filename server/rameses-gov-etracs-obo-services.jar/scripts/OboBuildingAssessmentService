@@ -7,7 +7,7 @@ import treasury.utils.*;
 import treasury.facts.*;
 import enterprise.utils.*;
 
-public class OboAssessmentService  {
+public class OboBuildingAssessmentService  {
 
 	@Service("AssessmentRuleService")
 	def assmtSvc;
@@ -27,14 +27,14 @@ public class OboAssessmentService  {
 		def fb = new FactBuilder();
 
 		fb.variableInfoProvider = new VariableInfoProvider(
-			schemaName: "obovariable",
+			schemaName: "obo_variable",
 			createDecimalFact: { return new OboDecimalInfo() },
 			createIntegerFact: { return new OboIntegerInfo() },
 			createBooleanFact: { return new OboBooleanInfo() }
 		);
 		
 		fb.facts << new BuildingUse( o.buildinguse );
-		fb.facts << new OboApplication(  o.application);
+		fb.facts << new OboApplication(o.application);
 		fb.facts << new treasury.facts.SystemDate(svrDate);
 		fb.facts << new treasury.facts.BillDate( (o.billdate) ?o.billdate: svrDate );
 		o.permits?.each { p->

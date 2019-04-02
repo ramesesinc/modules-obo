@@ -12,7 +12,8 @@ import com.rameses.enterprise.models.*;
 
 class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
 
-    def selectedSubApplication;
+    @Service("OboBuildingApplicationService")
+    def appSvc;
     
     String getFormName() {
         return getSchemaName() + ":form";
@@ -33,44 +34,36 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
     public String getFormId() {
         return entity.objid;
     }
-    
-    def subApplicationListModel = [
-        fetchList: { o->
-            def m = [_schemaname: "obo_building_subapplication" ];
-            m.findBy = [appid: entity.objid];
-            return queryService.getList( m );
-        }
-    ] as BasicListModel;
-
+  
     def addItem() {
         def h = { o->
-            if(entity.infos==null) entity.infos = [];
             o.each {
-                entity.infos << it;
+                it.remove("objid");
+                it.appid = entity.appid;
             }
-            infoListModel.reload();
+            appSvc.saveInfos( o );
+            infoListModel.load();
         }
-        return Inv.lookupOpener( "obo_variable:picklist", [typeid: entity.reqtype.objid, onselect: h ]);
+        return Inv.lookupOpener( "obo_variable:picklist", [typeid: entity.workitem.objid, onselect: h ]);
     }
     
     def editItems() {
         def selectedItems = infoListModel.getSelectedValue();
         if( !selectedItems ) throw new Exception("Please select items to edit");
-        def sitems = [];
-        selectedItems.each {
-            def m = [:];
-            m.putAll(it);
-            sitems << m;
-        }
         def h = { v->
-            v.each { zz->
-                entity.infos.find{ it.name == zz.name }.value = zz.value;                
-            }
-            infoListModel.reload();
+            appSvc.saveInfos( v );
+            infoListModel.load();
         }
-        def op= Inv.lookupOpener("obo_detail_info", [items: sitems, onselect: h ]);
+        def op= Inv.lookupOpener("obo_detail_info", [items: selectedItems, onselect: h ]);
         op.target = "popup";
         return op;
+    }
+    
+    void removeItems() {
+        def selectedItems = infoListModel.getSelectedValue();
+        if( !selectedItems ) throw new Exception("Please select items to remove");
+        appSvc.removeInfos( selectedItems );
+        infoListModel.load();
     }
     
     def infoListModel = [
@@ -78,7 +71,14 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
             return true;
         },
         fetchList: {
-            return entity.infos;
+            def m = [appid : entity.appid, typeid: entity.workitem.objid ];
+            return appSvc.getInfos(m);
+        }
+    ] as BasicListModel;
+    
+    def itemListModel = [
+        fetchList: { o->
+            return [];
         }
     ] as BasicListModel;
     
@@ -108,5 +108,9 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
         }
     ] as BasicListModel;
     */
+    
+    def viewAssessment() {
+        MsgBox.alert("view assessment");
+    }
     
 }

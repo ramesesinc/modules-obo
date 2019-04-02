@@ -28,8 +28,8 @@
 		<field name="task_assignee_name" caption="Assign To"/>	
 		<field name="task_actor_objid" />	
 		<field name="task_actor_name" />	
-		<field name="reqtype_type" />	
-		<field name="reqtype_objid" />			
-		<field name="reqtype_title" />	
+		<field name="workitem_type" />	
+		<field name="workitem_objid" />			
+		<field name="workitem_title" />	
 	</element>
 </schema>	

@@ -51,6 +51,8 @@ public class OboBuildingApplicationWorkitemPage extends javax.swing.JPanel {
         xButton1 = new com.rameses.rcp.control.XButton();
         xDataTable4 = new com.rameses.rcp.control.XDataTable();
         xButton2 = new com.rameses.rcp.control.XButton();
+        xButton3 = new com.rameses.rcp.control.XButton();
+        xButton4 = new com.rameses.rcp.control.XButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -186,6 +188,21 @@ public class OboBuildingApplicationWorkitemPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "unit"}
+                , new Object[]{"caption", "Unit"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "value"}
                 , new Object[]{"caption", "Value"}
                 , new Object[]{"width", 100}
@@ -205,6 +222,12 @@ public class OboBuildingApplicationWorkitemPage extends javax.swing.JPanel {
         xButton2.setName("editItems"); // NOI18N
         xButton2.setText("Edit Items");
 
+        xButton3.setName("viewAssessment"); // NOI18N
+        xButton3.setText("View Assessment");
+
+        xButton4.setName("removeItems"); // NOI18N
+        xButton4.setText("Remove Items");
+
         javax.swing.GroupLayout xPanel1Layout = new javax.swing.GroupLayout(xPanel1);
         xPanel1.setLayout(xPanel1Layout);
         xPanel1Layout.setHorizontalGroup(
@@ -219,7 +242,11 @@ public class OboBuildingApplicationWorkitemPage extends javax.swing.JPanel {
                         .addComponent(xButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(xButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 559, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(xButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(xButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 261, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         xPanel1Layout.setVerticalGroup(
@@ -228,7 +255,9 @@ public class OboBuildingApplicationWorkitemPage extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(xPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(xButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xDataTable4, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -320,7 +349,7 @@ public class OboBuildingApplicationWorkitemPage extends javax.swing.JPanel {
         xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
 
         xLabel11.setCaption("");
-        xLabel11.setExpression("#{entity.reqtype.title}");
+        xLabel11.setExpression("#{entity.workitem.title}");
         xLabel11.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         xLabel11.setPreferredSize(new java.awt.Dimension(0, 20));
 
@@ -366,6 +395,8 @@ public class OboBuildingApplicationWorkitemPage extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XButton xButton2;
+    private com.rameses.rcp.control.XButton xButton3;
+    private com.rameses.rcp.control.XButton xButton4;
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XDataTable xDataTable4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;

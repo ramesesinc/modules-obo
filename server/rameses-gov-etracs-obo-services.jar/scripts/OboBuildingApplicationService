@@ -20,8 +20,11 @@ public class OboBuildingApplicationService  {
 	@DataContext("obo_building_account")
 	def acctEm;
 
-	@DataContext("obo_building_subapplication")
-	def subAppEm;
+	@DataContext("obo_building_application_info")
+	def infoEm;
+
+	@DataContext("vw_obo_building_application_info")
+	def vwInfoEm;
 
 	@ProxyMethod
 	public def create(o) {
@@ -49,7 +52,50 @@ public class OboBuildingApplicationService  {
 		return app;
 	}
 
-	
+	@ProxyMethod
+	public void saveInfos( def items ) {
+		items.each {
+			if( it.datatype == 'date') it.datevalue = it.value;
+			else if( it.datatype == 'decimal') it.decimalvalue = it.value;
+			else if( it.datatype == 'integer') it.intvalue = it.value;
+			else if( it.datatype == 'boolean') it.booleanvalue = (it.value==true? 1 : 0);
+			else it.stringvalue = it.value;
+			if( !it.objid ) {
+				infoEm.create(it);
+			}	
+			else {
+				infoEm.find([objid: it.objid ]).update(it);
+			}	
+		}					
+	}
+
+	@ProxyMethod
+	public def getInfos( def o ) {
+		if(!o.appid ) throw new Exception("appid is required in OboBuildingApplicationService.getInfos");
+		def qry = vwInfoEm.find( [appid: o.appid] );
+		if(o.typeid) {
+			qry = qry.where( " typeid = :typeid", [typeid: o.typeid ] );
+		}	
+		else {
+			qry = qry.where( " typeid IS NULL ");
+		}
+		def list = qry.orderBy("sortorder").list();
+		list.each {
+			if( it.datatype == 'date') it.value = it.datevalue;
+			else if( it.datatype == 'decimal') it.value = it.decimalvalue;
+			else if( it.datatype == 'integer') it.value = it.intvalue;
+			else if( it.datatype == 'boolean')  it.value = ( (it.booleanvalue == 0) ? false: true);
+			else it.value = it.stringvalue;
+		}
+		return list;
+	}
+
+	@ProxyMethod
+	public void removeInfos( def items ) {
+		items.each {
+			infoEm.find([objid: it.objid ]).delete();
+		}					
+	}
 
 
 }

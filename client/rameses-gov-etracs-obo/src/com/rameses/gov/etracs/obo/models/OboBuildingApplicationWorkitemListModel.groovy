@@ -16,7 +16,7 @@ class OboBuildingApplicationWorkitemListModel extends WorkflowTaskListModel {
     String title;
     
     def getCustomFilter() {
-        return [ "reqtype.objid = :typeid", [typeid: typeid] ];
+        return [ "workitem.objid = :typeid", [typeid: typeid] ];
     }
     
 }

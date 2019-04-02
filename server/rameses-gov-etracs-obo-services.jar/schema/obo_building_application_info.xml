@@ -1,0 +1,15 @@
+<schema adapter="obodb">
+	<element tablename="obo_building_application_info">
+		<field name="objid" prefix="OBOAPPINFO" primary="true"/>
+		<field name="appid" required="true"/>
+		<field name="name" required="true"/>
+		<field name="stringvalue" type="string"/>
+		<field name="decimalvalue" type="decimal"/>
+		<field name="intvalue" type="integer"/>
+		<field name="datevalue" type="date"/>
+		<field name="booleanvalue" type="boolean"/>
+	</element>
+</schema>
+
+	
+		

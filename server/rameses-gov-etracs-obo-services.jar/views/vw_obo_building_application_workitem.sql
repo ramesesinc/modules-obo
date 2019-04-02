@@ -29,9 +29,9 @@ SELECT
     wit.assignee_name AS task_assignee_objid,
     wit.actor_name AS task_actor_name,
     wit.actor_objid AS task_actor_objid,
-    req.type AS reqtype_type,
-    req.objid AS reqtype_objid,
-    req.title AS reqtype_title
+    req.type AS workitem_type,
+    req.objid AS workitem_objid,
+    req.title AS workitem_title
 
 FROM obo_building_application_workitem wi
 INNER JOIN obo_building_application_workitem_task wit ON wi.taskid = wit.taskid
