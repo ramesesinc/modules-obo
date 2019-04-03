@@ -1,0 +1,18 @@
+<schema adapter="obodb">
+	<element tablename="obo_building_application_finding">
+		<field name="objid" primary="true" prefix="OBOAPPREQ"/>
+		<field name="appid" />
+		<field name="workitemid" />
+		<field name="particulars" />
+		<field name="dtcreated" />
+		<field name="createdby_objid" />
+		<field name="createdby_name" />
+
+		<!-- 0=fail 1=pass -->
+		<field name="status" />
+		<field name="resolvedby_objid" />
+		<field name="resolvedby_name" />
+		<field name="dtresolved" />
+		<field name="remarks" />
+	</element>
+</schema>

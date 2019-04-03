@@ -1,0 +1,9 @@
+<schema adapter="obodb">
+
+	<element tablename="obo_ancillary_type">
+		<field name="objid" primary="true" caption="Name" visible="true"/>
+		<field name="title" caption="Title" searchable="true"/>
+	</element>
+
+</schema>
+		

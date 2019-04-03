@@ -1,0 +1,6 @@
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="obo_ancillary_type">
+    <invokers>
+        <invoker type="obo_ancillary_type:lookup" caption="Lookup Ancillary Type" 
+                 action="init" orderBy="sortindex"/>
+    </invokers>
+</workunit>

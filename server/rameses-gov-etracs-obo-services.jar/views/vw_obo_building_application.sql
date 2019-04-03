@@ -2,6 +2,7 @@ DROP VIEW IF EXISTS vw_obo_building_application;
 CREATE VIEW vw_obo_building_application AS 
 SELECT 
    a.*,
+   ot.parentid AS occupancytypegroup,
    t.state AS task_state,
    t.startdate AS task_startdate,
    t.enddate AS task_enddate,
@@ -13,3 +14,4 @@ SELECT
    
 FROM obo_building_application a 
 INNER JOIN obo_building_application_task t ON a.taskid = t.taskid
+INNER JOIN obo_occupancy_type ot ON a.occupancytypeid = ot.objid

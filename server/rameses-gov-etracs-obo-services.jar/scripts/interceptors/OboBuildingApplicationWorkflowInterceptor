@@ -1,6 +1,6 @@
 import com.rameses.annotations.*; 
 
-class OboApplicationWorkflowInterceptor { 
+class OboBuildingApplicationWorkflowInterceptor { 
 
 	@Service("WorkflowTaskService")
 	def wfSvc;

@@ -13,6 +13,8 @@ import com.rameses.enterprise.models.*;
 class OboBuildingApplicationModel extends WorkflowTaskModel {
 
     def selectedSubApplication;
+    def selectedDocument;
+    def docHandler;
     
     String getFormName() {
         return getSchemaName() + ":form";
@@ -50,9 +52,43 @@ class OboBuildingApplicationModel extends WorkflowTaskModel {
             return queryService.getList( m );
         }
     ] as BasicListModel;
-    
-    
    
+    def infoListModel = [
+        fetchList : { o->
+            return [];
+        }
+    ] as BasicListModel;
+    
+    void verifyDoc() {
+        if(!selectedDocument)throw new Exception("Please select a document to verify");
+        def m = [_schemaname: 'obo_building_application_requirement'];
+        m.findBy = [objid: selectedDocument.objid];
+        m.status = 1;
+        persistenceService.update( m );
+        docHandler.reload();
+    }
+    
+    
+    def uploadDocument() {
+        MsgBox.alert("upload document");
+    }    
+    
+    def viewDocument() {
+        MsgBox.alert("view document");
+    }  
+
+    def addFinding() {
+        def m = [:];
+        m.appid = entity.appid;
+        m.workitemid = entity.objid;
+        m.handler = {
+            
+        }
+        return Inv.lookupOpener("obo_building_application_finding:create", [handler: h ]);
+    }
+    
+      
+
     /*
     void addAttachment()  {
         def p = [:];

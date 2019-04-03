@@ -1,0 +1,20 @@
+import com.rameses.annotations.*; 
+
+class OboBuildingApplicationWorkitemWorkflowInterceptor { 
+
+	@Service("WorkflowTaskService")
+	def wfSvc;
+
+
+
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_application_workitem' }") 
+	public void triggerApplicationWorkItems( def evt ) {
+		def p = evt.args[0];
+		def r = evt.result;
+		if( p.taskstate == 'approval' ) {
+					
+		}
+		//throw new Exception("fired action workflow " + p.action);
+	} 
+
+} 

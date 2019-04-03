@@ -10,19 +10,21 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class OboBuildingApplicationWorkitemListModel extends WorkflowTaskListModel {
+class BuildingApplicationFindingModel extends CrudFormModel {
+
+    def appid;
+    def workitemid;
     
-    def typeid;
-    String title;
+    def handler;
     
-    def getCustomFilter() {
-        return [ "workitem.objid = :typeid", [typeid: typeid] ];
+    void afterCreate() {
+        entity.appid = appid;
+        entity.workitemid = workitemid;
     }
     
-    def beforeFetchNodes( param ) {
-        super.beforeFetchNodes(param);
-        param.typeid = typeid;
-        return null;
+    void afterSave(def o ) {
+        MsgBox.alert("after save " + o);
+        if(handler) handler(entity);
     }
     
 }

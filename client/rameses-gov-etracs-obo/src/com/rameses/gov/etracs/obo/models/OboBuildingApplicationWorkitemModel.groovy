@@ -15,6 +15,11 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
     @Service("OboBuildingApplicationService")
     def appSvc;
     
+    @Service("OboBuildingAssessmentService")
+    def assmtSvc;
+    
+    def infos;
+    
     String getFormName() {
         return getSchemaName() + ":form";
     }
@@ -72,7 +77,8 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
         },
         fetchList: {
             def m = [appid : entity.appid, typeid: entity.workitem.objid ];
-            return appSvc.getInfos(m);
+            infos = appSvc.getInfos(m);
+            return infos;
         }
     ] as BasicListModel;
     
@@ -110,7 +116,41 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
     */
     
     def viewAssessment() {
-        MsgBox.alert("view assessment");
+        def f = [:];
+        
+        String apptype;		//NEW OR RENEW
+	String worktype;	//LOV OBO_BUILDING_WORK_TYPE
+	String permittype;	//BUILDING,ELECTRICAL
+
+	double projectcost;
+	double estimatedcost;
+	double constructioncost;	//computed. 
+	
+	String constructiontype;   	
+	double floorarea; 	
+	double height;
+	int numunits;
+	int numstoreys;
+        
+        f.app = [ 
+            appno:entity.appno, 
+            appdate:entity.appdate, 
+            apptype:entity.apptype, 
+            projectcost: entity.projectcost, 
+            height: 0,
+            numunits: entity.numunits,
+            floorarea: entity.floorarea
+        ];
+        f.occupancytype = [division:entity.occupancytypeid, group:entity.occupancytypegroup ];
+        f.infos = infos;
+        f.permits = [ [type: entity.workitem.objid ] ];
+        assmtSvc.assess( f );
     }
+    
+    def addFinding() {
+        
+    }
+    
+    
     
 }

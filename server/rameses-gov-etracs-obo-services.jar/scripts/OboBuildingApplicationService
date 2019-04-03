@@ -26,6 +26,9 @@ public class OboBuildingApplicationService  {
 	@DataContext("vw_obo_building_application_info")
 	def vwInfoEm;
 
+	@DataContext("vw_obo_building_application_workitem")
+	def aw;
+
 	@ProxyMethod
 	public def create(o) {
 		//if acctid does not exist create a new account

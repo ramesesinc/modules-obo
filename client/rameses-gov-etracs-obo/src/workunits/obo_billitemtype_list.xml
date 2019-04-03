@@ -1,0 +1,6 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="obo_billitemtype">
+    <invokers>
+        <invoker folderid="explorer/master/obo"  caption="Obo BillItem Types" action="init" index="20"
+            cols="objid,title,item.title"/>
+    </invokers>
+</workunit>

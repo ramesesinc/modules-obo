@@ -1,0 +1,9 @@
+<schema adapter="obodb">
+	<element tablename="vw_obo_building_application_requirement">
+		<field name="objid" primary="true"/>
+		<field name="appid" />
+		<field name="typeid" />
+		<field name="status" />
+		<field name="title" />
+	</element>
+</schema>	

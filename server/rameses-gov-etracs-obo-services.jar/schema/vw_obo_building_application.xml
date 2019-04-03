@@ -14,6 +14,7 @@
 		<field name="scope"/>
 		<field name="scopeparticulars"/>
 		<field name="occupancytypeid"/>
+		<field name="occupancytypegroup"/>
 		<field name="numunits"/>
 		<field name="floorarea"/>
 		<field name="estimatedcost"/>
