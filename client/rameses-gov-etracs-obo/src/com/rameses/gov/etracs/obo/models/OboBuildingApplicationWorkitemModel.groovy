@@ -19,6 +19,7 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
     def assmtSvc;
     
     def infos;
+    def findingListHandler;
     
     String getFormName() {
         return getSchemaName() + ":form";
@@ -148,9 +149,18 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
     }
     
     def addFinding() {
-        
+        def m = [:];
+        m.appid = entity.appid;
+        m.workitemid = entity.objid;
+        m.handler = {
+            findingListHandler.reload();
+        }
+        return Inv.lookupOpener("obo_building_application_finding:create", m);
     }
     
-    
-    
+    def viewApplication() {
+        def op = Inv.lookupOpener("vw_obo_building_application:open", [entity: [objid: entity.appid ] ] );
+        op.target = "popup";
+        return op;
+    }
 }

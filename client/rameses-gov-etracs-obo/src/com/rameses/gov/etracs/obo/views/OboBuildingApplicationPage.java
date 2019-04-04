@@ -46,7 +46,8 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
         xLabel12 = new com.rameses.rcp.control.XLabel();
         xLabel14 = new com.rameses.rcp.control.XLabel();
         xLabel13 = new com.rameses.rcp.control.XLabel();
-        xLabel9 = new com.rameses.rcp.control.XLabel();
+        xDecimalField2 = new com.rameses.rcp.control.XDecimalField();
+        xDecimalField1 = new com.rameses.rcp.control.XDecimalField();
         xLabel15 = new com.rameses.rcp.control.XLabel();
         xLabel16 = new com.rameses.rcp.control.XLabel();
         xDataTable2 = new com.rameses.rcp.control.XDataTable();
@@ -70,7 +71,7 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
         xTitledBorder1.setPadding(new java.awt.Insets(20, 10, 10, 10));
         xTitledBorder1.setTitle("Project Information");
         xFormPanel1.setBorder(xTitledBorder1);
-        xFormPanel1.setCaptionWidth(150);
+        xFormPanel1.setCaptionWidth(180);
 
         xLabel8.setCaption("Project Title");
         xLabel8.setExpression("#{entity.title}");
@@ -87,8 +88,8 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
 
-        xLabel6.setCaption("Scope");
-        xLabel6.setExpression("#{entity.scope}");
+        xLabel6.setCaption("Construction Type");
+        xLabel6.setExpression("#{entity.constructiontypeid}");
         xLabel6.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel6);
 
@@ -112,7 +113,7 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
         xTitledBorder2.setPadding(new java.awt.Insets(20, 10, 10, 10));
         xTitledBorder2.setTitle("Application");
         xFormPanel3.setBorder(xTitledBorder2);
-        xFormPanel3.setCaptionWidth(150);
+        xFormPanel3.setCaptionWidth(190);
         xFormPanel3.setPreferredSize(new java.awt.Dimension(0, 100));
 
         xLabel5.setCaption("App No");
@@ -139,11 +140,18 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
         xLabel13.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel13);
 
-        xLabel9.setCaption("Project Cost");
-        xLabel9.setExpression("#{entity.projectcost}");
-        xLabel9.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel9.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel3.add(xLabel9);
+        xDecimalField2.setCaption("Estimated Cost");
+        xDecimalField2.setDisableWhen("#{ true }");
+        xDecimalField2.setName("entity.estimatedcost"); // NOI18N
+        xDecimalField2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xDecimalField2.setPreferredSize(new java.awt.Dimension(150, 20));
+        xFormPanel3.add(xDecimalField2);
+
+        xDecimalField1.setCaption("Fixed Unit Cons. Cost");
+        xDecimalField1.setDisableWhen("#{ true }");
+        xDecimalField1.setName("entity.projectcost"); // NOI18N
+        xDecimalField1.setPreferredSize(new java.awt.Dimension(150, 20));
+        xFormPanel3.add(xDecimalField1);
 
         xLabel15.setCaption("Const. Date");
         xLabel15.setExpression("#{entity.dtproposedconstruction}");
@@ -151,7 +159,7 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
         xFormPanel3.add(xLabel15);
 
         xLabel16.setCaption("Est. Completion Date");
-        xLabel16.setExpression("#{entity.dtexprectedcompletion}");
+        xLabel16.setExpression("#{entity.dtexpectedcompletion}");
         xLabel16.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel3.add(xLabel16);
 
@@ -228,14 +236,14 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 467, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xDataTable2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(34, Short.MAX_VALUE))
+                    .addComponent(xDataTable2, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,7 +315,7 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(schemaList2, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
+                .addComponent(schemaList2, javax.swing.GroupLayout.DEFAULT_SIZE, 793, Short.MAX_VALUE)
                 .addGap(88, 88, 88))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(xButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -326,7 +334,7 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
                     .addComponent(xButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addComponent(schemaList2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         xTabbedPane1.addTab("Documents", jPanel2);
@@ -392,6 +400,21 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
                 , new Object[]{"alignment", "CENTER"}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "task.state"}
+                , new Object[]{"caption", "State"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
         schemaList1.setCustomFilter("appid = :objid");
@@ -406,7 +429,7 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(schemaList1, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
+                .addComponent(schemaList1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -460,7 +483,7 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(xDataTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addContainerGap(387, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,14 +501,14 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
+                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -502,6 +525,8 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XButton xButton7;
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XDataTable xDataTable2;
+    private com.rameses.rcp.control.XDecimalField xDecimalField1;
+    private com.rameses.rcp.control.XDecimalField xDecimalField2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
     private com.rameses.rcp.control.XLabel xLabel10;
@@ -517,7 +542,6 @@ public class OboBuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel6;
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;
-    private com.rameses.rcp.control.XLabel xLabel9;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

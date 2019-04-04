@@ -13,6 +13,7 @@
 		<field name="owner_ctcid" />
 
 		<field name="scope" />
+		<field name="constructiontypeid" />
 
 		<complex name="occupancytype" ref="obo_occupancy_type" jointype="many-to-one" required="true">
 			<key field="occupancytypeid" target="objid" />

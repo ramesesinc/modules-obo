@@ -13,12 +13,13 @@
 		<field name="owner_ctcid"/>
 		<field name="scope"/>
 		<field name="scopeparticulars"/>
+		<field name="constructiontypeid"/>
 		<field name="occupancytypeid"/>
 		<field name="occupancytypegroup"/>
 		<field name="numunits"/>
 		<field name="floorarea"/>
-		<field name="estimatedcost"/>
-		<field name="projectcost"/>
+		<field name="estimatedcost" type="decimal"/>
+		<field name="projectcost"  type="decimal"/>
 		<field name="dtproposedconstruction"/>
 		<field name="dtexpectedcompletion"/>
 		<field name="supervisorid"/>

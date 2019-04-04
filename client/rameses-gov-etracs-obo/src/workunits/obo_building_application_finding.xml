@@ -1,14 +1,17 @@
-<workunit schemaName="obo_building_application_requirement">
+<workunit schemaName="obo_building_application_finding">
     <invokers>
         <invoker type="obo_building_application_finding:create" caption="OBO Application"
-                action="open" index="1"/>
+                action="create" index="1" target="popup"/>
         
         <invoker type="obo_building_application_finding:open" caption="OBO Application"
-                action="open" index="1"/>
+                action="open" index="1" target="popup"/>
         
         <!-- formActions -->
-        <invoker type="formActions" caption="Resolve"
-                action="resolve" visibleWhen="#{mode != 'create' }"/>
+        <invoker type="formActions" caption="Approve"
+                action="approve" visibleWhen="#{mode != 'create' }"/>
+        
+        <invoker type="formActions" caption="For Revision"
+                action="revise" visibleWhen="#{mode != 'create' }"/>
         
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingApplicationFindingModel" />

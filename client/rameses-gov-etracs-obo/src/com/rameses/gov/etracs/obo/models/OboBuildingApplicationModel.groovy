@@ -77,15 +77,7 @@ class OboBuildingApplicationModel extends WorkflowTaskModel {
         MsgBox.alert("view document");
     }  
 
-    def addFinding() {
-        def m = [:];
-        m.appid = entity.appid;
-        m.workitemid = entity.objid;
-        m.handler = {
-            
-        }
-        return Inv.lookupOpener("obo_building_application_finding:create", [handler: h ]);
-    }
+    
     
       
 

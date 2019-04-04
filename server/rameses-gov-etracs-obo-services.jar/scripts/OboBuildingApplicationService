@@ -14,6 +14,12 @@ public class OboBuildingApplicationService  {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
+	@Service("AppnoGeneratorService")
+	def appNoSvc;
+
+	@Service("OboConstructionCostService")
+	def costSvc;
+
 	@DataContext("obo_building_application")
 	def appEm;
 
@@ -29,6 +35,9 @@ public class OboBuildingApplicationService  {
 	@DataContext("vw_obo_building_application_workitem")
 	def aw;
 
+	@Service("SequenceService")
+	def seqSvc;
+
 	@ProxyMethod
 	public def create(o) {
 		//if acctid does not exist create a new account
@@ -40,9 +49,18 @@ public class OboBuildingApplicationService  {
 			o.acctid = m.objid;
 		}
 
+		int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
+
 		def dt = dateSvc.getServerDate();
 		o.appdate = dt;
-		o.appno = "OBOAPP" + new UID();
+		o.appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  ) ;
+
+		//compute the fixed construction cost
+		def prms = [:];
+		prms.app = [floorarea: o.floorarea, height: o.height, apptype: o.apptype ];
+		prms.occupancytype = [ division: o.occupancytype.objid, group: o.occupancytype.parentid  ];
+		o.projectcost = costSvc.calc( prms );
+
 		def app = appEm.create( o );
 
 		def p = [:];

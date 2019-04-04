@@ -13,7 +13,6 @@ class OboBuildingApplicationWorkitemWorkflowListInterceptor {
 		def args = evt.args[0];
 		def result = evt.result;
 		result.each {
-			println "item is " + it;
 			if( it.name == 'mytask' ) {
 				it.count = appTask.select("c:{COUNT(*)}").where("workitem.objid = :typeid AND task.assignee.objid = :uid AND NOT(task.state = 'end') ", [uid: env.USERID, typeid: args.typeid ]).val();
 			}

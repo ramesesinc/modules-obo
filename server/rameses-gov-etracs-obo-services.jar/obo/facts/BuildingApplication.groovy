@@ -9,9 +9,8 @@ public class BuildingApplication {
 	String apptype;		//NEW OR RENEW
 	String worktype;	//LOV OBO_BUILDING_WORK_TYPE
 
-	double projectcost;
 	double estimatedcost;
-	double constructioncost;	//computed. 
+	double projectcost;	//computed. 
 	
 	int numstoreys;
 	double floorarea; 	

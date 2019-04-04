@@ -2,6 +2,9 @@
     <invokers>
         <invoker type="vw_obo_building_application_workitem:open" caption="Building Workitem"
                 action="open" index="1"/>
+        <!-- form actions -->
+        <invoker type="formActions" caption="View Application"
+                action="viewApplication" index="10"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboBuildingApplicationWorkitemModel" />
     <pages>

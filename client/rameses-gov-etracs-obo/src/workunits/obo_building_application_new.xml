@@ -1,7 +1,7 @@
 <workunit schemaName="obo_building_application">
     <invokers>
-        <invoker folderid="menucategory/obo/building" caption="New Building Permit Application"
-                action="start" index="1"/>
+        <invoker folderid="menucategory/obo/building" caption="New Building Permit"
+                action="start" index="-1" role="INFO"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboBuildingApplicationEntryModel" />
     <pageflow>

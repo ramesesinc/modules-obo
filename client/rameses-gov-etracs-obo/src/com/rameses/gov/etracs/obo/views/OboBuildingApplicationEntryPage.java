@@ -41,16 +41,15 @@ public class OboBuildingApplicationEntryPage extends javax.swing.JPanel {
         xTextField1 = new com.rameses.rcp.control.XTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         xTextArea1 = new com.rameses.rcp.control.XTextArea();
-        xDateField1 = new com.rameses.rcp.control.XDateField();
+        xComboBox2 = new com.rameses.rcp.control.XComboBox();
         entityLookup1 = new com.rameses.entity.components.EntityLookup();
         entityAddressLookup1 = new com.rameses.entity.components.EntityAddressLookup();
         xLookupField2 = new com.rameses.rcp.control.XLookupField();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xDecimalField3 = new com.rameses.rcp.control.XDecimalField();
+        xDecimalField4 = new com.rameses.rcp.control.XDecimalField();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xDecimalField1 = new com.rameses.rcp.control.XDecimalField();
-        xDecimalField2 = new com.rameses.rcp.control.XDecimalField();
-        xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xDateField2 = new com.rameses.rcp.control.XDateField();
         xDateField3 = new com.rameses.rcp.control.XDateField();
 
@@ -75,7 +74,7 @@ public class OboBuildingApplicationEntryPage extends javax.swing.JPanel {
 
         jLabel1.setText("Select Permits to include");
 
-        xFormPanel3.setCaptionWidth(160);
+        xFormPanel3.setCaptionWidth(200);
 
         xComboBox1.setCaption("App Type");
         xComboBox1.setExpression("");
@@ -100,12 +99,13 @@ public class OboBuildingApplicationEntryPage extends javax.swing.JPanel {
 
         xFormPanel3.add(jScrollPane1);
 
-        xDateField1.setCaption("App date");
-        xDateField1.setDisableWhen("#{ entity.txnmode == 'ONLINE' }");
-        xDateField1.setName("entity.appdate"); // NOI18N
-        xDateField1.setPreferredSize(new java.awt.Dimension(150, 20));
-        xDateField1.setRequired(true);
-        xFormPanel3.add(xDateField1);
+        xComboBox2.setCaption("Construction Type");
+        xComboBox2.setExpression("");
+        xComboBox2.setItems("workTypes");
+        xComboBox2.setName("entity.constructiontypeid"); // NOI18N
+        xComboBox2.setPreferredSize(new java.awt.Dimension(250, 30));
+        xComboBox2.setRequired(true);
+        xFormPanel3.add(xComboBox2);
 
         entityLookup1.setCaption("Owner");
         entityLookup1.setEntityType("entityindividual");
@@ -133,31 +133,28 @@ public class OboBuildingApplicationEntryPage extends javax.swing.JPanel {
         xIntegerField1.setName("entity.numunits"); // NOI18N
         xFormPanel3.add(xIntegerField1);
 
-        xDecimalField3.setCaption("Total Floor Area");
+        xDecimalField3.setCaption("Total Floor Area (sqm)");
         xDecimalField3.setName("entity.floorarea"); // NOI18N
         xFormPanel3.add(xDecimalField3);
 
-        xFormPanel2.setCaptionWidth(160);
+        xDecimalField4.setCaption("Height (m)");
+        xDecimalField4.setName("entity.height"); // NOI18N
+        xFormPanel3.add(xDecimalField4);
+
+        xFormPanel2.setCaptionWidth(200);
 
         xDecimalField1.setCaption("Estimated Cost");
         xDecimalField1.setName("entity.estimatedcost"); // NOI18N
         xDecimalField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xDecimalField1);
 
-        xDecimalField2.setCaption("Project Cost");
-        xDecimalField2.setName("entity.projectcost"); // NOI18N
-        xDecimalField2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xDecimalField2);
-
-        xFormPanel1.setCaptionWidth(200);
-
         xDateField2.setCaption("Proposed Const. Date");
         xDateField2.setName("entity.dtproposedconstruction"); // NOI18N
-        xFormPanel1.add(xDateField2);
+        xFormPanel2.add(xDateField2);
 
         xDateField3.setCaption("Expected Completion Date");
         xDateField3.setName("entity.dtexpectedcompletion"); // NOI18N
-        xFormPanel1.add(xDateField3);
+        xFormPanel2.add(xDateField3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,24 +163,19 @@ public class OboBuildingApplicationEntryPage extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 6, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 88, Short.MAX_VALUE))
+                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 76, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -242,14 +234,13 @@ public class OboBuildingApplicationEntryPage extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private com.rameses.rcp.control.XComboBox xComboBox1;
+    private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XDataTable xDataTable2;
-    private com.rameses.rcp.control.XDateField xDateField1;
     private com.rameses.rcp.control.XDateField xDateField2;
     private com.rameses.rcp.control.XDateField xDateField3;
     private com.rameses.rcp.control.XDecimalField xDecimalField1;
-    private com.rameses.rcp.control.XDecimalField xDecimalField2;
     private com.rameses.rcp.control.XDecimalField xDecimalField3;
-    private com.rameses.rcp.control.XFormPanel xFormPanel1;
+    private com.rameses.rcp.control.XDecimalField xDecimalField4;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;

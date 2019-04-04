@@ -17,9 +17,9 @@ public class ComputeConstructionCost implements RuleActionHandler {
 
 	public void execute(def params, def drools) {
 		def ba = params.application;
-		if( !ba.constructioncost || ba.constructioncost <= 0 ) {
+		if( !ba.projectcost || ba.projectcost <= 0 ) {
 			def amt = params.amount.decimalValue;			
-			ba.constructioncost = amt;
+			ba.projectcost = amt;
 		}
 	}
 

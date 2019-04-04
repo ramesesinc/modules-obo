@@ -430,10 +430,11 @@ public class OboBuildingApplicationWorkitemPage extends javax.swing.JPanel {
             })
         });
         schemaList1.setCustomFilter("workitemid  = :objid");
+        schemaList1.setHandlerName("findingListHandler");
         schemaList1.setName(""); // NOI18N
         schemaList1.setQueryName("entity");
         schemaList1.setSchemaName("obo_building_application_finding");
-        schemaList1.setRowHeight(40);
+        schemaList1.setRowHeight(20);
 
         javax.swing.GroupLayout xPanel2Layout = new javax.swing.GroupLayout(xPanel2);
         xPanel2.setLayout(xPanel2Layout);

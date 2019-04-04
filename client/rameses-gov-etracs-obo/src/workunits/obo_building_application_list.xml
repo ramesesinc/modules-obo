@@ -2,8 +2,8 @@
           processName="obo_building_application" schemaName="vw_obo_building_application"
           allowDelete="false" allowNotify="false">
     <invokers>
-        <invoker folderid="menucategory/obo/building" caption="View Application List"
+        <invoker folderid="menucategory/obo/building" caption="View OBO Application List"
              cols="appno,appdate,owner.name,title,projectcost,task.state,task.assignee.name"
-                action="init" index="-1" srole="SHARED"/>
+                action="init" index="-1" role="INFO"/>
     </invokers>
 </workunit>

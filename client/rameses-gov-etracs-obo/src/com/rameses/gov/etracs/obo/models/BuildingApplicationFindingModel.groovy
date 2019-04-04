@@ -14,8 +14,8 @@ class BuildingApplicationFindingModel extends CrudFormModel {
 
     def appid;
     def workitemid;
-    
     def handler;
+    def statusList = ["APPROVED", "REVISION"];
     
     void afterCreate() {
         entity.appid = appid;
@@ -23,8 +23,24 @@ class BuildingApplicationFindingModel extends CrudFormModel {
     }
     
     void afterSave(def o ) {
-        MsgBox.alert("after save " + o);
         if(handler) handler(entity);
+    }
+    
+    void changeStatus( def o ) {
+        def m = [_schemaname: getSchemaName() ];
+        m.findBy = [objid: entity.objid];
+        m.status = o;
+        persistenceService.update( m );
+        entity.status = o;
+        binding.refresh();
+    }
+    
+    void approve() {
+        changeStatus("APPROVED");
+    }
+    
+    void revise() {
+        changeStatus("FOR-REVISION");
     }
     
 }

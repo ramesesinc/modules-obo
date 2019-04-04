@@ -18,5 +18,6 @@
 		<field name="processname" />
 		<field name="sortindex" />
 		<field name="selectiontype" />
+		<field name="role" />
 	</element>
 </schema>

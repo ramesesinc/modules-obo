@@ -18,7 +18,7 @@ class OboMenuCategoryModel  extends MenuCategoryModel {
     
     void loadDynamicItems( String _id, def subitems, def invokers ) {
         def secProvider = clientContext.getSecurityProvider();
-        if(_id.matches('building|occupancy') ) {
+        if(_id.matches('(building|occupancy)_other') ) {
             boolean isRoot = (OsirisContext.env.ORGROOT == 1)
             def m = [_schemaname: "obo_requirement_type" ];
             m._limit = 200;
@@ -38,7 +38,7 @@ class OboMenuCategoryModel  extends MenuCategoryModel {
                 }
                 def id = _id + "/" + it.objid;
                 subitems << [ id: id, caption: it.title, index: (i++) ];
-                def sinv = "obo_" + _id + "_application_workitem:list"
+                def sinv = "obo_" + _id.split("_")[0] + "_application_workitem:list"
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
                 op.target = 'window';
                 invokers.put( id, op );

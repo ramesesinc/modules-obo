@@ -40,6 +40,7 @@ public class OboRequirementTypePage extends javax.swing.JPanel {
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
         xComboBox3 = new com.rameses.rcp.control.XComboBox();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
+        xTextField3 = new com.rameses.rcp.control.XTextField();
 
         xFormPanel1.setCaption("General Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -73,7 +74,7 @@ public class OboRequirementTypePage extends javax.swing.JPanel {
         xLookupField1.setExpression("#{ entity.org.name }");
         xLookupField1.setHandler("org:lookup");
         xLookupField1.setName("entity.org"); // NOI18N
-        xLookupField1.setVisibleWhen("#{ entity.type == 'WORKFLOW' }");
+        xLookupField1.setVisibleWhen("#{ entity.type == 'PROC' }");
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLookupField1);
 
@@ -112,6 +113,12 @@ public class OboRequirementTypePage extends javax.swing.JPanel {
         xIntegerField1.setRequired(true);
         xFormPanel1.add(xIntegerField1);
 
+        xTextField3.setCaption("Role");
+        xTextField3.setName("entity.role"); // NOI18N
+        xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField3.setSpaceChar('_');
+        xFormPanel1.add(xTextField3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,8 +132,8 @@ public class OboRequirementTypePage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -141,5 +148,6 @@ public class OboRequirementTypePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLookupField xLookupField1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
+    private com.rameses.rcp.control.XTextField xTextField3;
     // End of variables declaration//GEN-END:variables
 }

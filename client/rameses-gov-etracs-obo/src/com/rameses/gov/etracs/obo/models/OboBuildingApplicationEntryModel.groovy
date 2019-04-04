@@ -21,9 +21,10 @@ class OboBuildingApplicationEntryModel extends PageFlowController {
     def entity;
     def sections;
     def appTypes = ["NEW", "RENEW","ADDITIONAL"];
+    def workTypes = ["NEW CONSTRUCTION", "ADDITION", "RENOVATION", "ALTERATION", "DEMOLITION", "OTHER"];
     
     void initNew() {
-        entity = [subapplications:[]];
+        entity = [subapplications:[], numunits: 1];
         def m = [_schemaname:'obo_requirement_type'];
         m.where = ["type = 'PERMIT' "];
         m._limit = 1000;
