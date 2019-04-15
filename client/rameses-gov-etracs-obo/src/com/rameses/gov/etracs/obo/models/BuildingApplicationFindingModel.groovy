@@ -13,13 +13,13 @@ import com.rameses.enterprise.models.*;
 class BuildingApplicationFindingModel extends CrudFormModel {
 
     def appid;
-    def workitemid;
+    def subappid;
     def handler;
     def statusList = ["APPROVED", "REVISION"];
     
     void afterCreate() {
         entity.appid = appid;
-        entity.workitemid = workitemid;
+        entity.subappid = subappid;
     }
     
     void afterSave(def o ) {

@@ -9,9 +9,9 @@ import com.rameses.osiris2.common.*;
 import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
-import com.rameses.menu.models.MenuCategoryModel;
+import com.rameses.menu.models.*;
 
-class OboMenuCategoryModel  extends MenuCategoryModel {
+class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
 
     @Service("QueryService")
     def querySvc;
@@ -20,14 +20,14 @@ class OboMenuCategoryModel  extends MenuCategoryModel {
         def secProvider = clientContext.getSecurityProvider();
         if(_id.matches('(building|occupancy)_other') ) {
             boolean isRoot = (OsirisContext.env.ORGROOT == 1)
-            def m = [_schemaname: "obo_requirement_type" ];
+            def m = [_schemaname: "obo_subapplication_type" ];
             m._limit = 200;
             m.orderBy = "sortindex";
             if(isRoot) {
-                m.where = ["type IN ('PROC','PERMIT') AND org.objid IS NULL"];
+                m.where = ["org.objid IS NULL"];
             }
             else {
-                m.where = ["type IN ('PROC','PERMIT') AND org.objid = :orgid", [orgid: OsirisContext.env.ORGID] ];
+                m.where = ["org.objid = :orgid", [orgid: OsirisContext.env.ORGID] ];
             }
             def list = querySvc.getList( m );
             int i = 100;
@@ -38,7 +38,7 @@ class OboMenuCategoryModel  extends MenuCategoryModel {
                 }
                 def id = _id + "/" + it.objid;
                 subitems << [ id: id, caption: it.title, index: (i++) ];
-                def sinv = "obo_" + _id.split("_")[0] + "_application_workitem:list"
+                def sinv = "obo_" + _id.split("_")[0] + "_subapplication:list"
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
                 op.target = 'window';
                 invokers.put( id, op );

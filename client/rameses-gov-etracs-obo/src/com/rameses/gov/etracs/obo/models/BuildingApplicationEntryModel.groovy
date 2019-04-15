@@ -10,7 +10,7 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class OboBuildingApplicationEntryModel extends PageFlowController {
+class BuildingApplicationEntryModel extends PageFlowController {
     
     @Service("OboBuildingApplicationService")
     def appService;
@@ -25,8 +25,8 @@ class OboBuildingApplicationEntryModel extends PageFlowController {
     
     void initNew() {
         entity = [subapplications:[], numunits: 1];
-        def m = [_schemaname:'obo_requirement_type'];
-        m.where = ["type = 'PERMIT' "];
+        def m = [_schemaname:'obo_subapplication_type'];
+        m.where = ["required = 0 "];
         m._limit = 1000;
         m.orderBy = "sortindex";
         sections = queryService.getList(m);

@@ -1,9 +1,10 @@
-<workunit extends="com/rameses/menu/templates/MenuCategory.xml" context="obo" cols="2">
+<workunit extends="com/rameses/menu/templates/FXMenuCategory.xml" context="obo" cols="2">
     <invokers>
         <invoker type="home.action" 
-                 caption="OBO" icon="home/icons/obo.png"
+                icon="home/icons/obo.png"
                  role=".*"
+                 caption="OBO Main Menu" 
                  index="1" action="init"/>
     </invokers> 
-    <code class="com.rameses.gov.etracs.obo.models.OboMenuCategoryModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboFXMenuCategoryModel" />
 </workunit>

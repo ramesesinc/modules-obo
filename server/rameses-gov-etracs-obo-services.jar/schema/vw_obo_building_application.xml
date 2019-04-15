@@ -2,13 +2,13 @@
 	<element tablename="vw_obo_building_application">
 		<field name="objid" primary="true"/>
 		<field name="acctid"/>
-		<field name="appno"/>
+		<field name="appno" searchable="true"/>
 		<field name="appdate"/>
 		<field name="apptype"/>
 		<field name="title"/>
 		<field name="description"/>
 		<field name="owner_objid"/>
-		<field name="owner_name"/>
+		<field name="owner_name" searchable="true"/>
 		<field name="owner_address_text"/>
 		<field name="owner_ctcid"/>
 		<field name="scope"/>

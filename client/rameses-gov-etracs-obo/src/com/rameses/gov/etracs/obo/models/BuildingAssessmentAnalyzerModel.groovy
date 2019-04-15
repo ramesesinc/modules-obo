@@ -14,98 +14,131 @@ class BuildingAssessmentAnalyzerModel  {
 
     @Binding
     def binding;
-
-    @Service("BuildingAssessmentService")
-    def assmtSvc;
     
-    @Service("OboInfoService")
-    def infoSvc;
-
-    String title = "Building Assessment Analyzer";
-    def mode = "default";
+    @Service("OboConstructionCostService")
+    def costSvc;
     
-    def entity = [:];
-    def ruleExecutor;
-    def permits = [];
-    def bldginfos = [];
+    def entity;
+    def appTypes = ["NEW", "RENEW","ADDITIONAL"];
+    def workTypes = ["NEW CONSTRUCTION", "ADDITION", "RENOVATION", "ALTERATION", "DEMOLITION", "OTHER"];
+    def subApplication;
     
-    def buildInfo() {
-        def info = [:];
-        info.buildinguse = [
-            kind: entity.buildingkind.objid,
-            id: entity.buildingkind.use.objid, 
-            classificationid: entity.buildingkind.use.classificationid, 				
-            groupid:entity.buildingkind.use.groupid,				
-            division:entity.buildingkind.use.division,
-        ];    
-        info.application = [
-            floorarea: entity.floorarea,
-            worktype: entity.worktype,
+    void init() {
+        entity = [subapplications:[], numunits: 1, floorarea: 0, height: 0];
+    }
+    
+    @PropertyChangeListener
+    def propListener = [ 
+        "entity.(numunits|height|floorarea|apptype|occupancytypeid|constructiontypeid)" : { v->
+            entity.projectcost = 0;
+            if( entity.height == null ) {};
+            else if( !entity.floorarea ) {
+                println "entity floor area " + entity.floorarea;
+            };
+            else if( !entity.apptype ) {
+                println "entity app type " + entity.apptype;
+            };
+            else if( !entity.occupancytype ) {
+                println "occupancy type " + entity.occupancytype.objid;
+            };
+            else if( !entity.constructiontypeid ) {
+                println "work type " + entity.constructiontypeid
+            };            
+            else {
+                def req = buildBasicParams();
+                entity.projectcost = costSvc.calc(req); 
+            }
+            binding.refresh("entity.projectcost");
+        }
+    ];
+    
+    def buildBasicParams() {
+        def dt = null;
+        if( entity.appdate ) {
+            dt = (new java.text.SimpleDateFormat("yyyy-MM-dd")).parse(entity.appdate);
+        }
+        def f = [:];
+        f.app = [ 
+            appdate:dt, 
+            apptype:entity.apptype, 
+            projectcost: entity.projectcost, 
+            height: ((entity.height == null)?0:entity.height),
             numunits: entity.numunits,
-            height: entity.height,
-            apptype: entity.apptype    
+            floorarea: entity.floorarea
         ];
-        return info;
+        f.occupancytype = [division:entity.occupancytype.objid, group:entity.occupancytype.parentid ]; 
+        return f;
     }
     
     def assess() {
-        def p = buildInfo();
-        p.permits = [];
-        p.infos = [];
-        if(permits) {
-            permits.each {
-                p.permits << [permittype: it.permitType];
-                p.infos.addAll( it.infos );
+        def f = buildBasicParams();
+        def infos = [];
+        entity.subapplications.each {
+            infos.addAll( it.infos ); 
+        }
+        f.infos = infos;
+        f.permits = entity.subapplications.collect{ [type: it.objid] };
+        return Inv.lookupOpener("view_assessment", [params: f] );
+    }
+    
+    def addSubApp() {
+        def h = { items->
+            items.each { o->
+                if (!entity.subapplications.find{it.objid == o.objid}) {
+                    o.infos = [];
+                    entity.subapplications << o;
+                }
             }
-        };
-        if(bldginfos) {
-            bldginfos.each {
-                p.infos << it;
+            binding.refresh("subApplication");
+        }
+        return Inv.lookupOpener("obo_subapplication_type:lookup", [onselect:h, multiSelect: true ]);    
+    }
+    
+    void removeSubApp() {
+        if(!subApplication) throw new Exception("Please select a subapplication");
+        entity.subapplications.remove( subApplication );
+    }
+    
+    def addInfos() {
+        def h = { o->
+            o.each { v->
+                if (!subApplication.infos.find{it.objid == v.objid}) {
+                    subApplication.infos << v;
+                }
             }
+            infoListModel.load();
         }
-        def r = assmtSvc.assess( p );
-        entity.fees = r.fees;
-        entity.constructioncost = r.constructioncost;
-        r.infos?.each {
-            if(it.amount ) println it;
+        return Inv.lookupOpener( "obo_variable:picklist", [typeid: subApplication.objid, onselect: h ]);
+    }
+    
+    def editInfos() {
+        def selectedItems = infoListModel.getSelectedValue();
+        if( !selectedItems ) throw new Exception("Please select items to edit");
+        def h = { v->
+            infoListModel.load();
         }
-        //entity.infos = r.infos;
-        itemListModel.reload();
-        mode = "result";
-        return mode;
+        def op= Inv.lookupOpener("obo_detail_info", [items: selectedItems, onselect: h ]);
+        op.target = "popup";
+        return op;
     }
     
-    def assessInspection() {
-        
-    }
-    
-    def reset() {
-        mode = "default";
-        return mode;
-    }
-    
-    def itemListModel = [
-        fetchList: { o->
-            return entity.fees;
+    void removeInfos() {
+        def selectedItems = infoListModel.getSelectedValue();
+        if( !selectedItems ) throw new Exception("Please select items to remove");
+        selectedItems.each {
+            subApplication.infos.remove( it );
         }
-    ] as BasicListModel;
+        infoListModel.load();
+    }
     
-    def getPermit(String type) {
-        def permit = permits.find{ it.permitType == type };
-        if(!permit) {
-            permit = [permitType: type, infos: [] ];
-            permits << permit;
+    def infoListModel = [
+        isMultiSelect: {
+            return true;
+        },
+        fetchList: { o -> 
+            if(!subApplication) return [];
+            return subApplication.infos;
         }
-        return permit;
-    }
-    
-    def getElectricalPermit() { return getPermit( "ELECTRICAL" ).infos; }
-    def getMechanicalPermit() { return getPermit( "MECHANICAL" ).infos; }
-    def getPlumbingPermit() { return getPermit( "PLUMBING" ).infos; }
-    def getElectronicPermit() { return getPermit( "ELECTRONIC" ).infos; }
-    
-    def getBuildingInfos() { 
-        return bldginfos;
-    }
+    ] as EditorListModel;
 
 }

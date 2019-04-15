@@ -1,0 +1,28 @@
+import com.rameses.annotations.*; 
+
+class OboBuildingSubapplicationListInterceptor { 
+
+	@DataContext("vw_obo_building_subapplication")
+	def appTask;
+
+	@Env
+	def env;
+
+	@After(pattern="WorkflowTaskListService.getNodeList", eval="#{args[0].processname == 'obo_building_subapplication' }") 
+	public void afterGetNodes( def evt ) {
+		def args = evt.args[0];
+		def result = evt.result;
+		result.each {
+			if( it.name == 'mytask' ) {
+				it.count = appTask.select("c:{COUNT(*)}").where("typeid = :typeid AND task.assignee.objid = :uid AND NOT(task.state = 'end') ", [uid: env.USERID, typeid: args.typeid ]).val();
+			}
+			else if( it.name != 'end' ) {
+				it.count = appTask.select("c:{COUNT(*)}").where("typeid = :typeid AND task.state = :t", [t:it.name, typeid: args.typeid ] ).val();
+			}
+			if( it.count > 0 ) {
+				it.title = it.title + " (" + it.count + ")";
+			}
+		}
+	}
+
+} 

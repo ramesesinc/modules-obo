@@ -15,11 +15,16 @@ public class OboBuildingAssessmentService  {
 	@Service("DateService")
 	def dateSvc;
 
+	@DataContext("obo_billitemtype")
+	def billItemTypeEm;
+
 	@ProxyMethod
 	public def assess(o) {
 		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: o, include_items: false ] );
-		println "result is " + res.billitems
-		return [];
+		res.billitems.findAll{ it.billcode && it.item == null }.each {
+			it.item = billItemTypeEm.find( [objid: it.billcode ] ).first().item;
+		}
+		return res.billitems;
 	}
 
 }

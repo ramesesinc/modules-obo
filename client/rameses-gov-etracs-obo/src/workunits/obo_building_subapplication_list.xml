@@ -1,10 +1,10 @@
 <workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
-          processName="obo_building_subapplication" schemaName="obo_building_subapplication"
+          processName="obo_building_subapplication" schemaName="vw_obo_building_subapplication"
           allowDelete="false" allowNotify="false">
     <invokers>
         <invoker type="obo_building_subapplication:list" caption="View Sub Process List"
-             cols="app.appno,app.owner.name,section.title,type.org.name"
+             cols="appno,owner.name,task.assignee"
                 action="init" index="-1" srole="SHARED"/>
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboBuildingSubapplicationListModel" />
+    <code class="com.rameses.gov.etracs.obo.models.BuildingSubapplicationListModel" />
 </workunit>

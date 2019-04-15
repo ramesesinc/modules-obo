@@ -13,12 +13,12 @@ import com.rameses.rcp.ui.annotations.Template;
  * @author elmonazareno
  */
 @Template(FormPage.class)
-public class OboBuildingApplicationEntryPage extends javax.swing.JPanel {
+public class BuildingApplicationEntryPage extends javax.swing.JPanel {
 
     /**
      * Creates new form ApplicationEntryPage
      */
-    public OboBuildingApplicationEntryPage() {
+    public BuildingApplicationEntryPage() {
         initComponents();
     }
 

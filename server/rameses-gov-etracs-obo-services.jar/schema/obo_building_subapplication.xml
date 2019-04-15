@@ -4,7 +4,7 @@
 		<field name="appid" />
 		<field name="typeid" />
 		<field name="contractorid" />
-		<field name="workitemid" />
+		<field name="taskid" />
 
 		<!--
 		<complex name="section" ref="obo_section" required="false" jointype="many-to-one">

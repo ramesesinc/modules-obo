@@ -8,9 +8,6 @@ class OboBuildingApplicationWorkflowInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-	@DataContext("obo_building_application_workitem")
-	def workItemEm;
-
 	@DataContext("obo_building_application_requirement")
 	def appReqEm;
 
@@ -20,83 +17,73 @@ class OboBuildingApplicationWorkflowInterceptor {
 	@DataContext("obo_building_application")
 	def appEm;
 
-	@DataContext("obo_building_subapplication")
+	@DataContext("vw_obo_building_subapplication")
 	def subAppEm;
 
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_application' }") 
-	public void checkApplicationWorkItems( def evt ) {
-		//check if documents and workitems status <> 0
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_application' && args[0].action != 'reactivate' }") 
+	public void checkApplicationPendings( def evt ) {
+		//check if documents status <> 0
 		def p = evt.args[0];
 		def r = [appid:p.refid, processname:'obo_building_application', validationstate: p.taskstate];
-
-		def list = appEm.getUnvalidateRequirements( r );
-		if( list ) {
-			def buff = new StringBuilder();
-			def docs = list.findAll{ it.type == 'DOC' };
-			if( docs ) {
-				buff.append("The ff. are unvalidated document requirements: \n")
-				buff.append( docs.collect{"  "+it.title}.join("\n") );
-			}
-			def procs = list.findAll{ it.type != 'DOC' };
-			if( procs ) {
-				buff.append("\nThere are still unapproved transactions as follows: \n")
-				buff.append( procs.collect{"  "+it.title}.join("\n") );
-			}
+		def buff = new StringBuffer();
+		/*
+		def docs = appEm.getUnvalidateRequirements( r );
+		if( docs ) {
+			buff.append("The ff. are unvalidated document requirements: \n")
+			buff.append( docs.collect{"  "+it.title}.join("\n") );
 			throw new Exception( buff.toString() );			
+		}
+		*/
+		//check also if there are pending subapps not ended. but check only if activation is not caused by the subapp
+		if( p.info?.subappid == null ) {
+			def procs = subAppEm.find( [appid: p.refid ] ).where(" NOT(taskid IS NULL) AND NOT(task.state = 'end')  ").list();
+			if (procs) {
+				buff.append("The ff. are uncompleted processes: \n")
+				buff.append( procs.collect{"  "+it.typetitle}.join("\n") );
+				throw new Exception( buff.toString() );			
+			}
 		}
 	}
 
-	@After(pattern="WorkflowTaskService.(start|signal)", eval="#{args[0].processname == 'obo_building_application' }") 
-	public void triggerApplicationWorkItems( def evt ) {
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_application' && args[0].action == 'approve' }") 
+	public void startSubApplicationTask( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
-		def list = reqType.find([processname:'obo_building_application', activationstate:r.state]).list();
 		def appid = p.refid;
 
-		list?.each {
-			if( it.type.matches('PROC|PERMIT')) {
-				def subappid = null;
-				boolean addWorkitem = true;
-				if( it.type == 'PERMIT' ) {
-					def sa = subAppEm.find([appid:appid, typeid:it.objid] ).first();
-					if(!sa) {
-						addWorkitem = false;
-					}	
-					else {
-						subappid = sa.objid;
-					}	
-				}
-				if(addWorkitem) {
-					def wi = [:];
-					wi.appid = appid;
-					wi.typeid = it.objid;
-					wi.status = 0;
-					wi.subappid = subappid;
-					wi = workItemEm.create( wi );
-
-					//if there is a subapplication found, attach the workitem.
-					if( subappid != null ) {
-						subAppEm.find( [objid: subappid ] ).update([workitemid: wi.objid ]);
-					}
-
-					//fire the workitem task
-					def dt = dateSvc.getServerDate();
-					def f = [:];
-					f.processname = 'obo_building_application_workitem';
-					f.refid = wi.objid;
-					f.startdate = dt;
-					f.info = [ type: it, app: p.info ];
-					wfSvc.start(f);	
-				}
-			}
-			else {
-				def dr = [:];
-				dr.typeid = it.objid;
-				dr.appid = p.info.objid;
-				dr.status = 0;
-				appReqEm.create( dr );
+		//attach tasks for subapplications that have not yet been started
+		def list = subAppEm.select("objid").find( [appid: p.refid] ).where("activationstate = :astate AND taskid IS NULL ", [astate: r.state ] ).list(); 
+		if( list ) {
+			def dt = dateSvc.getServerDate();
+			list.each {
+				def f = [:];
+				f.processname = 'obo_building_subapplication';
+				f.refid = it.objid;
+				f.startdate = dt;
+				f.info = [ type: it.objid, app: p.info ];
+				wfSvc.start(f);	
 			}
 		}	
 	} 
+
+	//FOR REACTIVATION
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_application' && args[0].action == 'reactivate' }" ) 
+	public void reactivateSubapplicationTasks( def evt ) {
+		def p = evt.args[0];
+		def list = subAppEm.select("objid,taskid").find( [appid: p.refid ] ).where(" NOT(task.state = 'end') ").list();
+		if( list ) {
+			def dt = dateSvc.getServerDate();
+			list.each {
+				def f = [:];
+				f.processname = 'obo_building_subapplication';
+				f.refid = it.objid;
+				f.taskid = it.taskid;
+				f.startdate = dt;
+				f.action = "reactivate";
+				f.info = [ : ];
+				wfSvc.signal(f);	
+			}
+		}
+	}
 
 } 

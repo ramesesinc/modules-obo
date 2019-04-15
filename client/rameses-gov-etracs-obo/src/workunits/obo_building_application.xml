@@ -3,8 +3,8 @@
         <invoker type="vw_obo_building_application:open" caption="OBO Application"
                 action="open" index="1"/>
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboBuildingApplicationModel" />
+    <code class="com.rameses.gov.etracs.obo.models.BuildingApplicationModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.views.OboBuildingApplicationPage" />
+        <page template="com.rameses.gov.etracs.obo.views.BuildingApplicationPage" />
     </pages>
 </workunit>

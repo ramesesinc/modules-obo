@@ -1,6 +1,7 @@
 <workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="obo_billitemtype">
     <invokers>
-        <invoker type="obo_billitemtype:lookup" caption="Obo BillItem Type Lookup" action="init" index="15"
+        <invoker type="obo_billitemcode:lookup" caption="Obo BillItem Code Lookup" 
+                 action="init" index="15"
             cols="objid,title,item.title"/>
     </invokers>
 </workunit>

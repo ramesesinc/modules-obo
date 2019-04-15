@@ -10,27 +10,26 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
+class BuildingSubpplicationModel extends WorkflowTaskModel {
 
-    @Service("OboBuildingApplicationService")
+    @Service("OboBuildingSubapplicationService")
     def appSvc;
     
-    @Service("OboBuildingAssessmentService")
-    def assmtSvc;
-    
     def infos;
-    def findingListHandler;
     
     String getFormName() {
         return getSchemaName() + ":form";
     }
     
+    /*
     String getBarcodeFieldname() {
         return "appno";
     }
-    
+    */
+   
     public String getTitle() {
-        return entity.appno + "[ " +  task?.title + "]" ;
+        return entity.appno;
+        //return entity.appno + "[ " +  task?.title + "]" ;
     }
     
     public String getWindowTitle() {
@@ -41,16 +40,28 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
         return entity.objid;
     }
   
+    def infoListModel = [
+        isMultiSelect: {
+            return true;
+        },
+        fetchList: {
+            def m = [subappid : entity.objid ];
+            infos = appSvc.getInfos(m);
+            return infos;
+        }
+    ] as BasicListModel;
+    
     def addItem() {
         def h = { o->
             o.each {
                 it.remove("objid");
                 it.appid = entity.appid;
+                it.subappid = entity.objid;
             }
             appSvc.saveInfos( o );
             infoListModel.load();
         }
-        return Inv.lookupOpener( "obo_variable:picklist", [typeid: entity.workitem.objid, onselect: h ]);
+        return Inv.lookupOpener( "obo_variable:picklist", [typeid: entity.typeid, onselect: h ]);
     }
     
     def editItems() {
@@ -72,16 +83,7 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
         infoListModel.load();
     }
     
-    def infoListModel = [
-        isMultiSelect: {
-            return true;
-        },
-        fetchList: {
-            def m = [appid : entity.appid, typeid: entity.workitem.objid ];
-            infos = appSvc.getInfos(m);
-            return infos;
-        }
-    ] as BasicListModel;
+    
     
     def itemListModel = [
         fetchList: { o->
@@ -89,69 +91,27 @@ class OboBuildingApplicationWorkitemModel extends WorkflowTaskModel {
         }
     ] as BasicListModel;
     
-    
-    /*
-    void addAttachment()  {
-        def p = [:];
-        p.appid = entity.objid;
-        p._schemaname = 'obo_building_application_attachment';
-        
-        def h = { o->
-            attachmentListModel.reload();
-        }
-        Modal.show( "obo_application_attachment:create", [info:p, handler: h] );
-    }
-
-    def attachmentListModel = [
-        fetchList: { o->
-            def m = [_schemaname: 'obo_building_application_attachment'];
-            m.findBy = [appid: entity.objid];
-            return queryService.getList( m );
-        },
-        onOpenItem: { o,colName->
-            def opener = Inv.lookupOpener("sys_file:open", [entity: [objid: o.fileid]] );
-            opener.target = 'popup'; 
-            return opener; 
-        }
-    ] as BasicListModel;
-    */
-    
     def viewAssessment() {
         def f = [:];
-        
-        String apptype;		//NEW OR RENEW
-	String worktype;	//LOV OBO_BUILDING_WORK_TYPE
-	String permittype;	//BUILDING,ELECTRICAL
-
-	double projectcost;
-	double estimatedcost;
-	double constructioncost;	//computed. 
-	
-	String constructiontype;   	
-	double floorarea; 	
-	double height;
-	int numunits;
-	int numstoreys;
-        
         f.app = [ 
             appno:entity.appno, 
             appdate:entity.appdate, 
             apptype:entity.apptype, 
             projectcost: entity.projectcost, 
-            height: 0,
+            height: ((entity.height == null)?0:entity.height),
             numunits: entity.numunits,
             floorarea: entity.floorarea
         ];
         f.occupancytype = [division:entity.occupancytypeid, group:entity.occupancytypegroup ];
         f.infos = infos;
-        f.permits = [ [type: entity.workitem.objid ] ];
-        assmtSvc.assess( f );
+        f.permits = [ [type: entity.typeid ] ];
+        return Inv.lookupOpener("view_assessment", [params: f] );
     }
     
     def addFinding() {
         def m = [:];
         m.appid = entity.appid;
-        m.workitemid = entity.objid;
+        m.subappid = entity.objid;
         m.handler = {
             findingListHandler.reload();
         }

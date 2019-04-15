@@ -2,13 +2,13 @@ import com.rameses.annotations.*;
 
 class OboVariableListInterceptor { 
 
-	@DataContext("obo_requirement_type")
-	def reqType;
+	@DataContext("obo_subapplication_type")
+	def subType;
 
 	@After(pattern="QueryService.getNodeList", eval="#{args[0]._schemaname == 'obo_variable' }")
 	public void getNodeList(def evt) {
 		def result = evt.result;
-		def nodes = reqType.find( [type: 'PERMIT' ]).orderBy("sortindex").list();
+		def nodes = subType.orderBy("sortindex").list();
 		nodes.each {
 			result << [title: it.title, id: it.objid ];		
 		}

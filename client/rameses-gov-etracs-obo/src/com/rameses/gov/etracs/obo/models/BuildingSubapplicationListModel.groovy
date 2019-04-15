@@ -10,13 +10,13 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class OboBuildingApplicationWorkitemListModel extends WorkflowTaskListModel {
+class BuildingSubapplicationListModel extends WorkflowTaskListModel {
     
     def typeid;
     String title;
     
     def getCustomFilter() {
-        return [ "workitem.objid = :typeid", [typeid: typeid] ];
+        return [ "typeid = :typeid", [typeid: typeid] ];
     }
     
     def beforeFetchNodes( param ) {

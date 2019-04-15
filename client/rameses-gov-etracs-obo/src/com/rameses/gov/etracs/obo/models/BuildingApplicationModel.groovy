@@ -9,6 +9,8 @@ import com.rameses.osiris2.common.*;
 import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
+import javax.swing.*;
+import com.rameses.io.*;
 
 class OboBuildingApplicationModel extends WorkflowTaskModel {
 
@@ -42,14 +44,22 @@ class OboBuildingApplicationModel extends WorkflowTaskModel {
             def m = [_schemaname: "vw_obo_building_subapplication" ];
             m.findBy = [appid: entity.objid];
             return queryService.getList( m );
+        },
+        openItem: { o, colName ->
+            def op = Inv.lookupOpener("vw_obo_building_subapplication:open", [entity: o]);
+            op.target = "popup";
+            return op;
         }
     ] as BasicListModel;
     
     def workitemListModel = [
         fetchList: { o->
+            return [];
+            /*
             def m = [_schemaname: "vw_obo_building_application_workitem" ];
             m.findBy = [appid: entity.objid];
             return queryService.getList( m );
+            */
         }
     ] as BasicListModel;
    
@@ -70,41 +80,16 @@ class OboBuildingApplicationModel extends WorkflowTaskModel {
     
     
     def uploadDocument() {
-        MsgBox.alert("upload document");
+        def chooser = new JFileChooser();
+        int i = chooser.showOpenDialog(null);
+        if(i==0) {
+            MsgBox.alert("uploaded!");
+        }
     }    
     
     def viewDocument() {
-        MsgBox.alert("view document");
+        return Inv.lookupOpener("view_document", [:]);
     }  
 
-    
-    
-      
-
-    /*
-    void addAttachment()  {
-        def p = [:];
-        p.appid = entity.objid;
-        p._schemaname = 'obo_building_application_attachment';
-        
-        def h = { o->
-            attachmentListModel.reload();
-        }
-        Modal.show( "obo_application_attachment:create", [info:p, handler: h] );
-    }
-
-    def attachmentListModel = [
-        fetchList: { o->
-            def m = [_schemaname: 'obo_building_application_attachment'];
-            m.findBy = [appid: entity.objid];
-            return queryService.getList( m );
-        },
-        onOpenItem: { o,colName->
-            def opener = Inv.lookupOpener("sys_file:open", [entity: [objid: o.fileid]] );
-            opener.target = 'popup'; 
-            return opener; 
-        }
-    ] as BasicListModel;
-    */
     
 }

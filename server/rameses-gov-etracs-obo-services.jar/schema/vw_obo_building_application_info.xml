@@ -3,6 +3,8 @@
 		<field name="objid" primary="true"/>
 		
 		<field name="appid" />
+		<field name="subappid" />
+		<field name="typeid" />
 		<field name="name" />
 		<field name="caption" />
 		<field name="stringvalue" />
@@ -11,7 +13,6 @@
 		<field name="datevalue" />
 		<field name="booleanvalue" />
 		<field name="datatype" />
-		<field name="typeid" />
 		<field name="unit" />
 		<field name="caption" />
 		<field name="category" />

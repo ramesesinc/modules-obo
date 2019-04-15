@@ -1,0 +1,55 @@
+import com.rameses.annotations.*; 
+
+class OboBuildingSubapplicationWorkflowInterceptor { 
+
+	@Service("WorkflowTaskService")
+	def wfSvc;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("obo_building_application_finding")
+	def findingEm;
+
+	@DataContext("vw_obo_building_subapplication")
+	def subappEm;
+
+	/**********************************************************************************************
+	* REMEMBER: This is the obo_building_subapplication process flow
+	***********************************************************************************************/
+
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_subapplication' && args[0].action?.matches('approve|for-revision') }") 
+	public void checkFindingStatus( def evt ) {
+		def p = evt.args[0];
+		def c = findingEm.find( [subappid: p.refid ] ).select("c:{COUNT(*)}").where( "status IS NULL").val();
+		if( c > 0 ) throw new Exception("Please indicate status for the finding");
+
+		c = findingEm.find( [subappid: p.refid ] ).select("c:{COUNT(*)}").where( "status = 'FOR-REVISION' ").val();
+		if( c > 0 && p.action == 'approve' ) throw new Exception("Approve is not allowed. There are findings for revision.");
+		if( c == 0 && p.action == 'for-revision' ) throw new Exception("For Revision not allowed. There are no findings for revision.");
+	} 
+
+	//signal the parent 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_subapplication' && args[0].action?.matches('approve|for-revision') }") 
+	public void signalParent( def evt ) {
+		def p = evt.args[0];
+		def r = evt.result;
+
+		def appid = subappEm.find( [objid: p.refid] ).select("appid").val();
+		//check first of there are other subapplications that have not yet ended
+		def openItems = subappEm.find([appid:appid] ).where( "NOT(objid = :refid) AND task.state NOT IN ('end', 'revision') ", [refid: p.refid]).select("c:{COUNT(*)}").val();
+		if(!openItems) {
+			//check if there are other subapplications where state is under revision.
+			def forRevision =  subappEm.find([appid:appid] ).where( "NOT(objid = :refid) AND task.state = 'revision'", [refid: p.refid]).select("c:{COUNT(*)}").val();  
+			def f = [:];
+			f.processname = 'obo_building_application';
+			f.refid = appid;
+			f.startdate = dateSvc.getServerDate();
+			f.info = [ app: p.info, subappid: p.refid ];
+			f.action = (forRevision > 0) ? "for-revision" : p.action;
+
+			wfSvc.signal(f);	
+		}
+	} 
+
+} 

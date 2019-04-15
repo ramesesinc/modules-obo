@@ -15,7 +15,7 @@ class OboBuildingApplicationWorkflowListInterceptor {
 			if( it.name == 'mytask' ) {
 				it.count = appTask.select("c:{COUNT(*)}").where("task.assignee.objid = :uid AND NOT(task.state = 'end') ", [uid: env.USERID]).val();
 			}
-			else if(it.tracktime == 1) {
+			else if(it.name != 'end') {
 				it.count = appTask.select("c:{COUNT(*)}").where("task.state = :t", [t:it.name] ).val();
 			}
 			if( it.count > 0 ) {

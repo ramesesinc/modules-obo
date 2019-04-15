@@ -23,12 +23,6 @@ class OboFactBuilderInterceptor {
 			factBuilder.facts << new AncillaryPermit( it );
 		}
 
-		factBuilder.facts.each {
-			if(it instanceof BuildingApplication ) println "apptype is " + it.apptype;
-			if(it instanceof AncillaryPermit ) println "permit type is " + it.type;
-			println it;
-		}
-
 		/*
 		def svrDate = dateSvc.getServerDate();
 		fb.facts << new BuildingUse( o.buildinguse );
