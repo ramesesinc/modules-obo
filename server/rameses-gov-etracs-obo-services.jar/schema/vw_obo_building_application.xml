@@ -11,13 +11,16 @@
 		<field name="owner_name" searchable="true"/>
 		<field name="owner_address_text"/>
 		<field name="owner_ctcid"/>
-		<field name="scope"/>
-		<field name="scopeparticulars"/>
-		<field name="constructiontypeid"/>
-		<field name="occupancytypeid"/>
-		<field name="occupancytypegroup"/>
+		<field name="worktypeid"/>
+		<field name="occupancytype_division"/>
+		<field name="occupancytype_group"/>
 		<field name="numunits"/>
 		<field name="floorarea"/>
+		<field name="totalfloorarea"/>
+		<field name="height"/>
+		<field name="bldgtype_objid"/>
+		<field name="bldgtype_title"/>
+
 		<field name="estimatedcost" type="decimal"/>
 		<field name="projectcost"  type="decimal"/>
 		<field name="dtproposedconstruction"/>

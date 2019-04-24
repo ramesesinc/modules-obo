@@ -1,0 +1,8 @@
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml"
+    schemaName="obo_zoneclass">
+    <invokers>
+        <invoker type="obo_zoneclass:lookup" caption="Zone Classs"
+                cols="objid,description"
+                action="init" target="popup"/>
+    </invokers>
+</workunit>

@@ -21,7 +21,6 @@ class BuildingApplicationEntryModel extends PageFlowController {
     def entity;
     def sections;
     def appTypes = ["NEW", "RENEW","ADDITIONAL"];
-    def workTypes = ["NEW CONSTRUCTION", "ADDITION", "RENOVATION", "ALTERATION", "DEMOLITION", "OTHER"];
     
     void initNew() {
         entity = [subapplications:[], numunits: 1];

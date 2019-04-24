@@ -22,13 +22,14 @@ SELECT
     oa.owner_name,
     oa.owner_address_text,
     oa.owner_ctcid,
-    oa.scope,
     oa.title,
     oa.description,
-    oa.occupancytypeid,
-    ot.parentid AS occupancytypegroup,
+    oa.occupancytypeid AS occupancytype_division,
+    ot.parentid AS occupancytype_group,
     oa.numunits,
     oa.floorarea,
+        oa.totalfloorarea,
+        oa.height,
     oa.estimatedcost,
     oa.dtproposedconstruction,
     oa.dtexpectedcompletion,
@@ -62,6 +63,6 @@ FROM obo_building_subapplication sa
 INNER JOIN obo_building_application oa ON sa.appid = oa.objid
 LEFT JOIN obo_building_subapplication_task sat ON sat.taskid = sa.taskid
 INNER JOIN obo_subapplication_type wt ON sa.typeid = wt.objid
-INNER JOIN obo_occupancy_type ot ON oa.occupancytypeid = ot.objid
+LEFT JOIN obo_occupancy_type ot ON oa.occupancytypeid = ot.objid
 
 

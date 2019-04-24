@@ -1,6 +1,6 @@
 <schema adapter="obodb">
 	<element tablename="obo_occupancy_type">
-		<field name="objid" primary="true" visible="true" caption="Name" searchable="true"/>
+		<field name="objid" primary="true" visible="true" caption="Division" searchable="true" />
 		<field name="parentid" caption="Group" />
 		<field name="description" />
 		<field name="type" />

@@ -1,6 +1,9 @@
-<workunit extends="com/rameses/treasury/common/templates/Billitemtype.xml"  schemaName="obo_billitemtype">
+<workunit extends="com/rameses/seti2/templates/CrudForm.xml"  schemaName="obo_billitemtype">
     <invokers>
         <invoker type="obo_billitemtype:create" caption="Obo Billitem Type" action="create" index="1" target="popup"/>
         <invoker type="obo_billitemtype:open" caption="Obo Billitem Type" action="open" index="1" target="popup"/>
     </invokers>
+     <pages>
+        <page template="com.rameses.gov.etracs.obo.views.BillItemTypePage" />
+    </pages>
 </workunit>

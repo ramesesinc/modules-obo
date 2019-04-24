@@ -1,5 +1,5 @@
 <schema adapter="obodb">
-	<element tablename="obo_construction_type">
+	<element tablename="obo_work_type">
 		<field name="objid" primary="true" />
 		<field name="description" />
 		<field name="idx" />

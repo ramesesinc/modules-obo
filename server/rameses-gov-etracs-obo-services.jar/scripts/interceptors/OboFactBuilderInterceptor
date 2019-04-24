@@ -10,7 +10,7 @@ class OboFactBuilderInterceptor {
 	public void buildFacts(def evt) {
 		def factBuilder = evt.result; 
 		def params = evt.args[0].params;
-		
+
 		factBuilder.facts << new BuildingApplication( params.app );
 		factBuilder.facts << new OccupancyType( params.occupancytype );
 		factBuilder.variableInfoProvider = new DefaultVariableInfoProvider(
@@ -22,43 +22,6 @@ class OboFactBuilderInterceptor {
 		params.permits?.each {
 			factBuilder.facts << new AncillaryPermit( it );
 		}
-
-		/*
-		def svrDate = dateSvc.getServerDate();
-		fb.facts << new BuildingUse( o.buildinguse );
-		fb.facts << new OboApplication(o.application);
-		fb.facts << new treasury.facts.SystemDate(svrDate);
-		fb.facts << new treasury.facts.BillDate( (o.billdate) ?o.billdate: svrDate );
-		o.permits?.each { p->
-			fb.facts << new AuxiliaryPermit( permittype:p.permittype );
-		}		
-
-		def m = [items: [], infos:[]];	
-		def resultHandler = [
-			getFactKeyValue : { v->
-				if(v instanceof BillItem) {
-					m.items << v.toMap();
-				}	
-				else if(v instanceof OboApplication) {
-					m.constructioncost = v.constructioncost;
-				}
-				else if( v instanceof OboVariableInfo ) {
-					if( v.amount > 0 ) {
-						m.infos << v.toMap();
-					}
-				}
-				return null;
-			}
-		] as ResultHandler;
-
-		assmtSvc.execute( "oboassessment", data, fb, resultHandler );
-
-		m.fees = m.items.sort{ it.sortorder };
-		m.amount = m.items.sum{ it.amount };
-		return m;
-		*/
-
-
 	}
 
 

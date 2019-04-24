@@ -17,9 +17,6 @@ public class OboBuildingApplicationService  {
 	@Service("AppnoGeneratorService")
 	def appNoSvc;
 
-	@Service("OboConstructionCostService")
-	def costSvc;
-
 	@Service("SequenceService")
 	def seqSvc;
 
@@ -31,7 +28,6 @@ public class OboBuildingApplicationService  {
 
 	@DataContext("obo_subapplication_type")
 	def subAppType;
-
 
 	@ProxyMethod
 	public def create(o) {
@@ -49,12 +45,7 @@ public class OboBuildingApplicationService  {
 		def dt = dateSvc.getServerDate();
 		o.appdate = dt;
 		o.appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  ) ;
-
-		//compute the fixed construction cost
-		def prms = [:];
-		prms.app = [floorarea: o.floorarea, height: o.height, apptype: o.apptype ];
-		prms.occupancytype = [ division: o.occupancytype.objid, group: o.occupancytype.parentid  ];
-		o.projectcost = costSvc.calc( prms );
+		o.projectcost = 0;
 
 		//include also subapplications that are required
 		def reqList = subAppType.find( [required: 1]).list();
@@ -65,8 +56,6 @@ public class OboBuildingApplicationService  {
 		def app = appEm.create( o );
 
 		//save the subapplications attached include also those that are required from the type
-
-
 		def p = [:];
 		p.processname = 'obo_building_application';
 		p.refid = app.objid;

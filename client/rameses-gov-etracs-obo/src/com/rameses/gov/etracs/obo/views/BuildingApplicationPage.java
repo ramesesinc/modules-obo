@@ -40,7 +40,9 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel6 = new com.rameses.rcp.control.XLabel();
         xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel10 = new com.rameses.rcp.control.XLabel();
-        xLabel11 = new com.rameses.rcp.control.XLabel();
+        xDecimalField3 = new com.rameses.rcp.control.XDecimalField();
+        xDecimalField4 = new com.rameses.rcp.control.XDecimalField();
+        xDecimalField5 = new com.rameses.rcp.control.XDecimalField();
         xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
         xLabel5 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
@@ -88,13 +90,13 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
 
-        xLabel6.setCaption("Construction Type");
-        xLabel6.setExpression("#{entity.constructiontypeid}");
+        xLabel6.setCaption("Type of Work");
+        xLabel6.setExpression("#{entity.worktypeid}");
         xLabel6.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel6);
 
-        xLabel2.setCaption("Occupancy Type");
-        xLabel2.setExpression("#{entity.occupancytypeid}");
+        xLabel2.setCaption("Type of Building");
+        xLabel2.setExpression("#{entity.buildingtype.title}");
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel2);
 
@@ -103,10 +105,23 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel10.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel10);
 
-        xLabel11.setCaption("Floor Area");
-        xLabel11.setExpression("#{entity.floorarea}");
-        xLabel11.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel11);
+        xDecimalField3.setCaption("Base Floor Area");
+        xDecimalField3.setDisableWhen("#{ true }");
+        xDecimalField3.setName("entity.floorarea"); // NOI18N
+        xDecimalField3.setPreferredSize(new java.awt.Dimension(150, 20));
+        xFormPanel1.add(xDecimalField3);
+
+        xDecimalField4.setCaption("Total Floor Area");
+        xDecimalField4.setDisableWhen("#{ true }");
+        xDecimalField4.setName("entity.totalfloorarea"); // NOI18N
+        xDecimalField4.setPreferredSize(new java.awt.Dimension(150, 20));
+        xFormPanel1.add(xDecimalField4);
+
+        xDecimalField5.setCaption("Bldg Height");
+        xDecimalField5.setDisableWhen("#{ true }");
+        xDecimalField5.setName("entity.height"); // NOI18N
+        xDecimalField5.setPreferredSize(new java.awt.Dimension(150, 20));
+        xFormPanel1.add(xDecimalField5);
 
         xFormPanel3.setCaption("");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -516,10 +531,12 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XDecimalField xDecimalField1;
     private com.rameses.rcp.control.XDecimalField xDecimalField2;
+    private com.rameses.rcp.control.XDecimalField xDecimalField3;
+    private com.rameses.rcp.control.XDecimalField xDecimalField4;
+    private com.rameses.rcp.control.XDecimalField xDecimalField5;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
     private com.rameses.rcp.control.XLabel xLabel10;
-    private com.rameses.rcp.control.XLabel xLabel11;
     private com.rameses.rcp.control.XLabel xLabel12;
     private com.rameses.rcp.control.XLabel xLabel13;
     private com.rameses.rcp.control.XLabel xLabel14;

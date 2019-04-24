@@ -20,29 +20,29 @@ class BuildingAssessmentAnalyzerModel  {
     
     def entity;
     def appTypes = ["NEW", "RENEW","ADDITIONAL"];
-    def workTypes = ["NEW CONSTRUCTION", "ADDITION", "RENOVATION", "ALTERATION", "DEMOLITION", "OTHER"];
     def subApplication;
+    def selectedInfo;
     
     void init() {
-        entity = [subapplications:[], numunits: 1, floorarea: 0, height: 0];
+        entity = [subapplications:[], numunits: 1, floorarea: 0, height: 0, totalfloorarea: 0];
     }
     
     @PropertyChangeListener
     def propListener = [ 
-        "entity.(numunits|height|floorarea|apptype|occupancytypeid|constructiontypeid)" : { v->
+        "entity.(numunits|height|totalfloorarea|apptype|occupancytype|worktype)" : { v->
             entity.projectcost = 0;
             if( entity.height == null ) {};
-            else if( !entity.floorarea ) {
-                println "entity floor area " + entity.floorarea;
+            else if( !entity.totalfloorarea ) {
+                //println "entity floor area " + entity.floorarea;
             };
             else if( !entity.apptype ) {
-                println "entity app type " + entity.apptype;
+                //println "entity app type " + entity.apptype;
             };
             else if( !entity.occupancytype ) {
-                println "occupancy type " + entity.occupancytype.objid;
-            };
-            else if( !entity.constructiontypeid ) {
-                println "work type " + entity.constructiontypeid
+                //do nothing
+            }
+            else if( !entity.worktype ) {
+                //println "work type " + entity.constructiontypeid
             };            
             else {
                 def req = buildBasicParams();
@@ -64,9 +64,12 @@ class BuildingAssessmentAnalyzerModel  {
             projectcost: entity.projectcost, 
             height: ((entity.height == null)?0:entity.height),
             numunits: entity.numunits,
-            floorarea: entity.floorarea
+            totalfloorarea: entity.totalfloorarea,
+            floorarea: entity.floorarea,
+            worktype : entity.worktype.objid
         ];
-        f.occupancytype = [division:entity.occupancytype.objid, group:entity.occupancytype.parentid ]; 
+        def v = entity.occupancytype;
+        f.occupancytype =  [ division: v.objid, group: v.parentid, bldgtype: entity.bldgtype.objid, zoneclass: entity.zoneclass.objid  ];
         return f;
     }
     
@@ -102,9 +105,7 @@ class BuildingAssessmentAnalyzerModel  {
     def addInfos() {
         def h = { o->
             o.each { v->
-                if (!subApplication.infos.find{it.objid == v.objid}) {
-                    subApplication.infos << v;
-                }
+                subApplication.infos << v;
             }
             infoListModel.load();
         }
@@ -141,4 +142,13 @@ class BuildingAssessmentAnalyzerModel  {
         }
     ] as EditorListModel;
 
+    void editRemarks() {
+        if( !selectedInfo ) return;
+        def msg = MsgBox.prompt("Enter Remarks");
+        if(msg) {
+            selectedInfo.remarks = msg;
+            infoListModel.load();
+        }
+    }
+    
 }

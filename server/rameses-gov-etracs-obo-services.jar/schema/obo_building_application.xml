@@ -12,15 +12,19 @@
 		<field name="owner_address_text" />
 		<field name="owner_ctcid" />
 
-		<field name="scope" />
-		<field name="constructiontypeid" />
+		<complex name="worktype" ref="obo_work_type" jointype="many-to-one" required="true">
+			<key field="worktypeid" target="objid" />
+		</complex>	
 
-		<complex name="occupancytype" ref="obo_occupancy_type" jointype="many-to-one" required="true">
-			<key field="occupancytypeid" target="objid" />
+		<complex name="bldgtype" ref="obo_building_type" jointype="many-to-one" required="true">
+			<key field="bldgtypeid" target="objid" />
 		</complex>	
 
 		<field name="numunits" />
 		<field name="floorarea" />
+		<field name="totalfloorarea" />
+		<field name="height" />
+
 		<field name="estimatedcost" />
 		<field name="projectcost" />
 		<field name="dtproposedconstruction" />
