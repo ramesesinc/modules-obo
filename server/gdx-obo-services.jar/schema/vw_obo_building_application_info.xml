@@ -1,0 +1,24 @@
+<schema adapter="obodb">
+	<element tablename="vw_obo_building_application_info">
+		<field name="objid" primary="true"/>
+		
+		<field name="appid" />
+		<field name="subappid" />
+		<field name="typeid" />
+		<field name="name" />
+		<field name="caption" />
+		<field name="stringvalue" />
+		<field name="decimalvalue" />
+		<field name="intvalue" />
+		<field name="datevalue" />
+		<field name="booleanvalue" />
+		<field name="datatype" />
+		<field name="unit" />
+		<field name="caption" />
+		<field name="category" />
+		<field name="sortorder" />
+
+	</element>
+</schema>	
+
+

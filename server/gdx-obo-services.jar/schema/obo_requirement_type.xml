@@ -1,0 +1,23 @@
+<!--
+ selection type: 
+   0 = always required
+   1 = optional. To be provided by applicant
+
+-->
+<schema adapter="obodb">
+	<element tablename="obo_requirement_type">
+		<field name="objid" prefix="OBOREQTYP" primary="true"/>
+		<field name="title" />
+		<field name="type" />
+		<field name="system" />
+		<field name="org_objid" />
+		<field name="org_name" />
+		<field name="processname" />		
+		<field name="activationstate" />
+		<field name="validationstate" />
+		<field name="processname" />
+		<field name="sortindex" />
+		<field name="selectiontype" />
+		<field name="role" />
+	</element>
+</schema>

@@ -1,0 +1,17 @@
+<schema adapter="obodb">
+	<element tablename="vw_obo_building_application_finding">
+		<field name="objid" primary="true"/>
+		<field name="typeid" />
+		<field name="appid" />
+		<field name="subappid" />
+		<field name="particulars" />
+		<field name="dtcreated" />
+		<field name="createdby_objid" />
+		<field name="createdby_name" />
+		<field name="status" />
+		<field name="resolvedby_objid" />
+		<field name="resolvedby_name" />
+		<field name="dtresolved" />
+		<field name="remarks" />
+	</element>
+</schema>	

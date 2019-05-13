@@ -1,0 +1,8 @@
+<schema adapter="obodb">
+	<element tablename="obo_building_type">
+		<field name="objid" primary="true" visible="true" caption="code" width="100" minWidth="100"/>
+		<field name="title" required="true" searchable="true"/>
+		<field name="defaultuseid" />
+		<field name="groupid" />
+	</element>
+</schema>	
