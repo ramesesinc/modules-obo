@@ -1,0 +1,3 @@
+Thank you for sending. For follow up refer to the ff. tracking number:<br>
+
+<label r:context="app">#{ app.appno }</label> 

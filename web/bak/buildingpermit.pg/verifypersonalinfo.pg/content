@@ -1,0 +1,40 @@
+
+<%if (PARAMS._status && PARAMS._status > 0) {%>
+<pre>Error: ${PARAMS._message} </pre>
+<%}%>
+
+<div id="content">
+  <div class="container">
+    <div class="home" style="margin-bottom:200px;">
+      <h1>Verify Personal Information</h1>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <form method="GET" action="/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/addtdno">
+            <legend>Personal Information</legend>
+            <p class="font16">Owner : <strong>Juan Dela Cruz</strong></p>
+            <p class="font16">Birthday : <strong>03/04/1991</strong></p>
+            <br>
+            <legend>Address Information</legend>
+            <p class="font16">Blk No : <strong>34</strong></p>
+            <p class="font16">Street : <strong>Purok Centro 2</strong></p>
+            <p class="font16">Barangay: <strong>Poblacion</strong></p>
+            <p class="font16">City / Municipality: <strong>Legazpi City</strong></p>
+
+            <div class="row">
+              <div class="col-md-1" style="margin-top: 4%;">
+                <input class="thumbnail btn btn-primary" type="submit" value="Next">
+              </div>
+          </div>
+
+          </form>
+          <br>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

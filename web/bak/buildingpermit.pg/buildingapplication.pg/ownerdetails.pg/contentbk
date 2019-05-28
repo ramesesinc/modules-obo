@@ -1,0 +1,377 @@
+<%if( PARAMS.error !=null) { %>
+<pre>Error ${PARAMS.error?.message}</pre>
+<% } %>
+
+<script>
+\$put("${PAGE.context}", 
+   new function() {
+
+
+
+    /*
+      var svc = Service.lookup("CacheService", "default");
+      var self = this;
+
+      this.application = {items: []};
+      this.entity = {};
+      this.prcno;
+      this.professional;
+
+      this.onload = function() {
+        var val = svc.get( "${PARAMS.ctcno}_bldgapp" );
+        if (val != null) {
+          self.entity = val.entity;
+          self.application = self.application;
+        }
+        if (!self.entity) self.entity = {};
+        if (!self.application) self.application = {};
+      }
+
+      this.submit = function() {
+
+        var prm = {
+          key: "${PARAMS.ctcno}_bldgapp",
+          value: {
+            entity: self.entity,
+            application: self.application
+          }
+        }
+
+        //window.console.log( prm );
+        svc.put( prm );
+
+        var elem = \$("#form1");
+        if (elem != null) {
+          elem.attr("action", "/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/preapplication");
+          elem.submit();
+        }
+      }
+
+      this.confirmProfessional = function() {
+        self.entity.professional = self.professional;
+        self.professional = null;
+        self.prcno = null;
+        \$("#professional-result").addClass("hide");
+      }
+
+      this.searchProfessional = function() {
+        var elem = \$("#professional-result");
+        elem.addClass("hide");
+        if (!self.prcno) return;
+        self.professional = null;
+
+        var professions = svc.get( "professions" );
+        for (var i=0; i<professions.length; i++) {
+          var x = professions[i];
+          if (self.prcno == x.prcno) {
+            if (!x.name) {
+              x.name = x.lastname + ", " + x.firstname;
+              if (x.middlename) x.name += " " + x.middlename;
+            }
+            self.professional = x;
+            break;
+          }
+        }
+
+        elem.removeClass("hide");
+
+      }
+      */
+   }
+);  
+
+  \$(document).ready(function() {
+    \$('.group_ctrl').change(function () {
+        \$("." + \$(this).data("group")).prop('disabled', !this.checked);
+    }).change();
+});
+
+</script>
+
+<div class="bldgpermit-content">
+  <h1>Application for Building Permit</h1>
+    <div class="box1" >
+        <h3>Lot Owner</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <label>Last Name</label>
+            <p><label r:context="app" r:name="data.owner.lastname"></label></p>
+          </div>
+          <div class="col-md-4">
+            <label>First Name</label>
+            <p><label r:context="app" r:name="data.owner.firstname"></label></p>
+          </div>
+          <div class="col-md-4">
+            <label>Middle Name</label>
+            <p><label r:context="app" r:name="data.owner.middlename"></label></p>
+          </div>
+        </div>
+    </div>
+    <div class="box1-1">
+      <h3>Location of Construction</h3>
+      <div class="row">
+        <div class="col-md-3">
+          <label>LOT #</label>
+          <p><label r:context="app" r:name="data.address.lotno" /></p>
+        </div>
+        <div class="col-md-2">
+          <label>BLK #</label>
+          <p><label r:context="app" r:name="data.address.blockno" /></p>
+        </div>
+        <div class="col-md-3">
+          <label>TCT #</label>
+          <p><label r:context="app" r:name="data.owner.tctno" /></p>
+        </div>
+        <div class="col-md-4">
+          <label>TAX DEC #</label>
+          <p><label r:context="app" r:name="data.owner.taxdecno" /></p>
+        </div>
+        <div>
+         <div class="col-md-3">
+            <label>STREET</label>
+            <p><label r:context="app" r:name="data.address.street" /></p>
+          </div>
+          <div class="col-md-5">
+            <label>Barangay</label>
+            <p><label r:context="app" r:name="data.address.barangay" /></p>
+          </div>
+          <div class="col-md-4">
+            <label>City/Municipality</label>
+            <p><label r:context="app" r:name="data.address.city" /></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box1-2">
+      <h3> Project Details</h3>
+      <div class="col-md-12">
+        <label><b>Application Type</b></label><label> : New</label>
+        <div class="box1-2-1">
+        <h3>Scope of Work</h3>
+          <div class="row">
+              <div class="col-md-6">
+                  <label class="labelInput">
+                    <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" r:checkedValue="NEW"> New Construction
+                  </label>
+                  <label class="labelInput">
+                    <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" r:checkedValue="ERECTION"> Erection
+                  </label>
+                  <label class="labelInput">
+                    <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" r:checkedValue="ADDITION"> Addition
+                  </label>
+                  <label class="labelInput">
+                    <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" r:checkedValue="ALTERATION"> Alteration
+                  </label>
+                  <label class="labelInput">
+                    <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" r:checkedValue="RENOVATION"> Renovation
+                  </label>
+                  <label class="labelInput">
+                    <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" r:checkedValue="CONVERSION"> Conversion
+                  </label>
+              </div>
+              <div class="col-md-6">
+                    <label class="labelInput">
+                      <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set"  r:checkedValue="REPAIR"> Repair
+                    </label>
+                    <label class="labelInput">
+                      <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" r:checkedValue="MOVING"> Moving
+                    </label>
+                     <label class="labelInput">
+                      <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" r:checkedValue="RAISING"> Raising
+                    </label>
+                    <label class="labelInput">
+                      <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" class="group_ctrl" r:checkedValue="ACCESSORYBUILDING"> Accessory Building/Structure
+                    </label>
+                  <div class="row">
+                    <div class="col-md-6  col-xs-6">
+                      <label class="labelInput">
+                      <input type='checkbox' r:context="app" r:name="data.scope" r:mode="set" class="group_ctrl" data-group="group_k" r:checkedValue="OTHERS"> Others
+                    </label>
+                    </div>
+
+                    <div class="col-md-6  col-xs-6">
+                      <input type="text" class="group_k form-control" r:context="app" r:name="data.scopeparticular">
+                    </div>
+                  </div>
+              </div>
+          </div> 
+        <h3>Use or Character of Occupancy</h3>
+        <div class="row">
+          <div class="col-md-6">
+            <select r:context="app" r:items="occupancyuseList" r:name="data.occupancyuse" r:itemLabel="description" r:allowNull="true" r:emptyText="Select"  class="form-control" />
+          </div>
+          <div class="col-md-6">
+              <div class="control-group" style="display:none" >
+                 <input type="text" r:context="app" r:name="data.occupancyuse.others" class="form-control" placeholder="Specify">
+              </div>
+          </div>
+        </div>
+      <br>
+      <div class="row">
+        <div style="padding-bottom:30px;">
+          <div class="col-md-6">
+            <div class="col-md-6 row">
+              <label><b>Occupancy Classified</b></label>
+            </div>
+            <label r:name="data.classification.title" r:context="app" />
+          </div>
+          <div class="col-md-6">
+            <div class="col-md-8 row">
+              <label><b>Total Estimated Cost P</b></label>
+            </div>
+              <input type="text" placeholder="Php" r:name="data.estimatedcost" r:context="app">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div style="padding-bottom:30px;">
+         <div class="col-md-6">
+            <div class="col-md-6 row">
+              <label class="control-label"><b>Number of Units</b></label>
+            </div>
+            <input type="text" r:context="app" r:name="data.units" r:datatype="integer" value="1">
+          </div>
+           <div class="col-md-6">
+              <div class="col-md-8 row">
+                <label class="control-label"><b>Proposed Date of Construction</b></label>
+              </div>
+              <input type="text"  r:datatype="date" r:context="app" r:name="data.dtproposedconstruction" placeholder="Choose Date">
+           </div>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-md-6">
+          <div class="col-md-6 row">
+            <label class="control-label"><b>Total Floor Area</b></label>
+          </div>
+          <input type="text" placeholder="Square Meters" r:name="data.floorarea" r:context="app" >
+        </div>
+        <div class="col-md-6">
+          <div class="col-md-8 row">
+            <label class="control-label"><b>Expected Date of Completion</b></label>
+          </div>
+          <input type="text"  r:datatype="date" r:context="app" r:name="data.dtexpectedcompletion" placeholder="Choose Date">
+        </div>
+      </div>
+      </div>
+       </div>
+    </div>
+    <div class="col-md-12">
+      <div class="box2">
+        <h3>Full-time Inspector and Supervisor of Construction Works (REPRESENTING THE OWNER)</h3>
+        <br>
+        @box2(name: "data.supervisor", context: "app")
+      </div>
+    </div>
+
+</div>
+
+ <!-- <button r:context="app" r:name="display">Display Occupancy Use</button> -->
+
+
+            <table r:context="app" r:items="lots" r:varName="x" width="100%" r:varStatus="stat" r:name="selectedItem" style="display:none">
+              <tbody>
+                <tr>
+                  <td> 
+                    <div class="panel panel-info lot">
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-4"> 
+                                  <p>Tax Dec. No.</p>
+                                </div>
+                                <div class="col-md-8"> 
+                                  <p>: #{x.tdno}</p> 
+                                </div>
+                              </div>                         
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-4"> 
+                                  <p>TCT No.</p> 
+                                </div>
+                                <div class="col-md-8"> 
+                                  <p>: #{x.lotowner.tctno}</p>
+                                </div>
+                              </div>                       
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-4"> 
+                                  <p>Lot Owner</p>
+                                </div>
+                                <div class="col-md-8"> 
+                                  <p>: #{x.lotowner.name}</p> 
+                                </div>
+                              </div>                         
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-4"> 
+                                <p>Lot No.</p>
+                                </div>
+                                <div class="col-md-6"> 
+                                  <p>: #{x.lotowner.tctno}</p>
+                                </div>
+                              </div>                    
+                            </div>
+                          </div>      
+                          <div class="row">
+                          
+                          <div class="col-md-6">
+                            <div class="row">
+                              <div class="col-md-4"> 
+                                <p>Blk No.</p>
+                              </div>
+                              <div class="col-md-8"> 
+                                <p>: #{x.lotowner.blkno}</p>
+                              </div>
+                            </div>                    
+                          </div>
+                            <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4"> 
+                                  <p>Street</p>
+                                </div>
+                                <div class="col-md-8"> 
+                                  <p>: #{x.lotowner.street}</p>
+                                </div>
+                              </div>                    
+                            </div>
+                          </div> 
+                          <div class="row">
+                            <div  class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-4"> 
+                                  <p>Barangay</p>
+                                </div>
+                                <div class="col-md-8"> 
+                                  <p>: #{x.lotowner.barangay}</p>
+                                </div>
+                              </div> 
+                            </div>
+                            <div  class="col-md-6">
+                              <div class="row">
+                                <div class="col-md-4"> 
+                                  <p>City/Municipality</p>
+                                </div>
+                                <div class="col-md-7"> 
+                                  <p>: #{x.lotowner.state}</p>
+                                </div>
+                              </div> 
+                            </div>
+                          </div> 
+                        </div>
+                      <div r:context="app" r:visibleWhen="#{x.hasArrears==true}" style="color:red; font-weight:bold">This lot has unpaid dues <a href="/partners/${PARAMS.name}/services/rpt/asktdno?target=/partners/ddn_panabo/services/rpt/bill" target="_blank">Pay Here</a>
+                      </div>
+                      <div class="col-md-6">
+                        <a r:context="app" r:name="removeItem" >REMOVE</a>
+                      </div>
+                    </div> 
+                  </td> 
+                </tr>
+              </tbody>
+            </table> 

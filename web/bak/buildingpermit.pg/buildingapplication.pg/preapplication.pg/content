@@ -1,0 +1,50 @@
+
+<%if( PARAMS.error !=null) { %>
+<pre>Error ${PARAMS.error?.message}</pre>
+<% } %>
+
+<%
+  /*
+  def TRACK_ID = "ONBP-2017-01-0001";
+  def svc = SERVICE.lookup("CacheService", "default");
+  svc.put( [key: TRACK_ID, value: "${PARAMS.ctcno}"] );
+  svc.put( [key: "${PARAMS.ctcno}_trackingno", value: TRACK_ID] );
+  //svc.put([key: "\${PARAMS.ctcno}_tracking", value: TRACK_ID]);
+  //println svc.get("\${PARAMS.ctcno}_tracking");
+  */
+%>
+
+<script>
+
+\$put("ctx", new function(){
+
+});
+</script>
+
+  <div id="content" style="margin-bottom: 450px;">
+    <div class="container">
+      <div class="primary">
+          <div class="home">
+            <h1>Application for New Building Permit</h1>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="get" action="/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/permits">
+                      <p class="font16">Your pre-application number has been created. Use this number as reference when editing this appllication.</p>
+                      <p class="font16"><strong>Pre-application Tracking No. : ${PARAMS.controlno}</strong></p>
+                          <div class="row">
+                            <div class="col-md-2" style="margin-top: 4%;">
+                              <input type="hidden" name="controlno" value="${PARAMS.controlno}">
+                              <input class="thumbnail btn btn-primary" type="submit" value="Proceed to continue">
+                            </div>
+                          </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+

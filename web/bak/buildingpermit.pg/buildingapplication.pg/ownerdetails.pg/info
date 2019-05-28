@@ -1,0 +1,5 @@
+{
+	title  : 'Owner Details',
+	context: "ownerdetails",
+	fragment:true
+}

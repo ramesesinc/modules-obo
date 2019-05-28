@@ -1,0 +1,165 @@
+<script>
+\$put( "facilities",
+   new function() {
+      var self = this;
+      this.permit = {};
+      this.values = {};
+      this.items = [];
+      this.callbackHandler;
+      
+      this.list = [];
+      this.onload = function() {
+        //self.permit.f1 = "architectural";
+        if (self.permit == null) self.permit = {};
+        if (self.values == null) self.values = {};
+
+        /*
+        var elem = \$("#stair");
+        elem.click(function() {
+          alert("fire checkbox click");
+        });
+
+        elem.trigger("click");
+        */
+        window.console.log("load facilities")
+        self.buildList();
+     
+        //\$('#stair').click(function() {
+        //  alert("fire")
+        //});
+    
+      }
+
+      this.buildList = function() {
+        var html = "<ul style='padding-left:0px' id='facilitieslist'>";
+        for (var i=0; i<self.list.length; i++) {
+          var itm = self.list[ i ];
+          window.console.log( itm );
+          html += "<li style='list-style:none'>"
+          html += "<label style='width:200px'>"
+          html += "<input type='checkbox' class='cb' r:context='facilities' r:name='permit." + itm.name + "'  r:checkedValue='" + itm.id + "' id='" + itm.id + "'/>" +' '+ itm.title; 
+          html += "</label>";
+          html += "<label><input type='text' r:context='facilities' id='text-" + itm.id + "' r:name='values." + itm.name + "' disabled=''> </label> ";
+          html += "</li>";
+        }
+        html += "</ul>";
+
+        \$("#popup-content").html( html );
+        \$(".cb").click(function() {
+            var id = \$(this).prop("id");
+            window.console.log(!\$(this).is(':checked'));
+            \$("#text-" + id).prop("disabled", !\$(this).is(':checked'));
+        });
+
+        for (var i=0; i<self.list.length; i++) {
+          var itm = self.list[i];
+          if (itm != null) {
+            if (itm.name && self.permit[ itm.name ]) {
+              \$("#text-" + itm.id).prop("disabled", false);
+            }
+          }
+        }
+      }
+
+    this.submit = function() {
+      var permits = [];
+      for(k in this.permit){
+        var v = this.permit[k];
+
+        if(v && v != false){
+          var e = {id:v};
+          for (var j=0; j<self.list.length; j++) {
+            var p = self.list[j];
+            if (v == p.id) {
+              e.title = p.title;
+              e.name = p.name;
+              e.unit = p.unit;
+              if (self.values[k]) {
+                e.value = self.values[k];
+              }
+              window.console.log( e );
+              break;
+            }
+          }
+          //window.console.log( e );
+          permits.push(e);
+        }
+
+      }
+
+
+
+      if(this.callbackHandler) this.callbackHandler(permits);
+      return "_close";
+    }
+
+
+    this.doClose = function(){
+      return "_close"
+    }
+
+   
+
+   }); 
+
+  function myFunction() {
+      var input, filter, ul, li, label, i;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      ul = document.getElementById("facilitieslist");
+      li = ul.getElementsByTagName("li");
+      for (i = 0; i < li.length; i++) {
+          a = li[i].getElementsByTagName("label")[0];
+          if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+              li[i].style.display = "";
+          } else {
+              li[i].style.display = "none";
+
+          }
+      }
+  }
+
+</script>
+  <div class="input-group" style="position:absulote;width:450px;padding-bottom:20px">
+    <input type="text" id="myInput" onkeyup="myFunction()" class="form-control"/>
+    <span class="input-group-btn">
+      <button class="btn btn-primary"><i class="fa fa-search" ></i></button>
+    </span>
+ </div>
+<div id="popup-content">
+
+</div>
+<!--
+<table r:context="facilities" r:items="list" r:varName="item">
+  <tr>
+    <td>
+      <label style="width:200px;"><input type="checkbox" r:context="facilities" r:name="permit.#{item.name}"  r:checkedValue="#{item.id}" id="#{item.id}"/> #{item.title}</label>
+    
+         <input type="text" id="text" disabled="">
+    </td>
+  </tr>
+</table>
+-->
+
+<!--
+<div class="form-group" style="height:230px;;">
+  <div class="col-md-12">
+    <ul r:context="facilities" r:items="list" r:varName="item" r:varStatus="status" r:name="selectedItem" style="padding-left:0px">
+    <li style="list-style:none">
+
+        <label style="width:200px;"><input type="checkbox" r:context="facilities" r:name="permit.#{item.name}"  r:checkedValue="#{item.id}" id="#{item.id}"/> #{item.title}</label>
+    
+         <input type="text" id="text" disabled="">
+  
+    </li>
+  </ul>
+  </div>
+</div>
+-->
+<hr>
+<div class="col-md-12">
+  <input type="submit" r:context="facilities" r:name="submit" value="Ok" class="btn btn-submit btn-primary"/>
+  <input type="button" r:context="facilities" r:name="doClose" value="Cancel" class="btn btn-submit btn-warning"/>
+</div>
+
+        

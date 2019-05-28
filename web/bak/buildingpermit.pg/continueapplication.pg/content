@@ -1,0 +1,96 @@
+ <%if( PARAMS.error !=null) { %>
+<pre>Error ${PARAMS.error?.message}</pre>
+<% } %>
+
+
+<%
+  //def TRACK_ID = "ONBP-2017-01-0001";
+  //def svc = SERVICE.lookup("CacheService", "default");
+  //svc.put( [key: TRACK_ID, value: "${PARAMS.ctcno}"] );
+  //svc.put([key: "\${PARAMS.ctcno}_tracking", value: TRACK_ID]);
+  //println svc.get("\${PARAMS.ctcno}_tracking");
+%>
+
+
+<script>
+  var controller = new function() {
+  	var self = this;
+    var cacheSvc = Service.lookup("CacheService", "default");
+    var oboSvc = Service.lookup("TestOboService", "default");
+
+    this.trackingno;
+  	
+    this.verify = function() {
+      var data = oboSvc.verifyApplicationByControlno({controlno: self.trackingno});
+      window.location = "/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/permits?controlno=" + self.trackingno;
+    }
+
+  	this.xverify = function() {
+  		this.trackingno;
+  		var ctcno = cacheSvc.get( this.trackingno );
+  		//console.log(cacheSvc.get( this.trackingno ));
+  		window.location = "/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/permits?ctcno=" + ctcno;
+  	}
+  }
+  \$put("app", controller)
+
+    \$(document).ready(function () {
+        \$("input[name='radio']").click(function () {
+          \$('#show-me').css('display', (\$(this).val() === '1') ? 'block':'none');
+
+      });
+         \$("input[name='radio']").click(function () {
+          \$('#show-me1').css('display', (\$(this).val() === '2') ? 'block':'none');
+      });
+    });
+
+</script>
+
+
+<div style="padding-top:40px;">
+  <div class="row">
+      <div class="col-md-12">
+      	<div class="row">
+      		<div class="col-md-4">
+	        	<div class="control-group">
+	              <label class="control-label">
+	              	<input type="radio" name="radio" value="1" checked="checked"> Enter Application Tracking No.
+	              </label>
+	              <input type="text" r:context="app" r:name="trackingno" r:required="true" class="form-control"/ id='show-me' >
+	            </div> 
+	        </div>
+      	</div>
+      </div>
+      <!--
+      <br>
+      <div class="col-md-12">
+      	<div class="row">
+      		<div class="col-md-4">
+	        	<div class="control-group">
+	              <label class="control-label">
+	              	<input type="radio" name="radio" value="2"> Enter Permit Code
+	              </label>
+	              <div id='show-me1' style='display:none'>
+	              	<input type="text" r:context="app" r:name="trackingno" r:required="true" class="form-control" />
+	              </div>
+	            </div> 
+	        </div>
+      	</div>
+      </div>
+      -->
+	</div>
+	<br>
+	<div class="input-group">
+        <span class="input-group-btn">
+          <input type="button" r:name="verify" r:context="app" value="Next" class="btn btn-primary">
+        </span>
+      </div>
+</div>
+
+  
+
+
+
+
+
+

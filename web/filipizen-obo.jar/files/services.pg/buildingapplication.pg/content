@@ -1,0 +1,36 @@
+<script>
+	\$put("app", new function() {
+		var self = this;
+		this.appid = WindowUtil.getParameter("appid");
+		if(this.appid!=null && this.appid.trim().length ==0 ) {
+			this.appid = null;
+		}	
+		this.orgcode = "${PARAMS.info.id}";
+
+		this.service = Service.lookup("OnlineBuildingApplicationService", "obo");
+
+		if(this.appid == null ){
+			WindowUtil.loadHash("initial");		
+		}
+
+		this.navigate = function( page, params ) {
+			WindowUtil.loadHash(page, params);
+		} 
+
+		this.reload = function( params, hash ) {
+			WindowUtil.load( "${PAGE.path}", params, hash );
+		} 
+
+	});
+
+   \$register( {id:'initial', 		page:"${PAGE.path}/initial", 	  context: 'contact' } );
+   \$register( {id:'owner',   		page:"${PAGE.path}/owner",   	  context: 'owner' } );
+   \$register( {id:'professional',  page:"${PAGE.path}/professional", context: 'prof' } );
+   \$register( {id:'project',  		page:"${PAGE.path}/project", context: 'project' } );
+   \$register( {id:'requirements',  page:"${PAGE.path}/requirements", context: 'item' } );
+</script>
+
+<div style="padding:10px">
+	<h1>Building Application</h1>
+	<div id="content"></div>
+</div>

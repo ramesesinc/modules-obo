@@ -1,0 +1,32 @@
+<schema adapter="obodb">
+	<element tablename="online_building_application">
+		<field name="objid" primary="true"/>
+		<field name="contact_name" required="true"/>
+		<field name="contact_detail" />
+		<field name="contact_email" required="true"/>
+		<field name="contact_mobileno"/>
+		<field name="dtfiled" type="timestamp"/>
+		<field name="title" />
+		<field name="description" />
+		<field name="occupancytypeid" />
+		<field name="bldgtypeid" />
+		<field name="numunits" type="integer"/>
+		<field name="floorarea" type="decimal"/>
+		<field name="totalfloorarea" type="decimal"/>
+		<field name="numfloors" type="integer"/>
+
+		<field name="estimatedcost" type="decimal"/>
+		<field name="dtproposedconstruction" type="date" />
+		<field name="dtexpectedcompletion" type="date"/>
+		<field name="supervisorid" />
+		<field name="totalfloorarea" type="decimal"/>
+		<field name="height" type="decimal"/>
+
+		<!-- shows where the current step is at -->
+		<field name="step" />
+		<field name="ownerid" />
+		<complex name="worktypes" type="list" serializer="default" />
+
+	</element>
+</schema>
+

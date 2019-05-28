@@ -1,0 +1,5 @@
+{
+	title: "Building Application",
+	context: "permit-info",
+	fragment:true
+}

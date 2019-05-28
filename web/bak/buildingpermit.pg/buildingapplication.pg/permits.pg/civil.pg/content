@@ -1,0 +1,262 @@
+
+<%if( PARAMS.error !=null) { %>
+<pre>Error ${PARAMS.error?.message}</pre>
+<% } %>
+<script>
+\$register(  {id:"facilities", context: "facilities", 
+  page: "/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/facilities", title:"Nature Of Civil" }   )
+
+\$put("${PAGE.context}", new function(){
+      
+      var self = this;
+      var svc = Service.lookup("CacheService", "default");
+      this.id = "${PARAMS.ctcno}_permit_architectural";
+      this.entity;
+      //this.ctx = this;
+      //this.items = [];
+      this.selectedItem;
+      this.list = [
+        {id: 'Staking' , title: 'Staking', name: 'a1', unit: 'EA' },
+        {id: 'erection' , title: 'Erection', name: 'a2', unit: 'EA' },
+        {id: 'soilstabilization' , title: 'Soil Stabilization', name: 'a1', unit: 'EA' },
+        {id: 'pilingworks' , title: 'Piling Works', name: 'a3', unit: 'EA' },
+        {id: 'foundation' , title: 'Foundation', name: 'a4', unit: 'EA' },
+        {id: 'erection' , title: 'Erection/Lifting', name: 'a5', unit: 'EA' },
+        {id: 'concreteframing' , title: 'Concreteframing', name: 'a6', unit: 'EA' },
+        {id: 'structuralsteel' , title: 'Structural Stell Framing', name: 'a7', unit: 'EA' },
+        {id: 'slabs' , title: 'Slabs', name: 'a8', unit: 'EA' },
+        {id: 'walls' , title: 'Walls', name: 'a9', unit: 'EA' },
+        {id: 'prestressworks' , title: 'Prestress Works', name: 'a10', unit: 'EA' },
+        {id: 'materialtesting' , title: 'Material Testing', name: 'a11', unit: 'EA' },
+        {id: 'teeltowers' , title: 'Steel Towers', name: 'a12', unit: 'EA' }
+      ];
+      this.removeid;
+
+      this.removeItem = function() {
+        var idx;
+        for (var i=0; i<self.entity.items.length; i++) {
+          var x = self.entity.items[ i ];
+          if (x.id == self.removeid) {
+            idx = i;
+            break;
+          }
+        }
+
+        self.entity.items.splice( idx, 1 );
+
+        //window.console.log( self.removeid );
+        //window.console.log( id );
+        //this.items.pop(this.selectedItem);
+        //window.console.log( self.entity.items );
+        //self.entity.items.pop( this.selectedItem );
+        svc.put({key: self.id, value: self.entity});
+      }
+
+      this.onload = function() {
+        self.ctc = svc.get( "${PARAMS.ctcno}" );
+        self.locations = svc.get( "${PARAMS.ctcno}_location" );
+        self.bldgapp = svc.get( "${PARAMS.ctcno}_bldgapp" );
+        self.trackingno = svc.get( "${PARAMS.ctcno}_trackingno" );
+
+        self.entity = svc.get( self.id );
+        if (!self.entity) self.entity = {};
+        if (!self.entity.items) self.entity.items = [];
+        //window.console.log( self.trackingno );
+
+
+      // window.console.log( self.ctc)
+      //window.console.log( self.locations)
+      //window.console.log( self.bldgapp)
+
+      }
+
+      this.indexOf = function(jsondata, key) { 
+        var fval = jsondata[key]; 
+        for (var i=0; i<self.entity.items.length; i++) {
+          var item = self.entity.items[i]; 
+          if (fval == item[key]) return i;
+        }
+        return -1;
+      }
+
+
+      this.getItem = function( jsondata, key ) {
+        var item;
+        var fval = jsondata[key]; 
+        for (var i=0; i<self.entity.items.length; i++) {
+          var x = self.entity.items[ i ];
+          if (fval == x[ key ]) {
+            item = x;
+            break;
+          }
+        }
+        return item;
+      }
+
+      this.getPermits = function() {
+        var p = {};
+        for (var i=0; i<self.entity.items.length; i++) {
+          var x = self.entity.items[i];
+          p[x.name] = x.id;
+        }
+        return p;
+      }
+
+      this.getValues = function() {
+        var p = {};
+        for (var i=0; i<self.entity.items.length; i++) {
+          var x = self.entity.items[i];
+          p[x.name] = x.value;
+        }
+        return p;
+      }
+
+      this.additem = function(){
+        var handler = function(items){        
+          for( var i=0; i<items.length; i++ ) {
+              /*
+               if (self.indexOf(items[i], 'id') < 0 ) {
+                if (!self.entity) self.entity = {};
+                if (!self.entity.items) self.entity.items = [];
+                self.entity.items.push( items[i] );
+                //self.items.push( items[i] );
+               } 
+               */
+              var itm = self.getItem( items[i], 'id' );
+              if (!itm) {
+                if (!self.entity) self.entity = {};
+                if (!self.entity.items) self.entity.items = [];
+                self.entity.items.push( items[i] );
+              } else {
+                for (k in items[i]) {
+                  itm[k] = items[i][k];
+                }
+                //itm.putAll( items[i] );
+              }
+          }
+          svc.put({key: self.id, value: self.entity});
+        }
+        
+        var permit = self.getPermits();
+        var values = self.getValues();
+        //window.console.log( permit );
+
+        var params = {
+          callbackHandler: handler,
+          list: self.list,
+          permit: permit,
+          values: values
+        }
+
+        return new PopupOpener ("facilities", params,{width:500 , height: 560});
+      }
+
+      this.hasItems = function(){
+        return (this.entity.items.length > 0);
+      }
+});
+
+
+
+</script>
+
+  <div id="content" style="margin-bottom: 450px;">
+    <div class="container">
+      <div class="primary">
+
+          <div class="home">
+            <h1>Application for Civil/Structural Permit</h1>
+            <br>
+            <div class="row">
+              <div class="col-md-12"> 
+                <div class="row">
+                  <div class="col-md-12">
+
+                    <div class="col-md-12">
+                      <p class="font16">1. Architectural Facilities <a r:context="${PAGE.context}" r:name="additem" href="" style="color:blue">Add</a></p>
+                        <table r:context="${PAGE.context}" r:items="entity.items" r:varName="x" width="100%" r:name="selectedItem" style="display:none" class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Description</th>
+                              <th scope="col">Units</th>
+                              <th scope="col">Value</th>
+                            </tr>
+                          </thead>
+                            <tbody>
+
+                              <tr>
+                                <td><a href="/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/permits/#{x.id}"> #{x.title}</a></td>
+                                <td>#{x.unit}</td>
+                                <td>#{x.value}</td>
+                                <td><a r:context="${PAGE.context}" r:name="removeItem" r:param_removeid="#{x.id}">remove</a></td>
+                                <!--
+                                <td><input type="button" r:context="${PAGE.context}" r:name="removeItem" r:param_removeId="#{x.id}" value="Remove" /></td>
+                              -->
+                              </tr>
+                              
+                            </tbody>
+                          </table>
+                    </div>
+                    <div class="col-md-12">
+                      <p class="font16">2. Percentage of Site Occupancy</p>
+                    </div>
+
+                    <div class="col-md-12">
+                      <p class="font16">3. Conformance to Fire Code <a href="" style="color:blue">Add</a></p>
+                    </div>
+                          
+   
+                   </div>
+                </div>
+                 <div id="actions" class="row">
+
+                    <div class="col-lg-7">
+                      <!-- The fileinput-button span is used to style the file input field as button -->
+                      <span class="btn btn-success fileinput-button">
+                          <i class="fa fa-plus"></i>
+                          <span>Add files..</span>
+                      </span>
+                    </div>
+
+                  </div>
+                  
+                <div class="table table-striped" class="files" id="previews">
+
+                  <div id="template" class="file-row">
+                    <!-- This is used as the file preview template -->
+                    <div>
+                        <span class="preview"><img data-dz-thumbnail /></span>
+                    </div>
+                    <div>
+                        <p class="name" data-dz-name></p>
+                        <strong class="error text-danger" data-dz-errormessage></strong>
+                    </div>
+                    <div>
+                        <p class="size" data-dz-size></p>
+                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                        <div class="progress-bar progress-bar-success" style="width:0%;" data-dz-uploadprogress></div>
+                        </div>
+                    </div>
+                    <div>
+                      <button class="btn btn-primary start">
+                          <i class="fa fa-upload"></i>
+                          <span>Start</span>
+                      </button>
+                      <button data-dz-remove class="btn btn-warning cancel">
+                          <i class="fa fa-ban-circle"></i>
+                          <span>Cancel</span>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+
+    
+                   
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

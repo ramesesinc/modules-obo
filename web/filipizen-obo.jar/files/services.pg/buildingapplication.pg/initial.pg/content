@@ -1,0 +1,153 @@
+<script>
+	\$put("contact", new function() {
+		var self = this;
+		this.mode = "initial";
+
+		var app = \$get("app").code;
+		this.contact = {};
+		this.contact.email = "elmonazareno@yahoo.com"
+		this.hiddenkey;
+		this.key;
+		this.appid;
+
+		var emailSvc = {
+			verifyEmail : function( o, func ) {
+				func( {result:{key:'1234'}}, 'ok' );
+			}
+		}
+
+		this.verifyEmail = function() {
+			var p = {email: self.contact.email } 
+			//var emailSvc = Service.lookup(app.orgcode+':VerifyEmailService');
+
+			emailSvc.verifyEmail( p, function(o,s) {
+		      if( s == "error" ) {
+		        self.error = o.result;
+		      }
+		      else {
+		      	self.mode = "enter-key";
+		        self.hiddenkey = o.result.key;
+		        self.error = null;
+		      }
+		      self._controller.refresh();
+			});
+		}
+
+		this.validateKey = function() {
+			if(self.hiddenkey != self.key) {
+				self.error = "Key is incorrect. Please try again";
+			}
+			else {
+				self.error = null;
+				self.mode = "confirm";
+			}
+		}
+
+		this.agreed = false;
+		this.confirm = function() {
+			if(!this.agreed) {
+				alert("Read first the terms and  check 'I agree' ");
+				return;
+			}
+			var p = {orgcode:app.orgcode, contact: self.contact, worktypes: [] };
+			p.nextstep = "owner";
+			var a = app.service.create( p );
+			this.appid = a.objid;
+			self.mode = "success";
+		}
+
+		this.proceed = function() {
+			app.reload( { appid: this.appid }, "owner" );
+		}
+
+	});
+</script>
+
+<br>
+<br>
+
+<legend>Contact Details</legend>
+<div r:context="contact" r:visibleWhen="#{error != null }">
+	<label r:context="contact" style="color:red;">#{error}</label>
+</div>
+
+<div r:context="contact" r:visibleWhen="#{mode=='initial'}" style='display:none'>
+	<div class="row">
+	    <div class="col-md-4">
+	      <div class="control-group">
+	        <label class="control-label">Contact Name</label>
+	        <div class="form-group">
+	        	<input type="text" class="form-control input-response" r:context="contact" r:name="contact.name" r:required="true" r:caption="Contact Name"
+	        	placeholder="Last Name, First Name">
+	        </div>
+	        <label class="control-label">Contact Detail</label>
+	        <div class="form-group">
+	        	<input type="text" class="form-control input-response" r:context="contact" r:name="contact.detail" 
+	        	placeholder="Describe contact's role with this project">
+	        </div>
+	        <label class="control-label">Email</label>
+	        <div class="form-group">
+	        	<input type="text" class="form-control input-response" r:context="contact" 
+	        	r:name="contact.email" r:textcase="none" r:required="true" r:caption="Email">
+	        </div>
+	        <label class="control-label">Mobile No</label>
+	        <div class="form-group">
+	        	<input type="text" class="form-control input-response" r:context="contact" r:name="contact.mobileno" r:textcase="none">
+	        </div>
+
+          	<input type="submit" r:context="contact" r:name="verifyEmail" class="btn btn-submit btn-primary">
+	      </div>
+	    </div>      
+  	</div>
+</div>
+
+<div r:context="contact" r:visibleWhen="#{mode=='enter-key'}" style='display:none'>
+	<div class="row">
+	    <div class="col-md-4">
+	      <div class="control-group">
+	        <label class="control-label">Please enter the 4 digit key sent in your email</label>
+	          <div class="form-group">
+	            <input type="text" class="form-control input-response" r:context="contact" r:name="key" r:textcase="none">
+	          </div>
+	          <input type="submit" r:context="contact" r:name="validateKey" class="btn btn-submit btn-primary">
+	      </div>
+	    </div>      
+  	</div>
+</div>
+
+
+<div r:context="contact" r:visibleWhen="#{mode=='confirm'}" style='display:none'>
+	<div class="row">
+	    <div class="col-md-4">
+	      <div class="control-group">
+	        <label class="control-label">You are about to create an initial application.</label>
+	        <p>
+	        	Please read throughly the terms and conditions of the service.
+	        </p>  
+	        <br>
+	        <input type="checkbox" r:context="contact" r:name="agreed">Yes I have read and agree to the terms and conditions 
+	        <br><br>
+	        <input type="submit" r:context="contact" r:name="confirm" class="btn btn-submit btn-primary">
+	      </div>
+	    </div>      
+  	</div>
+</div>
+
+<div r:context="contact" r:visibleWhen="#{mode=='success'}" style='display:none'>
+	<div class="row">
+	    <div class="col-md-4">
+	      <div class="control-group">
+	        <label class="control-label">Please take note of 
+	        the tracking number for this application. This will be your tracking reference for completing
+	        and follow up for this application.</label>
+	        <h2>
+	        	<label r:context="contact">#{appid}</label> 
+	        </h2>  
+	        <br>
+	        <br>
+	          <input type="submit" r:context="contact" r:name="proceed" class="btn btn-submit btn-primary" value="Proceed">
+	      </div>
+	    </div>      
+  	</div>
+</div>
+

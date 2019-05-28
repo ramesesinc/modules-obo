@@ -1,0 +1,459 @@
+
+<%if( PARAMS.error !=null) { %>
+<pre>Error ${PARAMS.error?.message}</pre>
+<% } %>
+<script>
+\$register(  {id:"requirements", context: "requirements", 
+  page: "/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/permitrequirements", title:"Select Permits to Apply" }   )
+
+  var controller = new function() {
+    var self = this;
+    var oboSvc = Service.lookup("TestOboService", "default");
+
+    this.data;
+    this.scope;
+    this.removeid;
+    this.file;
+
+    this.onload = function() {
+      self.data = oboSvc.getApplication({controlno: "${PARAMS.controlno}"});
+      
+      if (self.data) {
+        self.scope = self.data.scope.join(",");
+      }
+
+      FilipizenUtil.fileUploadChangeEventListener('#UploadFile', function() {
+        console.log('my change function');
+        document.getElementById('FileName').value = this.value.substring(12);
+        FilipizenUtil.uploadFile(this);
+      });
+      /*
+      \$("#UploadFile").change(function() {
+        //document.getElementById('FileName').value = this.value.substring(12);
+        FilipizenUtil.uploadFile(this);
+
+      });
+*/
+
+      self.buildSubappContent();
+    }
+
+    this.buildValues = function( list ) {
+      var values = {};
+
+      if (list) {
+        for (var i=0; i<list.length; i++) {
+          var x = list[i];
+          if (x) {
+            var val = "unchecked";
+            var ii = FilipizenUtil.findItem( self.data.subapplications, {sectionid: x.objid}, "sectionid");
+            if (ii) {
+              val = "checked";
+            }
+            values[x.objid] = val;
+          }
+        }
+      }
+
+      return values;
+    }
+
+    this.addItem = function() {
+      var handler = function( items ) {
+        var params = {
+          appid: self.data.objid,
+          list: self.buildPermitsToSave(items)
+        }
+
+        self.data.subapplications = oboSvc.saveSubapplications( params );
+        self.buildSubappContent();
+      }
+      var list = oboSvc.getSections();
+
+      var params = {
+        callbackHandler: handler,
+        list: list,
+        values: self.buildValues( list )
+      }
+      return new PopupOpener ("requirements", params);
+    }
+
+    this.removeItem = function() {
+      if (!self.removeid) return;
+      oboSvc.removeSubapplication({objid: self.removeid});
+      self.data.subapplications = oboSvc.getSubapplications({appid: self.data.objid});
+        self.buildSubappContent();
+    }
+
+    this.buildPermitsToSave = function( src ) {
+      var list = [];
+      if (src) {
+        for (var i=0; i<src.length; i++) {
+          var x = src[i];
+          var sectionid = x.objid;
+          var item = FilipizenUtil.findItem( self.data.subapplications, {sectionid: sectionid}, "sectionid");
+          if (!item) {
+            item = {
+              objid: oboSvc.generateId("SUBAPP"),
+              appid: self.data.objid,
+              sectionid: sectionid.toUpperCase()
+            }
+          }
+          if (x.allowadd == true) item.allowadd = true;
+          if (x.allowremove == true) item.allowremove = true;
+          list.push( item );
+        }
+      }
+      return list;
+    }
+
+    this.buildSubappContent = function() {
+      var html = "<table class='table permitsTable' style='width:100%;'>";
+      html += "<thead>";
+      html += "<th scope='col'>Permit Name</th>";
+      html += "<th scope='col' class='text-center'>Assign To</th>";
+      html += "<th scope='col' class='text-center'>Completed</th>";
+      html += "<th scope='col' class='text-center'>Remove</th>";
+      html += "</thead>";
+
+      var list = self.data.subapplications;
+      if (list) {
+        var path = "/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/permits/permit-info";
+        html += "<tbody>";
+        for (var i=0; i<list.length; i++) {
+          var x = list[i];
+          html += "<tr>";
+          html += "<td><a href='" + path + "?subappid=" + x.objid + "&code=" + x.sectionid.toLowerCase() + "'>" + x.section.title + "</a></td>";
+          html += "<td>";
+          if (x.designprofessional.name != null) {
+            html += x.designprofessional.name;
+          }
+          html += "</td>"
+          /*
+          html += "<td><input type='checkbox' id='" + x.objid + "' class='cb' r:context='app' r:mode='set' r:name='completed' r:checkedValue='" + x.objid + "'></td>";
+          */
+          html += "<td class='text-center'></td>";
+          html += "<td class='text-center'><a id='" + x.objid + "-remove-button'";
+          if (x.completed == 1) {
+            html += " class='hide'";
+          }
+          html += " r:context='app' r:name='removeItem' r:param_removeid='" + x.objid + "'><i class='fa fa-trash'></i></a></td>";
+          html += "</tr>";
+        }
+        html += "</tbody>";
+      }
+      html += "</table>";
+
+      var elem = \$("#app-content");
+      if (elem != null) {
+        elem.html( html );
+      }
+
+      /*
+      \$(".cb").change(function() {
+        var id = \$(this).attr("id");
+        if (id != null) {
+          var rb = \$("#" + id + "-remove-button");
+          if (\$(this).is(":checked")) {
+            oboSvc.changeToCompleted( {objid: id, appid: self.bldgappid} );
+            if (rb != null) rb.addClass("hide");
+          } else {
+            oboSvc.changeToNotCompleted( {objid: id, appid: self.bldgappid} );
+            if (rb != null) rb.removeClass("hide");
+          }
+        }
+      });
+      */
+    }
+
+    this.getFile = function() {
+      return FilipizenUtil.getFile();
+    }
+
+    this.displayPreview = function ( e ) {
+        console.log(e.target.result);
+        \$('.img-preview').attr('src', e.target.result);
+      }
+
+      this.saveToDb = function ( e ) {
+        console.log(e);
+        let blob = e.target.result;
+        //console.log(blob);
+      }
+
+      this.asText = function( e ){
+        console.log( e );
+      }
+
+      this.binaryString = function( e ){
+        console.log( e );
+      }
+
+      this.readURL = function( input ) {
+        if (input && input.files) {
+
+          console.log(input.files);
+          self.file = input.files[0];
+          //var reader1 = new FileReader();
+          //var reader2 = new FileReader();
+          //var reader3 = new FileReader();
+          //var reader4 = new FileReader();
+          /*
+          reader.onload = function(e) {
+              console.log(e);
+              //\$('.img-preview').attr('src', e.target.result);
+          };
+          */
+          //reader.readAsDataURL(input.files[0]);
+
+          //reader1.onload = self.displayPreview;
+          //reader1.readAsDataURL(input.files[0]);
+
+          //reader2.onload = self.saveToDb;
+          //reader2.readAsArrayBuffer(input.files[0]);
+          /*
+          let f = input.files[0];
+
+          let url = window.URL.createObjectURL(f);
+          this.href = url;
+          this.target = '_blank';
+
+          //this.download = data.name;
+          this.download = f.name;
+          */
+          /*
+          reader3.onload = self.asText;
+          reader3.readAsText(input.files[0]);
+
+          reader4.onload = self.binaryString;
+          reader4.readAsBinaryString(input.files[0]);
+          */
+
+        }
+      }
+  }
+
+
+
+  \$put( "app", controller );
+
+  \$(document).ready(function() {
+    \$("#download").click(function() {
+      //let url = window.URL.createObjectURL(data);
+      let file = controller.getFile();
+      let url = window.URL.createObjectURL(file);
+      this.href = url;
+      this.target = '_blank';
+
+      this.download = file.name;
+    
+    })
+  });
+
+</script>
+
+
+  <div id="content" style="margin-bottom: 450px;">
+    <div class="container">
+      <div class="primary">
+          <div class="home">
+            <!-- <h1>Application for New Building Permit</h1> -->
+            <h1>Building Permit Application</h1>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="POST" action="/partners/${PARAMS.name}/services/buildingpermit/buildingapplication/permitrequirements">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="col-md-3">
+                              <p class="font16"><b>Application Type </b></p>
+                              <p class="font16"><b>Tracking No. </b></p>
+                              <p class="font16"><b>Owner </b></p>
+                              <p class="font16"><b>Scope of Work </b></p>
+                              <p class="font16"><b>Use or Character of Occupancy </b></p>
+                              <p class="font16"><b>Occupancy Classification </b></p>
+                              <p class="font16"><b>No. of Units </b></p>
+                              <p class="font16"><b>Total Floor Area (sqm) </b></p>
+                              <p class="font16"><b>Total Estimated Cost </b></p>
+                              <p class="font16"><b>Proposed Date of Const </b></p>
+                              <p class="font16"><b>Expected Comp. Date </b></p>
+                            </div>
+                            <div class="col-md-6">
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.apptype" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.controlno" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.owner.name" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="scope" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.occupancyuse.description" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.classification.title" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.units" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.floorarea" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.estimatedcost" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.dtproposedconstruction" /></p>
+                              <p class="font16" >: <label class="font16"  r:context="app" r:name="data.dtexpectedcompletion" /></p>
+                            </div>
+                            <div class="col-md-2 text-right"><a id="download" href="#" class="btn btn-primary"><i class="fa fa-file"></i> Download</a></div>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="col col-md-12">
+                          <div class="panel panel-default panel-table">
+                          <div class="panel-heading">
+                            <div class="row">
+                              <div class="col col-md-10">
+                                <h3 class="panel-permitsHeader">Permit(s)</h3>
+                              </div>
+                              <div class="col col-md-2 text-right">
+                                <button r:context="app" r:name="addItem" class="btn btn-primary" type="submit" ><i class="fa fa-plus"></i> Add Permit(s)</button>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="panel-body">
+                            <div id="app-content"></div>                          
+                          </div>
+                        </div>
+                        </div>
+                        
+                    </form>
+
+                  <br>
+
+                      <div class="col-md-4">
+                        <!--
+                        <div class="main-img-preview">
+                          <img class="thumbnail img-preview" src="" title="Preview">
+                        </div>
+                      -->
+                        <div class="form-group">
+                            <div class="input-group">
+                              <div class="input-group-btn">
+                                <label class="font16"><b>Document 1 </b></label>
+                                <div class="fileUpload btn btn-primary">
+                                  <span><i class="fa fa-paperclip"></i></span> 
+                                  <input id="UploadFile" type="file" class="attachment_upload">
+                                </div>
+                              </div>
+                              <input id="FileName" class="fileName" disabled="disabled">
+                            </div>
+                          </div>
+                      </div>
+
+
+
+                      
+
+                  <a id="download" href="#">Download</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+<script type="text/javascript">
+ /* 
+var data =  { hi: "hello, world"}
+
+document.getElementById('download').onclick = function(event){
+
+    var json = JSON.stringify(data),
+    blob = new Blob([json], {type: "octet/stream"}),
+    url = window.URL.createObjectURL(blob);
+  
+    this.href = url;
+    this.target = '_blank';
+    
+    // target filename
+    this.download = 'foobar.text';
+  */
+
+  /*
+  var data = new File(['foo','bar'], 'foobar.txt');
+
+  document.getElementById('download').onclick = function(e){
+    url = window.URL.createObjectURL(data);
+
+    this.href = url;
+    this.target = '_blank';
+
+    this.download = data.name;
+  
+  }
+  */
+
+
+
+</script>
+
+
+<!--
+<script type="text/javascript">
+\$(document).ready(function() {
+    //var fileupload = document.getElementById('UploadFile');
+    var fileupload = \$("#UploadFile");
+    if (fileupload) {
+      fileupload.change(function() {
+        document.getElementById('FileName').value = this.value.substring(12);
+        readURL(this);
+      });
+    }
+    /*
+    brand.className = 'attachment_upload';
+    brand.onchange = function() {
+        document.getElementById('FileName').value = this.value.substring(12);
+    };
+    */
+
+    /*
+    // Source: http://stackoverflow.com/a/4459419/6396981
+    function readURL(input) {
+      console.log(input.files[0]);
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                \$('.img-preview').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    \$("#UploadFile").change(function() {
+        readURL(this);
+    });
+*/
+});
+
+function readURL( input ) {
+  console.log(input.files);
+  if (input.files) {
+    //var reader1 = new FileReader();
+    var reader2 = new FileReader();
+    /*
+    reader.onload = function(e) {
+        console.log(e);
+        //\$('.img-preview').attr('src', e.target.result);
+    };
+    */
+    //reader.readAsDataURL(input.files[0]);
+
+    //reader1.onload = displayPreview;
+    //reader1.readAsDataURL(input.files[0]);
+
+    reader2.onload = saveToDb;
+    reader2.readAsArrayBuffer(input.files[0]);
+  }
+}
+
+function displayPreview( e ) {
+  console.log(e.target.result);
+  \$('.img-preview').attr('src', e.target.result);
+}
+
+function saveToDb( e ) {
+  //console.log('save to db');
+  let blob = e.target.result;
+  //console.log(blob);
+}
+</script>
+-->

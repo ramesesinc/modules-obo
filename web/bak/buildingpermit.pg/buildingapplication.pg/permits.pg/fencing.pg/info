@@ -1,0 +1,6 @@
+{
+	title: "Fencing",
+	context: "fencing",
+	showdesignprofessional: true,
+	showsupervisor: true
+}

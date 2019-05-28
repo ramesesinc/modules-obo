@@ -1,0 +1,300 @@
+<script type="text/javascript">
+\$put("owner", new function(){
+	var self = this;
+	this.mode = "initial";
+	this.error;
+	this.idno;
+	
+	var app = \$get("app").code;
+	this.owner;
+  this.id = {}
+
+  var appSvc = Service.lookup( 'OnlineBuildingApplicationService', 'obo' );
+
+	this.findOwner = function(){
+		var profileSvc = Service.lookup( app.orgcode + ':RemoteEntityProfileService' );
+		var p = {idno: self.idno };
+		profileSvc.findByIdno( p, function(o,s) {
+	      if( s == "error" ) {
+	        self.error = o.result;
+	      }
+	      else {
+	      	self.owner = o.result;
+	        self.error = null;		
+			    self.mode = "show-owner";
+	      }
+	      self._controller.refresh(); 
+	    });
+	};
+
+	this.editOwner = function() {
+		self.mode = "edit-owner";
+	}
+
+	this.retry = function() {
+		self.idno = null;
+		self.error = null;
+		self.mode = "initial";
+	}
+
+	this.saveOwner = function() {
+		self.owner.appid = app.appid;
+    self.owner.nextstep = "professional";
+		app.service.saveOwner( self.owner );
+		app.navigate( "professional" );
+	}
+
+  this.updateId = function() {
+    alert('updating ID');
+    \$('#id-entry').modal('hide');
+  }
+
+  this.onload = function() {
+    this.owner = appSvc.getOwner( {appid: app.appid} );
+    if(!this.owner) {
+      this.owner = {address:{barangay:{}}, resident:1};
+      self.mode = "initial";
+    }
+    else {
+      self.mode = "edit-owner";
+    }         
+
+  }
+
+});
+</script>
+
+<br>
+<br>
+<legend>Building Owner Details</legend>
+<div r:context="owner" r:visibleWhen="#{error != null }">
+	<label r:context="owner" style="color:red;">#{error}</label>
+</div>
+
+<div r:context="owner" r:visibleWhen="#{mode=='initial'}" style='display:none'>
+	<div class="row">
+	    <div class="col-md-4">
+	      <div class="control-group">
+	        <label class="control-label">Enter the Owner Entity ID No and click Search</label>
+	          <div class="form-group">
+	            <input type="text" class="form-control input-response" r:context="owner" r:name="idno" r:textcase="none" 
+	            placeholder="Enter Unique ID No registered provided by the LGU">
+	          	<input type="submit" r:context="owner" r:name="findOwner" class="btn btn-submit btn-primary" value="Search">	            
+	          </div>
+	      </div>
+	    </div>      
+  	</div>
+  	
+	Forgot registration? <a href="/zz/entity/profilerecovery" target="owner">Click here</a>. <br>
+	Register this owner as new entity? <a r:context="owner" r:name="editOwner">Click here</a>
+</div>
+
+<div r:context="owner" r:visibleWhen="#{mode=='edit-owner'}" style="display:none">
+  <p>Please fill in the necessary data below. Text marked with * are required fields. </p>
+  <br>
+  <div class="row">
+    <div class="col-md-8">     
+      <form class="form-horizontal"> 
+      <div class="form-group">
+        <label class="control-label col-sm-3">Last Name <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <input type="text" r:context="owner" r:name="owner.lastname" required="true" class="form-control text-all-capital"  placeholder="Enter your Last Name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">First Name <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <input type="text" r:context="owner" r:name="owner.firstname" required="true" class="form-control text-all-capital"  placeholder="Enter your First Name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Middle Name <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <input type="text" r:context="owner" r:name="owner.middlename" required="true" class="form-control text-all-capital"  placeholder="Enter your Middle Name">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Date of Birth <span class="text-danger">*</span></label>
+        <div class="col-xs-8">
+          <input type="text" r:datatype="date" r:context="owner" r:name="owner.birthdate" class="form-control" placeholder="Choose Date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Gender <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <label>
+          <input r:context="owner" r:name="owner.gender" type="radio" value="M" checked>
+          Male</label>
+          <label>
+          <input r:context="owner" r:name="owner.gender" type="radio" value="F" >
+          Female</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Address <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <div class="custom-radios">
+            <label class="control-label" style="padding-right:20px;">
+              <input type='radio' r:name="owner.resident" r:context="owner" value="1">
+                Resident
+            </label>
+            <label class="control-label">
+              <input type='radio' r:name="owner.resident" r:context="owner"  value="0">
+                 Non-resident
+            </label>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-3">
+              <p>Bldg No: </p> 
+              <input type="text" r:context="owner" r:name="owner.address.bldgno" class="form-control">
+          </div>
+            <div class="col-md-3">
+                <p>Unit No: </p> 
+                <input type="text" r:context="owner" r:name="owner.address.unitno" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <p>Subdivision</p> 
+                <input type="text" r:context="owner" r:name="owner.address.subdivision" class="form-control">
+            </div>
+            <div class="col-md-6">
+              <p>Street</p> 
+              <input type="text" r:context="owner" r:name="owner.address.street" required="true" class="form-control">
+            </div>
+            <div class="control-group" r:context="owner" r:depends="owner.resident" r:visibleWhen="#{owner.resident=='1'}">
+              <div class="row inputSelected">
+                <div class="col-md-6">
+                  <p>Barangay</p> 
+                  <select r:context="owner" r:name="owner.address.barangay" r:items="barangaylist" r:itemLabel="name" class="form-control">
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="control-group" r:context="owner" r:depends="owner.resident" r:visibleWhen="#{owner.resident=='0'}"  style='display:none'>
+                <div class="col-md-6">
+                  <p>Barangay</p> 
+                  <input type="text" r:context="owner" r:name="owner.address.barangay.name" required="true" class="form-control"/>
+                </div>
+                <div class="col-md-6" r:context="">
+                  <p>City/Municipality</p> 
+                  <input type="text" r:context="owner" r:name="owner.address.city" class="form-control"/>
+                </div>
+                <div class="col-md-6">
+                  <p>Province</p> 
+                  <input type="text" r:context="owner" r:name="owner.address.province" class="form-control"/>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+            <input type="text" r:context="owner" r:name="owner.email" 
+            	class="form-control"
+            	placeholder="Email" r:textCase="none">
+         </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Mobile No. <span class="text-danger">*</span></label>
+        <div class="col-md-5 col-sm-8">
+            <input type="text" r:context="owner" r:name="owner.mobileno" placeholder="Mobile no">
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <button type="button" data-toggle="modal" data-target="#id-entry"  
+          class="btn btn-primary" style="margin-right: 5px;"> Attach ID</button>
+        </span>
+
+      </div>     
+
+
+      <br>
+      <div class="form-group">
+        <label class="control-label col-sm-3"></label>
+        <div class="col-md-8"><input type="submit" r:context="owner" r:name="saveOwner" 
+        	class="btn-response btn btn-submit btn-primary" value="Next"></div>
+      </div>               
+    </div>
+  </div>
+</div>
+
+<div r:context="owner" r:visibleWhen="#{mode=='show-owner'}" style='display:none'>
+	<label>Please confirm if information is correct.</label>
+	<div class="verify-info">
+        <div class="col-md-12">
+          <div class="row">
+              <dl class="dl-horizontal">
+              	<dt>ID No:</dt>
+                <dd>: <label r:context="owner">#{owner.idno}</label></dd>
+              	<dt>LGU Entity No:</dt>
+                <dd>: <label r:context="owner">#{owner.entityno}</label></dd>
+                <dt>First Name </dt>
+                <dd>: <label r:context="owner">#{owner.firstname}</label></dd>
+                <dt>Last Name </dt>
+                <dd>: <label r:context="owner">#{owner.lastname}</label></dd>
+                <dt>Middle Name</dt>
+                <dd>: <label r:context="owner">#{owner.middlename}</label></dd>
+                <dt>Address</dt>
+                <dd>: <label r:context="owner">#{owner.address.text}</label></dd>
+              </dl>
+
+              <label r:context="owner" r:visibleWhen="#{owner.ctc_expired == true }" style="font-weight:bold;"> 
+              	<br>
+              	Note: Community Tax Certificate (CTC) is already expired. You will need to renew this.<br>
+              	 If you want to apply for a new CTC online.  <a href="">click here</a>  <br>
+               	 If you already have a CTC from another LGU or from the barangay <a href="">click here</a> 
+              </label>	
+              <br>
+
+              <br>
+              <button r:context="owner" r:name="retry" class="btn btn-submit btn-primary">Retry Search</button>&nbsp;
+              <button r:context="owner" r:name="saveOwner" class="btn btn-submit btn-primary">Next</button>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="id-entry" tabindex="-1" role="dialog" aria-labelledby="id-entry" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <span>Enter ID here</span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="row">
+          <p>ID No: </p> 
+          <input type="text" r:context="owner" r:name="id.idno">
+        </div>
+        <div class="row">
+          <p>Date Issued: </p> 
+          <input type="text" r:context="owner" r:name="id.dtissued" r:datatype="date">
+        </div>
+        <div class="row">
+          <p>Place Issued: </p> 
+          <input type="text" r:context="owner" r:name="id.placeissued" class="form-control">
+        </div>
+        <div class="row">
+          <p>Scan ID</p>
+          <input type="file" r:context="owner" r:name="id.image" />
+          <img r:context="owner" r:name="id.image" r:depends="id.image" style="border:1px solid gray;width:100px;height:200px;"/>
+        </div>
+      </div>
+        
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal">Cancel</button>
+        <button r:context="owner" r:name="updateId" class="submit">OK</button> 
+      </div>        
+
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,171 @@
+
+<%
+  def svc = SERVICE.lookup("OnlineBuildingApplicationService", "obo");
+  def workTypes = svc.getWorkTypes();
+%>
+
+<script>
+  \$put("project", new function() {
+      var self = this;
+      this.error;
+      this.mode;
+
+      var svc = Service.lookup("OnlineBuildingApplicationService", "obo");
+      var app = \$get("app").code;
+
+      this.project;
+
+      this.occupancytypes = svc.getOccupancyTypes();
+      this.getBldgTypes = function() {
+        if( this.project.occupancytypeid == null ) return []; 
+        return svc.getBldgTypes( {type: this.project.occupancytypeid } );
+      }
+
+      this.worktypes = {};
+      <%workTypes.each {o->%>
+      this.worktypes.${o.objid.toLowerCase()} = {objid: '${o.objid}', description: '${o.description}', checked: false };
+      <%}%>
+
+
+      this.update = function() {
+        this.project.worktypes = [];
+        for( var prop in self.worktypes ) {
+          if( self.worktypes[prop].checked == true ) {
+              self.project.worktypes.push( self.worktypes[prop].objid );
+          }
+        }
+        this.project.appid = app.appid;
+        svc.updateProjectInfo( this.project );
+        app.navigate("requirements");
+      }
+
+      this.onload = function() {
+        this.project = svc.getProjectInfo( {appid: app.appid });
+        for(var i = 0; i < this.project.worktypes.length; i++) {
+          var p = this.project.worktypes[ i ];
+          this.worktypes[ p.toLowerCase() ].checked = true;
+        };        
+
+      }
+
+  });
+</script>
+
+<br>
+
+  <legend>Project Details</legend>
+  <div r:context="project" r:visibleWhen="#{error != null }">
+     <label r:context="project" style="color:red;">#{error}</label>
+  </div>
+
+  <div class="col-md-12">
+    <label class="typeLabel">Project Title</label> 
+    <input type="text" r:context="project" r:name="project.title" placeholder="Enter Project Title" style="width:500px;">
+  </div>
+  <br>
+
+  <div class="col-md-12">
+    <label class="typeLabel">Project Description</label> 
+    <textarea r:context="project" r:name="project.description" placeholder="Enter Project Description" style="width:500px;" r:textCase="none"></textarea>
+  </div>
+
+  <div class="col-md-12">
+    <label class="typeLabel">Occupancy Type</label> 
+    <select r:context="project" r:name="project.occupancytypeid" r:allowNull="true" r:emptyText="Select Occupancy Type" r:items="occupancytypes" r:itemLabel="description" style="width:500px;" r:itemKey="objid">
+    </select>
+  </div>
+  <br>
+  <div class="col-md-12">
+    <label class="typeLabel">Building Type</label> 
+    <select r:context="project" r:name="project.bldgtypeid" r:items="getBldgTypes()" r:allowNull="true" r:emptyText="Select Building Type" 
+    r:depends="project.occupancytypeid" r:itemLabel="title" class="smallInput selectbox" style="width:500px;" r:itemKey="objid">
+    </select>
+  </div>
+  <br>
+
+  <div class="col-md-12">
+    <label class="control-label">Work Type (Please select at least one type of work involved in the project)</label>
+    <div style="width:500px;padding-left:50px;">
+      <%workTypes.each { o->%>
+        <input type="checkbox" r:context="project" r:name="worktypes.${o.objid.toLowerCase()}.checked" />&nbsp;${o.description}<br>
+      <%}%>
+    </div>
+  </div>
+  <br>
+  
+  <div class="box1-2">
+        <div class="row">
+          <div style="padding-bottom:30px;">
+            <div class="col-md-6">
+              <div class="col-md-6 row">
+                <label class="control-label"><b>No. of Units</b></label>
+              </div>
+              <input type="text" r:context="project" r:name="project.numunits" r:datatype="integer" value="1">
+            </div>
+            <div class="col-md-6">
+              <div class="col-md-7 row">
+                <label><b>Total Estimated Cost P</b></label>
+              </div>
+              <input type="text" placeholder="Php" r:name="project.estimatedcost" r:datatype="decimal" r:context="project" format="#,##0.00">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div style="padding-bottom:30px;">
+            <div class="col-md-6">
+              <div class="col-md-6 row">
+                <label class="control-label"><b>Base Floor Area (sqm)</b></label>
+              </div>
+              <input type="text" placeholder="Square Meters" r:name="project.floorarea" r:datatype="decimal" r:context="project" >
+            </div>
+             <div class="col-md-6">
+                <div class="col-md-7 row">
+                  <label class="control-label"><b>Proposed Date of Construction</b></label>
+                </div>
+                <input type="text"  r:datatype="date" r:context="project" r:name="project.dtproposedconstruction" placeholder="Choose Date" class="right">
+             </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col-md-6">
+              <div class="col-md-6 row">
+                <label class="control-label"><b>Total Floor Area (sqm)</b></label>
+              </div>
+              <input type="text" placeholder="Square Meters" r:name="project.totalfloorarea" r:datatype="decimal" r:context="project" >
+            </div>
+
+          <div class="col-md-6" style="float:right">
+            <div class="col-md-7 row">
+              <label class="control-label"><b>Expected Date of Completion</b></label>
+            </div>
+            <input type="text"  r:datatype="date" r:context="project" r:name="project.dtexpectedcompletion" placeholder="Choose Date" class="right">
+          </div>
+        </div>
+
+        <div class="row">        
+          <div class="col-md-6">
+              <div class="col-md-6 row">
+                <label class="control-label"><b>Building Height (Meters)</b></label>
+              </div>
+              <input type="text" placeholder="Meters" r:name="project.height" r:datatype="decimal" r:context="project" >
+            </div>
+        </div>
+
+        <div class="row">        
+          <div class="col-md-6">
+              <div class="col-md-6 row">
+                <label class="control-label"><b>No. of Floors</b></label>
+              </div>
+              <input type="text" placeholder="No. of floors" r:name="project.numfloors" r:datatype="integer" r:context="project" >
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<br>
+
+<button r:context="project" r:name="update" class="btn btn-submit btn-primary">Next <i class="fa fa-angle-double-right"></i></button>
+

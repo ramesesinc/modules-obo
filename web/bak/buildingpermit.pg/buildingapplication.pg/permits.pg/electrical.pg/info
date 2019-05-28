@@ -1,0 +1,6 @@
+{
+	title: "Electrical",
+	context: "electrical",
+	showdesignprofessional: true,
+	showsupervisor: true
+}

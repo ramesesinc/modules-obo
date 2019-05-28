@@ -1,0 +1,143 @@
+<%
+  def CONTEXT = "app";
+%>
+
+ <script type="text/javascript">
+  \$put("${CONTEXT}", new function(){
+      var self = this;
+      var svc = Service.lookup("CacheService", "default");
+      this.entity;
+      this.professions = ["Architect", "Electrical Engineer", "Mechanical Engineer", "Master Plumber"];
+
+      this.onload = function() {
+        this.entity = {gender: "male"};
+      }
+
+      this.findItem = function( list, data, key ) {
+        var item;
+        var val = data[key];
+        for (var i=0; i<list.length; i++) {
+          var itm = list[i];
+          if (itm != null) {
+            if (val == itm[key]) {
+              item = itm;
+            }
+          }
+        }
+        return item;
+      }
+
+      this.saveProfessional = function() {
+        var list = svc.get( "professions" );
+        if (!list) list = [];
+
+        var item = self.findItem( list, self.entity, "prcno" );
+        if (item != null) {
+          alert("PRC License No. " + self.entity.prcno + " has already been saved.");
+          return;
+        }
+
+        list.push( self.entity );
+        svc.put({key: "professions", value: list});
+
+        var elem = \$("#form1");
+        if (elem != null) {
+          elem.attr("action", "/partners/${PARAMS.name}/services/registrationsuccessful");
+          elem.submit();
+        }
+      }
+
+  });
+</script>
+
+   
+
+<p>Please fill in the necessary data below. Text marked with * are required fields. 
+
+</p>
+
+<br>
+<div class="row">
+  <div class="col-md-8">     
+    <form class="form-horizontal" id="form1">    
+      <div class="form-group">
+        <label class="control-label col-sm-3">PRC License No.</label>
+        <div class="col-md-8 col-sm-9">
+          <input type="text" class="form-control text-all-capital" r:required="true" placeholder="Enter your PRC License No." r:context="${CONTEXT}" r:name="entity.prcno" >
+        </div>
+      </div>  
+      <div class="form-group">
+        <label class="control-label col-sm-3">Profession <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <!-- <input type="text" class="form-control text-all-capital"  placeholder="Enter your PRC License No." > -->
+          <select r:context="${CONTEXT}" r:name="entity.profession" r:required="true" r:items="professions" class="form-control"></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Last Name <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <input type="text" class="form-control text-all-capital"  placeholder="Enter your Last Name here" r:context="${CONTEXT}" r:name="entity.lastname" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">First Name <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <input type="text" class="form-control text-all-capital"  placeholder="Enter your First Name here" r:context="${CONTEXT}" r:name="entity.firstname" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Middle Name <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <input type="text" class="form-control text-all-capital"  placeholder="Enter your Middle Name here" r:context="${CONTEXT}" r:name="entity.middlename" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Date of Birth <span class="text-danger">*</span></label>
+        <div class="col-xs-8">
+          <input type="text" r:datatype="date" r:context="${CONTEXT}" r:name="entity.birthdate" class="form-control" placeholder="Choose Date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Gender <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <label>
+          <input r:context="${CONTEXT}" r:name="entity.gender" type="radio" value="male">
+          Male</label>
+          <label>
+          <input r:context="${CONTEXT}" r:name="entity.gender" type="radio" value="female" >
+          Female</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Address <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+          <input type="text" class="form-control text-all-capital"  placeholder="Enter your Address here" r:context="${CONTEXT}" r:name="entity.address" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
+        <div class="col-md-8 col-sm-9">
+            <input type="email" class="form-control" placeholder="Enter your Email ID" r:context="${CONTEXT}" r:name="entity.email" >
+          <small> Note: </small> 
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3">Mobile No. <span class="text-danger">*</span></label>
+        <div class="col-md-5 col-sm-8">
+            <input type="number" class="form-control" placeholder="Enter your Mobile No." r:context="${CONTEXT}" r:name="entity.mobileno" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-3"></label>
+        <div class="col-md-8"><span class="text-muted"><input type="checkbox"> I agree to Filipizen's <a href="#" class="active-link">Terms</a> and <a href="#" class="active-link">Private Policy</a> (including the processing and disclosing of my personal data), and I am of legal age</span>.
+        </div>
+      </div> 
+      <div class="row" style="margin-top:30px;">
+            <div class="col-md-2">
+              <input class="thumbnail btn btn-primary" type="submit" r:context="${CONTEXT}" r:name="saveProfessional">
+            </div>
+          </div>         
+    </form>
+  </div>
+</div>
+

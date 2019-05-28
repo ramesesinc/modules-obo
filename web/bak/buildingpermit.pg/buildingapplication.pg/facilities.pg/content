@@ -1,0 +1,179 @@
+<script>
+
+  var controller = new function() {
+    var self = this;
+    var svc = Service.lookup("TestOboService", "default");
+
+    this.list;
+    this.active;
+    this.values;
+    this.items;
+
+    this.callbackHandler;
+
+    this.onload = function() {
+      if (!self.active) self.active = {};
+      if (!self.values) self.values = {};
+      if (!self.items) self.items = [];
+
+      //self.buildList( self.list );
+    }
+
+    this.isActive = function( value ) {
+      var flag = false;
+      if (self.active[value] == "checked") {
+        flag = true;
+      }
+      return flag;
+    }
+
+    this.searchList = function( searchtext ) {
+      var list = [];
+      if (!searchtext || searchtext.trim() == "") { 
+        //list = self.list;
+      } else {
+        for (var i=0; i<self.list.length; i++) {
+          var x = self.list[i];
+          if (x && (x.description.toLowerCase().search( searchtext ) != -1)) {
+            list.push( x );
+          }
+        }
+      }
+      self.buildList( list );
+      BindingUtils.bind(null, "#popup-content");
+    }
+
+    this.buildList = function( list ) {
+      if (list) {
+        var html = "<table style='width:100%;' cellpadding='5'>"
+        for (var i=0; i<list.length; i++) {
+          var x = list[i];
+          html += "<tr>";
+          /*
+          html += "<td width='5%' valign='top'><input type='checkbox' class='cb' r:context='facilities' r:mode='set' r:name='active' r:checkedValue='" + x.objid + "' id='" + x.objid + "' /></td>";
+          */
+          html += "<td width='5%' valign='top'><input type='checkbox' class='cb' r:context='facilities' r:name='active." + x.objid + "' r:checkedValue='checked' r:uncheckedValue='unchecked' id='" + x.objid + "' /></td>";
+          if (x.description) {
+            html += "<td valign='top'>" + x.description + "</td>";
+          } else {
+            html += "<td></td>";
+          }
+          if (x.datatype) {
+            html += "<td width='25%' valign='top'><input id='input-" + x.objid + "' type='text' style='width:100%;' r:context='facilities' r:name='values." + x.objid + "' ";
+
+            switch (x.datatype) {
+              case "integer": html += "r:datatype='integer' "; break
+              case "decimal": html += "r:datatype='decimal' "; break
+              case "date"   : html += "r:datatype='date' "; break
+            }
+            if (!self.isActive( x.objid )) {
+              html += "r:required='false' disabled ";
+            } else {
+              html += "r:required='true' ";
+            }
+            html +="/></td>";
+          } else {
+            html += "<td></td>";
+          }
+          if (x.unit) {
+            html += "<td width='10%' valign='top'>" + x.unit + "</td>";
+          } else {
+            html += "<td></td>";
+          }
+          html += "</tr>";
+        }
+        html += "</table>";
+
+        var e = \$("#popup-content");
+        if (e != null) {
+          e.html( html );
+        }
+
+        \$(".cb").change(function() {
+          var id = \$(this).attr("id");
+          var elem = \$("#input-" + id);
+          if (elem) {              
+            if (\$(this).is(":checked")) {
+              elem.removeAttr("disabled");
+              elem.attr("r:required", "true");
+            } else {
+              elem.val("");
+              elem.prop("disabled", "disabled");
+              elem.attr("r:required", "false");
+            }
+          }
+        });
+      }
+    }
+
+    this.findItem = function( src, jsondata, key ) {
+      var data;
+      var val = jsondata[key];
+      for (var i=0; i<src.length; i++) {
+        var x = src[i];
+        if (val == x[key]) {
+          data = x;
+          break;
+        }
+      }
+      return data;
+    }
+
+    this.submit = function() {
+
+      var xlist = [];
+      for (k in self.active) {
+        var val = self.active[k];
+        var item = self.findItem( self.items, {name: k}, "name");
+        if (!item) {
+          item = {name: k}
+        }
+        var info = self.findItem( self.list, {objid: k}, "objid");
+        if (info) {
+          if (!item.category) item.category = info.category;
+          if (!item.datatype) item.datatype = info.datatype;
+          if (!item.sortorder) item.sortorder = info.sortorder;
+          if (!item.description) item.description = info.description;
+          if (!item.unit) item.unit = info.unit;
+        }
+        if (self.values[k]) item.value = self.values[k];
+        if (val == "checked") {
+          if (!item.objid) item.objid = svc.generateId("OSAI");
+          item.allowadd = true;
+        } else if (val == "unchecked") {
+          item.allowremove = true;
+        }
+        xlist.push( item );
+      }
+
+      if (self.callbackHandler) self.callbackHandler( xlist );
+      return "_close";
+    }
+
+    this.doClose = function() {
+      return "_close";
+    }
+  }
+  \$put( "facilities", controller );
+
+  function myFunction() {
+
+    var searchtext = \$("#myInput").val().toLowerCase();
+    controller.searchList( searchtext );
+
+  }
+
+</script>
+
+<div class="input-group" style="position:absulote;width:450px;padding-bottom:20px">
+  <input type="text" id="myInput" onkeyup="myFunction()" class="form-control"/>
+  <span class="input-group-btn">
+    <button class="btn btn-primary"><i class="fa fa-search" ></i></button>
+  </span>
+</div>
+<div id="popup-content"></div>
+<hr>
+<div class="col-md-12">
+  <input type="submit" r:context="facilities" r:name="submit" value="Ok" class="btn btn-submit btn-primary"/>
+  <input type="button" r:context="facilities" r:name="doClose" r:immediate="true" value="Cancel" class="btn btn-submit btn-warning"/>
+</div>

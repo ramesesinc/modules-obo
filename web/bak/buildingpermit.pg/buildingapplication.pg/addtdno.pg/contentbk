@@ -1,0 +1,186 @@
+
+<%if (PARAMS._status && PARAMS._status > 0) {%>
+<pre>Error: ${PARAMS._message} </pre>
+<%}%>
+
+<script>
+
+
+\$put("addtdno", new function(){
+  /*
+     var self = this;
+    var svc = Service.lookup("CacheService", "default");
+
+      this.ctx = this;
+      this.lots = [];
+      this.selectedItem;
+
+      this.onload = function() {
+        self.lots = svc.get( "${PARAMS.ctcno}_location" );
+        if (!self.lots) self.lots = [];
+      }
+
+      this.removeItem = function(){
+        this.lots.pop(this.selectedItem);
+
+      }
+      this.additem = function(){
+        var handler = function(x){
+          var p = {};
+          p.tdno = x;
+          p.lotowner = {name:"Juan Dela Cruz", tctno:"39081", lotno:"2345", blkno:"14567", street:"Purok Centro 2", barangay:"Poblacion", state:"Legazpi"};
+      
+          if(p.tdno == "999"){
+            p.hasArrears = true;
+            }
+
+
+          self.lots.push(p);
+          //window.console.log("${PARAMS.ctcno}_location");
+          var prm = {key: "${PARAMS.ctcno}_location", value: self.lots}
+          svc.put( prm );
+          console.log(prm);
+          self._controller.refresh();
+        }
+        return new PopupOpener ("tdnumber", {callbackHandler: handler});
+      }
+      this.hasItems = function(){
+        return (this.lots.length > 0);
+      }
+      */
+});
+</script>
+<div class="col col-md-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col col-md-10">
+          <h3 class="panel-permitsHeader">Lot(s)</h3>
+        </div>
+        <div class="col col-md-2 text-right">
+          <a r:context="app" r:name="addLotItem" class="thumbnail btn btn-primary"><i class="fa fa-plus"></i> Add Lot (s)</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+        <table width="100%" r:context="app" r:items="data.lots" r:varName="item" r:name="selectedLot">
+          <tbody>
+            <tr>
+              <td> 
+                <div class="panel-lot panel-info lot">
+                  <div class="removeLotItem">
+                    <a r:context="app" r:name="removeLotItem" ><i class="fa fa-trash"></i></a>
+                  </div>
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-7">
+                          <div class="row">
+                            <div class="col-md-4"> 
+                              <p><b>Tax Dec. No. :</b></p>
+                            </div>
+                            <div class="col-md-8"> 
+                              <p class="lot-info">#{item.tdno}</p> 
+                            </div>
+                          </div>                         
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="row">
+                            <div class="col-md-5"> 
+                              <p><b>TCT No. :</b></p> 
+                            </div>
+                            <div class="col-md-7"> 
+                              <p class="lot-info">#{item.owner.tctno}</p>
+                            </div>
+                          </div>                       
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-7">
+                          <div class="row">
+                            <div class="col-md-4"> 
+                              <p><b>Lot Owner :</b></p>
+                            </div>
+                            <div class="col-md-8"> 
+                              <p class="lot-info">#{item.owner.lastname}, #{item.owner.firstname} #{item.owner.middlename? item.owner.middlename : ''}</p> 
+                            </div>
+                          </div>                         
+                        </div>
+                         <div class="col-md-4">
+                          <div class="row">
+                            <div class="col-md-5"> 
+                              <p><b>Street :</b></p>
+                            </div>
+                            <div class="col-md-7"> 
+                              <p class="lot-info">#{item.address.street}</p>
+                            </div>
+                          </div>                    
+                        </div>
+                        
+                      </div>      
+                      <div class="row">
+                        <div class="col-md-7">
+                          <div class="row">
+                            <div class="col-md-4"> 
+                            <p><b>Lot No. :</b></p>
+                            </div>
+                            <div class="col-md-8"> 
+                              <p class="lot-info">#{item.address.lotno}</p>
+                            </div>
+                          </div>                    
+                        </div>
+                       <div  class="col-md-4">
+                          <div class="row">
+                            <div class="col-md-5"> 
+                              <p><b>Barangay :</b></p>
+                            </div>
+                            <div class="col-md-7"> 
+                              <p class="lot-info">#{item.address.barangay}</p>
+                            </div>
+                          </div> 
+                        </div>
+                      
+                      </div> 
+                      <div class="row">
+                        <div class="col-md-7">
+                        <div class="row">
+                          <div class="col-md-4"> 
+                            <p><b>Blk No. :</b></p>
+                          </div>
+                          <div class="col-md-8"> 
+                            <p class="lot-info">#{item.address.blockno}</p>
+                          </div>
+                        </div>                    
+                      </div>
+                        
+                        <div  class="col-md-4">
+                          <div class="row">
+                            <div class="col-md-5"> 
+                              <p><b>City/Municipality:</b></p>
+                            </div>
+                            <div class="col-md-7"> 
+                              <p class="lot-info">#{item.address.city}</p>
+                            </div>
+                          </div> 
+                        </div>
+                      </div> 
+                    </div>
+                  <div r:context="app" r:visibleWhen="#{item.hasArrears==true}" style="color:red; font-weight:bold">This lot has unpaid dues <a href="/partners/${PARAMS.name}/services/rpt/asktdno?target=/partners/ddn_panabo/services/rpt/bill" target="_blank">Pay Here</a>
+                  </div>
+                  
+                </div> 
+              </td> 
+            </tr>
+          </tbody>
+        </table>                 
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
