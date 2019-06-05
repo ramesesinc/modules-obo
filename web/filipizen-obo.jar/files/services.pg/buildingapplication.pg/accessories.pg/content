@@ -1,0 +1,72 @@
+
+<%
+	def svc = SERVICE.lookup("OboMiscListService", "obo");
+	def items = svc.getItems( [type: 'ACCESSORIES'] );
+	def grps = items.groupBy{ it.category };
+%>
+
+
+<script>
+	\$put("accessories", new function() {
+		var self = this;
+
+		this.map = {};
+		<%items.each{ i-> %>
+		this.map.${ i.objid.toLowerCase() } = { objid: "${i.objid}", name:"${i.objid}", checked: false, caption: "${i.caption}", datatype:"${i.datatype}", unit:"${i.unit}" };<%}%>
+
+		//load accessories
+		var app = \$get("app").code;	
+		var svc = Service.lookup("OnlineBuildingApplicationService", "obo");
+
+		this.accessories;
+
+		this.onload = function() {
+			self.accessories = svc.getAccessories( {objid: app.appid } );
+			for(var i = 0; i < self.accessories.length; i++) {
+				var p = self.accessories[ i ];
+				var id = p.name.toLowerCase();
+				this.map[ id ].checked = true;
+				this.map[ id ].value = p.value; 
+			};
+		}
+
+		this.saveAndContinue = function() {
+			var infos = [];
+			for( var prop in this.map ) {
+				if( this.map[prop].checked == true ) {
+					infos.push( this.map[prop] );
+				}
+			}
+			svc.saveAccessories( { objid:app.appid, infos: infos} );
+			app.navigate("ancillarylist");
+		}
+
+	});
+</script>
+<br>
+<br>
+<legend>Accessories</legend>
+<p>Please specify if there are accessories added to the building</p>
+<div>
+	<%grps.each{ g,v->%>
+		<br>
+		<h2>${g == null ? '' : g}</h2>
+	 	<%v.each { i->%>
+	 		<div>
+			 		&nbsp;&nbsp;<input type="checkbox" r:context="accessories" r:name="map.${ i.objid.toLowerCase() }.checked">&nbsp;${i.caption}
+			 		<input type="text" r:context="accessories" r:name="map.${ i.objid.toLowerCase() }.value"
+			 			r:datatype="${i.datatype}"
+			 			r:depends="map.${ i.objid.toLowerCase() }.checked" 
+			 			r:visibleWhen="#{map.${ i.objid.toLowerCase() }.checked == true}"
+			 			style="width:80px;background-color:lightyellow;">
+			 		<label r:context="accessories"
+			 			r:depends="map.${ i.objid.toLowerCase() }.checked"  
+			 			r:visibleWhen="#{map.${ i.objid.toLowerCase() }.checked == true}">&nbsp;&nbsp;${i.unit}</label>	
+ 			</div> 
+	 	<%}%>
+	<%}%>
+ 	
+	<br><br>
+	<button r:context="app" r:name="_appinfo" class="btn btn-submit btn-primary"><i class="fa fa-angle-double-left"></i> Back</button>
+	<button r:context="accessories" r:name="saveAndContinue" class="btn btn-submit btn-primary">Next <i class="fa fa-angle-double-right"></i></button>
+</div>	

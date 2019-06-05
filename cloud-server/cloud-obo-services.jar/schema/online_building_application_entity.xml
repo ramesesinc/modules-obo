@@ -1,16 +1,18 @@
 <schema adapter="obodb">
 	<element tablename="online_building_application_entity">
 		<field name="objid" primary="true" prefix="OBENT" />
-		<field name="appid" />
-		<field name="role" />
+		<field name="appid" required="true" />
+		<field name="role" required="true"/>
 		<field name="profileid" />
-		<field name="entitytype" />
-		<field name="firstname" />
+		<field name="profileno" />
+		<field name="entitytype" />		
+		<field name="name" />		
+		<field name="firstname" required="true"/>
 		<field name="middlename" />
-		<field name="lastname" />
+		<field name="lastname" required="true"/>
 		<field name="birthdate" />
-		<field name="gender" />
-		<field name="resident" />
+		<field name="gender" required="true"/>
+		<field name="resident" required="true"/>
 
 		<field name="address_objid" />
 		<field name="address_text" />
@@ -19,19 +21,34 @@
 		<field name="address_bldgname" />
 		<field name="address_street" />
 		<field name="address_subdivision" />
-		<field name="address_barangy_objid" />
-		<field name="address_barangay_name" />
+		<field name="address_barangay_objid" />
+		<field name="address_barangay_name" required="true"/>
 		<field name="address_city" />
 		<field name="address_municipality" />
 		<field name="address_province" />
-		<field name="profession" />
 		<field name="ctc_objid" />
+		<field name="ctc_refno" />
+		<field name="ctc_dtissued" />
+		<field name="ctc_placeissued" />
+
 		<field name="prc_objid" />
+		<field name="prc_refno" />
+		<field name="prc_dtissued" />
+		<field name="prc_placeissued" />
+		<field name="prc_expirydate" />
+
 		<field name="ptr_objid" />
+		<field name="ptr_refno" />
+		<field name="ptr_dtissued" />
+		<field name="ptr_placeissued" />
+		<field name="ptr_expirydate" />
+
 		<field name="tin" />
 		<field name="email" />
 		<field name="mobileno" />
 		<field name="phoneno" />
+		<field name="profession" />
+		
 	</element>
 </schema>		
 

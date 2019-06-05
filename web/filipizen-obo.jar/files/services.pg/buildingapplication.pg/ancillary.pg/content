@@ -1,0 +1,95 @@
+ <%
+	def svc1 = SERVICE.lookup("OboMiscListService", "obo");
+	def items = svc1.getItems( [type: PARAMS.reftype] );
+	def grps = items.groupBy{ it.category };
+%>
+<script>
+\$put("ancillary", new function() {
+	
+	var self = this;
+	var app = \$get("app").code;
+
+	this.map = {};
+	<%items.each{ i-> %>
+	this.map.${ i.objid.toLowerCase() } = { name: "${i.objid}", objid:"${i.objid}", checked: false, caption: "${i.caption}", datatype:"${i.datatype}", unit:"${i.unit}" };<%}%>
+
+	
+	var svc = Service.lookup("OnlineBuildingApplicationService", "obo");
+	this.professionals;
+	this.permit;
+
+	this.onload = function() {
+		self.permit = svc.getAncillaryPermit( { objid: '${PARAMS.refid}' } );
+		self.professionals = svc.getProfessionalList({appid: app.appid });
+		self.professionals.each( function(x) {
+			x.expr = x.lastname + ', ' + x.firstname + ' (' + x.profession + ')'; 
+		});
+		for(var i = 0; i < self.permit.infos.length; i++) {
+			var p = self.permit.infos[ i ];
+			var id = p.name.toLowerCase();
+			this.map[ id ].checked = true;
+			this.map[ id ].value = p.value; 
+		};
+	}
+
+	this.saveAndComplete = function() {
+		var infos = [];
+		for( var prop in this.map ) {
+			if( this.map[prop].checked == true ) {
+				infos.push( this.map[prop] );
+			}
+		}
+		var m = { objid: '${PARAMS.refid}', state:'COMPLETED', infos: infos };
+		m.designprofessional = self.permit.designprofessional;
+		m.supervisor = self.permit.supervisor;		
+ 		svc.saveAncillaryPermit( m );
+		app.navigate("ancillarylist");
+	}
+
+	this.back = function() {
+		app.navigate( "ancillarylist"  );
+	}
+
+});
+</script>
+
+<h1>
+	<label r:context="ancillary">#{permit.type.title}</label>
+</h1>
+
+<br> 	
+Design Professional : 
+<select r:context="ancillary" r:name="permit.designprofessional"  r:itemLabel="expr" r:items="professionals" r:allowNull="true" 
+r:emptyText="Select Professional" ></select>
+<br> 
+Supervising in Charge Professional : 
+<select r:context="ancillary" r:name="permit.supervisor" r:items="professionals" r:itemLabel="expr" r:allowNull="true" r:emptyText="Select Professional" ></select> 
+
+<br><br><br> 	
+
+
+<p>Please check applicable items and fill the required values and click Submit when done</p>
+<%grps.each{ g,v->%>
+	<br>
+	<h2>${g==null?'':g}</h2>
+ 	<%v.each { i->%>
+ 		<div>
+		 		&nbsp;&nbsp;<input type="checkbox" r:context="ancillary" r:name="map.${ i.objid.toLowerCase() }.checked">&nbsp;${i.caption}
+		 		<span r:context="ancillary" r:visibleWhen="#{map.${ i.objid.toLowerCase() }.datatype != 'boolean'}">
+			 		<input type="text" r:context="ancillary" r:name="map.${ i.objid.toLowerCase() }.value"
+			 			r:datatype="${i.datatype}"
+			 			r:depends="map.${ i.objid.toLowerCase() }.checked" 
+			 			r:visibleWhen="#{map.${ i.objid.toLowerCase() }.checked == true}"
+			 			style="width:80px;background-color:lightyellow;">
+			 		<label r:context="ancillary"
+			 			r:depends="map.${ i.objid.toLowerCase() }.checked"  
+			 			r:visibleWhen="#{map.${ i.objid.toLowerCase() }.checked == true}">&nbsp;&nbsp;${i.unit}</label>	
+		 		</span>	
+			</div> 
+ 	<%}%>
+<%}%>
+
+<br>
+<button r:context="ancillary" r:name="back">Back</button>
+<button r:context="ancillary" r:name="saveAndComplete">Save and Complete</button>
+

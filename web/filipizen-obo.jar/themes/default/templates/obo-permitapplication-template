@@ -1,0 +1,54 @@
+<%
+
+	def svc = SERVICE.lookup("OnlineBuildingApplicationService", "obo");
+	def permit = svc.findAncillaryPermit( [objid: PARAMS.refid] );
+
+	def app = [:]
+
+	app.org = [ name:'Legazpi City', formalname: 'City of Legazpi', province: 'Province of Albay'];
+	app.owner = svc.getOwner( [appid: permit.appid] ); 
+	app.owner.middleinitial = app.owner.middlename.substring(0,1);
+	app.owner.ctc = [refno:'41225', dtissued:'2018-01-01', placeissued:'CEBU CITY'];
+	app.owner.address.text = [app.owner.address.bldgno, app.owner.address.subdivision, app.owner.address.street].findAll{ it!=null }.join(" ");
+
+	app.lotowner =  [lastname:'CANONOY', firstname:'JASPER', middlename: "MAGNOLIA", tin:"1111-22278788" , type:'INDIVIDUAL'];
+	app.lotowner.middleinitial = app.lotowner.middlename.substring(0,1);
+	app.lotowner.address = [text:'XXX ST. BANANA REPUBLIC DAWIS Legazpi City' ];
+	app.lotowner.ctc = [refno:'41225', dtissued:'2018-01-01', placeissued:'CEBU CITY']
+
+	app.occupancytype = [ objid:'A', description: 'SINGLE-ATTACHED OR DUPLEX OR TOWN- HOUSES, EACH PRIVATELY OWNED' ];
+	app.location = [blockno: 'B1', lotno: '123', street: 'MACOPA ST.', barangay: 'DAWIS', tdno:'01-0056-04958', tctno: '085-2015000286']
+
+
+	//app.designprofessional = [lastname:'SAN JUAN DEL MONTE', firstname:'NIÑ0 JOHN', middlename: 'VATOY', profession: 'ARCHITECT'];
+	app.designprofessional = permit.designprofessional;
+	app.designprofessional.address = [text: '0369 ORCHID ST. CAPITOL SITE CEBU CITY'];
+	app.designprofessional.ctc = [refno:'918298090', dtissued:'2019-01-01', placeissued:'CEBU CITY'];
+	app.designprofessional.prc = [refno:'PRC00029128999', dtissued:'2019-01-01', placeissued:'CEBU CITY', validity:'2024-01-01'];
+	app.designprofessional.ptr = [refno:'560001', dtissued:'2019-01-01', placeissued:'LEGAZPI CITY', tin:'201923388'];
+
+	//app.supervisor = [lastname:'VILLARENTE', firstname:'PABLO JOHN', middlename: 'MARTINEZ', profession: 'CIVIL ENGINEER'];
+	app.supervisor = permit.supervisor;
+	app.supervisor.address = [text: '0369 ORCHID ST. CAPITOL SITE CEBU CITY']
+	app.supervisor.ctc = [refno:'918298022', dtissued:'2019-02-01', placeissued:'CEBU CITY'];
+	app.supervisor.prc = [refno:'PRC00029128922', dtissued:'2019-01-01', placeissued:'CEBU CITY', validity:'2024-01-01'];
+	app.supervisor.ptr = [refno:'560002', dtissued:'2019-01-01', placeissued:'LEGAZPI CITY',tin:'241455' ];
+
+
+	PARAMS.app = app;
+%>
+
+<!DOCTYPE html>
+<html lang="en"> 
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link href="/themes/default/css/obo-permitapplication.css?ver=1" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+	<button onclick="window.print();return false;" class="btn-print">Print</button>
+		${_content}
+	</body>
+</html>
+
+
+

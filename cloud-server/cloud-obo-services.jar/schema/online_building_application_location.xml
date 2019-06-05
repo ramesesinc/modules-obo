@@ -1,0 +1,26 @@
+<schema adapter="obodb">
+	<element tablename="online_building_application_location">
+		<field name="objid" primary="true" prefix="OBOAPPRPU"/>
+		<field name="appid" required="true"/>
+
+		<!-- link to actual reference -->
+		<field name="refid" required="true"/>		
+		<field name="tdno" required="true"/>
+		<field name="tctno" />
+		<field name="pin" />
+		<field name="barangay" />
+		<field name="titleno" />		
+		<field name="lotno" />
+		<field name="blockno" />
+		<field name="street" />
+		<field name="areasqm" />
+		<field name="classcode" />
+		<field name="bill_amtdue"  datatype="decimal"/>
+		<field name="lotowned" datatype="integer" />		
+		<field name="ownerid" required="true"/>
+		
+		<complex name="owner" ref="online_building_application_entity" jointype="many-to-one" includefields="name,address.text">
+			<key field="ownerid" target="objid" />
+		</complex>	
+	</element>
+</schema>

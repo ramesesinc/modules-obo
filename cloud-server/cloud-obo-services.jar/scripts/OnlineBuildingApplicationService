@@ -6,26 +6,20 @@ import java.text.*;
 
 public class OnlineBuildingApplicationService  {
 
-	@DataContext("obo_building_type")
-	def bldgTypeEm;
-	
-	@DataContext("obo_occupancy_type")
-	def occTypeEm;
-
-	@DataContext("obo_work_type")
-	def workTypeEm;
-
-	@DataContext("obo_subapplication_type")
-	def itemTypeEm;
-
-	@DataContext("obo_variable")
-	def itemEm;
-
 	@DataContext("online_building_application")
 	def appEm;
 
 	@DataContext("online_building_application_entity")
 	def entityEm;
+
+	@DataContext("online_building_application_ancillary")
+	def ancillaryEm;
+
+	@DataContext("online_building_application_location")
+	def locationEm;
+
+	@DataContext("online_building_application_info")
+	def appInfoEm;
 
 	@Service("DateService")
 	def dateSvc;
@@ -33,33 +27,7 @@ public class OnlineBuildingApplicationService  {
 	@Service(dynamic=true)
 	def dynamicSvc;
 
-	@ProxyMethod
-	public def getOccupancyTypes() {
-		return occTypeEm.find( [type: 'group'] ).list();
-	}	
-
-	@ProxyMethod
-	public def getBldgTypes(def o ) {
-		return bldgTypeEm.find( [groupid: o.type] ).orderBy("title").list();
-	}	
-
-	@ProxyMethod
-	public def getWorkTypes() {
-		return workTypeEm.where("1=1").orderBy("idx").list();
-	}
-
-	@ProxyMethod
-	public def getItemTypes() {
-		return itemTypeEm.where("1=1").list();
-	}
-
-	@ProxyMethod
-	public def getItems(def o) {
-		def str = " typeid = :typeid ";
-		def prm = [typeid: o.type];  
-		return itemEm.where(str, prm).orderBy("sortorder").list();
-	}
-
+	
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
@@ -70,7 +38,6 @@ public class OnlineBuildingApplicationService  {
 		def emailSvc = dynamicSvc.lookup(o.orgcode+":EmailService");
 		app.tokenid = "MYTOKEN " + new UID();
 		emailSvc.send( app );
-
 		*/
 		updateNextStep( [appid: app.objid, nextstep: o.nextstep ] );
 		return app;
@@ -94,6 +61,51 @@ public class OnlineBuildingApplicationService  {
 	}
 
 	@ProxyMethod
+	public def findCurrentStep( def o ) {
+		appEm.find( [objid: o.appid ] ).select("step").first();
+	}
+
+	@ProxyMethod
+	public def saveLocation(def o) {
+		def lotowner = o.remove("owner");
+		lotowner.appid = o.appid;
+		lotowner.entityid = lotowner.remove("objid");
+		def entityOwner = saveEntity(lotowner, "lotowner");
+
+		o.ownerid = entityOwner.objid;
+		o.owner = [objid: o.ownerid ];
+		def loc = locationEm.create( o );
+		def  u = [locationid: loc.objid ];
+		if( o.lotowned == "1" ) {
+			u.ownerid = entityOwner.objid;
+			u.step = "professional";
+		}
+		else {
+			u.step = "owner";
+		}
+		appEm.find( [objid: o.appid ] ).update(u);		
+		return u;
+	}
+
+	@ProxyMethod
+	public def getLocation(def o ) {
+		def app = appEm.select("locationid").find( [objid: o.appid ] ).first();
+		if( !app?.locationid ) return null;
+		return locationEm.find( [objid: app.locationid ] ).first();
+	}
+
+	@ProxyMethod
+	public def getLocations(def o ) {
+		def app = appEm.select("locationid").find( [objid: o.appid ] ).first();
+		def locid = app.locationid;
+		def list =  locationEm.find( [appid: o.appid ] ).list();
+		list.each {
+			it.primary =  (it.objid == locid ) ? true : false;
+		}
+		return list;
+	}
+
+	@ProxyMethod
 	public def saveOwner(def o) {
 		def owner = saveEntity(o, "owner");
 		appEm.find([objid:o.appid]).update([ownerid: owner.objid]);
@@ -102,7 +114,9 @@ public class OnlineBuildingApplicationService  {
 
 	@ProxyMethod 
 	public def getOwner(def o) {
-		return entityEm.find( [appid: o.appid, role:'owner']).first();
+		def app = appEm.select("ownerid").find( [objid: o.appid ] ).first();
+		if(!app.ownerid) return null;
+		return entityEm.find( [objid: app.ownerid ] ).first();		
 	}
 
 	@ProxyMethod 
@@ -118,7 +132,7 @@ public class OnlineBuildingApplicationService  {
 
 	@ProxyMethod
 	public void removeProfessional( def o) {
-		entityEm.find( [o.objid]).delete();
+		entityEm.find( [objid: o.objid]).delete();
 	}
 
 	@ProxyMethod
@@ -138,40 +152,97 @@ public class OnlineBuildingApplicationService  {
 		return appEm.select(flds).find( [objid: o.appid] ).first();
 	}
 
-
-	/* To do 
-	public def getRequirementList( def o ){;}
-
-	@Service( dynamic=true ) 
-	def dynaSvc; 
+	
 
 	@ProxyMethod
-	public def sendTest(params) {
-		def svc = dynaSvc.lookup( '137:EntityTestService', 'gdx-script-service'); 
-		def v = svc.test( params );
-		return [status:'sent', result: v];
+	public def saveAncillaryPermits( def o ) {
+		o.permits.each { k,v->
+			def z = ancillaryEm.find( [appid:o.appid, permittypeid:k ] ).select("objid").val();
+			if( !z && v.toInteger() == 1 ) {
+				def m = [appid: o.appid, permittypeid: k, state: 'PENDING' ];
+				m.type = [objid: k];
+				ancillaryEm.create( m );	
+			} 
+			else if( z && v.toInteger() == 0 ) {
+				ancillaryEm.find( [appid: o.appid, permittypeid: k] ).delete()	
+			}
+		}		
+		return null;
 	}
 
-	@Service("BillingRuleService")
-	def billingRuleSvc;
-
-	@Service("DateService")
-	def dateSvc;
-
-	@DataContext("obo_billitemtype")
-	def billItemTypeEm;
+	@ProxyMethod
+	public def getAncillaryPermits( def o ) {
+		return ancillaryEm.find( [appid: o.appid] ).orderBy("type.sortorder").list();	
+	}
 
 	@ProxyMethod
-	public def assess(o) {
-		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: o, include_items: false ] );
-		res.billitems.findAll{ it.billcode && it.item == null }.each {
-			def p = billItemTypeEm.find( [objid: it.billcode ] ).first()
-			it.item = p.item;
-			it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
+	public def getAncillaryPermit( def o ) {
+		if(!o.objid) throw new Exception("getAncillary error. objid is required");
+		
+		def m = ancillaryEm.find( [objid: o.objid] ).first();
+		m.infos = getAppInfos( [parentid: o.objid ] );
+		//m.requirements = getRequirements( o );
+		return m;	
+	}
+
+	@ProxyMethod
+	public void saveAncillaryPermit( def o ) {
+		if(!o.objid) throw new Exception("updateAncillary error. objid is required");
+		if(!o.infos) throw new Exception("updateAncillary error. infos is required");
+		o.designprofessionalid = o.designprofessional?.objid;
+		o.supervisorid = o.supervisor?.objid;
+		ancillaryEm.find( [objid: o.objid ] ).update( o );
+		saveAppInfos( [parentid: o.objid, infos: o.infos ] );
+	}
+
+	@ProxyMethod
+	public def saveAccessories( def o ) {
+		if(!o.objid) throw new Exception("updateAccessories error. objid is required");
+		if(!o.infos) throw new Exception("updateAccessories error. infos is required");
+		saveAppInfos( [parentid: o.objid, infos: o.infos ] );
+	}
+
+	@ProxyMethod
+	public def getAccessories( def o ) {
+		if(!o.objid) throw new Exception("updateAccessories error. objid is required");
+		return getAppInfos( [parentid: o.objid ] );
+	}
+
+
+	//UTILITY METHODS FOR APP INFOS
+	private void saveAppInfos( o ) {
+		if(!o.parentid) throw new Exception("saveAppInfos error. parentid is required");
+		if(!o.infos) throw new Exception("saveAppInfos error. infos is required");
+
+		//clear first existing infos.
+		appInfoEm.find([parentid: o.parentid]).delete();
+		o.infos.each { info->
+			def m = [parentid: o.parentid, name: info.name];
+			m.type = [objid: info.name];
+			if( info.datatype == 'decimal') m.decimalvalue = info.value;
+			else if( info.datatype == 'integer') m.integervalue = info.value;
+			else if( info.datatype == 'boolean') m.booleanvalue = true;
+			else if( info.datatype == 'date') m.datevalue = info.value;
+			else m.stringvalue = info.value;
+			appInfoEm.create( m );
 		}
-		return res.billitems.findAll{ it.amount > 0 }.sort{ it.sortorder };
 	}
-	*/
+
+	private def getAppInfos( o ) {
+		def list = [];
+		def tmpList = appInfoEm.find( [parentid: o.parentid] ).list();
+		tmpList.each { info->
+			def m = [name:info.name, datatype:info.type.datatype];
+			if( m.datatype == 'decimal') m.value = info.decimalvalue;
+			else if( m.datatype == 'integer') m.value = info.integervalue;
+			else if( m.datatype == 'boolean') m.value = true;
+			else if( m.datatype == 'date') m.value = info.datevalue;
+			else m.value = info.stringvalue;
+			list << m;
+		}
+		return list;
+	}
+
 
 
 }

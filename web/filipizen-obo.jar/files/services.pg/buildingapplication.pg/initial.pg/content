@@ -1,5 +1,10 @@
+<%
+	def svc = SERVICE.lookup("OboMiscListService", "obo");
+	def permitTypes = svc.getMainPermitTypes();
+%>
+
 <script>
-	\$put("contact", new function() {
+	\$put("initial", new function() {
 		var self = this;
 		this.mode = "initial";
 
@@ -9,10 +14,24 @@
 		this.hiddenkey;
 		this.key;
 		this.appid;
+		this.appno;	
+		this.menuOption = "new";
+		this.permittype = "building";
 
 		var emailSvc = {
 			verifyEmail : function( o, func ) {
 				func( {result:{key:'1234'}}, 'ok' );
+			}
+		}
+
+		this.doMenuAction = function() {
+			if(this.menuOption == "new" ) {
+				self.appno = null;
+				self.mode = "add-contact";
+				self._controller.refresh();
+			}
+			else {
+				WindowUtil.load( "buildingapplication", {appid: self.appno } );
 			}
 		}
 
@@ -39,8 +58,13 @@
 			}
 			else {
 				self.error = null;
-				self.mode = "confirm";
+				self.mode = "select-permit-type";
 			}
+		}
+
+		this.showConfirm = function() {
+			self.error = null;
+			self.mode = "confirm";
 		}
 
 		this.agreed = false;
@@ -49,15 +73,19 @@
 				alert("Read first the terms and  check 'I agree' ");
 				return;
 			}
-			var p = {orgcode:app.orgcode, contact: self.contact, worktypes: [] };
-			p.nextstep = "owner";
+			var p = {orgcode:app.orgcode, contact: self.contact, worktypes: [], numunits: 1, apptype:'NEW', permittype: self.permittype };
+			p.nextstep = "location";
 			var a = app.service.create( p );
 			this.appid = a.objid;
 			self.mode = "success";
 		}
 
+		this.cancelApp = function() {
+			WindowUtil.load( "/partners/${PARAMS.name}/services");
+		}
+
 		this.proceed = function() {
-			app.reload( { appid: this.appid }, "owner" );
+			app.reload( { appid: this.appid }, "location" );
 		}
 
 	});
@@ -66,57 +94,81 @@
 <br>
 <br>
 
-<legend>Contact Details</legend>
-<div r:context="contact" r:visibleWhen="#{error != null }">
-	<label r:context="contact" style="color:red;">#{error}</label>
+<div r:context="initial" r:visibleWhen="#{error != null }">
+	<label r:context="initial" style="color:red;">#{error}</label>
 </div>
 
-<div r:context="contact" r:visibleWhen="#{mode=='initial'}" style='display:none'>
+<div r:context="initial" r:visibleWhen="#{mode=='initial'}" style='display:none'>
+	Select an action<br>
+	<input type="radio" r:context="initial" r:name="menuOption" value="new">Create New Application</input><br>	
+	<input type="radio" r:context="initial" r:name="menuOption" value="resume">Resume Pending Application</input><br>	
+	<div r:context="initial" r:depends="menuOption" r:visibleWhen="#{menuOption== 'resume'}" style="padding-left:10px">
+		Enter App Tracking No<input type="text" r:context="initial" r:name="appno">
+	</div>	
+	<input type="submit" r:context="initial" r:name="doMenuAction" class="btn btn-submit btn-primary" value="Next">
+</div>
+
+
+<div r:context="initial" r:visibleWhen="#{mode=='add-contact'}" style='display:none'>
 	<div class="row">
 	    <div class="col-md-4">
 	      <div class="control-group">
 	        <label class="control-label">Contact Name</label>
 	        <div class="form-group">
-	        	<input type="text" class="form-control input-response" r:context="contact" r:name="contact.name" r:required="true" r:caption="Contact Name"
+	        	<input type="text" class="form-control input-response" r:context="initial" r:name="contact.name" r:required="true" r:caption="Contact Name"
 	        	placeholder="Last Name, First Name">
 	        </div>
 	        <label class="control-label">Contact Detail</label>
 	        <div class="form-group">
-	        	<input type="text" class="form-control input-response" r:context="contact" r:name="contact.detail" 
+	        	<input type="text" class="form-control input-response" r:context="initial" r:name="contact.detail" 
 	        	placeholder="Describe contact's role with this project">
 	        </div>
 	        <label class="control-label">Email</label>
 	        <div class="form-group">
-	        	<input type="text" class="form-control input-response" r:context="contact" 
+	        	<input type="text" class="form-control input-response" r:context="initial" 
 	        	r:name="contact.email" r:textcase="none" r:required="true" r:caption="Email">
 	        </div>
 	        <label class="control-label">Mobile No</label>
 	        <div class="form-group">
-	        	<input type="text" class="form-control input-response" r:context="contact" r:name="contact.mobileno" r:textcase="none">
+	        	<input type="text" class="form-control input-response" r:context="initial" r:name="contact.mobileno" r:textcase="none">
 	        </div>
 
-          	<input type="submit" r:context="contact" r:name="verifyEmail" class="btn btn-submit btn-primary">
+          	<input type="submit" r:context="initial" r:name="verifyEmail" class="btn btn-submit btn-primary">
 	      </div>
 	    </div>      
   	</div>
 </div>
 
-<div r:context="contact" r:visibleWhen="#{mode=='enter-key'}" style='display:none'>
+<div r:context="initial" r:visibleWhen="#{mode=='enter-key'}" style='display:none'>
 	<div class="row">
 	    <div class="col-md-4">
 	      <div class="control-group">
 	        <label class="control-label">Please enter the 4 digit key sent in your email</label>
 	          <div class="form-group">
-	            <input type="text" class="form-control input-response" r:context="contact" r:name="key" r:textcase="none">
+	            <input type="text" class="form-control input-response" r:context="initial" r:name="key" r:textcase="none">
 	          </div>
-	          <input type="submit" r:context="contact" r:name="validateKey" class="btn btn-submit btn-primary">
+	          <input type="submit" r:context="initial" r:name="validateKey" class="btn btn-submit btn-primary">
+	      </div>
+	    </div>      
+  	</div>
+</div>
+
+<div r:context="initial" r:visibleWhen="#{mode=='select-permit-type'}" style='display:none'>
+	<div class="row">
+	    <div class="col-md-4">
+	      <div class="control-group">
+	        <label class="control-label">Please select the type of permit</label>
+	        <%permitTypes.each { o-> %>
+	        	<div><input type="radio" r:context="initial" r:name="permittype" value="${o.objid}">${o.title}</div>
+	        <%}%>
+	        <input type="submit" r:context="initial" r:name="showConfirm" class="btn btn-submit btn-primary" value="Submit">
 	      </div>
 	    </div>      
   	</div>
 </div>
 
 
-<div r:context="contact" r:visibleWhen="#{mode=='confirm'}" style='display:none'>
+<div r:context="initial" r:visibleWhen="#{mode=='confirm'}" style='display:none'>
 	<div class="row">
 	    <div class="col-md-4">
 	      <div class="control-group">
@@ -124,16 +176,25 @@
 	        <p>
 	        	Please read throughly the terms and conditions of the service.
 	        </p>  
+	        <p>
+	        	This application will require information of personal nature to carry out the transaction. This information 
+	        	will not be used for other purposes such as email or for advertisements. etc.etc. in violation of RA XXX or
+	        	the Data Privacy Act. Filipizen does not store any of this information. 
+	        	Your personal information will be stored in the database of the local government you 
+	        	are transacting. If you feel your rights are violated you may opt to cancel and not proceed.
+	        </p>
+
 	        <br>
-	        <input type="checkbox" r:context="contact" r:name="agreed">Yes I have read and agree to the terms and conditions 
+	        <input type="checkbox" r:context="initial" r:name="agreed">Yes I have read and agree to the terms and conditions 
 	        <br><br>
-	        <input type="submit" r:context="contact" r:name="confirm" class="btn btn-submit btn-primary">
+	        <input type="submit" r:context="initial" r:name="cancelApp" value="Cancel">
+	        <input type="submit" r:context="initial" r:name="confirm" class="btn btn-submit btn-primary">
 	      </div>
 	    </div>      
   	</div>
 </div>
 
-<div r:context="contact" r:visibleWhen="#{mode=='success'}" style='display:none'>
+<div r:context="initial" r:visibleWhen="#{mode=='success'}" style='display:none'>
 	<div class="row">
 	    <div class="col-md-4">
 	      <div class="control-group">
@@ -141,11 +202,11 @@
 	        the tracking number for this application. This will be your tracking reference for completing
 	        and follow up for this application.</label>
 	        <h2>
-	        	<label r:context="contact">#{appid}</label> 
+	        	<label r:context="initial">#{appid}</label> 
 	        </h2>  
 	        <br>
 	        <br>
-	          <input type="submit" r:context="contact" r:name="proceed" class="btn btn-submit btn-primary" value="Proceed">
+	          <input type="submit" r:context="initial" r:name="proceed" class="btn btn-submit btn-primary" value="Proceed">
 	      </div>
 	    </div>      
   	</div>

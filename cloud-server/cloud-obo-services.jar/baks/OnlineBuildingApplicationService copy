@@ -1,0 +1,169 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import java.rmi.server.*;
+import obo.facts.*;
+import java.text.*;
+
+public class OnlineBuildingApplicationService  {
+
+	@DataContext("online_building_application")
+	def appEm;
+
+	@DataContext("online_building_application_entity")
+	def entityEm;
+
+	@DataContext("online_building_application_ancillary")
+	def ancillaryEm;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@Service(dynamic=true)
+	def dynamicSvc;
+
+	
+	@ProxyMethod
+	public def create(def o) {
+		def kg = new KeyGen();
+		o.objid = kg.generateAlphanumKey(o.orgcode+"-",8);
+		o.dtfiled = dateSvc.getServerDate();
+		def app = appEm.create( o );
+		/*
+		def emailSvc = dynamicSvc.lookup(o.orgcode+":EmailService");
+		app.tokenid = "MYTOKEN " + new UID();
+		emailSvc.send( app );
+		*/
+		updateNextStep( [appid: app.objid, nextstep: o.nextstep ] );
+		return app;
+	}
+
+	def saveEntity(def o, def role ) {
+		if(!o.objid) {
+			def v = [role:role, appid: o.appid];
+			v.putAll(o);
+			return entityEm.create(v);
+		}
+		else {
+			return entityEm.find( [objid: o.objid] ).update( o );
+		}
+	}
+
+	@ProxyMethod
+	public void updateNextStep( def o ) {
+		if(!o.nextstep) return;
+		appEm.find( [objid: o.appid] ).update([step: o.nextstep]);
+	}
+
+	@ProxyMethod
+	public def saveOwner(def o) {
+		def owner = saveEntity(o, "owner");
+		appEm.find([objid:o.appid]).update([ownerid: owner.objid]);
+		updateNextStep( o );
+	}
+
+	@ProxyMethod 
+	public def getOwner(def o) {
+		return entityEm.find( [appid: o.appid, role:'owner']).first();
+	}
+
+	@ProxyMethod 
+	public def saveProfessional(def o) {
+		saveEntity(o, "professional");
+		updateNextStep( o );
+	}
+
+	@ProxyMethod 
+	public def getProfessional(def o) {
+		return entityEm.find( [objid: o.objid]).first();
+	}
+
+	@ProxyMethod
+	public void removeProfessional( def o) {
+		entityEm.find( [objid: o.objid]).delete();
+	}
+
+	@ProxyMethod
+	public def getProfessionalList( def o ) {
+		return entityEm.select("objid,lastname,firstname,middlename,profession,gender,address.*").find([appid: o.appid, role:'professional']).list();
+	}
+
+	@ProxyMethod
+	public def updateProjectInfo( def o  ) {
+		appEm.find( [objid: o.appid] ).update( o );
+		updateNextStep( o );
+	}
+
+	@ProxyMethod
+	public def getProjectInfo( def o  ) {
+		def flds = "description,title,occupancytypeid,numunits,floorarea,estimatedcost,dtproposedconstruction,dtexpectedcompletion,supervisorid,totalfloorarea,bldgtypeid,height,numfloors,worktypes";		
+		return appEm.select(flds).find( [objid: o.appid] ).first();
+	}
+
+	@ProxyMethod
+	public def findCurrentStep( def o ) {
+		appEm.find( [objid: o.appid ] ).select("step").first();
+	}
+
+	@ProxyMethod
+	public def saveAncillaryPermits( def o ) {
+		o.permits.each { k,v->
+			def z = ancillaryEm.find( [appid:o.appid, permittypeid:k ] ).select("objid").val();
+			if( !z && v.toInteger() == 1 ) {
+				def m = [appid: o.appid, permittypeid: k, state: 'PENDING' ];
+				m.type = [objid: k];
+				ancillaryEm.create( m );	
+			} 
+			else if( z && v.toInteger() == 0 ) {
+				ancillaryEm.find( [appid: o.appid, permittypeid: k] ).delete()	
+			}
+		}		
+		return null;
+	}
+
+	@ProxyMethod
+	public def getAncillaryPermits( def o ) {
+		return ancillaryEm.find( [appid: o.appid] ).orderBy("type.sortorder").list();	
+	}
+
+	@ProxyMethod
+	public def findAncillaryPermit( def o ) {
+		def ap = ancillaryEm.find( [objid: o.refid] ).first();	
+		return ap;
+	}
+
+
+
+	/* To do 
+	@Service( dynamic=true ) 
+	def dynaSvc; 
+
+	@ProxyMethod
+	public def sendTest(params) {
+		def svc = dynaSvc.lookup( '137:EntityTestService', 'gdx-script-service'); 
+		def v = svc.test( params );
+		return [status:'sent', result: v];
+	}
+
+	@Service("BillingRuleService")
+	def billingRuleSvc;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("obo_billitemtype")
+	def billItemTypeEm;
+
+	@ProxyMethod
+	public def assess(o) {
+		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: o, include_items: false ] );
+		res.billitems.findAll{ it.billcode && it.item == null }.each {
+			def p = billItemTypeEm.find( [objid: it.billcode ] ).first()
+			it.item = p.item;
+			it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
+		}
+		return res.billitems.findAll{ it.amount > 0 }.sort{ it.sortorder };
+	}
+	*/
+
+
+}

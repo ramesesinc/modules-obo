@@ -1,0 +1,104 @@
+<%
+	def svc1 = SERVICE.lookup("OboMiscListService", "obo");
+	def list = svc1.getAncillaryPermitTypes();
+%>
+
+
+ <script>
+\$put("ancillarylist", new function() {
+	var self = this;	
+	this.mode;
+	this.permits = {};
+	this.permitList;
+	this.selectedItem;
+
+	var app = \$get("app").code;
+
+	this.fetchPermitList = function() {
+		self.permitList = app.service.getAncillaryPermits( {appid: app.appid } );
+		for( var i=0; i < self.permitList.length; i++ ) {
+			this.permits[ self.permitList[i].permittypeid ] = 1;
+		}
+		if( self.permitList.length > 0 ) {
+			self.mode = "view";
+		}
+		else {
+			self.mode = "select";			
+		}
+	}
+
+	this.onload = function() {
+		self.fetchPermitList();
+	}
+
+	this.saveAncillaryPermits = function() {
+		var p = {
+			appid: app.appid,
+			permits: this.permits
+		}
+		app.service.saveAncillaryPermits( p );
+		self.fetchPermitList();
+		self._controller.refresh();
+	}
+
+	this.addAncillary = function() {
+		this.mode = "select";
+		self._controller.refresh();
+	}
+});
+</script>
+
+
+<h1>Ancillary Permits</h1>
+
+<div r:context="ancillarylist" r:visibleWhen="#{mode=='select'}">
+	<p>Select applicable ancillarylist permits for the project</p>
+	<br>
+	<%list.each {o-> %>
+		<input type="checkbox" r:context="ancillarylist" r:name="permits.${o.objid}" r:checkedValue="1" r:uncheckedValue="0"/>&nbsp;&nbsp;${o.title}<br>
+		<%}%>
+	<br>
+	<br>
+	<button r:context="ancillarylist" r:name="saveAncillaryPermits" class="btn btn-submit btn-primary">
+		Next <i class="fa fa-angle-double-right"></i>
+	</button>
+</div>
+
+<div r:context="ancillarylist" r:visibleWhen="#{mode=='view'}">
+	<p>Ancillary Permits applied</p>
+	<table r:context="ancillarylist" r:items="permitList" r:varName="item" r:name="selectedItem" border="1">
+		<thead>
+			<tr>
+				<th>Permit Type</th>
+				<th>Status</th>
+				<th>Design Professional</th>
+				<th>Supervisor In Charge</th>
+				<th>View</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>#{item.type.title}</td>
+				<td>#{item.state}</td>
+				<td>#{item.designprofessional.lastname}, #{item.designprofessional.firstname}</td>
+				<td>#{item.supervisor.lastname}, #{item.supervisor.firstname}</td>
+				<td>
+					<label r:context="ancillarylist">
+						<a href="#ancillary?reftype=#{item.type.objid}&refid=#{item.objid}">Edit</a>
+					</label>
+					&nbsp;&nbsp;					
+					<label r:context="ancillarylist">
+						<a href="/obo/permitapplications/#{item.type.objid}?refid=#{item.objid}" target="#">Print Report</a>
+					</label>
+				</td>
+			</tr>	
+		</tbody>
+	</table>
+
+	<br>
+	<button r:context="ancillarylist" r:name="addAncillary">Change Permits to Include</button>
+</div>
+
+
+
+

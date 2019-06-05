@@ -7,23 +7,26 @@
 	this.prof = {};
   this.selectedItem;
 
+  this.barangayid;
+  this.barangayList;
+
   var app = \$get("app").code;
 
 	this.professions = ["ARCHITECT", "CIVIL ENGINEER", "ELECTRICAL ENGINEER", "MECHANICAL ENGINEER"];
 
-	this.init = function() {
-		self.prof = {};	
-		self.mode = "initial";
-	}	
+  this.init = function() {
+    self.prof = {}; 
+    self.mode = "initial";
+  } 
 
-	this.findId = function(){
+  this.findId = function(){
       self.error = "Name not found. Please try again";
   };
 
   this.initNewEntry = function() {
-  	self.error = null;
+    self.error = null;
     self.mode = "add-entry";
-    self.prof = { address: {}};
+    self.prof = { address: {}, resident: 1, ctc: {} };
   }
 
   this.addNewEntry = function() {
@@ -34,7 +37,7 @@
   }
 
   this.finish = function() {
-    app.service.updateNextStep( {appid: app.appid, 'project'} );
+    app.service.updateNextStep( {appid: app.appid, step:'project'} );
     app.navigate( "project" );
   }
 
@@ -50,6 +53,36 @@
       self._controller.refresh();
     }
   }
+
+  this.propertyChangeListener = {
+    "barangayid" : function(o) {
+      var bgy = {};
+      for( var i =0; i<self.barangayList.length; i++ ) {
+        if( self.barangayList[i].objid == o ) {
+          bgy = self.barangayList[i];   
+          break;
+        }    
+      }
+      self.prof.address.barangay = bgy;  
+    },
+    "prof.resident": function(o) {
+      if(o == 0) {
+        self.barangayid = null;
+        self.prof.address.barangay.objid = null;
+      }
+      else {
+        self.prof.address.city = null;
+        self.prof.address.municipality = null;
+        self.prof.address.province = null;        
+      }    
+    }  
+  }
+
+  this.onload = function() {
+    var bsvc = Service.lookup("CloudPartnerService", "partner");
+    this.barangayList = bsvc.getBarangayList( {orgcode: app.orgcode} );
+  }
+
 
 });
 </script>
@@ -111,10 +144,11 @@
 <div r:context="prof" r:visibleWhen="#{mode=='add-entry'}" style="display:none">
   <p>Please fill in the necessary data below. Text marked with * are required fields. </p>
   <br>
-  <div class="row">
-    <div class="col-md-8">     
-      <form class="form-horizontal"> 
 
+  <form class="form-horizontal"> 
+
+  <div class="row">
+    <div class="col-md-8">  
       <div class="form-group">
         <label class="control-label col-sm-3">Profession <span class="text-danger">*</span></label>
         <div class="col-md-8 col-sm-9">
@@ -122,121 +156,18 @@
            r:emptyText="Select Profession" r:allowNull="true" r:emptyText="Select Profession"></select>
         </div>
       </div>
-
-      <div class="form-group">
-        <label class="control-label col-sm-3">Last Name <span class="text-danger">*</span></label>
-        <div class="col-md-8 col-sm-9">
-          <input type="text" r:context="prof" r:name="prof.lastname" required="true" class="form-control text-all-capital"  placeholder="Enter your Last Name">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-3">First Name <span class="text-danger">*</span></label>
-        <div class="col-md-8 col-sm-9">
-          <input type="text" r:context="prof" r:name="prof.firstname" required="true" class="form-control text-all-capital"  placeholder="Enter your First Name">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-3">Middle Name <span class="text-danger">*</span></label>
-        <div class="col-md-8 col-sm-9">
-          <input type="text" r:context="prof" r:name="prof.middlename" required="true" class="form-control text-all-capital"  placeholder="Enter your Middle Name">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-3">Date of Birth <span class="text-danger">*</span></label>
-        <div class="col-xs-8">
-          <input type="text" r:datatype="date" r:context="prof" r:name="prof.birthdate" class="form-control" placeholder="Choose Date">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-3">Gender <span class="text-danger">*</span></label>
-        <div class="col-md-8 col-sm-9">
-          <label>
-          <input r:context="prof" r:name="prof.gender" type="radio" value="M" checked>
-          Male</label>
-          <label>
-          <input r:context="prof" r:name="prof.gender" type="radio" value="F" >
-          Female</label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-3">Address <span class="text-danger">*</span></label>
-        <div class="col-md-8 col-sm-9">
-          <div class="custom-radios">
-            <label class="control-label" style="padding-right:20px;">
-              <input type='radio' r:name="prof.resident" r:context="prof"  value="1" checked>
-                Resident
-            </label>
-            <label class="control-label">
-              <input type='radio' r:name="prof.resident" r:context="prof"  value="0">
-                 Non-resident
-            </label>
-          </div>
-          <br>
-          <div class="row">
-            <div class="col-md-3">
-              <p>Bldg No: </p> 
-              <input type="text" r:context="prof" r:name="prof.address.bldgno" class="form-control">
-          </div>
-            <div class="col-md-3">
-                <p>Unit No: </p> 
-                <input type="text" r:context="prof" r:name="prof.address.unitno" class="form-control">
-            </div>
-            <div class="col-md-6">
-                <p>Subdivision</p> 
-                <input type="text" r:context="prof" r:name="prof.address.subdivision" class="form-control">
-            </div>
-            <div class="col-md-6">
-              <p>Street</p> 
-              <input type="text" r:context="prof" r:name="prof.address.street" required="true" class="form-control">
-            </div>
-            <div class="control-group" r:context="prof" r:depends="prof.resident" r:visibleWhen="#{prof.resident=='1'}">
-              <div class="row inputSelected">
-                <div class="col-md-6">
-                  <p>Barangay</p> 
-                  <select r:context="prof" r:name="prof.address.barangay" r:items="barangaylist" r:itemLabel="name" class="form-control">
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="control-group" r:context="prof" r:depends="prof.resident" r:visibleWhen="#{prof.resident=='0'}"  style='display:none'>
-                <div class="col-md-6">
-                  <p>Barangay</p> 
-                  <input type="text" r:context="prof" r:name="prof.address.barangay.name" required="true" class="form-control"/>
-                </div>
-                <div class="col-md-6" r:context="">
-                  <p>City/Municipality</p> 
-                  <input type="text" r:context="prof" r:name="prof.address.city" class="form-control"/>
-                </div>
-                <div class="col-md-6">
-                  <p>Province</p> 
-                  <input type="text" r:context="prof" r:name="prof.address.province" class="form-control"/>
-                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-3">Email ID <span class="text-danger">*</span></label>
-        <div class="col-md-8 col-sm-9">
-            <input type="text" r:context="prof" r:name="prof.email" placeholder="Email"
-              class="form-control" r:textCase="none">
-         </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-3">Mobile No. <span class="text-danger">*</span></label>
-        <div class="col-md-5 col-sm-8">
-            <input type="text" r:context="prof" r:name="prof.mobileno" placeholder="Mobile no">
-        </div>
-      </div>
-     
-      <br>
-      <div class="form-group">
-        <label class="control-label col-sm-3"></label>
-        <div class="col-md-8"><input type="submit" r:context="prof" r:name="addNewEntry" 
-        	class="btn-response btn btn-submit btn-primary" value="Add To List"></div>
-      </div>               
     </div>
-  </div>
+  </div>    
+
+  @obo:entityform( context:'prof', object: 'prof' ) 
+ 
+  <br>
+  <div class="form-group">
+    <label class="control-label col-sm-3"></label>
+    <div class="col-md-8"><input type="submit" r:context="prof" r:name="addNewEntry" 
+    	class="btn-response btn btn-submit btn-primary" value="Add To List"></div>
+  </div>               
+
 </div>
 
 <div  r:context="prof" r:visibleWhen="#{mode == 'view-list'}">
@@ -244,6 +175,7 @@
   <table r:context="prof" r:items="getProfessionals()" r:varName="item" r:name="selectedItem" border="1px">
     <thead>
       <tr>
+        <td>PRC No</td>
         <td>Profession</td>        
         <td>Last Name</td>
         <td>First Name</td>
@@ -254,6 +186,7 @@
     </thead>
     <tbody>
       <tr>
+        <td>#{item.prc.refno}</td>
         <td>#{item.profession}</td>        
         <td>#{item.lastname}</td>
         <td>#{item.firstname}</td>

@@ -1,0 +1,183 @@
+<script type="text/javascript">
+\$put("location", new function(){
+	var self = this;
+	this.mode = "initial";
+	this.refno = "01-0059-00657";
+  this.prop;
+	var app = \$get("app").code;
+
+  this.findProperty = function() {
+    var svc = Service.lookup( app.orgcode + ":OboOnlineService" );
+    svc.findLocation( {refno: self.refno}, function(o,s) {
+      if( s == "error" ) {
+        alert("Error " + o.result);
+      }
+      else {
+        self.mode = "view-lot";
+        console.log( o.result );
+        self.prop = o.result;
+        self.prop.owner.ctc = {};      //allocate ctc
+        self.prop.lotowned = null;
+        self._controller.refresh();
+      }
+    });
+  }
+
+  this.reloadList = function() {
+    self.locations = app.service.getLocations( {appid: app.appid} );
+  }
+
+  this.showOwner = function() {
+    self.mode = "view-owner";  
+  }
+
+  this.saveLocation = function() {
+    if(self.prop.lotowned == null ) {
+      alert("Please specify if lot owner is the same as the building owner");
+      return;
+    }  
+    self.prop.appid = app.appid;
+    var u = app.service.saveLocation( self.prop );
+    self.reloadList();
+    self.mode = 'view-locations';
+  }
+
+  this.locations;
+  this.onload = function() {
+    //check if there is a location set.
+    self.reloadList();
+    if( self.locations.length > 0) {
+      self.mode = "view-locations";
+    }
+    else {
+      self.mode = "initial";
+    }
+  }
+
+  this.addMore = function() {
+    this.prop = null;
+    self.mode = "initial";
+  }
+
+});
+</script>
+
+<style>
+  .label-caption { width:150px; font-weight:bold;  };  
+</style>
+
+
+<div r:context="location" r:visibleWhen="#{mode=='initial'}" style='display:none'>
+  @wx:text( caption:'Enter Tax Declaration No. of the Property', context:'location', name:'refno', attrs: [textcase:'none'], captionClass:'label-caption' )
+  <input type="submit" r:context="location" r:name="findProperty"  value="Search">              
+</div>
+
+<div r:context="location" r:visibleWhen="#{mode=='view-lot'}" style='display:none'>
+    <h2>Lot Details</h2>
+    <p>Please check thorughly if all the information is correct. If not, please contact the assessor's office.</p>
+    <br>
+    <table width="80%">
+      <td>
+        @wx:label( caption:'PIN', context:'location', expr:'#{prop.pin}', captionClass:'label-caption' )
+        @wx:label( caption:'Lot No', context:'location', expr:'#{prop.lotno}', captionClass:'label-caption' )
+        @wx:label( caption:'Block No', context:'location', expr:'#{prop.blockno}', captionClass:'label-caption' )
+        @wx:label( caption:'Street', context:'location', expr:'#{prop.street}', captionClass:'label-caption' )
+        @wx:label( caption:'Barangay', context:'location', expr:'#{prop.barangay}', captionClass:'label-caption' )
+        @wx:label( caption:'Area &#40;Sqm&#41;', context:'location', expr:'#{prop.areasqm}', captionClass:'label-caption' )
+      </td>
+      <td>
+        @wx:label( caption:'TD No', context:'location', expr:'#{prop.tdno}', captionClass:'label-caption' )
+        @wx:label( caption:'TCT No', context:'location', expr:'#{prop.tctno}', captionClass:'label-caption' )
+        @wx:label( caption:'Title No', context:'location', expr:'#{prop.titleno}', captionClass:'label-caption' )
+        @wx:label( caption:'Class Code', context:'location', expr:'#{prop.classcode}', captionClass:'label-caption' )
+      </td>
+    </table>  
+    <br>
+    <div r:context="location" r:visibleWhen="#{prop.bill!=null && prop.bill.amtdue > 0 }">
+      <label r:context="location" style="color:red;font-weight:bold;">
+        Note: There is still an unpaid balance of <u>Php #{prop.bill.amtdue}</u>.
+        You can settle this by paying online <a  href="/partners/${PARAMS.name}/services/rptis/billing#viewbill?refno=#{refno}" target="0">here</a>
+      </label>
+    </div>
+    <input type="submit" r:context="location" r:name="showOwner"  value="Next">   
+</div>
+
+<div r:context="location" r:visibleWhen="#{mode=='view-owner'}" style='display:none'>
+  <h2>Lot Owner Details</h2>
+  <p>Please check if the owner of the lot is correct. If not, you may need to contact the assessor's office for an update of the information</p>
+  <br>
+  <table width="80%">
+    <td>
+      @wx:label( caption:'Owner', context:'location', expr:'#{prop.owner.name}', captionClass:'label-caption' )
+      @wx:label( caption:'Entity No', context:'location', expr:'#{prop.owner.entityno}', captionClass:'label-caption' )
+      @wx:label( caption:'Owner Type', context:'location', expr:'#{prop.owner.type}', captionClass:'label-caption' )
+      @wx:label( caption:'Address', context:'location', expr:'#{prop.owner.address.text}', captionClass:'label-caption' )
+    </td>
+  </table>
+  <br>
+  <p>Enter the latest Community Tax Certificate Information for the lot owner</p>
+  <table width="80%">
+    <td>
+      @wx:text( caption:'CTC No', context:'location', name:'prop.owner.ctc.refno', captionClass:'label-caption', required: true, hint:'CTC No' )
+      @wx:date( caption:'Date Issued', context:'location', name:'prop.owner.ctc.dtissued', captionClass:'label-caption', required: true, hint:'CTC Date Issued' )
+      @wx:text( caption:'Place Issued', context:'location', name:'prop.owner.ctc.placeissued', captionClass:'label-caption', required: true, hint:'CTC Place Issued' )
+    </td>
+  </table>
+  <br>
+  No CTC yet? Apply online <a href="">here</a>
+  <br>
+  <br>
+  Is the Lot owner also the owner of the building?
+  <input type="radio" r:context="location" r:name="prop.lotowned" value="1">&nbsp;Yes &nbsp;&nbsp;
+  <input type="radio" r:context="location" r:name="prop.lotowned" value="0">&nbsp;No &nbsp;&nbsp;
+  <br>
+  <br>
+  <input type="submit" value="Next" r:context="location" r:name="saveLocation" r:immediate="false"/>   
+</div>
+
+<div  r:context="location" r:visibleWhen="#{mode=='view-locations'}" style='display:none'>
+  <h2>Locations</h2>
+  <table r:context="location" r:items="locations" r:varName="item" border="1">
+    <thead>
+      <tr>
+        <td>TD No</td>
+        <td>Title No</td>        
+        <td>PIN</td>
+        <td>Lot No</td>
+        <td>Block No</td>
+        <td>Street</td>
+        <td>Barangay</td>
+        <td>Class</td>
+        <td>Area (sqm)</td>        
+        <td>Owner</td>
+        <td>Owners address</td>        
+        <td>Primary</td>     
+        <td>Owned</td>     
+      </tr>
+    </thead>
+    <tbody>
+        <td>#{item.tdno}</td>
+        <td>#{item.titleno}</td>        
+        <td>#{item.pin}</td>
+        <td>#{item.lotno}</td>
+        <td>#{item.blockno}</td>
+        <td>#{item.street}</td>
+        <td>#{item.barangay}</td>
+        <td>#{item.classcode}</td>
+        <td>#{item.areasqm}</td>        
+        <td>#{item.owner.name}</td>
+        <td>#{item.owner.address.text}</td>        
+        <td>
+          <input type="checkbox" checked="#{item.primary}" disabled/>
+        </td>     
+        <td>
+          <input type="checkbox" checked="#{item.primary}" disabled/>
+          </td>     
+    </tbody>
+  </table>  
+  <br>
+  <br>
+  <input type="submit" value="Add More" r:context="location" r:name="addMore" r:immediate="false"/>     
+  <input type="submit" value="Next" r:context="location" r:name="proceed" r:immediate="false"/>     
+
+</div>
