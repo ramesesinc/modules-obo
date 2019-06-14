@@ -28,7 +28,7 @@
 		<field name="height" type="decimal"/>
 
 		<!-- shows where the current step is at -->
-		<field name="step" />
+		<field name="step" type="integer"/>
 		<field name="locationid" />
 		<field name="ownerid" />
 		<complex name="worktypes" type="list" serializer="default" />
@@ -40,6 +40,7 @@
 		<complex name="location" ref="online_building_application_location" jointype="many-to-one" required="false">
 			<key field="locationid" target="objid" />
 		</complex>	
+
 
 	</element>
 </schema>

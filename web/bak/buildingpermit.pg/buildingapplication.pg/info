@@ -1,7 +1,0 @@
-{
-	title  : 'Welcome to the Online Building Permit Application',
-	menu: 'Apply for New Permit',
-	fragment:true,
-	sortorder:-9,
-	context:"app"
-}

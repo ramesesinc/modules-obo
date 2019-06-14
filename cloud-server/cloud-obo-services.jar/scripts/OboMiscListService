@@ -61,6 +61,10 @@ public class OboMiscListService  {
 		return permitTypeEm.find( [ancillary: 1 ]).orderBy("sortorder").list();
 	}
 
+	
+
+
+
 	/* To do 
 	public def getRequirementList( def o ){;}
 	*/

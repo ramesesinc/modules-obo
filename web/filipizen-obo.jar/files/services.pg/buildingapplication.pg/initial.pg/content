@@ -3,6 +3,13 @@
 	def permitTypes = svc.getMainPermitTypes();
 %>
 
+<style>
+  .caption-class { width:150px; }
+  .input-class { width:250px;}
+  .test { width:300px; border:1px solid lighjtgrey; }
+</style>
+
+
 <script>
 	\$put("initial", new function() {
 		var self = this;
@@ -10,21 +17,15 @@
 
 		var app = \$get("app").code;
 		this.contact = {};
-		this.contact.email = "elmonazareno@yahoo.com"
 		this.hiddenkey;
 		this.key;
 		this.appid;
 		this.appno;	
 		this.menuOption = "new";
 		this.permittype = "building";
+		this.orgname = app.orgname;
 
-		var emailSvc = {
-			verifyEmail : function( o, func ) {
-				func( {result:{key:'1234'}}, 'ok' );
-			}
-		}
-
-		this.doMenuAction = function() {
+		this.selectOption = function() {
 			if(this.menuOption == "new" ) {
 				self.appno = null;
 				self.mode = "add-contact";
@@ -37,7 +38,7 @@
 
 		this.verifyEmail = function() {
 			var p = {email: self.contact.email } 
-			//var emailSvc = Service.lookup(app.orgcode+':VerifyEmailService');
+			var emailSvc = Service.lookup(app.orgcode+':VerifyEmailService');
 
 			emailSvc.verifyEmail( p, function(o,s) {
 		      if( s == "error" ) {
@@ -88,127 +89,89 @@
 			app.reload( { appid: this.appid }, "location" );
 		}
 
+
 	});
 </script>
 
-<br>
-<br>
 
-<div r:context="initial" r:visibleWhen="#{error != null }">
+<div r:context="initial" r:visibleWhen="#{error != null }" style='display:none'>
 	<label r:context="initial" style="color:red;">#{error}</label>
 </div>
 
 <div r:context="initial" r:visibleWhen="#{mode=='initial'}" style='display:none'>
-	Select an action<br>
-	<input type="radio" r:context="initial" r:name="menuOption" value="new">Create New Application</input><br>	
-	<input type="radio" r:context="initial" r:name="menuOption" value="resume">Resume Pending Application</input><br>	
-	<div r:context="initial" r:depends="menuOption" r:visibleWhen="#{menuOption== 'resume'}" style="padding-left:10px">
-		Enter App Tracking No<input type="text" r:context="initial" r:name="appno">
-	</div>	
-	<input type="submit" r:context="initial" r:name="doMenuAction" class="btn btn-submit btn-primary" value="Next">
+	<div class="subtitle">Select an action</div>
+	<div class="form">
+		<input type="radio" r:context="initial" r:name="menuOption" value="new"> Create New Application</input><br>	
+		<input type="radio" r:context="initial" r:name="menuOption" value="resume"> Resume Pending Application</input><br>	
+		<div r:context="initial" r:depends="menuOption" r:visibleWhen="#{menuOption== 'resume'}" style="padding-left:10px">
+			@wx:text( caption:'App Tracking No', context:'initial', name:'appno', required:true )
+		</div>
+	</div>
+	@wx:button( context:'initial', name:'selectOption', caption: 'Next' )
 </div>
 
 
 <div r:context="initial" r:visibleWhen="#{mode=='add-contact'}" style='display:none'>
-	<div class="row">
-	    <div class="col-md-4">
-	      <div class="control-group">
-	        <label class="control-label">Contact Name</label>
-	        <div class="form-group">
-	        	<input type="text" class="form-control input-response" r:context="initial" r:name="contact.name" r:required="true" r:caption="Contact Name"
-	        	placeholder="Last Name, First Name">
-	        </div>
-	        <label class="control-label">Contact Detail</label>
-	        <div class="form-group">
-	        	<input type="text" class="form-control input-response" r:context="initial" r:name="contact.detail" 
-	        	placeholder="Describe contact's role with this project">
-	        </div>
-	        <label class="control-label">Email</label>
-	        <div class="form-group">
-	        	<input type="text" class="form-control input-response" r:context="initial" 
-	        	r:name="contact.email" r:textcase="none" r:required="true" r:caption="Email">
-	        </div>
-	        <label class="control-label">Mobile No</label>
-	        <div class="form-group">
-	        	<input type="text" class="form-control input-response" r:context="initial" r:name="contact.mobileno" r:textcase="none">
-	        </div>
-
-          	<input type="submit" r:context="initial" r:name="verifyEmail" class="btn btn-submit btn-primary">
-	      </div>
-	    </div>      
-  	</div>
+	<div class="subtitle">Enter contact details</div>
+	<div class="form">
+		@wx:text( caption:'Contact Name', context:'initial', name:'contact.name', required:true )
+		@wx:text( caption:'Contact Detail', context:'initial', name:'contact.detail' )
+		@wx:email( context:'initial', name:'contact.email', required:true )
+		@wx:mobile( context:'initial', name:'contact.mobileno')
+	</div>
+	@wx:button( context:'initial', name:'verifyEmail', caption: 'Next')
 </div>
 
 <div r:context="initial" r:visibleWhen="#{mode=='enter-key'}" style='display:none'>
-	<div class="row">
-	    <div class="col-md-4">
-	      <div class="control-group">
-	        <label class="control-label">Please enter the 4 digit key sent in your email</label>
-	          <div class="form-group">
-	            <input type="text" class="form-control input-response" r:context="initial" r:name="key" r:textcase="none">
-	          </div>
-	          <input type="submit" r:context="initial" r:name="validateKey" class="btn btn-submit btn-primary">
-	      </div>
-	    </div>      
-  	</div>
+	<div class="form">
+		<div>Please enter the 6 digit key sent in your email</div>
+		@wx:text( context:'initial', name:'key')
+	</div>
+	@wx:button( context:'initial', name:'validateKey', caption: 'Next' )
 </div>
 
 <div r:context="initial" r:visibleWhen="#{mode=='select-permit-type'}" style='display:none'>
-	<div class="row">
-	    <div class="col-md-4">
-	      <div class="control-group">
-	        <label class="control-label">Please select the type of permit</label>
-	        <%permitTypes.each { o-> %>
-	        	<div><input type="radio" r:context="initial" r:name="permittype" value="${o.objid}">${o.title}</div>
-	        <%}%>
-	        <input type="submit" r:context="initial" r:name="showConfirm" class="btn btn-submit btn-primary" value="Submit">
-	      </div>
-	    </div>      
-  	</div>
+	<div class="subtitle">Select Type of Permit</div>
+	<div class="form">
+	    <%permitTypes.each { o-> %>
+	    	<div><input type="radio" r:context="initial" r:name="permittype" value="${o.objid}">&nbsp;${o.title}</div>
+	    <%}%>
+	</div>
+    @wx:button( context:'initial', name:'showConfirm', caption: 'Next' )
 </div>
 
-
 <div r:context="initial" r:visibleWhen="#{mode=='confirm'}" style='display:none'>
-	<div class="row">
-	    <div class="col-md-4">
-	      <div class="control-group">
-	        <label class="control-label">You are about to create an initial application.</label>
-	        <p>
-	        	Please read throughly the terms and conditions of the service.
-	        </p>  
-	        <p>
-	        	This application will require information of personal nature to carry out the transaction. This information 
-	        	will not be used for other purposes such as email or for advertisements. etc.etc. in violation of RA XXX or
-	        	the Data Privacy Act. Filipizen does not store any of this information. 
-	        	Your personal information will be stored in the database of the local government you 
-	        	are transacting. If you feel your rights are violated you may opt to cancel and not proceed.
-	        </p>
-
-	        <br>
-	        <input type="checkbox" r:context="initial" r:name="agreed">Yes I have read and agree to the terms and conditions 
-	        <br><br>
-	        <input type="submit" r:context="initial" r:name="cancelApp" value="Cancel">
-	        <input type="submit" r:context="initial" r:name="confirm" class="btn btn-submit btn-primary">
-	      </div>
-	    </div>      
+	<div class="subtitle">Please read throughly before proceeding</div>
+	<div class="form">
+		<p style="padding-bottom:10px;">
+			<label r:context="initial" style="font-weight:normal;">
+				This online service will require personal and sensitive personal information of the applicant, lot owner(s) 
+				and professionals involved in this transaction. In compliance with the Data Privacy Act, we are
+				securing your consent that you have been authorized by the aforementioned parties to act on their behalf.   
+				The data collected will be stored, processed and used for effectively carrying out legitimate transactions 
+				of the local government of #{orgname}. If you do not agree to these terms, you can cancel out by clicking the Cancel button. 
+				If you agree to these terms, tick on the checkbox and click Continue.
+	    	</label>
+    	</p>
+    	<input type="checkbox" r:context="initial" r:name="agreed"> Yes I have read and agree to the terms and conditions 
+	</div>	
+	<div>
+		@wx:button( context:'initial', name:'cancelApp', caption: 'Cancel' )
+		@wx:button( context:'initial', name:'confirm', caption: 'Continue' )
   	</div>
 </div>
 
 <div r:context="initial" r:visibleWhen="#{mode=='success'}" style='display:none'>
-	<div class="row">
-	    <div class="col-md-4">
-	      <div class="control-group">
-	        <label class="control-label">Please take note of 
+	<div class="subtitle">Application created</div>
+	<div class="form">
+		<p>Please take note of 
 	        the tracking number for this application. This will be your tracking reference for completing
-	        and follow up for this application.</label>
-	        <h2>
-	        	<label r:context="initial">#{appid}</label> 
-	        </h2>  
-	        <br>
-	        <br>
-	          <input type="submit" r:context="initial" r:name="proceed" class="btn btn-submit btn-primary" value="Proceed">
-	      </div>
-	    </div>      
-  	</div>
+	        and follow up for this application.
+		</p>
+		<h2>
+        	<label r:context="initial">#{appid}</label> 
+        </h2> 
+	</div>
+	@wx:button( context:'initial', name:'proceed', caption: 'Continue' )
 </div>
 

@@ -42,4 +42,11 @@ class OboOnlineService  {
         return info;
     }
     
+    @ProxyMethod
+    public def findProfessional( def o ) {
+        println "finding professional via prc no. ->"+o;
+        throw new Exception("Record not found");
+    }
+
+
 }

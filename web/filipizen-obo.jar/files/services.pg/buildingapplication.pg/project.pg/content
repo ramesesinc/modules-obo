@@ -1,4 +1,12 @@
 
+<style>
+  .caption-class { width:250px; }
+  .input-class { width:300px;}
+  .w700 { width:700px }
+  .w100 { width:100px }
+
+</style>
+
 <%
   def svc = SERVICE.lookup("OboMiscListService", "obo");
   def workTypes = svc.getWorkTypes();
@@ -17,27 +25,23 @@
       this.project;
 
       this.occupancytypes = listSvc.getOccupancyTypes();
-      this.getBldgTypes = function() {
-        if( this.project.occupancytypeid == null ) return []; 
-        return listSvc.getBldgTypes( {type: this.project.occupancytypeid } );
+      this.bldgTypes;
+
+      this.propertyChangeListener = {
+        "project.occupancytypeid" : function(o){
+          if(self.project.occupancytypeid == null ) {
+            self.bldgTypes = [];
+          }
+          else {
+            self.bldgTypes = listSvc.getBldgTypes( {type: self.project.occupancytypeid } );
+          }  
+        }
       }
 
-      this.worktypes = {};
-      <%workTypes.each {o->%>
-      this.worktypes.${o.objid.toLowerCase()} = {objid: '${o.objid}', description: '${o.description}', checked: false };
-      <%}%>
-
-
-      this.update = function() {
-        this.project.worktypes = [];
-        for( var prop in self.worktypes ) {
-          if( self.worktypes[prop].checked == true ) {
-              self.project.worktypes.push( self.worktypes[prop].objid );
-          }
-        }
+      this.updateProject = function() {
         this.project.appid = app.appid;
         svc.updateProjectInfo( this.project );
-        app.navigate("ancillarylist");
+        app.moveNextStep();
       }
 
       this.onload = function() {
@@ -46,86 +50,38 @@
           var p = this.project.worktypes[ i ];
           this.worktypes[ p.toLowerCase() ].checked = true;
         };        
-
+        app.updateStepNavbar();
       }
+
+      this.bldgTypes = [];
 
   });
 </script>
 
-<br>
+  <br>
 
   <legend>Project Details</legend>
   <div r:context="project" r:visibleWhen="#{error != null }">
      <label r:context="project" style="color:red;">#{error}</label>
   </div>
 
-  <div class="col-md-12">
-    <label class="typeLabel">Project Title</label> 
-    <input type="text" r:context="project" r:name="project.title" placeholder="Enter Project Title" style="width:500px;">
-  </div>
-  <br>
+  <div class="form">
+    @wx:text(caption:'Project Title', context:'project', name:'project.title', required: true, hint:'Enter Project Title', inputClass: '+w700')
+    @wx:text(caption:'Project Description', context:'project', name:'project.description', required: true, hint:'Enter Project Description', inputClass: '+w700')
+    @wx:combo(caption:'Primary Occupancy Type', context:'project', name:'project.occupancytypeid', inputClass: '+w700', required:true,
+    attrs:[allowNull:true, emptyText:'-', items:'occupancytypes', itemLabel:'description', itemKey:'objid']  )
 
-  <div class="col-md-12">
-    <label class="typeLabel">Project Description</label> 
-    <textarea r:context="project" r:name="project.description" placeholder="Enter Project Description" style="width:500px;" r:textCase="none"></textarea>
+    @wx:combo(caption:'Bldg Type', context:'project', name:'project.bldgtypeid', inputClass: '+w700', required:true,
+      attrs:[allowNull:true, emptyText:'-', items:'bldgTypes',itemLabel:'title', itemKey:'objid', depends: 'project.occupancytypeid' ]  )
+    
+    @wx:integer(caption:'No of Units', context:'project', name:'project.numunits', required: true, inputClass:'+w100')
+    @wx:decimal(caption:'Total Floor Area [sq.meter]', context:'project', name:'project.totalfloorarea', required: true, inputClass:'+w100')
+    @wx:decimal(caption:'Building Height [meter]', context:'project', name:'project.height', required: true, inputClass:'+w100')
+    @wx:decimal(caption:'Estimated Cost [Php]', context:'project', name:'project.estimatedcost', required: true, inputClass:'+w200')
+    @wx:date(caption:'Proposed Construction Date', context:'project', name:'project.dtproposedconstruction', required: true)
+    @wx:date(caption:'Expected Completion Date', context:'project', name:'project.dtproposedconstruction', required: true)
   </div>
+  @wx:button( caption: 'Next', context:'project', name: 'updateProject' )
 
-  <div class="col-md-12">
-    <label class="typeLabel">Occupancy Type</label> 
-    <select r:context="project" r:name="project.occupancytypeid" r:allowNull="true" r:emptyText="Select Occupancy Type" r:items="occupancytypes" r:itemLabel="description" style="width:500px;" r:itemKey="objid">
-    </select>
-  </div>
-  <br>
-  <div class="col-md-12">
-    <label class="typeLabel">Building Type</label> 
-    <select r:context="project" r:name="project.bldgtypeid" r:items="getBldgTypes()" r:allowNull="true" r:emptyText="Select Building Type" 
-    r:depends="project.occupancytypeid" r:itemLabel="title" class="smallInput selectbox" style="width:500px;" r:itemKey="objid">
-    </select>
-  </div>
-  <br>
 
-  <div class="col-md-12">
-    <label class="control-label">Work Type </label>
-    <div style="width:500px;padding-left:50px;">
-      <%workTypes.each { o->%>
-        <input type="checkbox" r:context="project" r:name="worktypes.${o.objid.toLowerCase()}.checked" />&nbsp;${o.description}<br>
-      <%}%>
-    </div>
-  </div>
-  <br>
-
-  <div class="col-md-12">
-    <label class="typeLabel">No. of Units</label>
-    <input type="text" r:context="project" r:name="project.numunits" r:datatype="integer" value="1"> 
-  </div>
-  
-  <div class="col-md-12">
-    <label class="control-label">Total Floor Area (sqm)</label>
-    <input type="text" placeholder="Square Meters"  r:context="project" r:name="project.totalfloorarea" r:datatype="decimal">
-  </div>
-
-  <div class="col-md-12">
-    <label class="control-label">Building Height (Meters)</label>
-    <input type="text" placeholder="Meters"  r:context="project" r:name="project.height" r:datatype="decimal">
-  </div>
-
-  <div class="col-md-12">
-    <label class="control-label">Total Estimated Cost P</label>
-    <input type="text" placeholder="Php" r:name="project.estimatedcost" r:datatype="decimal" r:context="project" format="#,##0.00">
-  </div>
-
-  <div class="col-md-12">
-    <label class="control-label">Proposed Date of Construction</label>
-    <input type="text"  r:datatype="date" r:context="project" r:name="project.dtproposedconstruction" placeholder="Choose Date" class="right">    
-  </div>
-
- <div class="col-md-12">
-    <label class="control-label">Expected Date of Completion</label>
-    <input type="text"  r:datatype="date" r:context="project" r:name="project.dtexpectedcompletion" placeholder="Choose Date" class="right">
- </div>
-
- <br>
- <br>
-
- <button r:context="project" r:name="update" class="btn btn-submit btn-primary">Next <i class="fa fa-angle-double-right"></i></button>
 

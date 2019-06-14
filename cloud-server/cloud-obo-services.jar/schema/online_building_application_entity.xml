@@ -2,7 +2,12 @@
 	<element tablename="online_building_application_entity">
 		<field name="objid" primary="true" prefix="OBENT" />
 		<field name="appid" required="true" />
-		<field name="role" required="true"/>
+
+		<field name="lotowner" />
+		<field name="owner" />
+		<field name="professional" />
+
+
 		<field name="profileid" />
 		<field name="profileno" />
 		<field name="entitytype" />		
@@ -23,32 +28,19 @@
 		<field name="address_subdivision" />
 		<field name="address_barangay_objid" />
 		<field name="address_barangay_name" required="true"/>
-		<field name="address_city" />
-		<field name="address_municipality" />
+		<field name="address_citymunicipality" />
 		<field name="address_province" />
-		<field name="ctc_objid" />
-		<field name="ctc_refno" />
-		<field name="ctc_dtissued" />
-		<field name="ctc_placeissued" />
-
-		<field name="prc_objid" />
-		<field name="prc_refno" />
-		<field name="prc_dtissued" />
-		<field name="prc_placeissued" />
-		<field name="prc_expirydate" />
-
-		<field name="ptr_objid" />
-		<field name="ptr_refno" />
-		<field name="ptr_dtissued" />
-		<field name="ptr_placeissued" />
-		<field name="ptr_expirydate" />
 
 		<field name="tin" />
 		<field name="email" />
 		<field name="mobileno" />
 		<field name="phoneno" />
 		<field name="profession" />
-		
+
+		<complex name="id" serializer="default" type="object" />
+		<complex name="prc" serializer="default" type="object" />
+		<complex name="ptr" serializer="default" type="object" />
+
 	</element>
 </schema>		
 

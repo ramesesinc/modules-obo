@@ -28,6 +28,7 @@
 				this.map[ id ].checked = true;
 				this.map[ id ].value = p.value; 
 			};
+			app.updateStepNavbar();			
 		}
 
 		this.saveAndContinue = function() {
@@ -38,22 +39,24 @@
 				}
 			}
 			svc.saveAccessories( { objid:app.appid, infos: infos} );
-			app.navigate("ancillarylist");
+			app.moveNextStep();
 		}
 
 	});
 </script>
-<br>
-<br>
+
 <legend>Accessories</legend>
 <p>Please specify if there are accessories added to the building</p>
-<div>
+<div style="padding-bottom:10px">
 	<%grps.each{ g,v->%>
-		<br>
-		<h2>${g == null ? '' : g}</h2>
+		<%if( g !=null) {%> 
+		<h2 style="padding-top:10px;">${g}</h2>
+		<%}%>
 	 	<%v.each { i->%>
 	 		<div>
-			 		&nbsp;&nbsp;<input type="checkbox" r:context="accessories" r:name="map.${ i.objid.toLowerCase() }.checked">&nbsp;${i.caption}
+			 		&nbsp;&nbsp;<input type="checkbox" r:context="accessories" r:name="map.${ i.objid.toLowerCase() }.checked">
+			 		&nbsp;<label style="text-transform:capitalize;font-weight:normal">${i.caption.toLowerCase()}</label>
+			 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 		<input type="text" r:context="accessories" r:name="map.${ i.objid.toLowerCase() }.value"
 			 			r:datatype="${i.datatype}"
 			 			r:depends="map.${ i.objid.toLowerCase() }.checked" 
@@ -65,8 +68,6 @@
  			</div> 
 	 	<%}%>
 	<%}%>
- 	
-	<br><br>
-	<button r:context="app" r:name="_appinfo" class="btn btn-submit btn-primary"><i class="fa fa-angle-double-left"></i> Back</button>
-	<button r:context="accessories" r:name="saveAndContinue" class="btn btn-submit btn-primary">Next <i class="fa fa-angle-double-right"></i></button>
+		
 </div>	
+@wx:button( caption:'Next', context:'accessories', name:'saveAndContinue' )

@@ -29,6 +29,7 @@
 
 	this.onload = function() {
 		self.fetchPermitList();
+		app.updateStepNavbar();		
 	}
 
 	this.saveAncillaryPermits = function() {
@@ -45,50 +46,75 @@
 		this.mode = "select";
 		self._controller.refresh();
 	}
-});
+
+	this.lookupProfessional = function( fldname ) {
+		var h = function(v) {
+		  	self.selectedItem[fldname] = v;
+		}
+		return new PopupOpener( "professional_lookup", { appid: app.appid, onselect: h }, 
+		  {width:'700', height:'300', title: 'Lookup Professional'}  )
+		}
+	});
+
+	this.lookupDesignProfessional = function() {
+		return self.lookupProfessional( "designprofessional" )
+	}
+
+	this.lookupSupervisor = function() {
+		return self.lookupProfessional( "supervisor" )
+	}
+
 </script>
 
 
 <h1>Ancillary Permits</h1>
 
 <div r:context="ancillarylist" r:visibleWhen="#{mode=='select'}">
-	<p>Select applicable ancillarylist permits for the project</p>
+	<p>Select applicable ancillary permits for the project</p>
 	<br>
 	<%list.each {o-> %>
 		<input type="checkbox" r:context="ancillarylist" r:name="permits.${o.objid}" r:checkedValue="1" r:uncheckedValue="0"/>&nbsp;&nbsp;${o.title}<br>
 		<%}%>
 	<br>
 	<br>
-	<button r:context="ancillarylist" r:name="saveAncillaryPermits" class="btn btn-submit btn-primary">
-		Next <i class="fa fa-angle-double-right"></i>
-	</button>
+	@wx:button( caption:'Next', context:'ancillarylist', name:'saveAncillaryPermits' )
 </div>
+
+<style>
+	table tbody a{font-size:14px;}
+</style>
 
 <div r:context="ancillarylist" r:visibleWhen="#{mode=='view'}">
 	<p>Ancillary Permits applied</p>
-	<table r:context="ancillarylist" r:items="permitList" r:varName="item" r:name="selectedItem" border="1">
+	<table r:context="ancillarylist" r:items="permitList" r:varName="item" r:name="selectedItem" border="1" width="100%" 
+		cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
-				<th>Permit Type</th>
-				<th>Status</th>
-				<th>Design Professional</th>
-				<th>Supervisor In Charge</th>
-				<th>View</th>
+				<td>
+					<label style="width:30%;margin-bottom:0px;vertical-align:top">Permit Type</label>
+					<label style="width:10%;margin-bottom:0px;vertical-align:top">Status</label>
+					<label style="width:19%;margin-bottom:0px;vertical-align:top">Design Professional</label>
+					<label style="width:19%;margin-bottom:0px;vertical-align:top">Supervisor In Charge</label>
+					<label style="width:10%;margin-bottom:0px;vertical-align:top">View</label>
+				</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>#{item.type.title}</td>
-				<td>#{item.state}</td>
-				<td>#{item.designprofessional.lastname}, #{item.designprofessional.firstname}</td>
-				<td>#{item.supervisor.lastname}, #{item.supervisor.firstname}</td>
 				<td>
-					<label r:context="ancillarylist">
-						<a href="#ancillary?reftype=#{item.type.objid}&refid=#{item.objid}">Edit</a>
+					<label style="width:30%;border-right:1px solid gray;margin-bottom:0px">#{item.type.title}</label>
+					<label style="width:10%;margin-bottom:0px">#{item.state}</label>
+					<label style="width:19%;margin-bottom:0px">
+						#{item.designprofessional.lastname}, #{item.designprofessional.firstname}
 					</label>
-					&nbsp;&nbsp;					
-					<label r:context="ancillarylist">
-						<a href="/obo/permitapplications/#{item.type.objid}?refid=#{item.objid}" target="#">Print Report</a>
+					<label style="width:19%;margin-bottom:0px">
+						#{item.supervisor.lastname}, #{item.supervisor.firstname}
+					</label>
+					<label style="margin-bottom:0px">
+						<%def backtarget = PAGE.parentPath + "?appid="+ PARAMS.appid + "#" + PAGE.pagename;%> 	
+						<a href="buildingapplication/ancillary?reftype=#{item.type.objid}&refid=#{item.objid}&backtarget=${backtarget}" >Edit</a>
+						&nbsp;&nbsp;					
+							<a href="/obo/permitapplications/#{item.type.objid}?refid=#{item.objid}" target="#{item.type.objid}_#{item.objid}:print">Print Report</a>
 					</label>
 				</td>
 			</tr>	

@@ -1,6 +1,0 @@
-{
-	title:"Continue Existing Application",
-	menu:"Continue Existing Application",
-	fragment:true,
-	sortorder:-1
-}

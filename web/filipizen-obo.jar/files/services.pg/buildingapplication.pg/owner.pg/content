@@ -1,11 +1,17 @@
+
+<style>
+  .caption-class { width:200px; }
+  .input-class { width:200px;}
+</style>
+
 <script type="text/javascript">
 \$put("owner", new function(){
 	var self = this;
+  this.menuOption = "0";
 	this.mode = "initial";
 	this.error;
 	this.idno;
   this.barangayList;
-  this.barangayid;
   this.owner;
 
 	var app = \$get("app").code;
@@ -27,138 +33,125 @@
 	    });
 	};
 
-	this.editOwner = function() {
-		self.mode = "edit-owner";
-	}
-
-	this.retry = function() {
-		self.error = null;
-		self.mode = "initial";
-	}
-
 	this.saveOwner = function() {
 		self.owner.appid = app.appid;
-    self.owner.nextstep = "professional";
-		app.service.saveOwner( self.owner );
-		app.navigate( "professional" );
+    app.service.saveOwner( self.owner );
+    app.moveNextStep();
 	}
 
-  this.propertyChangeListener = {
-    "barangayid" : function(o) {
-      var bgy = {};
-      for( var i =0; i<self.barangayList.length; i++ ) {
-        if( self.barangayList[i].objid == o ) {
-          bgy = self.barangayList[i];   
-          break;
-        }    
-      }
-      self.owner.address.barangay = bgy;  
-      console.log(self.owner.address.barangay);
-    },
-    "owner.resident": function(o) {
-      if(o == 0) {
-        self.barangayid = null;
-        self.owner.address.barangay.objid = null;
-      }
-      else {
-        self.owner.address.city = null;
-        self.owner.address.municipality = null;
-        self.owner.address.province = null;        
-      }    
-    }  
+  this.loadBarangay = function() {
+    //load barangay
+    var bsvc = Service.lookup("CloudPartnerService", "partner");
+    this.barangayList =  bsvc.getBarangayList( {orgcode: app.orgcode} ); 
   }
 
   this.onload = function() {
-    this.owner = appSvc.getOwner( {appid: app.appid} );
-    var bsvc = Service.lookup("CloudPartnerService", "partner");
-    this.barangayList = bsvc.getBarangayList( {orgcode: app.orgcode} );
-    if(!this.owner) {
-      this.owner = {address:{barangay:{}}, resident:1, ctc:{}};
+    self.owner = appSvc.getOwner( {appid: app.appid} );
+    if(!self.owner) {
+      self.owner = {address:{barangay:{}}, resident:1, ctc:{}};
+      self.owner.address.citymunicipality = app.orgname;    
+      self.owner.address.province = app.province;            
       self.mode = "initial";
     }
     else {
-      self.mode = "edit-owner";
-      if(this.owner.address.barangay.objid !=null) this.barangayid = this.owner.address.barangay.objid 
+      self.mode = "view-owner";
     }         
+    app.updateStepNavbar();
   }
 
+  this.doMenuOption = function() {
+    if( self.menuOption == "1" ) {
+      self.mode = "search-profile"
+    }
+    else {
+      self.editOwner();
+    }
+  }
+
+  this.editOwner = function() {
+    self.mode = "edit-owner";
+    self.loadBarangay();
+  }
+
+  this.viewInitial = function() {
+    self.error = null;
+    self.mode = "initial";
+  }
+
+  this.attachId = function() {
+    var h = function(v) {
+      self.owner.id = v;
+      self._controller.refresh();
+    }
+    return new PopupOpener( "id_entry", { onselect: h, entry: self.owner.id},  {width:'500', title:'Select Proof of Identity'} );
+  }
 
 });
 
- 
+ \$register( {id:'id_entry',  page:"${PAGE.parentPath}/id_entry", context: 'id_entry' } );
 </script>
 
-<style>
-  .form-horizontal .control-label {
-    width: 18%;
-  }
-</style>
-<br>
-<br>
-<legend>Building Owner Details</legend>
-<div r:context="owner" r:visibleWhen="#{error != null }">
+
+<legend>Building Applicant Details</legend>
+<div r:context="owner" r:visibleWhen="#{error != null }" style="display:none;">
 	<label r:context="owner" style="color:red;">#{error}</label>
 </div>
 
 <div r:context="owner" r:visibleWhen="#{mode=='initial'}" style='display:none'>
-	<div class="row">
-	    <div class="col-md-4">
-	      <div class="control-group">
-	        <label class="control-label">Enter the Owner Entity ID No and click Search</label>
-	          <div class="form-group">
-	            <input type="text" class="form-control input-response" r:context="owner" r:name="idno" r:textcase="none" 
-	            placeholder="Enter Unique ID No registered provided by the LGU">
-	          	<input type="submit" r:context="owner" r:name="findOwner" class="btn btn-submit btn-primary" value="Search">	            
-	          </div>
-	      </div>
-	    </div>      
-  	</div>
-  	
-	Forgot registration? <a href="/zz/entity/profilerecovery" target="owner">Click here</a>. <br>
-	Register this owner as new entity? <a r:context="owner" r:name="editOwner">Click here</a>
+   <p>Does the applicant already have a <b>Profile</b> registered with the LGU?</p>
+   <div class="form">
+   <input type="radio" r:context="owner" r:name="menuOption" value="1">&nbsp;Yes<br>
+   <input type="radio" r:context="owner" r:name="menuOption" value="0">&nbsp;No
+   </div>
+   @wx:button( caption:'Next', context:'owner', name:'doMenuOption')
+</div>
+ 
+<div r:context="owner" r:visibleWhen="#{mode=='search-profile'}" style='display:none'>
+    <p>Enter the profile no. and click search</p>
+    <div class="form">
+      @wx:text(caption:'Enter Profile No', context:'owner', name:'idno')
+    </div>
+    @wx:button( caption:'Back', context:'owner', name:'viewInitial')    
+    @wx:button( caption:'Search', context:'owner', name:'findOwner')
+</div>
+
+<div r:context="owner" r:visibleWhen="#{mode=='view-owner'}" style="display:none">
+    <div class="subtitle">Applicant Info</div>
+  <div class="form">
+    @wx:label(caption:'Profile No', context:'owner', expr:'#{owner.profileno}' )
+    @wx:label(caption:'Last Name', context:'owner', expr:'#{owner.lastname}' )
+    @wx:label(caption:'First Name', context:'owner', expr:'#{owner.firstname}' )
+    @wx:label(caption:'Middle Name', context:'owner', expr:'#{owner.middlename}' )
+    @wx:gender(caption:'Gender', context:'owner', name:'owner.gender', readonly:true )
+    @wx:address_nonlocal( caption: 'Address', context:'owner', name:'owner.address',  readonly:true )    
+    @wx:label(caption:'Email', context:'owner', expr:'#{owner.email }' )
+    @wx:label(caption:'Mobile No', context:'owner', expr:'#{owner.mobileno }' )
+    @wx:idproof( context:'owner', name:'owner.id', readonly:true )
+  </div>
+  @wx:button(caption:'Change Owner', context:'owner', name:'editOwner' )
 </div>
 
 <div r:context="owner" r:visibleWhen="#{mode=='edit-owner'}" style="display:none">
-  <p>Please fill in the necessary data below. Text marked with * are required fields. </p>
-      <br>
-        <form class="form-horizontal"> 
-        @obo:entityform( context:'owner', object: 'owner' ) 
-        </form>
-      <br>
-      <div class="form-group">
-        <label class="control-label col-sm-3"></label>
-        <div class="col-md-8"><input type="submit" r:context="owner" r:name="saveOwner" 
-        	class="btn-response btn btn-submit btn-primary" value="Next">
-        </div>
-      </div>               
-</div>
-
-<div r:context="owner" r:visibleWhen="#{mode=='show-owner'}" style='display:none'>
-	<label>Please confirm if information is correct.</label>
-	<div class="verify-info">
-        <div class="col-md-12">
-          <div class="row">
-              <dl class="dl-horizontal">
-              	<dt>ID No:</dt>
-                <dd>: <label r:context="owner">#{owner.idno}</label></dd>
-              	<dt>LGU Entity No:</dt>
-                <dd>: <label r:context="owner">#{owner.entityno}</label></dd>
-                <dt>First Name </dt>
-                <dd>: <label r:context="owner">#{owner.firstname}</label></dd>
-                <dt>Last Name </dt>
-                <dd>: <label r:context="owner">#{owner.lastname}</label></dd>
-                <dt>Middle Name</dt>
-                <dd>: <label r:context="owner">#{owner.middlename}</label></dd>
-                <dt>Address</dt>
-                <dd>: <label r:context="owner">#{owner.address.text}</label></dd>
-              </dl>
-
-              <br>
-              <button r:context="owner" r:name="retry" class="btn btn-submit btn-primary">Retry Search</button>&nbsp;
-              <button r:context="owner" r:name="saveOwner" class="btn btn-submit btn-primary">Next</button>
-          </div>
-        </div>
-    </div>
+  <div class="subtitle">
+  Please fill in the necessary data below. Text marked with * are required fields.
+  </div>
+  <div class="form">
+    @wx:label(caption:'Profile No', context:'owner', expr:'#{owner.profileno}', visibleWhen:'#{owner.profileno !=null }' )  
+    @wx:text(caption:'Last Name', context:'owner', name:'owner.lastname', required: true, hint:'Last Name')
+    @wx:text(caption:'First Name', context:'owner', name:'owner.firstname', required: true, hint:'First Name' )
+    @wx:text(caption:'Middle Name', context:'owner', name:'owner.middlename', required: true, hint:'Middle Name'  )
+    @wx:date(caption:'Birthdate', context:'owner', name:'owner.birthdate', required: true, hint:'Birth date in YYYY-MM-DD' )  
+    @wx:gender(caption:'Gender', context:'owner', name:'owner.gender', required:true )
+    @wx:radiolist( caption:'Resident', context:'owner', name:'owner.resident', required:true, items: [ [key:'1', value:'Resident'], [key:'0', value:'Non-resident' ] ] )
+    @wx:address_local( caption: 'Address', context:'owner', name:'owner.address', depends: 'owner.resident', visibleWhen: '#{ owner.resident == \'1\' }', required:true )
+    @wx:address_nonlocal( caption: 'Address', context:'owner', name:'owner.address', depends: 'owner.resident', visibleWhen: '#{ owner.resident == \'0\' }', required:true )
+    <br>
+    @wx:email(context:'owner', name:'owner.email')
+    @wx:mobile(context:'owner', name:'owner.mobileno')
+    <br>
+    @wx:idproof( context:'owner', name:'owner.id', action:'attachId' )
+    <br>
+    @wx:button( caption:'Next', context:'owner', name:'saveOwner')
 </div>
 
 

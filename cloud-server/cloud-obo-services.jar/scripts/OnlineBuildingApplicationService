@@ -27,63 +27,122 @@ public class OnlineBuildingApplicationService  {
 	@Service(dynamic=true)
 	def dynamicSvc;
 
-	
+
+
+	/* ----------------------------------------------------------------
+	/ This method takes care of updating the next step. It starts by 
+	/ knowing first current step. then based on conditions it will determine
+	/ the next step. For the steps, see getAppDSte
+	/------------------------------------------------------------------*/
+	@ProxyMethod
+	public def getAppSteps() {
+		def list = [];
+		list << [step:0, name:'initial', caption: "Initial"];
+		list << [step:1, name:'location', caption:'Location'];	
+		list << [step:2, name:'owner', caption:'Applicant'];
+		list << [step:3, name:'professional', caption:'Professionals'];
+		list << [step:4, name:'project', , caption:'Project Details'];
+		list << [step:5, name:'accessories',caption:'Accessories'];
+		list << [step:6, name:'ancillarylist', caption:'Ancillary Permits'];
+		list << [step:7, name:'requirementlist', caption:'Requirements'];	
+		return list;
+	}
+
+	@ProxyMethod
+	public def moveNextStep( def o ) {
+		if(!o.appid) throw new Exception("appid is required in determining the next step");
+		def app = appEm.find( [objid: o.appid] ).first();
+		def step = app.step;
+
+		//check if step is professional but does not have any entry
+		if( step == 3 ) {
+			def cnt = entityEm.find( [professional:1, appid: o.appid ] ).select("c:{COUNT(*)}").val();
+			if( cnt == 0 ) throw new Exception("Please add at least one professional");
+		}
+
+		def nextStep = step + 1;
+		if( nextStep == 2 ) {
+			if(app.ownerid) nextStep = 3; 
+		}
+		//compare next step if less than existing then you can update otherwise stay the same
+		if(app.step < nextStep ) {
+			appEm.find( [objid: o.appid] ).update([step: nextStep]);			
+		}
+		else {
+			nextStep = app.step;
+		}
+		return [step:nextStep];
+	}
+
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
 		o.objid = kg.generateAlphanumKey(o.orgcode+"-",8);
 		o.dtfiled = dateSvc.getServerDate();
+		o.step = 1;
 		def app = appEm.create( o );
 		/*
 		def emailSvc = dynamicSvc.lookup(o.orgcode+":EmailService");
 		app.tokenid = "MYTOKEN " + new UID();
 		emailSvc.send( app );
 		*/
-		updateNextStep( [appid: app.objid, nextstep: o.nextstep ] );
 		return app;
 	}
 
-	def saveEntity(def o, def role ) {
+	def formatAddress( def addr ) {
+		def lst = [];
+		lst << [addr.unitno, addr.bldgno, addr.bldgname ].findAll{it!=null}.join(" ");
+		lst << [addr.street, addr.subdivision ].findAll{it!=null}.join(",");
+		lst << [addr.barangay?.name, addr.citymunicipality, addr.province ].findAll{it!=null}.join(",");
+		return lst.findAll{it}.join(",");		
+	}
+
+	def formatPersonalName( def v ) {
+		return v.lastname + ", " + v.firstname + " " + ((v.middlename!=null)?v.middlename.substring(0,1)+'.': '');
+	}
+
+	//reusable method of saving entity
+	def saveEntity(def o) {
 		if(!o.objid) {
-			def v = [role:role, appid: o.appid];
+			def v = [appid: o.appid];
 			v.putAll(o);
+			if(o.owner == null) v.owner = 0;
+			if(o.lotowner == null) v.lotowner = 0;
+			if(o.professional == null) v.professional = 0;
+			v.name = formatPersonalName(o);
+			v.address.text = formatAddress(o.address);
 			return entityEm.create(v);
 		}
 		else {
+			o.name = formatPersonalName(o);
+			o.address.text = formatAddress(o.address);
 			return entityEm.find( [objid: o.objid] ).update( o );
 		}
 	}
 
-	@ProxyMethod
-	public void updateNextStep( def o ) {
-		if(!o.nextstep) return;
-		appEm.find( [objid: o.appid] ).update([step: o.nextstep]);
-	}
 
 	@ProxyMethod
-	public def findCurrentStep( def o ) {
-		appEm.find( [objid: o.appid ] ).select("step").first();
+	public def findCurrentInfo( def o ) {
+		appEm.find( [objid: o.appid ] ).select("orgcode,step").first();
 	}
 
+	//STEP 1.
 	@ProxyMethod
 	public def saveLocation(def o) {
 		def lotowner = o.remove("owner");
 		lotowner.appid = o.appid;
 		lotowner.entityid = lotowner.remove("objid");
-		def entityOwner = saveEntity(lotowner, "lotowner");
-
+		lotowner.lotowner = 1;
+		if( o.lotowned == "1" ) lotowner.owner = 1;
+		def entityOwner = saveEntity(lotowner);
 		o.ownerid = entityOwner.objid;
 		o.owner = [objid: o.ownerid ];
 		def loc = locationEm.create( o );
 		def  u = [locationid: loc.objid ];
 		if( o.lotowned == "1" ) {
 			u.ownerid = entityOwner.objid;
-			u.step = "professional";
 		}
-		else {
-			u.step = "owner";
-		}
-		appEm.find( [objid: o.appid ] ).update(u);		
+		appEm.find( [objid: o.appid ] ).update(u);
 		return u;
 	}
 
@@ -105,11 +164,12 @@ public class OnlineBuildingApplicationService  {
 		return list;
 	}
 
+	//STEP 2
 	@ProxyMethod
 	public def saveOwner(def o) {
-		def owner = saveEntity(o, "owner");
+		o.owner = 1;
+		def owner = saveEntity(o);
 		appEm.find([objid:o.appid]).update([ownerid: owner.objid]);
-		updateNextStep( o );
 	}
 
 	@ProxyMethod 
@@ -121,8 +181,8 @@ public class OnlineBuildingApplicationService  {
 
 	@ProxyMethod 
 	public def saveProfessional(def o) {
-		saveEntity(o, "professional");
-		updateNextStep( o );
+		o.professional = 1;
+		saveEntity(o);
 	}
 
 	@ProxyMethod 
@@ -137,13 +197,13 @@ public class OnlineBuildingApplicationService  {
 
 	@ProxyMethod
 	public def getProfessionalList( def o ) {
-		return entityEm.select("objid,lastname,firstname,middlename,profession,gender,address.*").find([appid: o.appid, role:'professional']).list();
+		def flds = "objid,name,profession,address.text,prc.*";
+		return entityEm.select(flds).find([appid: o.appid]).where('professional = 1').list();
 	}
 
 	@ProxyMethod
 	public def updateProjectInfo( def o  ) {
 		appEm.find( [objid: o.appid] ).update( o );
-		updateNextStep( o );
 	}
 
 	@ProxyMethod
@@ -152,7 +212,11 @@ public class OnlineBuildingApplicationService  {
 		return appEm.select(flds).find( [objid: o.appid] ).first();
 	}
 
-	
+
+	@ProxyMethod
+	public def getApplication(def o ) {
+		return appEm.find( [objid: o.objid] ).first();
+	}
 
 	@ProxyMethod
 	public def saveAncillaryPermits( def o ) {
@@ -188,7 +252,7 @@ public class OnlineBuildingApplicationService  {
 	@ProxyMethod
 	public void saveAncillaryPermit( def o ) {
 		if(!o.objid) throw new Exception("updateAncillary error. objid is required");
-		if(!o.infos) throw new Exception("updateAncillary error. infos is required");
+		//if(!o.infos) throw new Exception("updateAncillary error. infos is required");
 		o.designprofessionalid = o.designprofessional?.objid;
 		o.supervisorid = o.supervisor?.objid;
 		ancillaryEm.find( [objid: o.objid ] ).update( o );
@@ -198,7 +262,7 @@ public class OnlineBuildingApplicationService  {
 	@ProxyMethod
 	public def saveAccessories( def o ) {
 		if(!o.objid) throw new Exception("updateAccessories error. objid is required");
-		if(!o.infos) throw new Exception("updateAccessories error. infos is required");
+		if(!o.infos) return;
 		saveAppInfos( [parentid: o.objid, infos: o.infos ] );
 	}
 
@@ -212,7 +276,7 @@ public class OnlineBuildingApplicationService  {
 	//UTILITY METHODS FOR APP INFOS
 	private void saveAppInfos( o ) {
 		if(!o.parentid) throw new Exception("saveAppInfos error. parentid is required");
-		if(!o.infos) throw new Exception("saveAppInfos error. infos is required");
+		//if(!o.infos) throw new Exception("saveAppInfos error. infos is required");
 
 		//clear first existing infos.
 		appInfoEm.find([parentid: o.parentid]).delete();

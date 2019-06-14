@@ -1,29 +1,23 @@
  <%
-	def svc1 = SERVICE.lookup("OboMiscListService", "obo");
-	def items = svc1.getItems( [type: PARAMS.reftype] );
+	def svc = SERVICE.lookup("OboMiscListService", "obo");
+	def items = svc.getItems( [type: PARAMS.reftype] );
 	def grps = items.groupBy{ it.category };
 %>
+
 <script>
 \$put("ancillary", new function() {
 	
 	var self = this;
-	var app = \$get("app").code;
 
 	this.map = {};
 	<%items.each{ i-> %>
 	this.map.${ i.objid.toLowerCase() } = { name: "${i.objid}", objid:"${i.objid}", checked: false, caption: "${i.caption}", datatype:"${i.datatype}", unit:"${i.unit}" };<%}%>
 
-	
 	var svc = Service.lookup("OnlineBuildingApplicationService", "obo");
-	this.professionals;
 	this.permit;
 
 	this.onload = function() {
 		self.permit = svc.getAncillaryPermit( { objid: '${PARAMS.refid}' } );
-		self.professionals = svc.getProfessionalList({appid: app.appid });
-		self.professionals.each( function(x) {
-			x.expr = x.lastname + ', ' + x.firstname + ' (' + x.profession + ')'; 
-		});
 		for(var i = 0; i < self.permit.infos.length; i++) {
 			var p = self.permit.infos[ i ];
 			var id = p.name.toLowerCase();
@@ -43,27 +37,67 @@
 		m.designprofessional = self.permit.designprofessional;
 		m.supervisor = self.permit.supervisor;		
  		svc.saveAncillaryPermit( m );
-		app.navigate("ancillarylist");
+ 		alert("Document saved");
+		<%if( PARAMS.backtarget ) {%>
+		self.returnToMain();	
+		<%}%>
 	}
 
-	this.back = function() {
-		app.navigate( "ancillarylist"  );
+	this.lookupProfessional = function( fldname ) {
+		var h = function(v) {
+		  	self.permit[fldname] = v;
+		}
+		return new PopupOpener( "professional_lookup", { appid: self.permit.appid, onselect: h }, 
+		  {width:'700', height:'300', title: 'Lookup Professional'}  );
+		
 	}
+
+	this.lookupDesignProfessional = function() {
+		return self.lookupProfessional( "designprofessional" )
+	}
+
+	this.lookupSupervisor = function() {
+		return self.lookupProfessional( "supervisor" )
+	}
+
+	<%if( PARAMS.backtarget ) {%>
+	this.returnToMain = function() {
+		window.location.href = "${PARAMS.backtarget}#ancillarylist";
+	}
+	<%}%>
 
 });
+
+\$register( {id:'professional_lookup',	page:"${PAGE.parentPath}/professional_lookup", context: 'professional_lookup' } );
+
 </script>
 
+<style>
+	.caption-class { width:300px; }
+</style>
+
+<%if( PARAMS.backtarget ) {%>
+	<a href="#" r:context="ancillary" r:name="returnToMain"> << Back</a>
+<%}%>
 <h1>
 	<label r:context="ancillary">#{permit.type.title}</label>
 </h1>
 
-<br> 	
-Design Professional : 
-<select r:context="ancillary" r:name="permit.designprofessional"  r:itemLabel="expr" r:items="professionals" r:allowNull="true" 
-r:emptyText="Select Professional" ></select>
-<br> 
-Supervising in Charge Professional : 
-<select r:context="ancillary" r:name="permit.supervisor" r:items="professionals" r:itemLabel="expr" r:allowNull="true" r:emptyText="Select Professional" ></select> 
+	
+<div class="form">
+	<div>
+		<label class="caption-class">Design Professional</label>
+		<label r:context="ancillary" style="width:210px">#{ permit.designprofessional.name }</label>
+		<button r:context="ancillary" r:name="lookupDesignProfessional">Lookup</button>
+	</div>
+		
+	<div>
+		<label  class="caption-class">Supervisor In Charge Professional</label>
+		<label r:context="ancillary" style="width:210px">#{ permit.supervisor.name }</label>
+		<button r:context="ancillary" r:name="lookupSupervisor">Lookup</button>
+	</div>
+
+</div>
 
 <br><br><br> 	
 
@@ -90,6 +124,5 @@ Supervising in Charge Professional :
 <%}%>
 
 <br>
-<button r:context="ancillary" r:name="back">Back</button>
-<button r:context="ancillary" r:name="saveAndComplete">Save and Complete</button>
 
+@wx:button( caption:'Save And Complete', context:'ancillary', name:'saveAndComplete' )
