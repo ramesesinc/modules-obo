@@ -1,0 +1,228 @@
+<%def app = PARAMS.app; %>
+
+<table  width="100%" class="tblscope">
+	<tr>
+		<td colspan="9"><b>Scope of work</b></td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> New Construction</td>
+		<td colspan="4"><input type="checkbox"> Renovation </td>
+		<td colspan="2"><input type="checkbox"> Raising</td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> Erection</td>
+		<td colspan="4"><input type="checkbox"> Conversion</td>
+		<td colspan="2"><input type="checkbox"> Demolition</td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> Addition</td>
+		<td colspan="4"><input type="checkbox"> Repair</td>
+		<td colspan="2"><input type="checkbox"> Accessory Building/Structure <label class="underline2"></label></td>
+	</tr>
+	<tr class="last-td">
+		<td colspan="3"><input type="checkbox"> Alteration</td>
+		<td colspan="4"><input type="checkbox"> Moving</td>
+		<td colspan="2"><input type="checkbox"> Other (specify) <p class="underline"></p></td>
+	</tr>
+</table>
+
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td colspan="2" class="tdinside">
+				<p class="title"><b>Box 2 (To be accomplished by the design professional)</b></p>
+				<table class="boxpermit" align="center" width="100%">
+						<tr>
+							<td colspan="8"><b>Fixtures to be installed:</b></td>
+						</tr>
+						<tr class="fixture" >
+							<td>Qty.</td>
+							<td>New Fixtures</td>
+							<td>Existing Fixtures</td>
+							<td>Kind of Fixtures</td>
+							<td>Qty.</td>
+							<td>New Fixtures</td>
+							<td>Existing Fixtures</td>
+							<td style="width:200px">Kind of Fixtures</td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td class="fixture"><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Water Closet</td>
+							<td><label class="underline"></label></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Bidette</td>
+						</tr>
+						<tr class="fixture" >
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Floor Drain</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Laundry Trays</td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Lavatory</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Dental Cuspidor</td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Kitchen Sink</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Drinking Fountain</td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Faucet</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Bar Sink</td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Shower Head</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Soda Fountain Sink</td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Water Meter</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Labatory Sink</td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Grease Trap</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Sterilizer</td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Bath Tub</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Others (Specify)</td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Slop Sink</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><p class="underline"></p></td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Urinal</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><p class="underline"></p></td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Air Conditioning Unit</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><p class="underline"></p></td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"> Water Tank Reservoir</td>
+							<td><p class="underline"></p></td>
+							<td><input type="checkbox"></td>
+							<td><input type="checkbox"></td>
+							<td><p class="underline"></p></td>
+						</tr>
+						<tr class="fixture">
+							<td><p class="underline"></p></td>
+							<td colspan="3"> Total</td>
+							<td><p class="underline"></p></td>
+							<td colspan="3"> Total</td>
+						</tr>
+						<tr class="fixture">
+							<td colspan="8">
+								<table width="100%">
+									<tr class="fixture">
+										<td><input type="checkbox"> Water Distribution System</td>
+										<td><input type="checkbox"> Sewage System</td>
+										<td><input type="checkbox"> Septic Tank</td>
+										<td><input type="checkbox"> Storm Drainage System</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr class="last-td">
+							<td colspan="8" >Prepared by:</td>
+						</tr>
+				</table> 
+			</td>
+		</tr>
+		<tr>
+			<td class="tdinside">
+				<p class="title"><b>Box 3</b></p>
+				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app.designprofessional, role: 'MASTER PLUMBER' )
+			</td>
+			<td class="tdinside">
+				<p class="title"><b>Box 4</b></p>
+				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app.supervisor, role:'MASTER PLUMBER' )
+			</td>
+		</tr>
+		<!-- second row. 283 -->
+		<tr>
+			<td class="tdinside">
+				<p class="title"><b>Box 5</b></p>
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+			</td>
+			<td class="tdinside">
+				<p class="title"><b>Box 6</b></p>
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+

@@ -4,10 +4,11 @@ html, body {font-family: 'arial narrow';-ms-text-size-adjust: 100%;-webkit-text-
 h1{text-align: center;margin-top: 10px;font-size: 20pt;font-weight: 500;font-family: 'arial narrow'line-height: 35px;margin-bottom: 0px;color: #000000;}
 h2{text-align: center;font-size: 17pt}
 h3{text-align: center;text-transform: capitalize !important;margin: 0;font-weight: 600;font-family: 'arial narrow';font-size: 17px;line-height: 19px;}
-table tr td{height:23px;padding-left: 10px;padding-right: 10px;}
-table tr td input{margin-left: 40px !important;margin-bottom: 0px;}
+table tr td{padding-left: 10px;padding-right: 10px;}
+.tdinside {padding: 0px;}
+.tblscope{border-left: 1px solid #000000;border-right: 1px solid #000000;border-bottom: 1px solid #000000}
 input[type="checkbox"]{outline: 1px solid #000;}
-p {margin: 0px;text-transform: capitalize;}
+p {margin: 0px;}
 .data{font-size: 10pt;font-weight: bold;}
 .btn-print{width: 70px;height: 40px;color: #ffffff;background: #009688;font-size: 14px;outline: none;}
 .boxpermit{border: 1px solid #000;}
@@ -24,16 +25,16 @@ p {margin: 0px;text-transform: capitalize;}
 .nopaddingleft{padding-left: 0;}
 .nopaddingright{padding-right: 0;}
 .signature{padding:30px 70px 0px 70px;text-align: center}
-.signature label{width: 100%;border-bottom: 1px solid #000000;}
+.signature label{width: 100%;text-decoration: underline;}
 .page {background: white;padding:10px 20px 0px 20px;width: 100%}
 .barcode{float:right;text-align:center;height: 20px; padding-right:100px;position: relative;width:20%;}
 .header {display: inline-block;margin:0 auto;width:60%;}
 .formno {float:left;width:20%;}
 .header-container{width:100%;text-align:center;}
 table .last-td:last-child td {padding-bottom:10px;}
-@page {	 margin: 0;}
+@page {  margin: 0;}
 @media print {
-    .page {margin: 0;page-break-after: always;padding-top: 20px;}
+    .page {margin: 0;page-break-after: always;padding-top: 20px;margin-top:70px;}
     .data{font-size: 10pt;font-weight: bold;}
     .signature{padding: 30px 0px 0px 0px;}
     h1{font-size: 16pt;}
@@ -41,6 +42,9 @@ table .last-td:last-child td {padding-bottom:10px;}
     h3{font-size: 10pt;}
     button{display: none}
     table tr td input {margin-left: 10px !important;margin-bottom: 0px;}
+    .tdinside{padding-top: 5px;}
     .title{font-size: 10pt;}
     .wd{width: 552px;margin-right: 20px;}
+    .fixture {font-size: 8px;}
+    .signature{padding:20px 70px 0px 70px;}
 }

@@ -1,5 +1,6 @@
 <%def app = PARAMS.app; %>
 
+<button onclick="window.print();return false;" class="btn-print">Print</button>
 <div class="page">
 		<div class="header-container">
 		<div class="formno">
@@ -11,10 +12,10 @@
 			<h3>${app.org.province}</h3>
 			<br>
 			<h2>Office of the Building Official</h2>
-			<h1><b>Civil/Structural Permit</b></h1>
+			<h1><b>Electronics Permit Permit</b></h1>
 		</div>
 		<div class="barcode">
-			<h2 ><b>Tracking No. : <label>${app.objid}</label></b></h2>
+			<h2 ><b>Tracking No. : <label>1029289383</label></b></h2>
 		</div>
 	</div>	
 
@@ -99,7 +100,7 @@
 						<tr>
 							<td colspan="2"><label class="data">dd</label></td>
 							<td colspan="3" rowspan="2" class="tdborder"><label class="data">${app.owner.type}</label></td>
-							<td colspan="4" rowspan="2" class="tdborder"><label class="data">${app.occupancytype?.objid} - ${app.occupancytype?.description}</label></td>
+							<td colspan="4" rowspan="2" class="tdborder"><label class="data">${app.occupancytype.objid} - ${app.occupancytype.description}</label></td>
 						</tr>
 						<tr class="trborder">
 							<td colspan="9">By an enterprise</td>
@@ -156,7 +157,7 @@
 							<td colspan="4"><input type="checkbox"> Repair</td>
 							<td colspan="2"><input type="checkbox"> Accessory Building/Structure <label class="underline2"></label></td>
 						</tr>
-						<tr class="last-td">
+						<tr>
 							<td colspan="3"><input type="checkbox"> Alteration</td>
 							<td colspan="4"><input type="checkbox"> Moving</td>
 							<td colspan="2"><input type="checkbox"> Other (specify) <label class="underline"></label></td>
@@ -198,7 +199,7 @@
 									<td><input type="checkbox"> Walls</td>
 									<td><input type="checkbox"> Others(Specify) <label class="underline"></label></td>
 								</tr>
-								<tr class="last-td">
+								<tr>
 									<td colspan="3">Prepared by:</b></td>
 								</tr>
 							</tbody>
@@ -207,44 +208,45 @@
 			</tr>
 			<tr>
 				<td>
-					<br><br>
+					<br>
 					<p class="title"><b>Box 3</b></p>
 					<table class="boxpermit" style="width:99%" height="100%">
+						
 						<tbody>
 							<tr class="trborder">
 								<td colspan="2"><b>Design Professional, Plans and Specifications</b></td>
 							</tr>
 							<tr>
 								<td colspan="2" class="signature"><label>
-								${app.designprofessional.firstname} ${app.designprofessional.middlename}. ${app.designprofessional.lastname}
+								${app.designprofessional.firstname} ${app.designprofessional.middlename?.substring(0,1)}. ${app.designprofessional.lastname}
 								</label></td>
 							</tr>
 							<tr>
 								<td align="center" colspan="2"><p><b>Civil/Structutal Engineer</b></p> <p>(Signed and Sealed Over Printed Name)</p></td>
 							</tr>
 							<tr class="trborder">
-								<td align="center" colspan="2"><p>Date <label class="underline"></label></p></td>
+								<td align="center" colspan="2">Date <label class="underline"></label></td>
 							</tr>
 							<tr class="trborder">
-								<td colspan="2"><p>Address : <label class="data">${app.designprofessional.address.text}</label></p></td>
+								<td colspan="2">Address : <label class="data">${app.designprofessional.address.text}</label></td>
 							</tr>
 							<tr class="trborder">
 								<td>PRC No.: <label class="data">${app.designprofessional.prc.refno}</label></td>
-								<td class="tdborder"><p>Validity: <label class="data">${app.designprofessional.prc.validity}</label></p></td>
+								<td class="tdborder">Validity: <label class="data">${app.designprofessional.prc.validity}</label></td>
 							</tr>
 							<tr class="trborder">
 								<td>PTR No.: <label class="data">${app.designprofessional.ptr.refno}</label></td>
-								<td class="tdborder"><p>Date Issued <label class="data">${app.designprofessional.ptr.dtissued}</label></p></td>
+								<td class="tdborder">Date Issued <label class="data">${app.designprofessional.ptr.dtissued}</label></td>
 							</tr>
 							<tr class="trborder">
-								<td><p>Issued at: <label class="data">${app.designprofessional.ptr.placeissued}</label></p></td>
+								<td>Issued at: <label class="data">${app.designprofessional.ptr.placeissued}</label></td>
 								<td class="tdborder">TIN : <label class="data">${app.designprofessional.ptr.tin}</label></td>
 							</tr>
 						</tbody>
 					</table>
 				</td>
 				<td>
-					<br><br>
+					<br>
 					<p class="title"><b>Box 4</b></p>
 					<table class="boxpermit" style="width:100%" height="100%">
 						<tr class="trborder">
@@ -252,38 +254,38 @@
 						</tr>
 						<tr>
 							<td colspan="2" class="signature">
-								<label>${app.supervisor.firstname} ${app.supervisor.middlename}. ${app.supervisor.lastname}</label>
+								<label>${app.supervisor.firstname} ${app.supervisor.middlename?.substring(0,1)}. ${app.supervisor.lastname}</label>
 							</td>
 						</tr>
 						<tr>
 							<td align="center" colspan="2"><p><b>Civil/Structutal Engineer</b></p> <p>(Signed and Sealed Over Printed Name)</p></td>
 						</tr>
 						<tr class="trborder">
-							<td align="center" colspan="2"><p>Date <label class="underline"></label></p></td>
+							<td align="center" colspan="2">Date <label class="underline"></label></td>
 						</tr>
 						<tr class="trborder">
-							<td colspan="2"><p>Address: <label class="data">${app.supervisor.address.text}</label></p></td>
+							<td colspan="2">Address: <label class="data">${app.supervisor.address.text}</label></td>
 						</tr>
 						<tr class="trborder">
-							<td><p>PRC No. : <label class="data">${app.supervisor.prc.refno}</label></p></td>
-							<td class="tdborder"><p>Validity: <label class="data">${app.supervisor.prc.validity}</label></p></td>
+							<td>PRC No. : <label class="data">${app.supervisor.prc.refno}</label></td>
+							<td class="tdborder">Validity: <label class="data">${app.supervisor.prc.validity}</label></td>
 						</tr>
 						<tr class="trborder">
-							<td><p>PTR No. : <label class="data">${app.supervisor.ptr.refno}</p></td>
-							<td class="tdborder"><p>Date Issued: <label class="data">${app.supervisor.ptr.dtissued}</label></p></td>
+							<td>PTR No. : <label class="data">${app.supervisor.ptr.refno}</td>
+							<td class="tdborder">Date Issued: <label class="data">${app.supervisor.ptr.dtissued}</label></td>
 						</tr>
 						<tr class="trborder">
-							<td><p>Issued at: <label class="data">${app.supervisor.ptr.placeissued}</label></p></td>
-							<td class="tdborder"><p>TIN : <label class="data">${app.supervisor.ptr.tin}</label></p></td>
+							<td>Issued at: <label class="data">${app.supervisor.ptr.placeissued}</label></td>
+							<td class="tdborder">TIN : <label class="data">${app.supervisor.ptr.tin}</label></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 
-			<!-- second row. 283 -->
-						<tr>
+			<!-- second row -->
+			<tr>
 				<td>
-					<br><br><br><br><br>
+					<br><br><br><br>
 					<p class="title"><b>Box 5</b></p>
 					<table  class="boxpermit" style="width:99%" height="100%">
 						<tbody>
@@ -291,21 +293,21 @@
 								<td colspan="3"><b>BUILDING OWNER</b></td>
 							</tr>
 							<tr>
-								<td colspan="3" class="signature"><label class="data">${app.owner.firstname} ${app.owner.middlename}. ${app.owner.lastname}</label></td>
+								<td colspan="3" class="signature"><label class="data">${app.owner.firstname} ${app.owner.middlename.substring(0,1)}. ${app.owner.lastname}</label></td>
 							</tr>
 							<tr>
 								<td align="center" colspan="3"><p>(Signed Over Printed Name)</p></td>
 							</tr>
 							<tr class="trborder">
-								<td align="center" colspan="3"><p>Date <label class="underline"></label></p></td>
+								<td align="center" colspan="3">Date <label class="underline"></label></td>
 							</tr>
 							<tr class="trborder">
-								<td colspan="3"><p>Address:<label class="data"> ${app.owner.address.text}</label></p> </td>
+								<td colspan="3">Address: <label class="data"> ${app.owner.address.text}</label></td>
 							</tr>
 							<tr>
-								<td><p>C.T.C. No.</p></td>
-								<td class="tdborder"><p>Date Issued</p></td>
-								<td class="tdborder"><p>Place Issued</p></td>
+								<td>C.T.C. No.</td>
+								<td class="tdborder">Date Issued</td>
+								<td class="tdborder">Place Issued</td>
 							</tr>
 							<tr>
 								<td><label class="data"> ${app.owner.ctc.refno}</label></td>
@@ -315,8 +317,8 @@
 						</tbody>
 					</table>
 				</td>
-				<td>
-					<br><br><br><br><br>
+				<td style="padding:0px">
+					<br><br><br><br>
 					<p class="title"><b>Box 6</b></p>
 					<table  class="boxpermit" style="width:100%" height="100%">
 						<tbody>
@@ -324,21 +326,21 @@
 								<td colspan="3">WITH CONSENT: <b>LOT OWNER</b></td>
 							</tr>
 							<tr>
-								<td colspan="3" class="signature"><label class="data">${app.lotowner.firstname} ${app.lotowner.middlename}. ${app.lotowner.lastname}</label></td>
+								<td colspan="3" class="signature"><label class="data">${app.lotowner.firstname} ${app.lotowner.middlename.substring(0,1)}. ${app.lotowner.lastname}</label></td>
 							</tr>
 							<tr>
 								<td align="center" colspan="3"><p>(Signed Over Printed Name)</p></td>
 							</tr>
 							<tr class="trborder">
-								<td align="center" colspan="3"><p>Date </p><label class="underline"></label></td>
+								<td align="center" colspan="3">Date <label class="underline"></label></td>
 							</tr>
 							<tr class="trborder">
-								<td colspan="3"><p>Address : <label class="data"> ${app.lotowner.address.text}</p></label></td>
+								<td colspan="3">Address : <label class="data"> ${app.lotowner.address.text}</label></td>
 							</tr>
 							<tr>
-								<td><p>C.T.C. No.</p></td>
-								<td class="tdborder"><p>Date Issued</p></td>
-								<td class="tdborder"><p>Place Issued</p></td>
+								<td>C.T.C. No.</td>
+								<td class="tdborder">Date Issued</td>
+								<td class="tdborder">Place Issued</td>
 							</tr>
 							<tr>
 								<td><label class="data"> ${app.lotowner.ctc.refno}</label></td>
@@ -349,7 +351,6 @@
 					</table>
 				</td>
 			</tr>
-
 		</tbody>
 	</table>
 </div>
@@ -371,7 +372,7 @@
 						<td><input type="checkbox"> Civil/Structural Designs Computations, Plans and sepecification</td>
 						<td><input type="checkbox"> Cost Estimates</td>
 					</tr>
-					<tr class="last-td">
+					<tr>
 						<td><input type="checkbox"> Bill of Materials</td>
 						<td><input type="checkbox"> Others (Specify) <label class="underline"></label></td>
 					</tr>
@@ -427,18 +428,18 @@
 						<td><b>Permit is hereby issued subject to the following:</b></td>
 					</tr>
 					<tr>
-						<td style="padding-left:30px"><p>1. That under Article 1723 of the Civil Code of the Philippines, the engineer (or architect) who drew up the plans and
-						specifications for the building/structure is responsible for damages if within fifteen (15) years from the completion of the building/structure, the same should collapse due to defect in the plans or specifications or defects in the ground. The engineer or architect who supervises the construction shall be solidarily liable with the contractor should the edifice collapse due to defect in the construction or the use of inferior materials.</p><br>
-						<p>2. That the proposed civil/structural works shall be in accordance with the civil/structural plans filed with this office and in conformity with the latest National Structural Code of the Philippines, the National Building Code and its IRR.</p><br>
-						<P>3. That prior to any construction activity, a duly accomplished prescribed "Notice of Construction" shall be submitted to the Office of the Building Official.</P><br>
-						<p>4. That upon completion of the construction, the licensed full-time inspector and supervisor/in-charge of construction works shall submit the entry to the logbook duly signed and sealed to the Building Official including as-built plans and other documents and shall also accomplish and submit a certificate of completion stating that the civil/structural works conform to the provisions of the National Structural Code of the Philippines, the National Building Code and its IRR.</p><br>
-						<p>5. That this permit is null and void unless accompanied by the building permit.</p></td>
+						<td style="padding-left:30px">1. That under Article 1723 of the Civil Code of the Philippines, the engineer (or architect) who drew up the plans and
+						specifications for the building/structure is responsible for damages if within fifteen (15) years from the completion of the building/structure, the same should collapse due to defect in the plans or specifications or defects in the ground. The engineer or architect who supervises the construction shall be solidarily liable with the contractor should the edifice collapse due to defect in the construction or the use of inferior materials.
+						<br><br>2. That the proposed civil/structural works shall be in accordance with the civil/structural plans filed with this office and in conformity with the latest National Structural Code of the Philippines, the National Building Code and its IRR.
+						<br><br>3. That prior to any construction activity, a duly accomplished prescribed "Notice of Construction" shall be submitted to the Office of the Building Official.
+						<br><br>4. That upon completion of the construction, the licensed full-time inspector and supervisor/in-charge of construction works shall submit the entry to the logbook duly signed and sealed to the Building Official including as-built plans and other documents and shall also accomplish and submit a certificate of completion stating that the civil/structural works conform to the provisions of the National Structural Code of the Philippines, the National Building Code and its IRR.
+						<br><br>5. That this permit is null and void unless accompanied by the building permit.</td>
 					</tr>
 					<tr style="height:80px;">
 						<td><b>Permit Issued by:</b></td>
 					</tr>
 					<tr>
-						<td align="center"><b>Local building official</b><p>(Signature over Printed Name)</p><p>Date</p><label class="underline"></label></td>
+						<td align="center"><b>Local building official</b><br>(Signature over Printed Name)<br>Date <label class="underline"></label></td>
 					</tr>
 				</table>
 			</td>
@@ -447,4 +448,56 @@
 
 </div>
 
+
+
+
+<style type="text/css">
+
+
+table {border-collapse: collapse;font-size: 12px; margin: 0; padding: 0;}
+* {box-sizing: border-box;-moz-box-sizing: border-box;}
+html, body {font-family: 'arial narrow';-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;-webkit-font-smoothing: antialiased;text-transform: uppercase;color: #000000;font-size: 14px;}
+h1{text-align: center;margin-top: 10px;font-size: 20pt;font-weight: 500;font-family: 'arial narrow'line-height: 35px;margin-bottom: 0px;color: #000000;}
+h2{text-align: center;font-size: 17pt}
+h3{text-align: center;text-transform: capitalize !important;margin: 0;font-weight: 600;font-family: 'arial narrow';font-size: 17px;line-height: 19px;}
+table tr td{height: 20px;padding-left: 10px;padding-right: 10px;}
+table tr td input{margin-left: 40px !important;margin-bottom: 0px;}
+input[type="checkbox"]{outline: 1px solid #000;}
+p {margin: 0px;}
+.data{font-size: 10pt;font-weight: bold;}
+.btn-print{width: 70px;height: 40px;color: #ffffff;background: #009688;font-size: 14px;outline: none;}
+.boxpermit{border: 1px solid #000;}
+.wd{width: 692px;}
+.fwd{width: 1386px;}
+.wrap{margin-right: 60px !important;}
+.tbbody{margin-top: 10px;margin-bottom: 10px;}
+.trborder{border-bottom: 1px solid #000000;}
+.trlocation{height: 30px;}
+.tdborder{border-left: 1px solid #000;}
+.title{margin-top: 5px;margin-bottom: 5px;font-size: 10pt;}
+.underline {border-bottom: 1px solid #000000;font-weight: normal;margin-bottom: 0px; text-align: center;}
+.smallBox>tbody>tr>td{width: 23px;height: 23px;padding:0px;text-align: center;    border: solid 1px #000000}
+.nopaddingleft{padding-left: 0;}
+.nopaddingright{padding-right: 0;}
+.signature{padding:30px 70px 0px 70px;text-align: center}
+.signature label{width: 100%;border-bottom: 1px solid #000000;}
+.page {background: white;padding:10px 20px 0px 20px;width: 100%}
+.barcode{float:right;text-align:center;height: 20px; padding-right:100px;position: relative;width:20%;}
+.header {display: inline-block;margin:0 auto;width:60%;}
+.formno {float:left;width:20%;}
+.header-container{width:100%;text-align:center;}
+@page {	 margin: 0;}
+@media print {
+    .page {margin: 0;page-break-after: always;padding-top: 20px;}
+    .data{font-size: 10pt;font-weight: bold;}
+    .signature{padding: 30px 0px 0px 0px;}
+    h1{font-size: 16pt;}
+    h2{font-size: 12pt;}
+    h3{font-size: 10pt;}
+    button{display: none}
+    table tr td input {margin-left: 10px !important;margin-bottom: 0px;}
+    .title{font-size: 10pt;}
+    .wd{width: 552px;margin-right: 20px;}
+}
+</style>
 

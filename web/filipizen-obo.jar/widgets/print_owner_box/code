@@ -1,0 +1,33 @@
+<%
+	def owner = OPTIONS.owner;
+	if( owner == null ) owner  = [:];
+%>
+<table  class="boxpermit" style="width:99%" height="100%">
+	<tbody>
+		<tr>
+			<td colspan="3">${OPTIONS.title}</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="signature"><label class="data">${owner?.firstname} ${owner?.middlename}. ${owner?.lastname}</label></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="3"><p>(Signed Over Printed Name)</p></td>
+		</tr>
+		<tr class="trborder">
+			<td align="center" colspan="3"><p>Date <label class="underline"></label></p></td>
+		</tr>
+		<tr class="trborder">
+			<td colspan="3"><p>Address:<label class="data"> ${owner?.address?.text}</label></p> </td>
+		</tr>
+		<tr>
+			<td><p>C.T.C. No.</p></td>
+			<td class="tdborder"><p>Date Issued</p></td>
+			<td class="tdborder"><p>Place Issued</p></td>
+		</tr>
+		<tr>
+			<td><label class="data"> ${owner?.ctc?.refno}</label></td>
+			<td class="tdborder"><label class="data"> ${owner?.ctc?.dtissued}</label></td>
+			<td class="tdborder"><label class="data"> ${owner?.ctc?.placeissued}</label></td>
+		</tr>
+	</tbody>
+</table>

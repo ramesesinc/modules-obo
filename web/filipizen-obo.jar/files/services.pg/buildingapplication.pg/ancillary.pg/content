@@ -108,7 +108,8 @@
 	<h2>${g==null?'':g}</h2>
  	<%v.each { i->%>
  		<div>
-		 		&nbsp;&nbsp;<input type="checkbox" r:context="ancillary" r:name="map.${ i.objid.toLowerCase() }.checked">&nbsp;${i.caption}
+		 		&nbsp;&nbsp;<input type="checkbox" r:context="ancillary" r:name="map.${ i.objid.toLowerCase() }.checked">
+		 		&nbsp;<label style="text-transform:capitalize;font-weight:normal">${i.caption.toLowerCase()}</label>
 		 		<span r:context="ancillary" r:visibleWhen="#{map.${ i.objid.toLowerCase() }.datatype != 'boolean'}">
 			 		<input type="text" r:context="ancillary" r:name="map.${ i.objid.toLowerCase() }.value"
 			 			r:datatype="${i.datatype}"

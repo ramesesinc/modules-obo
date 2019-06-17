@@ -1,0 +1,60 @@
+<% 
+def prof = OPTIONS.professional;
+if(prof == null ) prof = [:];
+%>
+
+<table class="boxpermit" style="width:99%" height="100%">
+	<tbody>
+		<tr class="trborder">
+			<td colspan="3"><b>${OPTIONS.title}</b></td>
+		</tr>
+		<tr>
+			<td colspan="3" class="signature"><label>
+			${prof?.firstname} ${prof?.middlename}. ${prof?.lastname}
+			</label></td>
+		</tr>
+		<tr>
+			<td align="center" colspan="3"><p><b>${OPTIONS.role}</b></p> <p>(Signed and Sealed Over Printed Name)</p></td>
+		</tr>
+		<tr class="trborder">
+			<td align="center" colspan="3"><p>Date <label class="underline"></label></p></td>
+		</tr>
+		<tr class="trborder">
+			<td colspan="3"><p>Address : <label class="data">${prof?.address?.text}</label></p></td>
+		</tr>
+		<tr class="trborder">
+			<td>PRC No.: <label class="data">${prof?.prc?.refno}</label></td>
+			<td class="tdborder" colspan="2"><p>Validity: <label class="data">${prof?.prc?.validity}</label></p></td>
+		</tr>
+
+		<%if(! OPTIONS.role.equalsIgnoreCase('architect')) {%>
+			<tr class="trborder">
+				<td>PTR No.: <label class="data">${prof?.ptr?.refno}</label></td>
+				<td class="tdborder" colspan="2"><p>Date Issued <label class="data">${prof?.ptr?.dtissued}</label></p></td>
+			</tr>
+			<tr class="trborder">
+				<td><p>Issued at: <label class="data">${prof?.ptr?.placeissued}</label></p></td>
+				<td class="tdborder" colspan="2">TIN : <label class="data">${prof?.ptr?.tin}</label></td>
+			</tr>
+		<%}%>
+
+		<%if(OPTIONS.role.equalsIgnoreCase('architect')) {%>
+			<tr class="trborder">
+				<td>IAPOA No. <label class="data">${prof?.ptr?.refno}</label></td>
+				<td class="tdborder">O.R.No.</td>
+				<td class="tdborder"><p>Date Issued <label class="data">${prof?.ptr?.dtissued}</label></p></td>
+			</tr>
+			<tr class="trborder">
+				<td><p>PTR No.: <label class="data">${prof?.ptr?.placeissued}</label></p></td>
+				<td class="tdborder"><p>Place Issued</p></td>
+				<td class="tdborder">Date Issued <label class="data">${prof?.ptr?.tin}</label></td>
+			</tr>
+			<tr>
+				<td>TIN</td>
+				<td colspan="2"></td>
+			</tr>
+
+		<%}%>
+
+	</tbody>
+</table>

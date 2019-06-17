@@ -1,6 +1,6 @@
 <schema adapter="obodb">
 
-	<element tablename="obo_subapplication_type">
+	<element tablename="obo_variable_type">
 		<field name="objid" primary="true" caption="Name" visible="true"/>
 		<field name="title" caption="Title" searchable="true"/>
 		<field name="required" caption="Required" type="integer" />	

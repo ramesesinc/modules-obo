@@ -1,0 +1,93 @@
+<%def app = PARAMS.app; %>
+
+<table  width="100%" class="tblscope">
+	<tr>
+		<td colspan="9"><b>Scope of work</b></td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> New Construction</td>
+		<td colspan="4"><input type="checkbox"> Renovation</td>
+		<td colspan="2"><input type="checkbox"> Raising</td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> Erection</td>
+		<td colspan="4"><input type="checkbox"> Conversion</td>
+		<td colspan="2"><input type="checkbox"> Demolition</td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> Addition</td>
+		<td colspan="4"><input type="checkbox"> Repair</td>
+		<td colspan="2"><input type="checkbox"> Accessory Building/Structure <label class="underline2"></label></td>
+	</tr>
+	<tr class="last-td">
+		<td colspan="3"><input type="checkbox"> Alteration</td>
+		<td colspan="4"><input type="checkbox"> Moving</td>
+		<td colspan="2"><input type="checkbox"> Other (specify) <label class="underline"></label></td>
+	</tr>
+</table>
+
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td colspan="2" class="tdinside">
+				<p class="title"><b>Box 2 (To be accomplished by the design professional)</b></p>
+				<table class="boxpermit" align="center" width="100%">
+					<tbody>
+						<tr>
+							<td colspan="3"><b>Nature of Civil / Structural Works:</b></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"> Staking</td>
+							<td><input type="checkbox"> Erection/Lifting</td>
+							<td><input type="checkbox"> Prestress Works</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"> Excavation</td>
+							<td><input type="checkbox"> Concrete Framing</td>
+							<td><input type="checkbox"> Material testing</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"> Soil Stabilization</td>
+							<td><input type="checkbox"> Structural Steel Framing</td>
+							<td><input type="checkbox"> Steel Towers</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"> Piling Works</td>
+							<td><input type="checkbox"> Slabs</td>
+							<td><input type="checkbox"> Tanks</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"> Foundation</td>
+							<td><input type="checkbox"> Walls</td>
+							<td><input type="checkbox"> Others(Specify) <label class="underline"></label></td>
+						</tr>
+						<tr class="last-td">
+							<td colspan="3">Prepared by:</b></td>
+						</tr>
+					</tbody>
+				</table> 
+			</td>
+		</tr>
+		<tr>
+			<td class="tdinside">
+				<p class="title"><b>Box 3</b></p>
+				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app.designprofessional, role: 'Civil/Structutal Engineer' )
+			</td>
+			<td class="tdinside">
+				<p class="title"><b>Box 4</b></p>
+				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app.supervisor, role:'Civil/Structutal Engineer' )
+			</td>
+		</tr>
+		<!-- second row. 283 -->
+		<tr>
+			<td class="tdinside">
+				<p class="title"><b>Box 5</b></p>
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+			</td>
+			<td class="tdinside">
+				<p class="title"><b>Box 6</b></p>
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+			</td>
+		</tr>
+	</tbody>
+</table>

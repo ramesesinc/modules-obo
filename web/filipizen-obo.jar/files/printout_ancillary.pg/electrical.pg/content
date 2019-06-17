@@ -1,0 +1,112 @@
+<%def app = PARAMS.app; %>
+<table  width="100%" class="tblscope">
+	<tr>
+		<td colspan="9"><b>Scope of work</b></td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> New Installation</td>
+		<td colspan="3"><input type="checkbox"> Reconnection of service entrance</td>
+		<td colspan="3"><input type="checkbox"> relocation service etrance</td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> Annual inspection</td>
+		<td colspan="3"><input type="checkbox"> separation of service entrance</td>
+		<td colspan="3"><input type="checkbox"> Others (specify) <label class="underline"></label></td>
+	</tr>
+	<tr class="trborder" >
+		<td colspan="4"><input type="checkbox"> Temporary</td>
+		<td colspan="5"><input type="checkbox"> Upgrade of service entrace</td>
+	</tr>
+	<tr class="trborder">
+		<td colspan="9" align="center"><b>Summary of electrical load/capacities applied for</b></td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center">Total Connected Load</td>
+		<td colspan="3" class="tdborder" align="center">Total Transformer Capacity</td>
+		<td colspan="3" class="tdborder" align="center">Total Generator/Ups Capacity</td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center"><label class="underline"></label>kVA</td>
+		<td colspan="3" class="tdborder" align="center"><label class="underline"></label>kVA</td>
+		<td colspan="3" class="tdborder" align="center"><label class="underline"></label>kVA</td>
+	</tr>	
+</table>
+
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td colspan="2" class="tdinside">
+				<p class="title"><b>Box 2 (To be accomplished by the design professional)</b></p>
+				<table class="boxpermit" align="center" width="100%">
+					<tbody>
+						<tr class="trborder">
+							<td colspan="3"><b>Design Professional, Plans and Specifications</b></td>
+						</tr>
+						<tr>
+							<td align="center" rowspan="4"><label></label><p><b>Professional Electrical Engineer</b></p> <p>(Signed and Sealed Over Printed Name)</p></td>
+						</tr>
+						<tr class="trborder">
+							<td class="tdborder">PRC No.</td>
+							<td class="tdborder">Validity</td>
+						</tr>
+						<tr class="trborder">
+							<td class="tdborder">PTR No.</td>
+							<td class="tdborder">Daye Issued</td>
+						</tr>
+						<tr class="trborder">
+							<td class="tdborder">Issued at</td>
+							<td class="tdborder">TIN</td>
+						</tr>
+					</tbody>
+				</table> 
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="tdinside">
+				<p class="title"><b>Box 3</b></p>
+				<table class="boxpermit" width="100%">
+					<tbody>
+						<tr>
+							<td colspan="3"><b>Supervisor / In-charge of electrical works</b></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"> Professional Electrical Engineer</td>
+							<td><input type="checkbox">  Registered Electrical Engineer</td>
+							<td><input type="checkbox">  Registered Master Electrician</td>
+						</tr>
+						<tr class="trborder" style="height:170px;">
+							<td colspan="3" align="center"><label></label><br><p>(Signed and Sealed Over Printed Name)</p></td>
+						</tr>
+						<tr class="trborder">
+							<td>PRC No.</td>
+							<td colspan="2" class="tdborder">Validity</td>
+						</tr>
+						<tr class="trborder">
+							<td>PTR No.</td>
+							<td colspan="2" class="tdborder">Date Issued</td>
+						</tr>
+						<tr class="trborder">
+							<td>Issued at</td>
+							<td colspan="2" class="tdborder">TIN</td>
+						</tr>
+						<tr>
+							<td colspan="3">Address</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+
+		<!--second row. 283 -->
+		<tr>
+			<td class="tdinside">
+				<p class="title"><b>Box 5</b></p>
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+			</td>
+			<td class="tdinside">
+				<p class="title"><b>Box 6</b></p>
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+			</td>
+		</tr>
+	</tbody>
+</table>

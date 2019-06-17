@@ -1,0 +1,117 @@
+<%def app = PARAMS.app; %>
+<table  width="100%" class="tblscope">
+	<tr>
+		<td colspan="9"><b>Scope of work</b></td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> New Construction</td>
+		<td colspan="4"><input type="checkbox"> Renovation</td>
+		<td colspan="2"><input type="checkbox"> Raising</td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> Erection</td>
+		<td colspan="4"><input type="checkbox"> Conversion</td>
+		<td colspan="2"><input type="checkbox"> Demolition</td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> Addition</td>
+		<td colspan="4"><input type="checkbox"> Repair</td>
+		<td colspan="2"><input type="checkbox"> Accessory Building/Structure <label class="underline2"></label></td>
+	</tr>
+	<tr class="last-td">
+		<td colspan="3"><input type="checkbox"> Alteration</td>
+		<td colspan="4"><input type="checkbox"> Moving</td>
+		<td colspan="2"><input type="checkbox"> Other (specify) <label class="underline"></label></td>
+	</tr>
+</table>
+
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td colspan="2" class="tdinside">
+				<p class="title"><b>Box 2 (To be accomplished by the design professional)</b></p>
+				<table class="boxpermit" align="center" width="100%">
+					<tbody>
+						<tr>
+							<td colspan="4"><b>ARCHITECTURAL FACILITIES AND OTHER FEATURES PURSUANT TO BATAS PAMBANSA BILANG 344. REQUIRING CERTAIN BUILDINGS, INSTITUTIONS, ESTABLISHMENTS AND PUBLIC UTILITIES TO INSTALL FACILITIES AND OTHER DEVICES.</b></td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"> STAIRS</td>
+							<td><input type="checkbox"> WASH ROOMS AND TOILETS</td>
+							<td><input type="checkbox"> SWITCHES, CONTROL, BUZZERS </td>
+							<td><input type="checkbox"> DRINKING FOUNTAINS </td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"> WALKWAYS</td>
+							<td><input type="checkbox"> LIFT/ELEVATORS</td>
+							<td><input type="checkbox"> HANDRAILS </td>
+							<td><input type="checkbox"> PUBLIC TELEPHONES</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"> CORRIDORS</td>
+							<td><input type="checkbox"> RAMPS</td>
+							<td><input type="checkbox"> THRESHOLDS </td>
+							<td><input type="checkbox"> SEATING ACCOMODATONS</td>
+						</tr>
+						<tr class="trborder">
+							<td><input type="checkbox"> DOORS ENTANCES & THRESHOLDS</td>
+							<td><input type="checkbox"> PARKING AREAS</td>
+							<td><input type="checkbox"> FLOOR FINISHES</td>
+							<td><input type="checkbox"> OTHERS (Specify)</td>
+						</tr>
+						<tr>
+							<td colspan="2">2. PERCENTAGE OF SITE OCCUPANCY </td>
+							<td colspan="2" class="tdborder">3. CONFORMANCE TO FIRE CODE OF THE PHILIPPINES (F. D. 1185) OTHERS (Specif</td>
+						</tr>
+						<tr>
+							<td colspan="2" >PERCENTAGE OF BUILDING FOOTPRINT ________________%</td>
+							<td class="tdborder"><input type="checkbox" >  NUMBER AND WIDTH OF EXIT DOORS</td>
+							<td><input type="checkbox"> FIRE WALLS</td>
+						</tr>
+						<tr>
+							<td colspan="2">PERCENTAGE OF IMPERVIVOUS SURFACE AREA ______________% </td>
+							<td class="tdborder"><input type="checkbox"> WIDTH OF CORRIDORS</td>
+							<td><input type="checkbox"> FIRE FIGHTING AND SAFETY FACILITIES</td>
+						</tr>
+						<tr>
+							<td colspan="2">DETECTORS PERCENTAGE OF UNPAVED SURFACE AREA _________%  </td>
+							<td class="tdborder"><input type="checkbox"> DISTANCE TO FIRE EXITS</td>
+							<td><input type="checkbox"> EMERGENCY LIGHTS</td>
+						</tr>
+						<tr class="last-td">
+							<td colspan="2">OTHERS (Specify) __________</td>
+							<td class="tdborder"><input type="checkbox"> SMOKE DETECTORS</td>
+							<td><input type="checkbox"> OTHERS (Specify</td>
+						</tr>
+					</tbody>
+				</table> 
+			</td>
+		</tr>
+		<tr>
+			<td class="tdinside">
+				<p class="title"><b>Box 3</b></p>
+				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app.designprofessional, role:'ARCHITECT' )
+			</td>
+			<td class="tdinside">
+				<p class="title"><b>Box 4</b></p>
+				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app.supervisor, role: 'ARCHITECT' )
+			</td>
+		</tr>
+		<!-- second row. 283 -->
+		<tr>
+			<td class="tdinside">
+				<p class="title"><b>Box 5</b></p>
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+			</td>
+			<td class="tdinside">
+				<p class="title"><b>Box 6</b></p>
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+
+

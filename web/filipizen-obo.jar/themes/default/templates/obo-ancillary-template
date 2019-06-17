@@ -1,0 +1,174 @@
+<%
+	def svc = SERVICE.lookup("OnlineBuildingApplicationService", "obo");
+	def app = svc.getAncillaryPermit( [objid: PARAMS.refid] );
+	app.org = [ name:'Legazpi City', formalname: 'City of Legazpi', province: 'Province of Albay'];
+	def parent = svc.getApplication([objid: app.appid ] );
+	app.putAll( parent );
+	app.lotowner = [address: [:], ctc:[:], prc:[:], ptr:[:]  ] ;
+	PARAMS.app = app;
+%>
+
+<!DOCTYPE html>
+<html lang="en"> 
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link href="/themes/default/css/obo-ancillary.css?ver=1" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+	<button onclick="window.print();return false;" class="btn-print">Print</button>
+		<div class="page">
+			<div class="header-container">
+				<div class="formno">
+					<p>${PAGE.formno}</p>
+				</div>
+				<div class="header">
+					<h3>Republic of the Philippines</h3>
+					<h3>${app.org.formalname}</h3>
+					<h3>${app.org.province}</h3>
+					<br>
+					<h2>Office of the Building Official</h2>
+					<h1><b>${PAGE.title}</b></h1>
+				</div>
+				<div class="barcode">
+					<h2 ><b>Tracking No. : <label>${app.objid}</label></b></h2>
+				</div>
+			</div>	
+			<br><br>
+			<table align="center" width="100%">
+				<tr>
+					<td>Application No.
+						<table class="smallBox">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</td>
+					<td>${PAGE.controlname} 
+						<table class="smallBox">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</td>
+					<td>Building Permit no
+						<table class="smallBox">
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>	
+					</td>
+				</tr>
+			</table>
+			<br><br><br>
+
+
+
+			<table align="center" width="100%" cellpadding="0" cellspacing="0">
+				<tr>
+					<td colspan="2">
+						<p class="title"><b>Box 1 (To be accomplished in print print by the owner/application)</b></p>
+						<table align="center" class="boxpermit" width="100%">
+							<tbody>
+								<tr>
+									<td width="15%">owner/Applicant</td>
+									<td colspan="2">last name</td>
+									<td colspan="3">firstname</td>
+									<td colspan="1">M.I</td>
+									<td colspan="2" class="tdborder">TIN</td>
+								</tr>
+								<tr class="trborder">
+									<td></td>
+									<td colspan="2"><label class="data">${app.owner?.lastname} </label></td>
+									<td colspan="3"><label class="data">${app.owner?.firstname}</label></td>
+									<td colspan="1"><label class="data">${app.owner?.middleinitial}</label></td>
+									<td colspan="2" class="tdborder"><label class="data">${app.owner?.tin}</label></td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr>
+									<td colspan="2">For construction Owned</td>
+									<td colspan="3" class="tdborder">form of ownership</td>
+									<td colspan="4" class="tdborder"> use or character of occupancy</td>
+								</tr>
+								<tr>
+									<td colspan="2"><label class="data">dd</label></td>
+									<td colspan="3" rowspan="2" class="tdborder"><label class="data">${app.owner?.type}</label></td>
+									<td colspan="4" rowspan="2" class="tdborder"><label class="data">${app.occupancytype?.objid} - ${app.occupancytype?.description}</label></td>
+								</tr>
+								<tr class="trborder">
+									<td colspan="9">By an enterprise</td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr>
+									<td>address no.</td>
+									<td> street </td>
+									<td colspan="2">Barangay</td>
+									<td colspan="3">City/Municipality</td>
+									<td>Zip Code</td>
+									<td class="tdborder">Telephone No.</td>
+								</tr>
+								<tr class="trborder">
+									<td colspan="2">${app.owner?.address?.street}</td>
+									<td colspan="2">${app.owner?.address?.barangay?.name}</td>
+									<td colspan="3"></td>
+									<td></td>
+									<td class="tdborder"></td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr>
+									<td colspan="2">Location of Construction:</td>
+									<td colspan="2">Lot No. <label class="underline">${app.location?.lotno}</label></td>
+									<td  colspan="2">Blk No. <label class="underline">${app.location?.blockno}</label></td>
+									<td colspan="2">TCT No.  <label class="underline">${app.location?.tctno}</label></td>
+									<td >Tax Dec No. <label class="underline">${app.location?.tdno}</label></td>
+								</tr>
+								<tr class="trborder trlocation">
+									<td colspan="3">Street <label class="underline">${app.location?.street}</label></td>
+									<td colspan="3">Barangay <label class="underline">${app.location?.barangay}</label></td>
+									<td colspan="3">City/Municipality <label class="underline">${app.org.formalname}</label></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						${_content}
+					</td>	
+				</tr>
+			</table>		
+		</div>
+
+
+		<!-- PAGE 2 -->
+		<div class="page">
+			${_page2}
+		</div>
+	</body>
+</html>
+

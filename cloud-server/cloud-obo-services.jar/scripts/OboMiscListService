@@ -18,7 +18,7 @@ public class OboMiscListService  {
 	@DataContext("obo_permit_type")
 	def permitTypeEm;
 
-	@DataContext("obo_subapplication_type")
+	@DataContext("obo_variable_type")
 	def itemTypeEm;
 
 	@DataContext("obo_variable")
