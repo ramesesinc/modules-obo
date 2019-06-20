@@ -32,7 +32,7 @@
 		<field name="supervisorid" />
 		<field name="taskid" />
 
-		<complex name="subapplications" ref="obo_building_subapplication" jointype="one-to-many">
+		<complex name="sections" ref="obo_building_application_section" jointype="one-to-many">
 			<key field="objid" target="appid"/>
 		</complex> 
 

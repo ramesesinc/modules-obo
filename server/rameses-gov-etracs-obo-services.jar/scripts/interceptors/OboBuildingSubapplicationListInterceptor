@@ -2,7 +2,7 @@ import com.rameses.annotations.*;
 
 class OboBuildingSubapplicationListInterceptor { 
 
-	@DataContext("vw_obo_building_subapplication")
+	@DataContext("vw_obo_building_application_section")
 	def appTask;
 
 	@Env

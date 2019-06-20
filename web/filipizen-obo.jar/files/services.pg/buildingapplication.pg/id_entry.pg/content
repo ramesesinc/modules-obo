@@ -20,6 +20,12 @@
       this.idtypes.push( {name:'drivers', title:'Drivers License', caption: 'License No'} );  
       this.idtypes.push( {name:'sss', title:'SSS', caption: 'SSS No'} );
       this.idtypes.push( {name:'gsis', title:'GSIS', caption: 'GSIS No'} );
+
+      this.idtypes.push( {name:'umid', title:'UMID', caption: 'UMID No'} );
+      this.idtypes.push( {name:'passport', title:'PASSPORT', caption: 'Passport No.'} );
+      this.idtypes.push( {name:'tin', title:'TIN', caption: 'TIN'} );
+
+
       <%}%>
       <%if(PARAMS.idtype) {%>
       this.entry.type = { name: '${PARAMS.idtype}', title: '${PARAMS.idtitle}', caption:'${PARAMS.idcaption}' } 

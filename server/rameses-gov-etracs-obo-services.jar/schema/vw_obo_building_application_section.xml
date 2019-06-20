@@ -1,5 +1,5 @@
 <schema adapter="obodb">
-	<element tablename="vw_obo_building_subapplication">
+	<element tablename="vw_obo_building_application_section">
 		<field name="objid" primary="true"/>
 		<field name="appid"/>
 		<field name="appno"/>

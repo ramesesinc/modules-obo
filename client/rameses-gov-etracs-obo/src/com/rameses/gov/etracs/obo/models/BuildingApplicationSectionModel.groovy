@@ -10,9 +10,9 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingSubpplicationModel extends WorkflowTaskModel {
+class BuildingApplicationSectionModel extends WorkflowTaskModel {
 
-    @Service("OboBuildingSubapplicationService")
+    @Service("OboBuildingApplicationSectionService")
     def appSvc;
     
     def infos;

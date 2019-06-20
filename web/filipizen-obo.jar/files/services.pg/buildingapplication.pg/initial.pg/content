@@ -114,7 +114,7 @@
 <div r:context="initial" r:visibleWhen="#{mode=='add-contact'}" style='display:none'>
 	<div class="subtitle">Enter contact details</div>
 	<div class="form">
-		@wx:text( caption:'Contact Name', context:'initial', name:'contact.name', required:true )
+		@wx:text( caption:'Contact Name', context:'initial', name:'contact.name', required:true, hint:'Lastname, Firstname MI.' )
 		@wx:text( caption:'Contact Detail', context:'initial', name:'contact.detail' )
 		@wx:email( context:'initial', name:'contact.email', required:true )
 		@wx:mobile( context:'initial', name:'contact.mobileno')
@@ -145,11 +145,11 @@
 	<div class="form">
 		<p style="padding-bottom:10px;">
 			<label r:context="initial" style="font-weight:normal;">
-				This online service will require personal and sensitive personal information of the applicant, lot owner(s) 
+				This online service will require personal information from the applicant, lot owner(s) 
 				and professionals involved in this transaction. In compliance with the Data Privacy Act, we are
 				securing your consent that you have been authorized by the aforementioned parties to act on their behalf.   
 				The data collected will be stored, processed and used for effectively carrying out legitimate transactions 
-				of the local government of #{orgname}. If you do not agree to these terms, you can cancel out by clicking the Cancel button. 
+				with the local government of #{orgname}. If you do not agree to these terms, you can cancel out by clicking the Cancel button. 
 				If you agree to these terms, tick on the checkbox and click Continue.
 	    	</label>
     	</p>

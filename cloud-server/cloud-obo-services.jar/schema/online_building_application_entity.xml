@@ -4,7 +4,7 @@
 		<field name="appid" required="true" />
 
 		<field name="lotowner" />
-		<field name="owner" />
+		<field name="applicant" />
 		<field name="professional" />
 
 
@@ -38,8 +38,8 @@
 		<field name="profession" />
 
 		<complex name="id" serializer="default" type="object" />
-		<complex name="prc" serializer="default" type="object" />
-		<complex name="ptr" serializer="default" type="object" />
+		<complex name="prc" serializer="default" type="object" required="false"/>
+		<complex name="ptr" serializer="default" type="object" required="false"/>
 
 	</element>
 </schema>		

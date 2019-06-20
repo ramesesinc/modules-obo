@@ -26,13 +26,13 @@ public class OboBuildingApplicationService  {
 	@DataContext("obo_building_account")
 	def acctEm;
 
-	@DataContext("obo_subapplication_type")
-	def subAppType;
+	@DataContext("obo_section_type")
+	def sectionType;
 
 	@ProxyMethod
 	public def create(o) {
 		//if acctid does not exist create a new account
-		if(!o.subapplications) throw new Exception("There must be at least one subapplication");
+		if(!o.sections) throw new Exception("There must be at least one ancillary permit");
 
 		if(!o.acctid) {
 			def m = [controlno: "OBOACCT" + new UID() ];
@@ -47,15 +47,15 @@ public class OboBuildingApplicationService  {
 		o.appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  ) ;
 		o.projectcost = 0;
 
-		//include also subapplications that are required
-		def reqList = subAppType.find( [required: 1]).list();
+		//include also sections that are required
+		def reqList = sectionType.find( [required: 1]).list();
 		reqList.each {
-			o.subapplications << [typeid: it.objid ];
+			o.sections << [typeid: it.objid ];
 		}
 
 		def app = appEm.create( o );
 
-		//save the subapplications attached include also those that are required from the type
+		//save the ancillary permits attached include also those that are required from the type
 		def p = [:];
 		p.processname = 'obo_building_application';
 		p.refid = app.objid;

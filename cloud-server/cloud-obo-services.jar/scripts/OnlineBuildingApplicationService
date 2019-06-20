@@ -39,7 +39,7 @@ public class OnlineBuildingApplicationService  {
 		def list = [];
 		list << [step:0, name:'initial', caption: "Initial"];
 		list << [step:1, name:'location', caption:'Location'];	
-		list << [step:2, name:'owner', caption:'Applicant'];
+		list << [step:2, name:'applicant', caption:'Applicant'];
 		list << [step:3, name:'professional', caption:'Professionals'];
 		list << [step:4, name:'project', , caption:'Project Details'];
 		list << [step:5, name:'accessories',caption:'Accessories'];
@@ -62,7 +62,7 @@ public class OnlineBuildingApplicationService  {
 
 		def nextStep = step + 1;
 		if( nextStep == 2 ) {
-			if(app.ownerid) nextStep = 3; 
+			if(app.applicantid) nextStep = 3; 
 		}
 		//compare next step if less than existing then you can update otherwise stay the same
 		if(app.step < nextStep ) {
@@ -106,7 +106,7 @@ public class OnlineBuildingApplicationService  {
 		if(!o.objid) {
 			def v = [appid: o.appid];
 			v.putAll(o);
-			if(o.owner == null) v.owner = 0;
+			if(o.applicant == null) v.applicant = 0;
 			if(o.lotowner == null) v.lotowner = 0;
 			if(o.professional == null) v.professional = 0;
 			v.name = formatPersonalName(o);
@@ -140,7 +140,7 @@ public class OnlineBuildingApplicationService  {
 		def loc = locationEm.create( o );
 		def  u = [locationid: loc.objid ];
 		if( o.lotowned == "1" ) {
-			u.ownerid = entityOwner.objid;
+			u.applicantid = entityOwner.objid;
 		}
 		appEm.find( [objid: o.appid ] ).update(u);
 		return u;
@@ -166,17 +166,17 @@ public class OnlineBuildingApplicationService  {
 
 	//STEP 2
 	@ProxyMethod
-	public def saveOwner(def o) {
+	public def saveApplicant(def o) {
 		o.owner = 1;
-		def owner = saveEntity(o);
-		appEm.find([objid:o.appid]).update([ownerid: owner.objid]);
+		def applicant = saveEntity(o);
+		appEm.find([objid:o.appid]).update([applicantid: applicant.objid]);
 	}
 
 	@ProxyMethod 
-	public def getOwner(def o) {
-		def app = appEm.select("ownerid").find( [objid: o.appid ] ).first();
-		if(!app.ownerid) return null;
-		return entityEm.find( [objid: app.ownerid ] ).first();		
+	public def getApplicant(def o) {
+		def app = appEm.select("applicantid").find( [objid: o.appid ] ).first();
+		if(!app.applicantid) return null;
+		return entityEm.find( [objid: app.applicantid ] ).first();		
 	}
 
 	@ProxyMethod 

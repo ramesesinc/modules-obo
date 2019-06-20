@@ -1,16 +1,6 @@
-<!--
-  -- req.type AS workitem_type,
-    -- req.objid AS workitem_objid,
-    -- req.title AS workitem_title,
-    
-    -- (SELECT wt.dtcreated FROM obo_building_application_workitem_task wt WHERE  wt.refid = wi.objid AND wt.state = 'start') AS task_fromdate,
-    -- (SELECT  SEC_TO_TIME( SUM( TO_SECONDS(IFNULL( wt.enddate, NOW() )) -  TO_SECONDS(wt.dtcreated) ))
-    -- FROM obo_building_application_workitem_task wt
-    -- INNER JOIN sys_wf_node wn ON wn.name=wt.state AND wn.processname = 'obo_building_application_workitem'
-    -- WHERE wt.refid = wi.objid  AND wt.state NOT IN ('start', 'end' ) AND wn.tracktime = 1) AS task_timediff
--->
-DROP VIEW IF EXISTS vw_obo_building_subapplication;
-CREATE VIEW vw_obo_building_subapplication AS 
+
+DROP VIEW IF EXISTS vw_obo_building_application_section;
+CREATE VIEW vw_obo_building_application_section AS 
 SELECT 
     sa.objid,
     sa.appid, 
@@ -49,20 +39,19 @@ SELECT
     wt.activationstate,
 
         CASE WHEN sa.taskid IS NULL THEN NULL ELSE
-    (SELECT wt.dtcreated FROM obo_building_subapplication_task wt WHERE  wt.refid = sa.objid AND wt.state = 'start') 
+    (SELECT wt.dtcreated FROM obo_building_application_section_task wt WHERE  wt.refid = sa.objid AND wt.state = 'start') 
         END AS task_fromdate,
         
         CASE WHEN sa.taskid IS NULL THEN NULL ELSE
         (SELECT  SEC_TO_TIME( SUM( TO_SECONDS(IFNULL( wt.enddate, NOW() )) -  TO_SECONDS(wt.dtcreated) ))
-    FROM obo_building_subapplication_task wt
-    INNER JOIN sys_wf_node wn ON wn.name=wt.state AND wn.processname = 'obo_building_subapplication'
+    FROM obo_building_application_section_task wt
+    INNER JOIN sys_wf_node wn ON wn.name=wt.state AND wn.processname = 'obo_building_application_section'
     WHERE wt.refid = sa.objid  AND wt.state NOT IN ('start', 'end' ) AND wn.tracktime = 1) 
         END AS task_timediff 
 
-FROM obo_building_subapplication sa
+FROM obo_building_application_section sa
 INNER JOIN obo_building_application oa ON sa.appid = oa.objid
-LEFT JOIN obo_building_subapplication_task sat ON sat.taskid = sa.taskid
-INNER JOIN obo_subapplication_type wt ON sa.typeid = wt.objid
+LEFT JOIN obo_building_application_section_task sat ON sat.taskid = sa.taskid
+INNER JOIN obo_section_type wt ON sa.typeid = wt.objid
 LEFT JOIN obo_occupancy_type ot ON oa.occupancytypeid = ot.objid
-
 

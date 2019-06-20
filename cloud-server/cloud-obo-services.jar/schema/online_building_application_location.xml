@@ -19,7 +19,7 @@
 		<field name="lotowned" datatype="integer" />		
 		<field name="ownerid" required="true"/>
 		
-		<complex name="owner" ref="online_building_application_entity" jointype="many-to-one" includefields="name,address.text">
+		<complex name="owner" ref="online_building_application_entity" jointype="many-to-one">
 			<key field="ownerid" target="objid" />
 		</complex>	
 	</element>

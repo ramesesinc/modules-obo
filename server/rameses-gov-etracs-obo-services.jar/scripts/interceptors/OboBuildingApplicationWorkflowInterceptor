@@ -17,7 +17,7 @@ class OboBuildingApplicationWorkflowInterceptor {
 	@DataContext("obo_building_application")
 	def appEm;
 
-	@DataContext("vw_obo_building_subapplication")
+	@DataContext("vw_obo_building_application_section")
 	def subAppEm;
 
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_application' && args[0].action != 'reactivate' }") 
@@ -51,13 +51,13 @@ class OboBuildingApplicationWorkflowInterceptor {
 		def r = evt.result;
 		def appid = p.refid;
 
-		//attach tasks for subapplications that have not yet been started
+		//attach tasks for sections that have not yet been started
 		def list = subAppEm.select("objid").find( [appid: p.refid] ).where("activationstate = :astate AND taskid IS NULL ", [astate: r.state ] ).list(); 
 		if( list ) {
 			def dt = dateSvc.getServerDate();
 			list.each {
 				def f = [:];
-				f.processname = 'obo_building_subapplication';
+				f.processname = 'obo_building_application_section';
 				f.refid = it.objid;
 				f.startdate = dt;
 				f.info = [ type: it.objid, app: p.info ];
@@ -75,7 +75,7 @@ class OboBuildingApplicationWorkflowInterceptor {
 			def dt = dateSvc.getServerDate();
 			list.each {
 				def f = [:];
-				f.processname = 'obo_building_subapplication';
+				f.processname = 'obo_building_application_section';
 				f.refid = it.objid;
 				f.taskid = it.taskid;
 				f.startdate = dt;

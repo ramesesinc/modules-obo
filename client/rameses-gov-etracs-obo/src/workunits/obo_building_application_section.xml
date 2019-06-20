@@ -1,0 +1,15 @@
+<workunit schemaName="vw_obo_building_application_section" processName="obo_building_application_section">
+    <invokers>
+        <invoker type="vw_obo_building_application_section:open" caption="Building Application Section"
+                action="open" index="1"/>
+        <!-- form actions -->
+        <invoker type="formActions" caption="View Application"
+                action="viewApplication" index="10"/>
+        <invoker type="formActions" caption="Add Finding"
+                action="addFinding" index="11"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingApplicationSectionModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.BuildingApplicationSectionPage" />
+    </pages>
+</workunit>

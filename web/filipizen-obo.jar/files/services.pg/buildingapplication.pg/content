@@ -89,7 +89,7 @@
    	\$register( {id:'professional_lookup',	page:"${PAGE.path}/professional_lookup", context: 'professional_lookup' } );
 </script>
 
-<h2>Building Application</h2>
+<h2>Building Permit Application</h2>
 
 <%if( appid !=null ) { %>
 	<label>(App Tracking No: ${appid})</label> 

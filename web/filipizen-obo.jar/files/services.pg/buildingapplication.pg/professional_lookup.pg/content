@@ -33,11 +33,11 @@
       <tr>
         <td>
           <div class="table-class">
-            <div>PRC No</div>
-            <div>Profession</div>          
-            <div>Name</div>
-            <div>Address</div>
-            <div>&nbsp;</div>
+            <div style="width:10%;margin-bottom:0px;vertical-align:top">PRC No</div>
+            <div style="width:20%;margin-bottom:0px;vertical-align:top">Profession</div>          
+            <div style="width:30%;margin-bottom:0px;vertical-align:top">Name</div>
+            <div style="width:30%;margin-bottom:0px;vertical-align:top">Address</div>
+            <div style="width:10%;margin-bottom:0px;vertical-align:top">&nbsp;</div>
           </div>
         </td>  
       </tr>
@@ -46,11 +46,11 @@
       <tr>
         <td>
           <div class="table-class">
-            <div>#{item.prc.refno}</div>
-            <div>#{item.profession}</div>        
-            <div>#{item.name}</div>
-            <div>#{item.address.text}</div>
-            <div>
+            <div style="width:10%;margin-bottom:0px;vertical-align:top">#{item.prc.refno}</div>
+            <div style="width:20%;margin-bottom:0px;vertical-align:top">#{item.profession}</div>        
+            <div style="width:30%;margin-bottom:0px;vertical-align:top">#{item.name}</div>
+            <div style="width:30%;margin-bottom:0px;vertical-align:top">#{item.address.text}</div>
+            <div style="width:10%;margin-bottom:0px;vertical-align:top">
               <a href="#" r:context="professional_lookup" r:name="select">Select</a>
             </div>
           </div>

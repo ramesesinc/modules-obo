@@ -13,12 +13,12 @@ import com.rameses.seti2.views.WorkflowTaskFormPage;
  * @author elmonazareno
  */
 @Template(WorkflowTaskFormPage.class)
-public class BuildingSubapplicationPage extends javax.swing.JPanel {
+public class BuildingApplicationSectionPage extends javax.swing.JPanel {
 
     /**
      * Creates new form OboBuildingSubapplicationPage
      */
-    public BuildingSubapplicationPage() {
+    public BuildingApplicationSectionPage() {
         initComponents();
     }
 

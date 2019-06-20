@@ -1,5 +1,5 @@
 <schema adapter="obodb">
-	<element tablename="obo_building_subapplication_task">
+	<element tablename="obo_building_application_section_task">
 		<field name="taskid" primary="true"  prefix="OBOSUBTSK" visible="true"/>
 		<field name="refid" />		
 		<field name="parentprocessid" />

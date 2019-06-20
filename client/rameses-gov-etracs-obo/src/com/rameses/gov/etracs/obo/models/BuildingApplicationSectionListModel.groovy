@@ -10,7 +10,7 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingSubapplicationListModel extends WorkflowTaskListModel {
+class BuildingApplicationSectionListModel extends WorkflowTaskListModel {
     
     def typeid;
     String title;

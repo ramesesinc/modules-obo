@@ -6,7 +6,7 @@ import java.text.*;
 import treasury.utils.*;
 import treasury.facts.*;
 
-public class OboBuildingSubapplicationService  {
+public class OboBuildingApplicationSectionService  {
 	
 	@DataContext("obo_building_application_info")
 	def infoEm;

@@ -58,6 +58,7 @@
 
   this.viewInitial = function() { self.editmode = "edit"; self.mode = "initial";}
   this.editOwnerInfo = function() {self.mode = "edit-owner-info"; }
+
   this.viewList = function() {  
     self.reloadList();
     self.mode = 'view-locations'; 
@@ -65,7 +66,7 @@
 
   this.saveLocation = function() {
     if(self.prop.lotowned == null ) {
-      alert("Please specify if lot owner is the same as the building owner");
+      alert("Please specify if lot owner is the same as the applicant");
       return;
     }  
     self.prop.appid = app.appid;
@@ -124,9 +125,9 @@
 </div>
 
 <div r:context="location" r:visibleWhen="#{mode=='view-lot'}" style='display:none'>
-    <p>Please check carefully if the information is correct. If not, please contact the assessor's office before proceeding.<br>
+    <p>Please check carefully if the information is correct. If not, please contact the Assessor's Office before proceeding.<br>
     <label r:context="location">
-      <a href="mailto:assessor@filipizen.com?subject=Building Application Inquiry No: #{appid}">[Click Here to Send Message] </a></p>
+      <a href="mailto:assessor@filipizen.com?subject=Building Application Inquiry No: #{appid}&body=Please state your concern: ">[Click Here to Send Message] </a></p>
     </label>
     <br>
     <div class="form">
@@ -188,7 +189,7 @@
   <input type="radio" r:context="location" r:name="prop.lotowned" value="1">&nbsp;Yes &nbsp;&nbsp;
   <input type="radio" r:context="location" r:name="prop.lotowned" value="0">&nbsp;No &nbsp;&nbsp;
   </div> 
-  @wx:button( context:'location', name:'viewOwner', caption: 'Back' )   
+  @wx:button( context:'location', name:'viewInfo', caption: 'Back' )   
   @wx:button( context:'location', name:'saveLocation', caption: 'Next' )
 </div>
 

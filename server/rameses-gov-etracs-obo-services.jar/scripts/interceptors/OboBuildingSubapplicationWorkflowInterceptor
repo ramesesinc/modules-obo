@@ -11,14 +11,14 @@ class OboBuildingSubapplicationWorkflowInterceptor {
 	@DataContext("obo_building_application_finding")
 	def findingEm;
 
-	@DataContext("vw_obo_building_subapplication")
+	@DataContext("vw_obo_building_application_section")
 	def subappEm;
 
 	/**********************************************************************************************
 	* REMEMBER: This is the obo_building_subapplication process flow
 	***********************************************************************************************/
 
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_subapplication' && args[0].action?.matches('approve|for-revision') }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_application_section' && args[0].action?.matches('approve|for-revision') }") 
 	public void checkFindingStatus( def evt ) {
 		def p = evt.args[0];
 		def c = findingEm.find( [subappid: p.refid ] ).select("c:{COUNT(*)}").where( "status IS NULL").val();
@@ -30,16 +30,16 @@ class OboBuildingSubapplicationWorkflowInterceptor {
 	} 
 
 	//signal the parent 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_subapplication' && args[0].action?.matches('approve|for-revision') }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'obo_building_application_section' && args[0].action?.matches('approve|for-revision') }") 
 	public void signalParent( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
 
 		def appid = subappEm.find( [objid: p.refid] ).select("appid").val();
-		//check first of there are other subapplications that have not yet ended
+		//check first of there are other sections that have not yet ended
 		def openItems = subappEm.find([appid:appid] ).where( "NOT(objid = :refid) AND task.state NOT IN ('end', 'revision') ", [refid: p.refid]).select("c:{COUNT(*)}").val();
 		if(!openItems) {
-			//check if there are other subapplications where state is under revision.
+			//check if there are other sections where state is under revision.
 			def forRevision =  subappEm.find([appid:appid] ).where( "NOT(objid = :refid) AND task.state = 'revision'", [refid: p.refid]).select("c:{COUNT(*)}").val();  
 			def f = [:];
 			f.processname = 'obo_building_application';

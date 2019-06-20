@@ -1,0 +1,259 @@
+<style type="text/css">
+.fade.in {
+    background: #00000030;
+}
+.close {
+    line-height: .6;
+}
+#barcode {
+    float: right;
+    height:80px;
+}
+
+@media print {
+  .navbar-inverse{display:none}
+  .footer{display:none}
+  .no-print{display:none}
+  .print{margin:30px}
+  .left{float:left}
+  .right{right}
+  #blackbar{display:none}
+  #Header, #Footer { display: none ! important; }
+  @page {size: auto;margin: 0mm;}
+}
+@media screen{
+  #barcode{display:none;}
+}
+</style>
+
+
+<%
+  def barcode = "51005:" + PARAMS.refno
+%>
+<script src="/res/bpls/JsBarcode.code128.min.js"></script>
+
+<script>
+	\$put( "viewbill", new function() {
+
+		var self = this;
+		this.error;
+    this.selectedItem;
+    this.billperiod;
+
+		this.refno = WindowUtil.getParameter("refno");
+		this.qtr = WindowUtil.getParameter("qtr");
+    this.qtrs = [4,3,2,1];
+
+		var app = \$get("billing").code;
+    this.lgu = app.lgu;
+
+		this.onload = function() {
+      this.bill = app.bill;
+      if(!this.qtr) this.qtr = 4;
+			if( !this.bill ) {
+        var p = {refno: self.refno, qtr: this.qtr };
+				app.loadBill( p, function() {
+					self._controller.reload();
+				});
+			}
+      else {
+
+      }
+		}
+
+    this.recomputeBill = function() {
+      var p = {refno: self.refno, qtr: this.qtr }; 
+      app.loadBill( p, function() {
+        WindowUtil.loadHash("viewbill", p );
+      });
+      \$('#specifyQtr').modal('hide');
+    }
+
+
+    this.formatDate = function(n) {
+      return n;
+    }
+
+    this.cancelBill = function() {
+        WindowUtil.loadHash("askrefno", null);
+    }
+
+    this.createPaymentOrder = function() {
+      var svc = Service.lookup(app.orgcode + ":EPaymentService");
+      var pp = {refno:this.refno, qtr:this.qtr};
+      pp.orgcode = app.orgcode;
+      pp.origin = "filipizen";
+      pp.txntype = "obo";
+      svc.createPaymentOrder( pp, function(o,s) {
+          if( s == "error" ) {
+            alert("error " + o.result );
+          }
+          else {
+            var refno = o.result.objid;
+            WindowUtil.load( "/partners/${PARAMS.name}/paymentorder", {refno: refno});          
+          }  
+      });
+    }
+
+	})
+
+
+</script>
+
+<div class="print">
+   
+  <div class="row">
+    <div class="left">
+        <div class="col-xs-12">
+          <div class="row page-header">
+            <div class="col-md-6">
+               <h2>
+                  <b>
+                    BIN: <span r:context="viewbill" r:type="label">#{bill.bin}</span> 
+                  </b>
+              </h2>
+            </div>
+            <div class="col-md-6">
+               <h2>
+                  <b>Date Filed:</b> <span r:context="viewbill" r:type="label">#{bill.appdate}</span><br>
+                  <b>Agency:</b> <span r:context="viewbill" r:type="label">#{lgu.title}, #{lgu.group}</span>
+
+              </h2>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="right">
+      <img id="barcode"/>
+    </div>
+  </div>
+  
+  <div class="row invoice-info">
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-3 col-xs-4">
+          <STRONG> Trade Name </STRONG>
+          <span class="pull-right">:</span>
+        </div>
+        <div class="col-sm-8 nopadleft">
+          <span r:context="viewbill" r:type="label">#{bill.tradename}</span> 
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3 col-xs-4  "><STRONG>Owner Name</STRONG> <span class="pull-right">:</span></div>
+        <div class="col-sm-8 nopadleft" > 
+          <span r:context="viewbill" r:type="label">#{bill.ownername}</span> 
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3 col-xs-4  "><STRONG>Application</STRONG><span class="pull-right">:</span> </div>
+        <div class="col-sm-8 nopadleft"> 
+          <span r:context="viewbill" r:type="label">#{bill.apptype}</span> 
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+          <form action="#" method="post" id="paymentOption">
+              <div class="row">
+                <div class="col-md-2 col-xs-4"><STRONG>Address</STRONG><span class="pull-right">:</span></div>
+                <div class="col-sm-8 nopadleft"> 
+                  <span r:context="viewbill" r:type="label">#{bill.address}</span> 
+                </div>
+              </div>
+          </form>
+    </div>   
+  </div>
+
+
+  <div class="row">
+      <div class="col-md-12">
+         <table class="table" r:context="viewbill" r:items="bill.items" r:name="selectedItem" 
+                r:varName="k" r:varStatus="stat">
+            <thead>
+              <tr>
+                <th align="left">Line of Business</th>
+                <th align="left">Tax/Fee</th>
+                <th class="text-right">Amount</th>
+                <th class="text-right">Discount</th>
+                <th class="text-right">Surcharge</th>
+                <th class="text-right">Interest</th>
+                <th class="text-right">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#{k.lobname? k.lobname : ''}</td>
+                <td>#{k.account}</td>
+                <td align="right">#{k.amount.formatDecimal()}</td>
+                <td align="right">#{k.discount.formatDecimal()}</td>
+                <td align="right">#{k.surcharge.formatDecimal()}</td>
+                <td align="right">#{k.interest.formatDecimal()}</td>
+                <td align="right">#{k.total.formatDecimal()}</td>
+              </tr>
+            </tbody>
+            <tfooter>
+              <tr>
+                <th align="left" colspan="3"><span style="color:red">Note:</span> 
+                  THIS BILL IS VALID UNTIL &nbsp;
+                  <span r:context="viewbill" r:type="label">#{formatDate(bill.expirydate).toUpperCase()}</span>
+                </th>
+                <th class="text-right" colspan="2"> BILL AMOUNT :</th>
+                <th class="text-right" colspan="2">P 
+                  <span r:context="viewbill" r:type="label">#{bill.amount.formatDecimal()}</span>
+                </th>
+              </tr>
+              <tr>
+                <th align="left" colspan="7">
+                  BILL PERIOD : &nbsp;&nbsp;&nbsp; 
+                  <span r:context="viewbill" r:type="label">Qtr #{qtr}</span>
+                </th> 
+              </tr> 
+            </tfooter>
+          </table>
+      </div>
+  </div>                
+
+
+  <div class="row no-print">
+      <div class="col-xs-12">
+
+        <button r:context="viewbill" class="btn btn-primary" r:name="cancelBill"  style="margin-right: 5px;"> Try Another</button>
+
+        <button onclick="location.href='javascript:window.print()';" href="" class="btn-response btn btn-primary" onClick="window.print()"><i class="fa fa-print"></i> Print</button>
+
+        <span r:context="viewbill" r:visibleWhen="#{bill.apptype == 'RENEW'}"> 
+          <button type="button" data-toggle="modal" data-target="#specifyQtr"  
+            class="btn btn-primary" style="margin-right: 5px;"> Select Qtr</button>
+        </span>
+
+        <button r:context="viewbill" r:name="createPaymentOrder" r:visibleWhen="#{bill.amount > 0}" class="btn-response btn btn-primary pull-right">
+          <i class="fa fa-credit-card"> </i> Pay Now 
+        </button>
+      </div>
+  </div>
+
+  <div class="modal fade" id="specifyQtr" tabindex="-1" role="dialog" aria-labelledby="specifyQtr" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Select Qtr: <select r:context="viewbill" r:items="qtrs" r:name="qtr"></select><br>
+          <button r:context="viewbill" r:name="recomputeBill" class="submit">OK</button> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  
+<script>JsBarcode("#barcode", "${barcode}");</script> 
+
+
+

@@ -15,7 +15,7 @@ public class OboRequirementTypeModel extends CrudFormModel {
     def types = ["DOC", "PROC", "PERMIT"];
     def workflowStates;
     
-    def processNames  = ["obo_building_application", "obo_building_subapplication"];
+    def processNames  = ["obo_building_application", "obo_building_application_section"];
     
     @PropertyChangeListener
     def listener = [

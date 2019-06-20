@@ -4,4 +4,4 @@ SELECT
   sa.typeid,
 	of.*	
 FROM obo_building_application_finding of
-INNER JOIN obo_building_subapplication sa ON of.subappid = sa.objid ;
+INNER JOIN obo_building_application_section sa ON of.subappid = sa.objid ;

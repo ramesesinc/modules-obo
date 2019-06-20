@@ -41,12 +41,12 @@ class OboBuildingApplicationModel extends WorkflowTaskModel {
     
     def subApplicationListModel = [
         fetchList: { o->
-            def m = [_schemaname: "vw_obo_building_subapplication" ];
+            def m = [_schemaname: "vw_obo_building_application_section" ];
             m.findBy = [appid: entity.objid];
             return queryService.getList( m );
         },
         openItem: { o, colName ->
-            def op = Inv.lookupOpener("vw_obo_building_subapplication:open", [entity: o]);
+            def op = Inv.lookupOpener("vw_obo_building_application_section:open", [entity: o]);
             op.target = "popup";
             return op;
         }
