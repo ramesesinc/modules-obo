@@ -33,7 +33,7 @@
 					<h2 ><b>Tracking No. : <label>${app.objid}</label></b></h2>
 				</div>
 			</div>	
-			<br><br>
+			<br>
 			<table align="center" width="100%">
 				<tr>
 					<td>Application No.
@@ -90,7 +90,7 @@
 				<tr>
 					<td colspan="2">
 						<p class="title"><b>Box 1 (To be accomplished in print print by the owner/application)</b></p>
-						<table align="center" class="boxpermit" width="100%">
+						<table align="center" class="boxpermit allcaps" width="100%">
 							<tbody>
 								<tr>
 									<td width="15%">owner/Applicant</td>
@@ -101,10 +101,10 @@
 								</tr>
 								<tr class="trborder">
 									<td></td>
-									<td colspan="2"><label class="data">${app.owner?.lastname} </label></td>
-									<td colspan="3"><label class="data">${app.owner?.firstname}</label></td>
-									<td colspan="1"><label class="data">${app.owner?.middleinitial}</label></td>
-									<td colspan="2" class="tdborder"><label class="data">${app.owner?.tin}</label></td>
+									<td colspan="2"><p class="data">${app.owner?.lastname} </p></td>
+									<td colspan="3"><p class="data">${app.owner?.firstname}</p></td>
+									<td colspan="1"><p class="data">${app.owner?.middleinitial}</p></td>
+									<td colspan="2" class="tdborder"><p class="data">${app.owner?.tin}</p></td>
 								</tr>
 							</tbody>
 							<tbody>
@@ -114,9 +114,9 @@
 									<td colspan="4" class="tdborder"> use or character of occupancy</td>
 								</tr>
 								<tr>
-									<td colspan="2"><label class="data">dd</label></td>
-									<td colspan="3" rowspan="2" class="tdborder"><label class="data">${app.owner?.type}</label></td>
-									<td colspan="4" rowspan="2" class="tdborder"><label class="data">${app.occupancytype?.objid} - ${app.occupancytype?.description}</label></td>
+									<td colspan="2"><p class="data">dd</p></td>
+									<td colspan="3" rowspan="2" class="tdborder"><p class="data">${app.owner?.type}</p></td>
+									<td colspan="4" rowspan="2" class="tdborder"><p class="data">${app.occupancytype?.objid} - ${app.occupancytype?.description}</p></td>
 								</tr>
 								<tr class="trborder">
 									<td colspan="9">By an enterprise</td>
@@ -132,25 +132,25 @@
 									<td class="tdborder">Telephone No.</td>
 								</tr>
 								<tr class="trborder">
-									<td colspan="2">${app.owner?.address?.street}</td>
-									<td colspan="2">${app.owner?.address?.barangay?.name}</td>
-									<td colspan="3"></td>
+									<td colspan="2" class="data">${app.owner?.address?.street}</td>
+									<td colspan="2" class="data">${app.owner?.address?.barangay?.name}</td>
+									<td colspan="3" class="data"></td>
 									<td></td>
-									<td class="tdborder"></td>
+									<td class="tdborder data"></td>
 								</tr>
 							</tbody>
 							<tbody>
 								<tr>
 									<td colspan="2">Location of Construction:</td>
-									<td colspan="2">Lot No. <label class="underline">${app.location?.lotno}</label></td>
-									<td  colspan="2">Blk No. <label class="underline">${app.location?.blockno}</label></td>
-									<td colspan="2">TCT No.  <label class="underline">${app.location?.tctno}</label></td>
-									<td >Tax Dec No. <label class="underline">${app.location?.tdno}</label></td>
+									<td colspan="2"><p>Lot No.</p><p class="data underline lotno">${app.location?.lotno}</p></td>
+									<td ><p>Blk No.</p> <p class="data underline blkno">${app.location?.blockno}</p></td>
+									<td colspan="2"><p>TCT No.</p><p class="data underline tctno">${app.location?.tctno}</p></td>
+									<td colspan="2"><p>Tax Dec No.</p><p class="data underline taxdecno">${app.location?.tdno}</p></td>
 								</tr>
-								<tr class="trborder trlocation">
-									<td colspan="3">Street <label class="underline">${app.location?.street}</label></td>
-									<td colspan="3">Barangay <label class="underline">${app.location?.barangay}</label></td>
-									<td colspan="3">City/Municipality <label class="underline">${app.org.formalname}</label></td>
+								<tr class="last-td">
+									<td colspan="3">Street <p class="data underline street">${app.location?.street}</p></td>
+									<td colspan="3">Barangay <p class="data underline barangay">${app.location?.barangay}</p></td>
+									<td colspan="3">City/Municipality <p class="data underline municipality">${app.org.formalname}</p></td>
 								</tr>
 							</tbody>
 						</table>
@@ -163,7 +163,6 @@
 				</tr>
 			</table>		
 		</div>
-
 
 		<!-- PAGE 2 -->
 		<div class="page">
