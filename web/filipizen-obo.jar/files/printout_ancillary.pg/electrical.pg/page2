@@ -5,22 +5,22 @@
 				<table class="boxpermit" align="center" width="100%">
 					<tbody>
 					<tr class="trborder" style="height:40px;">
-						<td>Received by:</td>
-						<td>Date:</td>
+						<td class="allcaps">Received by:</td>
+						<td class="allcaps tdborder">Date:</td>
 					</tr>
 					<tr style="height:60px;">
-						<td colspan="2" align="center"><b>FIVE (5) SETS OF CIVIL/STRUCTURAL DOCUMENTS</b></td>
+						<td colspan="2" align="center" class="allcaps-bold">FIVE (5) SETS OF Electrical DOCUMENTS</td>
 					</tr>
 					<tr>
 						<td><input type="checkbox"> Electrical plans and specifications</td>
-						<td><input type="checkbox"> Expected date of completion/installation/construction <label class="underline"></label></td>
+						<td><input type="checkbox"> Expected date of completion/installation/construction <p class="underline"></p></td>
 					</tr>
 					<tr>
 						<td><input type="checkbox"> Special Fixtures and equiptment</td>
-						<td><input type="checkbox"> Others (Specify) <label class="underline"></label></td>
+						<td><input type="checkbox" rowspan="2"> Others (Specify) <p class="underline"></p></td>
 					</tr>
-					<tr>
-						<td colspan="2"><input type="checkbox"> Expected date of completion/installation/construction <label class="underline"></label></td>
+					<tr class="last-td">
+						<td><input type="checkbox"> Expected date of completion/installation/construction <p class="underline"></p></td>
 					</tr>
 					</tbody>
 				</table>
@@ -30,7 +30,7 @@
 			<td>
 				<p class="title"><b>Box 7</b></p>
 				<table class="boxpermit" align="center" width="100%">
-					<tr class="trborder" style="height:60px;">
+					<tr class="trborder">
 						<td colspan="6" align="center"><b>Progress Flow</b></td>
 					</tr>
 					<tr class="trborder">
@@ -51,7 +51,12 @@
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
-						<td align="center" class="tdborder" rowspan="3" style="height:100px;"><label class="underline"></label></br> <b>Electrical engineer</b><br>(Signature over printed name)<br>PRC Reg. No.<br>Validity</td>
+						<td align="center" class="tdborder" rowspan="3" style="padding-top:25px;padding-bottom:10px;">
+							<p class="underline bldgofficial"></p></br> 
+							<p class="allcaps-bold">Electrical engineer</p><br>
+							(Signature Over Printed name)<br>
+							PRC Reg. No.<p class="underline bldgofficial-date"></p><br>
+							Validity<p class="underline bldgofficial-date"></p></td>
 					</tr>
 					<tr class="trborder">
 						<td>Others (Specify)</td>
@@ -61,7 +66,7 @@
 						<td align="center" class="tdborder"></td>
 					</tr>
 					<tr>
-						<td></td>
+						<td>.</td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>

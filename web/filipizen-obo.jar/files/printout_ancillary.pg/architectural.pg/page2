@@ -107,18 +107,20 @@
 						<td><b>Permit is hereby issued subject to the following:</b></td>
 					</tr>
 					<tr>
-						<td style="padding-left:30px"><p>1. That under Article 1723 of the Civil Code of the Philippines, the engineer (or architect) who drew up the plans and
-						specifications for the building/structure is responsible for damages if within fifteen (15) years from the completion of the building/structure, the same should collapse due to defect in the plans or specifications or defects in the ground. The engineer or architect who supervises the construction shall be solidarily liable with the contractor should the edifice collapse due to defect in the construction or the use of inferior materials.</p><br>
-						<p>2. That the proposed civil/structural works shall be in accordance with the civil/structural plans filed with this office and in conformity with the latest National Structural Code of the Philippines, the National Building Code and its IRR.</p><br>
-						<P>3. That prior to any construction activity, a duly accomplished prescribed "Notice of Construction" shall be submitted to the Office of the Building Official.</P><br>
-						<p>4. That upon completion of the construction, the licensed full-time inspector and supervisor/in-charge of construction works shall submit the entry to the logbook duly signed and sealed to the Building Official including as-built plans and other documents and shall also accomplish and submit a certificate of completion stating that the civil/structural works conform to the provisions of the National Structural Code of the Philippines, the National Building Code and its IRR.</p><br>
-						<p>5. That this permit is null and void unless accompanied by the building permit.</p></td>
+						<td>	
+							<ol>
+								<li>That under Article 1723 of the Civil Code of the Philippines, the engineer (or architect) who drew up the plans and specifications for the building/structure is responsible for damages if within fifteen (15) years from the completion of the building/structure, the same should collapse due to defect in the plans or specifications or defects in the ground. The engineer or architect who supervises the construction shall be solidarily liable with the contractor should the edifice collapse due to defect in the construction or the use of inferior materials.</li>
+								<li>That the proposed civil/structural works shall be in accordance with the civil/structural plans filed with this office and in conformity with the latest National Structural Code of the Philippines, the National Building Code and its IRR.</li>
+								<li>That prior to any construction activity, a duly accomplished prescribed "Notice of Construction" shall be submitted to the Office of the Building Official.</li>
+								<li>That upon completion of the construction, the licensed full-time inspector and supervisor/in-charge of construction works shall submit the entry to the logbook duly signed and sealed to the Building Official including as-built plans and other documents and shall also accomplish and submit a certificate of completion stating that the civil/structural works conform to the provisions of the National Structural Code of the Philippines, the National Building Code and its IRR.</li>
+								<li>That this permit is null and void unless accompanied by the building permit.</li>
+							</ol>
 					</tr>
 					<tr style="height:80px;">
 						<td><b>Permit Issued by:</b></td>
 					</tr>
-					<tr>
-						<td align="center"><b>Local building official</b><p>(Signature over Printed Name)</p><br>Date <label class="underline"></label></td>
+					<tr class="last-td">
+						<td align="center"><p class="underline bldgofficial"></p><br><b><p class="allcaps">Local building official</p></b><br><p>(Signature over Printed Name)</p><br>Date <p class="underline bldgofficial-date"></p></td>
 					</tr>
 				</table>
 			</td>

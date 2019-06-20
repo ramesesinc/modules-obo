@@ -6,19 +6,22 @@ if(prof == null ) prof = [:];
 <table class="boxpermit" style="width:99%" height="100%">
 	<tbody>
 		<tr class="trborder">
-			<td colspan="3"><b>${OPTIONS.title}</b></td>
+			<td colspan="3"><p class="sub-title">${OPTIONS.title}</p></td>
 		</tr>
 		<tr>
-			<td colspan="3" class="signature"><label>
-			${prof?.firstname} ${prof?.middlename}. ${prof?.lastname}
-			</label></td>
+			<td colspan="3" align="center">
+				<p class="underline signature">${prof?.firstname} ${prof?.middlename}. ${prof?.lastname}</p> 
+				Date <p class="underline signature-date"></p>
+			</td>
 		</tr>
 		<tr>
-			<td align="center" colspan="3"><p><b>${OPTIONS.role}</b></p> <p>(Signed and Sealed Over Printed Name)</p></td>
+			<td align="center" colspan="3"><p><b>${OPTIONS.role}</b></p></td>
 		</tr>
-		<tr class="trborder">
-			<td align="center" colspan="3"><p>Date <label class="underline"></label></p></td>
+		<tr class="trborder last-td">
+			<td align="center" colspan="3"><p>(Signed and Sealed Over Printed Name)</p></td>
 		</tr>
+	</tbody>
+	<tbody>
 		<tr class="trborder">
 			<td colspan="3"><p>Address : <label class="data">${prof?.address?.text}</label></p></td>
 		</tr>

@@ -1,28 +1,28 @@
 <%def app = PARAMS.app; %>
 
 <table  width="100%" class="tblscope">
-	<tr>
+	<tr class="first-td">
 		<td colspan="9"><b>Scope of work</b></td>
 	</tr>
 	<tr>
 		<td colspan="3"><input type="checkbox"> New Construction</td>
-		<td colspan="4"><input type="checkbox"> Renovation</td>
-		<td colspan="2"><input type="checkbox"> Raising</td>
+		<td colspan="4"><input type="checkbox"> Renovation <p class="underline renovation"></p></td>
+		<td colspan="2"><input type="checkbox"> Raising <p class="underline raising"></p></td>
 	</tr>
 	<tr>
 		<td colspan="3"><input type="checkbox"> Erection</td>
-		<td colspan="4"><input type="checkbox"> Conversion</td>
-		<td colspan="2"><input type="checkbox"> Demolition</td>
+		<td colspan="4"><input type="checkbox"> Conversion <p class="underline conversion"></p></td>
+		<td colspan="2"><input type="checkbox"> Demolition <p class="underline demolition"></p></td>
 	</tr>
 	<tr>
 		<td colspan="3"><input type="checkbox"> Addition</td>
-		<td colspan="4"><input type="checkbox"> Repair</td>
-		<td colspan="2"><input type="checkbox"> Accessory Building/Structure <label class="underline2"></label></td>
+		<td colspan="4"><input type="checkbox"> Repair <p class="underline repair"></p></td>
+		<td colspan="2"><input type="checkbox"> Accessory Building/Structure <p class="underline accessory"></p></td>
 	</tr>
 	<tr class="last-td">
 		<td colspan="3"><input type="checkbox"> Alteration</td>
-		<td colspan="4"><input type="checkbox"> Moving</td>
-		<td colspan="2"><input type="checkbox"> Other (specify) <label class="underline"></label></td>
+		<td colspan="4"><input type="checkbox"> Moving <p class="underline moving"></p></td>
+		<td colspan="2"><input type="checkbox"> Others (specify) <p class="underline civilothers"></p></td>
 	</tr>
 </table>
 
@@ -59,10 +59,12 @@
 						<tr>
 							<td><input type="checkbox"> Foundation</td>
 							<td><input type="checkbox"> Walls</td>
-							<td><input type="checkbox"> Others(Specify) <label class="underline"></label></td>
-						</tr>
-						<tr class="last-td">
-							<td colspan="3">Prepared by:</b></td>
+							<td><input type="checkbox"> Others(Specify) <p class="underline civilothers"></p></td>
+						</tr> 
+					</tbody>
+					<tbody>
+						<tr class="first-td last-td">
+							<td colspan="3">Prepared by: <p class="underline prepared"></p></td>
 						</tr>
 					</tbody>
 				</table> 
