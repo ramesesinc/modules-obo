@@ -26,12 +26,12 @@ public class OboMiscListService  {
 
 	@ProxyMethod
 	public def getOccupancyTypes() {
-		return occTypeEm.find( [type: 'group'] ).list();
+		return occTypeEm.where( 'parentid IS NULL' ).list();
 	}	
 
 	@ProxyMethod
 	public def getBldgTypes(def o ) {
-		return bldgTypeEm.find( [groupid: o.type] ).orderBy("title").list();
+		return bldgTypeEm.find( [groupid: o.type] ).orderBy("objid").list();
 	}	
 
 	@ProxyMethod

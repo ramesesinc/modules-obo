@@ -112,7 +112,7 @@
 					</label>
 					<label style="margin-bottom:0px">
 						<%def backtarget = PAGE.parentPath + "?appid="+ PARAMS.appid + "#" + PAGE.pagename;%> 	
-						<a href="buildingapplication/ancillary?reftype=#{item.type.objid}&refid=#{item.objid}&backtarget=${backtarget}" >Edit</a>
+						<a href="buildingpermit/ancillary?reftype=#{item.type.objid}&refid=#{item.objid}&backtarget=${backtarget}" >Edit</a>
 						&nbsp;&nbsp;					
 							<a href="/obo/printout_ancillary/#{item.type.objid}?refid=#{item.objid}" target="#{item.type.objid}_#{item.objid}:print">Print Report</a>
 					</label>

@@ -118,7 +118,7 @@
 .bread-group-vertical>.breadcrumb-link, .breadcrumb-link {position: relative;float: left;}
 .breadcrumb-link:not(:first-child):not(:last-child):not(.dropdown-toggle) {border-radius: 0;}
 .breadcrumb-link:first-child {margin-left: 0;}
-.breadcrumb{padding:0px;margin-bottom: 10px;list-style: none;background-color:transparent !important;border-radius: 4px;width:100%;height:30px;display:block;}
+.breadcrumb{padding:0px;margin-bottom: 10px;list-style: none;background-color:transparent !important;border-radius: 4px;width:100%;display:block;}
 .breadcrumb-link {
     display: inline-block;
     margin-bottom: 0;

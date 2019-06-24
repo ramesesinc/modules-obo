@@ -9,11 +9,6 @@
   this.barangayList;
 
   var app = \$get("app").code;
- 
-- Geodetic Engineer
-- Professional Electrical Engineer
-- Registered Electrical Engineer
-- Professional 
 
 	this.professions = ["ARCHITECT", "CIVIL ENGINEER","GEODETIC ENGINEER", "PROFESSIONAL ELECTRICAL ENGINEER", "REGISTERED ELECTRICAL ENGINEER", "MECHANICAL ENGINEER"];
   this.professionalList;

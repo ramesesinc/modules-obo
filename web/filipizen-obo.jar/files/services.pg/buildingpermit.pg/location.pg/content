@@ -57,6 +57,7 @@
   }
 
   this.viewInitial = function() { self.editmode = "edit"; self.mode = "initial";}
+  this.viewLot = function() { self.mode = "view-lot";}  
   this.editOwnerInfo = function() {self.mode = "edit-owner-info"; }
 
   this.viewList = function() {  
@@ -131,7 +132,27 @@
     </label>
     <br>
     <div class="form">
+
+      <div style="float:right;position:relative;min-width:60px;border:1px solid grey;width:330px; padding:10px;margin-bottom:15px;">
+
+        <div r:context="location" r:visibleWhen="#{prop.bill!=null && prop.bill.amtdue > 0 }" style="padding-bottom:20px;">
+          <label r:context="location" style="color:red;font-weight:bold;">
+            Note: There is still an unpaid balance of <u>Php #{prop.bill.amtdue}</u>.
+            You can settle this by paying online <a  href="/partners/${PARAMS.name}/services/rptis/billing#viewbill?refno=#{refno}" target="0">here</a>
+          </label>
+        </div>
+
+        <div r:context="location" r:visibleWhen="#{prop.bill!=null && prop.bill.amtdue > 0 }" style="padding-bottom:20px;">
+          <label r:context="location">
+            <div>To request for tax clearance, click <a  href="/partners/${PARAMS.name}/services/rptis/rptclearance?refno=#{refno}" target="0">here</a> </div>
+            <div>To request for certificate of true copy, click <a  href="/partners/${PARAMS.name}/services/rptctc?refno=#{refno}" target="0">here</a> </div>
+          </label>
+        </div>
+
+      </div>  
+
       <h2>Lot Information</h2>
+
       <div>
         @wx:label( caption:'PIN', context:'location', expr:'#{prop.pin}' )
         @wx:label( caption:'Lot No', context:'location', expr:'#{prop.lotno}')
@@ -144,6 +165,9 @@
         @wx:label( caption:'Title No', context:'location', expr:'#{prop.titleno}' )
         @wx:label( caption:'Class Code', context:'location', expr:'#{prop.classcode}' )
       </div>
+
+      
+
      <hr> 
      <h2>Lot Owner Information</h2>
      <div>
@@ -162,15 +186,10 @@
       </div>
     </div> 
 
-    <div r:context="location" r:visibleWhen="#{prop.bill!=null && prop.bill.amtdue > 0 }">
-      <label r:context="location" style="color:red;font-weight:bold;">
-        Note: There is still an unpaid balance of <u>Php #{prop.bill.amtdue}</u>.
-        You can settle this by paying online <a  href="/partners/${PARAMS.name}/services/rptis/billing#viewbill?refno=#{refno}" target="0">here</a>
-      </label>
-    </div>
-    @wx:button( context:'location', name:'viewInitial', caption: 'Back', visibleWhen:'#{editmode == \'edit\' }'  )
+
+    @wx:button( context:'location', name:'viewInitial', caption: 'Back', visibleWhen:'#{editmode == \'edit\' }', attrs:[immediate:true]  )
     @wx:button( context:'location', name:'editOwnerInfo', caption: 'Next' , visibleWhen:'#{editmode == \'edit\' }')
-    @wx:button( context:'location', name:'viewList', caption: 'Back', visibleWhen:'#{editmode == \'view\' }' )
+    @wx:button( context:'location', name:'viewList', caption: 'Back', visibleWhen:'#{editmode == \'view\' }', attrs:[immediate:true] )
 </div>
 
 <div  r:context="location" r:visibleWhen="#{mode=='edit-owner-info'}" style='display:none'> 
@@ -185,11 +204,11 @@
   </div>
 
   <div style="padding-bottom:20px">
-  Is the Lot owner also the applicant?
+  Is the Lot owner also the applicant?<br>
   <input type="radio" r:context="location" r:name="prop.lotowned" value="1">&nbsp;Yes &nbsp;&nbsp;
   <input type="radio" r:context="location" r:name="prop.lotowned" value="0">&nbsp;No &nbsp;&nbsp;
   </div> 
-  @wx:button( context:'location', name:'viewInfo', caption: 'Back' )   
+  @wx:button( context:'location', name:'viewLot', caption: 'Back', attrs:[immediate:true] )   
   @wx:button( context:'location', name:'saveLocation', caption: 'Next' )
 </div>
 

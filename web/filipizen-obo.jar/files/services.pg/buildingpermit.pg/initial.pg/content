@@ -1,6 +1,7 @@
 <%
-	def svc = SERVICE.lookup("OboMiscListService", "obo");
-	def permitTypes = svc.getMainPermitTypes();
+	def appTypes = [];
+	appTypes << [objid:'NEW', title:'NEW CONSTRUCTION'];
+	appTypes << [objid:'RENOVATION', title:'RENOVATION,ALTERATION,REPAIR,ADDITION,EXTENSION'];	
 %>
 
 <style>
@@ -22,7 +23,7 @@
 		this.appid;
 		this.appno;	
 		this.menuOption = "new";
-		this.permittype = "building";
+		this.apptype = "NEW";
 		this.orgname = app.orgname;
 
 		this.selectOption = function() {
@@ -32,7 +33,7 @@
 				self._controller.refresh();
 			}
 			else {
-				WindowUtil.load( "buildingapplication", {appid: self.appno } );
+				WindowUtil.load( "buildingpermit", {appid: self.appno } );
 			}
 		}
 
@@ -74,7 +75,7 @@
 				alert("Read first the terms and  check 'I agree' ");
 				return;
 			}
-			var p = {orgcode:app.orgcode, contact: self.contact, worktypes: [], numunits: 1, apptype:'NEW', permittype: self.permittype };
+			var p = {orgcode:app.orgcode, contact: self.contact, worktypes: [], numunits: 1, apptype:self.apptype, permittype: 'BUILDING' };
 			p.nextstep = "location";
 			var a = app.service.create( p );
 			this.appid = a.objid;
@@ -131,10 +132,18 @@
 </div>
 
 <div r:context="initial" r:visibleWhen="#{mode=='select-permit-type'}" style='display:none'>
-	<div class="subtitle">Select Type of Permit</div>
+	<div class="subtitle">Select Type of application</div>
 	<div class="form">
-	    <%permitTypes.each { o-> %>
-	    	<div><input type="radio" r:context="initial" r:name="permittype" value="${o.objid}">&nbsp;${o.title}</div>
+	    <%appTypes.each { o-> %>
+	    	<%if(o.objid == 'NEW') {%>
+	    	<div style="text-transform:capitalize;">
+	    		<input type="radio" r:context="initial" r:name="apptype" value="${o.objid}">&nbsp;${o.title.toLowerCase()}
+	    	</div>	
+	    	<%} else { %>
+	    	<div style="color:lightgrey;text-transform:capitalize;">
+	    		<input type="radio" r:context="initial" r:name="apptype" value="${o.objid}" disabled>&nbsp;${o.title.toLowerCase()}
+	    	</div>
+	    	<%}%>
 	    <%}%>
 	</div>
     @wx:button( context:'initial', name:'showConfirm', caption: 'Next' )
