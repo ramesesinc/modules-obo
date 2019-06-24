@@ -1,29 +1,31 @@
-'<table>
+	<table>
 		<tr>
 			<td>
 				<p class="title">Box 7 (To be accomplished by the processing and evaluation division)</p>
 				<table class="boxpermit" align="center" width="100%">
-					<tr class="trborder" style="height:40px;">
-						<td class="allcaps">Received by:</td>
-						<td class="tdborder allcaps">Date:</td>
-					</tr>
+					<tbody>
+						<tr class="trborder first-td last-td">
+							<td class="allcaps">Received by:</td>
+							<td class="allcaps">Date:</td>
+						</tr>
+					</tbody>
 					<tr style="height:60px;">
-						<td colspan="2" align="center"><p class="allcaps-bold">FIVE (5) SETS OF SANITARY DOCUMENTS</p></td>
+						<td colspan="2" align="center"><p class="allcaps-bold">FIVE (5) SETS OF CIVIL/STRUCTURAL DOCUMENTS</p></td>
 					</tr>
 					<tr>
-						<td><p class="allcaps"><input type="checkbox"> Sanitary Plans and Specifications</p></td>
+						<td><p class="allcaps"><input type="checkbox"> Civil/Structural Designs Computations, Plans and sepecification</p></td>
 						<td><p class="allcaps"><input type="checkbox"> Cost Estimates</p></td>
 					</tr>
-					<tr class="last-td">
+					<tr>
 						<td><p class="allcaps"><input type="checkbox"> Bill of Materials</p></td>
-						<td><p class="allcaps"><input type="checkbox"> Others</p> (Specify) <p class="underline civilothers"></p></td>
+						<td><p class="allcaps"><input type="checkbox"> Others</p> (Specify) <p class="underline others"></p></td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<p class="title">Box 8</p>
+				<p class="title"><b>Box 8</b></p>
 				<table class="boxpermit" align="center" width="100%">
 					<tbody>
 						<tr class="trborder first-td last-td">
@@ -43,7 +45,7 @@
 						<td align="center" class="tdborder">Time</td>
 					</tr>
 					<tr class="trborder">
-						<td><p class="allcaps">Sanitary</p></td>
+						<td><p class="allcaps">Civil/Structural</p></td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
@@ -63,10 +65,10 @@
 		</tr>
 		<tr>
 			<td>
-				<p class="title">Box 9</p>
+				<p class="title"><b>Box 9</b></p>
 				<table class="boxpermit" align="center" width="100%">
 					<tr style="height:80px;">
-						<td align="left"><p class="allcaps-bold">Action Taken:</p></td>
+						<td align="left"><p class="allcaps-vold">Action Taken</p></td>
 					</tr>
 					<tr>
 						<td><p class="allcaps-bold">Permit is hereby issued subject to the following:</p></td>
@@ -74,17 +76,17 @@
 					<tr>
 						<td>
 							<ol>
-								<li>That the proposed sanitary works shall be in accordance with the sanitary plans filed with this Office and in conformity with tha latest Code on Sanitation of the Philippines, the National Building Code and its IRR.</li>
-								<li>That prior to any commencement of sanitary works, a duly accomplished prescribed <b>"Notice of Construction"</b> shall be submitted to the Office of the Building  Official.</li>
-								<li>That upon completion of sanitary works, the licensed supervisor/in-charge shall submit the entry to the logbook duly signed and sealed to the Building Official including as-built plans and other documents, and shall also accomplish the Certificate of Completion stating that the sanitary works conform to the provision of the Code on Sanitation, the National Building Code and its IRR.</li>
+								<li>That under Article 1723 of the Civil Code of the Philippines, the engineer (or architect) who drew up the plans andspecifications for the building/structure is responsible for damages if within fifteen (15) years from the completion of the building/structure, the same should collapse due to defect in the plans or specifications or defects in the ground. The engineer or architect who supervises the construction shall be solidarily liable with the contractor should the edifice collapse due to defect in the construction or the use of inferior materials.</li>
+								<li>That the proposed civil/structural works shall be in accordance with the civil/structural plans filed with this office and in conformity with the latest National Structural Code of the Philippines, the National Building Code and its IRR.</li>
+								<li>That prior to any construction activity, a duly accomplished prescribed "Notice of Construction" shall be submitted to the Office of the Building Official.</li>
+								<li>That upon completion of the construction, the licensed full-time inspector and supervisor/in-charge of construction works shall submit the entry to the logbook duly signed and sealed to the Building Official including as-built plans and other documents and shall also accomplish and submit a certificate of completion stating that the civil/structural works conform to the provisions of the National Structural Code of the Philippines, the National Building Code and its IRR.</li>
 								<li>That this permit is null and void unless accompanied by the building permit.</li>
 							</ol>
-						</td>
 					</tr>
 					<tr style="height:80px;">
 						<td><p class="allcaps-bold">Permit Issued by:</p></td>
 					</tr>
-					<tr>
+					<tr class="last-td">
 						<td align="center">
 							<p class="underline bldgofficial"></p><br>
 							<p class="allcaps-bold">Local building official</p><br>

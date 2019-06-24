@@ -1,8 +1,7 @@
 <table>
 		<tr>
 			<td colspan="2">
-				<br>
-				<p class="title"><b>Box 7 (To be accomplished by the processing and evaluation division)</b></p>
+				<p class="title">Box 7 (To be accomplished by the processing and evaluation division)</p>
 				<table class="boxpermit" align="center" width="100%">
 					<tr class="trborder" style="height:40px;">
 						<td>Received by:</td>
@@ -44,7 +43,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<p class="title"><b>Box 8</b></p>
+				<p class="title">Box 8</p>
 				<table class="boxpermit" align="center" width="100%">
 					<tr class="trborder" style="height:60px;">
 						<td colspan="6" align="center"><b>Progress Flow</b></td>
@@ -98,13 +97,13 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<p class="title"><b>Box 9</b></p>
+				<p class="title">Box 9</p>
 				<table class="boxpermit" align="center" width="100%">
 					<tr style="height:80px;">
-						<td align="left"><b>Action Taken</b></td>
+						<td align="left"><p class="allcaps-bold">Action Taken</p></td>
 					</tr>
 					<tr>
-						<td><b>Permit is hereby issued subject to the following:</b></td>
+						<td><p class="allcaps-bold">Permit is hereby issued subject to the following:</p></td>
 					</tr>
 					<tr>
 						<td>	
@@ -117,10 +116,15 @@
 							</ol>
 					</tr>
 					<tr style="height:80px;">
-						<td><b>Permit Issued by:</b></td>
+						<td><p class="allcaps-bold">Permit Issued by:</p></td>
 					</tr>
 					<tr class="last-td">
-						<td align="center"><p class="underline bldgofficial"></p><br><b><p class="allcaps">Local building official</p></b><br><p>(Signature over Printed Name)</p><br>Date <p class="underline bldgofficial-date"></p></td>
+						<td align="center">
+							<p class="underline bldgofficial"></p><br>
+							<p class="allcaps-bold">Local building official</p><br>
+							<p>(Signature over Printed Name)</p><br>
+							<p>Date</p><p class="underline bldgofficial-date"></p>
+						</td>
 					</tr>
 				</table>
 			</td>

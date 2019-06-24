@@ -2,7 +2,7 @@
 	<table>
 		<tr>
 			<td>
-				<p class="title"><b>Box 7 (To be accomplished by the processing and evaluation division)</b></p>
+				<p class="title">Box 7 (To be accomplished by the processing and evaluation division)</p>
 				<table class="boxpermit" align="center" width="100%">
 					<tr class="trborder" style="height:40px;">
 						<td>Received by:</td>
@@ -12,39 +12,41 @@
 						<td colspan="2" align="center"><b>FIVE (5) SETS OF Mechanical DOCUMENTS</b></td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"> MECHANICAL PLANS AND SPECIFICATIONS</td>
-						<td><input type="checkbox"> BILL OF MATERIALS</td>
+						<td><p class="allcaps"><input type="checkbox"> MECHANICAL PLANS AND SPECIFICATIONS</p></td>
+						<td><p class="allcaps"><input type="checkbox"> BILL OF MATERIALS</p></td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"> COST ESTIMATES</td>
-						<td><input type="checkbox"> Others (Specify) <p class="underline civilothers"></p></td>
+						<td><p class="allcaps"><input type="checkbox"> COST ESTIMATES</p></td>
+						<td><p class="allcaps"><input type="checkbox"> Other</p>s (Specify) <p class="underline civilothers"></p></td>
 					</tr>
 					<tr class="last-td">
-						<td colspan="2"><input type="checkbox"> Expected date of completion/installation/construction </td>
+						<td colspan="2"><p class="allcaps"><input type="checkbox"> Expected date of completion/installation/construction</p> </td>
 					</tr>
 				</table>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<p class="title"><b>Box 8</b></p>
+				<p class="title">Box 8</p>
 				<table class="boxpermit" align="center" width="100%">
-					<tr class="trborder" style="height:60px;">
-						<td colspan="6" align="center"><b>Progress Flow</b></td>
-					</tr>
-					<tr class="trborder">
+					<tbody>
+						<tr class="trborder first-td last-td">
+							<td colspan="6" align="center"><p class="allcaps-bold">Progress Flow</p></td>
+						</tr>
+					</tbody>
+					<tr class="trborder allcaps">
 						<td class="tdborder" rowspan="2"></td>
 						<td align="center" class="tdborder" colspan="2">in</td>
 						<td align="center" class="tdborder" colspan="2">out</td>
 						<td align="center" class="tdborder" rowspan="2">Processed by:</td>
 					</tr>
-					<tr class="trborder">
+					<tr class="trborder allcaps">
 						<td align="center" class="tdborder">Date</td>
 						<td align="center" class="tdborder">Time</td>
 						<td align="center" class="tdborder">Date</td>
 						<td align="center" class="tdborder">Time</td>
 					</tr>
-					<tr class="trborder">
+					<tr class="trborder allcaps">
 						<td>Civil/Structural</td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
@@ -53,7 +55,7 @@
 						<td align="center" class="tdborder"></td>
 					</tr>
 					<tr class="trborder">
-						<td>Others (Specify)</td>
+						<td><p class="allcaps">Others</p> (Specify)</td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
@@ -73,13 +75,13 @@
 		</tr>
 		<tr>
 			<td>
-				<p class="title"><b>Box 9</b></p>
+				<p class="title">Box 9</p>
 				<table class="boxpermit" align="center" width="100%">
 					<tr style="height:80px;">
-						<td align="left"><b>Action Taken</b></td>
+						<td align="left"><p class="allcaps-bold">Action Taken</p></td>
 					</tr>
 					<tr>
-						<td><b>Permit is hereby issued subject to the following:</b></td>
+						<td><p class="allcaps-bold">Permit is hereby issued subject to the following:</p></td>
 					</tr>
 					<tr>
 						<td>
@@ -93,7 +95,7 @@
 						</td>
 					</tr>
 					<tr style="height:80px;">
-						<td><b>Permit Issued by:</b> <label></label></td>
+						<td><p class="allcaps-bold">Permit Issued by:</p></td>
 					</tr>
 					<tr class="last-td">
 						<td align="center">

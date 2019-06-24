@@ -125,7 +125,7 @@
 </style>
 
 
-<h2>List of Licensed Professionals</h2>
+<legend>List of Licensed Professionals</legend>
 
 <div r:context="professional" r:visibleWhen="#{mode=='initial'}">
 	<p style="padding-bottom:10px">Specify technical persons involved who will require signature on the project (e.g. architect, civil engineer, etc):</p> 
