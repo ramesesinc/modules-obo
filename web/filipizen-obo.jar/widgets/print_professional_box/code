@@ -3,15 +3,15 @@ def prof = OPTIONS.professional;
 if(prof == null ) prof = [:];
 %>
 
-<table class="boxpermit" style="width:99%" height="100%">
+<table class="boxpermit" style="width:99.5%" height="100%">
 	<tbody>
 		<tr class="trborder">
-			<td colspan="3"><p class="sub-title">${OPTIONS.title}</p></td>
+			<td colspan="3"><p class="allcaps-bold">${OPTIONS.title}</p></td>
 		</tr>
 		<tr>
 			<td colspan="3" align="center">
 				<p class="underline signature">${prof?.firstname} ${prof?.middlename}. ${prof?.lastname}</p> 
-				Date <p class="underline signature-date"></p>
+				Date <p class="underline signature-date">01-01-2019</p>
 			</td>
 		</tr>
 		<tr>

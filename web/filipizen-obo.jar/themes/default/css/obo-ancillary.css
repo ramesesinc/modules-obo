@@ -3,20 +3,21 @@ table {border-collapse: collapse;font-size: 12px; margin: 0; padding: 0;}
 html, body {font-family: 'arial narrow';-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;-webkit-font-smoothing: antialiased;
     color: #000000;font-size: 14px;}
 h1{text-align: center;margin-top: 10px;font-size: 20px;font-weight: 500;font-family: 'arial narrow';line-height: 35px;
-    margin-bottom: 0px;color: #000000;}
-h2{text-align: center;font-size: 17px}
+    margin-bottom: 0px;color: #000000;text-transform: uppercase;}
+h2{text-align: center;font-size: 17px;text-transform: uppercase;}
 h3{text-align: center;text-transform: capitalize !important;margin: 0;font-weight: 600;font-family: 'arial narrow';font-size: 17px;line-height: 19px;}
 table tr td{padding-left: 10px;padding-right: 10px;}
 input[type="checkbox"]{ outline: 1px solid #000;}
 p {margin: 0px;}
 ol li {list-style: none;counter-increment: foo;display: table-row;}
 li::before {content: counter(foo) ".";display: table-cell;text-align: right;padding-right: 15px;}
-
-
+ol ol {counter-reset: list;margin: 0;}
+ol ol > li {list-style: none;position: relative;}
+ol ol > li:before {counter-increment: list;content: counter(list, lower-alpha) ". ";position: absolute;left: 11em;}
 
 .boxpermit{border: 1px solid #000;}
-.title{margin-top: 5px;margin-bottom: 5px;font-size: 10pt;text-transform: uppercase;}
-.tblscope{border-left: 1px solid #000000;border-right: 1px solid #000000;border-bottom: 1px solid #000000;text-transform: uppercase;}
+.title{margin-top: 5px;margin-bottom: 5px;font-size: 10pt;text-transform: uppercase;font-weight: bold;}
+.tblscope{border-left: 1px solid #000000;border-right: 1px solid #000000;border-bottom: 1px solid #000000;}
 .nopaddingleft{padding-left: 0;}
 .nopaddingright{padding-right: 0;}
 .data{font-size: 10pt;font-weight: bold;}
@@ -30,7 +31,7 @@ li::before {content: counter(foo) ".";display: table-cell;text-align: right;padd
 .header {display: inline-block;margin:0 auto;width:60%;}
 .formno {float:left;width:20%;}
 .header-container{width:100%;text-align:center;}
-.page {background: white;padding:10px 20px 0px 20px;width: 100%}
+.page {background: white;padding:0px 20px 0px 20px;width: 100%}
 .barcode{float:right;text-align:center;height: 20px; padding-right:100px;position: relative;width:20%;}
 
 /*Underline CSS*/
@@ -73,17 +74,18 @@ tr td p{ display: inline-block;}
 
 /*Design Professional boxCSS*/
 .signature{padding:40px 70px 0px 70px;text-align: center;}
-.signature-date{width: 20%;vertical-align: bottom;}
+.signature-date{padding:30px 20px 0px 20px;vertical-align: bottom;}
 
 /*Owner Box CSS*/
 .ownerbox{padding:30px 70px 0px 70px;text-align: center}
-.ownerbox-date{width: 20%;}
+.ownerbox-date{padding:0px 20px 0px 20px;text-align: center}
 
 /*Building Official CSS*/
 .bldgofficial{width: 40%}
 .bldgofficial-date{width: 20%;}
 
-
+/*Plimbing CSS*/
+.fixture .qty{width:100%}
 
 /*Print Media CSS*/
 @page {  margin: 0;}
@@ -118,8 +120,6 @@ tr td p{ display: inline-block;}
     .raising{ width: 76%;}
     .accessory{ width: 43%;}
     .others{ width: 95%;}
-
-
-
 }
+
 

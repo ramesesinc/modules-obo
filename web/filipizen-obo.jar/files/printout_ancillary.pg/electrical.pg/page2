@@ -12,15 +12,15 @@
 						<td colspan="2" align="center" class="allcaps-bold">FIVE (5) SETS OF Electrical DOCUMENTS</td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"> Electrical plans and specifications</td>
-						<td><input type="checkbox"> Expected date of completion/installation/construction <p class="underline"></p></td>
+						<td><p class="allcaps"><input type="checkbox"> Electrical plans and specifications</p></td>
+						<td><p class="allcaps"><input type="checkbox"> Expected date of completion/installation/construction</p> <p class="underline"></p></td>
 					</tr>
 					<tr>
-						<td><input type="checkbox"> Special Fixtures and equiptment</td>
-						<td><input type="checkbox" rowspan="2"> Others (Specify) <p class="underline"></p></td>
+						<td><p class="allcaps"><input type="checkbox"> Special Fixtures and equiptment</p></td>
+						<td rowspan="2" valign="top"><p class="allcaps"><input type="checkbox" rowspan="2"> Others</p> (Specify) <p class="underline others"></p></td>
 					</tr>
 					<tr class="last-td">
-						<td><input type="checkbox"> Expected date of completion/installation/construction <p class="underline"></p></td>
+						<td><p class="allcaps"><input type="checkbox"> Expected date of completion/installation/construction</p> <p class="underline"></p></td>
 					</tr>
 					</tbody>
 				</table>
@@ -30,23 +30,25 @@
 			<td>
 				<p class="title"><b>Box 7</b></p>
 				<table class="boxpermit" align="center" width="100%">
-					<tr class="trborder">
-						<td colspan="6" align="center"><b>Progress Flow</b></td>
-					</tr>
-					<tr class="trborder">
+					<tbody>
+						<tr class="trborder first-td last-td">
+							<td colspan="6" align="center"><p class="allcaps-bold">Progress Flow</p></td>
+						</tr>
+					</tbody>
+					<tr class="trborder allcaps">
 						<td class="tdborder" rowspan="2"></td>
 						<td align="center" class="tdborder" colspan="2">in</td>
 						<td align="center" class="tdborder" colspan="2">out</td>
 						<td align="center" class="tdborder" rowspan="2">Processed by:</td>
 					</tr>
-					<tr class="trborder">
+					<tr class="trborder allcaps">
 						<td align="center" class="tdborder">Date</td>
 						<td align="center" class="tdborder">Time</td>
 						<td align="center" class="tdborder">Date</td>
 						<td align="center" class="tdborder">Time</td>
 					</tr>
 					<tr class="trborder">
-						<td>Civil/Structural</td>
+						<td><p class="allcaps">Civil/Structural</p></td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
@@ -59,7 +61,7 @@
 							Validity<p class="underline bldgofficial-date"></p></td>
 					</tr>
 					<tr class="trborder">
-						<td>Others (Specify)</td>
+						<td><p class="allcaps">Others</p> (Specify)</td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
 						<td align="center" class="tdborder"></td>
@@ -86,20 +88,28 @@
 						<td><b>Permit is hereby issued subject to the following:</b></td>
 					</tr>
 					<tr>
-						<td style="padding-left:30px"><p>1. That the proposed electrical works shall be in accordance with the electrical plans filed with this Office and in conformity with the provisions of the latest Philippine Electrical Codes, the National Building Code and its IRR.</p>
-						<br><p>2. That prior to any electrical installation, the Owner/Permittee shall submit a duly accomplished prescribed Notice of Construction to the Office of the Building Official.</p>
-						<br><p>3. That for installed electrical capacity of 200 amperes and above at 230 volts nominal and above, a specialty electrical contractor duly licensed by the Philippine Contractors Accreditation Board (PCAB) shall be required.</p>
-						<br><p>4. That a duly licensed electrical practitioner shall be in-charge of the installation, and that upon completion of the electrical works, he shall submit the entry of the logbook duly signed and sealed to the OBO including as-built plans and other documents. He shall also accomplish the Certificate of Completion stating that the electrical works conform to the provisions of the Philippine Electrical Codes, the National Building Code and its IRR.</p>
-						<br><p>5. That this permit is null and void unless accompanied by the building permit except for projects involving purely electrical works in which case only the building permit number of the existing building/structure shall be required.</p>
-						<br><p>6. That a Certificate of Final Electrical Inspection (CFEI) shall be secured prior to the actual occupancy of the building.</p>
-						<br><br><p>7. That this permit shall be posted at the door or site of work.</p>
+						<td>	
+							<ol>
+								<li>That the proposed electrical works shall be in accordance with the electrical plans filed with this Office and in conformity with the provisions of the latest Philippine Electrical Codes, the National Building Code and its IRR.</li>
+								<li>That prior to any electrical installation, the Owner/Permittee shall submit a duly accomplished prescribed Notice of Construction to the Office of the Building Official.</li>
+								<li>That for installed electrical capacity of 200 amperes and above at 230 volts nominal and above, a specialty electrical contractor duly licensed by the Philippine Contractors Accreditation Board (PCAB) shall be required.</li>
+								<li>That a duly licensed electrical practitioner shall be in-charge of the installation, and that upon completion of the electrical works, he shall submit the entry of the logbook duly signed and sealed to the OBO including as-built plans and other documents. He shall also accomplish the Certificate of Completion stating that the electrical works conform to the provisions of the Philippine Electrical Codes, the National Building Code and its IRR.</li>
+								<li>That this permit is null and void unless accompanied by the building permit except for projects involving purely electrical works in which case only the building permit number of the existing building/structure shall be required.</li>
+								<li>That a Certificate of Final Electrical Inspection (CFEI) shall be secured prior to the actual occupancy of the building.</li>
+								<li>That this permit shall be posted at the door or site of work.</li>
+							</ol>
 					</td>
 					</tr>
 					<tr style="height:80px;">
-						<td><b>Permit Issued by:</b> <label></label></td>
+						<td><p class="allcaps-bold">Permit Issued by:</p></td>
 					</tr>
-					<tr>
-						<td align="center"><label class="underline"></label> <b>Building Official</b><p>(Signature over Printed Name)</p><p>Date<label class="underline"></label></p></td>
+					<tr class="last-td">
+						<td align="center">
+							<p class="underline bldgofficial"></p><br>
+							<p class="allcaps-bold">Local building official</p><br>
+							<p>(Signature over Printed Name)</p><br>
+							<p>Date</p><p class="underline bldgofficial-date"></p>
+						</td>
 					</tr>
 				</table>
 			</td>

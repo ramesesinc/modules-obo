@@ -2,33 +2,33 @@
 <table  width="100%" class="tblscope">
 	<tbody>
 		<tr class="first-td">
-			<td colspan="9"><b>Scope of work</b></td>
+			<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 		</tr>
 		<tr>
-			<td colspan="3"><input type="checkbox"> New Installation</td>
-			<td colspan="3"><input type="checkbox"> Reconnection of service entrance</td>
-			<td colspan="3"><input type="checkbox"> relocation service etrance</td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> New Installation</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> Reconnection of service entrance</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> relocation service etrance</p></td>
 		</tr>
 		<tr>
-			<td colspan="3"><input type="checkbox"> Annual inspection</td>
-			<td colspan="3"><input type="checkbox"> separation of service entrance</td>
-			<td colspan="3" rowspan="2" valign="top"><input type="checkbox"> Others (specify) <p class="underline others"></p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> Annual inspection</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> separation of service entrance</p></td>
+			<td colspan="3" rowspan="2" valign="top"><input type="checkbox"> Others</p> (specify) <p class="underline others"></p></td>
 		</tr>
 		<tr class="trborder last-td" >
-			<td colspan="3"><input type="checkbox"> Temporary</td>
-			<td colspan="5"><input type="checkbox"> Upgrade of service entrace</td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> Temporary</p></td>
+			<td colspan="5"><p class="allcaps"><input type="checkbox"> Upgrade of service entrace</p></td>
 		</tr>
 	</tbody>
 	<tbody>
 		<tr class="trborder first-td last-td">
-			<td colspan="9" align="center"><b>Summary of electrical load/capacities applied for</b></td>
+			<td colspan="9" align="center"><p class="allcaps-bold">Summary of electrical load/capacities applied for</p></td>
 		</tr>
 	</tbody>
 	<tbody>
 		<tr class="first-td">
-			<td colspan="3" align="center">Total Connected Load</td>
-			<td colspan="3" class="tdborder" align="center">Total Transformer Capacity</td>
-			<td colspan="3" class="tdborder" align="center">Total Generator/Ups Capacity</td>
+			<td colspan="3" align="center"><p class="allcaps">Total Connected Load</p></td>
+			<td colspan="3" class="tdborder" align="center"><p class="allcaps">Total Transformer Capacity</p></td>
+			<td colspan="3" class="tdborder" align="center"><p class="allcaps">TTotal Generator/Ups Capacity</p></td>
 		</tr>
 		<tr class="last-td">
 			<td colspan="3" align="center"><p class="underline kva"></p>kVA</td>
@@ -48,16 +48,16 @@
 		</tr>
 		<tr>
 			<td colspan="2" class="tdinside">
-				<p class="title"><b>Box 3</b></p>
+				<p class="title">Box 3</p>
 				<table class="boxpermit" width="100%">
 					<tbody>
 						<tr>
 							<td colspan="3"><b>Supervisor / In-charge of electrical works</b></td>
 						</tr>
 						<tr>
-							<td><input type="checkbox"> Professional Electrical Engineer</td>
-							<td><input type="checkbox">  Registered Electrical Engineer</td>
-							<td><input type="checkbox">  Registered Master Electrician</td>
+							<td><p class="allcaps"><input type="checkbox"> Professional Electrical Engineer</p></td>
+							<td><p class="allcaps"><input type="checkbox">  Registered Electrical Engineer</p></td>
+							<td><p class="allcaps"><input type="checkbox">  Registered Master Electrician</p></td>
 						</tr>
 						<tr class="trborder last-td">
 							<td colspan="3" align="center">
@@ -91,11 +91,11 @@
 		<!--second row. 283 -->
 		<tr>
 			<td class="tdinside">
-				<p class="title"><b>Box 5</b></p>
+				<p class="title">Box 5</p>
 				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
 			</td>
 			<td class="tdinside">
-				<p class="title"><b>Box 6</b></p>
+				<p class="title">Box 6</p>
 				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
 			</td>
 		</tr>

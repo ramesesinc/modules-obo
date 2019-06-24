@@ -193,8 +193,8 @@
 </div>
 
 <div  r:context="location" r:visibleWhen="#{mode=='view-locations'}" style='display:none'>
-  <h2>Locations</h2>
-  <table r:context="location" r:items="locations" r:varName="item" border="1" r:name="selectedItem">
+  <legend>Locations</legend>
+  <table r:context="location" r:items="locations" r:varName="item" border="1" r:name="selectedItem" width="100%">
     <thead>
       <tr>
         <td>TD No</td>

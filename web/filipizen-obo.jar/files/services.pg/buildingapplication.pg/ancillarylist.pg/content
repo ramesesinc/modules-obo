@@ -67,7 +67,7 @@
 </script>
 
 
-<h1>Ancillary Permits</h1>
+<legend>Ancillary Permits</legend>
 
 <div r:context="ancillarylist" r:visibleWhen="#{mode=='select'}">
 	<p>Select applicable ancillary permits for the project</p>

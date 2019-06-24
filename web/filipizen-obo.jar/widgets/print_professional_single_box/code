@@ -4,12 +4,15 @@
 				<td colspan="3"><p class="allcaps-bold">Design Professional, Plans and Specifications</p></td>
 			</tr>
 			<tr>
-				<td align="center" rowspan="4" style="padding-bottom:20px;padding-top:20px">
-					<p class="underline signature"></p> 
-					Date <p class="underline signature-date"></p><br>
+				<td align="center" rowspan="5" style="padding-bottom:20px;padding-top:20px">
+					<p class="underline signature">dddd</p> 
+					Date <p class="underline signature-date">01-01-2019</p><br>
 					<p class="allcaps-bold">${OPTIONS.role}</p><br>
 					<p>(Signed and Sealed Over Printed Name)</p><br>
 				</td>
+			</tr>
+			<tr class="trborder">
+				<td class="tdborder" colspan="2">Address</td>
 			</tr>
 			<tr class="trborder">
 				<td class="tdborder">PRC No.</td>

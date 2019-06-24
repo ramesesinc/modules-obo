@@ -58,7 +58,6 @@
   });
 </script>
 
-  <br>
 
   <legend>Project Details</legend>
   <div r:context="project" r:visibleWhen="#{error != null }">

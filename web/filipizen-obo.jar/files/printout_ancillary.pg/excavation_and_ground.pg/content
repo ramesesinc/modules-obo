@@ -1,489 +1,75 @@
 <%def app = PARAMS.app; %>
 
-<button onclick="window.print();return false;" class="btn-print">Print</button>
-<div class="page">
-	<h3>Republic of the Philippines</h3>
-	<h3>${app.org.formalname}</h3>
-	<h3>${app.org.province}</h3>
-	<br>
-	<h2 style="float:right"><b>Tracking No. : <label>1029289383</label></b></h2>
-	<h2>Office of the Building Official</h2>
-	<h1><b>Excavation and Ground Preparation Permit</b></h1>
-
-	<br><br>
-	<table align="center" width="100%" border="0">
-		<tr>
-			<td>Application No.
-				<table class="smallBox">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
-			</td>
-			<td>EGPP No.
-				<table class="smallBox">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
-			</td>
-			<td>Building Permit no.
-				<table class="smallBox">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>	
-			</td>
-		</tr>
-	</table>
-	<br>
-
-	<table align="center" width="100%">
-		<tr>
-			<td colspan="2">
-				<p class="title"><b>Box 1 (To be accomplished in print print by the owner/application)</b></p>
-				<table align="center" class="boxpermit" width="100%">
-					<tbody>
-						<tr>
-							<td width="15%">owner/Applicant</td>
-							<td colspan="2">last name</td>
-							<td colspan="3">firstname</td>
-							<td colspan="1">M.I</td>
-							<td colspan="2" class="tdborder">TIN</td>
-						</tr>
-						<tr class="trborder">
-							<td></td>
-							<td colspan="2"><label class="data">${app.owner.lastname} </label></td>
-							<td colspan="3"><label class="data">${app.owner.firstname}</label></td>
-							<td colspan="1"><label class="data">${app.owner.middleinitial}</label></td>
-							<td colspan="2" class="tdborder"><label class="data">${app.owner.tin}</label></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td colspan="2">For construction Owned</td>
-							<td colspan="3" class="tdborder">form of ownership</td>
-							<td colspan="4" class="tdborder"> use or character of occupancy</td>
-						</tr>
-						<tr>
-							<td colspan="2"><label class="data">dd</label></td>
-							<td colspan="3" rowspan="2" class="tdborder"><label class="data">${app.owner.type}</label></td>
-							<td colspan="4" rowspan="2" class="tdborder"><label class="data">${app.occupancytype.objid} - ${app.occupancytype.description}</label></td>
-						</tr>
-						<tr class="trborder">
-							<td colspan="2">By an enterprise</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td>address no.</td>
-							<td> street </td>
-							<td colspan="2">Barangay</td>
-							<td colspan="3">City/Municipality</td>
-							<td>Zip Code</td>
-							<td class="tdborder">Telephone No.</td>
-						</tr>
-						<tr class="trborder">
-							<td colspan="2">${app.owner.address.street}</td>
-							<td colspan="2">${app.owner.address.barangay.name}</td>
-							<td colspan="3"></td>
-							<td></td>
-							<td class="tdborder"></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td colspan="2">Location of Construction:</td>
-							<td colspan="2">Lot No. <label class="underline">${app.location.lotno}</label></td>
-							<td  colspan="2">Blk No. <label class="underline">${app.location.blockno}</label></td>
-							<td colspan="2">TCT No.  <label class="underline">${app.location.tctno}</label></td>
-							<td >Tax Dec No. <label class="underline">${app.location.tdno}</label></td>
-						</tr>
-						<tr class="trborder trlocation">
-							<td colspan="3">Street <label class="underline">${app.location.street}</label></td>
-							<td colspan="3">Barangay <label class="underline">${app.location.barangay}</label></td>
-							<td colspan="3">City/Municipality <label class="underline">${app.org.formalname}</label></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td colspan="9"><b>Scope of work</b></td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> New Construction</td>
-							<td colspan="3"><input type="checkbox"> Renovation</td>
-							<td colspan="3"><input type="checkbox">  Other (specify) <label class="underline"></label></td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> Erection</td>
-							<td colspan="6"><input type="checkbox"> Repair <label class="underline"></label></td>
-						</tr>
-						<tr class="trborder">
-							<td colspan="9"><input type="checkbox"> Addition</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td colspan="9"><b>Use or Character of Occupancy:</b></td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> Group A: Residential, Dwellings</td>
-							<td colspan="6"><input type="checkbox"> Group G: Industrial storage and hazardous</td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> Group B: Residential, Hotel, Apartment</td>
-							<td colspan="6"><input type="checkbox"> Group H: Recreational, assembly occupant load less than 1000</td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> Group C: Educational, Recreational/td>
-							<td colspan="6"><input type="checkbox"> Group I: Recreational, assembly occupant load 1000 or more</td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> Group D: Institutional</td>
-							<td colspan="6"><input type="checkbox"> Group J: Agricultural, accessory</td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> Group E: Business and Mercantile</td>
-							<td colspan="6"><input type="checkbox"> Others (Specify)<label class="underline"></label></td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
+<table  width="100%" class="tblscope">
+	<tbody>
+		<tr class="first-td">
+			<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 		</tr>
 		<tr>
-			<td>
-				<br>
-				<p class="title"><b>Box 2</b></p>
-				<table class="boxpermit" style="width:99%" height="100%">
-						
-					<tbody>
-						<tr class="trborder">
-							<td colspan="2"><b>Design Professional, Plans and Specifications</b></td>
-						</tr>
-						<tr>
-							<td colspan="2" class="signature"><label>
-							${app.designprofessional.firstname} ${app.designprofessional.middlename?.substring(0,1)}. ${app.designprofessional.lastname}
-							</label></td>
-						</tr>
-						<tr>
-							<td align="center" colspan="2"><p><b>Architect or Civil Engineer</b></p> <p>(Signed and Sealed Over Printed Name)</p></td>
-						</tr>
-						<tr class="trborder">
-							<td align="center" colspan="2">Date <label class="underline"></label></td>
-						</tr>
-						<tr class="trborder">
-							<td colspan="2">Address : <label class="data">${app.designprofessional.address.text}</label></td>
-						</tr>
-						<tr class="trborder">
-							<td>PRC No.: <label class="data">${app.designprofessional.prc.refno}</label></td>
-							<td class="tdborder">Validity: <label class="data">${app.designprofessional.prc.validity}</label></td>
-						</tr>
-						<tr class="trborder">
-							<td>PTR No.: <label class="data">${app.designprofessional.ptr.refno}</label></td>
-							<td class="tdborder">Date Issued <label class="data">${app.designprofessional.ptr.dtissued}</label></td>
-						</tr>
-						<tr class="trborder">
-							<td>Issued at: <label class="data">${app.designprofessional.ptr.placeissued}</label></td>
-							<td class="tdborder">TIN : <label class="data">${app.designprofessional.ptr.tin}</label></td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-			<td>
-				<br>
-				<p class="title"><b>Box 3</b></p>
-				<table class="boxpermit" style="width:100%" height="100%">
-					<tr class="trborder">
-						<td colspan="2"><b>Full-time Inspector and Supervisor of Construction Works</b></td>
-					</tr>
-					<tr>
-						<td colspan="2" class="signature">
-							<label>${app.supervisor.firstname} ${app.supervisor.middlename?.substring(0,1)}. ${app.supervisor.lastname}</label>
-						</td>
-					</tr>
-					<tr>
-						<td align="center" colspan="2"><p><b>Architect or Civil Engineer</b></p> <p>(Signed and Sealed Over Printed Name)</p></td>
-					</tr>
-					<tr class="trborder">
-						<td align="center" colspan="2">Date <label class="underline"></label></td>
-					</tr>
-					<tr class="trborder">
-						<td colspan="2">Address: <label class="data">${app.supervisor.address.text}</label></td>
-					</tr>
-					<tr class="trborder">
-						<td>PRC No. : <label class="data">${app.supervisor.prc.refno}</label></td>
-						<td class="tdborder">Validity: <label class="data">${app.supervisor.prc.validity}</label></td>
-					</tr>
-					<tr class="trborder">
-						<td>PTR No. : <label class="data">${app.supervisor.ptr.refno}</td>
-						<td class="tdborder">Date Issued: <label class="data">${app.supervisor.ptr.dtissued}</label></td>
-					</tr>
-					<tr class="trborder">
-						<td>Issued at: <label class="data">${app.supervisor.ptr.placeissued}</label></td>
-						<td class="tdborder">TIN : <label class="data">${app.supervisor.ptr.tin}</label></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-
-			<!-- second row -->
-		<tr>
-			<td>
-				<br>
-				<p class="title"><b>Box 4</b></p>
-				<table  class="boxpermit" style="width:99%" height="100%">
-					<tbody>
-						<tr>
-							<td colspan="3"><b>BUILDING OWNER</b></td>
-						</tr>
-						<tr>
-							<td colspan="3" class="signature"><label class="data">${app.owner.firstname} ${app.owner.middlename.substring(0,1)}. ${app.owner.lastname}</label></td>
-						</tr>
-						<tr>
-							<td align="center" colspan="3"><p>(Signed Over Printed Name)</p></td>
-						</tr>
-						<tr class="trborder">
-							<td align="center" colspan="3">Date <label class="underline"></label></td>
-						</tr>
-						<tr class="trborder">
-							<td colspan="3">Address: <label class="data"> ${app.owner.address.text}</label></td>
-						</tr>
-						<tr>
-							<td>C.T.C. No.</td>
-							<td class="tdborder">Date Issued</td>
-							<td class="tdborder">Place Issued</td>
-						</tr>
-						<tr>
-							<td><label class="data"> ${app.owner.ctc.refno}</label></td>
-							<td class="tdborder"><label class="data"> ${app.owner.ctc.dtissued}</label></td>
-							<td class="tdborder"><label class="data"> ${app.owner.ctc.placeissued}</label></td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-			<td style="padding:0px">
-				<br>
-				<p class="title"><b>Box 5</b></p>
-				<table  class="boxpermit" style="width:100%" height="100%">
-					<tbody>
-						<tr>
-							<td colspan="3">WITH CONSENT: <b>LOT OWNER</b></td>
-						</tr>
-						<tr>
-							<td colspan="3" class="signature"><label class="data">${app.lotowner.firstname} ${app.lotowner.middlename.substring(0,1)}. ${app.lotowner.lastname}</label></td>
-						</tr>
-						<tr>
-							<td align="center" colspan="3"><p>(Signed Over Printed Name)</p></td>
-						</tr>
-						<tr class="trborder">
-							<td align="center" colspan="3">Date <label class="underline"></label></td>
-						</tr>
-						<tr class="trborder">
-							<td colspan="3">Address : <label class="data"> ${app.lotowner.address.text}</label></td>
-						</tr>
-						<tr>
-							<td>C.T.C. No.</td>
-							<td class="tdborder">Date Issued</td>
-							<td class="tdborder">Place Issued</td>
-						</tr>
-						<tr>
-							<td><label class="data"> ${app.lotowner.ctc.refno}</label></td>
-							<td class="tdborder"><label class="data"> ${app.lotowner.ctc.dtissued}</label></td>
-							<td class="tdborder"><label class="data"> ${app.lotowner.ctc.placeissued}</label></td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-	</table>
-</div>
-
-<div class="page">
-	<table>
-		<tr>
-			<td>
-				<p class="title"><b>Box 6(To be accomplished by the Design Professional)</b></p>
-				<table class="boxpermit" align="center" width="100%">
-					<tr>
-						<td><input type="checkbox"> Excavation and Fills</td>
-						<td><input type="checkbox"> Foundation and Retaining Walls</td>
-						<td><input type="checkbox"> Pile Foundations</td>
-						<td><input type="checkbox"> Grading and Earthworks</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"> Others (Specify) <label class="underline"></label></td>
-						<td><input type="checkbox"> <label class="underline"></label></td>
-						<td><input type="checkbox"> <label class="underline"></label></td>
-						<td style="padding-left: 70px">(Including fills and Embankment)</td>
-					</tr>
-				</table>
-			</td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> New Construction</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> Renovation</p></td>
+			<td colspan="3" rowspan="2"><p class="allcaps"><input type="checkbox">  Other (specify)</p> <p class="underline civilothers"></p></td>
 		</tr>
 		<tr>
-			<td>
-				<p class="title"><b>Box 7</b></p>
-				<table class="boxpermit" align="center" width="100%">
-					<tr style="height:80px;">
-						<td align="left"><b>Action Taken:</b></td>
-					</tr>
-					<tr>
-						<td><b>Permit is hereby issued/granted subject to the following conditions:</b></td>
-					</tr>
-					<tr>
-						<td style="padding-left: 30px">
-							<table class="align-td-top align-text-justify" width="100%">
-								<tr>
-									<td>1.</td>
-									<td>That under Article 1723 of the Civil Code of the Philippines, the engineer or architect who drew up the plans and specifications for a building/structure is liable for damages if within fifteen (15) years from the completion of the building/structure, the same should collapse due to defect in the plans or specifications or defects in the ground. The engineer or architect who supervises the construction shall be solidarily liable with the contractor should the edifice collapse due to defect in the construction or the use of inferior materials.</td>
-								</tr>
-								<tr>
-									<td>2.</td>
-									<td>That the proposed excavation and ground preparation of the project site shall be in conformity with the zoning ordinance and the provisions of the "National Building Code" (PD 1096), the National Structural Code of the Philippines and its implementing Rules and Regulations.</td>
-								</tr>
-								<tr>
-									<td style="padding-left: 50px" colspan="2">
-										<table>
-											<tr>
-												<td>a.</td>
-												<td>That prior to commencement of the proposed projects and construction an actual relocation survey shall be conducted by the responsible licensed Geodetic Engineer.</td>
-											</tr>
-											<tr>
-												<td>b.</td>
-												<td>That before commencing the excavation the person making or causing the excavation to be made shall notify in writing the owner of the adjoining building not less than ten (10) days before such excavation is to be made and show how the adjoining building should be protected.</td>
-											</tr>
-											<tr>
-												<td>c.</td>
-												<td>That the owner of the building shall engage the services of a responsible licensed Architect or Civil Engineer to undertake the full-time inspection and supervision of the construction work.</td>
-											</tr>
-											<tr>
-												<td>d.</td>
-												<td>That there shall be kept at the jobsite at all times a logbook of daily construction activities wherein the actual daily progress of construction including tests conducted, weather condition and other pertinent data are to be recorded, same shall be made available for scrutiny and comments by the OBO representative during the conduct of his/her inspection pursuant to Section 207 of the National Building Code.</td>
-											</tr>
-											<tr>
-												<td>e.</td>
-												<td>That upon completion of the excavation and ground preparation of the project site the said responsible licensed supervising Architect or Civil Engineer shall prepare and submit a Certificate of Completion of the project stating that the excavation and ground preparation of the project site conforms to the provision of the "National Building Code", (P.D. 1096).</td>
-											</tr>
-										</table>
-									</td>
-								</tr>
-								<tr>
-									<td>3.</td>
-									<td>All public facilities and utilities such as streets, sidewalks, curbs, gutters, electric posts, power and communication lines, water, sewer and drainage lines and the like shall be properly protected against any damage and obstruction. Any facility and/or utility damaged shall be properly repaired and restored to its original condition by the owner/applicant subject to the approval of the Building Official and the proper authorities concerned.</td>
-								</tr>
-								<tr>
-									<td>4.</td>
-									<td>The owner and contractor shall be jointly responsible for the safety, protection, security and convenience of the general public and his/her personnel, third parties, the works, equipment and the like. All wastes or discarded materials from the project shall be properly stored and disposed of. Water wastes shall be discharged directly into drainage lines. Pertinent provisions of the National Building Code (P.D. 1096) shall be compiled with.</td>
-								</tr>
-								<tr>
-									<td>5.</td>
-									<td>That this permit does not guarantee the subsequent granting of the principal building permit under process and that the owner/applicant undertakes the work or project at his/her own risk.</td>
-								</tr>
-								<tr>
-									<td>6.</td>
-									<td>That this permit shall not serve as an exemption from securing permits/written clearances from various government authorities exercising regulatory function affecting buildings and other related structures.</td>
-								</tr>
-								<tr>
-									<td>7.</td>
-									<td>For excavations more than fifty - (50) cubic meters and more than two (2) meters in depth, the owner/permitee shall post a cash bond of fifty thousand (P 50,000.00) for the first (50) cubic meters and three hundred pesos (P 300.00) for every cubic meter thereafter to be deposited with the O.B.O. Said excavations shall not exceed one hundred (100) cubic meters or three (3) meters in depth until the building permit is issued and shall not be left open without any work being done in the site for more than one hundred twenty (120) days, otherwise, the cash bond shall be forfeited in favor of the government to cover the expense for the necessary restoration should the owner/permitee fail to restore the same. If the bond is insufficient to effect the necessary restoration, additional cost to be incurred to complete the restoration shall be charged to the account of the owner/permitee or to whoever shall assume ownership of the property.</td>
-								</tr>
-							</table>
-						</td>
-					</tr>
-					<tr style="height:80px;">
-						<td><b>Permit Issued by:</b></td>
-					</tr>
-					<tr>
-						<td align="center"><b>Building official</b><br>(Signature over Printed Name)<br>Date <label class="underline"></label></td>
-					</tr>
-				</table>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> Erection</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox"> Repair</p> <p class="underline repair"></p></td>
+		</tr>
+		<tr class="trborder last-td">
+			<td colspan="9"><p class="allcaps"><input type="checkbox"> Addition</p></td>
+		</tr>
+	</tbody>
+	<tbody>
+		<tr class="first-td">
+			<td colspan="9"><p class="allcaps-bold">Use or Character of Occupancy:</p></td>
+		</tr>
+		<tr>
+			<td colspan="3"><input type="checkbox"> Group A: Residential, Dwellings</td>
+			<td colspan="6"><input type="checkbox"> Group G: Industrial storage and hazardous</td>
+		</tr>
+		<tr>
+			<td colspan="3"><input type="checkbox"> Group B: Residential, Hotel, Apartment</td>
+			<td colspan="6"><input type="checkbox"> Group H: Recreational, assembly occupant load less than 1000</td>
+		</tr>
+		<tr>
+			<td colspan="3"><input type="checkbox"> Group C: Educational, Recreational</td>
+			<td colspan="6"><input type="checkbox"> Group I: Recreational, assembly occupant load 1000 or more</td>
+		</tr>
+		<tr>
+			<td colspan="3"><input type="checkbox"> Group D: Institutional</td>
+			<td colspan="6"><input type="checkbox"> Group J: Agricultural, accessory</td>
+		</tr>
+		<tr class="last-td">
+			<td colspan="3"><input type="checkbox"> Group E: Business and Mercantile</td>
+			<td colspan="6"><input type="checkbox"> Others (Specify) <p class="underline civilothers"></p></td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td class="tdinside">
+				<p class="title">Box 2</p>
+				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app.designprofessional, role:'ARCHITECT OR CIVIL ENGINEER' )
+			</td>
+			<td class="tdinside">
+				<p class="title">Box 3</p>
+				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app.supervisor, role: 'ARCHITECT OR CIVIL ENGINEER' )
 			</td>
 		</tr>
-	</table>
-
-</div>
-
-
-
-<style type="text/css">
-table {border-collapse: collapse;font-size: 12px; margin: 0; padding: 0;}
-* {box-sizing: border-box;-moz-box-sizing: border-box;}
-html, body {font-family: 'arial narrow';-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;-webkit-font-smoothing: antialiased;text-transform: uppercase;color: #000000;font-size: 14px;}
-h1{text-align: center;margin-top: 10px;font-size: 20pt;font-weight: 500;font-family: 'arial narrow'line-height: 35px;margin-bottom: 0px;color: #000000;}
-h2{text-align: center;font-size: 17pt}
-h3{text-align: center;text-transform: capitalize !important;margin: 0;font-weight: 600;font-family: 'arial narrow';font-size: 17px;line-height: 19px;}
-table tr td{height:23px;padding-left: 10px;padding-right: 10px;}
-table tr td input{margin-left: 40px !important;margin-bottom: 0px;}
-input[type="checkbox"]{outline: 1px solid #000;}
-p {margin: 0px;text-transform: capitalize;}
-.data{font-size: 10pt;font-weight: bold;}
-.btn-print{width: 70px;height: 40px;color: #ffffff;background: #009688;font-size: 14px;outline: none;}
-.boxpermit{border: 1px solid #000;}
-.wd{width: 692px;}
-.fwd{width: 1386px;}
-.wrap{margin-right: 60px !important;}
-.tbbody{margin-top: 10px;margin-bottom: 10px;}
-.trborder{border-bottom: 1px solid #000000;}
-.trlocation{height: 30px;}
-.tdborder{border-left: 1px solid #000;}
-.title{margin-top: 5px;margin-bottom: 5px;font-size: 10pt;}
-.underline {border-bottom: 1px solid #000000;font-weight: normal;margin-bottom: 0px; text-align: center;}
-.smallBox>tbody>tr>td{width: 23px;height: 23px;padding:0px;text-align: center;    border: solid 1px #000000}
-.nopaddingleft{padding-left: 0;}
-.nopaddingright{padding-right: 0;}
-.signature{padding:30px 70px 0px 70px;text-align: center}
-.signature label{width: 100%;border-bottom: 1px solid #000000;}
-.page {background: white;padding:10px 20px 0px 20px;width: 100%}
-.barcode{float:right;text-align:center;height: 20px; padding-right:100px;position: relative;width:20%;}
-.header {display: inline-block;margin:0 auto;width:60%;}
-.formno {float:left;width:20%;}
-.header-container{width:100%;text-align:center;}
-table .last-td:last-child td {padding-bottom:10px;}
-@page {	 margin: 0;}
-@media print {
-    .page {margin: 0;page-break-after: always;padding-top: 20px;}
-    .data{font-size: 10pt;font-weight: bold;}
-    .signature{padding: 30px 0px 0px 0px;}
-    h1{font-size: 16pt;}
-    h2{font-size: 12pt;}
-    h3{font-size: 10pt;}
-    button{display: none}
-    table tr td input {margin-left: 10px !important;margin-bottom: 0px;}
-    .title{font-size: 10pt;}
-    .wd{width: 552px;margin-right: 20px;}
-}
-
-.text-transform-none {text-transform: none !important;}
-.align-td-top tr td { vertical-align: top !important; }
-.align-text-justify tr td { text-align: justify !important; }
-
-</style>
-
-
-
-
-
+		<!-- second row. 283 -->
+		<tr>
+			<td class="tdinside">
+				<p class="title">Box 4</p>
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+			</td>
+			<td class="tdinside">
+				<p class="title">Box 5</p>
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 

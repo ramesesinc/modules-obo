@@ -1,503 +1,83 @@
 <%def app = PARAMS.app; %>
 
-<button onclick="window.print();return false;" class="btn-print">Print</button>
-<div class="page">
-		<div class="header-container">
-		<div class="formno">
-			<p>NBC FORM NO. A-01</p>
-		</div>
-		<div class="header">
-			<h3>Republic of the Philippines</h3>
-			<h3>${app.org.formalname}</h3>
-			<h3>${app.org.province}</h3>
-			<br>
-			<h2>Office of the Building Official</h2>
-			<h1><b>Electronics Permit Permit</b></h1>
-		</div>
-		<div class="barcode">
-			<h2 ><b>Tracking No. : <label>1029289383</label></b></h2>
-		</div>
-	</div>	
-
-	<br><br>
-	<table align="center" width="100%" border="0">
+<table  width="100%" class="tblscope">
+	<tr class="first-td">
+		<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
+	</tr>
+	<tr class="last-td">
+		<td colspan="3"><p class="allcaps"><input type="checkbox"> New Installation</p></td>
+		<td colspan="4"><p class="allcaps"><input type="checkbox"> Annual Inspection</p></td>
+		<td colspan="2"><p class="allcaps"><input type="checkbox"> Other</p> (specify) <p class="underline civilothers"></p></td>
+	</tr>
+</table>
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
 		<tr>
-			<td>Application No.
-				<table class="smallBox">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
-			</td>
-			<td>C/SP No
-				<table class="smallBox">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>
-			</td>
-			<td>Building Permit no
-				<table class="smallBox">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				</table>	
-			</td>
-		</tr>
-	</table>
-	<br>
-
-	<table align="center" width="100%">
-		<tr>
-			<td colspan="2">
-				<p class="title"><b>Box 1 (To be accomplished in print print by the owner/application)</b></p>
-				<table align="center" class="boxpermit" width="100%">
-					<tbody>
-						<tr>
-							<td width="15%">owner/Applicant</td>
-							<td colspan="2">last name</td>
-							<td colspan="3">firstname</td>
-							<td colspan="1">M.I</td>
-							<td colspan="2" class="tdborder">TIN</td>
-						</tr>
-						<tr class="trborder">
-							<td></td>
-							<td colspan="2"><label class="data">${app.owner.lastname} </label></td>
-							<td colspan="3"><label class="data">${app.owner.firstname}</label></td>
-							<td colspan="1"><label class="data">${app.owner.middleinitial}</label></td>
-							<td colspan="2" class="tdborder"><label class="data">${app.owner.tin}</label></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td colspan="2">For construction Owned</td>
-							<td colspan="3" class="tdborder">form of ownership</td>
-							<td colspan="4" class="tdborder"> use or character of occupancy</td>
-						</tr>
-						<tr>
-							<td colspan="2"><label class="data">dd</label></td>
-							<td colspan="3" rowspan="2" class="tdborder"><label class="data">${app.owner.type}</label></td>
-							<td colspan="4" rowspan="2" class="tdborder"><label class="data">${app.occupancytype.objid} - ${app.occupancytype.description}</label></td>
-						</tr>
-						<tr class="trborder">
-							<td colspan="9">By an enterprise</td>
-						</tr>
-						
-					</tbody>
-					<tbody>
-						<tr>
-							<td>address no.</td>
-							<td> street </td>
-							<td colspan="2">Barangay</td>
-							<td colspan="3">City/Municipality</td>
-							<td>Zip Code</td>
-							<td class="tdborder">Telephone No.</td>
-						</tr>
-						<tr class="trborder">
-							<td colspan="2">${app.owner.address.street}</td>
-							<td colspan="2">${app.owner.address.barangay.name}</td>
-							<td colspan="3"></td>
-							<td></td>
-							<td class="tdborder"></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td colspan="2">Location of Construction:</td>
-							<td colspan="2">Lot No. <label class="underline">${app.location.lotno}</label></td>
-							<td  colspan="2">Blk No. <label class="underline">${app.location.blockno}</label></td>
-							<td colspan="2">TCT No.  <label class="underline">${app.location.tctno}</label></td>
-							<td >Tax Dec No. <label class="underline">${app.location.tdno}</label></td>
-						</tr>
-						<tr class="trborder trlocation">
-							<td colspan="3">Street <label class="underline">${app.location.street}</label></td>
-							<td colspan="3">Barangay <label class="underline">${app.location.barangay}</label></td>
-							<td colspan="3">City/Municipality <label class="underline">${app.org.formalname}</label></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td colspan="9"><b>Scope of work</b></td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> New Construction</td>
-							<td colspan="4"><input type="checkbox"> Renovation</td>
-							<td colspan="2"><input type="checkbox"> Raising</td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> Erection</td>
-							<td colspan="4"><input type="checkbox"> Conversion</td>
-							<td colspan="2"><input type="checkbox"> Demolition</td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> Addition</td>
-							<td colspan="4"><input type="checkbox"> Repair</td>
-							<td colspan="2"><input type="checkbox"> Accessory Building/Structure <label class="underline2"></label></td>
-						</tr>
-						<tr>
-							<td colspan="3"><input type="checkbox"> Alteration</td>
-							<td colspan="4"><input type="checkbox"> Moving</td>
-							<td colspan="2"><input type="checkbox"> Other (specify) <label class="underline"></label></td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-			<tr>
-				<td colspan="2">
-					<p class="title"><b>Box 2 (To be accomplished by the design professional)</b></p>
-						<table class="boxpermit" align="center" width="100%">
-							<tbody>
-								<tr>
-									<td colspan="3"><b>Nature of Civil / Structural Works:</b></td>
-								</tr>
-								<tr>
-									<td><input type="checkbox"> Staking</td>
-									<td><input type="checkbox"> Erection/Lifting</td>
-									<td><input type="checkbox"> Prestress Works</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox"> Excavation</td>
-									<td><input type="checkbox"> Concrete Framing</td>
-									<td><input type="checkbox"> Material testing</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox"> Soil Stabilization</td>
-									<td><input type="checkbox"> Structural Steel Framing</td>
-									<td><input type="checkbox"> Steel Towers</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox"> Piling Works</td>
-									<td><input type="checkbox"> Slabs</td>
-									<td><input type="checkbox"> Tanks</td>
-								</tr>
-								<tr>
-									<td><input type="checkbox"> Foundation</td>
-									<td><input type="checkbox"> Walls</td>
-									<td><input type="checkbox"> Others(Specify) <label class="underline"></label></td>
-								</tr>
-								<tr>
-									<td colspan="3">Prepared by:</b></td>
-								</tr>
-							</tbody>
-						</table> 
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<br>
-					<p class="title"><b>Box 3</b></p>
-					<table class="boxpermit" style="width:99%" height="100%">
-						
-						<tbody>
-							<tr class="trborder">
-								<td colspan="2"><b>Design Professional, Plans and Specifications</b></td>
-							</tr>
-							<tr>
-								<td colspan="2" class="signature"><label>
-								${app.designprofessional.firstname} ${app.designprofessional.middlename?.substring(0,1)}. ${app.designprofessional.lastname}
-								</label></td>
-							</tr>
-							<tr>
-								<td align="center" colspan="2"><p><b>Civil/Structutal Engineer</b></p> <p>(Signed and Sealed Over Printed Name)</p></td>
-							</tr>
-							<tr class="trborder">
-								<td align="center" colspan="2">Date <label class="underline"></label></td>
-							</tr>
-							<tr class="trborder">
-								<td colspan="2">Address : <label class="data">${app.designprofessional.address.text}</label></td>
-							</tr>
-							<tr class="trborder">
-								<td>PRC No.: <label class="data">${app.designprofessional.prc.refno}</label></td>
-								<td class="tdborder">Validity: <label class="data">${app.designprofessional.prc.validity}</label></td>
-							</tr>
-							<tr class="trborder">
-								<td>PTR No.: <label class="data">${app.designprofessional.ptr.refno}</label></td>
-								<td class="tdborder">Date Issued <label class="data">${app.designprofessional.ptr.dtissued}</label></td>
-							</tr>
-							<tr class="trborder">
-								<td>Issued at: <label class="data">${app.designprofessional.ptr.placeissued}</label></td>
-								<td class="tdborder">TIN : <label class="data">${app.designprofessional.ptr.tin}</label></td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td>
-					<br>
-					<p class="title"><b>Box 4</b></p>
-					<table class="boxpermit" style="width:100%" height="100%">
-						<tr class="trborder">
-							<td colspan="2"><b>Supervisor/In-charge of civil/structural works</b></td>
-						</tr>
-						<tr>
-							<td colspan="2" class="signature">
-								<label>${app.supervisor.firstname} ${app.supervisor.middlename?.substring(0,1)}. ${app.supervisor.lastname}</label>
-							</td>
-						</tr>
-						<tr>
-							<td align="center" colspan="2"><p><b>Civil/Structutal Engineer</b></p> <p>(Signed and Sealed Over Printed Name)</p></td>
-						</tr>
-						<tr class="trborder">
-							<td align="center" colspan="2">Date <label class="underline"></label></td>
-						</tr>
-						<tr class="trborder">
-							<td colspan="2">Address: <label class="data">${app.supervisor.address.text}</label></td>
-						</tr>
-						<tr class="trborder">
-							<td>PRC No. : <label class="data">${app.supervisor.prc.refno}</label></td>
-							<td class="tdborder">Validity: <label class="data">${app.supervisor.prc.validity}</label></td>
-						</tr>
-						<tr class="trborder">
-							<td>PTR No. : <label class="data">${app.supervisor.ptr.refno}</td>
-							<td class="tdborder">Date Issued: <label class="data">${app.supervisor.ptr.dtissued}</label></td>
-						</tr>
-						<tr class="trborder">
-							<td>Issued at: <label class="data">${app.supervisor.ptr.placeissued}</label></td>
-							<td class="tdborder">TIN : <label class="data">${app.supervisor.ptr.tin}</label></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-
-			<!-- second row -->
-			<tr>
-				<td>
-					<br><br><br><br>
-					<p class="title"><b>Box 5</b></p>
-					<table  class="boxpermit" style="width:99%" height="100%">
-						<tbody>
-							<tr>
-								<td colspan="3"><b>BUILDING OWNER</b></td>
-							</tr>
-							<tr>
-								<td colspan="3" class="signature"><label class="data">${app.owner.firstname} ${app.owner.middlename.substring(0,1)}. ${app.owner.lastname}</label></td>
-							</tr>
-							<tr>
-								<td align="center" colspan="3"><p>(Signed Over Printed Name)</p></td>
-							</tr>
-							<tr class="trborder">
-								<td align="center" colspan="3">Date <label class="underline"></label></td>
-							</tr>
-							<tr class="trborder">
-								<td colspan="3">Address: <label class="data"> ${app.owner.address.text}</label></td>
-							</tr>
-							<tr>
-								<td>C.T.C. No.</td>
-								<td class="tdborder">Date Issued</td>
-								<td class="tdborder">Place Issued</td>
-							</tr>
-							<tr>
-								<td><label class="data"> ${app.owner.ctc.refno}</label></td>
-								<td class="tdborder"><label class="data"> ${app.owner.ctc.dtissued}</label></td>
-								<td class="tdborder"><label class="data"> ${app.owner.ctc.placeissued}</label></td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-				<td style="padding:0px">
-					<br><br><br><br>
-					<p class="title"><b>Box 6</b></p>
-					<table  class="boxpermit" style="width:100%" height="100%">
-						<tbody>
-							<tr>
-								<td colspan="3">WITH CONSENT: <b>LOT OWNER</b></td>
-							</tr>
-							<tr>
-								<td colspan="3" class="signature"><label class="data">${app.lotowner.firstname} ${app.lotowner.middlename.substring(0,1)}. ${app.lotowner.lastname}</label></td>
-							</tr>
-							<tr>
-								<td align="center" colspan="3"><p>(Signed Over Printed Name)</p></td>
-							</tr>
-							<tr class="trborder">
-								<td align="center" colspan="3">Date <label class="underline"></label></td>
-							</tr>
-							<tr class="trborder">
-								<td colspan="3">Address : <label class="data"> ${app.lotowner.address.text}</label></td>
-							</tr>
-							<tr>
-								<td>C.T.C. No.</td>
-								<td class="tdborder">Date Issued</td>
-								<td class="tdborder">Place Issued</td>
-							</tr>
-							<tr>
-								<td><label class="data"> ${app.lotowner.ctc.refno}</label></td>
-								<td class="tdborder"><label class="data"> ${app.lotowner.ctc.dtissued}</label></td>
-								<td class="tdborder"><label class="data"> ${app.lotowner.ctc.placeissued}</label></td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
-<br><br><br>
-<div class="page">
-	<table>
-		<tr>
-			<td>
-				<p class="title"><b>Box 7 (To be accomplished by the processing and evaluation division)</b></p>
+			<td colspan="2" class="tdinside">
+				<p class="title allcaps-bold">Box 2 (To be accomplished by the design professional)</p>
 				<table class="boxpermit" align="center" width="100%">
-					<tr class="trborder" style="height:40px;">
-						<td>Received by:</td>
-						<td>Date:</td>
-					</tr>
-					<tr style="height:60px;">
-						<td colspan="2" align="center"><b>FIVE (5) SETS OF CIVIL/STRUCTURAL DOCUMENTS</b></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"> Civil/Structural Designs Computations, Plans and sepecification</td>
-						<td><input type="checkbox"> Cost Estimates</td>
-					</tr>
-					<tr>
-						<td><input type="checkbox"> Bill of Materials</td>
-						<td><input type="checkbox"> Others (Specify) <label class="underline"></label></td>
-					</tr>
-				</table>
+					<tbody>
+						<tr>
+							<td colspan="3"><p class="allcaps-bold">Nature of Civil / Structural Works:</p></td>
+						</tr>
+						<tr>
+							<td><p class="allcaps"><input type="checkbox"> Staking</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Erection/Lifting</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Prestress Works</p></td>
+						</tr>
+						<tr>
+							<td><p class="allcaps"><input type="checkbox"> Excavation</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Concrete Framing</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Material testing</p></td>
+						</tr>
+						<tr>
+							<td><p class="allcaps"><input type="checkbox"> Soil Stabilization</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Structural Steel Framing</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Steel Towers</p></td>
+						</tr>
+						<tr>
+							<td><p class="allcaps"><input type="checkbox"> Piling Works</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Slabs</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Tanks</p></td>
+						</tr>
+						<tr>
+							<td><p class="allcaps"><input type="checkbox"> Foundation</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Walls</p></td>
+							<td><p class="allcaps"><input type="checkbox"> Others(Specify)</p> <p class="underline civilothers"></p></td>
+						</tr> 
+					</tbody>
+					<tbody>
+						<tr class="first-td last-td">
+							<td colspan="3">Prepared by: <p class="underline prepared"></p></td>
+						</tr>
+					</tbody>
+				</table> 
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<p class="title"><b>Box 8</b></p>
-				<table class="boxpermit" align="center" width="100%">
-					<tr class="trborder" style="height:60px;">
-						<td colspan="6" align="center"><b>Progress Flow</b></td>
-					</tr>
-					<tr class="trborder">
-						<td class="tdborder" rowspan="2"></td>
-						<td align="center" class="tdborder" colspan="2">in</td>
-						<td align="center" class="tdborder" colspan="2">out</td>
-						<td align="center" class="tdborder" rowspan="2">Processed by:</td>
-					</tr>
-					<tr class="trborder">
-						<td align="center" class="tdborder">Date</td>
-						<td align="center" class="tdborder">Time</td>
-						<td align="center" class="tdborder">Date</td>
-						<td align="center" class="tdborder">Time</td>
-					</tr>
-					<tr class="trborder">
-						<td>Civil/Structural</td>
-						<td align="center" class="tdborder"></td>
-						<td align="center" class="tdborder"></td>
-						<td align="center" class="tdborder"></td>
-						<td align="center" class="tdborder"></td>
-						<td align="center" class="tdborder"></td>
-					</tr>
-					<tr>
-						<td>Others (Specify)</td>
-						<td align="center" class="tdborder"></td>
-						<td align="center" class="tdborder"></td>
-						<td align="center" class="tdborder"></td>
-						<td align="center" class="tdborder"></td>
-						<td align="center" class="tdborder"></td>
-					</tr>
-				</table>
+			<td class="tdinside">
+				<p class="title">Box 3</p>
+				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app.designprofessional, role: 'Civil/Structutal Engineer' )
+			</td>
+			<td class="tdinside">
+				<p class="title">Box 4</p>
+				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app.supervisor, role:'Civil/Structutal Engineer' )
 			</td>
 		</tr>
+		<!-- second row. 283 -->
 		<tr>
-			<td>
-				<p class="title"><b>Box 9</b></p>
-				<table class="boxpermit" align="center" width="100%">
-					<tr style="height:80px;">
-						<td align="left"><b>Action Taken</b></td>
-					</tr>
-					<tr>
-						<td><b>Permit is hereby issued subject to the following:</b></td>
-					</tr>
-					<tr>
-						<td style="padding-left:30px">1. That under Article 1723 of the Civil Code of the Philippines, the engineer (or architect) who drew up the plans and
-						specifications for the building/structure is responsible for damages if within fifteen (15) years from the completion of the building/structure, the same should collapse due to defect in the plans or specifications or defects in the ground. The engineer or architect who supervises the construction shall be solidarily liable with the contractor should the edifice collapse due to defect in the construction or the use of inferior materials.
-						<br><br>2. That the proposed civil/structural works shall be in accordance with the civil/structural plans filed with this office and in conformity with the latest National Structural Code of the Philippines, the National Building Code and its IRR.
-						<br><br>3. That prior to any construction activity, a duly accomplished prescribed "Notice of Construction" shall be submitted to the Office of the Building Official.
-						<br><br>4. That upon completion of the construction, the licensed full-time inspector and supervisor/in-charge of construction works shall submit the entry to the logbook duly signed and sealed to the Building Official including as-built plans and other documents and shall also accomplish and submit a certificate of completion stating that the civil/structural works conform to the provisions of the National Structural Code of the Philippines, the National Building Code and its IRR.
-						<br><br>5. That this permit is null and void unless accompanied by the building permit.</td>
-					</tr>
-					<tr style="height:80px;">
-						<td><b>Permit Issued by:</b></td>
-					</tr>
-					<tr>
-						<td align="center"><b>Local building official</b><br>(Signature over Printed Name)<br>Date <label class="underline"></label></td>
-					</tr>
-				</table>
+			<td class="tdinside">
+				<p class="title">Box 5</p>
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+			</td>
+			<td class="tdinside">
+				<p class="title">Box 6</p>
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
 			</td>
 		</tr>
-	</table>
-
-</div>
-
+	</tbody>
+</table>
 
 
 
-<style type="text/css">
-
-
-table {border-collapse: collapse;font-size: 12px; margin: 0; padding: 0;}
-* {box-sizing: border-box;-moz-box-sizing: border-box;}
-html, body {font-family: 'arial narrow';-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;-webkit-font-smoothing: antialiased;text-transform: uppercase;color: #000000;font-size: 14px;}
-h1{text-align: center;margin-top: 10px;font-size: 20pt;font-weight: 500;font-family: 'arial narrow'line-height: 35px;margin-bottom: 0px;color: #000000;}
-h2{text-align: center;font-size: 17pt}
-h3{text-align: center;text-transform: capitalize !important;margin: 0;font-weight: 600;font-family: 'arial narrow';font-size: 17px;line-height: 19px;}
-table tr td{height: 20px;padding-left: 10px;padding-right: 10px;}
-table tr td input{margin-left: 40px !important;margin-bottom: 0px;}
-input[type="checkbox"]{outline: 1px solid #000;}
-p {margin: 0px;}
-.data{font-size: 10pt;font-weight: bold;}
-.btn-print{width: 70px;height: 40px;color: #ffffff;background: #009688;font-size: 14px;outline: none;}
-.boxpermit{border: 1px solid #000;}
-.wd{width: 692px;}
-.fwd{width: 1386px;}
-.wrap{margin-right: 60px !important;}
-.tbbody{margin-top: 10px;margin-bottom: 10px;}
-.trborder{border-bottom: 1px solid #000000;}
-.trlocation{height: 30px;}
-.tdborder{border-left: 1px solid #000;}
-.title{margin-top: 5px;margin-bottom: 5px;font-size: 10pt;}
-.underline {border-bottom: 1px solid #000000;font-weight: normal;margin-bottom: 0px; text-align: center;}
-.smallBox>tbody>tr>td{width: 23px;height: 23px;padding:0px;text-align: center;    border: solid 1px #000000}
-.nopaddingleft{padding-left: 0;}
-.nopaddingright{padding-right: 0;}
-.signature{padding:30px 70px 0px 70px;text-align: center}
-.signature label{width: 100%;border-bottom: 1px solid #000000;}
-.page {background: white;padding:10px 20px 0px 20px;width: 100%}
-.barcode{float:right;text-align:center;height: 20px; padding-right:100px;position: relative;width:20%;}
-.header {display: inline-block;margin:0 auto;width:60%;}
-.formno {float:left;width:20%;}
-.header-container{width:100%;text-align:center;}
-@page {	 margin: 0;}
-@media print {
-    .page {margin: 0;page-break-after: always;padding-top: 20px;}
-    .data{font-size: 10pt;font-weight: bold;}
-    .signature{padding: 30px 0px 0px 0px;}
-    h1{font-size: 16pt;}
-    h2{font-size: 12pt;}
-    h3{font-size: 10pt;}
-    button{display: none}
-    table tr td input {margin-left: 10px !important;margin-bottom: 0px;}
-    .title{font-size: 10pt;}
-    .wd{width: 552px;margin-right: 20px;}
-}
-</style>
 

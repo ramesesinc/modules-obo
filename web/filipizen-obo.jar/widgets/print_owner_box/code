@@ -2,7 +2,7 @@
 	def owner = OPTIONS.owner;
 	if( owner == null ) owner  = [:];
 %>
-<table  class="boxpermit" style="width:99%" height="100%">
+<table  class="boxpermit" style="width:99.5%" height="100%">
 	<tbody>
 		<tr>
 			<td colspan="3">${OPTIONS.title}</td>
@@ -14,7 +14,7 @@
 			<td align="center" colspan="3"><p>(Signed Over Printed Name)</p></td>
 		</tr>
 		<tr class=" trborder last-td">
-			<td align="center" colspan="3">Date <p class="underline ownerbox-date" ></p></td>
+			<td align="center" colspan="3">Date <p class="underline ownerbox-date" >01-01-2019</p></td>
 		</tr>
 	</tbody>
 	<tbody>

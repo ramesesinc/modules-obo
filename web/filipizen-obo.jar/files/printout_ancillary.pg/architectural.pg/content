@@ -1,26 +1,26 @@
 <%def app = PARAMS.app; %>
 <table  width="100%" class="tblscope">
 	<tr class="first-td">
-		<td colspan="9"><b>Scope of work</b></td>
+		<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><input type="checkbox"> New Construction</td>
-		<td colspan="4"><p> <input type="checkbox"> Renovation</p> <p class="underline renovation"></p></td>
-		<td colspan="2"><input type="checkbox"> Raising <p class="underline raising"></p></td>
+		<td colspan="3"><input type="checkbox"> NEW CONSTRUCTION </td>
+		<td colspan="4"><input type="checkbox"> RENOVATION <p class="underline renovation"></p></td>
+		<td colspan="2"><input type="checkbox"> RAISING <p class="underline raising"></p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><input type="checkbox"> Erection</td>
-		<td colspan="4"><input type="checkbox"> Conversion <p class="underline conversion"></p></td>
-		<td colspan="2"><input type="checkbox"> Accessory Building/Structure <p class="underline accessory"></p></td>
+		<td colspan="3"><input type="checkbox"> ERECTION</td>
+		<td colspan="4"><input type="checkbox"> CONVERSION <p class="underline conversion"></p></td>
+		<td colspan="2"><input type="checkbox"> ACCESSORY BUILDING/STRUCTURE<p class="underline accessory"></p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><input type="checkbox"> Addition</td>
-		<td colspan="4"><input type="checkbox"> Repair <p class="underline repair"></p></td>
-		<td colspan="2" rowspan="2" valign="top"><input type="checkbox"> Others (specify) <p class="underline others"></p></td>
+		<td colspan="3"><input type="checkbox"> ADDTION</td>
+		<td colspan="4"><input type="checkbox"> REPAIR <p class="underline repair"></p></td>
+		<td colspan="2" rowspan="2" valign="top"><input type="checkbox"> OTHERS (specify) <p class="underline others"></p></td>
 	</tr>
 	<tr class="last-td">
-		<td colspan="3"><input type="checkbox"> Alteration</td>
-		<td colspan="4"><input type="checkbox"> Moving <p class="underline moving"></p></td>
+		<td colspan="3"><input type="checkbox"> ALTERATION</td>
+		<td colspan="4"><input type="checkbox"> MOVING <p class="underline moving"></p></td>
 	</tr>
 </table>
 
@@ -28,7 +28,7 @@
 	<tbody>
 		<tr>
 			<td colspan="2" class="tdinside">
-				<p class="title"><b>Box 2 (To be accomplished by the design professional)</b></p>
+				<p class="title">Box 2 (To be accomplished by the design professional)</p>
 				<table class="boxpermit" align="center" width="100%">
 					<tbody>
 						<tr class="first-td">
@@ -82,7 +82,7 @@
 						<tr class="last-td">
 							<td colspan="2">OTHERS (Specify) __________</td>
 							<td class="tdborder"><input type="checkbox"> SMOKE DETECTORS</td>
-							<td><input type="checkbox"> OTHERS (Specify</td>
+							<td><input type="checkbox"> OTHERS (Specify)</td>
 						</tr>
 					</tbody>
 				</table> 
@@ -90,22 +90,22 @@
 		</tr>
 		<tr>
 			<td class="tdinside">
-				<p class="title"><b>Box 3</b></p>
+				<p class="title">Box 3</p>
 				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app.designprofessional, role:'ARCHITECT' )
 			</td>
 			<td class="tdinside">
-				<p class="title"><b>Box 4</b></p>
+				<p class="title">Box 4</p>
 				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app.supervisor, role: 'ARCHITECT' )
 			</td>
 		</tr>
 		<!-- second row. 283 -->
 		<tr>
 			<td class="tdinside">
-				<p class="title"><b>Box 5</b></p>
+				<p class="title">Box 5</p>
 				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
 			</td>
 			<td class="tdinside">
-				<p class="title"><b>Box 6</b></p>
+				<p class="title">Box 6</p>
 				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
 			</td>
 		</tr>
