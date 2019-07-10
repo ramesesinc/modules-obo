@@ -1,0 +1,100 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import java.rmi.server.*;
+import obo.facts.*;
+import java.text.*;
+import treasury.utils.*;
+import treasury.facts.*;
+
+public class BuildingPermitOnlineService  {
+	
+	@DataContext("building_permit")
+	def appEm;
+
+	@DataContext("building_permit_entity")
+	def entityEm;
+
+	@DataContext("building_permit_ancillary")
+	def ancillaryEm;
+
+	@DataContext("building_permit_rpu")
+	def locationEm;
+
+	@DataContext("building_permit_info")
+	def appInfoEm;
+
+	@DataContext("building_permit_professional")
+	def professionalEm;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@Service("SequenceService")
+	def seqSvc;
+
+	@Service("AppnoGeneratorService")
+	def appNoSvc;
+
+	@Service("WorkflowTaskService")
+	def wfSvc;
+
+	@ProxyMethod
+	public def upload( def app ) {
+		app.remove("objid");
+		def locationid = app.remove("locationid");
+		def applicantid = app.remove("applicantid");		
+
+		def newapp = appEm.create( app );
+		app.entities.each {
+			it.appid = newapp.objid;
+			entityEm.create( it );
+		}
+		app.rpus.each {
+			it.appid = newapp.objid;
+			it.owner = [objid: it.ownerid ];
+			locationEm.create( it );
+		}
+		app.professionals.each {
+			it.appid = newapp.objid;
+			it.entity = [objid: it.entityid ];
+			professionalEm.create( it );
+		}
+		app.ancillaries.each {
+			it.appid = newapp.objid;
+			it.type = [ permittypeid: it.permittypeid ];
+			ancillaryEm.create( it );
+		}
+		app.infos.each {
+			it.appid = newapp.objid;
+			it.type = [name: it.name ];
+			appInfoEm.create( it );
+		}
+		appEm.find( [objid: newapp.objid ] ).update( [locationid: locationid, applicantid: applicantid ] );
+		return [status: 'OK', objid: app.objid ];
+	}
+
+	@ProxyMethod
+	public def receive( def app ) {
+		def dt = dateSvc.getServerDate();
+
+		//update the appno first
+		int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
+		def appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  );
+
+		def u = [:];
+		u.appdate = dt;
+		u.appno = appno;
+		u.projectcost = 0;		
+		appEm.find( [objid: app.objid ] ).update( u );
+
+		def p = [:];
+		p.processname = 'building_permit';
+		p.refid = app.objid;
+		p.startdate = dt;
+		p.info = app;
+		wfSvc.start(p);	
+
+		return u;
+	}
+
+}

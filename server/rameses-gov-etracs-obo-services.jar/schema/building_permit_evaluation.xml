@@ -1,0 +1,8 @@
+<schema adapter="obodb">
+	<element tablename="building_permit_evaluation">
+		<field name="objid" primary="true" prefix="OBOBPEVAL"/>
+		<field name="appid" />
+		<field name="typeid" />
+		<field name="taskid" />
+	</element>
+</schema>

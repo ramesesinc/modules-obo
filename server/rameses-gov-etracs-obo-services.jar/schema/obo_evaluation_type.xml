@@ -1,0 +1,16 @@
+<schema adapter="obodb">
+	<element tablename="obo_evaluation_type">
+		<field name="objid" primary="true" caption="Name" visible="true"/>
+		<field name="title" caption="Title" searchable="true"/>
+		<field name="org_objid" />
+		<field name="org_name" />
+		<field name="activationstate" />
+		<field name="validationstate" />
+		<field name="sortindex" />
+		<field name="role" />
+
+		<field name="activatewithancillary" />
+		<field name="ancillarypermitid" />
+	</element>
+</schema>
+		

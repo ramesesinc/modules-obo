@@ -71,7 +71,7 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel3" pref="329" max="32767" attributes="0"/>
+                          <Component id="jPanel3" pref="358" max="32767" attributes="0"/>
                           <Component id="jPanel5" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -397,35 +397,11 @@
                         <Property name="name" type="java.lang.String" value="entity.appdate" noResource="true"/>
                       </Properties>
                     </Component>
-                    <Component class="com.rameses.rcp.control.XLookupField" name="xLookupField2">
-                      <Properties>
-                        <Property name="caption" type="java.lang.String" value="Type of Work"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.worktype.objid}"/>
-                        <Property name="handler" type="java.lang.String" value="obo_work_type:lookup"/>
-                        <Property name="name" type="java.lang.String" value="entity.worktype" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 20]"/>
-                        </Property>
-                        <Property name="required" type="boolean" value="true"/>
-                      </Properties>
-                    </Component>
                     <Component class="com.rameses.rcp.control.XLookupField" name="xLookupField3">
                       <Properties>
-                        <Property name="caption" type="java.lang.String" value="Building Type"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.bldgtype.title}"/>
-                        <Property name="handler" type="java.lang.String" value="obo_building_type:lookup"/>
-                        <Property name="name" type="java.lang.String" value="entity.bldgtype" noResource="true"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 20]"/>
-                        </Property>
-                        <Property name="required" type="boolean" value="true"/>
-                      </Properties>
-                    </Component>
-                    <Component class="com.rameses.rcp.control.XLookupField" name="xLookupField4">
-                      <Properties>
                         <Property name="caption" type="java.lang.String" value="Occupancy Type"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.occupancytype.objid} - #{entity.occupancytype.parentid}"/>
-                        <Property name="handler" type="java.lang.String" value="obo_occupancy_type:lookup"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.occupancytype.division.objid} #{entity.occupancytype.title}"/>
+                        <Property name="handler" type="java.lang.String" value="vw_obo_occupancy_type:lookup"/>
                         <Property name="name" type="java.lang.String" value="entity.occupancytype" noResource="true"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 20]"/>

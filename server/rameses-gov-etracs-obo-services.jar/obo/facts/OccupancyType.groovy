@@ -8,5 +8,6 @@ public class OccupancyType {
     String group;	 //parentid	
     String bldgtype;		
     String zoneclass;
+	String id;
 
 }

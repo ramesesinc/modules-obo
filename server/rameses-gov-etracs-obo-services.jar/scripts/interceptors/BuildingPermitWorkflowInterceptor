@@ -1,0 +1,93 @@
+import com.rameses.annotations.*; 
+
+class BuildingPermitWorkflowInterceptor { 
+
+	@Service("WorkflowTaskService")
+	def wfSvc;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("building_permit_evaluation")
+	def evalEm;
+
+	@DataContext("vw_building_permit_evaluation")
+	def vwEvalEm;
+
+	@DataContext("obo_evaluation_type")
+	def evalTypeEm;
+
+
+	@DataContext("building_permit")
+	def appEm;
+
+	@DataContext("building_permit_ancillary")
+	def ancillaryEm;
+
+
+	//check there should be no pending transactions
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
+	public void checkApplicationPendings( def evt ) {
+		def p = evt.args[0];
+		def r = [appid:p.refid, processname:'building_permit', validationstate: p.taskstate];
+		def buff = new StringBuffer();
+		def procs = vwEvalEm.find( [appid: p.refid ] ).where(" NOT(task.state = 'end')  ").list();
+		if (procs) {
+			buff.append("The ff. are uncompleted processes: \n")
+			buff.append( procs.collect{"  "+it.type.title}.join("\n") );
+			throw new Exception( buff.toString() );			
+		}
+	}
+
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
+	public void startEvaluationTask( def evt ) {
+		def p = evt.args[0];
+		def r = evt.result;
+		def appid = p.refid;
+
+		//fire evaluations for non-ancillary as well as those for ancillary
+		def list1 = evalTypeEm.where("activationstate = :state AND NOT(activatewithancillary = 1) ", [state: r.state]).list()*.objid;
+
+		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: appid ] ).where( "type.activationstate = :state", [state:r.state] ).list()*.type.evaluationtypeid;
+
+		def mlist = list1 + list2;
+		if( mlist ) {
+			def dt = dateSvc.getServerDate();
+			mlist.each {
+				//create each evaliuation but check first if task exists
+				def m = [appid: appid, typeid: it ]
+				boolean b = evalEm.find( m ).where("taskid IS NULL").exists();
+				if(!b) {
+					m = evalEm.create( m );
+					def f = [:];
+					f.processname = 'building_permit_evaluation';
+					f.refid = m.objid;
+					f.startdate = dt;
+					f.info = [ type: it, app: p.info ];
+					wfSvc.start(f);				
+				}
+			}
+		}
+	} 
+
+	//FOR REACTIVATION
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'reactivate' }" ) 
+	public void reactivateEvaluationTasks( def evt ) {
+		def p = evt.args[0];
+		def list = subAppEm.select("objid,taskid").find( [appid: p.refid ] ).where(" NOT(task.state = 'end') ").list();
+		if( list ) {
+			def dt = dateSvc.getServerDate();
+			list.each {
+				def f = [:];
+				f.processname = 'building_permit_evaluation';
+				f.refid = it.objid;
+				f.taskid = it.taskid;
+				f.startdate = dt;
+				f.action = "reactivate";
+				f.info = [ : ];
+				wfSvc.signal(f);	
+			}
+		}
+	}
+
+} 

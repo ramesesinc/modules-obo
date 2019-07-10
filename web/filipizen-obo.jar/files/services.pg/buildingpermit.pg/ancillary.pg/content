@@ -2,18 +2,26 @@
 	def svc = SERVICE.lookup("OboMiscListService", "obo");
 	def items = svc.getItems( [type: PARAMS.reftype] );
 	def grps = items.groupBy{ it.category };
+
+	def grpList = [];
+	grps.each { k,v->
+		grpList << [key: (k==null? '' : k), value: v];
+	}
+	grpList = grpList.sort{ it.key }
 %>
+
 
 <script>
 \$put("ancillary", new function() {
 	
 	var self = this;
+	this.loaded = false;
 
 	this.map = {};
 	<%items.each{ i-> %>
 	this.map.${ i.objid.toLowerCase() } = { name: "${i.objid}", objid:"${i.objid}", checked: false, caption: "${i.caption}", datatype:"${i.datatype}", unit:"${i.unit}" };<%}%>
 
-	var svc = Service.lookup("OnlineBuildingApplicationService", "obo");
+	var svc = Service.lookup("OnlineBuildingPermitService", "obo");
 	this.permit;
 
 	this.onload = function() {
@@ -24,6 +32,7 @@
 			this.map[ id ].checked = true;
 			this.map[ id ].value = p.value; 
 		};
+		self.loaded = true;
 	}
 
 	this.saveAndComplete = function() {
@@ -33,11 +42,10 @@
 				infos.push( this.map[prop] );
 			}
 		}
-		var m = { objid: '${PARAMS.refid}', state:'COMPLETED', infos: infos };
+		var m = { objid: '${PARAMS.refid}', state:'COMPLETED', infos: infos, appid: self.permit.appid };
 		m.designprofessional = self.permit.designprofessional;
 		m.supervisor = self.permit.supervisor;		
  		svc.saveAncillaryPermit( m );
- 		alert("Document saved");
 		<%if( PARAMS.backtarget ) {%>
 		self.returnToMain();	
 		<%}%>
@@ -76,54 +84,56 @@
 	.caption-class { width:300px; }
 </style>
 
-<%if( PARAMS.backtarget ) {%>
-	<a href="#" r:context="ancillary" r:name="returnToMain"> << Back</a>
-<%}%>
-<h1>
-	<label r:context="ancillary">#{permit.type.title}</label>
-</h1>
 
-	
-<div class="form">
-	<div>
-		<label class="caption-class">Design Professional</label>
-		<label r:context="ancillary" style="width:210px">#{ permit.designprofessional.name }</label>
-		<button r:context="ancillary" r:name="lookupDesignProfessional">Lookup</button>
-	</div>
+<div r:context="ancillary" r:visibleWhen="#{loaded == true}" style="display:none;">
+	<%if( PARAMS.backtarget ) {%>
+		<a href="#" r:context="ancillary" r:name="returnToMain"> << Back</a>
+	<%}%>
+	<h2>
+		<label r:context="ancillary">#{permit.type.title}</label>
+	</h2>
+
 		
-	<div>
-		<label  class="caption-class">Supervisor In Charge Professional</label>
-		<label r:context="ancillary" style="width:210px">#{ permit.supervisor.name }</label>
-		<button r:context="ancillary" r:name="lookupSupervisor">Lookup</button>
+	<div class="form">
+		<div>
+			<label class="caption-class">Design Professional</label>
+			<label r:context="ancillary" style="width:210px">#{ permit.designprofessional.entity.name }</label>
+			<button r:context="ancillary" r:name="lookupDesignProfessional">Lookup</button>
+		</div>
+			
+		<div>
+			<label  class="caption-class">Supervisor In Charge Professional</label>
+			<label r:context="ancillary" style="width:210px">#{ permit.supervisor.entity.name }</label>
+			<button r:context="ancillary" r:name="lookupSupervisor">Lookup</button>
+		</div>
+
 	</div>
+	<br> 	
+
+	<p>Please check applicable items and fill the required values and click Submit when done</p>
+	<%grpList.each{ o-> def g = o.key; def v = o.value; %>
+		<br>
+		<h2>${g==null?'':g}</h2>
+	 	<%v.each { i->%>
+	 		<div>
+			 		&nbsp;&nbsp;<input type="checkbox" r:context="ancillary" r:name="map.${ i.objid.toLowerCase() }.checked">
+			 		&nbsp;<label style="text-transform:capitalize;font-weight:normal">${i.caption.toLowerCase()}</label>
+			 		<span r:context="ancillary" r:visibleWhen="#{map.${ i.objid.toLowerCase() }.datatype != 'boolean'}">
+				 		<input type="text" r:context="ancillary" r:name="map.${ i.objid.toLowerCase() }.value"
+				 			r:datatype="${i.datatype}"
+				 			r:depends="map.${ i.objid.toLowerCase() }.checked" 
+				 			r:visibleWhen="#{map.${ i.objid.toLowerCase() }.checked == true}"
+				 			style="width:80px;background-color:lightyellow;">
+				 		<label r:context="ancillary"
+				 			r:depends="map.${ i.objid.toLowerCase() }.checked"  
+				 			r:visibleWhen="#{map.${ i.objid.toLowerCase() }.checked == true}">&nbsp;&nbsp;${i.unit}</label>	
+			 		</span>	
+				</div> 
+	 	<%}%>
+	<%}%>
+
+	<br>
+
+	@wx:button( caption:'Save And Complete', context:'ancillary', name:'saveAndComplete' )
 
 </div>
-
-<br><br><br> 	
-
-
-<p>Please check applicable items and fill the required values and click Submit when done</p>
-<%grps.each{ g,v->%>
-	<br>
-	<h2>${g==null?'':g}</h2>
- 	<%v.each { i->%>
- 		<div>
-		 		&nbsp;&nbsp;<input type="checkbox" r:context="ancillary" r:name="map.${ i.objid.toLowerCase() }.checked">
-		 		&nbsp;<label style="text-transform:capitalize;font-weight:normal">${i.caption.toLowerCase()}</label>
-		 		<span r:context="ancillary" r:visibleWhen="#{map.${ i.objid.toLowerCase() }.datatype != 'boolean'}">
-			 		<input type="text" r:context="ancillary" r:name="map.${ i.objid.toLowerCase() }.value"
-			 			r:datatype="${i.datatype}"
-			 			r:depends="map.${ i.objid.toLowerCase() }.checked" 
-			 			r:visibleWhen="#{map.${ i.objid.toLowerCase() }.checked == true}"
-			 			style="width:80px;background-color:lightyellow;">
-			 		<label r:context="ancillary"
-			 			r:depends="map.${ i.objid.toLowerCase() }.checked"  
-			 			r:visibleWhen="#{map.${ i.objid.toLowerCase() }.checked == true}">&nbsp;&nbsp;${i.unit}</label>	
-		 		</span>	
-			</div> 
- 	<%}%>
-<%}%>
-
-<br>
-
-@wx:button( caption:'Save And Complete', context:'ancillary', name:'saveAndComplete' )

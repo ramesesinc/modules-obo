@@ -40,7 +40,7 @@
   }
 
   this.addNew = function() {
-    self.prof = { address: {barangay:{}}, resident: 1 };
+    self.prof = { entity: {address: {barangay:{}}, resident: 1} };
     initEdit();
   }
 
@@ -54,7 +54,7 @@
     if(!this.selectedItem) throw new Exception("Please select an item");
     var b = confirm("You are about to remove this entry. Proceed?");
     if( b ) {
-      app.service.removeProfessional( {objid: this.selectedItem.objid } );
+      app.service.removeProfessional( this.selectedItem );
       loadList();
       self._controller.refresh();
     }
@@ -88,10 +88,10 @@
 
   this.attachId = function() {
     var h = function(v) {
-      self.prof.id = v;
+      self.prof.entity.id = v;
       self._controller.refresh();
     }
-    return new PopupOpener( "id_entry", { onselect: h, entry: self.prof.id},  {width:'500', title:'Select Proof of Identity'} );
+    return new PopupOpener( "id_entry", { onselect: h, entry: self.prof.entity.id},  {width:'500', title:'Select Proof of Identity'} );
   }
 
   this.attachPRC = function() {
@@ -147,23 +147,23 @@
 
 <div  r:context="professional" r:visibleWhen="#{mode == 'view-list'}">
   <label class="control-label">List of Professionals</label>
-  <table r:context="professional" r:items="professionalList" r:varName="item" r:name="selectedItem" border="1px" style="width:100%">
+  <table r:context="professional" r:items="professionalList" r:varName="item" r:name="selectedItem"  style="width:100%" class="customtable">
     <thead>
       <tr>
-        <td>PRC No</td>
-        <td>Profession</td>        
-        <td>Name</td>
-        <td>Address</td>
-        <td>&nbsp;</td>        
+        <td class="lp-prcno">PRC No</td>
+        <td class="lp-profession">Profession</td>        
+        <td class="lp-name">Name</td>
+        <td class="lp-adddress">Address</td>
+        <td class="lp-action">&nbsp;</td>        
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>#{item.prc.idno}</td>
-        <td>#{item.profession}</td>        
-        <td>#{item.name}</td>
-        <td>#{item.address.text}</td>
-        <td>
+        <td class="lp-prcno">#{item.prc.idno}</td>
+        <td class="lp-profession">#{item.profession}</td>        
+        <td class="lp-name">#{item.entity.name}</td>
+        <td class="lp-address">#{item.entity.address.text}</td>
+        <td class="lp-action">
           <a href="#" r:context="professional" r:name="editItem">Edit</a> 
           &nbsp;&nbsp;
           <a href="#" r:context="professional" r:name="removeItem">Remove</a> 
@@ -182,21 +182,21 @@
   <div class="form">
     @wx:combo(caption:'Primary Profession', context:'professional', name:'prof.profession', required: true, inputClass:'+w250', 
       attrs:[items:'professions', emptyText:'-', allowNull: true ])
-    @wx:text(caption:'Last Name', context:'professional', name:'prof.lastname', required: true, hint:'Last Name')
-    @wx:text(caption:'First Name', context:'professional', name:'prof.firstname', required: true, hint:'First Name' )
-    @wx:text(caption:'Middle Name', context:'professional', name:'prof.middlename', required: true, hint:'Middle Name')
-    @wx:date(caption:'Birthdate', context:'professional', name:'prof.birthdate', required: true, hint:'Birth date in YYYY-MM-DD')
-    @wx:gender(context:'professional', name:'prof.gender', required:true )
+    @wx:text(caption:'Last Name', context:'professional', name:'prof.entity.lastname', required: true, hint:'Last Name')
+    @wx:text(caption:'First Name', context:'professional', name:'prof.entity.firstname', required: true, hint:'First Name' )
+    @wx:text(caption:'Middle Name', context:'professional', name:'prof.entity.middlename', required: true, hint:'Middle Name')
+    @wx:date(caption:'Birthdate', context:'professional', name:'prof.entity.birthdate', required: true, hint:'Birth date in YYYY-MM-DD')
+    @wx:gender(context:'professional', name:'prof.entity.gender', required:true )
 
-    @wx:radiolist( caption:'Resident', context:'professional', name:'prof.resident', required:true, items: [ [key:'1', value:'Resident'], [key:'0', value:'Non-resident' ] ] )
-    @wx:address_local( caption: 'Address', context:'professional', name:'prof.address', depends: 'prof.resident', visibleWhen: '#{ prof.resident == \'1\' }', required:true )
-    @wx:address_nonlocal( caption: 'Address', context:'professional', name:'prof.address', depends: 'prof.resident', visibleWhen: '#{ prof.resident == \'0\' }', required:true )
+    @wx:radiolist( caption:'Resident', context:'professional', name:'prof.entity.resident', required:true, items: [ [key:'1', value:'Resident'], [key:'0', value:'Non-resident' ] ] )
+    @wx:address_local( caption: 'Address', context:'professional', name:'prof.entity.address', depends: 'prof.entity.resident', visibleWhen: '#{ prof.entity.resident == \'1\' }', required:true )
+    @wx:address_nonlocal( caption: 'Address', context:'professional', name:'prof.entity.address', depends: 'prof.entity.resident', visibleWhen: '#{ prof.entity.resident == \'0\' }', required:true )
 
-    @wx:email(context:'professional', name:'prof.email', required:true)
-    @wx:mobile(context:'professional', name:'prof.mobileno' )
+    @wx:email(context:'professional', name:'prof.entity.email', required:true)
+    @wx:mobile(context:'professional', name:'prof.entity.mobileno' )
 
     <br>
-    @wx:idproof( context:'professional', name:'prof.id', action:'attachId' )
+    @wx:idproof( context:'professional', name:'prof.entity.id', action:'attachId' )
     <br>
     @wx:idproof( context:'professional', name:'prof.prc', action:'attachPRC', caption:'Professional Regulation Commission [PRC]' )
     <br>

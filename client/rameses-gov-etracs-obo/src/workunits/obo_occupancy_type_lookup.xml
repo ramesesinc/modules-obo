@@ -1,9 +1,8 @@
 <workunit extends="com/rameses/seti2/templates/CrudLookup.xml"
-    schemaName="obo_occupancy_type">
+    schemaName="vw_obo_occupancy_type">
     <invokers>
-        <invoker type="obo_occupancy_type:lookup" caption="Use Classifcation"
-                customFilter="NOT(parentid IS NULL)"
-                cols="objid,description,parentid"
+        <invoker type="vw_obo_occupancy_type:lookup" caption="Use Classifcation"
+                cols="objid,title,division.objid,group.objid"
                 action="init" target="popup"/>
     </invokers>
 </workunit>

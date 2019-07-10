@@ -1,0 +1,9 @@
+<schema adapter="obodb">
+	<element tablename="obo_permit_type">
+		<field name="objid" primary="true" visible="true"/>
+		<field name="title" searchable="true"/>
+		<field name="main" datatype="integer" />
+		<field name="ancillary" datatype="integer" />
+		<field name="sortorder" />
+	</element>
+</schema>	

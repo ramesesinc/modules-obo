@@ -1,0 +1,50 @@
+<schema adapter="obodb">
+	<element tablename="online_building_permit">
+		<field name="objid" primary="true"/>
+		<field name="orgcode" required="true"/>
+
+		<field name="apptype" required="true"/>
+		<field name="permittype" required="true"/>
+
+		<field name="contact_name" required="true"/>
+		<field name="contact_detail" />
+		<field name="contact_email" required="true"/>
+		<field name="contact_mobileno"/>
+		<field name="dtfiled" type="timestamp"/>
+		<field name="title" />
+		<field name="description" />
+		<field name="occupancytypeid" />
+		<field name="bldgtypeid" />
+		<field name="numunits" type="integer"/>
+		<field name="floorarea" type="decimal"/>
+		<field name="totalfloorarea" type="decimal"/>
+		<field name="numfloors" type="integer"/>
+
+		<field name="estimatedcost" type="decimal"/>
+		<field name="dtproposedconstruction" type="date" />
+		<field name="dtexpectedcompletion" type="date"/>
+		<field name="supervisorid" />
+		<field name="totalfloorarea" type="decimal"/>
+		<field name="height" type="decimal"/>
+
+		<!-- shows where the current step is at -->
+		<field name="step" type="integer"/>
+		<field name="locationid" />
+		<field name="applicantid" />
+		<complex name="worktypes" type="list" serializer="default" />
+
+		<complex name="applicant" ref="online_building_permit_entity" jointype="many-to-one" required="false">
+			<key field="applicantid" target="objid" />
+		</complex>	
+
+		<complex name="location" ref="online_building_permit_rpu" jointype="many-to-one" required="false">
+			<key field="locationid" target="objid" />
+		</complex>	
+
+		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one" required="false">
+			<key field="occupancytypeid" target="objid" />
+		</complex>	
+
+	</element>
+</schema>
+

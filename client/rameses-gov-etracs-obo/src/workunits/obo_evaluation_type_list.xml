@@ -1,0 +1,6 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="obo_evaluation_type">
+    <invokers>
+        <invoker folderid="/explorer/master/obo" caption="OBO Evaluation Types" action="init"
+                 role="MASTER" zpermission="obo_evaluation_type.view"/>
+    </invokers>
+</workunit>

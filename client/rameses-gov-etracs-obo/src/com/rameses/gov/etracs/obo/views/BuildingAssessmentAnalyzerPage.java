@@ -51,9 +51,7 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
         xDateField1 = new com.rameses.rcp.control.XDateField();
-        xLookupField2 = new com.rameses.rcp.control.XLookupField();
         xLookupField3 = new com.rameses.rcp.control.XLookupField();
-        xLookupField4 = new com.rameses.rcp.control.XLookupField();
         xLookupField5 = new com.rameses.rcp.control.XLookupField();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xDecimalField3 = new com.rameses.rcp.control.XDecimalField();
@@ -278,29 +276,13 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
         xDateField1.setName("entity.appdate"); // NOI18N
         xFormPanel1.add(xDateField1);
 
-        xLookupField2.setCaption("Type of Work");
-        xLookupField2.setExpression("#{entity.worktype.objid}");
-        xLookupField2.setHandler("obo_work_type:lookup");
-        xLookupField2.setName("entity.worktype"); // NOI18N
-        xLookupField2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xLookupField2.setRequired(true);
-        xFormPanel1.add(xLookupField2);
-
-        xLookupField3.setCaption("Building Type");
-        xLookupField3.setExpression("#{entity.bldgtype.title}");
-        xLookupField3.setHandler("obo_building_type:lookup");
-        xLookupField3.setName("entity.bldgtype"); // NOI18N
+        xLookupField3.setCaption("Occupancy Type");
+        xLookupField3.setExpression("#{entity.occupancytype.division.objid} #{entity.occupancytype.title}");
+        xLookupField3.setHandler("vw_obo_occupancy_type:lookup");
+        xLookupField3.setName("entity.occupancytype"); // NOI18N
         xLookupField3.setPreferredSize(new java.awt.Dimension(0, 20));
         xLookupField3.setRequired(true);
         xFormPanel1.add(xLookupField3);
-
-        xLookupField4.setCaption("Occupancy Type");
-        xLookupField4.setExpression("#{entity.occupancytype.objid} - #{entity.occupancytype.parentid}");
-        xLookupField4.setHandler("obo_occupancy_type:lookup");
-        xLookupField4.setName("entity.occupancytype"); // NOI18N
-        xLookupField4.setPreferredSize(new java.awt.Dimension(0, 20));
-        xLookupField4.setRequired(true);
-        xFormPanel1.add(xLookupField4);
 
         xLookupField5.setCaption("Zone Class");
         xLookupField5.setExpression("#{entity.zoneclass.objid}");
@@ -380,7 +362,7 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -436,9 +418,7 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XIntegerField xIntegerField2;
     private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XList xList1;
-    private com.rameses.rcp.control.XLookupField xLookupField2;
     private com.rameses.rcp.control.XLookupField xLookupField3;
-    private com.rameses.rcp.control.XLookupField xLookupField4;
     private com.rameses.rcp.control.XLookupField xLookupField5;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane2;
     // End of variables declaration//GEN-END:variables

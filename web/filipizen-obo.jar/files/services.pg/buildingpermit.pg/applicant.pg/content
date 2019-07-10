@@ -14,7 +14,7 @@
   this.orgname;
 
 	var app = \$get("app").code;
-  var appSvc = Service.lookup( 'OnlineBuildingApplicationService', 'obo' );
+  var appSvc = Service.lookup( 'OnlineBuildingPermitService', 'obo' );
 
 	this.findApplicant = function(){
 		var profileSvc = Service.lookup( app.orgcode + ':RemoteEntityProfileService' );

@@ -86,36 +86,27 @@
 
 <div r:context="ancillarylist" r:visibleWhen="#{mode=='view'}">
 	<p>Ancillary Permits applied</p>
-	<table r:context="ancillarylist" r:items="permitList" r:varName="item" r:name="selectedItem" border="1" width="100%" 
+	<table r:context="ancillarylist" r:items="permitList" r:varName="item" r:name="selectedItem" style="width:100%" class="customtable" 
 		cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
-				<td>
-					<label style="width:30%;margin-bottom:0px;vertical-align:top">Permit Type</label>
-					<label style="width:10%;margin-bottom:0px;vertical-align:top">Status</label>
-					<label style="width:19%;margin-bottom:0px;vertical-align:top">Design Professional</label>
-					<label style="width:19%;margin-bottom:0px;vertical-align:top">Supervisor In Charge</label>
-					<label style="width:10%;margin-bottom:0px;vertical-align:top">View</label>
-				</td>
+				<td class="ap-permit">Permit Type</td>
+				<td class="ap-status">Status</td>
+				<td class="ap-design">Design Professional</td>
+				<td class="ap-supervisor">Supervisor In Charge</td>
+				<td class="ap-view">View</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>
-					<label style="width:30%;border-right:1px solid gray;margin-bottom:0px">#{item.type.title}</label>
-					<label style="width:10%;margin-bottom:0px">#{item.state}</label>
-					<label style="width:19%;margin-bottom:0px">
-						#{item.designprofessional.lastname}, #{item.designprofessional.firstname}
-					</label>
-					<label style="width:19%;margin-bottom:0px">
-						#{item.supervisor.lastname}, #{item.supervisor.firstname}
-					</label>
-					<label style="margin-bottom:0px">
-						<%def backtarget = PAGE.parentPath + "?appid="+ PARAMS.appid + "#" + PAGE.pagename;%> 	
+				<td class="ap-permit">#{item.type.title}</td>
+				<td class="ap-status">#{item.state}</td>
+				<td class="ap-design">#{item.designprofessional.entity.name}</td>
+				<td class="ap-supervisor">#{item.supervisor.entity.name}</td>
+				<td class="ap-view"><%def backtarget = PAGE.parentPath + "?appid="+ PARAMS.appid + "#" + PAGE.pagename;%> 	
 						<a href="buildingpermit/ancillary?reftype=#{item.type.objid}&refid=#{item.objid}&backtarget=${backtarget}" >Edit</a>
 						&nbsp;&nbsp;					
 							<a href="/obo/printout_ancillary/#{item.type.objid}?refid=#{item.objid}" target="#{item.type.objid}_#{item.objid}:print">Print Report</a>
-					</label>
 				</td>
 			</tr>	
 		</tbody>

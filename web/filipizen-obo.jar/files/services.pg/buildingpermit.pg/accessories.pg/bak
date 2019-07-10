@@ -1,6 +1,6 @@
 
 <%
-	def svc = SERVICE.lookup("OnlineBuildingApplicationService", "obo");
+	def svc = SERVICE.lookup("OnlineBuildingPermitService", "obo");
 	def items = svc.getItems( [type: 'ACCESSORIES'] );
 	def grps = items.groupBy{ it.category };
 %>

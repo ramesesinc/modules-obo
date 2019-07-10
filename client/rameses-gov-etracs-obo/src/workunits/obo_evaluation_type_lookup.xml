@@ -1,0 +1,7 @@
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="obo_evaluation_type">
+    <invokers>
+        <invoker type="obo_evaluation_type:lookup" caption="Lookup Evaluation Type" 
+                 cols="name,title"
+                 action="init" orderBy="sortindex" target="popup"/>
+    </invokers>
+</workunit>

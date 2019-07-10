@@ -1,0 +1,15 @@
+<workunit schemaName="vw_building_permit_evaluation" processName="building_permit_evaluation">
+    <invokers>
+        <invoker type="vw_building_permit_evaluation:open" caption="Building Application Section"
+                action="open" index="1"/>
+        <!-- form actions -->
+        <invoker type="formActions" caption="View Application"
+                action="viewApplication" index="10"/>
+        <invoker type="formActions" caption="Add Finding"
+                action="addFinding" index="11"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitEvaluationModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.BuildingPermitEvaluationPage" />
+    </pages>
+</workunit>

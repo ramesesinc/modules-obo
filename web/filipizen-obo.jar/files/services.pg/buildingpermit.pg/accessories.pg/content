@@ -16,7 +16,7 @@
 
 		//load accessories
 		var app = \$get("app").code;	
-		var svc = Service.lookup("OnlineBuildingApplicationService", "obo");
+		var svc = Service.lookup("OnlineBuildingPermitService", "obo");
 
 		this.accessories;
 

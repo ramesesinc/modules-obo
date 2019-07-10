@@ -16,11 +16,15 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
     @Service("QueryService")
     def querySvc;
     
+    public String getMenuContextName() {
+        return "obo";
+    }
+    
     void loadDynamicItems( String _id, def subitems, def invokers ) {
         def secProvider = clientContext.getSecurityProvider();
         if(_id.matches('(building|occupancy)_other') ) {
             boolean isRoot = (OsirisContext.env.ORGROOT == 1)
-            def m = [_schemaname: "obo_section_type" ];
+            def m = [_schemaname: "obo_evaluation_type" ];
             m._limit = 200;
             m.orderBy = "sortindex";
             if(isRoot) {
@@ -37,8 +41,9 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
                     if(!b) return;
                 }
                 def id = _id + "/" + it.objid;
-                subitems << [ id: id, caption: it.title, index: (i++) ];
-                def sinv = "obo_" + _id.split("_")[0] + "_application_section:list"
+                def notid = 'building_permit_evaluation:'+it.objid.toLowerCase();
+                subitems << [ id: id, caption: it.title, index: (i++), notificationid: notid ];
+                def sinv = _id.split("_")[0] + "_permit_evaluation:list"
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
                 op.target = 'window';
                 invokers.put( id, op );

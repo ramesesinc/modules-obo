@@ -1,0 +1,9 @@
+<workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
+          processName="building_permit" schemaName="vw_building_permit"
+          allowDelete="false" allowNotify="false">
+    <invokers>
+        <invoker folderid="menucategory/obo/building" caption="View Application List"
+             cols="appno,appdate,applicant.name,title,projectcost,task.state,task.assignee.name"
+                action="init" index="-1" role="INFO" notificationid="vw_building_permit"/>
+    </invokers>
+</workunit>

@@ -9,8 +9,12 @@ public class OboMiscListService  {
 	@DataContext("obo_occupancy_type")
 	def occTypeEm;
 
-	@DataContext("obo_building_type")
-	def bldgTypeEm;
+	@DataContext("obo_occupancy_type_group")
+	def occGroupEm;
+
+	@DataContext("obo_occupancy_type_division")
+	def occDivisionEm;
+
 	
 	@DataContext("obo_work_type")
 	def workTypeEm;
@@ -25,13 +29,30 @@ public class OboMiscListService  {
 	def itemEm;
 
 	@ProxyMethod
-	public def getOccupancyTypes() {
-		return occTypeEm.where( 'parentid IS NULL' ).list();
+	public def getOccupancyTypeGroups() {
+		def list = occGroupEm.where( '1=1' ).list();
+		list.each {
+			it.description = it.objid + ' ' + it.title.toLowerCase();
+		}
+		return list;
 	}	
 
 	@ProxyMethod
-	public def getBldgTypes(def o ) {
-		return bldgTypeEm.find( [groupid: o.type] ).orderBy("objid").list();
+	public def getOccupancyTypeDivisions(def o) {
+		def list = occDivisionEm.where( 'groupid=:groupid', [groupid: o.groupid] ).list();
+		list.each {
+			it.description = it.objid + ' ' + it.title.toLowerCase();
+		}
+		return list;
+	}	
+
+	@ProxyMethod
+	public def getOccupancyTypes(def o ) {
+		def list = occTypeEm.find( [divisionid: o.divisionid ] ).orderBy("objid").list();
+		list.each {
+			it.description = it.title.toLowerCase();
+		}
+		return list;
 	}	
 
 	@ProxyMethod

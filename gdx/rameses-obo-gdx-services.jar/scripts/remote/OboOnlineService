@@ -11,6 +11,12 @@ class OboOnlineService  {
     @Service(value="EntityService", connection="local-etracs")
     def entitySvc;
 
+    @Service(value="BuildingPermitOnlineService", connection="local-obo")
+    def localOboSvc;
+
+    @Service(value="OnlineBuildingPermitService", connection="cloud-obo")
+    def cloudOboSvc;
+
     @ProxyMethod
     public def findLocation( def params ) {
         def info = svc.verifyTaxDec(params);
@@ -48,5 +54,11 @@ class OboOnlineService  {
         throw new Exception("Record not found");
     }
 
+    @ProxyMethod
+    public def submitOnlineApplication( def o ) {
+        def app = cloudOboSvc.getOnlineSubmission( [appid: o.appid ] );
+        app = localOboSvc.upload( app );
+        return app;
+    }
 
 }

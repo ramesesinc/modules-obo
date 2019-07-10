@@ -69,7 +69,11 @@ class BuildingAssessmentAnalyzerModel  {
             worktype : entity.worktype.objid
         ];
         def v = entity.occupancytype;
-        f.occupancytype =  [ division: v.objid, group: v.parentid, bldgtype: entity.bldgtype.objid, zoneclass: entity.zoneclass.objid  ];
+        def occ = [:];
+        occ.division = v.division.objid;
+        occ.group = v.group.objid;
+        occ.id = v.objid; 
+        f.occupancytype =  occ;
         return f;
     }
     

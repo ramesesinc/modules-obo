@@ -1,6 +1,19 @@
+<script src="/res/partner/proxy-service.js"></script>
+
 <%
-	def svc = SERVICE.lookup("OnlineBuildingApplicationService", "obo");
-	def list = svc.getAppSteps();
+	def svc = SERVICE.lookup("OnlineBuildingPermitService", "obo");
+
+	def list = [];
+	list << [step:0, name:'initial', caption: "Initial"];
+	list << [step:1, name:'location', caption:'Location'];	
+	list << [step:2, name:'applicant', caption:'Applicant'];
+	list << [step:3, name:'professional', caption:'Professionals'];
+	list << [step:4, name:'project', , caption:'Project Details'];
+	list << [step:5, name:'accessories',caption:'Accessories'];
+	list << [step:6, name:'ancillarylist', caption:'Ancillary Permits'];
+	list << [step:7, name:'requirementlist', caption:'Requirements'];
+	list << [step:8, name:'confirm', caption:'Confirm'];			
+
 	def appid = PARAMS.appid;
 	def sappid = (!PARAMS.appid) ? "null" : "\"" + appid + "\""; 
 
@@ -10,7 +23,9 @@
 	if( appid !=null ) {
 		def app = svc.findCurrentInfo( [appid: appid] );
 		if(!app) err = "Application no. does not exist";
-		else if( PARAMS.info.id != app.orgcode ) err = "The application number provided is not for this local government";
+		else if( PARAMS.info.id != app.orgcode ) {
+			err = "The application number provided is not for this local government";
+		}	
 		else {
 			currstep = app.step;
 		}
@@ -20,10 +35,11 @@
 <div style="padding:10px">
 
 <%if( err !=null) { %>
-	<h2>Building Application</h2>
 	<label style="color:red;">
 		${err}		
-	</label>	
+	</label>
+	<br>
+	<a href="${PAGE.path}">Retry</a>	
 <%}%>
 
 <%if( err == null ) { %>
@@ -35,7 +51,7 @@
 		this.orgcode = "${PARAMS.info.id}";
 		this.orgname = "${ PARAMS.info.title.toUpperCase() }";
 		this.province = "${ PARAMS.info.group?.title.toUpperCase() }";
-		this.service = Service.lookup("OnlineBuildingApplicationService", "obo");
+		this.service = ProxyService.lookup(null, "OnlineBuildingPermitService", "obo");
 		this.maxstep;
 		this.step; //current step
 
@@ -87,9 +103,9 @@
    	<%}%>
    	\$register( {id:'ancillary',			page:"${PAGE.path}/ancillary", 			 context: 'ancillary' } );
    	\$register( {id:'professional_lookup',	page:"${PAGE.path}/professional_lookup", context: 'professional_lookup' } );
+	\$register( {id:'occupancytype_lookup', page:"${PAGE.path}/occupancytype_lookup", context: 'occupancytype_lookup' } );   	
 </script>
 
-<h2>Building Permit Application</h2>
 
 <%if( appid !=null ) { %>
 	<label>(App Tracking No: ${appid})</label> 

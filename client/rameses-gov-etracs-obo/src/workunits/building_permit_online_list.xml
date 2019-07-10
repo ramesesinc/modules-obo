@@ -1,0 +1,10 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml"
+    schemaName="vw_building_permit_online" allowDelete="false" allowNotify="false">
+    <invokers>
+        <invoker folderid="menucategory/obo/building" caption="Online Applications"
+             cols="trackingno,dtfiled,applicant.name,title,description"
+             customFilter="taskid IS NULL"
+                action="init" index="-2" role="INFO"/>
+    </invokers>
+</workunit>
+

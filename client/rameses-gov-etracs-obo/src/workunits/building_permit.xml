@@ -1,0 +1,11 @@
+<workunit schemaName="vw_building_permit" processName="building_permit">
+    <invokers>
+        <invoker type="vw_building_permit:open" caption="Building Permit Application"
+                action="open" index="1"/>
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.BuildingPermitPage" />
+    </pages>
+</workunit>

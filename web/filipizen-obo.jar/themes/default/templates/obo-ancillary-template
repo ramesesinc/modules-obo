@@ -101,10 +101,10 @@
 								</tr>
 								<tr class="trborder">
 									<td></td>
-									<td colspan="2"><p class="data">${app.owner?.lastname} </p></td>
-									<td colspan="3"><p class="data">${app.owner?.firstname}</p></td>
-									<td colspan="1"><p class="data">${app.owner?.middleinitial}</p></td>
-									<td colspan="2" class="tdborder"><p class="data">${app.owner?.tin}</p></td>
+									<td colspan="2"><p class="data">${app.applicant?.lastname} </p></td>
+									<td colspan="3"><p class="data">${app.applicant?.firstname}</p></td>
+									<td colspan="1"><p class="data">${app.applicant?.middleinitial}</p></td>
+									<td colspan="2" class="tdborder"><p class="data">${app.applicant?.tin}</p></td>
 								</tr>
 							</tbody>
 							<tbody>
@@ -115,7 +115,7 @@
 								</tr>
 								<tr>
 									<td colspan="2"><p class="data">dd</p></td>
-									<td colspan="3" rowspan="2" class="tdborder"><p class="data">${app.owner?.type}</p></td>
+									<td colspan="3" rowspan="2" class="tdborder"><p class="data">${app.applicant?.type}</p></td>
 									<td colspan="4" rowspan="2" class="tdborder"><p class="data">${app.occupancytype?.objid} - ${app.occupancytype?.description}</p></td>
 								</tr>
 								<tr class="trborder">
@@ -132,8 +132,8 @@
 									<td class="tdborder">Telephone No.</td>
 								</tr>
 								<tr class="trborder">
-									<td colspan="2" class="data">${app.owner?.address?.street}</td>
-									<td colspan="2" class="data">${app.owner?.address?.barangay?.name}</td>
+									<td colspan="2" class="data">${app.applicant?.address?.street}</td>
+									<td colspan="2" class="data">${app.applicant?.address?.barangay?.name}</td>
 									<td colspan="3" class="data"></td>
 									<td></td>
 									<td class="tdborder data"></td>

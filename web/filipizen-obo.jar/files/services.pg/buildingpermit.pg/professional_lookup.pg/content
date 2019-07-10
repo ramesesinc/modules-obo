@@ -6,7 +6,7 @@
 	this.appid;
 	this.selectedItem;
 
-	var svc = Service.lookup("OnlineBuildingApplicationService", "obo");
+	var svc = Service.lookup("OnlineBuildingPermitService", "obo");
 	this.professionalList;
 
 	this.onload = function() {
@@ -28,33 +28,23 @@
 </style>
 
 <div style="padding-bottom:20px;">
-  <table r:context="professional_lookup" r:items="professionalList" r:varName="item" r:name="selectedItem" border="1px" style="width:100%">
+  <table r:context="professional_lookup" r:items="professionalList" r:varName="item" r:name="selectedItem"   style="width:100%" class="customtable">
     <thead>
       <tr>
-        <td>
-          <div class="table-class">
-            <div style="width:10%;margin-bottom:0px;vertical-align:top">PRC No</div>
-            <div style="width:20%;margin-bottom:0px;vertical-align:top">Profession</div>          
-            <div style="width:30%;margin-bottom:0px;vertical-align:top">Name</div>
-            <div style="width:30%;margin-bottom:0px;vertical-align:top">Address</div>
-            <div style="width:10%;margin-bottom:0px;vertical-align:top">&nbsp;</div>
-          </div>
-        </td>  
+        <td style="width:80px;">PRC No</td>
+        <td style="width:100px;">Profession</td>
+        <td style="width:160px;">Name</td>
+        <td style="width:220px;">Address</td>
+        <td>&nbsp;</td> 
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>
-          <div class="table-class">
-            <div style="width:10%;margin-bottom:0px;vertical-align:top">#{item.prc.refno}</div>
-            <div style="width:20%;margin-bottom:0px;vertical-align:top">#{item.profession}</div>        
-            <div style="width:30%;margin-bottom:0px;vertical-align:top">#{item.name}</div>
-            <div style="width:30%;margin-bottom:0px;vertical-align:top">#{item.address.text}</div>
-            <div style="width:10%;margin-bottom:0px;vertical-align:top">
-              <a href="#" r:context="professional_lookup" r:name="select">Select</a>
-            </div>
-          </div>
-        </td>
+      <td style="width:80px;">#{item.prc.idno}</td>
+        <td style="width:100px;">#{item.profession}</td>
+        <td style="width:160px;">#{item.entity.name}</td>
+        <td style="width:220px;">#{item.entity.address.text}</td>
+        <td><a href="#" r:context="professional_lookup" r:name="select">Select</a></td>
       </tr>
     </tbody>
   </table>

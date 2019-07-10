@@ -1,6 +1,0 @@
-<workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="obo_requirement_type">
-    <invokers>
-        <invoker folderid="/explorer/master/obo" caption="OBO Requirement Types" action="init"
-                 role="MASTER" permission="obo_requirement_type.view"/>
-    </invokers>
-</workunit>

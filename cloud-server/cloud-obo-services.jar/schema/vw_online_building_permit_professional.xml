@@ -1,0 +1,9 @@
+<schema adapter="obodb">
+	<element tablename="vw_online_building_permit_professional">
+		<field name="objid" primary="true" />
+		<field name="appid" />
+		<field name="entityid" />
+		<field name="profession" />
+		<field name="entity_name" />
+	</element>
+</schema>
