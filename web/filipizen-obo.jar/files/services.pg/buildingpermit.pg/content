@@ -51,7 +51,7 @@
 		this.orgcode = "${PARAMS.info.id}";
 		this.orgname = "${ PARAMS.info.title.toUpperCase() }";
 		this.province = "${ PARAMS.info.group?.title.toUpperCase() }";
-		this.service = ProxyService.lookup(null, "OnlineBuildingPermitService", "obo");
+		this.service = Service.lookup("OnlineBuildingPermitService", "obo");
 		this.maxstep;
 		this.step; //current step
 

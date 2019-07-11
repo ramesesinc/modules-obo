@@ -36,11 +36,10 @@ class BuildingAssessmentAnalyzerModel  {
         f.app = [ 
             appdate:dt, 
             apptype:entity.apptype, 
-            projectcost: entity.projectcost, 
+            projectcost: (entity.projectcost==null)?0:entity.projectcost, 
             height: ((entity.height == null)?0:entity.height),
             numunits: entity.numunits,
-            totalfloorarea: entity.totalfloorarea,
-            worktype : entity.worktype.objid
+            totalfloorarea: entity.totalfloorarea
         ];
         def v = entity.occupancytype;
         def occ = [:];
@@ -129,8 +128,9 @@ class BuildingAssessmentAnalyzerModel  {
         }
     }
     
-    def computeCost() {
+    void computeCost() {
         def req = buildBasicParams();
+        req.app.projectcost = 0;
         entity.projectcost = costSvc.calc(req); 
     }
     
