@@ -3,6 +3,8 @@ CREATE VIEW vw_building_permit_evaluation AS
 SELECT 
    a.*,
    et.title AS type_title,
+   et.ancillarypermitid,
+   et.allowassessment,
    t.state AS task_state,
    t.startdate AS task_startdate,
    t.enddate AS task_enddate,

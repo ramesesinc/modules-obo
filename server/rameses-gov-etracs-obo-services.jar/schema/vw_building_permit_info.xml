@@ -1,9 +1,8 @@
 <schema adapter="obodb">
-	<element tablename="vw_obo_building_application_info">
+	<element tablename="vw_building_permit_info">
 		<field name="objid" primary="true"/>
-		
 		<field name="appid" />
-		<field name="subappid" />
+		<field name="parentid" />
 		<field name="typeid" />
 		<field name="name" />
 		<field name="caption" />
@@ -17,8 +16,5 @@
 		<field name="caption" />
 		<field name="category" />
 		<field name="sortorder" />
-
 	</element>
 </schema>	
-
-

@@ -1,6 +1,7 @@
 <schema adapter="obodb">
 	<element tablename="building_permit_info">
 		<field name="objid" primary="true" prefix="OBOBPINFO"/>
+		<field name="appid" required="true"/>
 		<field name="parentid" required="true"/>
 		<field name="name" required="true"/>
 		<field name="stringvalue" />

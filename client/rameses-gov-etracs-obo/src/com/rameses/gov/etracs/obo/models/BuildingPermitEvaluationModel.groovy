@@ -23,11 +23,6 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
         return getSchemaName() + ":form";
     }
     
-    /*
-    String getBarcodeFieldname() {
-        return "appno";
-    }
-    */
     
     @FormTitle
     public String getTitle() {
@@ -57,4 +52,16 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
         op.target = "popup";
         return op;
     }
+    
+     def viewAncillaryPermit() {
+        //find first the objid of ancillary permit
+        def m = [_schemaname: 'building_permit_ancillary'];
+        m.findBy = [appid: entity.appid,permittypeid: entity.ancillarypermitid ];
+        def zz = queryService.findFirst( m );
+        def op = Inv.lookupOpener("building_permit_ancillary:open", [entity: [objid: zz.objid ] ] );
+        op.target = "popup";
+        return op;
+    }
+
+    
 }

@@ -1,5 +1,5 @@
-DROP VIEW IF EXISTS vw_obo_building_application_info;
-CREATE VIEW vw_obo_building_application_info AS
+DROP VIEW IF EXISTS vw_building_permit_info;
+CREATE VIEW vw_building_permit_info AS
 SELECT ai.*,
    ov.datatype,
    ov.typeid,
@@ -7,5 +7,5 @@ SELECT ai.*,
    ov.caption, 
    ov.category, 
    ov.sortorder
-FROM obo_building_application_info ai
+FROM building_permit_info ai
 INNER JOIN obo_variable ov ON ov.objid = ai.name

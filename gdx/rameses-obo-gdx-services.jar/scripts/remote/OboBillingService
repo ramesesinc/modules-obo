@@ -1,0 +1,22 @@
+import com.rameses.annotations.*; 
+
+class OboBillingService {
+
+    @Service(value="OboBillingService", connection="local-obo")
+    def billingSvc;
+
+    @Service("NumberService")
+    def numSvc;
+
+    @ProxyMethod
+    public def getBilling( def o ) { 
+       return billingSvc.getBilling(o);
+    }
+
+    @ProxyMethod
+    public def createPaymentOrder( def evt ) { 
+        return null;        
+    }
+
+
+}

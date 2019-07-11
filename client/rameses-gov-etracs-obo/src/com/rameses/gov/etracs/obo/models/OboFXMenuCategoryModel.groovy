@@ -16,8 +16,15 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
     @Service("QueryService")
     def querySvc;
     
+    @Service("OboMenuNotificationService")
+    def oboMenuSvc;
+    
     public String getMenuContextName() {
         return "obo";
+    }
+    
+    public def getMenuNotificationService() {
+        return oboMenuSvc;
     }
     
     void loadDynamicItems( String _id, def subitems, def invokers ) {
@@ -33,6 +40,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             else {
                 m.where = ["org.objid = :orgid", [orgid: OsirisContext.env.ORGID] ];
             }
+            m.orderBy = "sortindex";
             def list = querySvc.getList( m );
             int i = 100;
             list.each {
@@ -46,6 +54,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
                 def sinv = _id.split("_")[0] + "_permit_evaluation:list"
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
                 op.target = 'window';
+                op.id = sinv;
                 invokers.put( id, op );
             }
         }

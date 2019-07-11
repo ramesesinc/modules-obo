@@ -3,6 +3,7 @@
         <invoker type="building_permit_ancillary:open" caption="Building Permit Application"
                 action="open" index="1" target="popup"/>
         
+         
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitAncillaryModel" />
     <pages>

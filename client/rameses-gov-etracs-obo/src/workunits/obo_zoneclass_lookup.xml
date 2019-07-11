@@ -2,7 +2,7 @@
     schemaName="obo_zoneclass">
     <invokers>
         <invoker type="obo_zoneclass:lookup" caption="Zone Classs"
-                cols="objid,description"
+                cols="objid,title"
                 action="init" target="popup"/>
     </invokers>
 </workunit>

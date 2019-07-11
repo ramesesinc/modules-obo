@@ -1,0 +1,75 @@
+import com.rameses.annotations.*; 
+
+class OboBillingService {
+
+	@Service("NumberService")
+	def numSvc;
+
+	@DataContext("building_permit")
+	def appEm;
+
+	@DataContext("building_permit_fee")
+	def appFeeEm;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@ProxyMethod
+	public def getBilling( def o ) { 
+
+		def app = appEm.find( [appno: o.refno ]).first();
+		if(!app) throw new Exception("ref no" + o.refno + " not found");
+
+		def p = [:];
+		p.appno = app.appno;
+		p.permittype = "BUILDING PERMIT";
+		p.apptype = app.apptype;		
+		p.title = app.title;
+		p.address = app.location?.lotno + ' ' + app.location?.barangay;
+		p.applicant = app.applicant.name;
+		p.applicantaddress = app.applicant.address?.text;
+
+		p.items =  appFeeEm.find( [appid: app.objid ] ).orderBy("item.sortorder").list().collect{
+			[ objid: it.objid, account: it.item.title, amount: it.amount]
+		} 
+		p.amount = p.items.sum{it.amount};
+		p.mobileno = app.contact?.mobileno;
+		p.email = app.contact?.email;
+		p.expirydate = app.getServerDate();
+		return p;
+	}
+
+	@ProxyMethod
+	public def createPaymentOrder( def o ) { 
+		def bill = getBilling( o );
+		def m = [:];
+		m.payer = z.app.business.owner;
+		m.paidby = z.app.tradename;
+		m.paidbyaddress = z.app.businessaddress;
+		m.particulars = 'Business Permit';
+		m.refid = z.app.objid;
+		m.refno = o.appno;
+		m.info = z.payment;
+		m.amount = z.amount;
+		m.txntype = 'bpls';
+		m.txntypename = 'Business Permit';
+		m.expirydate = z.expirydate;
+
+		/*
+		def o = evt.args[0];
+		o.appno = o.refno;
+		def z = generateBilling(o);
+		
+
+		//retrieve the contactinfo
+		def contact = [:];
+		def c = appEm.find( [objid: z.app.objid ] ).select("business.*").first();
+		def biz  = c.business;
+		m.mobileno = (biz.mobileno) ? biz.mobileno : biz.owner.mobileno;
+		m.email = (biz.email) ? biz.email : biz.owner.email;
+		m.phoneno = (biz.phoneno) ? biz.phoneno : biz.owner.phoneno;
+		o.info = m;
+		*/
+	}
+
+}

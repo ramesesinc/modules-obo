@@ -11,6 +11,7 @@
 
 		<field name="activatewithancillary" />
 		<field name="ancillarypermitid" />
+		<field name="allowassessment" />
 	</element>
 </schema>
 		
