@@ -4,6 +4,15 @@
 		<field name="appid" />
 		<field name="entityid" />
 		<field name="profession" />
+		<field name="ptr" />
+		<field name="prc" />
+		<complex name="applicant_id" serializer="default"/>
 		<field name="entity_name" />
+		<field name="entity_lastname" />
+		<field name="entity_firstname" />
+		<field name="entity_middlename" />
+		<field name="entity_address_text" />
+		<field name="entity_tin" />
+		<complex name="entity_id" serializer="default"/>
 	</element>
 </schema>
