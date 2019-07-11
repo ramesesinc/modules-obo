@@ -38,6 +38,9 @@ public class BuildingPermitOnlineService  {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
+	@Service("OboConstructionCostService")
+	def costSvc;
+
 	@ProxyMethod
 	public def upload( def app ) {
 		app.remove("objid");
@@ -77,6 +80,16 @@ public class BuildingPermitOnlineService  {
 	public def receive( def app ) {
 		def dt = dateSvc.getServerDate();
 
+		//calculate the cost first
+		def param = [:];
+		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
+		param.occupancytype = [
+			group: app.occupancytype.group.objid,
+			division: app.occupancytype.division.objid,
+			type: app.occupancytype.objid
+		] 
+		def cost = costSvc.calc( param );
+
 		//update the appno first
 		int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
 		def appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  );
@@ -84,9 +97,10 @@ public class BuildingPermitOnlineService  {
 		def u = [:];
 		u.appdate = dt;
 		u.appno = appno;
-		u.projectcost = 0;		
+		u.projectcost = cost;		
 		appEm.find( [objid: app.objid ] ).update( u );
 
+		//fire the workflow to start the process
 		def p = [:];
 		p.processname = 'building_permit';
 		p.refid = app.objid;

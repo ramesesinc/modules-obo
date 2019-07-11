@@ -54,7 +54,6 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
         xLookupField3 = new com.rameses.rcp.control.XLookupField();
         xLookupField5 = new com.rameses.rcp.control.XLookupField();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
-        xDecimalField3 = new com.rameses.rcp.control.XDecimalField();
         xIntegerField2 = new com.rameses.rcp.control.XIntegerField();
         xDecimalField4 = new com.rameses.rcp.control.XDecimalField();
         xDecimalField5 = new com.rameses.rcp.control.XDecimalField();
@@ -294,11 +293,6 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
 
         xFormPanel2.setCaptionWidth(230);
 
-        xDecimalField3.setCaption("Floor Area (sqm)");
-        xDecimalField3.setName("entity.floorarea"); // NOI18N
-        xDecimalField3.setRequired(true);
-        xFormPanel2.add(xDecimalField3);
-
         xIntegerField2.setCaption("No. of Units");
         xIntegerField2.setName("entity.numunits"); // NOI18N
         xIntegerField2.setRequired(true);
@@ -362,7 +356,7 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -410,7 +404,6 @@ public class BuildingAssessmentAnalyzerPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XDataTable xDataTable4;
     private com.rameses.rcp.control.XDateField xDateField1;
     private com.rameses.rcp.control.XDecimalField xDecimalField2;
-    private com.rameses.rcp.control.XDecimalField xDecimalField3;
     private com.rameses.rcp.control.XDecimalField xDecimalField4;
     private com.rameses.rcp.control.XDecimalField xDecimalField5;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;

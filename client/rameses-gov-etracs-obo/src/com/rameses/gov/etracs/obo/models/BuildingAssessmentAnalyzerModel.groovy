@@ -24,33 +24,8 @@ class BuildingAssessmentAnalyzerModel  {
     def selectedInfo;
     
     void init() {
-        entity = [subapplications:[], numunits: 1, floorarea: 0, height: 0, totalfloorarea: 0];
+        entity = [subapplications:[], numunits: 1, floorarea: 0, height: 0, totalfloorarea: 0, projectcost: 0];
     }
-    
-    @PropertyChangeListener
-    def propListener = [ 
-        "entity.(numunits|height|totalfloorarea|apptype|occupancytype|worktype)" : { v->
-            entity.projectcost = 0;
-            if( entity.height == null ) {};
-            else if( !entity.totalfloorarea ) {
-                //println "entity floor area " + entity.floorarea;
-            };
-            else if( !entity.apptype ) {
-                //println "entity app type " + entity.apptype;
-            };
-            else if( !entity.occupancytype ) {
-                //do nothing
-            }
-            else if( !entity.worktype ) {
-                //println "work type " + entity.constructiontypeid
-            };            
-            else {
-                def req = buildBasicParams();
-                entity.projectcost = costSvc.calc(req); 
-            }
-            binding.refresh("entity.projectcost");
-        }
-    ];
     
     def buildBasicParams() {
         def dt = null;
@@ -65,7 +40,6 @@ class BuildingAssessmentAnalyzerModel  {
             height: ((entity.height == null)?0:entity.height),
             numunits: entity.numunits,
             totalfloorarea: entity.totalfloorarea,
-            floorarea: entity.floorarea,
             worktype : entity.worktype.objid
         ];
         def v = entity.occupancytype;
@@ -98,7 +72,7 @@ class BuildingAssessmentAnalyzerModel  {
             }
             binding.refresh("subApplication");
         }
-        return Inv.lookupOpener("obo_subapplication_type:lookup", [onselect:h, multiSelect: true ]);    
+        return Inv.lookupOpener("obo_permit_type:ancillary:lookup", [onselect:h, multiSelect: true ]);    
     }
     
     void removeSubApp() {
@@ -153,6 +127,11 @@ class BuildingAssessmentAnalyzerModel  {
             selectedInfo.remarks = msg;
             infoListModel.load();
         }
+    }
+    
+    def computeCost() {
+        def req = buildBasicParams();
+        entity.projectcost = costSvc.calc(req); 
     }
     
 }

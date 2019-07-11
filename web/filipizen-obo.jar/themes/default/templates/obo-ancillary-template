@@ -1,12 +1,14 @@
 <%
 	def svc = SERVICE.lookup("OnlineBuildingApplicationService", "obo");
 	def app = svc.getAncillaryPermit( [objid: PARAMS.refid] );
+
 	app.org = [ name:'Legazpi City', formalname: 'City of Legazpi', province: 'Province of Albay'];
 	def parent = svc.getApplication([objid: app.appid ] );
 	app.putAll( parent );
 	app.lotowner = [address: [:], ctc:[:], prc:[:], ptr:[:]  ] ;
 	PARAMS.app = app;
 %>
+
 
 <!DOCTYPE html>
 <html lang="en"> 

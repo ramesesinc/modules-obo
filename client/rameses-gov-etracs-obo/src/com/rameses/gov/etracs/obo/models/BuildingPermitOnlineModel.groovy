@@ -67,8 +67,10 @@ class BuildingPermitOnlineModel extends WorkflowTaskModel {
 
     def receive() {
         if(!MsgBox.confirm("You are about to recive this application. Proceed?")) return;
-        def app = bpSvc.receive( [objid: entity.objid ] );
+        def app = bpSvc.receive( entity );
+        entity.putAll(app);
         MsgBox.alert( "App No " + app.appno + " is created");
+        return "_close";
     }
     
 }

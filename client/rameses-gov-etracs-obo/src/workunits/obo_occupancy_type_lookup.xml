@@ -4,5 +4,12 @@
         <invoker type="vw_obo_occupancy_type:lookup" caption="Use Classifcation"
                 cols="objid,title,division.objid,group.objid"
                 action="init" target="popup"/>
+
+        <!-- different types of lookup -->        
+        <invoker type="obo_occupancy_type:lookup" caption="Occupancy Type"
+                cols="objid,title,division.objid,group.objid"
+                action="init" target="popup"/>
+        
+        
     </invokers>
 </workunit>

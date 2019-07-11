@@ -71,7 +71,7 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel3" pref="358" max="32767" attributes="0"/>
+                          <Component id="jPanel3" pref="373" max="32767" attributes="0"/>
                           <Component id="jPanel5" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -428,13 +428,6 @@
                     <Property name="captionWidth" type="int" value="230"/>
                   </Properties>
                   <SubComponents>
-                    <Component class="com.rameses.rcp.control.XDecimalField" name="xDecimalField3">
-                      <Properties>
-                        <Property name="caption" type="java.lang.String" value="Floor Area (sqm)"/>
-                        <Property name="name" type="java.lang.String" value="entity.floorarea" noResource="true"/>
-                        <Property name="required" type="boolean" value="true"/>
-                      </Properties>
-                    </Component>
                     <Component class="com.rameses.rcp.control.XIntegerField" name="xIntegerField2">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="No. of Units"/>

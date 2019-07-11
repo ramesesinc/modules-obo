@@ -20,6 +20,7 @@ public class BuildingApplication {
 	double height;
 	int numunits;
 
+	String zoneclass;
 
 }
 

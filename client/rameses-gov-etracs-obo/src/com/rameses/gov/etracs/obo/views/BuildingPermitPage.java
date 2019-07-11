@@ -44,16 +44,20 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xLabel11 = new com.rameses.rcp.control.XLabel();
+        xDecimalField2 = new com.rameses.rcp.control.XDecimalField();
+        xDecimalField1 = new com.rameses.rcp.control.XDecimalField();
+        xLabel15 = new com.rameses.rcp.control.XLabel();
+        xLabel16 = new com.rameses.rcp.control.XLabel();
         xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
         xLabel5 = new com.rameses.rcp.control.XLabel();
         xLabel9 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
         xLabel14 = new com.rameses.rcp.control.XLabel();
         xLabel13 = new com.rameses.rcp.control.XLabel();
-        xDecimalField2 = new com.rameses.rcp.control.XDecimalField();
-        xDecimalField1 = new com.rameses.rcp.control.XDecimalField();
-        xLabel15 = new com.rameses.rcp.control.XLabel();
-        xLabel16 = new com.rameses.rcp.control.XLabel();
+        xLabel17 = new com.rameses.rcp.control.XLabel();
+        xLabel18 = new com.rameses.rcp.control.XLabel();
+        xLabel19 = new com.rameses.rcp.control.XLabel();
+        xLabel20 = new com.rameses.rcp.control.XLabel();
         jPanel5 = new javax.swing.JPanel();
         schemaList4 = new com.rameses.seti2.components.SchemaList();
         jPanel2 = new javax.swing.JPanel();
@@ -127,12 +131,35 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xLabel11.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel11);
 
+        xDecimalField2.setCaption("Estimated Cost");
+        xDecimalField2.setDisableWhen("#{ true }");
+        xDecimalField2.setName("entity.estimatedcost"); // NOI18N
+        xDecimalField2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xDecimalField2.setPreferredSize(new java.awt.Dimension(150, 20));
+        xFormPanel1.add(xDecimalField2);
+
+        xDecimalField1.setCaption("Fixed Unit  Cost (computed)");
+        xDecimalField1.setDisableWhen("#{ true }");
+        xDecimalField1.setName("entity.projectcost"); // NOI18N
+        xDecimalField1.setPreferredSize(new java.awt.Dimension(150, 20));
+        xFormPanel1.add(xDecimalField1);
+
+        xLabel15.setCaption("Const. Date");
+        xLabel15.setExpression("#{entity.dtproposedconstruction}");
+        xLabel15.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel15);
+
+        xLabel16.setCaption("Est. Completion Date");
+        xLabel16.setExpression("#{entity.dtexpectedcompletion}");
+        xLabel16.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel16);
+
         xFormPanel3.setCaption("");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder2.setPadding(new java.awt.Insets(20, 10, 10, 10));
-        xTitledBorder2.setTitle("Application");
+        xTitledBorder2.setTitle("Application Info");
         xFormPanel3.setBorder(xTitledBorder2);
-        xFormPanel3.setCaptionWidth(190);
+        xFormPanel3.setCaptionWidth(150);
         xFormPanel3.setPreferredSize(new java.awt.Dimension(0, 100));
 
         xLabel5.setCaption("App No");
@@ -165,28 +192,26 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xLabel13.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel13);
 
-        xDecimalField2.setCaption("Estimated Cost");
-        xDecimalField2.setDisableWhen("#{ true }");
-        xDecimalField2.setName("entity.estimatedcost"); // NOI18N
-        xDecimalField2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xDecimalField2.setPreferredSize(new java.awt.Dimension(150, 20));
-        xFormPanel3.add(xDecimalField2);
+        xLabel17.setCaption("Contact Name");
+        xLabel17.setExpression("#{entity.contact.name}");
+        xLabel17.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel17.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel3.add(xLabel17);
 
-        xDecimalField1.setCaption("Fixed Unit Cons. Cost");
-        xDecimalField1.setDisableWhen("#{ true }");
-        xDecimalField1.setName("entity.projectcost"); // NOI18N
-        xDecimalField1.setPreferredSize(new java.awt.Dimension(150, 20));
-        xFormPanel3.add(xDecimalField1);
+        xLabel18.setCaption("Contact Description");
+        xLabel18.setExpression("#{entity.contact.description}");
+        xLabel18.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel3.add(xLabel18);
 
-        xLabel15.setCaption("Const. Date");
-        xLabel15.setExpression("#{entity.dtproposedconstruction}");
-        xLabel15.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel3.add(xLabel15);
+        xLabel19.setCaption("Contact Email");
+        xLabel19.setExpression("#{entity.contact.email}");
+        xLabel19.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel3.add(xLabel19);
 
-        xLabel16.setCaption("Est. Completion Date");
-        xLabel16.setExpression("#{entity.dtexpectedcompletion}");
-        xLabel16.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel3.add(xLabel16);
+        xLabel20.setCaption("Contact Phone");
+        xLabel20.setExpression("#{entity.contact.phone}");
+        xLabel20.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel3.add(xLabel20);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -289,7 +314,6 @@ public class BuildingPermitPage extends javax.swing.JPanel {
             })
         });
         schemaList4.setCustomFilter("appid = :objid");
-        schemaList4.setOrderBy("type.sortorder");
         schemaList4.setQueryName("entity");
         schemaList4.setSchemaName("building_permit_ancillary");
 
@@ -390,7 +414,6 @@ public class BuildingPermitPage extends javax.swing.JPanel {
             })
         });
         schemaList5.setCustomFilter("appid = :objid");
-        schemaList5.setOrderBy("type.sortorder");
         schemaList5.setQueryName("entity");
         schemaList5.setSchemaName("vw_building_permit_evaluation");
 
@@ -562,7 +585,11 @@ public class BuildingPermitPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel14;
     private com.rameses.rcp.control.XLabel xLabel15;
     private com.rameses.rcp.control.XLabel xLabel16;
+    private com.rameses.rcp.control.XLabel xLabel17;
+    private com.rameses.rcp.control.XLabel xLabel18;
+    private com.rameses.rcp.control.XLabel xLabel19;
     private com.rameses.rcp.control.XLabel xLabel2;
+    private com.rameses.rcp.control.XLabel xLabel20;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;

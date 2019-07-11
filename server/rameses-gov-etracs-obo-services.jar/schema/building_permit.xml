@@ -16,11 +16,12 @@
 		<field name="occupancytypeid" />
 		<field name="bldgtypeid" />
 		<field name="numunits" type="integer"/>
-		<field name="floorarea" type="decimal"/>
 		<field name="totalfloorarea" type="decimal"/>
 		<field name="numfloors" type="integer"/>
 
 		<field name="estimatedcost" type="decimal"/>
+		<field name="projectcost" type="decimal"/>
+
 		<field name="dtproposedconstruction" type="date" />
 		<field name="dtexpectedcompletion" type="date"/>
 		<field name="supervisorid" />

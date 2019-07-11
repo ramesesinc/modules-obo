@@ -21,8 +21,9 @@
 		<field name="title" />
 		<field name="occupancytypeid" />
 		<field name="numunits" />
-		<field name="floorarea" />
 		<field name="estimatedcost" />
+		<field name="projectcost" />
+
 		<field name="dtproposedconstruction" />
 		<field name="dtexpectedcompletion" />
 		<field name="supervisorid" />
