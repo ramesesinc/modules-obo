@@ -233,11 +233,6 @@ public class OnlineBuildingPermitService  {
 		if(!o.objid) throw new Exception("getAncillary error. objid is required");
 		
 		def m = ancillaryEm.find( [objid: o.objid] ).first();
-		m.each { k,v->
-			println k+"="+v;
-		}
-
-
 		m.infos = getAppInfos( [parentid: o.objid ] );
 		//m.requirements = getRequirements( o );
 		return m;	

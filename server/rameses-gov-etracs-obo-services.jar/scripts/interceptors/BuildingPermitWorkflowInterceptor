@@ -39,6 +39,16 @@ class BuildingPermitWorkflowInterceptor {
 		}
 	}
 
+	//check for zoning evaluation
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' && args[0].taskstate == 'zoning-evaluation' }") 
+	public void checkHasZoning( def evt ) {
+		def p = evt.args[0];
+		def zc = appEm.find( [objid: p.refid]).select("zoneclassid").first();
+		if( !zc.objid ) {
+			throw new Exception("Please specify zoning class");
+		}
+	}
+
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
 	public void startEvaluationTask( def evt ) {
 		def p = evt.args[0];

@@ -1,0 +1,36 @@
+import com.rameses.annotations.*; 
+
+class OboPaymentService {
+
+	@Service("NumberService")
+	def numSvc;
+
+	@ProxyMethod
+	public void postPayment( evt ) { 
+		/*
+		def o = evt.args[0];
+		def r = [:]
+		r.appno = o.refno;
+		def z = generateBilling( r );
+		if ( o.amount != z.amount ) 
+			throw new Exception('Bill amount has changed from '+ o.amount +' to '+ z.amount); 
+		o.businessid = z.app.business.objid;
+		o.applicationid = z.app.objid;
+		o.appyear = z.app.appyear; 
+		o.taxfees = z.taxfees;
+		o.expirydate = z.expirydate; 
+		o.items = z.items; 
+		*/
+	}
+
+	@ProxyMethod
+	public void afterPostPayment( def evt ) { 
+		def o = evt.args[0]; 
+		def res = evt.result; 
+		o.reftype = 'eor';
+		o.receiptno = res.receiptno; 
+		o.receiptdate = res.receiptdate;
+		postPaymentSvc.postPayment( o ); 
+	} 
+
+}	

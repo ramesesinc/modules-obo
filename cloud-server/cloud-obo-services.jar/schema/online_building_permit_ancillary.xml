@@ -11,10 +11,10 @@
 			<key field="permittypeid" target="objid" />
 		</complex>  
 
-		<complex name="designprofessional" ref="vw_online_building_permit_professional" jointype="many-to-one" required="false" includefields="objid,profession,entity.name">
+		<complex name="designprofessional" ref="vw_online_building_permit_professional" jointype="many-to-one" required="false" includefields="objid,profession,entity.*">
 			<key field="designprofessionalid" target="objid" />
 		</complex>  
-		<complex name="supervisor" ref="vw_online_building_permit_professional" jointype="many-to-one"  required="false"  includefields="objid,profession,entity.name">
+		<complex name="supervisor" ref="vw_online_building_permit_professional" jointype="many-to-one"  required="false"  includefields="objid,profession,entity.*">
 			<key field="supervisorid" target="objid" />
 		</complex>  
 

@@ -32,6 +32,7 @@
 		<field name="applicantid"/>
 		<field name="trackingno" required="true" searchable="true"/>
 		<field name="taskid" />
+		<field name="zoneclassid" />
 
 		<complex name="worktypes" type="list" serializer="default" />
 
@@ -46,6 +47,7 @@
 		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one"  required="false">
 			<key field="occupancytypeid" target="objid" />
 		</complex>	
+
 
 	</element>
 </schema>

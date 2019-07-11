@@ -67,4 +67,20 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return Inv.lookupOpener("view_document", [:]);
     }  
     
+    public boolean getShowUpdateZoneclass() {
+        return (task.state == "zoning-evaluation");
+    }
+    
+    def updateZoneclass() {
+        def h = { zc ->
+            def m = [_schemaname:'building_permit'];
+            m.findBy = [objid: entity.objid ];
+            m.zoneclassid = zc.objid;
+            persistenceService.update(m);
+            entity.zoneclass = zc;
+            binding.refresh();
+        }
+        return Inv.lookupOpener("obo_zoneclass:lookup", [ onselect:  h] );
+    }
+    
 }

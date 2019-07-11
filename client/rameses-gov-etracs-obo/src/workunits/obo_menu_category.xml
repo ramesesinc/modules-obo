@@ -3,7 +3,7 @@
         <invoker type="home.action" 
                 icon="home/icons/obo.png"
                  role=".*"
-                 caption="OBO Main Menu" 
+                 caption="Construction (OBO)" 
                  index="1" action="init"/>
     </invokers> 
     <code class="com.rameses.gov.etracs.obo.models.OboFXMenuCategoryModel" />

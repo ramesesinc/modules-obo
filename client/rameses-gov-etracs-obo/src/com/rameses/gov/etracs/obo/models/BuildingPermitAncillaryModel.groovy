@@ -14,45 +14,50 @@ import com.rameses.io.*;
 
 class BuildingPermitAncillaryModel extends CrudFormModel {
 
-    def infoList = [
-        fetchList: { o->
-            return [];
-        }
-    ] as BasicListModel;
- 
+    def selectedInfo;
+    def infos;
+    
+    @Service("BuildingPermitAncillaryService")
+    def ancillarySvc;
+    
+    /*
     def getHtmlInfo() {
         return TemplateProvider.instance.getResult( "com/rameses/gov/etracs/obo/templates/ancillaryinfo.gtpl", [info:[:] ] );
     }
+    */
+   
+    void afterInit() {
+        infos = ancillarySvc.getInfos([objid: entity.objid ] );
+    }
     
+    /* ************************************************************************
+    * INFOS ADDED IN THE ANCILLARY 
+    *************************************************************************/
     def infoListModel = [
         isMultiSelect: {
             return true;
         },
-        fetchList: {
-            def m = [parebn : entity.objid ];
-            infos = appSvc.getInfos(m);
+        fetchList: { o -> 
             return infos;
         }
-    ] as BasicListModel;
+    ] as EditorListModel;
     
-    def addItem() {
+    def addInfos() {
         def h = { o->
-            o.each {
-                it.remove("objid");
-                it.appid = entity.appid;
-                it.subappid = entity.objid;
+            o.each { v->
+                if( !infos.find{it.name == v.name} ) {
+                    infos << v;                    
+                }
             }
-            appSvc.saveInfos( o );
             infoListModel.load();
         }
-        return Inv.lookupOpener( "obo_variable:picklist", [typeid: entity.typeid, onselect: h ]);
+        return Inv.lookupOpener( "obo_variable:picklist", [typeid: entity.permittypeid, onselect: h ]);
     }
     
-    def editItems() {
+    def editInfos() {
         def selectedItems = infoListModel.getSelectedValue();
         if( !selectedItems ) throw new Exception("Please select items to edit");
         def h = { v->
-            appSvc.saveInfos( v );
             infoListModel.load();
         }
         def op= Inv.lookupOpener("obo_detail_info", [items: selectedItems, onselect: h ]);
@@ -60,19 +65,27 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
         return op;
     }
     
-    void removeItems() {
+    void removeInfos() {
         def selectedItems = infoListModel.getSelectedValue();
         if( !selectedItems ) throw new Exception("Please select items to remove");
-        appSvc.removeInfos( selectedItems );
+        selectedItems.each {
+            infos.remove( it );
+        }
         infoListModel.load();
     }
-    
-    def itemListModel = [
-        fetchList: { o->
-            return [];
+
+    void editRemarks() {
+        if( !selectedInfo ) return;
+        def msg = MsgBox.prompt("Enter Remarks");
+        if(msg) {
+            selectedInfo.remarks = msg;
+            infoListModel.load();
         }
-    ] as BasicListModel;
+    }
     
+    /* ************************************************************************
+    * TEST ASSESSMENT OF FEES
+    *************************************************************************/
     def viewAssessment() {
         def f = [:];
         f.app = [ 
@@ -89,5 +102,7 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
         f.permits = [ [type: entity.typeid ] ];
         return Inv.lookupOpener("view_assessment", [params: f] );
     }
+    
+    
     
 }

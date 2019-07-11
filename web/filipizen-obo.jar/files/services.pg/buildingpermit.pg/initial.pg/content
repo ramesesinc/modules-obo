@@ -38,7 +38,7 @@
 		}
 
 		this.verifyEmail = function() {
-			var p = {email: self.contact.email } 
+			var p = {email: self.contact.email, phoneno: self.contact.mobileno } 
 			var emailSvc = Service.lookup(app.orgcode+':VerifyEmailService');
 
 			emailSvc.verifyEmail( p, function(o,s) {

@@ -5,8 +5,14 @@
         <!-- form actions -->
         <invoker type="formActions" caption="View Application"
                 action="viewApplication" index="10"/>
-        <invoker type="formActions" caption="Add Finding"
-                action="addFinding" index="11"/>
+        <invoker type="formActions" caption="View Ancillary Permit"
+                action="viewAncillaryPermit" index="11" visibleWhen="#{entity.ancillarypermitid != null }"/>
+        <invoker type="formActions" caption="View Assessment" index="20"
+                action="viewAssessment" visibleWhen="#{entity.allowassessment == 1 }"/>        
+        
+        <!-- context related actions -->
+         <invoker type="formAction" caption="Change Zoning Class"
+            action="open" index="1" visibleWhen="#{entity.typeid.toLowerCase() == 'zoning' }"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitEvaluationModel" />
     <pages>

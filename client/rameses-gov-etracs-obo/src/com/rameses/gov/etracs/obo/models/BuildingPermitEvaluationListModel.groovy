@@ -15,6 +15,12 @@ class BuildingPermitEvaluationListModel extends WorkflowTaskListModel {
     def typeid;
     String title;
     
+    @FormId
+    public String getFormId() {
+        return "building_permit_evaluation:" + typeid + ":list";
+    }
+
+    
     def getCustomFilter() {
         return [ "typeid = :typeid", [typeid: typeid] ];
     }

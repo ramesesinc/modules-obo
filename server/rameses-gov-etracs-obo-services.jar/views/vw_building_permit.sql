@@ -10,6 +10,10 @@ SELECT
    od.title AS occupancytype_division_title,   
    og.objid AS occupancytype_group_objid,
    og.title AS occupancytype_group_title,   
+
+   zc.objid AS zoneclass_objid,
+   zc.title AS zoneclass_title,
+
    t.state AS task_state,
    t.startdate AS task_startdate,
    t.enddate AS task_enddate,
@@ -25,3 +29,4 @@ INNER JOIN building_permit_task t ON a.taskid = t.taskid
 INNER JOIN obo_occupancy_type bt ON a.occupancytypeid = bt.objid
 INNER JOIN obo_occupancy_type_division od ON bt.divisionid = od.objid
 INNER JOIN obo_occupancy_type_group og ON od.groupid = og.objid
+LEFT JOIN obo_zoneclass zc ON a.zoneclassid = zc.objid
