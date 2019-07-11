@@ -1,5 +1,5 @@
 <%
-	def svc = SERVICE.lookup("OnlineBuildingApplicationService", "obo");
+	def svc = SERVICE.lookup("OnlineBuildingPermitService", "obo");
 	def app = svc.getAncillaryPermit( [objid: PARAMS.refid] );
 
 	app.org = [ name:'Legazpi City', formalname: 'City of Legazpi', province: 'Province of Albay'];
