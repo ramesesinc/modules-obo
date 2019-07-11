@@ -91,22 +91,22 @@
 		<tr>
 			<td class="tdinside">
 				<p class="title">Box 3</p>
-				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app.designprofessional, role:'ARCHITECT' )
+				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app?.designprofessional, role:'ARCHITECT' )
 			</td>
 			<td class="tdinside">
 				<p class="title">Box 4</p>
-				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app.supervisor, role: 'ARCHITECT' )
+				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app?.supervisor, role: 'ARCHITECT' )
 			</td>
 		</tr>
 		<!-- second row. 283 -->
 		<tr>
 			<td class="tdinside">
 				<p class="title">Box 5</p>
-				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app?.owner )
 			</td>
 			<td class="tdinside">
 				<p class="title">Box 6</p>
-				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app?.lotowner )
 			</td>
 		</tr>
 	</tbody>
