@@ -14,7 +14,7 @@ public class OboMenuNotificationService {
 			def id = it.id;
 			if(id.startsWith("building_permit_evaluation")) {
 				def c = id.split(":")[1];
-				it.count = appTask.select("c:{COUNT(*)}").where("typeid = :typ AND task.state NOT IN('for-revision', 'end')", [typ:c] ).val();
+				it.count = appTask.select("c:{COUNT(*)}").where("typeid = :typ AND task.state NOT IN('revision', 'end')", [typ:c] ).val();
 			}
 			else if(id == "building_permit_online"){
 				it.count = vwApp.select("c:{COUNT(*)}").where( "taskid IS NULL ").val();

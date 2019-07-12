@@ -7,7 +7,7 @@ import treasury.utils.*;
 import treasury.facts.*;
 import enterprise.utils.*;
 
-public class BuildingPermitFeeService  {
+public class OboAssessmentService  {
 
 	@Service("BillingRuleService")
 	def billingRuleSvc;
@@ -23,25 +23,6 @@ public class BuildingPermitFeeService  {
 
 	@ProxyMethod
 	public def assess(o) {
-		if( o.app == null && o.appid ) {
-			def vapp = appEm.find( [objid: o.appid ] ).find();
-			def m = [:];
-			m.appno = vapp.appno;
-            m.appdate = vapp.dtfiled; 
-            m.apptype = vapp.apptype;
-            m.projectcost = vapp.projectcost;
-            m.height = vapp.height;
-            m.numunits = vapp.numunits;
-            m.totalfloorarea = vapp.totalfloorarea;
-            m.zoneclass = vapp.zoneclassid;
-            o.app = m;
-            def occ = [:];
-            occ.group = vapp.occupancytype.group.objid;
-            occ.division = vapp.occupancytype.division.objid;
-            occ.type = vapp.occupancytype.objid;
-            o.occupancytype = occ;
-		}
-
 		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: o, include_items: false ] );
 		res.billitems.findAll{ it.billcode && it.item == null }.each {
 			def p = billItemTypeEm.find( [objid: it.billcode ] ).first()

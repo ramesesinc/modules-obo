@@ -14,6 +14,9 @@ class OboBillingService {
 	@Service("DateService")
 	def dateSvc;
 
+	@Service(value="OnlinePaymentService", connection="local-etracs")
+    def pmtSvc;
+
 	@ProxyMethod
 	public def getBilling( def o ) { 
 
@@ -28,48 +31,30 @@ class OboBillingService {
 		p.address = app.location?.lotno + ' ' + app.location?.barangay;
 		p.applicant = app.applicant.name;
 		p.applicantaddress = app.applicant.address?.text;
-
 		p.items =  appFeeEm.find( [appid: app.objid ] ).orderBy("item.sortorder").list().collect{
 			[ objid: it.objid, account: it.item.title, amount: it.amount]
 		} 
 		p.amount = p.items.sum{it.amount};
 		p.mobileno = app.contact?.mobileno;
 		p.email = app.contact?.email;
-		p.expirydate = app.getServerDate();
+		p.expirydate = dateSvc.getServerDate();
+
+		//build the info beforehand for payment order purpose
+		def m = [:];
+		m.payer = [objid:'X', name: p.applicant];
+		m.paidby = p.applicant;
+		m.paidbyaddress = p.applicantaddress;
+		m.particulars = 'Building Permit';
+		m.refid = app.objid;
+		m.refno = p.appno;
+		m.info = [appid: app.objid];
+		m.amount = p.amount;
+		m.txntype = 'obo';
+		m.txntypename = 'Building Permit';
+		m.expirydate = p.expirydate;
+		p.info = m;
 		return p;
 	}
 
-	@ProxyMethod
-	public def createPaymentOrder( def o ) { 
-		def bill = getBilling( o );
-		def m = [:];
-		m.payer = z.app.business.owner;
-		m.paidby = z.app.tradename;
-		m.paidbyaddress = z.app.businessaddress;
-		m.particulars = 'Business Permit';
-		m.refid = z.app.objid;
-		m.refno = o.appno;
-		m.info = z.payment;
-		m.amount = z.amount;
-		m.txntype = 'bpls';
-		m.txntypename = 'Business Permit';
-		m.expirydate = z.expirydate;
-
-		/*
-		def o = evt.args[0];
-		o.appno = o.refno;
-		def z = generateBilling(o);
-		
-
-		//retrieve the contactinfo
-		def contact = [:];
-		def c = appEm.find( [objid: z.app.objid ] ).select("business.*").first();
-		def biz  = c.business;
-		m.mobileno = (biz.mobileno) ? biz.mobileno : biz.owner.mobileno;
-		m.email = (biz.email) ? biz.email : biz.owner.email;
-		m.phoneno = (biz.phoneno) ? biz.phoneno : biz.owner.phoneno;
-		o.info = m;
-		*/
-	}
 
 }

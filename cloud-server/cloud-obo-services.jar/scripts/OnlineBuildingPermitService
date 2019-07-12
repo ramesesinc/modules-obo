@@ -24,6 +24,12 @@ public class OnlineBuildingPermitService  {
 	@DataContext("online_building_permit_professional")
 	def professionalEm;
 
+	@DataContext("online_building_permit_requirement")
+	def reqEm;
+
+	@DataContext("obo_requirement_type")
+	def reqTypeEm;
+
 	@Service("DateService")
 	def dateSvc;
 
@@ -204,9 +210,6 @@ public class OnlineBuildingPermitService  {
 		return appEm.select(flds).find( [objid: o.appid] ).first();
 	}
 
-
-	
-
 	@ProxyMethod
 	public def saveAncillaryPermits( def o ) {
 		o.permits.each { k,v->
@@ -214,10 +217,13 @@ public class OnlineBuildingPermitService  {
 			if( !z && v.toInteger() == 1 ) {
 				def m = [appid: o.appid, permittypeid: k, state: 'PENDING' ];
 				m.type = [objid: k];
-				ancillaryEm.create( m );	
+				m = ancillaryEm.create( m );	
+				buildRequirements( m );
 			} 
 			else if( z && v.toInteger() == 0 ) {
-				ancillaryEm.find( [appid: o.appid, permittypeid: k] ).delete()	
+				def x = ancillaryEm.find( [appid: o.appid, permittypeid: k] ).first();
+				reqEm.find([parentid : x.objid]).delete();
+				ancillaryEm.find( [objid:x.objid] ).delete()	
 			}
 		}		
 		return null;
@@ -234,7 +240,7 @@ public class OnlineBuildingPermitService  {
 		
 		def m = ancillaryEm.find( [objid: o.objid] ).first();
 		m.infos = getAppInfos( [parentid: o.objid ] );
-		//m.requirements = getRequirements( o );
+		m.requirements = getRequirements( [parentid: o.objid] );
 		return m;	
 	}
 
@@ -298,6 +304,23 @@ public class OnlineBuildingPermitService  {
 	}
 
 	@ProxyMethod
+	public def buildRequirements(def o) {
+		def rlist  = reqTypeEm.find( [permittype: o.permittypeid]).list();
+		if(!rlist) {
+			rlist = reqTypeEm.where("permittype IS NULL").list();
+		}
+		rlist.each {
+			def m = [appid: o.appid, parentid:o.objid, typeid: it.objid];
+			reqEm.create( m );
+		}
+	}
+
+	@ProxyMethod
+	public def getRequirements(def o) {
+		return reqEm.find( o ).list(); 
+	}
+
+	@ProxyMethod
 	public def getApplication(def o ) {
 		def app = appEm.find([objid: o.appid ] ).first();
 		if(o.loadall == true ) {
@@ -319,16 +342,22 @@ public class OnlineBuildingPermitService  {
 
 		//add the entities, locations, professionals
 		app.entities = entityEm.find( [appid: appid ]).list();
+
+
 		app.rpus = locationEm.find( [appid: appid] ).list();
 		app.rpus.each{ it.remove("owner") };
 		app.professionals = professionalEm.find( [appid:appid] ).list();
 		app.professionals.each{ it.remove("entity") }
+		
 
 		app.ancillaries = ancillaryEm.find([appid: appid]).list();
 		app.ancillaries.each{ it.remove("type"); it.remove("designprofessional"); it.remove("supervisor"); }
+		
 
 		app.infos = appInfoEm.find( [appid: appid ] ).list();
 		app.infos.each { it.remove("type") };
+		app.requirements = reqEm.find( [appid: appid ]).list();
+
 		app.trackingno = app.remove("objid");
 		return app;
 	}

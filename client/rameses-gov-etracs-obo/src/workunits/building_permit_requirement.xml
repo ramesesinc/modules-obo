@@ -1,0 +1,15 @@
+<workunit schemaName="building_permit_requirement">
+    <invokers>
+        <invoker type="building_permit_requirement:open" caption="Finding"
+                action="open" index="1" target="popup"/>
+        
+        <invoker type="formActions" caption="Cancel"
+                action="_close" index="0" target="popup"/>
+        <invoker type="formActions" caption="Update"
+                action="updateReq" index="1" target="popup"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitRequirementModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.BuildingPermitRequirementPage" />
+    </pages>
+</workunit>

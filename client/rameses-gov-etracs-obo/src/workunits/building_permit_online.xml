@@ -3,6 +3,7 @@
         <invoker type="vw_building_permit_online:open" caption="Building Permit Application"
                 action="open" index="1"/>
          <!-- formActions -->
+        <invoker type="formActions" caption="Send Requirement Issues" action="sendRequirementFindings"/>
         <invoker type="formActions" caption="Receive" action="receive"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitOnlineModel" />

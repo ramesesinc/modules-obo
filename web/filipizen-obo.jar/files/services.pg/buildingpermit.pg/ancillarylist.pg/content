@@ -53,8 +53,7 @@
 		}
 		return new PopupOpener( "professional_lookup", { appid: app.appid, onselect: h }, 
 		  {width:'700', height:'300', title: 'Lookup Professional'}  )
-		}
-	});
+	}
 
 	this.lookupDesignProfessional = function() {
 		return self.lookupProfessional( "designprofessional" )
@@ -63,6 +62,11 @@
 	this.lookupSupervisor = function() {
 		return self.lookupProfessional( "supervisor" )
 	}
+
+	this.closeAncillary = function() {
+		app.moveNextStep();
+	}
+});
 
 </script>
 
@@ -113,7 +117,8 @@
 	</table>
 
 	<br>
-	<button r:context="ancillarylist" r:name="addAncillary">Change Permits to Include</button>
+	@wx:button( caption:'Change Permits to Include', context:'ancillarylist', name:'addAncillary')
+	@wx:button( caption:'Next', context:'ancillarylist', name:'closeAncillary')
 </div>
 
 

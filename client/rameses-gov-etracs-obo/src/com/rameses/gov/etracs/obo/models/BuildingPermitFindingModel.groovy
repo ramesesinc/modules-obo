@@ -16,6 +16,12 @@ class BuildingPermitFindingModel extends CrudFormModel {
     def parentid;
     def handler;
     def statusList = ["APPROVED", "REVISION"];
+    def categoryList = [];
+    
+    void afterInit() {
+        categoryList << [ objid:'V1', title:'Improper Installation' ];
+        categoryList << [ objid:'V2', title:'Encroachment of road' ];        
+    }
     
     void afterCreate() {
         entity.appid = appid;

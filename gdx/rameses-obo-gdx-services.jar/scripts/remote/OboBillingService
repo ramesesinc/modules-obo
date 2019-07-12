@@ -14,8 +14,8 @@ class OboBillingService {
     }
 
     @ProxyMethod
-    public def createPaymentOrder( def evt ) { 
-        return null;        
+    public def createPaymentOrder( def o ) { 
+        return billingSvc.createPaymentOrder(o);      
     }
 
 

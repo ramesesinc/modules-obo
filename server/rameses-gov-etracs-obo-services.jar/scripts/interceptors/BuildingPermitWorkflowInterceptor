@@ -24,9 +24,22 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit_ancillary")
 	def ancillaryEm;
 
+	@DataContext("vw_building_permit")
+	def vwAppEm;
+
+	//This is the part where you need to check for application specific routines
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
+	public void checkHasZoning( def evt ) {
+		def p = evt.args[0];
+		//check existing application first regarding its state
+		def app = vwAppEm.find( [objid: p.refid]).first();
+		if( app.task.state == "zoning-evaluation") {
+			if(app.zoneclassid == null ) throw new Exception("Please specify zone classification");
+		}
+	}
 
 	//check there should be no pending transactions
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }", index=100) 
 	public void checkApplicationPendings( def evt ) {
 		def p = evt.args[0];
 		def r = [appid:p.refid, processname:'building_permit', validationstate: p.taskstate];
@@ -36,16 +49,6 @@ class BuildingPermitWorkflowInterceptor {
 			buff.append("The ff. are uncompleted processes: \n")
 			buff.append( procs.collect{"  "+it.type.title}.join("\n") );
 			throw new Exception( buff.toString() );			
-		}
-	}
-
-	//check for zoning evaluation
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' && args[0].taskstate == 'zoning-evaluation' }") 
-	public void checkHasZoning( def evt ) {
-		def p = evt.args[0];
-		def zc = appEm.find( [objid: p.refid]).select("zoneclassid").first();
-		if( !zc.objid ) {
-			throw new Exception("Please specify zoning class");
 		}
 	}
 

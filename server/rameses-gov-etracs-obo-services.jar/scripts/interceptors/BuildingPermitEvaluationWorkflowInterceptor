@@ -29,6 +29,8 @@ class BuildingPermitEvaluationWorkflowInterceptor {
 		if( !c && p.action == 'for-revision' ) throw new Exception("For Revision not allowed. There are no findings for revision.");
 	} 
 
+
+
 	//signal the parent 
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_evaluation' && args[0].action?.matches('approve|for-revision') }") 
 	public void signalParent( def evt ) {

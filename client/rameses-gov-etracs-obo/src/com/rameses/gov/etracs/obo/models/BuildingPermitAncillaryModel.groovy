@@ -83,26 +83,7 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
         }
     }
     
-    /* ************************************************************************
-    * TEST ASSESSMENT OF FEES
-    *************************************************************************/
-    def viewAssessment() {
-        def f = [:];
-        f.app = [ 
-            appno:entity.appno, 
-            appdate:entity.appdate, 
-            apptype:entity.apptype, 
-            projectcost: entity.projectcost, 
-            height: ((entity.height == null)?0:entity.height),
-            numunits: entity.numunits,
-            floorarea: entity.floorarea
-        ];
-        f.occupancytype = [division:entity.occupancytypeid, group:entity.occupancytypegroup ];
-        f.infos = infos;
-        f.permits = [ [type: entity.typeid ] ];
-        return Inv.lookupOpener("view_assessment", [params: f] );
-    }
-    
+   
     
     
 }

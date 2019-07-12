@@ -83,7 +83,10 @@
 		    pp.refno = this.refno;
 		    pp.orgcode = self.orgcode;
 		    pp.origin = "filipizen";
-		    svc.createPaymentOrder( pp, function(o,s) {
+		    pp.info = self.bill.info;
+		    pp.txntype = "obo";
+		    var pmtSvc = Service.lookup(self.orgcode + ":EPaymentService");
+		    pmtSvc.createPaymentOrder( pp, function(o,s) {
 		        if( s == "error" ) {
 		          alert("error " + o.result );
 		        }
@@ -145,7 +148,8 @@
 		                  <label r:context="billing">#{bill.expirydate}</label>
 		                </th>
 		                <th style="text-align:right">
-		                  <label r:context="billing">BILL AMOUNT P :#{bill.amount.formatDecimal()}</label>
+		                  <label r:context="billing">BILL AMOUNT P : 
+		                  &nbsp;&nbsp;&nbsp;&nbsp;#{bill.amount.formatDecimal()}</label>
 		                </th>
               		</tr>
 	            </tfooter>

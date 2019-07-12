@@ -132,6 +132,20 @@
 	 	<%}%>
 	<%}%>
 
+	<hr>
+	<b>Requirements</b>
+	<br><br>
+	Please review the ff. requirements. Please prepare (5) of each<br><br>
+	<table r:context="ancillary" r:varName="item" r:items="permit.requirements" style="width:100%" class="customtable">
+		<tbody>
+			<tr>
+				<td class="lp-title">#{item.type.title}</td>
+				<td class="lp-attach">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Attach Document</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<br>
 	<br>
 
 	@wx:button( caption:'Save And Complete', context:'ancillary', name:'saveAndComplete' )

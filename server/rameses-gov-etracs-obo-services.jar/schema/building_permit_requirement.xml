@@ -1,0 +1,21 @@
+<schema adapter="obodb">
+	<element tablename="building_permit_requirement">
+		<field name="objid" primary="true"/>
+		<field name="appid" />
+		<field name="parentid" />
+		<field name="typeid" />
+		<field name="status" />
+		<field name="checked" />
+		<field name="remarks" />
+		<field name="modifiedby_objid" />
+		<field name="modifiedby_name" />
+
+		<complex name="type" ref="obo_requirement_type" jointype="many-to-one" required="false" includefields="title">
+			<key field="typeid" target="objid"/>
+		</complex>
+		<complex name="parent" ref="building_permit_ancillary" jointype="many-to-one" required="false" includefields="type.title">
+			<key field="parentid" target="objid"/>
+		</complex>
+	</element>
+</schema>
+

@@ -6,9 +6,11 @@ public class OccupancyType {
 
 	String division; //objid		
     String group;	 //parentid	
-    String bldgtype; //deprecate this		
     String type;
-    String zoneclass;
 	String id;
+
+	//need to deprecate
+    String bldgtype; //deprecate this		
+    String zoneclass;	
 
 }

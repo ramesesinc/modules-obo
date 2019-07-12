@@ -5,20 +5,20 @@
  */
 package com.rameses.gov.etracs.obo.views;
 
+import com.rameses.osiris2.themes.FormPage;
 import com.rameses.rcp.ui.annotations.Template;
-import com.rameses.seti2.views.CrudFormPage;
 
 /**
  *
  * @author elmonazareno
  */
-@Template(CrudFormPage.class)
-public class BuildingPermitFindingPage extends javax.swing.JPanel {
+@Template(FormPage.class)
+public class BuildingPermitRequirementPage extends javax.swing.JPanel {
 
     /**
-     * Creates new form BuildingApplicationFindingPage
+     * Creates new form BuildingPermitRequirementPage
      */
-    public BuildingPermitFindingPage() {
+    public BuildingPermitRequirementPage() {
         initComponents();
     }
 
@@ -31,66 +31,65 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        xComboBox1 = new com.rameses.rcp.control.XComboBox();
+        xLabel2 = new com.rameses.rcp.control.XLabel();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         xTextArea1 = new com.rameses.rcp.control.XTextArea();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
+        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
 
-        xFormPanel2.setVisibleWhen("#{ mode != 'create' }");
+        xLabel2.setCaption("Permit");
+        xLabel2.setExpression("#{ entity.parent.type.title }");
+        xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel2);
 
-        xComboBox1.setCaption("Category");
-        xComboBox1.setExpression("#{ item.objid } #{ item.title }");
-        xComboBox1.setItems("categoryList");
-        xComboBox1.setName("entity.category"); // NOI18N
-        xComboBox1.setPreferredSize(new java.awt.Dimension(0, 27));
-        xFormPanel1.add(xComboBox1);
+        xLabel1.setCaption("Type");
+        xLabel1.setExpression("#{ entity.type.title }");
+        xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel1);
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 80));
 
-        xTextArea1.setCaption("Finding");
+        xTextArea1.setCaption("Remarks");
         xTextArea1.setLineWrap(true);
-        xTextArea1.setName("entity.particulars"); // NOI18N
+        xTextArea1.setName("remarks"); // NOI18N
         xTextArea1.setPreferredSize(new java.awt.Dimension(0, 60));
         jScrollPane1.setViewportView(xTextArea1);
 
         xFormPanel1.add(jScrollPane1);
 
-        xLabel1.setCaption("Status");
-        xLabel1.setExpression("#{ entity.status }");
-        xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel1);
+        xCheckBox1.setCaption("");
+        xCheckBox1.setCheckValue(1);
+        xCheckBox1.setName("checked"); // NOI18N
+        xCheckBox1.setUncheckValue(0);
+        xCheckBox1.setText("Passed");
+        xFormPanel1.add(xCheckBox1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(xFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private com.rameses.rcp.control.XComboBox xComboBox1;
+    private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
-    private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XLabel xLabel1;
+    private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XTextArea xTextArea1;
     // End of variables declaration//GEN-END:variables
 }

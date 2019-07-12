@@ -9,10 +9,16 @@
 		<field name="createdby_name" />
 
 		<!-- 0=fail 1=pass -->
+		<field name="category_objid" />		
 		<field name="status" />
 		<field name="resolvedby_objid" />
 		<field name="resolvedby_name" />
 		<field name="dtresolved" />
 		<field name="remarks" />
+
+		<complex name="parent" ref="building_permit_evaluation" jointype="many-to-one" includefields="typeid" required="false">
+			<key field="parentid" target="objid"/>
+		</complex>	
+
 	</element>
 </schema>
