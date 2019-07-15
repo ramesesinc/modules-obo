@@ -64,19 +64,11 @@ class BuildingPermitOnlineModel extends WorkflowTaskModel {
     def viewDocument() {
         return Inv.lookupOpener("view_document", [:]);
     }  
-
-    void sendRequirementFindings() {
-        bpSvc.sendRequirementFindings([objid: entity.objid ]);
-        MsgBox.alert("findings sent");
-    }
-    
     
     def receive() {
         if(!MsgBox.confirm("You are about to recive this application. Proceed?")) return;
-        def app = bpSvc.receive( entity );
-        entity.putAll(app);
-        MsgBox.alert( "App No " + app.appno + " is created");
-        return "_close";
+        bpSvc.receive( entity );
+        return Inv.lookupOpener("vw_building_permit:open", [entity:entity] );       
     }
     
 }

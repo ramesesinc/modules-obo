@@ -15,40 +15,34 @@ class BuildingPermitEvaluationWorkflowInterceptor {
 	def evalEm;
 
 	/**********************************************************************************************
-	* REMEMBER: This is the obo_building_subapplication process flow
+	* REMEMBER: This is the building_permit_evaluation process flow
 	***********************************************************************************************/
-
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_evaluation' && args[0].action?.matches('approve|for-revision') }") 
-	public void checkFindingStatus( def evt ) {
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_evaluation' && args[0].action == 'send-for-verification' }") 
+	public void beforeSendForVerification( def evt ) {
 		def p = evt.args[0];
-		def c = findingEm.find( [parentid: p.refid ] ).where( "status IS NULL").exists();
-		if( c ) throw new Exception("Please indicate status for the finding");
-
-		c = findingEm.find( [parentid: p.refid ] ).where( "status = 'FOR-REVISION' ").exists();
-		if( c && p.action == 'approve' ) throw new Exception("Approve is not allowed. There are findings for revision.");
-		if( !c && p.action == 'for-revision' ) throw new Exception("For Revision not allowed. There are no findings for revision.");
+		def v = evalEm.find( [objid: p.refid ]).first();
+		if( v.typeid.toLowerCase() == 'zoning' ) {
+			if(v.app.zoneclass?.objid == null ) {
+				throw new Exception("Please specify zone classification");	
+			}
+		}
 	} 
 
-
-
 	//signal the parent 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_evaluation' && args[0].action?.matches('approve|for-revision') }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_evaluation' && args[0].action == 'send-for-verification' }") 
 	public void signalParent( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
-
 		def appid = evalEm.find( [objid: p.refid] ).select("appid").val();
-		//check first of there are other sections that have not yet ended. If there are open, do not fire the parent application
-		def openItems = evalEm.find([appid:appid] ).where( "task.state NOT IN ('end', 'revision') ").exists();
+		//check first of there are other e that have not yet ended. If there are open, do not fire the parent application
+		def openItems = evalEm.find([appid:appid] ).where( "task.state NOT IN ('for-verification', 'end') ").exists();
 		if(!openItems) {
-			//check if there are other sections where state is under revision.
-			def forRevision =  evalEm.find([appid:appid] ).where( "NOT(objid = :refid) AND task.state = 'revision'", [refid: p.refid]).exists();  
 			def f = [:];
 			f.processname = 'building_permit';
 			f.refid = appid;
 			f.startdate = dateSvc.getServerDate();
-			f.info = [ app: p.info, fromevaluation: true ];
-			f.action = (forRevision) ? "for-revision" : p.action;
+			f.info = [ app: p.info ];
+			f.action = 'send-for-verification';
 			wfSvc.signal(f);	
 		}
 	} 

@@ -33,19 +33,11 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
 
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        xComboBox1 = new com.rameses.rcp.control.XComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         xTextArea1 = new com.rameses.rcp.control.XTextArea();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
+        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
 
         xFormPanel2.setVisibleWhen("#{ mode != 'create' }");
-
-        xComboBox1.setCaption("Category");
-        xComboBox1.setExpression("#{ item.objid } #{ item.title }");
-        xComboBox1.setItems("categoryList");
-        xComboBox1.setName("entity.category"); // NOI18N
-        xComboBox1.setPreferredSize(new java.awt.Dimension(0, 27));
-        xFormPanel1.add(xComboBox1);
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 80));
 
@@ -57,10 +49,12 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
 
         xFormPanel1.add(jScrollPane1);
 
-        xLabel1.setCaption("Status");
-        xLabel1.setExpression("#{ entity.status }");
-        xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel1);
+        xCheckBox1.setCaption("");
+        xCheckBox1.setCheckValue(1);
+        xCheckBox1.setName("entity.checked"); // NOI18N
+        xCheckBox1.setUncheckValue(0);
+        xCheckBox1.setText("Passed");
+        xFormPanel1.add(xCheckBox1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -87,10 +81,9 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private com.rameses.rcp.control.XComboBox xComboBox1;
+    private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
-    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XTextArea xTextArea1;
     // End of variables declaration//GEN-END:variables
 }

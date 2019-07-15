@@ -2,9 +2,9 @@
 	<element tablename="vw_building_permit">
 		<field name="objid" primary="true"/>
 		<field name="objid" />
-		<field name="appno" />
+		<field name="appno" searchable="true"/>
 
-		<field name="applicant_name" />
+		<field name="applicant_name" searchable="true"/>
 		<field name="applicant_objid" />
 		<field name="orgcode" />
 		<field name="trackingno" />

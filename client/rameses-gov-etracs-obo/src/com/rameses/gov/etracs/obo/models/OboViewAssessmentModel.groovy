@@ -12,7 +12,7 @@ import com.rameses.enterprise.models.*;
 
 class OboViewAssessmentModel extends PageFlowController {
     
-    @Service("OboBuildingAssessmentService")
+    @Service("OboAssessmentService")
     def assmtSvc;
 
     def params;

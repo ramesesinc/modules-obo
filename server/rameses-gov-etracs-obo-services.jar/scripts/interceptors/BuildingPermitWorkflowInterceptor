@@ -1,5 +1,13 @@
 import com.rameses.annotations.*; 
 
+/* **************
+Notes:
+The ff. are generic actions with similar related actions
+1. send-for-verification = do nothing special; this action is triggered by the system when all evaluations are complete
+2. send-for-revision = invoked by OBO verifier. triggers all email messages
+3. reactivate - to be invoked by OBO receiving
+approve - invoked by OBO Verifier. 
+*************** */
 class BuildingPermitWorkflowInterceptor { 
 
 	@Service("WorkflowTaskService")
@@ -7,6 +15,13 @@ class BuildingPermitWorkflowInterceptor {
 
 	@Service("DateService")
 	def dateSvc;
+
+	@Service("SequenceService")
+	def seqSvc;
+
+	@Service("AppnoGeneratorService")
+	def appNoSvc;
+
 
 	@DataContext("building_permit_evaluation")
 	def evalEm;
@@ -17,6 +32,8 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("obo_evaluation_type")
 	def evalTypeEm;
 
+	@DataContext("building_permit_requirement")
+	def reqEm;
 
 	@DataContext("building_permit")
 	def appEm;
@@ -27,67 +44,14 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("vw_building_permit")
 	def vwAppEm;
 
-	//This is the part where you need to check for application specific routines
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
-	public void checkHasZoning( def evt ) {
-		def p = evt.args[0];
-		//check existing application first regarding its state
-		def app = vwAppEm.find( [objid: p.refid]).first();
-		if( app.task.state == "zoning-evaluation") {
-			if(app.zoneclassid == null ) throw new Exception("Please specify zone classification");
-		}
-	}
+	@DataContext("building_permit_finding")
+	def findingEm;
 
-	//check there should be no pending transactions
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }", index=100) 
-	public void checkApplicationPendings( def evt ) {
-		def p = evt.args[0];
-		def r = [appid:p.refid, processname:'building_permit', validationstate: p.taskstate];
-		def buff = new StringBuffer();
-		def procs = vwEvalEm.find( [appid: p.refid ] ).where(" NOT(task.state = 'end')  ").list();
-		if (procs) {
-			buff.append("The ff. are uncompleted processes: \n")
-			buff.append( procs.collect{"  "+it.type.title}.join("\n") );
-			throw new Exception( buff.toString() );			
-		}
-	}
-
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
-	public void startEvaluationTask( def evt ) {
-		def p = evt.args[0];
-		def r = evt.result;
-		def appid = p.refid;
-
-		//fire evaluations for non-ancillary as well as those for ancillary
-		def list1 = evalTypeEm.where("activationstate = :state AND NOT(activatewithancillary = 1) ", [state: r.state]).list()*.objid;
-
-		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: appid ] ).where( "type.activationstate = :state", [state:r.state] ).list()*.type.evaluationtypeid;
-
-		def mlist = list1 + list2;
-		if( mlist ) {
-			def dt = dateSvc.getServerDate();
-			mlist.each {
-				//create each evaliuation but check first if task exists
-				def m = [appid: appid, typeid: it ]
-				boolean b = evalEm.find( m ).where("taskid IS NULL").exists();
-				if(!b) {
-					m = evalEm.create( m );
-					def f = [:];
-					f.processname = 'building_permit_evaluation';
-					f.refid = m.objid;
-					f.startdate = dt;
-					f.info = [ type: it, app: p.info ];
-					wfSvc.start(f);				
-				}
-			}
-		}
-	} 
-
-	//FOR REACTIVATION
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'reactivate' }" ) 
-	public void reactivateEvaluationTasks( def evt ) {
-		def p = evt.args[0];
-		def list = subAppEm.select("objid,taskid").find( [appid: p.refid ] ).where(" NOT(task.state = 'end') ").list();
+	/* *********************************************************************
+	//Evaluation-related triggers
+	************************************************************************ */
+	private void fireEvaluationWorkflow( refid, taskstate, action ) {
+		def list = vwEvalEm.select("objid,taskid").find( [appid: refid ] ).where(" task.state = :tstate", [tstate:taskstate]).list();
 		if( list ) {
 			def dt = dateSvc.getServerDate();
 			list.each {
@@ -96,11 +60,111 @@ class BuildingPermitWorkflowInterceptor {
 				f.refid = it.objid;
 				f.taskid = it.taskid;
 				f.startdate = dt;
-				f.action = "reactivate";
-				f.info = [ : ];
+				f.action = action;
+				f.info = [:];
 				wfSvc.signal(f);	
 			}
+		}	
+	}
+
+	//move all evaluations from for-verification to for-revision
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }") 
+	public void sendEvaluationTaskForRevision( def evt ) {
+		def p = evt.args[0];
+		fireEvaluationWorkflow( p.refid, "for-verification", "send-for-revision" );
+	}
+
+	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'reactivate' }" ) 
+	public void reactivateEvaluationTasks( def evt ) {
+		def p = evt.args[0];
+		fireEvaluationWorkflow( p.refid, "for-revision", "reactivate" );
+	}
+
+	//approve. check if there are evaluations where the task state is for-revision and reactivate each
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }" ) 
+	public void approveEvaluationTasks( def evt ) {
+		def p = evt.args[0];
+		def result = evt.result;
+		fireEvaluationWorkflow( p.refid, "for-verification", "approve" );
+
+		//start the next evaluation tasks. fire evaluations for non-ancillary as well as those for ancillary
+		def appid = p.refid;
+		def list1 = evalTypeEm.where("activationstate = :state AND ancillarypermitid IS NULL ", [state: result.state]).list()*.objid;
+		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: appid ] ).where( "type.activationstate = :state", [state:result.state] ).list()*.type.evaluationtypeid;
+		def mlist = list1 + list2;
+		if( mlist ) {
+			def dt = dateSvc.getServerDate();
+			mlist.each {
+				//create each evaluation but check first if task exists
+				def m = [appid: appid, typeid: it ]
+				boolean b = evalEm.find( m ).where("taskid IS NULL").exists();
+				if(!b) {
+					m = evalEm.create( m );
+					def f = [:];
+					f.processname = 'building_permit_evaluation';
+					f.refid = m.objid;
+					f.startdate = dt;
+					f.info = [ type: it ];
+					wfSvc.start(f);				
+				}
+			}
+		}		
+	}
+
+	/* *********************************************************************
+	//Specific before action tasks
+	************************************************************************ */
+	//Check prior to send-for-revision. There must be at least one finding
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }") 
+	public void doActionBeforeRevision( def evt ) {
+		def p = evt.args[0];
+		if(p.taskstate == "receiving") {
+			def c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("checked=0 AND remarks IS NULL").val();
+			if( c>0) throw new Exception("Please ensure that all requirements have remarks");
+		}
+		else {
+			//check there must be at least one finding
+			def c = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("checked=0").val();
+			if( c == 0) throw new Exception("There must be at least one finding");
 		}
 	}
+	//This is the part where you need to check for application specific routines
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
+	public void doActionBeforeApproval( def evt ) {
+		def p = evt.args[0];
+
+		//check if there are open findings
+		def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("checked=0").val();
+		if( t > 0) throw new Exception("All findings must be resolved first.");
+
+		if(p.taskstate == "receiving") {
+			def c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("checked=0").val();
+			if( c>0) throw new Exception("Please check first all requirements");
+		}
+		else if( p.to == "payment") {
+			throw new Exception("There must be at least one application fee");		
+		}
+	}
+
+	//application specific routines after worksflow step
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
+	public void doActionsAfterApproval( def evt ) {
+		def p = evt.args[0];
+		def result = evt.result;
+		def appid = p.refid;
+
+		if( p.taskstate == "receiving") {
+			//update the appno first
+			int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
+			def appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  );
+			def u = [:];
+			u.appdate = dateSvc.getServerDate();
+			u.appno = appno;
+			appEm.find( [objid: appid ] ).update( u );
+		}
+		
+	}
+
 
 } 

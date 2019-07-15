@@ -6,13 +6,6 @@
         <invoker type="building_permit_finding:open" caption="Finding"
                 action="open" index="1" target="popup"/>
         
-        <!-- formActions -->
-        <invoker type="formActions" caption="Approve"
-                action="approve" visibleWhen="#{mode != 'create' }"/>
-        
-        <invoker type="formActions" caption="For Revision"
-                action="revise" visibleWhen="#{mode != 'create' }"/>
-        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitFindingModel" />
     <pages>

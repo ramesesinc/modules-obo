@@ -12,41 +12,19 @@ import com.rameses.enterprise.models.*;
 
 class BuildingPermitFindingModel extends CrudFormModel {
 
-    def appid;
-    def parentid;
-    def handler;
-    def statusList = ["APPROVED", "REVISION"];
-    def categoryList = [];
-    
-    void afterInit() {
-        categoryList << [ objid:'V1', title:'Improper Installation' ];
-        categoryList << [ objid:'V2', title:'Encroachment of road' ];        
-    }
     
     void afterCreate() {
-        entity.appid = appid;
-        entity.parentid = parentid;
+        entity.appid = caller.entity.appid;
+        entity.parentid = caller.entity.objid;
+        entity.checked = 0;
     }
     
     void afterSave(def o ) {
-        if(handler) handler(entity);
+        if(caller) {
+            caller.findingListHandler.reload();
+        }
     }
     
-    void changeStatus( def o ) {
-        def m = [_schemaname: getSchemaName() ];
-        m.findBy = [objid: entity.objid];
-        m.status = o;
-        persistenceService.update( m );
-        entity.status = o;
-        binding.refresh();
-    }
     
-    void approve() {
-        changeStatus("APPROVED");
-    }
-    
-    void revise() {
-        changeStatus("FOR-REVISION");
-    }
     
 }

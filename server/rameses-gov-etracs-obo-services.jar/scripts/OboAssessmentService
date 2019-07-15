@@ -18,9 +18,6 @@ public class OboAssessmentService  {
 	@DataContext("obo_billitemtype")
 	def billItemTypeEm;
 
-	@DataContext("vw_building_permit")
-	def appEm;
-
 	@ProxyMethod
 	public def assess(o) {
 		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: o, include_items: false ] );

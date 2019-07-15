@@ -15,6 +15,9 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
     @Service("BuildingPermitEvaluationService")
     def appSvc;
     
+    @Service("BuildingPermitAncillaryService")
+    def ancillarySvc;
+    
     def infos;
     
     def findingListHandler;
@@ -36,16 +39,6 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
     public String getFormId() {
         return entity.objid;
     }
-  
-    def addFinding() {
-        def m = [:];
-        m.appid = entity.appid;
-        m.parentid = entity.objid;
-        m.handler = {
-            findingListHandler.reload();
-        }
-        return Inv.lookupOpener("building_permit_finding:create", m);
-    }
     
     def viewApplication() {
         def op = Inv.lookupOpener("vw_building_permit:open", [entity: [objid: entity.appid ] ] );
@@ -53,7 +46,7 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
         return op;
     }
     
-     def viewAncillaryPermit() {
+    def viewAncillaryPermit() {
         //find first the objid of ancillary permit
         def m = [_schemaname: 'building_permit_ancillary'];
         m.findBy = [appid: entity.appid,permittypeid: entity.ancillarypermitid ];
@@ -64,24 +57,29 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
     }
 
     def viewAssessment() {
-        MsgBox.alert("view assessment");
-        //
-        /*
+        if(! entity.app.zoneclass?.objid )
+            throw new Exception("Please specify a zone class first");
         def f = [:];
         f.app = [ 
-            appno:entity.appno, 
-            appdate:entity.appdate, 
-            apptype:entity.apptype, 
-            projectcost: entity.projectcost, 
-            height: ((entity.height == null)?0:entity.height),
-            numunits: entity.numunits,
-            floorarea: entity.floorarea
+            appno:entity.app.appno, 
+            appdate:entity.app.appdate, 
+            apptype:entity.app.apptype, 
+            projectcost: entity.app.projectcost, 
+            height: ((entity.app.height == null)?0:entity.app.height),
+            numunits: entity.app.numunits,
+            totalfloorarea: entity.app.totalfloorarea,
+            zoneclass: entity.app.zoneclass?.objid
         ];
-        f.occupancytype = [division:entity.occupancytypeid, group:entity.occupancytypegroup ];
-        f.infos = infos;
+        def occ = entity.app.occupancytype;
+        f.occupancytype = [division:occ.division.objid, group:occ.group.objid, type:occ.objid ];
+        if( entity.ancillarypermitid != null  ) {
+            def m = [_schemaname: 'building_permit_ancillary'];
+            m.findBy = [appid: entity.appid,permittypeid: entity.ancillarypermitid ];
+            def zz = queryService.findFirst( m );
+            f.infos = ancillarySvc.getInfos( [objid: zz.objid ]);            
+        }
         f.permits = [ [type: entity.typeid ] ];
         return Inv.lookupOpener("view_assessment", [params: f] );
-        */
     }
     
 }

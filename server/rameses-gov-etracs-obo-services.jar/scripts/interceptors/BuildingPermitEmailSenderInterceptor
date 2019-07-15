@@ -20,56 +20,46 @@ class BuildingPermitEmailSenderInterceptor {
 	@DataContext("building_permit")
 	def appEm;
 
-	@After(pattern="BuildingPermitOnlineService.sendRequirementFindings")
-	public void sendRequirementEmail( def evt ) {
+	@DataContext("vw_building_permit")
+	def vwAppEm;
+
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' && args[0].taskstate == 'receiving'}", index=1000)
+	public void sendEmailAfterAcceptance( def evt ) {
 		def p = evt.args[0];
-		def appid = p.objid;
+		def appid = p.refid;
 		def app = appEm.find( [objid: appid ] ).first();
-
-		def data = [:];
-		data.app = app;
-		data.findings = reqEm.find( [appid: appid ] ).where("checked = 0").list().groupBy({it.parent}); 
-		def msg1 = templateService.get( "building_permit_requirement_findings", [data:data] ).toString();
-
-		smtpSvc.send( [to: app.contact.email, subject:"Building Permit Requirements", message: msg1] );
-
-		if(app.contact.mobileno) {
-			String msg = "Your application has not yet been received due to requirement defeciencies. Please check your email for details. From Legazpi City OBO";		
-			smsSvc.send( [phoneno: app.contact.mobileno, message: msg ]);
-		}
-	}	
-
-	@After(pattern="BuildingPermitOnlineService.receive")
-	public void sendEmailAfterReceive( def evt ) {
-		def p = evt.args[0];
-		def appid = p.objid;
-		def app = appEm.find( [objid: appid ] ).first();
-
 		String msg = "Your application has been confirmed. Your application number is " + app.appno + ". Please wait for evaluation. From Legazpi City OBO";
 		smtpSvc.send( [to: app.contact.email, subject:"Building Permit Application Confirmation", message: msg] );
 		if(app.contact.mobileno) {
 			smsSvc.send( [phoneno: app.contact.mobileno, message: msg ]);
 		}
 	}	
-
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'for-revision' }")public void sendEmailAfterRevision( def evt ) {
+	
+	//Check prior to send-for-revision. There must be at least one finding
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }", index=1000) 
+	public void doActionAfterRevision( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;
 
-		def app = appEm.find( [objid: appid ] ).first();
+		def data = vwAppEm.find( [objid: appid ] ).first();
+		if(p.taskstate == "receiving") {
+			def reqs = reqEm.find([appid: appid]).where("checked = 0").list();
+			if( reqs ) {
+				data.requirements = reqs.groupBy({it.parent});
+			}			
+		};
 
-		def data = [:];
-		data.app = app;
-
-		def findings = findingEm.find([appid: appid]).where("status = 'FOR-REVISION'").list();
-		data.findings = findings.groupBy{ it.parent };
-
-		def msg = templateService.get( "building_permit_evaluation_findings", [data:data] ).toString();
-
-		smtpSvc.send( [to: app.contact.email, subject:"Building Permit Findings", message: msg] );
-
-		if(app.contact.mobileno) {
-			smsSvc.send( [phoneno: app.contact.mobileno, message:'Please check email for your evaluation. From Legazpi OBO' ]);
+		def findings = findingEm.find( [appid: appid ] ).where("checked=0").list();		
+		if(findings) {
+			data.findings = findings.groupBy({it.parent});
 		}
+		def msg1 = templateService.get( "building_permit_revision", [data:data] ).toString();
+
+		smtpSvc.send( [to: data.contact.email, subject:"Building Permit for Revision", message: msg1] );
+
+		if(data.contact.mobileno) {
+			smsSvc.send( [phoneno: data.contact.mobileno, message:'Please check email for revision for your application. From Legazpi OBO' ]);
+		}		
 	}
+
 }

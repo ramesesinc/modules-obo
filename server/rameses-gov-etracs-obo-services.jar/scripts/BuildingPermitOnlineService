@@ -26,17 +26,8 @@ public class BuildingPermitOnlineService  {
 	@DataContext("building_permit_professional")
 	def professionalEm;
 
-	@DataContext("building_permit_requirement")
-	def reqEm;
-
 	@Service("DateService")
 	def dateSvc;
-
-	@Service("SequenceService")
-	def seqSvc;
-
-	@Service("AppnoGeneratorService")
-	def appNoSvc;
 
 	@Service("WorkflowTaskService")
 	def wfSvc;
@@ -49,8 +40,8 @@ public class BuildingPermitOnlineService  {
 		app.remove("objid");
 		def locationid = app.remove("locationid");
 		def applicantid = app.remove("applicantid");		
-		println "ENTERING OBO UPLOAD....."
 		/*
+		println "ENTERING OBO UPLOAD....."		
 		println "rpus " + app.rpus.size();
 		println "entityies " + app.entities.size();
 		println "ancillaries " + app.ancillaries.size();
@@ -97,12 +88,8 @@ public class BuildingPermitOnlineService  {
 
 	@ProxyMethod
 	public def receive( def app ) {
-		def c = reqEm.select("c:{COUNT(*)}").find([appid:app.objid]).where("checked=0").val();
-		if( c>0) throw new Exception("Please check first all requirements");
-
 		def dt = dateSvc.getServerDate();
-
-		//calculate the cost first
+		//calculate the cost first before receiving
 		def param = [:];
 		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
 		param.occupancytype = [
@@ -111,17 +98,9 @@ public class BuildingPermitOnlineService  {
 			type: app.occupancytype.objid
 		] 
 		def cost = costSvc.calc( param );
-
-		//update the appno first
-		int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
-		def appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  );
-
 		def u = [:];
-		u.appdate = dt;
-		u.appno = appno;
 		u.projectcost = cost;		
 		appEm.find( [objid: app.objid ] ).update( u );
-
 		//fire the workflow to start the process
 		def p = [:];
 		p.processname = 'building_permit';
@@ -129,16 +108,9 @@ public class BuildingPermitOnlineService  {
 		p.startdate = dt;
 		p.info = app;
 		wfSvc.start(p);	
-
 		return u;
 	}
 
-	@ProxyMethod
-	public void sendRequirementFindings( def o ) {
-		def c = reqEm.select("c:{COUNT(*)}").find([appid:o.objid]).where("checked=0 AND remarks IS NULL").val();
-		if( c>0)
-			throw new Exception("Please put remarks in all requirements");
-		//this is intercepted by the email
-	}
+	
 
 }
