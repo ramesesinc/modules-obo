@@ -14,9 +14,14 @@ import com.rameses.io.*;
 
 class BuildingPermitModel extends WorkflowTaskModel {
 
+    @Service("BuildingPermitFeeService")
+    def feeSvc;
+    
+    
     def showOption = "showall";
     def query = [:];
     def evaluationHandler;
+    def reqListHandler;
     
     @PropertyChangeListener
     def listener = [
@@ -33,7 +38,6 @@ class BuildingPermitModel extends WorkflowTaskModel {
             evaluationHandler.reload();            
         }
     ]
-    
     
     String getFormName() {
         return getSchemaName() + ":form";
@@ -59,34 +63,9 @@ class BuildingPermitModel extends WorkflowTaskModel {
         query.objid = entity.objid;
     }
     
-    /*
-    def infoListModel = [
-        fetchList : { o->
-            return [];
-        }
-    ] as BasicListModel;
-    
-    void verifyDoc() {
-        if(!selectedDocument)throw new Exception("Please select a document to verify");
-        def m = [_schemaname: 'building_permit_requirement'];
-        m.findBy = [objid: selectedDocument.objid];
-        m.status = 1;
-        persistenceService.update( m );
-        docHandler.reload();
+    public boolean getShowAssessAction() {
+        return true;
     }
-    
-    def uploadDocument() {
-        def chooser = new JFileChooser();
-        int i = chooser.showOpenDialog(null);
-        if(i==0) {
-            MsgBox.alert("uploaded!");
-        }
-    }    
-    
-    def viewDocument() {
-        return Inv.lookupOpener("view_document", [:]);
-    } 
-    */
     
     public boolean getShowUpdateZoneclass() {
         return (task.state == "zoning-evaluation");
@@ -104,4 +83,16 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return Inv.lookupOpener("obo_zoneclass:lookup", [ onselect:  h] );
     }
     
+    def feeListModel = [
+        fetchList: { o->
+            return feeSvc.getFees( [appid: entity.objid ] );
+        }
+    ] as BasicListModel;
+    
+    void assess() {
+        def result  = feeSvc.assess( [appid: entity.objid ] );
+        entity.amount = result.amount;
+        feeListModel.reload();
+        binding.refresh("entity.amount");
+    }
 }

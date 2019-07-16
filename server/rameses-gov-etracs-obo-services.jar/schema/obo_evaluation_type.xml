@@ -9,7 +9,6 @@
 		<field name="sortindex" />
 		<field name="role" />
 
-		<field name="activatewithancillary" />
 		<field name="ancillarypermitid" />
 		<field name="allowassessment" />
 	</element>

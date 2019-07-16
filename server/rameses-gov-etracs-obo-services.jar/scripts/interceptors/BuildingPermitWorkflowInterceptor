@@ -1,13 +1,13 @@
 import com.rameses.annotations.*; 
 
-/* **************
+/* ******************************************************************************************************
 Notes:
 The ff. are generic actions with similar related actions
 1. send-for-verification = do nothing special; this action is triggered by the system when all evaluations are complete
 2. send-for-revision = invoked by OBO verifier. triggers all email messages
 3. reactivate - to be invoked by OBO receiving
 approve - invoked by OBO Verifier. 
-*************** */
+******************************************************************************************************* */
 class BuildingPermitWorkflowInterceptor { 
 
 	@Service("WorkflowTaskService")
@@ -47,11 +47,14 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit_finding")
 	def findingEm;
 
+	@DataContext("building_permit_fee")
+	def feeEm;
+
 	/* *********************************************************************
 	//Evaluation-related triggers
 	************************************************************************ */
-	private void fireEvaluationWorkflow( refid, taskstate, action ) {
-		def list = vwEvalEm.select("objid,taskid").find( [appid: refid ] ).where(" task.state = :tstate", [tstate:taskstate]).list();
+	private void fireEvaluationWorkflow( refid, filter, action ) {
+		def list = vwEvalEm.select("objid,taskid").find( [appid: refid ] ).where( filter ).list();
 		if( list ) {
 			def dt = dateSvc.getServerDate();
 			list.each {
@@ -63,22 +66,29 @@ class BuildingPermitWorkflowInterceptor {
 				f.action = action;
 				f.info = [:];
 				wfSvc.signal(f);	
-			}
-		}	
+			}		
+		}
 	}
 
-	//move all evaluations from for-verification to for-revision
+	//move all evaluations from for-verification to for-revision. For those that do not have issues send for approval.
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }") 
 	public void sendEvaluationTaskForRevision( def evt ) {
 		def p = evt.args[0];
-		fireEvaluationWorkflow( p.refid, "for-verification", "send-for-revision" );
+
+		//check first findings that are yet open. These are tasks that need to be sent-for-revision
+		def list = findingEm.find( [appid: p.refid ] ).where("checked = 0").list();
+		def inIds = " objid IN ('" + list*.parentid.join("','") + "') ";
+		def notInIds = " objid NOT IN ('" + list*.parentid.join("','") + "') AND task.state = 'for-verification' ";
+
+		fireEvaluationWorkflow( p.refid, inIds, "send-for-revision" );
+		fireEvaluationWorkflow( p.refid, notInIds, "approve" );
 	}
 
 	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'reactivate' }" ) 
 	public void reactivateEvaluationTasks( def evt ) {
 		def p = evt.args[0];
-		fireEvaluationWorkflow( p.refid, "for-revision", "reactivate" );
+		fireEvaluationWorkflow( p.refid, " task.state = 'for-revision' ", "reactivate" );
 	}
 
 	//approve. check if there are evaluations where the task state is for-revision and reactivate each
@@ -86,12 +96,13 @@ class BuildingPermitWorkflowInterceptor {
 	public void approveEvaluationTasks( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		fireEvaluationWorkflow( p.refid, "for-verification", "approve" );
+		fireEvaluationWorkflow( p.refid, " task.state = 'for-verification' ", "approve" );
 
 		//start the next evaluation tasks. fire evaluations for non-ancillary as well as those for ancillary
 		def appid = p.refid;
-		def list1 = evalTypeEm.where("activationstate = :state AND ancillarypermitid IS NULL ", [state: result.state]).list()*.objid;
-		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: appid ] ).where( "type.activationstate = :state", [state:result.state] ).list()*.type.evaluationtypeid;
+		def pstate = [state: result.state];
+		def list1 = evalTypeEm.where("activationstate = :state AND ancillarypermitid IS NULL ", pstate ).list()*.objid;
+		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: appid ] ).where( "type.activationstate = :state", pstate ).list()*.type.evaluationtypeid;
 		def mlist = list1 + list2;
 		if( mlist ) {
 			def dt = dateSvc.getServerDate();
@@ -143,7 +154,9 @@ class BuildingPermitWorkflowInterceptor {
 			if( c>0) throw new Exception("Please check first all requirements");
 		}
 		else if( p.to == "payment") {
-			throw new Exception("There must be at least one application fee");		
+			def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").val();
+			if( c == 0 )
+				throw new Exception("There must be at least one fee");		
 		}
 	}
 

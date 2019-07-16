@@ -1,9 +1,10 @@
 <schema adapter="obodb">
 	<element tablename="building_permit_fee">
-		<field name="objid" primary="true" />
+		<field name="objid" primary="true" prefix="OBOPF"/>
 		<field name="appid" required="true" />
 		<field name="amount" required="true" />
 		<field name="amtpaid" required="true" />
+
 		<complex name="item" ref="obo_billitemtype" jointype="many-to-one" required="true">
 			<key field="itemid" target="objid" />
 		</complex>	

@@ -21,7 +21,7 @@ class BuildingPermitFindingModel extends CrudFormModel {
     
     void afterSave(def o ) {
         if(caller) {
-            caller.findingListHandler.reload();
+            caller.reqListHandler.reload();
         }
     }
     

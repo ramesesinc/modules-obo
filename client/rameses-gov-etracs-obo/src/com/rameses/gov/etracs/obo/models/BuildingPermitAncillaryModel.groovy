@@ -17,8 +17,8 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
     def selectedInfo;
     def infos;
     
-    @Service("BuildingPermitAncillaryService")
-    def ancillarySvc;
+    @Service("BuildingPermitInfoService")
+    def infoSvc;
     
     /*
     def getHtmlInfo() {
@@ -27,7 +27,7 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
     */
    
     void afterInit() {
-        infos = ancillarySvc.getInfos([objid: entity.objid ] );
+        infos = infoSvc.getInfos([parentid: entity.objid ] );
     }
     
     /* ************************************************************************

@@ -37,9 +37,6 @@ public class BuildingPermitOnlineService  {
 
 	@ProxyMethod
 	public def upload( def app ) {
-		app.remove("objid");
-		def locationid = app.remove("locationid");
-		def applicantid = app.remove("applicantid");		
 		/*
 		println "ENTERING OBO UPLOAD....."		
 		println "rpus " + app.rpus.size();
@@ -49,6 +46,11 @@ public class BuildingPermitOnlineService  {
 		println "requirements " + app.requirements.size();
 		println "infos " + app.infos.size();
 		*/
+
+		app.remove("objid");
+		def locationid = app.remove("locationid");
+		def applicantid = app.remove("applicantid");
+		app.amount = 0;		
 
 		def newapp = appEm.create( app );
 		app.entities.each {
@@ -81,7 +83,6 @@ public class BuildingPermitOnlineService  {
 			it.type = [name: it.name ];
 			appInfoEm.create( it );
 		}
-			
 		appEm.find( [objid: newapp.objid ] ).update( [locationid: locationid, applicantid: applicantid ] );
 		return [status: 'OK', objid: app.objid ];
 	}

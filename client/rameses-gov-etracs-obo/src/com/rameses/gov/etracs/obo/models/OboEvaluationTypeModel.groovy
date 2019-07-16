@@ -16,13 +16,25 @@ public class OboEvaluationTypeModel extends CrudFormModel {
     def svc;
 
     def workflowStates;
+    def withancillary = false;
     
+    @PropertyChangeListener
+    def listener = [
+        "withancillary" : { o->
+            if(o==false) {
+                entity.ancillarypermitid = null;
+                entity.ancillarypermit = null;
+            } 
+        }
+    ]
+
     def getAncillaryPermits() {
         return svc.getAncillaryPermitTypes();
     }
-        
+    
     void afterInit() {
         workflowStates = svc.getEvaluationTypeStates()*.name;
+        if( entity.ancillarypermitid ) withancillary = true;
     }
     
 }

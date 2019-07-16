@@ -61,6 +61,7 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xTextField2.setName("entity.title"); // NOI18N
         xTextField2.setPreferredSize(new java.awt.Dimension(0, 20));
         xTextField2.setRequired(true);
+        xTextField2.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         xFormPanel1.add(xTextField2);
 
         xLookupField1.setCaption("Org");
@@ -99,20 +100,23 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xFormPanel1.add(xTextField3);
 
         xCheckBox1.setCaption("");
-        xCheckBox1.setName("entity.activatewithancillary"); // NOI18N
+        xCheckBox1.setDisableWhen("#{ mode == 'read' }");
+        xCheckBox1.setName("withancillary"); // NOI18N
         xCheckBox1.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
-        xCheckBox1.setText("Activate only with ancillary permit");
+        xCheckBox1.setShowCaption(false);
+        xCheckBox1.setText("Associated with ancillary permit");
         xFormPanel1.add(xCheckBox1);
 
-        xComboBox4.setCaption("Ancillary Permit");
-        xComboBox4.setDepends(new String[] {"entity.activatewithancillary"});
+        xComboBox4.setCaption("Associated with Ancillary Permit");
+        xComboBox4.setDepends(new String[] {"withancillary"});
         xComboBox4.setExpression("#{ item.objid }");
         xComboBox4.setItemKey("objid");
         xComboBox4.setItems("ancillaryPermits");
         xComboBox4.setName("entity.ancillarypermitid"); // NOI18N
-        xComboBox4.setVisibleWhen("#{ entity.activatewithancillary== true || entity.ancillarypermitid != null }");
+        xComboBox4.setVisibleWhen("#{ withancillary== true }");
         xComboBox4.setPreferredSize(new java.awt.Dimension(0, 22));
         xComboBox4.setRequired(true);
+        xComboBox4.setShowCaption(false);
         xFormPanel1.add(xComboBox4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

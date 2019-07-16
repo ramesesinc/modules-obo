@@ -48,6 +48,7 @@
 			<key field="occupancytypeid" target="objid" />
 		</complex>	
 
+		<field name="amount" type="decimal"/>
 
 	</element>
 </schema>

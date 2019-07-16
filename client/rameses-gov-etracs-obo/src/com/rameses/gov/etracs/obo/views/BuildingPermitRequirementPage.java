@@ -5,14 +5,14 @@
  */
 package com.rameses.gov.etracs.obo.views;
 
-import com.rameses.osiris2.themes.FormPage;
 import com.rameses.rcp.ui.annotations.Template;
+import com.rameses.seti2.views.CrudFormPage;
 
 /**
  *
  * @author elmonazareno
  */
-@Template(FormPage.class)
+@Template(CrudFormPage.class)
 public class BuildingPermitRequirementPage extends javax.swing.JPanel {
 
     /**
@@ -52,7 +52,7 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
 
         xTextArea1.setCaption("Remarks");
         xTextArea1.setLineWrap(true);
-        xTextArea1.setName("remarks"); // NOI18N
+        xTextArea1.setName("entity.remarks"); // NOI18N
         xTextArea1.setPreferredSize(new java.awt.Dimension(0, 60));
         jScrollPane1.setViewportView(xTextArea1);
 
@@ -60,7 +60,7 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
 
         xCheckBox1.setCaption("");
         xCheckBox1.setCheckValue(1);
-        xCheckBox1.setName("checked"); // NOI18N
+        xCheckBox1.setName("entity.checked"); // NOI18N
         xCheckBox1.setUncheckValue(0);
         xCheckBox1.setText("Passed");
         xFormPanel1.add(xCheckBox1);

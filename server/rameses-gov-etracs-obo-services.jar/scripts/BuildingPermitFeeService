@@ -15,40 +15,86 @@ public class BuildingPermitFeeService  {
 	@Service("DateService")
 	def dateSvc;
 
+	@Service("BuildingPermitInfoService")
+	def infoSvc;
+
 	@DataContext("obo_billitemtype")
 	def billItemTypeEm;
 
 	@DataContext("vw_building_permit")
+	def vwAppEm;
+
+	@DataContext("building_permit")
 	def appEm;
+
+	@DataContext("building_permit_ancillary")
+	def ancillaryEm;
+
+	@DataContext("obo_evaluation_type")
+	def evalTypeEm;
+
+	@DataContext("building_permit_fee")
+	def feeEm;
 
 	@ProxyMethod
 	public def assess(o) {
-		if( o.app == null && o.appid ) {
-			def vapp = appEm.find( [objid: o.appid ] ).find();
-			def m = [:];
-			m.appno = vapp.appno;
-            m.appdate = vapp.dtfiled; 
-            m.apptype = vapp.apptype;
-            m.projectcost = vapp.projectcost;
-            m.height = vapp.height;
-            m.numunits = vapp.numunits;
-            m.totalfloorarea = vapp.totalfloorarea;
-            m.zoneclass = vapp.zoneclassid;
-            o.app = m;
-            def occ = [:];
-            occ.group = vapp.occupancytype.group.objid;
-            occ.division = vapp.occupancytype.division.objid;
-            occ.type = vapp.occupancytype.objid;
-            o.occupancytype = occ;
+		def params = [:];
+
+		def vapp = vwAppEm.find( [objid: o.appid ] ).first();
+
+		def m = [:];
+		m.appno = vapp.appno;
+        m.appdate = vapp.dtfiled; 
+        m.apptype = vapp.apptype;
+        m.projectcost = vapp.projectcost;
+        m.height = vapp.height;
+        m.numunits = vapp.numunits;
+        m.totalfloorarea = vapp.totalfloorarea;
+        m.zoneclass = vapp.zoneclassid;
+        params.app = m;
+
+        def occ = [:];
+        occ.group = vapp.occupancytype.group.objid;
+        occ.division = vapp.occupancytype.division.objid;
+        occ.type = vapp.occupancytype.objid;
+        params.occupancytype = occ;
+
+        params.permits = [];
+		def list1 = evalTypeEm.where("ancillarypermitid IS NULL ").list()*.objid;
+		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: o.appid ] ).list()*.type.evaluationtypeid;
+		(list1+list2).each {
+			params.permits << [type: it ];
 		}
 
-		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: o, include_items: false ] );
+		params.infos = infoSvc.getInfos( [appid: o.appid ] );
+
+		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: params, include_items: false ] );
 		res.billitems.findAll{ it.billcode && it.item == null }.each {
 			def p = billItemTypeEm.find( [objid: it.billcode ] ).first()
 			it.item = p.item;
 			it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
 		}
-		return res.billitems.findAll{ it.amount > 0 }.sort{ it.sortorder };
+		def result = [:] 
+		def items = res.billitems.findAll{ it.amount > 0 }.sort{ it.sortorder };
+		items.each {
+			def z = [:];
+			z.item = [objid: it.billcode];
+			z.amount = it.amount;
+			z.amtpaid = 0;
+			z.appid = o.appid;
+			feeEm.create( z );
+		}
+
+		def amount = res.billitems.sum{ it.amount };
+		appEm.find( [objid: o.appid] ).update( [amount: amount ]);
+
+		result.amount = amount;
+		return result;
+	}
+
+	@ProxyMethod
+	public def getFees( def o ) {
+		return feeEm.find([appid: o.appid ]).orderBy("item.sortorder").list();
 	}
 
 }

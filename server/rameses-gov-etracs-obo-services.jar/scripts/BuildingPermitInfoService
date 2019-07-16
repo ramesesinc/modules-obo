@@ -6,7 +6,7 @@ import java.text.*;
 import treasury.utils.*;
 import treasury.facts.*;
 
-public class BuildingPermitAncillaryService  {
+public class BuildingPermitInfoService  {
 
 	@DataContext("building_permit_info")
 	def infoEm;
@@ -33,8 +33,7 @@ public class BuildingPermitAncillaryService  {
 
 	@ProxyMethod
 	public def getInfos( def o ) {
-		if(!o.objid ) throw new Exception("objid is required in BuildingPermitAncillaryService.getInfos");
-		def list = vwInfoEm.find( [parentid: o.objid] ).orderBy("sortorder").list();
+		def list = vwInfoEm.find( o ).orderBy("sortorder").list();
 		list.each {
 			if( it.datatype == 'date') it.value = it.datevalue;
 			else if( it.datatype == 'decimal') it.value = it.decimalvalue;

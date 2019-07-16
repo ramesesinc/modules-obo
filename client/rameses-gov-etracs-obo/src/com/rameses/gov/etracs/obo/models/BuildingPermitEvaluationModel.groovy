@@ -15,8 +15,8 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
     @Service("BuildingPermitEvaluationService")
     def appSvc;
     
-    @Service("BuildingPermitAncillaryService")
-    def ancillarySvc;
+    @Service("BuildingPermitInfoService")
+    def infoSvc;
     
     def infos;
     
@@ -76,7 +76,7 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
             def m = [_schemaname: 'building_permit_ancillary'];
             m.findBy = [appid: entity.appid,permittypeid: entity.ancillarypermitid ];
             def zz = queryService.findFirst( m );
-            f.infos = ancillarySvc.getInfos( [objid: zz.objid ]);            
+            f.infos = infoSvc.getInfos( [parentid: zz.objid ]);            
         }
         f.permits = [ [type: entity.typeid ] ];
         return Inv.lookupOpener("view_assessment", [params: f] );

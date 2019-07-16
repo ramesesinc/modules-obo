@@ -20,13 +20,11 @@ class BuildingPermitRequirementModel extends CrudFormModel {
         remarks = entity.remarks;
     }
     
-    def updateReq() {
-        def m = [_schemaname: getSchemaName() ];
-        m.findBy = [objid: entity.objid];
-        m.checked = checked;
-        m.remarks = remarks;
-        persistenceService.update( m );
-        return "_close";
+    
+    void afterSave(def o ) {
+        if(caller) {
+            caller.findingListHandler.reload();
+        }
     }
     
     
