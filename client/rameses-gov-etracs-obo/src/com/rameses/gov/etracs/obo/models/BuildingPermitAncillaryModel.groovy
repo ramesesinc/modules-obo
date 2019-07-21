@@ -15,6 +15,7 @@ import com.rameses.io.*;
 class BuildingPermitAncillaryModel extends CrudFormModel {
 
     def selectedInfo;
+    
     def infos;
     
     @Service("BuildingPermitInfoService")
@@ -27,9 +28,9 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
     */
    
     void afterInit() {
-        infos = infoSvc.getInfos([parentid: entity.objid ] );
+        this.infos = infoSvc.getInfos([parentid: entity.objid ] );  
     }
-    
+   
     /* ************************************************************************
     * INFOS ADDED IN THE ANCILLARY 
     *************************************************************************/
@@ -38,18 +39,34 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
             return true;
         },
         fetchList: { o -> 
-            return infos;
+            return infos;      
         }
     ] as EditorListModel;
     
+    void saveInfos(def items) {
+        def _infos = [];
+        items.each { v->
+            def existInfo = infos.find{it.name == v.name};
+            if( !existInfo ) {
+                v.objid = null;
+                v.parentid = entity.objid;
+                v.appid = entity.appid;
+                _infos << v;
+            }
+            else {
+                existInfo.value =  v.value;
+                _infos << existInfo;                    
+            }
+        }
+        infoSvc.saveInfos( _infos );
+        this.infos = infoSvc.getInfos([parentid: entity.objid ] ); 
+        infoListModel.load();
+    }
+    
+    
     def addInfos() {
         def h = { o->
-            o.each { v->
-                if( !infos.find{it.name == v.name} ) {
-                    infos << v;                    
-                }
-            }
-            infoListModel.load();
+            saveInfos(o);
         }
         return Inv.lookupOpener( "obo_variable:picklist", [typeid: entity.permittypeid, onselect: h ]);
     }
@@ -57,8 +74,8 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
     def editInfos() {
         def selectedItems = infoListModel.getSelectedValue();
         if( !selectedItems ) throw new Exception("Please select items to edit");
-        def h = { v->
-            infoListModel.load();
+        def h = { o->
+            saveInfos(o);
         }
         def op= Inv.lookupOpener("obo_detail_info", [items: selectedItems, onselect: h ]);
         op.target = "popup";
@@ -68,9 +85,8 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
     void removeInfos() {
         def selectedItems = infoListModel.getSelectedValue();
         if( !selectedItems ) throw new Exception("Please select items to remove");
-        selectedItems.each {
-            infos.remove( it );
-        }
+        infoSvc.removeInfos( selectedItems );
+        this.infos = infoSvc.getInfos([parentid: entity.objid ] ); 
         infoListModel.load();
     }
 

@@ -95,4 +95,8 @@ class BuildingPermitModel extends WorkflowTaskModel {
         feeListModel.reload();
         binding.refresh("entity.amount");
     }
+    
+    public boolean isViewReportAllowed() {
+        return true;
+    }
 }

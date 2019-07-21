@@ -1,0 +1,7 @@
+<workunit extends="com/rameses/seti2/templates/CrudReport.xml" 
+    reportName="com/rameses/gov/etracs/obo/reports/nbc_form_B01.jasper">
+    <invokers>
+        <invoker type="vw_building_permit:form:reports" caption="Building Permit"
+                action="view" index="1"/>
+    </invokers>
+</workunit>

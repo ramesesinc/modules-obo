@@ -38,10 +38,9 @@
 		this.orgcode = "${PARAMS.info.id}";    	
 		this.lgu = {title:"${PARAMS.info.title}", group: "${PARAMS.info.group.title}"};
 
-		var svc = Service.lookup(self.orgcode + ":OboBillingService");
-
 		this.loadBill = function() {
-			var params = {refno: this.refno};
+			var svc = Service.lookup(self.orgcode + ":EPaymentService");
+			var params = {refno: this.refno, txntype: 'building_permit'};
 			svc.getBilling( params, function(o,s) {
 				if( s == "error" ) {
 					self.error = o.result;
@@ -50,7 +49,7 @@
 				else {
 					self.error = null;
 					self.mode = "viewbill";
-					self.bill = o.result;					
+					self.bill = o.result;	
 					//self.barcode = "51010:"+self.bill.billno; 					
 					if( self.bill.amount == 0 ) {
 						self.bill.items = [];	
@@ -83,8 +82,7 @@
 		    pp.refno = this.refno;
 		    pp.orgcode = self.orgcode;
 		    pp.origin = "filipizen";
-		    pp.info = self.bill.info;
-		    pp.txntype = "obo";
+		    pp.txntype = self.bill.txntype;
 		    var pmtSvc = Service.lookup(self.orgcode + ":EPaymentService");
 		    pmtSvc.createPaymentOrder( pp, function(o,s) {
 		        if( s == "error" ) {
@@ -127,8 +125,8 @@
 			@wx:label(caption:'Applicant', context:'billing', expr:'#{bill.applicant}')
 		</div>
 		<div>	
-			<table class="table" r:context="billing" r:items="bill.items" r:name="selectedItem" 
-			r:varName="k" r:varStatus="stat" style="width:70%">
+			<table class="table tablebilling" r:context="billing" r:items="bill.items" r:name="selectedItem" 
+			r:varName="k" r:varStatus="stat">
 	            <thead>
 	              <tr>
 	                <th align="left">Tax/Fee</th>

@@ -23,6 +23,7 @@ public class BuildingPermitInfoService  {
 			else if( it.datatype == 'boolean') it.booleanvalue = (it.value==true? 1 : 0);
 			else it.stringvalue = it.value;
 			if( !it.objid ) {
+				it.type = [objid:it.name];
 				infoEm.create(it);
 			}	
 			else {

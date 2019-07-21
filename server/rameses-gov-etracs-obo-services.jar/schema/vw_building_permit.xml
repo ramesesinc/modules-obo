@@ -1,11 +1,15 @@
 <schema adapter="obodb">
 	<element tablename="vw_building_permit">
 		<field name="objid" primary="true"/>
-		<field name="objid" />
 		<field name="appno" searchable="true"/>
 
 		<field name="applicant_name" searchable="true"/>
 		<field name="applicant_objid" />
+
+		<complex name="applicant" ref="building_permit_entity" jointype="many-to-one" required="false">
+			<key field="applicantid" target="objid" />
+		</complex>
+
 		<field name="orgcode" />
 		<field name="trackingno" />
 		<field name="apptype" />
