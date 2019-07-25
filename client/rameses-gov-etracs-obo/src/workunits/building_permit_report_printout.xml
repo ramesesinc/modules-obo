@@ -1,7 +1,9 @@
-<workunit extends="com/rameses/seti2/templates/CrudReport.xml" 
-    reportName="com/rameses/gov/etracs/obo/reports/nbc_form_B01.jasper">
+<workunit extends="com/rameses/seti2/templates/FormReport.xml" 
+    reportId="buildingpermit"
+    reportName="com/rameses/gov/etracs/obo/reports/buildingpermit.jasper">
     <invokers>
-        <invoker type="vw_building_permit:form:reports" caption="Building Permit"
-                action="view" index="1"/>
+        <invoker type="vw_building_permit:form:permits" caption="Building Permit"
+                action="preview" index="1" visibleWhen="#{task!=null}"/>
     </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
 </workunit>

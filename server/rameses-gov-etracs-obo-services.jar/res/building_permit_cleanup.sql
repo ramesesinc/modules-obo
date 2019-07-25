@@ -1,5 +1,5 @@
 [cleanup-all]
-UPDATE building_permit SET locationid = null, applicantid = null, taskid = NULL;
+UPDATE building_permit SET locationid = null, applicantid = null, contractorid=NULL, taskid = NULL;
 UPDATE building_permit_evaluation SET taskid = NULL;
 DELETE FROM building_permit_evaluation_task;
 DELETE FROM building_permit_task;

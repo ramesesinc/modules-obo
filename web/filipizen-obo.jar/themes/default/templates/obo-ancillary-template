@@ -7,20 +7,18 @@
 		def parent = svc.getApplication([ appid: app.appid ]);
 		if ( parent) { 
 			app.putAll( parent );
-			app.owner = parent.applicant;
 		}
 
-		def location = svc.getLocation([ appid: app.appid ]); 
-		if ( location ) app.location = location;
-		
+		app.lotowner  = app.location.owner;
+		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename.charAt(0) : '');
+
 	} catch(Throwable e){
 		app = [:];
 	}
 
-	if ( !app.lotowner ) app.lotowner = [address: [:], ctc:[:], prc:[:], ptr:[:]  ] ;
-
 	PARAMS.app = app;
 %>
+
 
 <!DOCTYPE html>
 <html lang="en"> 
@@ -116,10 +114,10 @@
 								</tr>
 								<tr class="trborder">
 									<td></td>
-									<td colspan="2"><p class="data">${app?.lastname} </p></td>
-									<td colspan="3"><p class="data">${app?.firstname}</p></td>
-									<td colspan="1"><p class="data">${app?.middlename ? app?.middlename.charAt(0) : ''}</p></td>
-									<td colspan="2" class="tdborder"><p class="data">${app?.tin}</p></td>
+									<td colspan="2"><p class="data">${app.applicant.lastname} </p></td>
+									<td colspan="3"><p class="data">${app.applicant.firstname}</p></td>
+									<td colspan="1"><p class="data">${app.applicant.middleinitial}</p></td>
+									<td colspan="2" class="tdborder"><p class="data">${app.applicant.tin}</p></td>
 								</tr>
 							</tbody>
 							<tbody>
@@ -129,9 +127,9 @@
 									<td colspan="4" class="tdborder"> use or character of occupancy</td>
 								</tr>
 								<tr>
-									<td colspan="2"><p class="data">dd</p></td>
-									<td colspan="3" rowspan="2" class="tdborder"><p class="data">${app?.type}</p></td>
-									<td colspan="4" rowspan="2" class="tdborder"><p class="data">${app?.occupancytype?.objid} - ${app?.occupancytype?.description}</p></td>
+									<td colspan="2"><p class="data"></p></td>
+									<td colspan="3" rowspan="2" class="tdborder"><p class="data"></p></td>
+									<td colspan="4" rowspan="2" class="tdborder"><p class="data">${app.occupancytype.title} - ${app.occupancytype.division.objid}</p></td>
 								</tr>
 								<tr class="trborder">
 									<td colspan="9">By an enterprise</td>
@@ -147,8 +145,9 @@
 									<td class="tdborder">Telephone No.</td>
 								</tr>
 								<tr class="trborder">
-									<td colspan="2" class="data">${app?.address?.text}</td>
-									<td colspan="2" class="data">${app?.address?.barangay?.name}</td>
+									<td  class="data">${app.applicant.address?.bldgno}</td>
+									<td  class="data">${app.applicant.address?.street}</td>
+									<td colspan="2" class="data">${app.applicant.address?.barangay?.name}</td>
 									<td colspan="3" class="data"></td>
 									<td></td>
 									<td class="tdborder data"></td>

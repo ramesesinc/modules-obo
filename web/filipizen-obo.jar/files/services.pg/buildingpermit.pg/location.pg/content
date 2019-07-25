@@ -10,6 +10,7 @@
   this.searchtype = "tdno";
   this.selectedItem;
   this.editmode;
+  this.barangayList;
 
 	var app = \$get("app").code;
 
@@ -58,7 +59,17 @@
 
   this.viewInitial = function() { self.editmode = "edit"; self.mode = "initial";}
   this.viewLot = function() { self.mode = "view-lot";}  
-  this.editOwnerInfo = function() {self.mode = "edit-owner-info"; }
+  
+  this.editOwnerInfo = function() {
+    self.mode = "edit-owner-info"; 
+    if(!self.barangayList) {
+      var bsvc = Service.lookup("CloudPartnerService", "partner");
+      self.barangayList =  bsvc.getBarangayList( {orgcode: app.orgcode} );     
+    }
+    if(self.prop.owner.resident == null )self.prop.owner.resident = 1;
+    if(!self.prop.owner.address.citymunicipality) self.prop.owner.address.citymunicipality = app.orgname;
+    if(!self.prop.owner.address.province) self.prop.owner.address.province = app.province;
+  }
 
   this.viewList = function() {  
     self.reloadList();
@@ -76,9 +87,7 @@
     self.mode = 'view-locations';
   }
 
-  this.moveNextStep = function() {
-    app.moveNextStep(  {appid: app.appid } );
-  }
+  
 
   this.attachId = function() {
     var h = function(v) {
@@ -93,6 +102,10 @@
     self.prop = self.selectedItem;
     self.mode = "view-lot";
     self.editmode = "view";
+  }
+
+  this.moveNextStep = function() {
+    app.moveNextStep(  {appid: app.appid } );
   }
 
 });
@@ -200,6 +213,12 @@
     @wx:label( caption:'Name', context:'location', expr:'#{prop.owner.name}' , captionClass:'+w200')    
     @wx:email( context:'location', name:'prop.owner.email', inputClass: '+w200', captionClass:'+w200')
     @wx:mobile(context:'location', name:'prop.owner.mobileno', inputClass: '+w200', captionClass:'+w200' )
+
+    @wx:radiolist( caption:'Resident', context:'location', name:'prop.owner.resident', required:true, items: [ [key:'1', value:'Resident'], [key:'0', value:'Non-resident' ] ] )
+     @wx:address_local( caption: 'Address', context:'location', name:'prop.owner.address', depends: 'prop.owner.resident', visibleWhen: '#{ prop.owner.resident != \'0\' }', required:true )
+    @wx:address_nonlocal( caption: 'Address', context:'location', name:'prop.owner.address', depends: 'prop.owner.resident', visibleWhen: '#{ prop.owner.resident == \'0\' }', required:true )
+    <br>
+    <br>
     @wx:idproof( context:'location', name:'prop.owner.id', action:'attachId' )
   </div>
 

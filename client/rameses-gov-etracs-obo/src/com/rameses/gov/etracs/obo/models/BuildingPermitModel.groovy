@@ -96,7 +96,5 @@ class BuildingPermitModel extends WorkflowTaskModel {
         binding.refresh("entity.amount");
     }
     
-    public boolean isViewReportAllowed() {
-        return true;
-    }
+    
 }

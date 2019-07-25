@@ -22,14 +22,14 @@
 			<td colspan="3"><p>Address:<label class="data"> ${owner?.address?.text}</label></p> </td>
 		</tr>
 		<tr>
-			<td><p>C.T.C. No.</p></td>
+			<td><p>${owner.id?.type?.caption}</p></td>
 			<td class="tdborder"><p>Date Issued</p></td>
 			<td class="tdborder"><p>Place Issued</p></td>
 		</tr>
 		<tr>
-			<td><label class="data"> ${owner?.ctc?.refno}</label></td>
-			<td class="tdborder"><label class="data"> ${owner?.ctc?.dtissued}</label></td>
-			<td class="tdborder"><label class="data"> ${owner?.ctc?.placeissued}</label></td>
+			<td><label class="data"> ${owner?.id?.idno}</label></td>
+			<td class="tdborder"><label class="data"> ${owner?.id?.dtissued}</label></td>
+			<td class="tdborder"><label class="data"> ${owner?.id?.placeissued}</label></td>
 		</tr>
 	</tbody>
 </table>

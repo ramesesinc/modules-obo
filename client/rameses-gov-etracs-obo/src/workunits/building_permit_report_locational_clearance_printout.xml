@@ -1,7 +1,9 @@
-<workunit extends="com/rameses/seti2/templates/CrudReport.xml" 
-    reportName="com/rameses/gov/etracs/obo/reports/nbc_form_B01.jasper">
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml" 
+    reportId="locationalclearance"
+    reportName="com/rameses/gov/etracs/obo/reports/locationalclearance.jasper">
     <invokers>
-        <invoker type="vw_building_permit:form:reports" caption="Locational Clearance"
-                action="view" index="2"/>
+        <invoker type="vw_building_permit:form:permits" caption="Locational Clearance"
+                action="preview" index="2" />
     </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
 </workunit>

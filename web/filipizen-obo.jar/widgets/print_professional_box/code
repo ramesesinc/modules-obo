@@ -10,7 +10,7 @@ if(prof == null ) prof = [:];
 		</tr>
 		<tr>
 			<td colspan="3" align="center">
-				<p class="underline signature">${prof?.entity?.firstname} ${prof?.entity?.middlename}. ${prof?.entity?.lastname}</p> 
+				<p class="underline signature">${prof?.firstname} ${prof?.middlename}. ${prof?.lastname}</p> 
 				Date <p class="underline signature-date">01-01-2019</p>
 			</td>
 		</tr>
@@ -23,16 +23,16 @@ if(prof == null ) prof = [:];
 	</tbody>
 	<tbody>
 		<tr class="trborder">
-			<td colspan="3"><p>Address : <label class="data">${prof?.entity?.address?.text}</label></p></td>
+			<td colspan="3"><p>Address : <label class="data">${prof?.address?.text}</label></p></td>
 		</tr>
 		<tr class="trborder">
-			<td>PRC No.: <label class="data">${prof?.prc?.refno}</label></td>
+			<td>PRC No.: <label class="data">${prof?.prc?.idno}</label></td>
 			<td class="tdborder" colspan="2"><p>Validity: <label class="data">${prof?.prc?.validity}</label></p></td>
 		</tr>
 
 		<%if(! OPTIONS.role.equalsIgnoreCase('architect')) {%>
 			<tr class="trborder">
-				<td>PTR No.: <label class="data">${prof?.ptr?.refno}</label></td>
+				<td>PTR No.: <label class="data">${prof?.ptr?.idno}</label></td>
 				<td class="tdborder" colspan="2"><p>Date Issued <label class="data">${prof?.ptr?.dtissued}</label></p></td>
 			</tr>
 			<tr class="trborder">
@@ -43,7 +43,7 @@ if(prof == null ) prof = [:];
 
 		<%if(OPTIONS.role.equalsIgnoreCase('architect')) {%>
 			<tr class="trborder">
-				<td>IAPOA No. <label class="data">${prof?.ptr?.refno}</label></td>
+				<td>IAPOA No. <label class="data">${prof?.ptr?.idno}</label></td>
 				<td class="tdborder">O.R.No.</td>
 				<td class="tdborder"><p>Date Issued <label class="data">${prof?.ptr?.dtissued}</label></p></td>
 			</tr>

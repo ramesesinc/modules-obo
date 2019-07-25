@@ -24,6 +24,9 @@ public class OnlineBuildingPermitService  {
 	@DataContext("online_building_permit_professional")
 	def professionalEm;
 
+	@DataContext("vw_online_building_permit_professional")
+	def vwProfessionalEm;
+
 	@DataContext("online_building_permit_requirement")
 	def reqEm;
 
@@ -199,6 +202,11 @@ public class OnlineBuildingPermitService  {
 	}
 
 	@ProxyMethod
+	public def getLookupProfessionalList( def o ) {
+		return vwProfessionalEm.find([appid: o.appid]).list();
+	}
+
+	@ProxyMethod
 	public def updateProjectInfo( def o  ) {
 		o.occupancytypeid = o.occupancytype?.objid;
 		appEm.find( [objid: o.appid] ).update( o );
@@ -206,8 +214,7 @@ public class OnlineBuildingPermitService  {
 
 	@ProxyMethod
 	public def getProjectInfo( def o  ) {
-		def flds = "description,title,occupancytype.*,numunits,floorarea,estimatedcost,dtproposedconstruction,dtexpectedcompletion,supervisorid,totalfloorarea,bldgtypeid,height,numfloors,worktypes";		
-		return appEm.select(flds).find( [objid: o.appid] ).first();
+		return appEm.find( [objid: o.appid] ).first();
 	}
 
 	@ProxyMethod

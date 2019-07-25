@@ -97,16 +97,15 @@
 	<div class="form">
 		<div>
 			<label class="caption-class">Design Professional</label>
-			<label r:context="ancillary" style="width:210px">#{ permit.designprofessional.entity.name }</label>
+			<label r:context="ancillary" style="width:210px">#{ permit.designprofessional.name }</label>
 			<button r:context="ancillary" r:name="lookupDesignProfessional">Lookup</button>
 		</div>
 			
 		<div>
 			<label  class="caption-class">Supervisor In Charge Professional</label>
-			<label r:context="ancillary" style="width:210px">#{ permit.supervisor.entity.name }</label>
+			<label r:context="ancillary" style="width:210px">#{ permit.supervisor.name }</label>
 			<button r:context="ancillary" r:name="lookupSupervisor">Lookup</button>
 		</div>
-
 	</div>
 	<br> 	
 

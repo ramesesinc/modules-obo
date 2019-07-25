@@ -3,7 +3,7 @@
 	<element tablename="building_permit_task">
 		<field name="taskid" primary="true"  prefix="OBOTSK" visible="true"/>
 		<complex name="app" ref="building_permit" jointype="many-to-one" required="false"
-			includefields="appno,apptype,appdate,owner.name,description,estimatedcost"> 
+			includefields="appno,apptype,appdate,owner.name,description,projectcost,fixedcost"> 
 			<key field="refid" target="objid"/>
 		</complex>
 		<field name="parentprocessid" />

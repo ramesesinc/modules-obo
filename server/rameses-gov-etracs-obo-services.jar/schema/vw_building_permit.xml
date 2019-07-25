@@ -25,19 +25,25 @@
 		<field name="title" />
 		<field name="occupancytypeid" />
 		<field name="numunits" />
-		<field name="estimatedcost" />
+		<field name="fixedcost" />
 		<field name="projectcost" />
 
 		<field name="dtproposedconstruction" />
 		<field name="dtexpectedcompletion" />
-		<field name="supervisorid" />
 		<field name="totalfloorarea" />
 		<field name="height" />
 		<field name="numfloors" />
 		<field name="worktypes" />
 
+
 		<field name="zoneclass_objid" />
 		<field name="zoneclass_title" />
+
+		<field name="location_lotno" />
+		<field name="location_blockno" />
+		<field name="location_street" />
+		<field name="location_barangay" />
+		<field name="location_address_text" />
 
 		<field name="taskid" />
 		<field name="occupancytype_objid" />
@@ -55,6 +61,11 @@
 		<field name="task_actor_name" />
 		<field name="task_title" />
 		<field name="amount" />
+
+		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one"  required="false">
+			<key field="contractorid" target="objid" />
+		</complex>
+
 	</element>
 </schema>	
 

@@ -92,11 +92,11 @@
 		<tr>
 			<td class="tdinside">
 				<p class="title">Box 5</p>
-				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.applicant )
 			</td>
 			<td class="tdinside">
 				<p class="title">Box 6</p>
-				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.location.owner )
 			</td>
 		</tr>
 	</tbody>

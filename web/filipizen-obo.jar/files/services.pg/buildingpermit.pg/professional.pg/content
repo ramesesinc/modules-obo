@@ -36,7 +36,17 @@
       var bsvc = Service.lookup("CloudPartnerService", "partner");
       self.barangayList = bsvc.getBarangayList( {orgcode: app.orgcode} );
     }
+    if( self.prof.resident == null ) self.prof.resident = 1;
     self.mode = "edit-entry";
+  }
+
+  this.propertyChangeListener = {
+     'prof.resident' : function(v){
+        if( v == 1 ) {
+          self.prof.address.citymunicipality = app.orgname;
+          self.prof.address.province = app.province;
+        }
+     }
   }
 
   this.addNew = function() {
@@ -200,7 +210,7 @@
     <br>
     @wx:idproof( context:'professional', name:'prof.prc', action:'attachPRC', caption:'Professional Regulation Commission [PRC]' )
     <br>
-    @wx:idproof( context:'professional', name:'prof.ptr', action:'attachPTR', caption: 'Professional Tax Receipt [PRC]' )
+    @wx:idproof( context:'professional', name:'prof.ptr', action:'attachPTR', caption: 'Professional Tax Receipt [PTR]' )
 
   </div>  
   @wx:button( caption:'Cancel', context:'professional', name:'cancelEdit', attrs:[immediate:true])
