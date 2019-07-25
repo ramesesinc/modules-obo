@@ -19,10 +19,10 @@
 			<td colspan="4"><p>Address:<label class="data"> ${owner?.address?.text}</label></p> </td>
 		</tr>
 		<tr>
-			<td>C.T.C. No. <p class="data">${owner?.ctc?.refno}</p></td>
-			<td class="tdborder">Date Issued <p class="data">${owner?.ctc?.dtissued}</p></td>
-			<td class="tdborder">Place Issued <p class="data">${owner?.ctc?.placeissued}</p></td>
-			<td class="tdborder">TIN <p class="data">${owner?.ctc?.tin}</p></td>
+			<td>C.T.C. No. <p class="data">${owner?.id?.idno}</p></td>
+			<td class="tdborder">Date Issued <p class="data">${owner?.id?.dtissued}</p></td>
+			<td class="tdborder">Place Issued <p class="data">${owner?.id?.placeissued}</p></td>
+			<td class="tdborder">TIN <p class="data">${owner?.id?.tin}</p></td>
 		</tr>
 	</tbody>
 </table>

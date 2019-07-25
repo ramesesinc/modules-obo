@@ -10,7 +10,7 @@
 	this.professionalList;
 
 	this.onload = function() {
-		this.professionalList =  svc.getProfessionalList( {appid: self.appid } );  
+		this.professionalList =  svc.getLookupProfessionalList( {appid: self.appid } );  
 	}
 
 	this.select = function() {
@@ -42,8 +42,8 @@
       <tr>
       <td style="width:80px;">#{item.prc.idno}</td>
         <td style="width:100px;">#{item.profession}</td>
-        <td style="width:160px;">#{item.entity.name}</td>
-        <td style="width:220px;">#{item.entity.address.text}</td>
+        <td style="width:160px;">#{item.name}</td>
+        <td style="width:220px;">#{item.address.text}</td>
         <td><a href="#" r:context="professional_lookup" r:name="select">Select</a></td>
       </tr>
     </tbody>

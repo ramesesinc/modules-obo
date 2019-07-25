@@ -3,6 +3,8 @@
         <invoker type="vw_building_permit:open" caption="Building Permit Application"
                 action="open" index="1"/>
         
+        <invoker type="formActions" caption="Permits/Clearances" icon="images/toolbars/printer.png"
+            action="showMenu" context="permits" />
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />
     <pages>

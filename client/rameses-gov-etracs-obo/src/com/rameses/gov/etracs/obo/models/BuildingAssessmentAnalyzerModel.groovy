@@ -36,7 +36,7 @@ class BuildingAssessmentAnalyzerModel  {
         f.app = [ 
             appdate:dt, 
             apptype:entity.apptype, 
-            projectcost: (entity.projectcost==null)?0:entity.projectcost, 
+            fixedcost: (entity.fixedcost==null)?0:entity.fixedcost, 
             height: ((entity.height == null)?0:entity.height),
             numunits: entity.numunits,
             totalfloorarea: entity.totalfloorarea

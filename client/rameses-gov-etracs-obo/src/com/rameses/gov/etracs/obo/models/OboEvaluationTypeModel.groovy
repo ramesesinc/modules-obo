@@ -35,6 +35,7 @@ public class OboEvaluationTypeModel extends CrudFormModel {
     void afterInit() {
         workflowStates = svc.getEvaluationTypeStates()*.name;
         if( entity.ancillarypermitid ) withancillary = true;
+        if( entity.issuepermit == null ) entity.issuepermit = 0;
     }
     
 }

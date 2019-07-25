@@ -21,12 +21,11 @@
 		<field name="title" />
 		<field name="occupancytypeid" />
 		<field name="numunits" />
-		<field name="estimatedcost" />
+		<field name="fixedcost" />
 		<field name="projectcost" />
 
 		<field name="dtproposedconstruction" />
 		<field name="dtexpectedcompletion" />
-		<field name="supervisorid" />
 		<field name="totalfloorarea" />
 		<field name="height" />
 		<field name="numfloors" />
@@ -38,6 +37,10 @@
 		<field name="occupancytype_division_title" />
 		<field name="occupancytype_group_objid" />
 		<field name="occupancytype_group_title" />
+
+		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one"  required="false">
+			<key field="contractorid" target="objid" />
+		</complex>
 
 	</element>
 </schema>	

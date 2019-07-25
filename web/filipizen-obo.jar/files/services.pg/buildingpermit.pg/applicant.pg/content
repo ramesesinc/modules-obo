@@ -38,12 +38,6 @@
     app.moveNextStep();
 	}
 
-  this.loadBarangay = function() {
-    //load barangay
-    var bsvc = Service.lookup("CloudPartnerService", "partner");
-    this.barangayList =  bsvc.getBarangayList( {orgcode: app.orgcode} ); 
-  }
-
   this.viewInitial = function() {
     self.applicant = {address:{barangay:{}}, resident:1, ctc:{}};
     self.applicant.address.citymunicipality = app.orgname;    
@@ -76,9 +70,21 @@
 
   this.editApplicant = function() {
     self.mode = "edit-applicant";
-    self.loadBarangay();
+    if(!self.barangayList ) {
+      var bsvc = Service.lookup("CloudPartnerService", "partner");
+      self.barangayList =  bsvc.getBarangayList( {orgcode: app.orgcode} );
+    }
+    if(self.applicant.resident == null) self.applicant.resident = 1;    
   }
 
+  this.propertyChangeListener = {
+     'applicant.resident' : function(v){
+        if( v == 1 ) {
+          self.applicant.address.citymunicipality = app.orgname;
+          self.applicant.address.province = app.province;
+        }
+     }
+  }
 
   this.attachId = function() {
     var h = function(v) {
@@ -161,6 +167,7 @@
     <br>
     @wx:email(context:'applicant', name:'applicant.email')
     @wx:mobile(context:'applicant', name:'applicant.mobileno')
+    <br>
     <br>
     @wx:idproof( context:'applicant', name:'applicant.id', action:'attachId' )
     <br>

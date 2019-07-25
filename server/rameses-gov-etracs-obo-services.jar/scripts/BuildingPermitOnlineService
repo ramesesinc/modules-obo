@@ -26,6 +26,9 @@ public class BuildingPermitOnlineService  {
 	@DataContext("building_permit_professional")
 	def professionalEm;
 
+	@DataContext("building_permit_requirement")
+	def reqEm;
+
 	@Service("DateService")
 	def dateSvc;
 
@@ -50,6 +53,8 @@ public class BuildingPermitOnlineService  {
 		app.remove("objid");
 		def locationid = app.remove("locationid");
 		def applicantid = app.remove("applicantid");
+		def contractorid = app.remove("contractorid");
+
 		app.amount = 0;		
 
 		def newapp = appEm.create( app );
@@ -83,7 +88,11 @@ public class BuildingPermitOnlineService  {
 			it.type = [name: it.name ];
 			appInfoEm.create( it );
 		}
-		appEm.find( [objid: newapp.objid ] ).update( [locationid: locationid, applicantid: applicantid ] );
+		def u = [:];
+		u.locationid = locationid;
+		u.applicantid = applicantid;
+		u.contractorid = contractorid;
+		appEm.find( [objid: newapp.objid ] ).update( u );
 		return [status: 'OK', objid: app.objid ];
 	}
 
@@ -100,7 +109,7 @@ public class BuildingPermitOnlineService  {
 		] 
 		def cost = costSvc.calc( param );
 		def u = [:];
-		u.projectcost = cost;		
+		u.fixedcost = cost;		
 		appEm.find( [objid: app.objid ] ).update( u );
 		//fire the workflow to start the process
 		def p = [:];

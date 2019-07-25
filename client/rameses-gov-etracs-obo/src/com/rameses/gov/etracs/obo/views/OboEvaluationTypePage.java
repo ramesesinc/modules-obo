@@ -41,6 +41,7 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xTextField3 = new com.rameses.rcp.control.XTextField();
         xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
         xComboBox4 = new com.rameses.rcp.control.XComboBox();
+        xCheckBox2 = new com.rameses.rcp.control.XCheckBox();
 
         xFormPanel1.setCaption("General Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -119,6 +120,21 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xComboBox4.setShowCaption(false);
         xFormPanel1.add(xComboBox4);
 
+        xCheckBox2.setCaption("");
+        xCheckBox2.setCheckValue(1);
+        xCheckBox2.setDisableWhen("#{ mode == 'read' }");
+        xCheckBox2.setName("entity.issuepermit"); // NOI18N
+        xCheckBox2.setUncheckValue(0);
+        xCheckBox2.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xCheckBox2.setShowCaption(false);
+        xCheckBox2.setText("Issue Permit");
+        xCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xCheckBox2ActionPerformed(evt);
+            }
+        });
+        xFormPanel1.add(xCheckBox2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,9 +153,14 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void xCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xCheckBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xCheckBox2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.rcp.control.XCheckBox xCheckBox1;
+    private com.rameses.rcp.control.XCheckBox xCheckBox2;
     private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XComboBox xComboBox3;
     private com.rameses.rcp.control.XComboBox xComboBox4;

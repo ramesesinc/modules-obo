@@ -79,8 +79,8 @@
 				<tr>
 					<td class="ap-permit">#{item.type.title}</td>
 					<td class="ap-status">#{item.state}</td>
-					<td class="ap-design">#{item.designprofessional.entity.name}</td>
-					<td class="ap-supervisor">#{item.supervisor.entity.name}</td>
+					<td class="ap-design">#{item.designprofessional.name}</td>
+					<td class="ap-supervisor">#{item.supervisor.name}</td>
 					<td class="ap-view"> 	
 						<a href="/obo/printout_ancillary/#{item.type.objid}?refid=#{item.objid}" target="#{item.type.objid}_#{item.objid}:print">Print Report</a>
 					</td>

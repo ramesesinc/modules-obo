@@ -14,16 +14,14 @@
 		<field name="title" />
 		<field name="description" />
 		<field name="occupancytypeid" />
-		<field name="bldgtypeid" />
 		<field name="numunits" type="integer"/>
 		<field name="floorarea" type="decimal"/>
 		<field name="totalfloorarea" type="decimal"/>
 		<field name="numfloors" type="integer"/>
 
-		<field name="estimatedcost" type="decimal"/>
+		<field name="projectcost" type="decimal"/>
 		<field name="dtproposedconstruction" type="date" />
 		<field name="dtexpectedcompletion" type="date"/>
-		<field name="supervisorid" />
 		<field name="totalfloorarea" type="decimal"/>
 		<field name="height" type="decimal"/>
 
@@ -44,6 +42,11 @@
 		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one" required="false">
 			<key field="occupancytypeid" target="objid" />
 		</complex>	
+
+
+		<complex name="contractor" ref="vw_online_building_permit_professional" jointype="many-to-one"  required="false">
+			<key field="contractorid" target="objid" />
+		</complex>
 
 	</element>
 </schema>
