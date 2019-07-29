@@ -7,32 +7,7 @@ class OboOnlinePaymentInterceptor {
 
 	@After(pattern="EPaymentService.getBilling", eval="#{args[0].txntype=='obo'}")
 	public void fetchBilling( def evt ) { 
-		def o = evt.args[0];
-		def result = evt.result;
-
-		println "entering obo billing " + o.refno;
-		def p = [:];
-		p = [
-			appno: 'XXX',
-			permittype: 'BUILDING PERMIT',
-			apptype: 'NEW',
-			title:'CONSTRUCTION OF 2 BEDROOM APARTMENT',
-			address: 'CAPITOL SITE',
-			applicant: 'NAZARENO, ELMO'
-		];
-		p.items = [];
-		p.items << [account: 'BUILDING PERMIT', amount : 2000 ];
-		p.items << [account: 'ELECTRICAL FEE', amount : 1000 ];
-		p.items << [account: 'ZONING FEE', amount : 3000 ];
-		p.items << [account: 'ELECTRONIC FEE', amount : 200 ];
-		p.items.each {
-			it.discount = 0;
-			it.surcharge = 0;
-			it.interest = 0;
-			it.total = it.amount;
-		}
-		p.amount = p.items.sum{it.total};
-		result.putAll( p );
+		
 	}
 
 	@Before(pattern="EPaymentService.createPaymentOrder", eval="#{args[0].txntype=='obo'}")
@@ -62,24 +37,6 @@ class OboOnlinePaymentInterceptor {
 		m.email = (biz.email) ? biz.email : biz.owner.email;
 		m.phoneno = (biz.phoneno) ? biz.phoneno : biz.owner.phoneno;
 		o.info = m;
-	}
-
-	@Before(pattern="EORService.post", eval="#{args[0].txntype=='obo'}")
-	public void postPayment( evt ) { 
-		/*
-		def o = evt.args[0];
-		def r = [:]
-		r.appno = o.refno;
-		def z = generateBilling( r );
-		if ( o.amount != z.amount ) 
-			throw new Exception('Bill amount has changed from '+ o.amount +' to '+ z.amount); 
-		o.businessid = z.app.business.objid;
-		o.applicationid = z.app.objid;
-		o.appyear = z.app.appyear; 
-		o.taxfees = z.taxfees;
-		o.expirydate = z.expirydate; 
-		o.items = z.items; 
-		*/
 	}
 
 	@After(pattern="EORService.post", eval="#{args[0].txntype=='obo'}")

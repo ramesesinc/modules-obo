@@ -1,4 +1,5 @@
 import com.rameses.annotations.*; 
+import com.rameses.util.*;
 
 class BuildingPermitEmailSenderInterceptor {
 	
@@ -23,6 +24,9 @@ class BuildingPermitEmailSenderInterceptor {
 	@DataContext("vw_building_permit")
 	def vwAppEm;
 
+	@DataContext("building_permit_fee")
+	def feeEm;
+
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' && args[0].taskstate == 'receiving'}", index=1000)
 	public void sendEmailAfterAcceptance( def evt ) {
 		def p = evt.args[0];
@@ -34,7 +38,7 @@ class BuildingPermitEmailSenderInterceptor {
 			smsSvc.send( [phoneno: app.contact.mobileno, message: msg ]);
 		}
 	}	
-	
+
 	//Check prior to send-for-revision. There must be at least one finding
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }", index=1000) 
 	public void doActionAfterRevision( def evt ) {
@@ -61,5 +65,20 @@ class BuildingPermitEmailSenderInterceptor {
 			smsSvc.send( [phoneno: data.contact.mobileno, message:'Please check email for revision for your application. From Legazpi OBO' ]);
 		}		
 	}
+
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].to == 'payment' }", index=2000) 
+	public void sendEmailForPayment( def evt ) {
+		def p = evt.args[0];
+		def appid = p.refid;
+		def app = appEm.find( [objid: appid ] ).first();
+		def amt = NumberUtil.round( feeEm.find( [appid: appid ]).select( "c:{SUM( amount-amtpaid )}" ).val() );
+		
+		String msg = "Your application " + app.appno + " is now ready for payment. Total amount due is ${amt}. From Legazpi City OBO";
+		smtpSvc.send( [to: app.contact.email, subject:"Building Permit Application For Payment", message: msg] );
+		if(app.contact.mobileno) {
+			smsSvc.send( [phoneno: app.contact.mobileno, message: msg ]);
+		}
+	}	
+
 
 }

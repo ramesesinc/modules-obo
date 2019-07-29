@@ -22,12 +22,13 @@ class BuildingPermitModel extends WorkflowTaskModel {
     def query = [:];
     def evaluationHandler;
     def reqListHandler;
+    def receipt;
     
     @PropertyChangeListener
     def listener = [
         "showOption" : { o->
             if(o == "showunfinished") {
-                query.where = " task.state NOT IN ('end', 'for-verification') ";
+                query.where = " task.state NOT IN ('end', 'for-verification', 'wait' ) ";
             }
             else if(o == "showfinished") {
                 query.where = " task.state = 'end' ";

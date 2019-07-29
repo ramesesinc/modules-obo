@@ -36,11 +36,11 @@
 	<field name="firstname" class="java.lang.String"/>
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="applicant.address.text" class="java.lang.String"/>
-	<field name="applicant.businessname" class="java.lang.String"/>
-	<field name="project.location" class="java.lang.String"/>
+	<field name="businessname" class="java.lang.String"/>
+	<field name="location.address.text" class="java.lang.String"/>
 	<field name="project.type" class="java.lang.String"/>
 	<field name="project.zoning.classification" class="java.lang.String"/>
-	<field name="project.area" class="java.lang.String"/>
+	<field name="totalfloorarea" class="java.lang.Number"/>
 	<field name="project.status" class="java.lang.String"/>
 	<field name="project.remarks" class="java.lang.String"/>
 	<field name="or.no" class="java.lang.String"/>
@@ -1235,7 +1235,7 @@
 					<textElement>
 						<font size="14" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.businessname}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{businessname}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1248,7 +1248,7 @@
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{project.type}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1287,7 +1287,7 @@
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{project.area}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{totalfloorarea}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

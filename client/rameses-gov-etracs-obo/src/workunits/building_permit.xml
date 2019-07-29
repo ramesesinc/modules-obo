@@ -4,7 +4,8 @@
                 action="open" index="1"/>
         
         <invoker type="formActions" caption="Permits/Clearances" icon="images/toolbars/printer.png"
-            action="showMenu" context="permits" />
+            action="showMenu" context="permits" visibleWhen="#{ task.state == 'releasing' }" />
+        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />
     <pages>

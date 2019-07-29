@@ -95,6 +95,7 @@ class BuildingPermitBillingService {
 		receipt.reftype = rct.type;
 		receipt.refid = rct.objid;
 		receipt.refdate = rct.receiptdate;
+		receipt.amount = rct.amount;
 		receipt.voided = 0;
 		pmtEm.create( receipt );
 
@@ -107,7 +108,7 @@ class BuildingPermitBillingService {
 		m.processname = "building_permit";
 		m.taskid = app.taskid;
 		m.refid = app.objid;
-		m.action = "post";
+		m.action = "post-payment";
 		wfSvc.signal(m);		
 		return null;
 	} 

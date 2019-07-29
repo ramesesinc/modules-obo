@@ -56,12 +56,12 @@ public class BuildingPermitAncillaryPage extends javax.swing.JPanel {
         xFormPanel1.add(xLabel8);
 
         xLabel7.setCaption("Design Professional");
-        xLabel7.setExpression("#{entity.designprofessional.entity.name}");
+        xLabel7.setExpression("#{entity.designprofessional.name}");
         xLabel7.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel7);
 
         xLabel4.setCaption("Supervisor In Charge");
-        xLabel4.setExpression("#{entity.supervisor.entity.name}");
+        xLabel4.setExpression("#{entity.supervisor.name}");
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
 

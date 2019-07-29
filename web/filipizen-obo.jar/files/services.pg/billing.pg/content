@@ -160,4 +160,3 @@
 	@wx:button( caption: 'Proceed for Payment', context:'billing', name: 'createPaymentOrder', visibleWhen:'#{ bill.amount > 0}' )
 </div>
 
-asdasd

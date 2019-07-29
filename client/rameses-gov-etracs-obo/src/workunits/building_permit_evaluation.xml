@@ -10,6 +10,9 @@
         <invoker type="formActions" caption="View Assessment" index="20"
                 action="viewAssessment" visibleWhen="#{entity.allowassessment == 1 }"/>        
         
+        <invoker type="formActions" caption="Issue Permit/Clearance" index="20"
+                action="issuePermit" visibleWhen="#{task.state == 'releasing' }"/>
+        
         <!-- context related actions -->
          <invoker type="formAction" caption="Change Zoning Class"
             action="open" index="1" visibleWhen="#{entity.typeid.toLowerCase() == 'zoning' }"/>

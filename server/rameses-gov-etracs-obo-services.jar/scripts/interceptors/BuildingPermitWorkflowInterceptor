@@ -50,6 +50,7 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit_fee")
 	def feeEm;
 
+
 	/* *********************************************************************
 	//Evaluation-related triggers
 	************************************************************************ */
@@ -74,12 +75,10 @@ class BuildingPermitWorkflowInterceptor {
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }") 
 	public void sendEvaluationTaskForRevision( def evt ) {
 		def p = evt.args[0];
-
 		//check first findings that are yet open. These are tasks that need to be sent-for-revision
 		def list = findingEm.find( [appid: p.refid ] ).where("checked = 0").list();
 		def inIds = " objid IN ('" + list*.parentid.join("','") + "') ";
 		def notInIds = " objid NOT IN ('" + list*.parentid.join("','") + "') AND task.state = 'for-verification' ";
-
 		fireEvaluationWorkflow( p.refid, inIds, "send-for-revision" );
 		fireEvaluationWorkflow( p.refid, notInIds, "approve" );
 	}
@@ -161,22 +160,23 @@ class BuildingPermitWorkflowInterceptor {
 	}
 
 	//application specific routines after worksflow step
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
-	public void doActionsAfterApproval( def evt ) {
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' && args[0].taskstate == 'receiving' }") 
+	public void doActionsAfterApprovedReceiving( def evt ) {
 		def p = evt.args[0];
-		def result = evt.result;
 		def appid = p.refid;
+		//update the appno first
+		int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
+		def appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  );
+		def u = [:];
+		u.appdate = dateSvc.getServerDate();
+		u.appno = appno;
+		appEm.find( [objid: appid ] ).update( u );
+	}
 
-		if( p.taskstate == "receiving") {
-			//update the appno first
-			int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
-			def appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  );
-			def u = [:];
-			u.appdate = dateSvc.getServerDate();
-			u.appno = appno;
-			appEm.find( [objid: appid ] ).update( u );
-		}
-		
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'post-payment' }") 
+	public void doActionsAfterPayPosting( def evt ) {
+		def p = evt.args[0];
+		fireEvaluationWorkflow( p.refid, " task.state = 'wait' ", "send-for-release" );
 	}
 
 

@@ -19,7 +19,7 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
     def infoSvc;
     
     def infos;
-    
+    def receipt;
     def findingListHandler;
     
     String getFormName() {
@@ -80,6 +80,10 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
         }
         f.permits = [ [type: entity.typeid ] ];
         return Inv.lookupOpener("view_assessment", [params: f] );
+    }
+    
+    def issuePermit() {
+        MsgBox.alert("issue permit");
     }
     
 }

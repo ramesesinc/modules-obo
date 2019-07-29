@@ -39,7 +39,7 @@ public class BuildingPermitFeeService  {
 	@ProxyMethod
 	public def assess(o) {
 		def params = [:];
-
+		feeEm.find( [appid: o.appid ]).delete();
 		def vapp = vwAppEm.find( [objid: o.appid ] ).first();
 
 		def m = [:];
@@ -47,6 +47,10 @@ public class BuildingPermitFeeService  {
         m.appdate = vapp.dtfiled; 
         m.apptype = vapp.apptype;
         m.projectcost = vapp.projectcost;
+        m.fixedcost = vapp.fixedcost;
+        
+        m.highercost = (vapp.fixedcost > vapp.projectcost ) ? vapp.fixedcost : vapp.projectcost;
+
         m.height = vapp.height;
         m.numunits = vapp.numunits;
         m.totalfloorarea = vapp.totalfloorarea;

@@ -29,29 +29,26 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
     
     void loadDynamicItems( String _id, def subitems, def invokers ) {
         def secProvider = clientContext.getSecurityProvider();
-        if(_id.matches('(building|occupancy)_other') ) {
-            boolean isRoot = (OsirisContext.env.ORGROOT == 1)
-            def m = [_schemaname: "obo_evaluation_type" ];
-            m._limit = 200;
-            m.orderBy = "sortindex";
-            if(isRoot) {
-                m.where = ["org.objid IS NULL"];
-            }
-            else {
-                m.where = ["org.objid = :orgid", [orgid: OsirisContext.env.ORGID] ];
-            }
-            m.orderBy = "sortindex";
-            def list = querySvc.getList( m );
+        def orgFilter = [:];
+        boolean isRoot = (OsirisContext.env.ORGROOT == 1);
+        if(isRoot) {
+            orgFilter = ["org.objid IS NULL"];
+        }
+        else {
+            orgFilter = ["org.objid = :orgid", [orgid: OsirisContext.env.ORGID] ];
+        }
+        
+        def buildInvokers = { list, title ->
             int i = 100;
             list.each {
                 if(it.role) {
                     boolean b = secProvider.checkPermission( workunit.workunit.module.domain, it.role, ".*" );
                     if(!b) return;
                 }
-                def id = _id + "/" + it.objid;
-                def notid = 'building_permit_evaluation:'+it.objid.toLowerCase();
+                def id = title + "/" + it.objid;
+                def notid = title + ':'+it.objid.toLowerCase();
                 subitems << [ id: id, caption: it.title, index: (i++), notificationid: notid ];
-                def sinv = _id.split("_")[0] + "_permit_evaluation:list"
+                def sinv = title + ":list"
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
                 op.target = 'window';
                 op.id = sinv;
@@ -59,6 +56,26 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             }
         }
         
+        if(_id == 'building_permit_evaluation' ) {
+            def m = [_schemaname: "obo_evaluation_type" ];
+            m._limit = 200;
+            m.orderBy = "sortindex";
+            m.where =  orgFilter;
+            m.orderBy = "sortindex";
+            def list = querySvc.getList( m );
+            buildInvokers( list, 'building_permit_evaluation' );
+        }
+        else if( _id == "permit_issuance") {
+            /*
+            def m = [_schemaname: "obo_evaluation_type" ];
+            m._limit = 200;
+            m.orderBy = "sortindex";
+            m.findBy = [issuepermit: 1];
+            m.where =  orgFilter;
+            m.orderBy = "sortindex";
+            def list = querySvc.getList( m );
+            */
+        }
     }
     
 }

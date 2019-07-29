@@ -6,14 +6,15 @@ public class BuildingApplication {
 
 	String appno;
 	Date appdate;
-	String apptype;		//NEW OR RENEW
+	String apptype;				//NEW OR RENEW
 	String constructiontype;	
 
 	String worktype;
 
-	double estimatedcost;
-	double projectcost;	//computed. 
-	
+	double projectcost;			//computed. 
+	double fixedcost;  			//fixed cost
+	double highercost;			//whichever is higher = computed or fixed
+
 	int numstoreys;
 	double floorarea; 
 	double totalfloorarea; 		

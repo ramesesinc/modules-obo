@@ -62,8 +62,13 @@
 		<field name="task_title" />
 		<field name="amount" />
 
-		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one"  required="false">
+		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one">
 			<key field="contractorid" target="objid" />
+		</complex>
+
+		<complex name="payment" ref="building_permit_payment" jointype="many-to-one" required="false"
+			includefields="refno,refdate,amount">
+			<key field="objid" target="appid" />
 		</complex>
 
 	</element>

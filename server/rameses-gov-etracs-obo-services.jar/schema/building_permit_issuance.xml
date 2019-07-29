@@ -1,0 +1,13 @@
+<schema adapter="obodb">
+	<element tablename="building_permit_issuance">
+		<field name="objid" primary="true" prefix="BPISS" />
+		<field name="appid" required="true"/>
+		<field name="controlno" searchable="true" />
+		<field name="dtissued" />		
+		<field name="issuedby_objid" />		
+		<field name="issuedby_name" />	
+		<complex name="type" ref="obo_evaluation_type" jointype="many-to-one">
+			<key field="typeid" target="objid" />
+		</complex> 
+	</element>
+</schema>
