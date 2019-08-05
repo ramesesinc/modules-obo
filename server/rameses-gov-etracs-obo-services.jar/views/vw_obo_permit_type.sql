@@ -8,4 +8,4 @@ SELECT
  et.activationstate,
  et.validationstate 
 FROM obo_permit_type ot 
-LEFT JOIN obo_evaluation_type et ON ot.objid = et.ancillarypermitid 
+LEFT JOIN obo_evaluation_type et ON ot.objid = et.permitid 

@@ -39,9 +39,10 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xComboBox3 = new com.rameses.rcp.control.XComboBox();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xTextField3 = new com.rameses.rcp.control.XTextField();
-        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
         xComboBox4 = new com.rameses.rcp.control.XComboBox();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
         xCheckBox2 = new com.rameses.rcp.control.XCheckBox();
+        xCheckBox3 = new com.rameses.rcp.control.XCheckBox();
 
         xFormPanel1.setCaption("General Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -100,34 +101,27 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xTextField3.setSpaceChar('_');
         xFormPanel1.add(xTextField3);
 
-        xCheckBox1.setCaption("");
-        xCheckBox1.setDisableWhen("#{ mode == 'read' }");
-        xCheckBox1.setName("withancillary"); // NOI18N
-        xCheckBox1.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
-        xCheckBox1.setShowCaption(false);
-        xCheckBox1.setText("Associated with ancillary permit");
-        xFormPanel1.add(xCheckBox1);
-
-        xComboBox4.setCaption("Associated with Ancillary Permit");
-        xComboBox4.setDepends(new String[] {"withancillary"});
+        xComboBox4.setCaption("Associated Permit");
         xComboBox4.setExpression("#{ item.objid }");
-        xComboBox4.setItemKey("objid");
-        xComboBox4.setItems("ancillaryPermits");
-        xComboBox4.setName("entity.ancillarypermitid"); // NOI18N
-        xComboBox4.setVisibleWhen("#{ withancillary== true }");
+        xComboBox4.setItems("permitTypes");
+        xComboBox4.setName("entity.permittype"); // NOI18N
+        xComboBox4.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xComboBox4.setPreferredSize(new java.awt.Dimension(0, 22));
-        xComboBox4.setRequired(true);
-        xComboBox4.setShowCaption(false);
         xFormPanel1.add(xComboBox4);
+
+        xLabel1.setCaption("Permit Type");
+        xLabel1.setDepends(new String[] {"entity.permittype"});
+        xLabel1.setExpression("#{ entity.permittype.type }");
+        xFormPanel1.add(xLabel1);
 
         xCheckBox2.setCaption("");
         xCheckBox2.setCheckValue(1);
         xCheckBox2.setDisableWhen("#{ mode == 'read' }");
-        xCheckBox2.setName("entity.issuepermit"); // NOI18N
+        xCheckBox2.setName("entity.allowassessment"); // NOI18N
         xCheckBox2.setUncheckValue(0);
         xCheckBox2.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
         xCheckBox2.setShowCaption(false);
-        xCheckBox2.setText("Issue Permit");
+        xCheckBox2.setText("Allow Assessment");
         xCheckBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 xCheckBox2ActionPerformed(evt);
@@ -135,21 +129,36 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         });
         xFormPanel1.add(xCheckBox2);
 
+        xCheckBox3.setCaption("");
+        xCheckBox3.setCheckValue(1);
+        xCheckBox3.setDisableWhen("#{ mode == 'read' }");
+        xCheckBox3.setName("entity.issuepermit"); // NOI18N
+        xCheckBox3.setUncheckValue(0);
+        xCheckBox3.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xCheckBox3.setShowCaption(false);
+        xCheckBox3.setText("Issue Permit");
+        xCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xCheckBox3ActionPerformed(evt);
+            }
+        });
+        xFormPanel1.add(xCheckBox3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,15 +166,20 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_xCheckBox2ActionPerformed
 
+    private void xCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xCheckBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xCheckBox3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XCheckBox xCheckBox2;
+    private com.rameses.rcp.control.XCheckBox xCheckBox3;
     private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XComboBox xComboBox3;
     private com.rameses.rcp.control.XComboBox xComboBox4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
+    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLookupField xLookupField1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;

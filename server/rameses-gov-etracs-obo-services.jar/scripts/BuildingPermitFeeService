@@ -18,8 +18,8 @@ public class BuildingPermitFeeService  {
 	@Service("BuildingPermitInfoService")
 	def infoSvc;
 
-	@DataContext("obo_billitemtype")
-	def billItemTypeEm;
+	@DataContext("obo_itemaccount")
+	def itemAcctEm;
 
 	@DataContext("vw_building_permit")
 	def vwAppEm;
@@ -74,7 +74,7 @@ public class BuildingPermitFeeService  {
 
 		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: params, include_items: false ] );
 		res.billitems.findAll{ it.billcode && it.item == null }.each {
-			def p = billItemTypeEm.find( [objid: it.billcode ] ).first()
+			def p = itemAcctEm.find( [objid: it.billcode ] ).first()
 			it.item = p.item;
 			it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
 		}

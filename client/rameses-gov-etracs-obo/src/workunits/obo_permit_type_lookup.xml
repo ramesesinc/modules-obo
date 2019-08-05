@@ -6,6 +6,8 @@
                 customFilter="ancillary = 1"
                 action="init" target="popup"/>
 
-        
+        <invoker type="obo_permit_type:lookup" caption="Lookup Permit Type"
+                cols="objid,title"
+                action="init" target="popup"/>
     </invokers>
 </workunit>

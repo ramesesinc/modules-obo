@@ -65,6 +65,7 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
             appdate:entity.app.appdate, 
             apptype:entity.app.apptype, 
             projectcost: entity.app.projectcost, 
+            fixedcost: entity.app.fixedcost,
             height: ((entity.app.height == null)?0:entity.app.height),
             numunits: entity.app.numunits,
             totalfloorarea: entity.app.totalfloorarea,
@@ -78,6 +79,7 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
             def zz = queryService.findFirst( m );
             f.infos = infoSvc.getInfos( [parentid: zz.objid ]);            
         }
+        MsgBox.alert( "type id is " + entity.typeid);
         f.permits = [ [type: entity.typeid ] ];
         return Inv.lookupOpener("view_assessment", [params: f] );
     }

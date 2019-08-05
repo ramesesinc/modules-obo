@@ -28,7 +28,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
     def listener = [
         "showOption" : { o->
             if(o == "showunfinished") {
-                query.where = " task.state NOT IN ('end', 'for-verification', 'wait' ) ";
+                query.where = " task.state IN ('evaluation', 'review', 'approval' ) ";
             }
             else if(o == "showfinished") {
                 query.where = " task.state = 'end' ";

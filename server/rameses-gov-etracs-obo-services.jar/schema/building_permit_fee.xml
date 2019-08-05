@@ -5,7 +5,7 @@
 		<field name="amount" required="true" />
 		<field name="amtpaid" required="true" />
 
-		<complex name="item" ref="obo_billitemtype" jointype="many-to-one" required="true">
+		<complex name="item" ref="obo_itemaccount" jointype="many-to-one" required="true">
 			<key field="itemid" target="objid" />
 		</complex>	
 	</element>

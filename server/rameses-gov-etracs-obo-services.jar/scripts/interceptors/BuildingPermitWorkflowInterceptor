@@ -173,11 +173,13 @@ class BuildingPermitWorkflowInterceptor {
 		appEm.find( [objid: appid ] ).update( u );
 	}
 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'post-payment' }") 
-	public void doActionsAfterPayPosting( def evt ) {
+	//send for assessment, payment and post payment
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action.matches('send-for-assessment|send-for-payment|post-payment') }") 
+	public void doActionsAfterAssessment( def evt ) {
 		def p = evt.args[0];
-		fireEvaluationWorkflow( p.refid, " task.state = 'wait' ", "send-for-release" );
+		fireEvaluationWorkflow( p.refid, " NOT(task.state IS NULL) ", p.action );
 	}
+
 
 
 } 

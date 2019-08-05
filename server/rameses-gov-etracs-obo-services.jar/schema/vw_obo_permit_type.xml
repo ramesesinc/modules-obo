@@ -2,13 +2,12 @@
 	<element tablename="vw_obo_permit_type">		
 		<field name="objid" primary="true"/>
 		<field name="title" />
-		<field name="main" />
-		<field name="ancillary" />
 		<field name="sortorder" />
 		<field name="evaluationtypeid" />
 		<field name="org_objid" />
 		<field name="org_name" />
 		<field name="activationstate" />
 		<field name="validationstate" />
+		<field name="type" />	
 	</element>
 </schema>

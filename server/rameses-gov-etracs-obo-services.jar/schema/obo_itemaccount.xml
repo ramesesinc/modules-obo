@@ -1,5 +1,5 @@
 <schema adapter="obodb">
-	<element tablename="obo_billitemtype">
+	<element tablename="obo_itemaccount">
 		<field name="objid" primary="true" visible="true"/>
 		<field name="title" searchable="true"/>
 		<field name="item_objid" />

@@ -33,9 +33,10 @@ class BuildingPermitEvaluationWorkflowInterceptor {
 	public void signalParent( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
+
 		def appid = evalEm.find( [objid: p.refid] ).select("appid").val();
 		//check first of there are other e that have not yet ended. If there are open, do not fire the parent application
-		def openItems = evalEm.find([appid:appid] ).where( "task.state NOT IN ('for-verification', 'end') ").exists();
+		def openItems = evalEm.find([appid:appid] ).where( "task.state IN ('evaluation', 'review', 'approval' ) ").exists();
 		if(!openItems) {
 			def f = [:];
 			f.processname = 'building_permit';

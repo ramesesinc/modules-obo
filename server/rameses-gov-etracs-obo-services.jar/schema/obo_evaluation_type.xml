@@ -9,9 +9,14 @@
 		<field name="sortindex" />
 		<field name="role" />
 
-		<field name="ancillarypermitid" />
+		<field name="permitid" />
 		<field name="allowassessment" />
 		<field name="issuepermit" />
+
+		<complex name="permittype" ref="obo_permit_type" jointype="many-to-one" required="false">
+			<key field="permitid" target="objid" />
+		</complex>	
+
 	</element>
 </schema>
 		

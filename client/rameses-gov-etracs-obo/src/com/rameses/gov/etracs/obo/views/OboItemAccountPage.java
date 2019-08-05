@@ -13,12 +13,12 @@ import com.rameses.seti2.views.CrudFormPage;
  * @author elmonazareno
  */
 @Template(CrudFormPage.class)
-public class BillItemTypePage extends javax.swing.JPanel {
+public class OboItemAccountPage extends javax.swing.JPanel {
 
     /**
      * Creates new form BillItemTypePage
      */
-    public BillItemTypePage() {
+    public OboItemAccountPage() {
         initComponents();
     }
 

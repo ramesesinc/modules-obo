@@ -74,16 +74,19 @@ public class OboMiscListService  {
 
 	@ProxyMethod
 	public def getMainPermitTypes() {
-		return permitTypeEm.find( [main: 1 ]).orderBy("sortorder").list();
+		return permitTypeEm.find( [type: 'MAIN' ] ).orderBy("sortorder").list();
 	}
 
 	@ProxyMethod
 	public def getAncillaryPermitTypes() {
-		return permitTypeEm.find( [ancillary: 1 ]).orderBy("sortorder").list();
+		return permitTypeEm.find( [type: 'ANCILLARY' ]).orderBy("sortorder").list();
 	}
 
 	
-
+	@ProxyMethod
+	public def getPermitTypes() {
+		return permitTypeEm.where( "1=1" ).orderBy("sortorder").list();
+	}
 
 
 	/* To do 

@@ -14,6 +14,7 @@ DELETE FROM building_permit_ancillary;
 DELETE FROM building_permit_rpu;
 DELETE FROM building_permit_professional;
 DELETE FROM building_permit_entity;
+DELETE FROM building_permit_payment;
 DELETE FROM building_permit;
 
 [cleanup-for-online]
