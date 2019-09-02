@@ -1,0 +1,9 @@
+<schema adapter="obodb">
+	<element tablename="obo_evaluation_checklist">
+		<field name="objid" primary="true" caption="Name" visible="true"/>
+		<field name="evaluationtypeid" />
+		<field name="title" />
+		<field name="category" />
+	</element>
+</schema>
+		

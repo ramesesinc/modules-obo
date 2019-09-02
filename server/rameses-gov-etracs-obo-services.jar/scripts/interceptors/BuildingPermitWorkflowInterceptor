@@ -100,7 +100,7 @@ class BuildingPermitWorkflowInterceptor {
 		//start the next evaluation tasks. fire evaluations for non-ancillary as well as those for ancillary
 		def appid = p.refid;
 		def pstate = [state: result.state];
-		def list1 = evalTypeEm.where("activationstate = :state AND ancillarypermitid IS NULL ", pstate ).list()*.objid;
+		def list1 = evalTypeEm.where("activationstate = :state AND (permitid IS NULL OR permittype.type <> 'ANCILLARY' ) ", pstate ).list()*.objid;
 		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: appid ] ).where( "type.activationstate = :state", pstate ).list()*.type.evaluationtypeid;
 		def mlist = list1 + list2;
 		if( mlist ) {

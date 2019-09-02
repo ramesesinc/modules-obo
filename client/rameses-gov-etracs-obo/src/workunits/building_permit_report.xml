@@ -1,0 +1,12 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml">
+    <invokers>
+         <invoker type="vw_building_permit:form:formActions" 
+                caption="Print Building Permit"
+                action="preview" 
+                reportName="com/rameses/gov/etracs/obo/reports/building_permit.jasper"
+                reportId="building_permit"
+                visibleWhen="#{ entity.permitid != null }"    />
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitReportFormModel" />
+</workunit>

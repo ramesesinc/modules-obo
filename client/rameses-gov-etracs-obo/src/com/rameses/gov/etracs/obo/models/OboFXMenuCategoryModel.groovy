@@ -20,7 +20,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
     def oboMenuSvc;
     
     public String getMenuContextName() {
-        return "obo";
+        return "building_permit";
     }
     
     public def getMenuNotificationService() {
@@ -46,8 +46,8 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
                     if(!b) return;
                 }
                 def id = title + "/" + it.objid;
-                def notid = title + ':'+it.objid.toLowerCase();
-                subitems << [ id: id, caption: it.title, index: (i++), notificationid: notid ];
+                def notid = it.objid.toLowerCase();
+                subitems << [ id: id, caption: it.title, index: (i++), notificationid: notid, event: title ];
                 def sinv = title + ":list"
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
                 op.target = 'window';
@@ -65,6 +65,15 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             def list = querySvc.getList( m );
             buildInvokers( list, 'building_permit_evaluation' );
         }
+        else if(_id == 'occupancy_permit_evaluation' ) {
+            def m = [_schemaname: "obo_evaluation_type" ];
+            m._limit = 200;
+            m.orderBy = "sortindex";
+            m.where =  orgFilter;
+            m.orderBy = "sortindex";
+            def list = querySvc.getList( m );
+            buildInvokers( list, 'occupancy_permit_evaluation' );
+        }        
         else if( _id == "permit_issuance") {
             /*
             def m = [_schemaname: "obo_evaluation_type" ];

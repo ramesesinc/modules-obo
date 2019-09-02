@@ -1,7 +1,7 @@
 <schema adapter="obodb">
 	<element tablename="vw_building_permit">
 		<field name="objid" primary="true"/>
-		<field name="appno" searchable="true"/>
+		<field name="appno" searchable="true" indexed="true"/>
 
 		<field name="applicant_name" searchable="true"/>
 		<field name="applicant_objid" />
@@ -61,6 +61,8 @@
 		<field name="task_actor_name" />
 		<field name="task_title" />
 		<field name="amount" />
+		<field name="permitid" />
+		<field name="txnmode" />
 
 		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one">
 			<key field="contractorid" target="objid" />
@@ -69,6 +71,11 @@
 		<complex name="payment" ref="building_permit_payment" jointype="many-to-one" required="false"
 			includefields="refno,refdate,amount">
 			<key field="objid" target="appid" />
+		</complex>
+
+		<complex name="permit" ref="building_permit_issuance" jointype="many-to-one" required="false"
+			includefields="controlno,dtissued">
+			<key field="permitid" target="objid" />
 		</complex>
 
 	</element>

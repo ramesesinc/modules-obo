@@ -64,7 +64,7 @@ public class BuildingPermitFeeService  {
         params.occupancytype = occ;
 
         params.permits = [];
-		def list1 = evalTypeEm.where("ancillarypermitid IS NULL ").list()*.objid;
+		def list1 = evalTypeEm.where( "permitid IS NULL OR permittype.type <> 'ANCILLARY' ").list()*.objid;
 		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: o.appid ] ).list()*.type.evaluationtypeid;
 		(list1+list2).each {
 			params.permits << [type: it ];

@@ -1,0 +1,181 @@
+
+
+
+<script type="text/javascript">
+\$put("applicant", new function(){
+	var self = this;
+  this.menuOption = "0";
+	this.mode = "initial";
+	this.error;
+  this.iderror;
+	this.idno;
+  this.barangayList;
+  this.applicant;
+  this.orgname;
+
+	var app = \$get("app").code;
+  var appSvc = Service.lookup( 'OnlineBuildingPermitService', 'obo' );
+
+	this.findApplicant = function(){
+		var profileSvc = Service.lookup( app.orgcode + ':RemoteEntityProfileService' );
+		var p = {idno: self.idno };
+		profileSvc.findByIdno( p, function(o,s) {
+	      if( s == "error" ) {
+	        self.iderror = o.result;
+	      }
+	      else {
+	      	self.applicant = o.result;
+	        self.iderror = null;		
+			    self.mode = "show-applicant";
+	      }
+	      self._controller.refresh(); 
+	    });
+	};
+
+	this.saveApplicant = function() {
+		self.applicant.appid = app.appid;
+    app.service.saveApplicant( self.applicant );
+    app.moveNextStep();
+	}
+
+  this.viewInitial = function() {
+    self.applicant = {address:{barangay:{}}, resident:1, ctc:{}};
+    self.applicant.address.citymunicipality = app.orgname;    
+    self.applicant.address.province = app.province;    
+    self.error = null;
+    self.iderror = null;
+    self.mode = "initial";
+  }
+
+  this.onload = function() {
+    self.orgname = app.orgname;
+    self.applicant = appSvc.getApplicant( {appid: app.appid} );
+    if(!self.applicant) {
+      self.viewInitial();             
+    }
+    else {
+      self.mode = "view-applicant";
+    }         
+    app.updateStepNavbar();
+  }
+
+  this.doMenuOption = function() {
+    if( self.menuOption == "1" ) {
+      self.findApplicant();
+    }
+    else {
+      self.editApplicant();
+    }
+  }
+
+  this.editApplicant = function() {
+    self.mode = "edit-applicant";
+    if(!self.barangayList ) {
+      var bsvc = Service.lookup("CloudPartnerService", "partner");
+      self.barangayList =  bsvc.getBarangayList( {orgcode: app.orgcode} );
+    }
+    if(self.applicant.resident == null) self.applicant.resident = 1;    
+  }
+
+  this.propertyChangeListener = {
+     'applicant.resident' : function(v){
+        if( v == 1 ) {
+          self.applicant.address.citymunicipality = app.orgname;
+          self.applicant.address.province = app.province;
+        }
+     }
+  }
+
+  this.attachId = function() {
+    var h = function(v) {
+      self.applicant.id = v;
+      self._controller.refresh();
+    }
+    return new PopupOpener( "id_entry", { onselect: h, entry: self.applicant.id},  {width:'500', title:'Select Proof of Identity'} );
+  }
+
+
+});
+
+ \$register( {id:'id_entry',  page:"${PAGE.parentPath}/id_entry", context: 'id_entry' } );
+ </script>
+
+<style>
+  .caption-class { width:200px; }
+  .input-class { width:200px;}
+  .profile-caption { width: 120px; }
+  .profile-block { padding-left:20px;  }
+  .iderror {color:red; padding-left: 20px;} 
+</style>
+
+
+<legend>Building Applicant Details</legend>
+<div r:context="applicant" r:visibleWhen="#{error != null }" style="display:none;">
+	<label r:context="applicant" style="color:red;">#{error}</label>
+</div>
+
+<div r:context="applicant" r:visibleWhen="#{mode=='initial'}" style='display:none'>
+   <p>
+    Does the applicant already have a <b>Profile</b> registered with <label r:context="applicant">#{orgname}</label>?
+   </p>
+   <div class="form">
+      <input type="radio" r:context="applicant" r:name="menuOption" value="1" >&nbsp;Yes
+      <div r:context="applicant" r:depends="menuOption" r:visibleWhen="#{ menuOption == '1'}"> 
+          @wx:text(caption:'Enter Profile No', context:'applicant', name:'idno', captionClass:'+profile-caption', required:true, blockClass:'profile-block')
+          <label r:context="applicant" class="iderror" r:visibleWhen:"#{iderror != null}">#{iderror}</label>
+      </div>
+
+      <div>
+        <input type="radio" r:context="applicant" r:name="menuOption" value="0">&nbsp;No
+      </div>
+   </div>
+  
+   @wx:button( caption:'Next', context:'applicant', name:'doMenuOption')
+</div>
+
+<div r:context="applicant" r:visibleWhen="#{mode=='view-applicant'}" style="display:none">
+    <div class="subtitle">Applicant Info</div>
+  <div class="form">
+    @wx:label(caption:'Profile No', context:'applicant', expr:'#{applicant.profileno}', visibleWhen:'#{applicant.profileno !=null }' )
+    @wx:label(caption:'Last Name', context:'applicant', expr:'#{applicant.lastname}' )
+    @wx:label(caption:'First Name', context:'applicant', expr:'#{applicant.firstname}' )
+    @wx:label(caption:'Middle Name', context:'applicant', expr:'#{applicant.middlename}' )
+    @wx:gender(caption:'Gender', context:'applicant', name:'applicant.gender', readonly:true )
+    @wx:address_nonlocal( caption: 'Address', context:'applicant', name:'applicant.address',  readonly:true )    
+    @wx:label(caption:'Email', context:'applicant', expr:'#{applicant.email }' )
+    @wx:label(caption:'Mobile No', context:'applicant', expr:'#{applicant.mobileno }' )
+    @wx:idproof( context:'applicant', name:'applicant.id', readonly:true )
+  </div>
+  @wx:button(caption:'Edit Info', context:'applicant', name:'editApplicant' )
+  @wx:button(caption:'Change Applicant', context:'applicant', name:'viewInitial', visibleWhen:'#{applicant.profileno !=null }' )  
+</div>
+
+<div r:context="applicant" r:visibleWhen="#{mode=='edit-applicant'}" style="display:none">
+  <div class="subtitle">
+  Please fill in the necessary data below. Text marked with * are required fields.
+  </div>
+  <div class="form">
+    @wx:label(caption:'Profile No', context:'applicant', expr:'#{applicant.profileno}', visibleWhen:'#{applicant.profileno !=null }' )  
+    @wx:text(caption:'Last Name', context:'applicant', name:'applicant.lastname', required: true, hint:'Last Name', attrs: [ disableWhen: '#{applicant.profileno !=null }' ] )
+    @wx:text(caption:'First Name', context:'applicant', name:'applicant.firstname', required: true, hint:'First Name', attrs: [ disableWhen: '#{applicant.profileno !=null }']  )
+    @wx:text(caption:'Middle Name', context:'applicant', name:'applicant.middlename', required: true, hint:'Middle Name'  )
+    @wx:date(caption:'Birthdate', context:'applicant', name:'applicant.birthdate', required: true, hint:'Birth date in YYYY-MM-DD', attrs: [ disableWhen: '#{applicant.profileno !=null }']  )  
+    @wx:gender(caption:'Gender', context:'applicant', name:'applicant.gender', required:true )
+    @wx:radiolist( caption:'Resident', context:'applicant', name:'applicant.resident', required:true, items: [ [key:'1', value:'Resident'], [key:'0', value:'Non-resident' ] ] )
+    @wx:address_local( caption: 'Address', context:'applicant', name:'applicant.address', depends: 'applicant.resident', visibleWhen: '#{ applicant.resident == \'1\' }', required:true )
+    @wx:address_nonlocal( caption: 'Address', context:'applicant', name:'applicant.address', depends: 'applicant.resident', visibleWhen: '#{ applicant.resident == \'0\' }', required:true )
+    <br>
+    @wx:email(context:'applicant', name:'applicant.email')
+    @wx:mobile(context:'applicant', name:'applicant.mobileno')
+    <br>
+    <br>
+    @wx:idproof( context:'applicant', name:'applicant.id', action:'attachId' )
+    <br>
+    @wx:button( caption:'Next', context:'applicant', name:'saveApplicant')
+</div>
+
+
+
+
+
+

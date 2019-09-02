@@ -1,16 +1,16 @@
 import com.rameses.annotations.*; 
 
-class BuildingPermitEmailSenderInterceptor {
+class BuildingPermitFormReportInterceptor {
 	
 	@DataContext("vw_building_permit")
 	def vwAppEm;
 
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'buildingpermit'}")
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit'}")
 	public void getBuildingPermitReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def id = p.parameters.objid;
-		def app = vwAppEm.find( [objid: id ] ).first();
+		def app = vwAppEm.find( [objid: id ] ).first();	
 		result.data = app;
 	}	
 	

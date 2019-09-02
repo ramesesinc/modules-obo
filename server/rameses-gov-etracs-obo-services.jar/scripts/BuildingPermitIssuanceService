@@ -1,0 +1,28 @@
+import com.rameses.annotations.*; 
+
+class BuildingPermitIssuanceService {
+
+	@DataContext("building_permit")
+	def bpEm;
+
+	@DataContext("building_permit_issuance")
+	def issuanceEm;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@Service("ControlnoGeneratorService")
+	def controlNoSvc;
+
+	@ProxyMethod
+	public def create( def o ) { 
+		o.controlno = controlNoSvc.getNextNo( "BP[org][yyyy]-[%06d]" );	
+		if(!o.dtissued) o.dtissued = dateSvc.getServerDate();
+		o = issuanceEm.create( o );
+		bpEm.find( [objid: o.appid ] ).update( [permitid: o.objid ]);
+		return o;
+	}
+
+
+
+}

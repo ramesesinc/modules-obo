@@ -56,7 +56,7 @@ public class BuildingPermitOnlineService  {
 		def contractorid = app.remove("contractorid");
 
 		app.amount = 0;		
-
+		app.txnmode = 'ONLINE';
 		def newapp = appEm.create( app );
 		app.entities.each {
 			it.appid = newapp.objid;

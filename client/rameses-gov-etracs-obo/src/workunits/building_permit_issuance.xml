@@ -1,0 +1,13 @@
+<workunit schemaName="vw_building_permit" processName="building_permit">
+    <invokers>
+        <invoker type="vw_building_permit:form:formActions" 
+                caption="Issue Building Permit"
+                action="create" target="popup"
+                visibleWhen="#{ task.state == 'releasing' &amp;&amp; entity.permitid == null }"    />
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitIssuanceModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.BuildingPermitIssuancePage" />
+    </pages>
+</workunit>

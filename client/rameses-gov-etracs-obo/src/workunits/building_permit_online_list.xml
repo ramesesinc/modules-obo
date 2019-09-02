@@ -4,8 +4,9 @@
         <invoker folderid="menucategory/obo/building" caption="Online Applications"
              cols="trackingno,dtfiled,applicant.name,title,description"
              customFilter="taskid IS NULL"
+             event="building_permit"
              notificationid="building_permit_online"
-                action="init" index="-2" role="INFO"/>
+             action="init" index="-2" role="INFO"/>
     </invokers>
 </workunit>
 

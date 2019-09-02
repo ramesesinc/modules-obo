@@ -8,19 +8,38 @@ public class OboMenuNotificationService {
 	@DataContext("building_permit")
 	def vwApp;
 
+	def building_permit_online = {
+		return vwApp.select("c:{COUNT(*)}").where( "taskid IS NULL ").val();		
+	}
+
+	def building_permit = {
+		return vwApp.select("c:{COUNT(*)}").where( "NOT(taskid IS NULL)").val();		
+	}
+	
 	@ProxyMethod
 	public def fetchNotifications( def p ) {
+		def items = p.items;
+		def result = items.collect{ [id: it, count : 0] };
+		if(p.event == 'building_permit') {
+			result.each { 
+				if( it.id == 'building_permit_online' ) it.count = building_permit_online();
+				else if( it.id == 'building_permit' ) it.count = building_permit();				
+			}	
+		}
+		return result;
+
+		/*
 		p.items.each {
 			def id = it.id;
 			if(id.startsWith("building_permit_evaluation")) {
 				def c = id.split(":")[1];
 				it.count = appTask.select("c:{COUNT(*)}").where("typeid = :typ AND task.state IN('evaluation', 'review', 'approval')", [typ:c] ).val();
 			}
-			else if(id == "building_permit_online"){
+			else if(id == "building_permit"){
 				it.count = vwApp.select("c:{COUNT(*)}").where( "taskid IS NULL ").val();
 			}
 		}
-		return p;
+		*/
 	}
 
 }

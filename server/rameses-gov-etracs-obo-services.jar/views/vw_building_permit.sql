@@ -34,7 +34,8 @@ SELECT
    t.actor_objid AS task_actor_objid,
    t.actor_name AS task_actor_name,
    (SELECT title FROM sys_wf_node WHERE processname = 'building_permit' AND name=t.state) AS task_title
-   
+
+
 FROM building_permit a 
 INNER JOIN building_permit_entity e ON a.applicantid = e.objid
 INNER JOIN building_permit_task t ON a.taskid = t.taskid
