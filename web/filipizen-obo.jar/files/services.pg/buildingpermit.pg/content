@@ -12,7 +12,7 @@
 	list << [step:5, name:'accessories',caption:'Accessories'];
 	list << [step:6, name:'ancillarylist', caption:'Ancillary Permits'];
 	list << [step:7, name:'confirm', caption:'Confirm'];
-	list << [step:8, name:'confirm', caption:'Success'];				
+	list << [step:8, name:'success', caption:'Success'];				
 
 	def appid = PARAMS.appid;
 	def sappid = (!PARAMS.appid) ? "null" : "\"" + appid + "\""; 

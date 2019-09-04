@@ -1,18 +1,12 @@
 <script src="/res/partner/proxy-service.js"></script>
 
 <%
-	def svc = SERVICE.lookup("OnlineBuildingPermitService", "obo");
+	def svc = SERVICE.lookup("OnlineOccupancyPermitService", "obo");
 
 	def list = [];
 	list << [step:0, name:'initial', caption: "Initial"];
-	list << [step:1, name:'location', caption:'Location'];	
-	list << [step:2, name:'applicant', caption:'Applicant'];
-	list << [step:3, name:'professional', caption:'Professionals'];
-	list << [step:4, name:'project', , caption:'Project Details'];
-	list << [step:5, name:'accessories',caption:'Accessories'];
-	list << [step:6, name:'ancillarylist', caption:'Ancillary Permits'];
-	list << [step:7, name:'confirm', caption:'Confirm'];
-	list << [step:8, name:'confirm', caption:'Success'];				
+	list << [step:1, name:'costing', caption:'Costing'];	
+	list << [step:2, name:'confirm', caption:'Confirm'];	
 
 	def appid = PARAMS.appid;
 	def sappid = (!PARAMS.appid) ? "null" : "\"" + appid + "\""; 
@@ -51,7 +45,7 @@
 		this.orgcode = "${PARAMS.info.id}";
 		this.orgname = "${ PARAMS.info.title.toUpperCase() }";
 		this.province = "${ PARAMS.info.group?.title.toUpperCase() }";
-		this.service = Service.lookup("OnlineBuildingPermitService", "obo");
+		this.service = Service.lookup("OnlineOccupancyPermitService", "obo");
 		this.maxstep;
 		this.step; //current step
 
@@ -101,9 +95,6 @@
 	<%list.each { %>
    	\$register( {id:'${it.name}',   page:"${PAGE.path}/${it.name}", 	  	context: '${it.name}' } );
    	<%}%>
-   	\$register( {id:'ancillary',			page:"${PAGE.path}/ancillary", 			 context: 'ancillary' } );
-   	\$register( {id:'professional_lookup',	page:"${PAGE.path}/professional_lookup", context: 'professional_lookup' } );
-	\$register( {id:'occupancytype_lookup', page:"${PAGE.path}/occupancytype_lookup", context: 'occupancytype_lookup' } );   	
 </script>
 
 
@@ -119,14 +110,11 @@
 	</div>
 <%}%>
 
-
 <br>
 <div id="content"></div>
 <%}%>
 
 </div>
-
-
 
 <style>
 .breadcrumb-link:last-child:not(:first-child) {border-top-left-radius: 0;border-bottom-left-radius: 0;}

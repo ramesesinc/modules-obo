@@ -1,11 +1,6 @@
-<%
-	def appTypes = [];
-	appTypes << [objid:'NEW', title:'NEW CONSTRUCTION'];
-	appTypes << [objid:'RENOVATION', title:'RENOVATION,ALTERATION,REPAIR,ADDITION,EXTENSION'];	
-%>
-
 <style>
   .caption-class { width:150px; }
+  .caption-class2 { width:200px; }
   .input-class { width:250px;}
   .test { width:300px; border:1px solid lighjtgrey; }
 </style>
@@ -17,14 +12,20 @@
 		this.mode = "initial";
 
 		var app = \$get("app").code;
+		var svc = Service.lookup( app.orgcode + ":RemoteOccupancyPermitService" );
+
 		this.contact = {};
 		this.hiddenkey;
 		this.key;
 		this.appid;
 		this.appno;	
 		this.menuOption = "new";
-		this.apptype = "NEW";
 		this.orgname = app.orgname;
+
+		this.permitno;
+		this.permit;
+
+		this.apptypes = ["FULL", "PARTIAL"];
 
 		this.selectOption = function() {
 			if(this.menuOption == "new" ) {
@@ -33,11 +34,15 @@
 				self._controller.refresh();
 			}
 			else {
-				WindowUtil.load( "buildingpermit", {appid: self.appno } );
+				WindowUtil.load( "occupancypermit", {appid: self.appno } );
 			}
 		}
 
 		this.verifyEmail = function() {
+		    self.mode = "enter-key";
+		    self._controller.refresh();
+
+			/*
 			var p = {email: self.contact.email, phoneno: self.contact.mobileno } 
 			var emailSvc = Service.lookup(app.orgcode+':VerifyEmailService');
 
@@ -52,16 +57,36 @@
 		      }
 		      self._controller.refresh();
 			});
+			*/
 		}
 
 		this.validateKey = function() {
+			self.mode = "enter-building-permitno";
+			/*
 			if(self.hiddenkey != self.key) {
 				self.error = "Key is incorrect. Please try again";
 			}
 			else {
 				self.error = null;
-				self.mode = "select-permit-type";
+				self.mode = "enter-building-permitno";
 			}
+			*/
+		}
+
+		this.lookupPermit = function() {
+			var p = { permitno: this.permitno };
+			svc.findPermitNo( p, function(o,s) {
+				if( s == "error") {
+					self.error = o.result;
+				}
+				else {
+					self.mode = "view-building-permit";	
+					self.permit = o.result;
+					console.log(self.permit);
+					self.error = null;
+				}
+				self._controller.refresh();
+			});
 		}
 
 		this.showConfirm = function() {
@@ -75,8 +100,10 @@
 				alert("Read first the terms and  check 'I agree' ");
 				return;
 			}
-			var p = {orgcode:app.orgcode, contact: self.contact, worktypes: [], numunits: 1, apptype:self.apptype, permittype: 'BUILDING' };
-			p.nextstep = "location";
+			var p = self.permit;
+			p.contact = self.contact;
+			p.bldgpermit = self.permit.permit;
+			p.nextstep = "costing";
 			var a = app.service.create( p );
 			this.appid = a.objid;
 			self.mode = "success";
@@ -111,7 +138,6 @@
 	@wx:button( context:'initial', name:'selectOption', caption: 'Next' )
 </div>
 
-
 <div r:context="initial" r:visibleWhen="#{mode=='add-contact'}" style='display:none'>
 	<div class="subtitle">Enter contact details</div>
 	<div class="form">
@@ -131,22 +157,37 @@
 	@wx:button( context:'initial', name:'validateKey', caption: 'Next' )
 </div>
 
-<div r:context="initial" r:visibleWhen="#{mode=='select-permit-type'}" style='display:none'>
-	<div class="subtitle">Select Type of application</div>
+<div r:context="initial" r:visibleWhen="#{mode=='enter-building-permitno'}" style='display:none'>
 	<div class="form">
-	    <%appTypes.each { o-> %>
-	    	<%if(o.objid == 'NEW') {%>
-	    	<div style="text-transform:capitalize;">
-	    		<input type="radio" r:context="initial" r:name="apptype" value="${o.objid}">&nbsp;${o.title.toLowerCase()}
-	    	</div>	
-	    	<%} else { %>
-	    	<div style="color:lightgrey;text-transform:capitalize;">
-	    		<input type="radio" r:context="initial" r:name="apptype" value="${o.objid}" disabled>&nbsp;${o.title.toLowerCase()}
-	    	</div>
-	    	<%}%>
-	    <%}%>
+		<div>Enter Building Permit No.</div>
+		@wx:text( context:'initial', name:'permitno')
 	</div>
-    @wx:button( context:'initial', name:'showConfirm', caption: 'Next' )
+    @wx:button( context:'initial', name:'lookupPermit', caption: 'Next' )
+</div>
+
+<div r:context="initial" r:visibleWhen="#{mode=='view-building-permit'}" style='display:none'>
+	<div style="padding-bottom:20px;">Please check building permit info if correct. Click next to continue</div>
+	<div class="form">
+	  @wx:combo( caption:'App Type', context:'initial', name:'permit.apptype', attrs: [items:"apptypes"],captionClass:'caption-class2' )	
+	  @wx:label(caption:'Permit No', context:'initial', expr:'#{permit.permit.controlno}', captionClass:'caption-class2')  
+	  @wx:label(caption:'Permit Issued', context:'initial', expr:'#{permit.permit.dtissued}', captionClass:'caption-class2')  
+	  @wx:label(caption:'App No', context:'initial', expr:'#{permit.appno}', captionClass:'caption-class2')  
+	  @wx:label(caption:'App Date', context:'initial', expr:'#{permit.dtfiled}', captionClass:'caption-class2')  	  
+	  @wx:label(caption:'Applicant', context:'initial', expr:'#{permit.applicant.name}', captionClass:'caption-class2')  	
+	  @wx:label(caption:'Applicant Address', context:'initial', expr:'#{permit.applicant.address.text}', captionClass:'caption-class2')  	
+	  @wx:label(caption:'Project Location', context:'initial', expr:'#{permit.location.address.text}', captionClass:'caption-class2')
+	  @wx:label(caption:'Project Title', context:'initial', expr:'#{permit.title}', captionClass:'caption-class2')
+	  @wx:label(caption:'Project Description', context:'initial', expr:'#{permit.description}', captionClass:'caption-class2')
+	  @wx:label(caption:'Occupancy Type', context:'initial', expr:'#{permit.occupancytype.title}', captionClass:'caption-class2')
+	  @wx:label(caption:'Occupancy Category', context:'initial', expr:'#{permit.occupancytype.group.objid}', captionClass:'caption-class2')
+	  @wx:integer(caption:'No of Units', context:'initial', name:'permit.numunits', attrs: [ disableWhen:'#{true}'], captionClass:'caption-class2' )
+	  @wx:decimal(caption:'Total Floor Area [sq.meter]', context:'initial', name:'permit.totalfloorarea', attrs: [disableWhen:'#{true}'], captionClass:'caption-class2')
+	  @wx:decimal(caption:'Building Height [meter]', context:'initial', name:'permit.height', attrs:[disableWhen:'#{true}'], captionClass:'caption-class2')
+	  @wx:decimal(caption:'Estimated Cost [Php]', context:'initial', name:'permit.estimatedcost', attrs:[disableWhen:'#{true}'], captionClass:'caption-class2')
+	  @wx:date(caption:'Proposed Construction Date', context:'initial', name:'permit.dtproposedconstruction', attrs:[disableWhen:'#{true}'], captionClass:'caption-class2')
+	  @wx:date(caption:'Expected Completion Date', context:'initial', name:'permit.dtproposedconstruction', attrs:[disableWhen:'#{true}'], captionClass:'caption-class2')
+      @wx:button( context:'initial', name:'showConfirm', caption: 'Next' )
+    </div>  
 </div>
 
 <div r:context="initial" r:visibleWhen="#{mode=='confirm'}" style='display:none'>

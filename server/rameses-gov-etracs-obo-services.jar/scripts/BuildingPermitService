@@ -1,0 +1,32 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import java.rmi.server.*;
+import obo.facts.*;
+import java.text.*;
+import treasury.utils.*;
+import treasury.facts.*;
+
+public class BuildingPermitService  {
+	
+	@DataContext("vw_building_permit")
+	def vwAppEm;
+
+	@DataContext("building_permit_rpu")
+	def permitRpu;
+
+	@DataContext("building_permit_entity")
+	def permitEntity;
+
+	@DataContext("building_permit_professional")
+	def professionalEm;
+
+	@ProxyMethod
+	public def findByPermitNo( def p ) {
+		def perm = vwAppEm.where(  ["permit.controlno = :permitno", [permitno: p.permitno ] ] ).first();
+		perm.rpus = permitRpu.find( [appid: perm.objid ] ).list();
+		perm.entities = permitEntity.find( [appid: perm.objid ] ).list();
+		perm.professionals = professionalEm.find( [appid: perm.objid ]).list();
+		return perm;
+	}	
+
+}

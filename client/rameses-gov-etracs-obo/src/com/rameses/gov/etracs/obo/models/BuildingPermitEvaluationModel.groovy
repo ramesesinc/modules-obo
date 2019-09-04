@@ -21,6 +21,7 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
     def infos;
     def receipt;
     def findingListHandler;
+    def feeListHandler;
     
     String getFormName() {
         return getSchemaName() + ":form";
@@ -79,7 +80,6 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
             def zz = queryService.findFirst( m );
             f.infos = infoSvc.getInfos( [parentid: zz.objid ]);            
         }
-        MsgBox.alert( "type id is " + entity.typeid);
         f.permits = [ [type: entity.typeid ] ];
         return Inv.lookupOpener("view_assessment", [params: f] );
     }

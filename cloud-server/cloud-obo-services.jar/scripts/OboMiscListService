@@ -28,6 +28,9 @@ public class OboMiscListService  {
 	@DataContext("obo_variable")
 	def itemEm;
 
+	@DataContext("obo_costitem")
+	def costItemEm;
+
 	@ProxyMethod
 	public def getOccupancyTypeGroups() {
 		def list = occGroupEm.where( '1=1' ).list();
@@ -88,6 +91,11 @@ public class OboMiscListService  {
 		return permitTypeEm.where( "1=1" ).orderBy("sortorder").list();
 	}
 
+
+	@ProxyMethod
+	public def getCostItems() {
+		return  costItemEm.where("1=1").list();
+	}
 
 	/* To do 
 	public def getRequirementList( def o ){;}

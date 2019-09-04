@@ -23,11 +23,8 @@ public class BuildingPermitEvaluationCheckListModel {
     void init() {
         def m = [_schemaname: 'obo_evaluation_checklist'];
         m.orderBy = "objid";
-        m.where = ["evaluationtypeid = :id", [id: 'FIRE'] ];
+        m.where = ["evaluationtypeid = :id", [id: caller.entity.typeid ] ];
         checkList = querySvc.getList(m);
-        caller.entity.each { k,v->
-            println k+"="+v;
-        }
     }
     
     def listHandler = [

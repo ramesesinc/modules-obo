@@ -4,6 +4,7 @@
 		<field name="title" searchable="true"/>
 		<field name="item_objid" />
 		<field name="item_title" />
-		<field name="sortorder" />		
+		<field name="sortorder" />	
+		<field name="type_objid" />				
 	</element>
 </schema>	
