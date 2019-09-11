@@ -7,7 +7,6 @@
 		<field name="org_objid" />
 		<field name="org_name" />
 		<field name="activationstate" />
-		<field name="validationstate" />
 		<field name="type" />	
 	</element>
 </schema>

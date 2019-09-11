@@ -5,14 +5,14 @@
  */
 package com.rameses.gov.etracs.obo.views;
 
-import com.rameses.osiris2.themes.CloseOnlyPage;
+import com.rameses.osiris2.themes.OKCancelPage;
 import com.rameses.rcp.ui.annotations.Template;
 
 /**
  *
  * @author elmonazareno
  */
-@Template(CloseOnlyPage.class)
+@Template(OKCancelPage.class)
 public class ViewAssessmentPage extends javax.swing.JPanel {
 
     /**
@@ -80,7 +80,7 @@ public class ViewAssessmentPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xDataTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(xDataTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

@@ -27,7 +27,7 @@ class OboBillingService {
 			throw new Exception("This is not yet for payment");
 
 		def fees = 	appFeeEm.find( [appid: app.objid ] ).orderBy("item.sortorder").where("amount - amtpaid > 0").list().collect{
-			[ objid: it.objid, account: it.item.title, amount: it.amount]
+			[ itemid: it.item.objid, account: it.item.title, amount: it.amount, refid: it.objid, objid: it.objid ]
 		};
 		if( !fees )
 			throw new Exception("There are no items for payment");

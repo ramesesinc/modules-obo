@@ -101,4 +101,14 @@ public class BuildingPermitFeeService  {
 		return feeEm.find([appid: o.appid ]).orderBy("item.sortorder").list();
 	}
 
+	@ProxyMethod
+	public def saveFees(o) {
+		o.each {
+			it.itemid = it.item?.objid;
+			it.amtpaid = 0;
+			println it;
+			feeEm.create(it);
+		}
+	}
+
 }

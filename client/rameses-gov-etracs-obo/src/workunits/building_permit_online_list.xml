@@ -1,4 +1,4 @@
-<workunit extends="com/rameses/seti2/templates/CrudList.xml"
+<workunit extends="com/rameses/seti2/templates/CrudNodeList.xml"
     schemaName="vw_building_permit_online" allowDelete="false" allowNotify="false">
     <invokers>
         <invoker folderid="menucategory/obo/building" caption="Online Applications"
@@ -6,7 +6,7 @@
              customFilter="taskid IS NULL"
              event="building_permit"
              notificationid="building_permit_online"
-             action="init" index="-2" role="INFO"/>
+             action="init" index="-2" role="RECEIVER"/>
     </invokers>
 </workunit>
 

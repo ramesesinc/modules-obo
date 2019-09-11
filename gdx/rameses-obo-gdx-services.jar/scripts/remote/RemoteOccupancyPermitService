@@ -15,8 +15,10 @@ class RemoteOccupancyPermitService  {
     public def findPermitNo( def params ) {
         def res = permitSvc.findByPermitNo( [permitno: params.permitno ] );
         println "result is " + res;
+        /*
         if(res==null)
             throw new Exception("Permit no " + params.permitno + " not found");
+        */    
         return res;
     }
      

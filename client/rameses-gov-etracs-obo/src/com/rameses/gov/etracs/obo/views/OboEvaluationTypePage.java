@@ -36,13 +36,10 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xTextField2 = new com.rameses.rcp.control.XTextField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
-        xComboBox3 = new com.rameses.rcp.control.XComboBox();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xTextField3 = new com.rameses.rcp.control.XTextField();
         xComboBox4 = new com.rameses.rcp.control.XComboBox();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
         xCheckBox2 = new com.rameses.rcp.control.XCheckBox();
-        xCheckBox3 = new com.rameses.rcp.control.XCheckBox();
 
         xFormPanel1.setCaption("General Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -81,14 +78,6 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xComboBox1.setRequired(true);
         xFormPanel1.add(xComboBox1);
 
-        xComboBox3.setCaption("Validation State");
-        xComboBox3.setItems("workflowStates");
-        xComboBox3.setName("entity.validationstate"); // NOI18N
-        xComboBox3.setDynamic(true);
-        xComboBox3.setPreferredSize(new java.awt.Dimension(150, 22));
-        xComboBox3.setRequired(true);
-        xFormPanel1.add(xComboBox3);
-
         xIntegerField1.setCaption("Sort Index");
         xIntegerField1.setName("entity.sortindex"); // NOI18N
         xIntegerField1.setPreferredSize(new java.awt.Dimension(50, 20));
@@ -101,18 +90,13 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xTextField3.setSpaceChar('_');
         xFormPanel1.add(xTextField3);
 
-        xComboBox4.setCaption("Associated Permit");
+        xComboBox4.setCaption("Issue Permit");
         xComboBox4.setExpression("#{ item.objid }");
         xComboBox4.setItems("permitTypes");
         xComboBox4.setName("entity.permittype"); // NOI18N
         xComboBox4.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xComboBox4.setPreferredSize(new java.awt.Dimension(0, 22));
         xFormPanel1.add(xComboBox4);
-
-        xLabel1.setCaption("Permit Type");
-        xLabel1.setDepends(new String[] {"entity.permittype"});
-        xLabel1.setExpression("#{ entity.permittype.type }");
-        xFormPanel1.add(xLabel1);
 
         xCheckBox2.setCaption("");
         xCheckBox2.setCheckValue(1);
@@ -128,21 +112,6 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
             }
         });
         xFormPanel1.add(xCheckBox2);
-
-        xCheckBox3.setCaption("");
-        xCheckBox3.setCheckValue(1);
-        xCheckBox3.setDisableWhen("#{ mode == 'read' }");
-        xCheckBox3.setName("entity.issuepermit"); // NOI18N
-        xCheckBox3.setUncheckValue(0);
-        xCheckBox3.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
-        xCheckBox3.setShowCaption(false);
-        xCheckBox3.setText("Issue Permit");
-        xCheckBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xCheckBox3ActionPerformed(evt);
-            }
-        });
-        xFormPanel1.add(xCheckBox3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -166,20 +135,13 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_xCheckBox2ActionPerformed
 
-    private void xCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xCheckBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_xCheckBox3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.rcp.control.XCheckBox xCheckBox2;
-    private com.rameses.rcp.control.XCheckBox xCheckBox3;
     private com.rameses.rcp.control.XComboBox xComboBox1;
-    private com.rameses.rcp.control.XComboBox xComboBox3;
     private com.rameses.rcp.control.XComboBox xComboBox4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
-    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLookupField xLookupField1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;

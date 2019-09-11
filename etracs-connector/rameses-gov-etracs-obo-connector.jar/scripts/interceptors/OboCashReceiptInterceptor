@@ -1,0 +1,21 @@
+import com.rameses.annotations.*; 
+
+class OboCashReceiptInterceptor {
+
+	@Service(value="BuildingPermitPaymentService", connection="local-obo")
+	def pmtSvc;
+
+ 	@After(pattern="CashReceiptService.post", eval="#{args[0].txntype=='building_permit'}")
+	public void afterPostPayment( def evt ) { 
+		def p = evt.args[0];
+		p.receipt = evt.result;
+		p.type = 'cashreceipt';
+		pmtSvc.postPayment(p);
+	}
+
+ 	@Before(pattern="CashReceiptService.void", eval="#{args[0].txntype=='building_permit'}")
+	public void beforeVoid( def evt ) { 
+		throw new Exception("Voiding of payments not allowed for building permit transactions");
+	}
+
+}

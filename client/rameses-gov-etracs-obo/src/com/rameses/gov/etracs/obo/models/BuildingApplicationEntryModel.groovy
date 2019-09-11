@@ -18,6 +18,7 @@ class BuildingApplicationEntryModel extends PageFlowController {
     @Service("QueryService")
     def queryService;
 
+    def task;    
     def entity;
     def sections;
     def appTypes = ["NEW", "RENEW","ADDITIONAL"];

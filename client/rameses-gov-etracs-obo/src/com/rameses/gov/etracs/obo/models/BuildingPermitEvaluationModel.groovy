@@ -18,6 +18,9 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
     @Service("BuildingPermitInfoService")
     def infoSvc;
     
+     @Service("BuildingPermitFeeService")
+    def feeSvc;
+    
     def infos;
     def receipt;
     def findingListHandler;
@@ -81,7 +84,20 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
             f.infos = infoSvc.getInfos( [parentid: zz.objid ]);            
         }
         f.permits = [ [type: entity.typeid ] ];
-        return Inv.lookupOpener("view_assessment", [params: f] );
+        f.sectionid = entity.typeid;
+        def h  = { list->
+            list.each {
+                it.appid = entity.appid;
+                it.parentid = entity.objid;
+                it.amtpaid = 0;
+            }
+            feeSvc.saveFees( list );
+        }
+        return Inv.lookupOpener("view_assessment", [params: f, handler: h] );
+    }
+    
+    def addFee() {
+        return Inv.lookupOpener("building_permit_fee:create", [:] );
     }
     
     def issuePermit() {

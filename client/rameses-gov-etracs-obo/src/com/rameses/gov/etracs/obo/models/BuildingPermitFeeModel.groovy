@@ -14,8 +14,13 @@ class BuildingPermitFeeModel extends CrudFormModel {
     
     void afterCreate() {
         entity.appid = caller.entity.appid;
-        entity.typeid = caller.entity.objid;
+        entity.parentid = caller.entity.objid;
+        entity.amtpaid = 0;
     }
     
+    def getLookupAccount() {
+        def m = ["query.typeid": caller.entity.typeid ];
+        return Inv.lookupOpener( "obo_itemaccount:type:lookup", m );
+    }
     
 }

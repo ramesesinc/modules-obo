@@ -50,6 +50,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
                 subitems << [ id: id, caption: it.title, index: (i++), notificationid: notid, event: title ];
                 def sinv = title + ":list"
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
+                op.domain = "OBO";
                 op.target = 'window';
                 op.id = sinv;
                 invokers.put( id, op );

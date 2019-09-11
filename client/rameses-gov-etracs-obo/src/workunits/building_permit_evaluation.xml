@@ -7,8 +7,6 @@
                 action="viewApplication" index="10"/>
         <invoker type="formActions" caption="View Ancillary Permit"
                 action="viewAncillaryPermit" index="11" visibleWhen="#{entity.ancillarypermitid != null }"/>
-        <invoker type="formActions" caption="View Assessment" index="20"
-                action="viewAssessment" visibleWhen="#{entity.allowassessment == 1 }"/>        
         
         <invoker type="formActions" caption="Issue Permit/Clearance" index="20"
                 action="issuePermit" visibleWhen="#{task.state == 'releasing' }"/>

@@ -122,20 +122,20 @@
 			@wx:label(caption:'Project Title', context:'billing', expr:'#{bill.title}')
 			@wx:label(caption:'Address', context:'billing', expr:'#{bill.address}')
 			@wx:label(caption:'Agency', context:'billing', expr:'#{lgu.title}, #{lgu.group}')
-			@wx:label(caption:'Applicant', context:'billing', expr:'#{bill.applicant}')
+			@wx:label(caption:'Applicant', context:'billing', expr:'#{bill.applicant.name}')
 		</div>
 		<div>	
 			<table class="table tablebilling" r:context="billing" r:items="bill.items" r:name="selectedItem" 
 			r:varName="k" r:varStatus="stat">
 	            <thead>
 	              <tr>
-	                <th align="left">Tax/Fee</th>
+	                <th align="left">Tax/Fee1</th>
 	                <th class="text-right">Amount</th>
 	              </tr>
 	            </thead>
 	            <tbody>
 	              <tr>
-	                <td>#{k.account}</td>
+	                <td>#{k.item.title}</td>
 	                <td align="right">#{k.amount.formatDecimal()}</td>
 	              </tr>
 	            </tbody>

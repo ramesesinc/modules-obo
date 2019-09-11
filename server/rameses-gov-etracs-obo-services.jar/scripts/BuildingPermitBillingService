@@ -11,12 +11,6 @@ class BuildingPermitBillingService {
 	@Service("DateService")
 	def dateSvc;
 
-	@Service("WorkflowTaskService")
-	def wfSvc;
-
-	@DataContext("building_permit_payment")
-	def pmtEm;
-
 	@ProxyMethod
 	public def getBilling( def o ) { 
 		def app = vwAppEm.find( [appno: o.refno ]).first();
@@ -24,7 +18,7 @@ class BuildingPermitBillingService {
 		if(app.task.state != 'payment')
 			throw new Exception("This is not yet for payment");
 		def fees = 	appFeeEm.find( [appid: app.objid ] ).orderBy("item.sortorder").where("amount - amtpaid > 0").list().collect{
-			[ objid: it.objid, account: it.item.title, amount: it.amount]
+			[ item: it.item.item, amount: it.amount, refid: it.objid ]
 		};
 		if( !fees )
 			throw new Exception("There are no items for payment");
@@ -35,13 +29,11 @@ class BuildingPermitBillingService {
 		p.apptype = app.apptype;		
 		p.title = app.title;
 		p.address = app.location?.lotno + ' ' + app.location?.barangay;
-		p.applicant = app.applicant.name;
-		p.applicantaddress = app.applicant.address?.text;
+		p.applicant = app.applicant;
 		p.items = fees; 
 		p.amount = p.items.sum{it.amount};
 		p.expirydate = dateSvc.getServerDate();
 		p.txntype = "building_permit";
-
  		p.mobileno = app.contact?.mobileno;
 		p.email = app.contact?.email;
 		return p;
@@ -51,11 +43,12 @@ class BuildingPermitBillingService {
 	public def getPaymentOrderInfo( def o ) {
 		//build the info beforehand for payment order purpose. This is the one saved to payment order.
 		def p = getBilling( o );
-		
 		def m = [:];
-		m.payer = [objid:'X', name: p.applicant];
-		m.paidby = p.applicant;
-		m.paidbyaddress = p.applicantaddress;
+		if(p.applicant.objid) {
+			m.payer = p.applicant;
+		}
+		m.paidby = p.applicant?.name;
+		m.paidbyaddress = p.applicant?.address?.text;
 		m.particulars = 'Building Permit';
 		m.refid = p.objid;
 		m.refno = o.refno;
@@ -66,52 +59,11 @@ class BuildingPermitBillingService {
 		m.expirydate = p.expirydate;
 		m.mobileno = p.mobileno;
 		m.email = p.email;
+		m.items = p.items;
 		return m;
+		
 	}
 
-	@ProxyMethod
-	public def getPaymentDetails( def po ) { 
-		//the parameter passed here is the payment order. The reference id is the application
-		def appid = po.refid;
-
-		def app = vwAppEm.find( [objid: appid ]).first();
-		def fees = 	appFeeEm.find( [appid: app.objid ] ).orderBy("item.sortorder").where("amount - amtpaid > 0").list().collect{
-			[  item: it.item.item, amount: it.amount]
-		}	
-		po.appid = app.objid;
-		po.items = fees;
-		return po;
-	}
-
-	@ProxyMethod
-	public void postPayment( def po ) { 
-		def rct = po.receipt;
-		def appid = po.refid;
-
-		//create the payment
-		def receipt = [:];
-		receipt.appid = appid;
-		receipt.refno = rct.receiptno;
-		receipt.reftype = rct.type;
-		receipt.refid = rct.objid;
-		receipt.refdate = rct.receiptdate;
-		receipt.amount = rct.amount;
-		receipt.voided = 0;
-		pmtEm.create( receipt );
-
-		//post to the ledger
-		def app = vwAppEm.find( [objid: appid ] ).first();
-		appFeeEm.find([appid: app.objid]).update( [amtpaid: "{amount}"] );
-
-		//fire the workflow for release.
-		def m = [:];
-		m.processname = "building_permit";
-		m.taskid = app.taskid;
-		m.refid = app.objid;
-		m.action = "post-payment";
-		wfSvc.signal(m);		
-		return null;
-	} 
 
 
 }

@@ -94,18 +94,6 @@
             <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="com.rameses.rcp.control.XComboBox" name="xComboBox3">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Validation State"/>
-            <Property name="items" type="java.lang.String" value="workflowStates"/>
-            <Property name="name" type="java.lang.String" value="entity.validationstate" noResource="true"/>
-            <Property name="dynamic" type="boolean" value="true"/>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[150, 22]"/>
-            </Property>
-            <Property name="required" type="boolean" value="true"/>
-          </Properties>
-        </Component>
         <Component class="com.rameses.rcp.control.XIntegerField" name="xIntegerField1">
           <Properties>
             <Property name="caption" type="java.lang.String" value="Sort Index"/>
@@ -128,7 +116,7 @@
         </Component>
         <Component class="com.rameses.rcp.control.XComboBox" name="xComboBox4">
           <Properties>
-            <Property name="caption" type="java.lang.String" value="Associated Permit"/>
+            <Property name="caption" type="java.lang.String" value="Issue Permit"/>
             <Property name="expression" type="java.lang.String" value="#{ item.objid }"/>
             <Property name="items" type="java.lang.String" value="permitTypes"/>
             <Property name="name" type="java.lang.String" value="entity.permittype" noResource="true"/>
@@ -138,17 +126,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[0, 22]"/>
             </Property>
-          </Properties>
-        </Component>
-        <Component class="com.rameses.rcp.control.XLabel" name="xLabel1">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Permit Type"/>
-            <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="entity.permittype"/>
-              </StringArray>
-            </Property>
-            <Property name="expression" type="java.lang.String" value="#{ entity.permittype.type }"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XCheckBox" name="xCheckBox2">
@@ -170,27 +147,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xCheckBox2ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="com.rameses.rcp.control.XCheckBox" name="xCheckBox3">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value=""/>
-            <Property name="checkValue" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="1" type="code"/>
-            </Property>
-            <Property name="disableWhen" type="java.lang.String" value="#{ mode == &apos;read&apos; }"/>
-            <Property name="name" type="java.lang.String" value="entity.issuepermit" noResource="true"/>
-            <Property name="uncheckValue" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="0" type="code"/>
-            </Property>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[10, 0, 0, 0]"/>
-            </Property>
-            <Property name="showCaption" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="Issue Permit"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xCheckBox3ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

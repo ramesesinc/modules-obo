@@ -38,12 +38,6 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit")
 	def appEm;
 
-	@DataContext("building_permit_ancillary")
-	def ancillaryEm;
-
-	@DataContext("vw_building_permit")
-	def vwAppEm;
-
 	@DataContext("building_permit_finding")
 	def findingEm;
 
@@ -99,10 +93,7 @@ class BuildingPermitWorkflowInterceptor {
 
 		//start the next evaluation tasks. fire evaluations for non-ancillary as well as those for ancillary
 		def appid = p.refid;
-		def pstate = [state: result.state];
-		def list1 = evalTypeEm.where("activationstate = :state AND (permitid IS NULL OR permittype.type <> 'ANCILLARY' ) ", pstate ).list()*.objid;
-		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: appid ] ).where( "type.activationstate = :state", pstate ).list()*.type.evaluationtypeid;
-		def mlist = list1 + list2;
+		def mlist = evalTypeEm.where("activationstate = :state", [state: result.state] ).list()*.objid;
 		if( mlist ) {
 			def dt = dateSvc.getServerDate();
 			mlist.each {
@@ -174,12 +165,19 @@ class BuildingPermitWorkflowInterceptor {
 	}
 
 	//send for assessment, payment and post payment
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action.matches('send-for-assessment|send-for-payment|post-payment') }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action.matches('send-for-assessment|send-for-payment') }") 
 	public void doActionsAfterAssessment( def evt ) {
 		def p = evt.args[0];
 		fireEvaluationWorkflow( p.refid, " NOT(task.state IS NULL) ", p.action );
 	}
 
+	//actions after payment
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action=='post-payment' }") 
+	public void doActionsOnPostPayment( def evt ) {
+		def p = evt.args[0];
+		fireEvaluationWorkflow( p.refid, " permitid IS NULL ", 'end-task' );
+		fireEvaluationWorkflow( p.refid, " NOT(permitid IS NULL) ", 'send-for-release' );		
+	}
 
 
 } 

@@ -25,10 +25,12 @@ class BuildingPermitEvaluationListModel extends WorkflowTaskListModel {
         return [ "typeid = :typeid", [typeid: typeid] ];
     }
     
+    /*
     def beforeFetchNodes( param ) {
         super.beforeFetchNodes(param);
         param.typeid = typeid;
         return null;
     }
+    */
     
 }

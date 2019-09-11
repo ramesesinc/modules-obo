@@ -53,6 +53,7 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
         xPanel1 = new com.rameses.rcp.control.XPanel();
         schemaList2 = new com.rameses.seti2.components.SchemaList();
         xButton1 = new com.rameses.rcp.control.XButton();
+        xButton2 = new com.rameses.rcp.control.XButton();
         xPanel2 = new com.rameses.rcp.control.XPanel();
         schemaList1 = new com.rameses.seti2.components.SchemaList();
 
@@ -181,9 +182,11 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
 
         xTabbedPane1.addTab("General Info", jPanel1);
 
+        xPanel1.setVisibleWhen("#{ entity.allowassessment == 1 }");
+
         schemaList2.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "title"}
+                new Object[]{"name", "item.title"}
                 , new Object[]{"caption", "Title"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
@@ -233,11 +236,14 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
         schemaList2.setName(""); // NOI18N
         schemaList2.setQueryName("entity");
         schemaList2.setSchemaName("building_permit_fee");
-        schemaList2.setAllowCreate(true);
         schemaList2.setAllowDelete(true);
         schemaList2.setRowHeight(20);
 
-        xButton1.setText("Assess");
+        xButton1.setName("viewAssessment"); // NOI18N
+        xButton1.setText("Auto Assess");
+
+        xButton2.setName("addFee"); // NOI18N
+        xButton2.setText("Add Fee");
 
         javax.swing.GroupLayout xPanel1Layout = new javax.swing.GroupLayout(xPanel1);
         xPanel1.setLayout(xPanel1Layout);
@@ -249,6 +255,8 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
                     .addComponent(schemaList2, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
                     .addGroup(xPanel1Layout.createSequentialGroup()
                         .addComponent(xButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(xButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -256,7 +264,9 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
             xPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, xPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(xPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(xButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(schemaList2, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -363,6 +373,7 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
     private com.rameses.seti2.components.SchemaList schemaList1;
     private com.rameses.seti2.components.SchemaList schemaList2;
     private com.rameses.rcp.control.XButton xButton1;
+    private com.rameses.rcp.control.XButton xButton2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
     private com.rameses.rcp.control.XLabel xLabel10;

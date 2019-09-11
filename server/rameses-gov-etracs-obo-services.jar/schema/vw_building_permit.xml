@@ -35,7 +35,6 @@
 		<field name="numfloors" />
 		<field name="worktypes" />
 
-
 		<field name="zoneclass_objid" />
 		<field name="zoneclass_title" />
 
@@ -64,9 +63,11 @@
 		<field name="permitid" />
 		<field name="txnmode" />
 
+		<!--
 		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one">
 			<key field="contractorid" target="objid" />
 		</complex>
+		-->
 
 		<complex name="payment" ref="building_permit_payment" jointype="many-to-one" required="false"
 			includefields="refno,refdate,amount">

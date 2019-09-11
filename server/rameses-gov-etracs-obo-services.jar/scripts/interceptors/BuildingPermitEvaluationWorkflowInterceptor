@@ -14,6 +14,9 @@ class BuildingPermitEvaluationWorkflowInterceptor {
 	@DataContext("vw_building_permit_evaluation")
 	def evalEm;
 
+	@DataContext("building_permit_fee")
+	def buildingEm;
+
 	/**********************************************************************************************
 	* REMEMBER: This is the building_permit_evaluation process flow
 	***********************************************************************************************/

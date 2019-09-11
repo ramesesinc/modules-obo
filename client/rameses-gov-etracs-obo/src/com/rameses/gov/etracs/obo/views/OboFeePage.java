@@ -38,8 +38,8 @@ public class OboFeePage extends javax.swing.JPanel {
         xDecimalField1 = new com.rameses.rcp.control.XDecimalField();
 
         xLookupField1.setCaption("Account");
-        xLookupField1.setExpression("#{ item.item.title }");
-        xLookupField1.setHandler("obo_itemaccount:lookup");
+        xLookupField1.setExpression("#{ item.title }");
+        xLookupField1.setHandler("lookupAccount");
         xLookupField1.setName("entity.item"); // NOI18N
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLookupField1);

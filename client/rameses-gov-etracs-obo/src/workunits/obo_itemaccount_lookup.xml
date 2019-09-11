@@ -3,5 +3,10 @@
         <invoker type="obo_itemaccount:lookup" caption="Obo Item Account Lookup" 
                  action="init" index="15"
             cols="objid,title,item.title"/>
+        
+         <invoker type="obo_itemaccount:type:lookup" caption="Obo Item Account Lookup" 
+                 action="init" index="15"
+                 customFilter="type.objid = :typeid"
+            cols="objid,title,item.title"/>
     </invokers>
 </workunit>

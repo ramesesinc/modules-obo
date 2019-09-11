@@ -6,6 +6,7 @@
 		<field name="dtissued" />		
 		<field name="issuedby_objid" />		
 		<field name="issuedby_name" />	
+		<field name="typeid" />
 		<!--
 		<complex name="type" ref="obo_evaluation_type" jointype="many-to-one">
 			<key field="typeid" target="objid" />

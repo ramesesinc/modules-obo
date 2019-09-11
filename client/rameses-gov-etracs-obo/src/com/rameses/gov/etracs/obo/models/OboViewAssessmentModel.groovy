@@ -17,6 +17,7 @@ class OboViewAssessmentModel extends PageFlowController {
 
     def params;
     def list;
+    def handler;
 
     def listHandler = [
         fetchList: { o->
@@ -29,6 +30,16 @@ class OboViewAssessmentModel extends PageFlowController {
     }
 
     def doClose() {
+        return "_close";
+    }
+    
+    def doCancel() {
+        return "_close";
+    }
+
+    def doOk() {
+        if(! MsgBox.confirm("You are about to save the fees. Proceed?")) return null;
+        if(handler) handler( list );
         return "_close";
     }
 

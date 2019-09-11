@@ -5,7 +5,6 @@ SELECT
  et.objid AS evaluationtypeid,
  et.org_objid,
  et.org_name,
- et.activationstate,
- et.validationstate 
+ et.activationstate
 FROM obo_permit_type ot 
 LEFT JOIN obo_evaluation_type et ON ot.objid = et.permitid 

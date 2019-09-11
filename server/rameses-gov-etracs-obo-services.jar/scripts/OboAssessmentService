@@ -18,15 +18,28 @@ public class OboAssessmentService  {
 	@DataContext("obo_itemaccount")
 	def itemAccountEm;
 
+
 	@ProxyMethod
 	public def assess(o) {
 		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: o, include_items: false ] );
+		def bitems = [];
 		res.billitems.findAll{ it.billcode && it.item == null }.each {
 			def p = itemAccountEm.find( [objid: it.billcode ] ).first()
-			it.item = p.item;
-			it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
+			if( o.sectionid ) {
+				if(p.type.objid == o.sectionid ) {
+					it.item = p;
+					it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
+					bitems << it;				
+				}
+			}
+			else {
+				it.item = p;
+				it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
+				bitems << it;				
+			}
 		}
-		return res.billitems.findAll{ it.amount > 0 }.sort{ it.sortorder };
+		def billitems = bitems.findAll{ it.amount > 0 }.sort{ it.sortorder };
+		return billitems;
 	}
 
 }
