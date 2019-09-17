@@ -33,8 +33,11 @@ SELECT
    t.assignee_name AS task_assignee_name,
    t.actor_objid AS task_actor_objid,
    t.actor_name AS task_actor_name,
-   (SELECT title FROM sys_wf_node WHERE processname = 'building_permit' AND name=t.state) AS task_title
+   (SELECT title FROM sys_wf_node WHERE processname = 'building_permit' AND name=t.state) AS task_title,
 
+   p.objid AS issuance_objid,
+   p.controlno AS issuance_controlno,
+   p.dtissued AS issuance_dtissued
 
 FROM building_permit a 
 INNER JOIN building_permit_entity e ON a.applicantid = e.objid
@@ -44,3 +47,4 @@ INNER JOIN obo_occupancy_type bt ON a.occupancytypeid = bt.objid
 INNER JOIN obo_occupancy_type_division od ON bt.divisionid = od.objid
 INNER JOIN obo_occupancy_type_group og ON od.groupid = og.objid
 LEFT JOIN obo_zoneclass zc ON a.zoneclassid = zc.objid
+LEFT JOIN building_permit_issuance p ON a.issuanceid = p.objid 

@@ -5,6 +5,9 @@ class BuildingPermitIssuanceService {
 	@DataContext("building_permit")
 	def bpEm;
 
+	@DataContext("building_permit_evaluation")
+	def evalEm;
+
 	@DataContext("building_permit_issuance")
 	def issuanceEm;
 
@@ -14,12 +17,24 @@ class BuildingPermitIssuanceService {
 	@Service("ControlnoGeneratorService")
 	def controlNoSvc;
 
+	@Env
+	def env;
+
 	@ProxyMethod
 	public def create( def o ) { 
-		o.controlno = controlNoSvc.getNextNo( "BP[org][yyyy]-[%06d]" );	
+		if(!o.controlno) {
+			o.controlno = controlNoSvc.getNextNo( "BP[org][yyyy]-[%06d]" );	
+		}
 		if(!o.dtissued) o.dtissued = dateSvc.getServerDate();
+		env.issuedby = [objid: env.USERID, name: env.FULLNAME ];
 		o = issuanceEm.create( o );
-		bpEm.find( [objid: o.appid ] ).update( [permitid: o.objid ]);
+
+		if( o.evaluationid == null ) {
+			bpEm.find( [objid: o.appid ] ).update( [issuanceid: o.objid ] );
+		}
+		else {
+			evalEm.find( [objid: o.evaluationid ] ).update( [issuanceid: o.objid ] );
+		}
 		return o;
 	}
 

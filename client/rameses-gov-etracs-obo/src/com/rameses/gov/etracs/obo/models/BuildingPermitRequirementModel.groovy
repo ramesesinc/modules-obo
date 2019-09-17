@@ -10,22 +10,32 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingPermitRequirementModel extends CrudFormModel {
+class BuildingPermitRequirementModel {
 
-    def checked;
-    def remarks;
     
-    void afterInit() {
-        checked = entity.checked;
-        remarks = entity.remarks;
+    @Service("OboFindingService")
+    def findingSvc;
+
+    @Invoker
+    def invoker;
+    
+    @Caller
+    def caller;
+
+    def entity;
+
+    void open() {
     }
     
-    
-    void afterSave(def o ) {
-        if(caller) {
-            caller.findingListHandler.reload();
-        }
+    def doOk() {
+        entity.tag = "building_permit_requirement";
+        findingSvc.save( entity );
+        caller.reqListHandler.reload();
+        return "_close";
     }
     
+    def doCancel() {
+        return "_close";
+    }
     
 }

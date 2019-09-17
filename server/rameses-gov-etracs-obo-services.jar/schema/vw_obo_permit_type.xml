@@ -3,6 +3,7 @@
 		<field name="objid" primary="true"/>
 		<field name="title" />
 		<field name="sortorder" />
+		<field name="handler" />		
 		<field name="evaluationtypeid" />
 		<field name="org_objid" />
 		<field name="org_name" />

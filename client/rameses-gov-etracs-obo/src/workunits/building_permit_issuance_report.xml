@@ -5,8 +5,14 @@
                 action="preview" 
                 reportName="com/rameses/gov/etracs/obo/reports/building_permit.jasper"
                 reportId="building_permit"
-                visibleWhen="#{ task?.state?.matches('releasing|end') &amp;&amp; entity.permitid != null }"    />
+                visibleWhen="#{ entity.issuance?.objid != null }"    />
         
+         <invoker type="vw_building_permit_evaluation:form:formActions" 
+                caption="Print Permit/Clerance"
+                action="preview" 
+                reportId="building_permit_evaluation"
+                visibleWhen="#{ entity.issuance?.objid != null }"    />
+
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitReportFormModel" />
 </workunit>

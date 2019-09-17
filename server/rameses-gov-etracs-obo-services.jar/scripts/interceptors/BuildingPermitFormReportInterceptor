@@ -5,22 +5,30 @@ class BuildingPermitFormReportInterceptor {
 	@DataContext("vw_building_permit")
 	def vwAppEm;
 
+	@DataContext("vw_building_permit_evaluation")
+	def evalEm;
+
 	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit'}")
 	public void getBuildingPermitReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def id = p.parameters.objid;
 		def app = vwAppEm.find( [objid: id ] ).first();	
+		app.name = app.applicant?.lastname + ", " + app.applicant?.firstname;
 		result.data = app;
 	}	
 	
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'locationalclearance'}")
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_evaluation'}")
 	public void getLocationalClearanceReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def id = p.parameters.objid;
-		def app = vwAppEm.find( [objid: id ] ).first();
-		result.data = app;
+		def ea = evalEm.find( [objid: id ] ).first();
+		def app = vwAppEm.find( [objid: ea.appid ] ).first();	
+		app.name = app.applicant?.lastname + ", " + app.applicant?.firstname;
+		app.remove("issuance");
+		ea.putAll( app );
+		result.data = ea;
 	}	
 
 

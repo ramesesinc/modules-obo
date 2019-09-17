@@ -18,19 +18,27 @@ public class BuildingPermitIssuanceModel {
     def caller;
     
     def handler;
-    def app;
+    def appid;
+    def evaluationid;
     def entity;
+    def typeid;
+    
+    boolean showpermitno = false;
     
     void create() {
+        if( caller.entity.txnmode == 'CAPTURE' ) {
+            showpermitno = true;
+        }
         entity = [:];
-        app = caller.entity;
-        entity.txnmode = app.txnmode;
-        entity.appid = app.objid;
+        entity.txnmode = caller.entity.txnmode;
+        entity.appid = appid;
+        entity.evaluationid = evaluationid;
+        entity.typeid = typeid;
     }
     
     def doOk() {
         def pmt = permitSvc.create( entity );
-        app.permitid = pmt.objid;
+        if(handler) handler( pmt );
         return "_close";
     }
     

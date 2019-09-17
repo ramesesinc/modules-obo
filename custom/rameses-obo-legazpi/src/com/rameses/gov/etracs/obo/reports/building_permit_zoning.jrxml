@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="LocationalClearance"
+		 name="building_permit_zoning"
 		 columnCount="1"
 		 printOrder="Vertical"
 		 orientation="Portrait"
@@ -32,24 +32,23 @@
 
 	<field name="city" class="java.lang.String"/>
 	<field name="province" class="java.lang.String"/>
-	<field name="lastname" class="java.lang.String"/>
-	<field name="firstname" class="java.lang.String"/>
-	<field name="applicant.name" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
 	<field name="applicant.address.text" class="java.lang.String"/>
 	<field name="businessname" class="java.lang.String"/>
 	<field name="location.address.text" class="java.lang.String"/>
-	<field name="project.type" class="java.lang.String"/>
-	<field name="project.zoning.classification" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="zoneclass.title" class="java.lang.String"/>
 	<field name="totalfloorarea" class="java.lang.Number"/>
 	<field name="project.status" class="java.lang.String"/>
-	<field name="project.remarks" class="java.lang.String"/>
+	<field name="remarks" class="java.lang.String"/>
 	<field name="or.no" class="java.lang.String"/>
 	<field name="or.dateissued" class="java.lang.String"/>
 	<field name="or.amountpaid" class="java.lang.String"/>
-	<field name="application.no" class="java.lang.String"/>
-	<field name="decision.no" class="java.lang.String"/>
-	<field name="decision.dateissued" class="java.lang.String"/>
-	<field name="decision.validity" class="java.lang.String"/>
+	<field name="appno" class="java.lang.String"/>
+	<field name="issuance.controlno" class="java.lang.String"/>
+	<field name="issuance.dtissued" class="java.util.Date"/>
+	<field name="issuance.validity" class="java.lang.String"/>
+	<field name="zone" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -1209,7 +1208,7 @@
 					<textElement verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{name}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1261,7 +1260,7 @@
 					<textElement>
 						<font size="10" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{project.type}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1274,7 +1273,7 @@
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{project.zoning.classification}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{zoneclass.title} + " " + $F{zone}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1313,7 +1312,7 @@
 					<textElement>
 						<font isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{project.remarks}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{remarks}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1365,7 +1364,7 @@
 					<textElement verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{application.no}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{appno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1378,9 +1377,9 @@
 					<textElement verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{decision.no}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuance.controlno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="yyyy-MM-dd" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="454"
 						y="76"
@@ -1391,20 +1390,7 @@
 					<textElement verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{decision.dateissued}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="455"
-						y="92"
-						width="115"
-						height="12"
-						key="textField"/>
-					<box></box>
-					<textElement verticalAlignment="Middle">
-						<font pdfFontName="Helvetica-Bold" isBold="true"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{decision.validity}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuance.dtissued}]]></textFieldExpression>
 				</textField>
 			</band>
 		</title>

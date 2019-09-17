@@ -34,8 +34,8 @@
 	<field name="appno" class="java.lang.String"/>
 	<field name="dtfiled" class="java.util.Date"/>
 	<field name="scopeofwork" class="java.lang.String"/>
-	<field name="permit.controlno" class="java.lang.String"/>
-	<field name="permit.dtissued" class="java.util.Date"/>
+	<field name="issuance.controlno" class="java.lang.String"/>
+	<field name="issuance.dtissued" class="java.util.Date"/>
 	<field name="planspec.personincharge" class="java.lang.String"/>
 	<field name="planspec.profession" class="java.lang.String"/>
 	<field name="planspec.prcnovalidity" class="java.lang.String"/>
@@ -4359,7 +4359,7 @@
 					<textElement>
 						<font fontName="Arial Narrow"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permit.controlno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuance.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4372,7 +4372,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial Narrow"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{permit.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuance.dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

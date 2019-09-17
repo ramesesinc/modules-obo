@@ -4,11 +4,17 @@
 		<field name="appid" />
 		<field name="parentid" />
 		<field name="typeid" />
-		<field name="status" />
+
+		<!-- 0 = editable, 1 = non editable -->
+		<field name="state" />
+		
 		<field name="checked" />
 		<field name="remarks" />
 		<field name="modifiedby_objid" />
 		<field name="modifiedby_name" />
+		<field name="dtmodified" />
+
+		<field name="supersederid" />
 
 		<complex name="type" ref="obo_requirement_type" jointype="many-to-one" required="false" includefields="title">
 			<key field="typeid" target="objid"/>

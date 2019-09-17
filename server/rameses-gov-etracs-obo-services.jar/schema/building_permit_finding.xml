@@ -8,9 +8,10 @@
 		<field name="createdby_objid" />
 		<field name="createdby_name" />
 
-		<!-- 0=fail 1=pass -->
 		<field name="category_objid" />		
-		<field name="status" />
+
+		<!-- 0=editable 1=noneditable must override -->
+		<field name="state" />
 		<field name="resolvedby_objid" />
 		<field name="resolvedby_name" />
 		<field name="dtresolved" />

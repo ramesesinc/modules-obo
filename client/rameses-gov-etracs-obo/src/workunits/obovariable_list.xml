@@ -1,6 +1,6 @@
 <workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" schemaName="obo_variable">
     <invokers>
         <invoker folderid="explorer/master/obo" caption="Obo Variable List" action="init" index="15"
-            cols="name,caption,unit,datatype,category,sortorder" orderBy="sortorder"/>
+            cols="name,caption,unit,datatype,category,sortorder" role="MASTER" orderBy="sortorder"/>
     </invokers>
 </workunit>

@@ -22,6 +22,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
     def query = [:];
     def evaluationHandler;
     def reqListHandler;
+    def findingListHandler;
     def receipt;
     
     @PropertyChangeListener
@@ -97,5 +98,20 @@ class BuildingPermitModel extends WorkflowTaskModel {
         binding.refresh("entity.amount");
     }
     
+    void clearAssessment() {
+        def result = feeSvc.clearAssessment( [appid: entity.objid ] );
+        entity.amount = result.amount;
+        feeListModel.reload();
+        binding.refresh("entity.amount");
+    }
+    
+    def issuePermit() {
+        def m = [appid:entity.objid];
+        m.handler = { o->
+            entity.permit = o;
+            reload();
+        }
+        return Inv.lookupOpener("building_permit_issuance:create", m );
+    }
     
 }

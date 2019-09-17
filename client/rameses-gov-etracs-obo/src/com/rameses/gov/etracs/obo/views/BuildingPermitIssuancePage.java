@@ -40,14 +40,14 @@ public class BuildingPermitIssuancePage extends javax.swing.JPanel {
         xFormPanel1.setCaptionWidth(120);
 
         xTextField1.setCaption("Permit No");
-        xTextField1.setName("entity.permitno"); // NOI18N
-        xTextField1.setVisibleWhen("#{ app.txnmode == 'CAPTURE'  }");
+        xTextField1.setName("entity.controlno"); // NOI18N
+        xTextField1.setVisibleWhen("#{ showpermitno == true }");
         xTextField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xTextField1);
 
         xDateField1.setCaption("Date Issued");
         xDateField1.setName("entity.dtissued"); // NOI18N
-        xDateField1.setVisibleWhen("#{ app.txnmode == 'CAPTURE'  }");
+        xDateField1.setVisibleWhen("#{ entity.txnmode == 'CAPTURE'  }");
         xFormPanel1.add(xDateField1);
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 60));

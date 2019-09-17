@@ -1,6 +1,6 @@
-<workunit schemaName="building_permit_requirement">
+<workunit>
     <invokers>
-        <invoker type="building_permit_requirement:open" caption="Finding"
+        <invoker type="building_permit_requirement:open" caption="Requirement Finding"
                 action="open" index="1" target="popup"/>        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitRequirementModel" />

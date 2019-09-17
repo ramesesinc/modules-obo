@@ -1,11 +1,10 @@
-<workunit schemaName="building_permit_finding">
+<workunit>
     <invokers>
         <invoker type="building_permit_finding:create" caption="Finding"
                 action="create" index="1" target="popup"/>
         
         <invoker type="building_permit_finding:open" caption="Finding"
                 action="open" index="1" target="popup"/>
-        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitFindingModel" />
     <pages>

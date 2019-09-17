@@ -33,12 +33,12 @@
 		<field name="trackingno" required="true" searchable="true"/>
 		<field name="taskid" />
 		<field name="zoneclassid" />
-		<field name="contractorid" />
+		<field name="zone" />
 
 		<complex name="worktypes" type="list" serializer="default" />
 
 		<field name="amount" type="decimal"/>
-		<field name="permitid" />
+		<field name="issuanceid" />
 		<field name="txnmode" />
 
 	</element>

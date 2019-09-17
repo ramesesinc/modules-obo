@@ -39,7 +39,7 @@ public class BuildingPermitFeeService  {
 	@ProxyMethod
 	public def assess(o) {
 		def params = [:];
-		feeEm.find( [appid: o.appid ]).delete();
+		
 		def vapp = vwAppEm.find( [objid: o.appid ] ).first();
 
 		def m = [:];
@@ -64,9 +64,15 @@ public class BuildingPermitFeeService  {
         params.occupancytype = occ;
 
         params.permits = [];
+        /*
 		def list1 = evalTypeEm.where( "permitid IS NULL OR permittype.type <> 'ANCILLARY' ").list()*.objid;
 		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: o.appid ] ).list()*.type.evaluationtypeid;
 		(list1+list2).each {
+			params.permits << [type: it ];
+		}
+		*/
+		def list1 = evalTypeEm.where( "1=1").list()*.objid;
+		list1.each {
 			params.permits << [type: it ];
 		}
 
@@ -86,7 +92,10 @@ public class BuildingPermitFeeService  {
 			z.amount = it.amount;
 			z.amtpaid = 0;
 			z.appid = o.appid;
-			feeEm.create( z );
+			def zz = feeEm.find( [appid: o.appid, itemid: it.billcode] ).first();
+			if( !zz ) {
+				feeEm.create( z );
+			}
 		}
 
 		def amount = res.billitems.sum{ it.amount };
@@ -106,9 +115,16 @@ public class BuildingPermitFeeService  {
 		o.each {
 			it.itemid = it.item?.objid;
 			it.amtpaid = 0;
-			println it;
 			feeEm.create(it);
 		}
+	}
+
+	@ProxyMethod
+	public def clearAssessment(def o ) {
+		feeEm.find( [appid: o.appid ]).where("parentid IS NULL").delete();
+		def val = feeEm.find( [appid: o.appid ]).select("c:{SUM(amount)}").val();
+		appEm.find( [objid: o.appid] ).update( [amount: val ]);
+		return [amount: val];
 	}
 
 }

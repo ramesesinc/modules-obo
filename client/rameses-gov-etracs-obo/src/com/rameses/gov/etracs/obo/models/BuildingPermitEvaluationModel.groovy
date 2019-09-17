@@ -53,8 +53,11 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
     def viewAncillaryPermit() {
         //find first the objid of ancillary permit
         def m = [_schemaname: 'building_permit_ancillary'];
-        m.findBy = [appid: entity.appid,permittypeid: entity.ancillarypermitid ];
+        m.findBy = [appid: entity.appid,permittypeid: entity.typeid ];
         def zz = queryService.findFirst( m );
+        if(!zz )
+            throw new Exception("There is no associated ancillary permit for this section");
+        
         def op = Inv.lookupOpener("building_permit_ancillary:open", [entity: [objid: zz.objid ] ] );
         op.target = "popup";
         return op;
@@ -65,6 +68,7 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
             throw new Exception("Please specify a zone class first");
         def f = [:];
         f.app = [ 
+            appid: entity.app.objid,
             appno:entity.app.appno, 
             appdate:entity.app.appdate, 
             apptype:entity.app.apptype, 
@@ -86,6 +90,7 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
         f.permits = [ [type: entity.typeid ] ];
         f.sectionid = entity.typeid;
         def h  = { list->
+            println "list is " + list;
             list.each {
                 it.appid = entity.appid;
                 it.parentid = entity.objid;
@@ -97,11 +102,21 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
     }
     
     def addFee() {
-        return Inv.lookupOpener("building_permit_fee:create", [:] );
+        def m = [appid: entity.appid, parentid: entity.objid, typeid: entity.typeid ];
+        return Inv.lookupOpener("building_permit_fee:create", m );
+    }
+    
+    def viewAssessmentInfo() {
+        MsgBox.alert( "typeid is " + entity)
     }
     
     def issuePermit() {
-        MsgBox.alert("issue permit");
+        def m = [showpermitno:true, appid:entity.appid, evaluationid: entity.objid, typeid: entity.typeid ];
+        m.handler = { o->
+            entity.permit = o;
+            reload();
+        }
+        return Inv.lookupOpener("building_permit_issuance:create", m );
     }
     
 }

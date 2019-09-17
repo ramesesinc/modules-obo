@@ -5,15 +5,17 @@
         <!-- form actions -->
         <invoker type="formActions" caption="View Application"
                 action="viewApplication" index="10"/>
+
         <invoker type="formActions" caption="View Ancillary Permit"
-                action="viewAncillaryPermit" index="11" visibleWhen="#{entity.ancillarypermitid != null }"/>
+                action="viewAncillaryPermit" index="11" svisibleWhen="#{entity.ancillarypermitid != null }"/>
         
         <invoker type="formActions" caption="Issue Permit/Clearance" index="20"
-                action="issuePermit" visibleWhen="#{task.state == 'releasing' }"/>
+                action="issuePermit" visibleWhen="#{task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"/>
         
         <!-- context related actions -->
-         <invoker type="formAction" caption="Change Zoning Class"
+        <invoker type="formAction" caption="Change Zoning Class"
             action="open" index="1" visibleWhen="#{entity.typeid.toLowerCase() == 'zoning' }"/>
+        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitEvaluationModel" />
     <pages>

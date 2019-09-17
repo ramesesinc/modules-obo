@@ -38,10 +38,6 @@
 		<field name="occupancytype_group_objid" />
 		<field name="occupancytype_group_title" />
 
-		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one"  required="false">
-			<key field="contractorid" target="objid" />
-		</complex>
-
 	</element>
 </schema>	
 

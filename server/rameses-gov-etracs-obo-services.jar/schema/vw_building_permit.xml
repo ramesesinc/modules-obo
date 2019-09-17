@@ -37,6 +37,7 @@
 
 		<field name="zoneclass_objid" />
 		<field name="zoneclass_title" />
+		<field name="zone" />
 
 		<field name="location_lotno" />
 		<field name="location_blockno" />
@@ -60,25 +61,18 @@
 		<field name="task_actor_name" />
 		<field name="task_title" />
 		<field name="amount" />
-		<field name="permitid" />
+		<field name="issuanceid" />
 		<field name="txnmode" />
-
-		<!--
-		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one">
-			<key field="contractorid" target="objid" />
-		</complex>
-		-->
 
 		<complex name="payment" ref="building_permit_payment" jointype="many-to-one" required="false"
 			includefields="refno,refdate,amount">
 			<key field="objid" target="appid" />
 		</complex>
 
-		<complex name="permit" ref="building_permit_issuance" jointype="many-to-one" required="false"
-			includefields="controlno,dtissued">
-			<key field="permitid" target="objid" />
-		</complex>
-
+		<field name="issuance_objid" />
+		<field name="issuance_controlno" />
+		<field name="issuance_dtissued" />
+		
 	</element>
 </schema>	
 

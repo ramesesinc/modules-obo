@@ -12,14 +12,18 @@ import com.rameses.enterprise.models.*;
 
 class BuildingPermitFeeModel extends CrudFormModel {
     
+    def appid;
+    def parentid;
+    def typeid;
+    
     void afterCreate() {
-        entity.appid = caller.entity.appid;
-        entity.parentid = caller.entity.objid;
+        entity.appid = appid;
+        entity.parentid = parentid;
         entity.amtpaid = 0;
     }
     
     def getLookupAccount() {
-        def m = ["query.typeid": caller.entity.typeid ];
+        def m = ["query.typeid": typeid ];
         return Inv.lookupOpener( "obo_itemaccount:type:lookup", m );
     }
     

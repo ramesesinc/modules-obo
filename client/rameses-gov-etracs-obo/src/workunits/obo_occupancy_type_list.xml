@@ -3,6 +3,7 @@
     <invokers>
         <invoker folderid="explorer/master/obo" caption="Occupancy Type"
                 cols="objid,title,division.objid,group.objid"
+                role="MASTER"
                 action="init" />
     </invokers>
 </workunit>
