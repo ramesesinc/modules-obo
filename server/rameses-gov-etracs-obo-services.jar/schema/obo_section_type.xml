@@ -1,5 +1,5 @@
 <schema adapter="obodb">
-	<element tablename="obo_evaluation_type">
+	<element tablename="obo_section_type">
 		<field name="objid" primary="true" caption="Name" visible="true"/>
 		<field name="title" caption="Title" searchable="true"/>
 		<field name="org_objid" />

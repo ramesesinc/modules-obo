@@ -23,13 +23,13 @@ class BuildingPermitWorkflowInterceptor {
 	def appNoSvc;
 
 
-	@DataContext("building_permit_evaluation")
+	@DataContext("building_permit_section")
 	def evalEm;
 
-	@DataContext("vw_building_permit_evaluation")
+	@DataContext("vw_building_permit_section")
 	def vwEvalEm;
 
-	@DataContext("obo_evaluation_type")
+	@DataContext("obo_section_type")
 	def evalTypeEm;
 
 	@DataContext("building_permit_requirement")
@@ -54,7 +54,7 @@ class BuildingPermitWorkflowInterceptor {
 			def dt = dateSvc.getServerDate();
 			list.each {
 				def f = [:];
-				f.processname = 'building_permit_evaluation';
+				f.processname = 'building_permit_section';
 				f.refid = it.objid;
 				f.taskid = it.taskid;
 				f.startdate = dt;
@@ -103,7 +103,7 @@ class BuildingPermitWorkflowInterceptor {
 				if(!b) {
 					m = evalEm.create( m );
 					def f = [:];
-					f.processname = 'building_permit_evaluation';
+					f.processname = 'building_permit_section';
 					f.refid = m.objid;
 					f.startdate = dt;
 					f.info = [ type: it ];

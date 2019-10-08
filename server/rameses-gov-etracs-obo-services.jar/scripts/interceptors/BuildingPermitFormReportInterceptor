@@ -5,7 +5,7 @@ class BuildingPermitFormReportInterceptor {
 	@DataContext("vw_building_permit")
 	def vwAppEm;
 
-	@DataContext("vw_building_permit_evaluation")
+	@DataContext("vw_building_permit_section")
 	def evalEm;
 
 	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit'}")
@@ -18,7 +18,7 @@ class BuildingPermitFormReportInterceptor {
 		result.data = app;
 	}	
 	
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_evaluation'}")
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_section'}")
 	public void getLocationalClearanceReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;

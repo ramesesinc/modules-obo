@@ -30,7 +30,7 @@ public class BuildingPermitFeeService  {
 	@DataContext("building_permit_ancillary")
 	def ancillaryEm;
 
-	@DataContext("obo_evaluation_type")
+	@DataContext("obo_section_type")
 	def evalTypeEm;
 
 	@DataContext("building_permit_fee")

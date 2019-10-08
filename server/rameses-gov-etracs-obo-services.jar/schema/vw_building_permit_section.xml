@@ -1,5 +1,5 @@
 <schema adapter="obodb">
-	<element tablename="vw_building_permit_evaluation">
+	<element tablename="vw_building_permit_section">
 		<field name="objid" primary="true" />
 		<field name="appid" />
 

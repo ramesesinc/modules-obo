@@ -11,6 +11,7 @@ class BuildingPermitBillingService {
 	@Service("DateService")
 	def dateSvc;
 
+
 	@ProxyMethod
 	public def getBilling( def o ) { 
 		def app = vwAppEm.find( [appno: o.refno ]).first();

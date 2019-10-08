@@ -11,16 +11,16 @@ class BuildingPermitEvaluationWorkflowInterceptor {
 	@DataContext("building_permit_finding")
 	def findingEm;
 
-	@DataContext("vw_building_permit_evaluation")
+	@DataContext("vw_building_permit_section")
 	def evalEm;
 
 	@DataContext("building_permit_fee")
 	def buildingEm;
 
 	/**********************************************************************************************
-	* REMEMBER: This is the building_permit_evaluation process flow
+	* REMEMBER: This is the building_permit_section process flow
 	***********************************************************************************************/
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_evaluation' && args[0].action == 'send-for-verification' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' && args[0].action == 'send-for-verification' }") 
 	public void beforeSendForVerification( def evt ) {
 		def p = evt.args[0];
 		def v = evalEm.find( [objid: p.refid ]).first();
@@ -32,7 +32,7 @@ class BuildingPermitEvaluationWorkflowInterceptor {
 	} 
 
 	//signal the parent 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_evaluation' && args[0].action == 'send-for-verification' }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' && args[0].action == 'send-for-verification' }") 
 	public void signalParent( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;

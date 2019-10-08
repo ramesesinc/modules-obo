@@ -17,6 +17,9 @@ class OboOnlineService  {
     @Service(value="OnlineBuildingPermitService", connection="cloud-obo")
     def cloudOboSvc;
 
+    @Service(value="OnlineBuildingPermitDownloadService", connection="cloud-obo")
+    def downloadSvc;
+
     @ProxyMethod
     public def findLocation( def params ) {
         def info = svc.verifyTaxDec(params);
@@ -57,7 +60,7 @@ class OboOnlineService  {
 
     @ProxyMethod
     public def submitOnlineApplication( def o ) {
-        def app = cloudOboSvc.getOnlineSubmission( [appid: o.appid ] );
+        def app = downloadSvc.getInfo( [appid: o.appid ] );
         app = localOboSvc.upload( app );
         return app;
     }

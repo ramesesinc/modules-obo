@@ -1,6 +1,6 @@
 <schema adapter="obodb">
-	<element tablename="building_permit_evaluation_checklist">
-		<field name="objid" primary="true" prefix="OBOBPEVAL"/>
+	<element tablename="building_permit_section_checklist">
+		<field name="objid" primary="true" prefix="OBOBPSECCHKLST"/>
 		<field name="appid" />
 		<field name="typeid" />
 		<field name="taskid" />

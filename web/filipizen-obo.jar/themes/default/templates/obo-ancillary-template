@@ -65,7 +65,7 @@
 							</tr>
 						</table>
 					</td>
-					<td>{PAGE.controlname} 
+					<td>{PAGE.controlno} 
 						<table class="smallBox">
 							<tr>
 								<td></td>
@@ -184,10 +184,11 @@
 		</pre>
 		-->
 
-		<!-- PAGE 2 -->
+		<!-- PAGE 2 
 		<div class="page">
 			${_page2}
 		</div>
+		-->
 	</body>
 </html>
 

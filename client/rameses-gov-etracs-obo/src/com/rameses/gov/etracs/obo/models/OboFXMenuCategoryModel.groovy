@@ -57,17 +57,17 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             }
         }
         
-        if(_id == 'building_permit_evaluation' ) {
-            def m = [_schemaname: "obo_evaluation_type" ];
+        if(_id == 'building_permit_section' ) {
+            def m = [_schemaname: "obo_section_type" ];
             m._limit = 200;
             m.orderBy = "sortindex";
             m.where =  orgFilter;
             m.orderBy = "sortindex";
             def list = querySvc.getList( m );
-            buildInvokers( list, 'building_permit_evaluation' );
+            buildInvokers( list, 'building_permit_section' );
         }
         else if(_id == 'occupancy_permit_evaluation' ) {
-            def m = [_schemaname: "obo_evaluation_type" ];
+            def m = [_schemaname: "obo_section_type" ];
             m._limit = 200;
             m.orderBy = "sortindex";
             m.where =  orgFilter;
@@ -77,7 +77,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
         }        
         else if( _id == "permit_issuance") {
             /*
-            def m = [_schemaname: "obo_evaluation_type" ];
+            def m = [_schemaname: "obo_section_type" ];
             m._limit = 200;
             m.orderBy = "sortindex";
             m.findBy = [issuepermit: 1];

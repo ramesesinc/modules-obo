@@ -13,6 +13,11 @@
 		<field name="category" hidden="true"/>
 		<field name="typeid" />
 		<field name="unit" width="40"/>
+
+		<complex name="type" ref="obo_variable_type" jointype="many-to-one" required="true" includefields="accessory">
+			<key field="typeid" target="objid" />
+		</complex>	
+		
 	</element>
 
 </schema>

@@ -1,6 +1,6 @@
 <workunit>
     <invokers>
-        <invoker type="vw_building_permit_evaluation:form:formActions" caption="View CheckList"
+        <invoker type="vw_building_permit_section:form:formActions" caption="View CheckList"
                 action="init" index="1" target="popup"/>
         
     </invokers>

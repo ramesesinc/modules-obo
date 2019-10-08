@@ -10,14 +10,14 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingPermitEvaluationListModel extends WorkflowTaskListModel {
+class BuildingPermitSectionListModel extends WorkflowTaskListModel {
     
     def typeid;
     String title;
     
     @FormId
     public String getFormId() {
-        return "building_permit_evaluation:" + typeid + ":list";
+        return "building_permit_section:" + typeid + ":list";
     }
 
     

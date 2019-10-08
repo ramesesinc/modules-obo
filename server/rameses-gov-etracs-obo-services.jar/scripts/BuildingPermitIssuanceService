@@ -5,7 +5,7 @@ class BuildingPermitIssuanceService {
 	@DataContext("building_permit")
 	def bpEm;
 
-	@DataContext("building_permit_evaluation")
+	@DataContext("building_permit_section")
 	def evalEm;
 
 	@DataContext("building_permit_issuance")

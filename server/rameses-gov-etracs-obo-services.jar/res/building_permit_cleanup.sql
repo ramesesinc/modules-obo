@@ -1,12 +1,12 @@
 [cleanup-all]
 UPDATE building_permit SET locationid = null, applicantid = null, contractorid=NULL, taskid = NULL;
-UPDATE building_permit_evaluation SET taskid = NULL;
-DELETE FROM building_permit_evaluation_task;
+UPDATE building_permit_section SET taskid = NULL;
+DELETE FROM building_permit_section_task;
 DELETE FROM building_permit_task;
 DELETE FROM building_permit_fee;
 
 DELETE FROM building_permit_finding;
-DELETE FROM building_permit_evaluation;
+DELETE FROM building_permit_section;
 
 DELETE FROM building_permit_info;
 DELETE FROM building_permit_requirement;
@@ -20,9 +20,9 @@ DELETE FROM building_permit;
 [cleanup-for-online]
 UPDATE building_permit SET taskid = NULL,appno=NULL;
 UPDATE building_permit_requirement SET checked = 0, remarks=null; 
-UPDATE building_permit_evaluation SET taskid = NULL;
-DELETE FROM building_permit_evaluation_task;
+UPDATE building_permit_section SET taskid = NULL;
+DELETE FROM building_permit_section_task;
 DELETE FROM building_permit_task;
 DELETE FROM building_permit_fee;
 DELETE FROM building_permit_finding;
-DELETE FROM building_permit_evaluation;
+DELETE FROM building_permit_section;

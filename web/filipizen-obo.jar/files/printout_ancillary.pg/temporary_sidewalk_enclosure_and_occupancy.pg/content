@@ -1,127 +1,59 @@
 <%def app = PARAMS.app; %>
 <table  width="100%" class="tblscope">
 	<tr class="first-td">
-		<td colspan="9"><p class="allcaps-bold">Purpose</p></td>
+		<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 	</tr>
-	<tr  class="trborder last-td">
-		<td colspan="3"><input type="checkbox"> FOR CONSTRUCTION </td>
-		<td colspan="4"><input type="checkbox"> FOR TESTING</td>
-		<td colspan="2"><input type="checkbox"> OTHERS (specify) <p class="underline others"></p></td>
+	<tr>
+		<td colspan="3"><input type="checkbox"> NEW CONSTRUCTION </td>
+		<td colspan="4"><input type="checkbox"> RENOVATION <p class="underline renovation"></p></td>
+		<td colspan="2"><input type="checkbox"> DEMOLITION <p class="underline raising"></p></td>
 	</tr>
-	<tbody>
-		<tr class="trborder first-td last-td">
-			<td colspan="9" align="center"><p class="allcaps-bold">Summary of electrical load/capacities applied for</p></td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr class="first-td">
-			<td colspan="3" align="center"><p class="allcaps">Total Connected Load</p></td>
-			<td colspan="3" class="tdborder" align="center"><p class="allcaps">Total Transformer Capacity</p></td>
-			<td colspan="3" class="tdborder" align="center"><p class="allcaps">TTotal Generator/Ups Capacity</p></td>
-		</tr>
-		<tr class="last-td">
-			<td colspan="3" align="center"><p class="underline kva"></p>kVA</td>
-			<td colspan="3" class="tdborder" align="center"><p class="underline kva"></p>kVA</td>
-			<td colspan="3" class="tdborder" align="center"><p class="underline kva"></p>kVA</td>
-		</tr>	
-	</tbody>
+	<tr>
+		<td colspan="3"><input type="checkbox"> ERECTION</td>
+		<td colspan="4"><input type="checkbox"> CONVERSION <p class="underline conversion"></p></td>
+		<td colspan="2"><input type="checkbox"> ACCESSORY BUILDING/STRUCTURE<p class="underline accessory"></p></td>
+	</tr>
+	<tr>
+		<td colspan="3"><input type="checkbox"> ADDTION</td>
+		<td colspan="4"><input type="checkbox"> REPAIR <p class="underline repair"></p></td>
+		<td colspan="2" rowspan="2" valign="top"><input type="checkbox"> OTHERS (specify) <p class="underline others"></p></td>
+	</tr>
+	<tr class="last-td">
+		<td colspan="3"><input type="checkbox"> ALTERATION</td>
+		<td colspan="4"><input type="checkbox"> MOVING <p class="underline moving"></p></td>
+	</tr>
 </table>
 
 <table cellpadding="0" cellspacing="0" width="100%">
 	<tbody>
 		<tr>
-			<td colspan="2" class="tdinside">
-				<p class="title">Box 2 (To be accomplished by the design professional)</p>
-				@obo:print_professional_single_box( title: 'Design Professional, Plans and Specifications', professional: app.designprofessional, role:'PROFESSIONAL ELECTRICAL ENGINEER' )
+			<td class="tdinside">
+				<p class="title">Box 2</p>
+				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app?.designprofessional, role:'ARCHITECT OR CIVIL ENGINEER' )
+			</td>
+			<td class="tdinside">
+				<p class="title">Box 3</p>
+				@obo:print_professional_box( title: 'FULL-TIME INSPECTOR AND SUPERVISOR OF CONSTRUCTION WORKS', professional: app?.supervisor, role: 'ARCHITECT OR CIVIL ENGINEER' )
+			</td>
+		</tr>
+		<tr>
+			<td class="tdinside">
+				<p class="title">Box 4</p>
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app?.owner )
+			</td>
+			<td class="tdinside">
+				<p class="title">Box 5</p>
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app?.location?.owner )
 			</td>
 		</tr>
 		<tr>
 			<td class="tdinside" colspan="2">
-				<p class="title">Box 3</p>
-				<table class="boxpermit" style="width:99.5%" height="100%">
-					<tbody>
-						<tr class="trborder">
-							<td colspan="3"><p class="allcaps-bold">SUPERVISOR / IN-CHARGE OF ELECTRICAL WORKS</p></td>
-						</tr>
-						<tr>
-							<td><p class="allcaps-bold"><input type="checkbox"> PROFESSIONAL ELECTRICAL ENGINEER </p></td>
-							<td><p class="allcaps-bold"><input type="checkbox"> REGISTERED ELECTRICAL ENGINEER </p></td>
-							<td><p class="allcaps-bold"><input type="checkbox"> REGISTERED MASTER ELECTRICIAN </p></td>
-						</tr>
-						<tr>
-							<td colspan="3" align="center">
-								<p class="underline signature">dddd</p> 
-								Date <p class="underline signature-date">01-01-2019</p>
-							</td>
-						</tr>
-						<tr class="trborder last-td">
-							<td align="center" colspan="3"><p>(Signed and Sealed Over Printed Name)</p></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr class="trborder">
-							<td>PRC No.: <label class="data"></label></td>
-							<td class="tdborder" colspan="2"><p>Validity: <label class="data"></label></p></td>
-						</tr>
-						<tr class="trborder">
-							<td>PTR No.: <label class="data"></label></td>
-							<td class="tdborder" colspan="2"><p>Date Issued  <label class="data"></label></p></td>
-						</tr>
-						<tr class="trborder">
-							<td>Issued at <label class="data"></label></td>
-							<td class="tdborder" colspan="2"><p>TIN <label class="data"></label></p></td>
-						</tr>
-						<tr>
-							<td>Address</td>
-							<td colspan="2"></td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-		<!-- second row. 283 -->
-		<tr>
-			<td class="tdinside">
-				<p class="title">Box 4</p>
-				<table class="boxpermit" align="center" width="100%" >
-					<tbody>
-						<tr class="trborder">
-							<td colspan="3"><p class="allcaps-bold">Design Professional, Plans and Specifications</p></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<td align="center" rowspan="3" style="padding-bottom:20px;padding-top:20px">
-								<p class="underline signature">dddd</p> <br>
-								<p>(Signed and Sealed Over Printed Name)</p><br>
-								Date <p class="underline ownerbox-date">01-01-2019</p>
-							</td>
-						</tr>
-						<tr class="trborder" >
-							<td class="tdborder" colspan="2">Address</td>
-						</tr>
-						<tr class="trborder">
-							<td class="tdborder" > PRC No.</td>
-							<td class="tdborder">Validity</td>
-						</tr>
-						<tr class="trborder">
-							<td class="tdborder" rowspan="2">PTR No.</td>
-						</tr>
-						<tr class="trborder" >
-							<td class="tdborder">Issued at</td>
-							<td class="tdborder">TIN</td>
-						</tr>
-					</tbody>
-				</table> 
+				<p class="title">Box 6</p>
+				@obo:print_owner_single_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
 			</td>
 		</tr>
 	</tbody>
 </table>
-
-
-						<tr class="first-td">
-							<td colspan="3"><p class="allcaps-bold">OWNER / APPLICANT</p></td>
-						</tr>
 
 
 

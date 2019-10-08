@@ -7,4 +7,4 @@ SELECT
  et.org_name,
  et.activationstate
 FROM obo_permit_type ot 
-LEFT JOIN obo_evaluation_type et ON ot.objid = et.permitid 
+LEFT JOIN obo_section_type et ON ot.objid = et.permitid 

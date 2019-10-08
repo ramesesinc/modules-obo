@@ -1,6 +1,6 @@
-<workunit schemaName="vw_building_permit_evaluation" processName="building_permit_evaluation">
+<workunit schemaName="vw_building_permit_section" processName="building_permit_section">
     <invokers>
-        <invoker type="vw_building_permit_evaluation:open" caption="Building Application Section"
+        <invoker type="vw_building_permit_section:open" caption="Building Application Section"
                 action="open" index="1"/>
         <!-- form actions -->
         <invoker type="formActions" caption="View Application"

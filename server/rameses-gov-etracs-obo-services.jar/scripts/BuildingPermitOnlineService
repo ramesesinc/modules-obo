@@ -40,60 +40,8 @@ public class BuildingPermitOnlineService  {
 
 	@ProxyMethod
 	public def upload( def app ) {
-		/*
-		println "ENTERING OBO UPLOAD....."		
-		println "rpus " + app.rpus.size();
-		println "entityies " + app.entities.size();
-		println "ancillaries " + app.ancillaries.size();
-		println "professionals " + app.professionals.size();
-		println "requirements " + app.requirements.size();
-		println "infos " + app.infos.size();
-		*/
-
-		app.remove("objid");
-		def locationid = app.remove("locationid");
-		def applicantid = app.remove("applicantid");
-		def contractorid = app.remove("contractorid");
-
-		app.amount = 0;		
-		app.txnmode = 'ONLINE';
-		def newapp = appEm.create( app );
-		app.entities.each {
-			it.appid = newapp.objid;
-			entityEm.create( it );
-		}
-		app.rpus.each {
-			it.appid = newapp.objid;
-			it.owner = [objid: it.ownerid ];
-			locationEm.create( it );
-		}
-
-		app.professionals.each {
-			it.appid = newapp.objid;
-			it.entity = [objid: it.entityid ];
-			professionalEm.create( it );
-		}
-		app.ancillaries.each {
-			it.appid = newapp.objid;
-			it.type = [ permittypeid: it.permittypeid ];
-			ancillaryEm.create( it );
-		}
-		app.requirements?.each {
-			it.appid = newapp.objid;
-			it.checked = 0;
-			reqEm.create( it );
-		}
-		app.infos.each {
-			it.appid = newapp.objid;
-			it.type = [name: it.name ];
-			appInfoEm.create( it );
-		}
-		def u = [:];
-		u.locationid = locationid;
-		u.applicantid = applicantid;
-		u.contractorid = contractorid;
-		appEm.find( [objid: newapp.objid ] ).update( u );
-		return [status: 'OK', objid: app.objid ];
+		println "uploading application ->" + app;
+		throw new Exception("uploading online app");
 	}
 
 	@ProxyMethod

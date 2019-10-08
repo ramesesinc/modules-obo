@@ -20,6 +20,18 @@ public class BuildingPermitService  {
 	@DataContext("building_permit_professional")
 	def professionalEm;
 
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("building_permit")
+	def appEm;
+
+	@Service("OboConstructionCostService")
+	def costSvc;
+
+	@Env
+	def env;
+
 	@ProxyMethod
 	public def findByPermitNo( def p ) {
 		def perm = vwAppEm.where( "issuance.controlno = :permitno", [permitno: p.permitno ] ).first();
@@ -31,5 +43,26 @@ public class BuildingPermitService  {
 		perm.professionals = professionalEm.find( [appid: perm.objid ]).list();
 		return perm;
 	}	
+
+
+	@ProxyMethod
+	public def saveCapture( def app ) {
+		def dt = dateSvc.getServerDate();
+		//calculate the cost first before receiving
+		def param = [:];
+		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
+		param.occupancytype = [
+			group: app.occupancytype.group.objid,
+			division: app.occupancytype.division.objid,
+			type: app.occupancytype.objid
+		] 
+		app.worktypes = [ app.worktype.objid ];
+		app.fixedcost = costSvc.calc( param );
+		app.txnmode = "CAPTURE";
+		app.appno = app.permitno;
+		app.permittype = "BUILDING PERMIT";
+		app.orgcode = env.ORGCODE;
+		appEm.create( app );
+	}
 
 }

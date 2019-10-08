@@ -3,7 +3,6 @@
 		<field name="objid" primary="true" prefix="OBBPENT" />
 		<field name="appid" required="true" />
 
-
 		<field name="profileid" />
 		<field name="profileno" />
 		<field name="entitytype" />		
@@ -11,8 +10,6 @@
 		<field name="firstname" required="true"/>
 		<field name="middlename" />
 		<field name="lastname" required="true"/>
-		<field name="birthdate" />
-		<field name="gender" required="true"/>
 		<field name="resident" required="true"/>
 
 		<field name="address_objid" />
@@ -34,7 +31,6 @@
 
 		<complex name="id" serializer="default" type="object" />
 		
-
 	</element>
 </schema>		
 

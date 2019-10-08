@@ -3,7 +3,7 @@ import java.rmi.server.*;
 
 public class OboMenuNotificationService {
 	
-	@DataContext("vw_building_permit_evaluation")
+	@DataContext("vw_building_permit_section")
 	def appTask;
 
 	@DataContext("building_permit")
@@ -29,9 +29,9 @@ public class OboMenuNotificationService {
 		return getTaskCount(r);		
 	}
 	
-	def building_permit_evaluation = { o->
-		def r = [processname: 'building_permit_evaluation'];
-		r._schemaname = "vw_building_permit_evaluation";
+	def building_permit_section = { o->
+		def r = [processname: 'building_permit_section'];
+		r._schemaname = "vw_building_permit_section";
 		r.domain = o.domain;
 		r.where = [ " typeid = :typeid", [typeid: o.typeid.toUpperCase() ] ];
 		return getTaskCount(r);		
@@ -53,9 +53,9 @@ public class OboMenuNotificationService {
 			else if( it.id == 'occupancy_permit') {
 				it.count = 0;
 			}			
-			else if( p.event == 'building_permit_evaluation') {
+			else if( p.event == 'building_permit_section') {
 				p.typeid = it.id;
-				it.count = building_permit_evaluation( p );
+				it.count = building_permit_section( p );
 			}
 		}	
 		return result;

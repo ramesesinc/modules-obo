@@ -69,7 +69,7 @@ public class OboItemAccountPage extends javax.swing.JPanel {
 
         xLookupField2.setCaption("Section");
         xLookupField2.setExpression("#{ entity.type.objid }");
-        xLookupField2.setHandler("obo_evaluation_type:lookup");
+        xLookupField2.setHandler("obo_section_type:lookup");
         xLookupField2.setName("entity.type"); // NOI18N
         xLookupField2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLookupField2.setPreferredSize(new java.awt.Dimension(0, 20));

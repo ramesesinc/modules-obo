@@ -1,6 +1,6 @@
 <schema adapter="obodb">
 	<element tablename="building_permit_finding">
-		<field name="objid" primary="true" prefix="OBOAPPREQ"/>
+		<field name="objid" primary="true" prefix="BLDPMTFND"/>
 		<field name="appid" />
 		<field name="parentid" />
 		<field name="particulars" />
@@ -18,7 +18,7 @@
 		<field name="remarks" />
 		<field name="checked" />
 
-		<complex name="parent" ref="building_permit_evaluation" jointype="many-to-one" includefields="typeid" required="false">
+		<complex name="parent" ref="building_permit_section" jointype="many-to-one" includefields="typeid" required="false">
 			<key field="parentid" target="objid"/>
 		</complex>	
 

@@ -10,7 +10,7 @@ import com.rameses.util.*;
 import com.rameses.osiris2.reports.*;
 import com.rameses.seti2.models.*;
 
-public class OboEvaluationTypeModel extends CrudFormModel {
+public class OboSectionTypeModel extends CrudFormModel {
     
     @Service("OboMiscListService")
     def svc;

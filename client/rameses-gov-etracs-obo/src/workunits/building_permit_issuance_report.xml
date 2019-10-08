@@ -7,10 +7,10 @@
                 reportId="building_permit"
                 visibleWhen="#{ entity.issuance?.objid != null }"    />
         
-         <invoker type="vw_building_permit_evaluation:form:formActions" 
+         <invoker type="vw_building_permit_section:form:formActions" 
                 caption="Print Permit/Clerance"
                 action="preview" 
-                reportId="building_permit_evaluation"
+                reportId="building_permit_section"
                 visibleWhen="#{ entity.issuance?.objid != null }"    />
 
     </invokers>

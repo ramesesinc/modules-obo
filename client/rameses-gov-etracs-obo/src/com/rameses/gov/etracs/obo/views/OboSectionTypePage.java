@@ -13,12 +13,12 @@ import com.rameses.seti2.views.CrudFormPage;
  * @author elmonazareno
  */
 @Template(CrudFormPage.class)
-public class OboEvaluationTypePage extends javax.swing.JPanel {
+public class OboSectionTypePage extends javax.swing.JPanel {
 
     /**
      * Creates new form OboRequirementTypePage
      */
-    public OboEvaluationTypePage() {
+    public OboSectionTypePage() {
         initComponents();
     }
 
@@ -53,7 +53,6 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xTextField1.setDisableWhen("#{ mode != 'create' }");
         xTextField1.setName("entity.objid"); // NOI18N
         xTextField1.setRequired(true);
-        xTextField1.setSpaceChar('_');
         xFormPanel1.add(xTextField1);
 
         xTextField2.setCaption("Title");
@@ -87,7 +86,6 @@ public class OboEvaluationTypePage extends javax.swing.JPanel {
         xTextField3.setCaption("Role");
         xTextField3.setName("entity.role"); // NOI18N
         xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField3.setSpaceChar('_');
         xFormPanel1.add(xTextField3);
 
         xComboBox4.setCaption("Issue Permit");

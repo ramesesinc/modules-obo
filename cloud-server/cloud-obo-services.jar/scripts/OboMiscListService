@@ -31,6 +31,9 @@ public class OboMiscListService  {
 	@DataContext("obo_costitem")
 	def costItemEm;
 
+	@DataContext("vw_obo_occupancy_type")
+	def vwOccTypeEm;
+
 	@ProxyMethod
 	public def getOccupancyTypeGroups() {
 		def list = occGroupEm.where( '1=1' ).list();
@@ -59,6 +62,15 @@ public class OboMiscListService  {
 	}	
 
 	@ProxyMethod
+	public def getAccessoryOccupancyTypes() {
+		def list = vwOccTypeEm.where( "group.objid = 'J' " ).list();
+		list.each {
+			it.description = it.title.toLowerCase();
+		}
+		return list;
+	}
+
+	@ProxyMethod
 	public def getWorkTypes() {
 		return workTypeEm.where("1=1").orderBy("idx").list();
 	}
@@ -73,6 +85,11 @@ public class OboMiscListService  {
 		def str = " typeid = :typeid ";
 		def prm = [typeid: o.type];  
 		return itemEm.where(str, prm).orderBy("sortorder").list();
+	}
+
+	@ProxyMethod
+	public def getAccessoryInfos() {
+		return itemEm.where("type.accessory = 1").orderBy("sortorder").list();
 	}
 
 	@ProxyMethod
