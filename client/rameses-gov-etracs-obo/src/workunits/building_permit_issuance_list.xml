@@ -1,0 +1,7 @@
+<workunit  extends="com/rameses/seti2/templates/CrudNodeList.xml" schemaName="vw_building_permit_issuance">
+    <invokers>
+        <invoker folderid="menucategory/obo/building" 
+                caption="Building Permits Issued"
+                action="init" index="50"/>        
+    </invokers>
+</workunit>

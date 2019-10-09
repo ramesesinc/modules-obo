@@ -14,5 +14,5 @@
                 visibleWhen="#{ entity.issuance?.objid != null }"    />
 
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitReportFormModel" />
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitIssuanceReportFormModel" />
 </workunit>

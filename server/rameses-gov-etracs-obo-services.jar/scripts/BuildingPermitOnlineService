@@ -14,11 +14,14 @@ public class BuildingPermitOnlineService  {
 	@DataContext("building_permit_entity")
 	def entityEm;
 
+	@DataContext("building_permit_accessory")
+	def accessoryEm;
+
 	@DataContext("building_permit_ancillary")
 	def ancillaryEm;
 
 	@DataContext("building_permit_rpu")
-	def locationEm;
+	def rpuEm;
 
 	@DataContext("building_permit_info")
 	def appInfoEm;
@@ -29,24 +32,69 @@ public class BuildingPermitOnlineService  {
 	@DataContext("building_permit_requirement")
 	def reqEm;
 
+	@DataContext("obo_requirement_type")
+	def reqTypeEm;
+
+	@Service("OboConstructionCostService")
+	def costSvc;
+
 	@Service("DateService")
 	def dateSvc;
 
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@Service("OboConstructionCostService")
-	def costSvc;
+	@Service("SequenceService")
+	def seqSvc;
+
+	@Service("AppnoGeneratorService")
+	def appNoSvc;
 
 	@ProxyMethod
 	public def upload( def app ) {
-		println "uploading application ->" + app;
-		throw new Exception("uploading online app");
+		def applicantid = app.remove("applicantid");
+		def accessoryid = app.remove("accessoryid");
+		def newapp = appEm.create( app );
+		app.entities.each {
+			it.appid = newapp.objid;
+			entityEm.create( it );
+		}
+		app.rpus.each {
+			it.appid = newapp.objid;
+			it.owner = [objid: it.ownerid ];
+			rpuEm.create( it );
+		}
+		app.professionals.each {
+			it.appid = newapp.objid;
+			it.entity = [objid: it.entityid ];
+			professionalEm.create( it );
+		}
+		app.accessories.each {
+			it.appid = newapp.objid;
+			it.occupancytype = [objid: it.occupancytypeid];
+			accessoryEm.create( it );
+		}
+		app.ancillaries.each {
+			it.appid = newapp.objid;
+			it.type = [ permittypeid: it.permittypeid ];
+			ancillaryEm.create( it );
+		}
+		app.infos.each {
+			it.appid = newapp.objid;
+			it.type = [name: it.name ];
+			appInfoEm.create( it );
+		}
+		def u = [:];
+		u.applicantid = applicantid;
+		if( accessoryid ) u.accessoryid = accessoryid;
+		appEm.find( [objid: newapp.objid ] ).update( u );
+		return [status: 'OK'];
 	}
 
 	@ProxyMethod
-	public def receive( def app ) {
+	public def accept( def app ) {
 		def dt = dateSvc.getServerDate();
+
 		//calculate the cost first before receiving
 		def param = [:];
 		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
@@ -57,8 +105,22 @@ public class BuildingPermitOnlineService  {
 		] 
 		def cost = costSvc.calc( param );
 		def u = [:];
-		u.fixedcost = cost;		
+		u.fixedcost = cost;
+
 		appEm.find( [objid: app.objid ] ).update( u );
+
+		//update the requirements
+		def reqTypes = reqTypeEm.where("1=1").list();
+		reqTypes.each {
+			def r = [:];
+			r.appid = app.objid;
+			r.state = 0;
+			r.typeid = it.objid;
+			r.type = [objid: it.objid];
+			r.checked = 0;
+			reqEm.create( r );
+		}
+
 		//fire the workflow to start the process
 		def p = [:];
 		p.processname = 'building_permit';

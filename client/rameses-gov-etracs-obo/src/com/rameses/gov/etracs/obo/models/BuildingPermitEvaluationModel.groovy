@@ -90,13 +90,13 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
         f.permits = [ [type: entity.typeid ] ];
         f.sectionid = entity.typeid;
         def h  = { list->
-            println "list is " + list;
             list.each {
                 it.appid = entity.appid;
                 it.parentid = entity.objid;
                 it.amtpaid = 0;
             }
             feeSvc.saveFees( list );
+            feeListHandler.reload();
         }
         return Inv.lookupOpener("view_assessment", [params: f, handler: h] );
     }
@@ -106,9 +106,6 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
         return Inv.lookupOpener("building_permit_fee:create", m );
     }
     
-    def viewAssessmentInfo() {
-        MsgBox.alert( "typeid is " + entity)
-    }
     
     def issuePermit() {
         def m = [showpermitno:true, appid:entity.appid, evaluationid: entity.objid, typeid: entity.typeid ];

@@ -12,10 +12,15 @@
 		<field name="contact_email" />
 		<field name="contact_mobileno" />
 		<field name="dtfiled" />
-		<field name="locationid" />
 		<field name="applicantid" />
 		<field name="applicant_name" />
 		<field name="applicant_address_text" />
+
+		<field name="location_lotno" />
+		<field name="location_blockno" />
+		<field name="location_street" />
+		<field name="location_barangay_name" />		
+		<field name="location_barangay_objid" />
 
 		<field name="description" />
 		<field name="title" />
@@ -37,6 +42,8 @@
 		<field name="occupancytype_division_title" />
 		<field name="occupancytype_group_objid" />
 		<field name="occupancytype_group_title" />
+
+		<field name="task_state" />
 
 	</element>
 </schema>	

@@ -27,7 +27,7 @@
 				self._controller.refresh();
 			}
 			else {
-				app.moveNextStep();
+				app.service.moveNextStep( {appid: self.appid } );
 				window.location.reload();
 			}
 		});
@@ -35,7 +35,7 @@
 
 	this.finish = function() {
 		if(!confirm("You are about to complete this application. Once submitted you cannot make any more changes. Continue?")) return;
-		app.moveNextStep();
+		app.service.moveNextStep( {appid: self.appid } );
 		window.location.reload();
 	}
 });

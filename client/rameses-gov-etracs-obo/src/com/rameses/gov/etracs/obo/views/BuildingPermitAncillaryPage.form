@@ -144,9 +144,16 @@
                           <Component id="xButton5" min="-2" pref="34" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="xButton4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
                           <Component id="xButton6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="500" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="384" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
+                              <Component id="xButton7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="490" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -154,15 +161,22 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="xButton6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="xButton6" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="xButton5" alignment="0" max="32767" attributes="0"/>
                                   <Component id="xButton4" alignment="1" max="32767" attributes="0"/>
                                   <Component id="xButton3" alignment="1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace pref="16" max="32767" attributes="0"/>
+                              <Component id="xButton7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -184,8 +198,8 @@
                 </Component>
                 <Component class="com.rameses.rcp.control.XButton" name="xButton6">
                   <Properties>
-                    <Property name="name" type="java.lang.String" value="editRemarks" noResource="true"/>
-                    <Property name="text" type="java.lang.String" value="Edit Remarks"/>
+                    <Property name="name" type="java.lang.String" value="viewCalc" noResource="true"/>
+                    <Property name="text" type="java.lang.String" value="View Calc"/>
                   </Properties>
                 </Component>
                 <Component class="com.rameses.rcp.control.XButton" name="xButton5">
@@ -193,6 +207,12 @@
                     <Property name="name" type="java.lang.String" value="editInfos" noResource="true"/>
                     <Property name="iconResource" type="java.lang.String" value="images/toolbars/edit.png"/>
                     <Property name="immediate" type="boolean" value="true"/>
+                  </Properties>
+                </Component>
+                <Component class="com.rameses.rcp.control.XButton" name="xButton7">
+                  <Properties>
+                    <Property name="name" type="java.lang.String" value="editRemarks" noResource="true"/>
+                    <Property name="text" type="java.lang.String" value="Edit Remarks"/>
                   </Properties>
                 </Component>
               </SubComponents>

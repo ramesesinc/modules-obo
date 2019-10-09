@@ -1,0 +1,4350 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="building_permit_doc_verification_checklist"
+
+		 language="groovy"		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="612"
+		 pageHeight="936"
+		 columnWidth="612"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+	<field name="application.datesigned" class="java.lang.String"/>
+	<field name="application.applicantorauthorizedrepresentative" class="java.lang.String"/>
+	<field name="location.address.text" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
+	<field name="applicant.name" class="java.lang.String"/>
+	<field name="appno" class="java.lang.String"/>
+	<field name="application.date" class="java.lang.String"/>
+	<field name="application.evaluationofficer" class="java.lang.String"/>
+
+		<background>
+			<band height="936"  isSplitAllowed="true" >
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="643"
+						width="612"
+						height="293"
+						key="image-3"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["building-images/background.jpg"]]></imageExpression>
+				</image>
+			</band>
+		</background>
+		<title>
+			<band height="936"  isSplitAllowed="true" >
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="38"
+						y="25"
+						width="69"
+						height="69"
+						key="image-4"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/LegazpiLogo.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement
+						x="115"
+						y="21"
+						width="107"
+						height="12"
+						key="staticText-1"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Republic of the Philippines]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="115"
+						y="33"
+						width="218"
+						height="12"
+						key="staticText-2"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[C  I  T  Y    O  F    L  E  G  A  Z  P  I]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="115"
+						y="45"
+						width="263"
+						height="13"
+						key="staticText-3"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="11" isBold="true"/>
+					</textElement>
+				<text><![CDATA[OFFICE OF THE LOCAL BUILDING OFFICIAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="115"
+						y="59"
+						width="436"
+						height="25"
+						forecolor="#5B9BD5"
+						key="staticText-4"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="20" isBold="true"/>
+					</textElement>
+				<text><![CDATA[ONE - STOP SHOP FOR CONSTRUCTION PERMITS]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="114"
+						y="84"
+						width="462"
+						height="0"
+						key="line-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="115"
+						y="88"
+						width="449"
+						height="12"
+						key="staticText-5"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial Narrow" size="8"/>
+					</textElement>
+				<text><![CDATA[Ground Floor, City Engineering Office, Miguel Lopez de Legazpi Boulevard, Dapdap, Legazpi City | Contact Nos.: 0948 359 1219 and 0965 601 8727]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="157"
+						y="110"
+						width="299"
+						height="22"
+						key="staticText-6"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="17" isBold="true"/>
+					</textElement>
+				<text><![CDATA[DOCUMENT VERIFICATION CHECKLIST]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="175"
+						y="129"
+						width="263"
+						height="22"
+						key="staticText-7"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="12" isBold="false"/>
+					</textElement>
+				<text><![CDATA[BUILDING PERMIT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="152"
+						width="174"
+						height="13"
+						key="staticText-8"/>
+					<box></box>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Date                                                        :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="165"
+						width="174"
+						height="13"
+						key="staticText-9"/>
+					<box></box>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Application Number                                :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="178"
+						width="174"
+						height="13"
+						key="staticText-10"/>
+					<box></box>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Evaluation Officer                                   :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="200"
+						width="174"
+						height="13"
+						key="staticText-11"/>
+					<box></box>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Name of Applicant                                  :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="213"
+						width="174"
+						height="13"
+						key="staticText-12"/>
+					<box></box>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Name of Project                                     :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="226"
+						width="174"
+						height="13"
+						key="staticText-13"/>
+					<box></box>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Project Location                                     :]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="216"
+						y="165"
+						width="180"
+						height="0"
+						key="line-2"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="216"
+						y="178"
+						width="180"
+						height="0"
+						key="line-3"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="216"
+						y="191"
+						width="180"
+						height="0"
+						key="line-4"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="216"
+						y="213"
+						width="360"
+						height="0"
+						key="line-5"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="216"
+						y="226"
+						width="360"
+						height="0"
+						key="line-6"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="216"
+						y="239"
+						width="360"
+						height="0"
+						key="line-7"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="58"
+						y="251"
+						width="32"
+						height="15"
+						forecolor="#FFFFFF"
+						backcolor="#000000"
+						key="staticText-14"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[	QTY]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="90"
+						y="251"
+						width="54"
+						height="15"
+						forecolor="#FFFFFF"
+						backcolor="#000000"
+						key="staticText-15"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[UNIT]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="144"
+						y="251"
+						width="293"
+						height="15"
+						forecolor="#FFFFFF"
+						backcolor="#000000"
+						key="staticText-16"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[REQUIREMENTS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="437"
+						y="251"
+						width="139"
+						height="15"
+						forecolor="#FFFFFF"
+						backcolor="#000000"
+						key="staticText-17"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[REMARKS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="36"
+						y="251"
+						width="22"
+						height="15"
+						forecolor="#FFFFFF"
+						backcolor="#000000"
+						key="staticText-18"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="42"
+						y="253"
+						width="10"
+						height="10"
+						key="image-5"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check-white.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement
+						x="36"
+						y="266"
+						width="22"
+						height="12"
+						key="staticText-19"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="266"
+						width="32"
+						height="12"
+						key="staticText-20"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="266"
+						width="54"
+						height="12"
+						key="staticText-21"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="266"
+						width="293"
+						height="12"
+						key="staticText-22"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished and notarized Application Form for Building Permit]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="266"
+						width="139"
+						height="12"
+						key="staticText-23"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="278"
+						width="22"
+						height="12"
+						key="staticText-24"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="290"
+						width="22"
+						height="12"
+						key="staticText-25"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="302"
+						width="22"
+						height="12"
+						key="staticText-26"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="314"
+						width="22"
+						height="12"
+						key="staticText-27"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="326"
+						width="22"
+						height="12"
+						key="staticText-28"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="338"
+						width="22"
+						height="12"
+						key="staticText-29"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="350"
+						width="22"
+						height="12"
+						key="staticText-30"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="362"
+						width="22"
+						height="12"
+						key="staticText-31"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="374"
+						width="22"
+						height="12"
+						key="staticText-32"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="386"
+						width="22"
+						height="12"
+						key="staticText-33"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[Static Text]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="398"
+						width="22"
+						height="26"
+						key="staticText-34"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="424"
+						width="22"
+						height="49"
+						key="staticText-35"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="473"
+						width="22"
+						height="59"
+						key="staticText-36"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="532"
+						width="22"
+						height="37"
+						key="staticText-37"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="569"
+						width="22"
+						height="36"
+						key="staticText-38"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="641"
+						width="22"
+						height="36"
+						key="staticText-39"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="677"
+						width="22"
+						height="36"
+						key="staticText-40"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="713"
+						width="22"
+						height="36"
+						key="staticText-41"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="749"
+						width="22"
+						height="37"
+						key="staticText-42"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="786"
+						width="22"
+						height="60"
+						key="staticText-43"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="846"
+						width="22"
+						height="49"
+						key="staticText-44"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="278"
+						width="32"
+						height="12"
+						key="staticText-45"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="290"
+						width="32"
+						height="12"
+						key="staticText-46"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="302"
+						width="32"
+						height="12"
+						key="staticText-47"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="314"
+						width="32"
+						height="12"
+						key="staticText-48"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="326"
+						width="32"
+						height="12"
+						key="staticText-49"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="338"
+						width="32"
+						height="12"
+						key="staticText-50"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="350"
+						width="32"
+						height="12"
+						key="staticText-51"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="362"
+						width="32"
+						height="12"
+						key="staticText-52"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="374"
+						width="32"
+						height="12"
+						key="staticText-53"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="386"
+						width="32"
+						height="12"
+						key="staticText-54"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="398"
+						width="32"
+						height="26"
+						key="staticText-55"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="424"
+						width="32"
+						height="49"
+						key="staticText-56"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="473"
+						width="32"
+						height="59"
+						key="staticText-57"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="532"
+						width="32"
+						height="37"
+						key="staticText-58"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="605"
+						width="22"
+						height="36"
+						key="staticText-59"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="569"
+						width="32"
+						height="36"
+						key="staticText-60"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="605"
+						width="32"
+						height="36"
+						key="staticText-61"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="641"
+						width="32"
+						height="36"
+						key="staticText-62"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="677"
+						width="32"
+						height="36"
+						key="staticText-63"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="713"
+						width="32"
+						height="36"
+						key="staticText-64"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="749"
+						width="32"
+						height="37"
+						key="staticText-65"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="786"
+						width="32"
+						height="60"
+						key="staticText-66"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[3]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="846"
+						width="32"
+						height="49"
+						key="staticText-67"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[3]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="278"
+						width="54"
+						height="12"
+						key="staticText-68"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="290"
+						width="54"
+						height="12"
+						key="staticText-69"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="302"
+						width="54"
+						height="12"
+						key="staticText-70"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="314"
+						width="54"
+						height="12"
+						key="staticText-71"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="326"
+						width="54"
+						height="12"
+						key="staticText-72"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="338"
+						width="54"
+						height="12"
+						key="staticText-73"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="350"
+						width="54"
+						height="12"
+						key="staticText-74"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="362"
+						width="54"
+						height="12"
+						key="staticText-75"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="374"
+						width="54"
+						height="12"
+						key="staticText-76"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="386"
+						width="54"
+						height="12"
+						key="staticText-77"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copies]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="398"
+						width="54"
+						height="26"
+						key="staticText-78"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="424"
+						width="54"
+						height="49"
+						key="staticText-79"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="473"
+						width="54"
+						height="59"
+						key="staticText-80"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="532"
+						width="54"
+						height="37"
+						key="staticText-81"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="569"
+						width="54"
+						height="36"
+						key="staticText-82"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="605"
+						width="54"
+						height="36"
+						key="staticText-83"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="641"
+						width="54"
+						height="36"
+						key="staticText-84"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="677"
+						width="54"
+						height="36"
+						key="staticText-85"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="713"
+						width="54"
+						height="36"
+						key="staticText-86"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="749"
+						width="54"
+						height="37"
+						key="staticText-87"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="786"
+						width="54"
+						height="60"
+						key="staticText-88"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="846"
+						width="54"
+						height="49"
+						key="staticText-89"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="278"
+						width="293"
+						height="12"
+						key="staticText-90"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="290"
+						width="293"
+						height="12"
+						key="staticText-91"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished Architectural Permit Form]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="302"
+						width="293"
+						height="12"
+						key="staticText-92"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished Civil/Structural Permit Form]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="314"
+						width="293"
+						height="12"
+						key="staticText-93"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished Electrical Permit Form]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="326"
+						width="293"
+						height="12"
+						key="staticText-94"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished Mechanical Permit Form]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="338"
+						width="293"
+						height="12"
+						key="staticText-95"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished Sanitary Permit Form]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="350"
+						width="293"
+						height="12"
+						key="staticText-96"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished Plumbing Permit Form]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="362"
+						width="293"
+						height="12"
+						key="staticText-97"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished Electronics Permit Form]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="374"
+						width="293"
+						height="12"
+						key="staticText-98"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished Sign Permit Form]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="386"
+						width="293"
+						height="12"
+						key="staticText-99"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[   Duly accomplished Fencing Permit Form]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="398"
+						width="293"
+						height="26"
+						key="staticText-100"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="424"
+						width="293"
+						height="49"
+						key="staticText-101"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="473"
+						width="293"
+						height="59"
+						key="staticText-102"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="532"
+						width="293"
+						height="37"
+						key="staticText-103"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="569"
+						width="293"
+						height="36"
+						key="staticText-104"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="605"
+						width="293"
+						height="36"
+						key="staticText-105"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="641"
+						width="293"
+						height="36"
+						key="staticText-106"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="677"
+						width="293"
+						height="36"
+						key="staticText-107"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="713"
+						width="293"
+						height="36"
+						key="staticText-108"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="749"
+						width="293"
+						height="37"
+						key="staticText-109"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="786"
+						width="293"
+						height="60"
+						key="staticText-110"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="846"
+						width="293"
+						height="49"
+						key="staticText-111"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="398"
+						width="281"
+						height="26"
+						key="staticText-112"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Certified true copy of latest OCT/TCT, on file with the Registry of Deeds (in case the appicant is the registered owner of the lot)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="424"
+						width="281"
+						height="49"
+						key="staticText-113"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Duly notarized copy of the Contract of Lease, Award Notice, Deed of Absolute Sale, Contract to Sell, Extra-Judicial Settlement or Authority from the registered owner (in case the applicant is not the registered owner of the lot, in addition to the certified true copy of latest OCT/TCT)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="473"
+						width="281"
+						height="59"
+						key="staticText-114"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Certification from a duly licensed and registered Geodetic Engineer that the proposed construction, renovation, alteration, repair or addition shall be within the property of the owner/applicant and will not encroach any adjoining property (incorporated in the first page of Architectural Design Plans)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="532"
+						width="281"
+						height="37"
+						key="staticText-115"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Architectural Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Architect, and approved by the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="569"
+						width="281"
+						height="36"
+						key="staticText-116"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Civil/Structural Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Civil/Structural Engineer, and approved by the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="605"
+						width="281"
+						height="36"
+						key="staticText-117"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Electrical Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Professional Electrical Engineer, and approved by the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="641"
+						width="281"
+						height="36"
+						key="staticText-118"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Mechanical Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Professional Mechanical Engineer, and approved by the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="677"
+						width="281"
+						height="36"
+						key="staticText-119"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Sanitary Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Sanitary Engineer, and approved by the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="713"
+						width="281"
+						height="36"
+						key="staticText-120"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Plumbing Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Master Plumber, and approved by the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="749"
+						width="281"
+						height="36"
+						key="staticText-121"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Electronics Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Electronics Engineer, and approved by the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="786"
+						width="281"
+						height="60"
+						key="staticText-122"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Three (3) sets of Structural Analysis and Design, signed and sealed over the printed name of the duly licensed and registered Civil/ Structural Engineer (Applicable for all buildings/structures except for one storey and single detached building/structure with a total floor area of 20.00 sq. meters or less)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="149"
+						y="846"
+						width="281"
+						height="49"
+						key="staticText-123"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Boring and Load Test (Applicable for buildings/structure of three (3) storeys and higher, lower building structures for areas with potential geological/geotechnical hazards, or if necessary in accordance with the provisions of the National Structural Code of the Philippines NSCP)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="278"
+						width="139"
+						height="12"
+						key="staticText-124"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="290"
+						width="139"
+						height="12"
+						key="staticText-125"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="302"
+						width="139"
+						height="12"
+						key="staticText-126"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="314"
+						width="139"
+						height="12"
+						key="staticText-127"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="326"
+						width="139"
+						height="12"
+						key="staticText-128"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="338"
+						width="139"
+						height="12"
+						key="staticText-129"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="350"
+						width="139"
+						height="12"
+						key="staticText-130"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="362"
+						width="139"
+						height="12"
+						key="staticText-131"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="374"
+						width="139"
+						height="12"
+						key="staticText-132"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="386"
+						width="139"
+						height="12"
+						key="staticText-133"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="398"
+						width="139"
+						height="26"
+						key="staticText-134"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="424"
+						width="139"
+						height="49"
+						key="staticText-135"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="473"
+						width="139"
+						height="59"
+						key="staticText-136"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="532"
+						width="139"
+						height="37"
+						key="staticText-137"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="569"
+						width="139"
+						height="36"
+						key="staticText-138"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="605"
+						width="139"
+						height="36"
+						key="staticText-139"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="641"
+						width="139"
+						height="36"
+						key="staticText-140"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="677"
+						width="139"
+						height="36"
+						key="staticText-141"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="713"
+						width="139"
+						height="36"
+						key="staticText-142"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="749"
+						width="139"
+						height="37"
+						key="staticText-143"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="786"
+						width="139"
+						height="60"
+						key="staticText-144"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="846"
+						width="139"
+						height="49"
+						key="staticText-145"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="216"
+						y="153"
+						width="180"
+						height="12"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Date"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="216"
+						y="166"
+						width="180"
+						height="12"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{appno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="216"
+						y="201"
+						width="360"
+						height="12"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="216"
+						y="214"
+						width="360"
+						height="12"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="216"
+						y="227"
+						width="360"
+						height="12"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="216"
+						y="179"
+						width="180"
+						height="12"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Evaluation Officer"]]></textFieldExpression>
+				</textField>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="936"  isSplitAllowed="true" >
+				<rectangle>
+					<reportElement
+						mode="Transparent"
+						x="37"
+						y="433"
+						width="539"
+						height="45"
+						key="rectangle-1"/>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="144"
+						y="81"
+						width="293"
+						height="37"
+						key="staticText-201"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="46"
+						width="22"
+						height="35"
+						key="staticText-146"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="46"
+						width="32"
+						height="35"
+						key="staticText-147"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[3]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="46"
+						width="54"
+						height="35"
+						key="staticText-148"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="46"
+						width="293"
+						height="35"
+						key="staticText-149"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="46"
+						width="139"
+						height="35"
+						key="staticText-150"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="81"
+						width="22"
+						height="37"
+						key="staticText-151"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="118"
+						width="22"
+						height="37"
+						key="staticText-152"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="155"
+						width="22"
+						height="35"
+						key="staticText-153"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="190"
+						width="22"
+						height="24"
+						key="staticText-154"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="214"
+						width="22"
+						height="36"
+						key="staticText-155"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="250"
+						width="22"
+						height="37"
+						key="staticText-156"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="287"
+						width="22"
+						height="12"
+						key="staticText-157"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="299"
+						width="22"
+						height="12"
+						key="staticText-158"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="311"
+						width="22"
+						height="12"
+						key="staticText-159"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="323"
+						width="22"
+						height="12"
+						key="staticText-160"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="335"
+						width="22"
+						height="12"
+						key="staticText-161"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="347"
+						width="22"
+						height="12"
+						key="staticText-162"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="359"
+						width="22"
+						height="12"
+						key="staticText-163"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="371"
+						width="22"
+						height="12"
+						key="staticText-164"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="383"
+						width="22"
+						height="12"
+						key="staticText-165"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="36"
+						y="395"
+						width="22"
+						height="12"
+						key="staticText-166"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement>
+						<font/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="81"
+						width="32"
+						height="37"
+						key="staticText-167"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="118"
+						width="32"
+						height="37"
+						key="staticText-168"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="155"
+						width="32"
+						height="35"
+						key="staticText-169"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="190"
+						width="32"
+						height="24"
+						key="staticText-170"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="214"
+						width="32"
+						height="36"
+						key="staticText-171"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="250"
+						width="32"
+						height="37"
+						key="staticText-172"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[4]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="81"
+						width="54"
+						height="37"
+						key="staticText-173"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="118"
+						width="54"
+						height="37"
+						key="staticText-174"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[sets]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="155"
+						width="54"
+						height="35"
+						key="staticText-175"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[set]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="190"
+						width="54"
+						height="24"
+						key="staticText-176"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="214"
+						width="54"
+						height="36"
+						key="staticText-177"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="250"
+						width="54"
+						height="37"
+						key="staticText-178"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="287"
+						width="32"
+						height="12"
+						key="staticText-179"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="299"
+						width="32"
+						height="12"
+						key="staticText-180"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="311"
+						width="32"
+						height="12"
+						key="staticText-181"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="323"
+						width="32"
+						height="12"
+						key="staticText-182"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="335"
+						width="32"
+						height="12"
+						key="staticText-183"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[1]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="347"
+						width="32"
+						height="12"
+						key="staticText-184"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="359"
+						width="32"
+						height="12"
+						key="staticText-185"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="371"
+						width="32"
+						height="12"
+						key="staticText-186"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="383"
+						width="32"
+						height="12"
+						key="staticText-187"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="58"
+						y="395"
+						width="32"
+						height="12"
+						key="staticText-188"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="287"
+						width="54"
+						height="12"
+						key="staticText-189"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="299"
+						width="54"
+						height="12"
+						key="staticText-190"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="311"
+						width="54"
+						height="12"
+						key="staticText-191"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="323"
+						width="54"
+						height="12"
+						key="staticText-192"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="335"
+						width="54"
+						height="12"
+						key="staticText-193"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[copy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="347"
+						width="54"
+						height="12"
+						key="staticText-194"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="359"
+						width="54"
+						height="12"
+						key="staticText-195"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="371"
+						width="54"
+						height="12"
+						key="staticText-196"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="383"
+						width="54"
+						height="12"
+						key="staticText-197"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="90"
+						y="395"
+						width="54"
+						height="12"
+						key="staticText-198"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="46"
+						width="281"
+						height="35"
+						key="staticText-199"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Three (3) sets of Electrical Analysis and Design, signed and sealed over the printed name of the duly licensed and registered Professional Electrical Engineer]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="82"
+						width="281"
+						height="35"
+						key="staticText-200"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Photocopy of latest PRC Identification Card and Professional Tax Receipt, signed (three specimen signatures) and sealed by the respective professionals]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="118"
+						width="293"
+						height="37"
+						key="staticText-202"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="155"
+						width="293"
+						height="35"
+						key="staticText-203"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="190"
+						width="293"
+						height="24"
+						key="staticText-204"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="214"
+						width="293"
+						height="36"
+						key="staticText-205"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="250"
+						width="293"
+						height="37"
+						key="staticText-206"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="287"
+						width="293"
+						height="12"
+						key="staticText-207"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[   Affidavit of Non-Objection]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="299"
+						width="293"
+						height="12"
+						key="staticText-208"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[   Affidavit of Undertaking on Lot Occupancy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="311"
+						width="293"
+						height="12"
+						key="staticText-209"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[   Barangay Resolution/Endorsement]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="323"
+						width="293"
+						height="12"
+						key="staticText-210"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[   Manifestation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="335"
+						width="293"
+						height="12"
+						key="staticText-211"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[   Simple Subdivision Approval/Copy of Approved Subdivision Plan]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="347"
+						width="293"
+						height="12"
+						key="staticText-212"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[   Other pertinent documents]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="359"
+						width="293"
+						height="12"
+						key="staticText-213"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="371"
+						width="293"
+						height="12"
+						key="staticText-214"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="383"
+						width="293"
+						height="12"
+						key="staticText-215"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="144"
+						y="395"
+						width="293"
+						height="12"
+						key="staticText-216"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[   Size of Building Plans]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="118"
+						width="281"
+						height="37"
+						key="staticText-217"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Duly notarized Bill of Materials/Cost Estimate of the building or structure to be erected, signed and sealed over the printed name by a duly licensed and registered Architect or Civil Engineer, and approved by the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="155"
+						width="281"
+						height="35"
+						key="staticText-218"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Construction Logbook, signed and sealed over the printed name of the duly licensed and registered Civil Engineer or Architect-In-Charge of construction, and signed by the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="190"
+						width="281"
+						height="24"
+						key="staticText-219"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Original Certificate of Approval of Construction Safety and Health Program (CSHP) (Department of Labor and Employment)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="214"
+						width="281"
+						height="36"
+						key="staticText-220"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Affidavit of Undertaking (for clearances from National Government Agencies which can be submitted 30 days or less after the issuance of the Building Permit, per JMC No. 2018-01) ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="150"
+						y="250"
+						width="281"
+						height="37"
+						key="staticText-221"/>
+					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Top">
+						<font fontName="Arial Narrow" size="10"/>
+					</textElement>
+				<text><![CDATA[Special Power of Attorney (for individuals) or Board Resolution/Secretary's Certificate (for corporations) for the authorized representative/signatory in behalf of the owner/applicant]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="42"
+						y="446"
+						width="273"
+						height="31"
+						key="staticText-222"/>
+					<box></box>
+					<textElement verticalAlignment="Top" isStyledText="true">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[I fully understand my deficiencies listed herein, the reason that my application was
+returned to me. Accordingly, I hereby undertake to correct and/or comply such
+deficiencies on my resubmission.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="61"
+						y="434"
+						width="260"
+						height="13"
+						key="staticText-223"/>
+					<box></box>
+					<textElement verticalAlignment="Middle" isStyledText="true">
+						<font fontName="Arial Narrow" size="11"/>
+					</textElement>
+				<text><![CDATA[<b>RECEIVED RETURNED DOCUMENTS TO APPLICANT</b>]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="341"
+						y="440"
+						width="200"
+						height="12"
+						key="textField-1"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Name"]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="341"
+						y="452"
+						width="200"
+						height="0"
+						key="line-8"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="334"
+						y="453"
+						width="215"
+						height="12"
+						key="staticText-224"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Top" isStyledText="true">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Applicant/Authorized Representative Signature over Printed Name]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="371"
+						y="463"
+						width="19"
+						height="12"
+						key="staticText-225"/>
+					<box></box>
+					<textElement textAlignment="Left" verticalAlignment="Top" isStyledText="true">
+						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Date:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="390"
+						y="463"
+						width="118"
+						height="12"
+						key="textField-2"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Arial Narrow"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Date"]]></textFieldExpression>
+				</textField>
+				<line direction="TopDown">
+					<reportElement
+						x="390"
+						y="475"
+						width="118"
+						height="0"
+						key="line-9"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="437"
+						y="81"
+						width="139"
+						height="37"
+						key="staticText-226"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="118"
+						width="139"
+						height="37"
+						key="staticText-227"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="155"
+						width="139"
+						height="35"
+						key="staticText-228"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="190"
+						width="139"
+						height="24"
+						key="staticText-229"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="214"
+						width="139"
+						height="36"
+						key="staticText-230"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="250"
+						width="139"
+						height="37"
+						key="staticText-231"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="287"
+						width="139"
+						height="12"
+						key="staticText-232"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="299"
+						width="139"
+						height="12"
+						key="staticText-233"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="311"
+						width="139"
+						height="12"
+						key="staticText-234"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="323"
+						width="139"
+						height="12"
+						key="staticText-235"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="335"
+						width="139"
+						height="12"
+						key="staticText-236"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="347"
+						width="139"
+						height="12"
+						key="staticText-237"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="359"
+						width="139"
+						height="12"
+						key="staticText-238"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="371"
+						width="139"
+						height="12"
+						key="staticText-239"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="383"
+						width="139"
+						height="12"
+						key="staticText-240"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="437"
+						y="395"
+						width="139"
+						height="12"
+						key="staticText-241"/>
+					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font fontName="Arial Narrow" size="9"/>
+					</textElement>
+				<text><![CDATA[]]></text>
+				</staticText>
+			</band>
+		</summary>
+</jasperReport>

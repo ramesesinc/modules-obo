@@ -36,12 +36,12 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         xTextArea1 = new com.rameses.rcp.control.XTextArea();
-        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
         jPanel2 = new javax.swing.JPanel();
         schemaList6 = new com.rameses.seti2.components.SchemaList();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
-        xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel1 = new com.rameses.rcp.control.XLabel();
+        xRadio1 = new com.rameses.rcp.control.XRadio();
+        xRadio2 = new com.rameses.rcp.control.XRadio();
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 150));
 
@@ -52,13 +52,6 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
         jScrollPane1.setViewportView(xTextArea1);
 
         xFormPanel1.add(jScrollPane1);
-
-        xCheckBox1.setCaption("");
-        xCheckBox1.setCheckValue(1);
-        xCheckBox1.setName("entity.checked"); // NOI18N
-        xCheckBox1.setUncheckValue(0);
-        xCheckBox1.setText("Passed");
-        xFormPanel1.add(xCheckBox1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -72,7 +65,7 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -145,21 +138,29 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(schemaList6, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                .addComponent(schemaList6, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         xTabbedPane1.addTab("History", jPanel2);
 
-        xLabel2.setCaption("Permit");
-        xLabel2.setExpression("#{ entity.parent.type.title }");
-        xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel2);
-
-        xLabel1.setCaption("Type");
-        xLabel1.setExpression("#{ entity.type.title }");
-        xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel1.setCaption("Req.Type");
+        xLabel1.setExpression("<html>#{ entity.type.title }</html>");
+        xLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel1.setPreferredSize(new java.awt.Dimension(0, 80));
         xFormPanel2.add(xLabel1);
+
+        xRadio1.setCaption("Status");
+        xRadio1.setName("entity.checked"); // NOI18N
+        xRadio1.setOptionValue(1);
+        xRadio1.setText("Pass");
+        xFormPanel2.add(xRadio1);
+
+        xRadio2.setCaption("");
+        xRadio2.setName("entity.checked"); // NOI18N
+        xRadio2.setOptionValue(0);
+        xRadio2.setText("Deficient");
+        xFormPanel2.add(xRadio2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -176,9 +177,9 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -189,11 +190,11 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private com.rameses.seti2.components.SchemaList schemaList6;
-    private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XLabel xLabel1;
-    private com.rameses.rcp.control.XLabel xLabel2;
+    private com.rameses.rcp.control.XRadio xRadio1;
+    private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     private com.rameses.rcp.control.XTextArea xTextArea1;
     // End of variables declaration//GEN-END:variables

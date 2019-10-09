@@ -99,7 +99,32 @@ class BuildingPermitAncillaryModel extends CrudFormModel {
         }
     }
     
-   
+    def viewCalc() {
+        def mm = [_schemaname:'vw_building_permit'];
+        mm.findBy =[objid: entity.appid];
+        def zapp = queryService.findFirst(mm);
+        def f = [:];
+        f.app = [ 
+            appid: zapp.objid,
+            appno:zapp.appno, 
+            appdate:zapp.appdate, 
+            apptype:zapp.apptype, 
+            projectcost: zapp.projectcost, 
+            fixedcost: zapp.fixedcost,
+            height: ((zapp.height == null)?0:zapp.height),
+            numunits: zapp.numunits,
+            totalfloorarea: zapp.totalfloorarea,
+            zoneclass: zapp.zoneclass?.objid
+        ];
+        def occ = zapp.occupancytype;
+        f.occupancytype = [division:occ.division.objid, group:occ.group.objid, type:occ.objid ];
+        f.permits = [ [type: entity.type.objid ] ];
+        f.sectionid = entity.type.objid;
+        
+        def h  = { list->
+        }
+        return Inv.lookupOpener("view_assessment", [params: f, handler: h] );
+    }
     
     
 }

@@ -28,6 +28,8 @@ class BuildingPermitRequirementModel {
     }
     
     def doOk() {
+        if( entity.checked == null ) 
+            throw new Exception("Please status");
         entity.tag = "building_permit_requirement";
         findingSvc.save( entity );
         caller.reqListHandler.reload();

@@ -4,7 +4,6 @@
 		<field name="orgcode" required="true"/>
 		<field name="appno" searchable="true" indexed="true"/>
 		<field name="apptype" required="true"/>
-		<field name="permittype" required="true"/>
 
 		<field name="contact_name" />
 		<field name="contact_detail" />
@@ -25,7 +24,6 @@
 		<field name="dtproposedconstruction" type="date" />
 		<field name="dtexpectedcompletion" type="date"/>
 
-		<field name="locationid"/>
 		<field name="applicantid"/>
 		<field name="trackingno" searchable="true"/>
 		<field name="taskid" />
@@ -43,11 +41,9 @@
 		<field name="amount" type="decimal"/>
 		<field name="issuanceid" />
 		<field name="txnmode" />
-		
-		<!-- this is only a guard filled up when the occupancy type selected is an accessory 
-		to ensure that it will not be accidentally deleted --> 
- 		<field name="accessoryid" />
 
+		<!-- this is used if the building permit applied is for accessory or type J -->
+		<field name="accessoryid" />
 	</element>
 </schema>
 

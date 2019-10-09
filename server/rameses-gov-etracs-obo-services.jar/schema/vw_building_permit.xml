@@ -4,7 +4,6 @@
 		<field name="appno" searchable="true" indexed="true"/>
 
 		<field name="applicant_name" searchable="true"/>
-		<field name="applicant_objid" />
 
 		<complex name="applicant" ref="building_permit_entity" jointype="many-to-one" required="false">
 			<key field="applicantid" target="objid" />
@@ -19,7 +18,6 @@
 		<field name="contact_email" />
 		<field name="contact_mobileno" />
 		<field name="dtfiled" />
-		<field name="locationid" />
 		<field name="applicantid" />
 		<field name="description" />
 		<field name="title" />
@@ -42,7 +40,7 @@
 		<field name="location_lotno" />
 		<field name="location_blockno" />
 		<field name="location_street" />
-		<field name="location_barangay" />
+		<field name="location_barangay_name" />
 		<field name="location_address_text" />
 
 		<field name="taskid" />

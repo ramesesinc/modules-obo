@@ -42,6 +42,7 @@ public class BuildingPermitAncillaryPage extends javax.swing.JPanel {
         xButton4 = new com.rameses.rcp.control.XButton();
         xButton6 = new com.rameses.rcp.control.XButton();
         xButton5 = new com.rameses.rcp.control.XButton();
+        xButton7 = new com.rameses.rcp.control.XButton();
         xDataTable4 = new com.rameses.rcp.control.XDataTable();
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -75,12 +76,15 @@ public class BuildingPermitAncillaryPage extends javax.swing.JPanel {
         xButton4.setIconResource("images/toolbars/trash.png");
         xButton4.setImmediate(true);
 
-        xButton6.setName("editRemarks"); // NOI18N
-        xButton6.setText("Edit Remarks");
+        xButton6.setName("viewCalc"); // NOI18N
+        xButton6.setText("View Calc");
 
         xButton5.setName("editInfos"); // NOI18N
         xButton5.setIconResource("images/toolbars/edit.png");
         xButton5.setImmediate(true);
+
+        xButton7.setName("editRemarks"); // NOI18N
+        xButton7.setText("Edit Remarks");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -93,21 +97,31 @@ public class BuildingPermitAncillaryPage extends javax.swing.JPanel {
                 .addComponent(xButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(144, 144, 144)
                 .addComponent(xButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 500, Short.MAX_VALUE))
+                .addGap(0, 384, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createSequentialGroup()
+                    .addGap(132, 132, 132)
+                    .addComponent(xButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(490, Short.MAX_VALUE)))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(xButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(xButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(xButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(xButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                    .addContainerGap(16, Short.MAX_VALUE)
+                    .addComponent(xButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap()))
         );
 
         xDataTable4.setHandler("infoListModel");
@@ -233,6 +247,7 @@ public class BuildingPermitAncillaryPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XButton xButton4;
     private com.rameses.rcp.control.XButton xButton5;
     private com.rameses.rcp.control.XButton xButton6;
+    private com.rameses.rcp.control.XButton xButton7;
     private com.rameses.rcp.control.XDataTable xDataTable4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XLabel xLabel4;

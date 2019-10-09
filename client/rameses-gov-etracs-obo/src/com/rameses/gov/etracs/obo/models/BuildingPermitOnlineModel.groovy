@@ -65,9 +65,9 @@ class BuildingPermitOnlineModel extends WorkflowTaskModel {
         return Inv.lookupOpener("view_document", [:]);
     }  
     
-    def receive() {
-        if(!MsgBox.confirm("You are about to recive this application. Proceed?")) return;
-        bpSvc.receive( entity );
+    def accept() {
+        if(!MsgBox.confirm("You are about to accept this application. Proceed?")) return;
+        bpSvc.accept( entity );
         return Inv.lookupOpener("vw_building_permit:open", [entity:entity] );       
     }
     

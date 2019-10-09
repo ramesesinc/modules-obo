@@ -19,7 +19,6 @@ class OboVariableListInterceptor {
 		def o = evt.args[0];
 		//o.debug = true;
 		if( !o.node?.id ) return;
-		if( o.node.id == 'all' ) return;
 
 		def str = " typeid = :typeid";
 		def m = [typeid: o.node.id ];

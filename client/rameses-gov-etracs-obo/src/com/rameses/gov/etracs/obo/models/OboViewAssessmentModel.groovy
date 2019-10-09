@@ -38,7 +38,6 @@ class OboViewAssessmentModel extends PageFlowController {
     }
 
     def doOk() {
-        if(! MsgBox.confirm("You are about to save the fees. Proceed?")) return null;
         if(handler) handler( list );
         return "_close";
     }

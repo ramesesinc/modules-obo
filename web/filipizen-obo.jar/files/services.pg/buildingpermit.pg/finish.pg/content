@@ -26,27 +26,27 @@
 	<p>You have completed the application. Please click and print the following</p>
 
 	<div style="padding-top:10px;font-weight:bold;">1) Building Permit
-		<a href="/obo/printout_main/buildingpermit?appid=${appid}" target=":print" class="printlink">[Print]</a>
+		<a href="/obo/printout_main/buildingpermit?appid=${appid}" target=":print" class="printlink">[Print 4 copies]</a>
 		&nbsp;&nbsp;
 		<a class="printlink">[Download data]</a>		
 	</div>
 
-	<div style="padding-top:10px;font-weight:bold;">2) Ancillary Permits</div>
+	<div style="padding-top:20px;font-weight:bold;">2) Ancillary Permits</div>
 	<%ancillaryList.each { item-> %>
 		<div style="padding-left:10px;">	
 			${item.type.title}
-			<a href="/obo/printout_ancillary/${item.type.objid}?refid=${item.objid}" target="${item.type.objid}_${item.objid}:print" class="printlink">[Print]</a>
+			<a href="/obo/printout_ancillary/${item.type.objid}?refid=${item.objid}" target="${item.type.objid}_${item.objid}:print" class="printlink">[Print  4 copies]</a>
 		</div>
 	<%}%>
 
-	<div style="padding-top:10px;font-weight:bold;">3) 
-		Please read the ff. requirements and download this checklist together with the requirements
-		<a class="printlink">[Print]</a>
+	<div style="padding-top:20px;font-weight:bold;">3) 
+		Please read the ff. requirements and download this checklist 
 	</div> 
-	<div style="padding-top:10px;" ></div>
+	<div style="padding-top:40px;" ></div>
 
 	<div class="title">
 		<p style="font-weight:bold;font-size:15px;">Checklist of Requirements</p>
+		<a class="printlink">[Download and Print]</a>
 	</div>
 	<div class="body">
 		<div class="body-content">

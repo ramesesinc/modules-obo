@@ -183,27 +183,10 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
 
         xTabbedPane1.addTab("General Info", jPanel1);
 
-        xPanel1.setVisibleWhen("#{ entity.allowassessment == 1 }");
-
         schemaList2.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "item.title"}
                 , new Object[]{"caption", "Title"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 0}
-                , new Object[]{"maxWidth", 0}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "remarks"}
-                , new Object[]{"caption", "Remarks"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
@@ -230,6 +213,21 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.DecimalColumnHandler("#,##0.00", -1.0, -1.0, false, 2)}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "remarks"}
+                , new Object[]{"caption", "Remarks"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
         schemaList2.setCustomFilter("appid = :appid AND parentid = :objid");
@@ -246,8 +244,8 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
         xButton2.setName("addFee"); // NOI18N
         xButton2.setText("Add Fee");
 
-        xButton3.setName("viewAssessmentInfo"); // NOI18N
-        xButton3.setText("View Info");
+        xButton3.setName("viewAncillaryPermit"); // NOI18N
+        xButton3.setText("View Ancillary Info");
 
         javax.swing.GroupLayout xPanel1Layout = new javax.swing.GroupLayout(xPanel1);
         xPanel1.setLayout(xPanel1Layout);
@@ -262,7 +260,7 @@ public class BuildingPermitEvaluationPage extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(xButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(xButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(xButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );

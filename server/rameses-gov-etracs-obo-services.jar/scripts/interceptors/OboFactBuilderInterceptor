@@ -22,10 +22,10 @@ class OboFactBuilderInterceptor {
 		params.permits?.each {
 			//this is only temporary for discussion purposes
 			if(it.type.toUpperCase() == 'FIRE') it.type = it.type.toLowerCase();
-			def anc =new AncillaryPermit( it ); 
+			it.type = it.type.toUpperCase();
+			def anc = new AncillaryPermit( it ); 
 			factBuilder.facts << anc;
 		}
-
 	}
 
 

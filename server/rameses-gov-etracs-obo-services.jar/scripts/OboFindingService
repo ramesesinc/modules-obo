@@ -49,6 +49,7 @@ class OboFindingService {
 				em.find( [objid: oldid ] ).update( [supersederid: m.objid ] );			
 			}
 			else {
+				r.checked = o.checked;
 				r.remarks = o.remarks; 
 				r.state = 0;
 				r.modifiedby = [objid: env.USERID, name: env.FULLNAME ];

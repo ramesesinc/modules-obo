@@ -1,0 +1,19 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+         <invoker type="vw_building_permit:form:reports" 
+                 caption="Claim Stub"
+                 reportId="building_permit_claimstub"
+                 reportName="com/rameses/gov/etracs/obo/reports/building_permit_claimstub.jasper"
+                 visibleWhen="#{ task.state == 'receiving'}" 
+                action="preview" index="1" target="popup"/>
+        
+        <invoker type="vw_building_permit:form:reports" 
+                 caption="Document Verification Checklist"
+                 reportId="building_permit_doc_verification_checklist"
+                 reportName="com/rameses/gov/etracs/obo/reports/building_permit_doc_verification_checklist.jasper"
+                  visibleWhen="#{ task.state == 'receiving-revision'}"
+                 action="preview" index="2" target="popup"/>
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
+</workunit>

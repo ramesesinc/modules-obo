@@ -26,7 +26,6 @@ public class OboAssessmentService  {
 
 	@ProxyMethod
 	public def assess(o) {
-
 		def appid = o.app.remove("appid");
 		//load the related infos. find the related ancillary permit to get the info parentid
 		if(o.sectionid) {
@@ -36,7 +35,6 @@ public class OboAssessmentService  {
 				o.infos = zinfos;
 			}
 		}
-
 		def res = billingRuleSvc.execute( [rulename:'oboassessment', params: o, include_items: false ] );
 		def bitems = [];
 		res.billitems.each {

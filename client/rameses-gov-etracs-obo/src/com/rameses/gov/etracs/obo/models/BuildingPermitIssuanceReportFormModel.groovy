@@ -11,7 +11,7 @@ import com.rameses.seti2.models.*;
 import com.rameses.rcp.framework.ClientContext;
 
 
-public class BuildingPermitReportFormModel extends FormReportModel {
+public class BuildingPermitIssuanceReportFormModel extends FormReportModel {
     
     def entity;
     def permit;

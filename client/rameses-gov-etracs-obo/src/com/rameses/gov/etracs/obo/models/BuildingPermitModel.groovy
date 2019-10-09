@@ -114,4 +114,5 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return Inv.lookupOpener("building_permit_issuance:create", m );
     }
     
+    
 }

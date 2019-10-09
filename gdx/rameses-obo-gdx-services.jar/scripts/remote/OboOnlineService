@@ -61,8 +61,8 @@ class OboOnlineService  {
     @ProxyMethod
     public def submitOnlineApplication( def o ) {
         def app = downloadSvc.getInfo( [appid: o.appid ] );
-        app = localOboSvc.upload( app );
-        return app;
+        localOboSvc.upload( app );
+        return [status: 'OK'];
     }
 
 }

@@ -6,6 +6,10 @@
                 action="issuePermit" target="popup"
                 visibleWhen="#{ task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"    />
 
+        <invoker type="formActions" 
+                caption="Reports"
+                action="showMenu" context="reports"/>
+
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />
     <pages>

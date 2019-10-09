@@ -1,6 +1,7 @@
 [cleanup-all]
-UPDATE building_permit SET locationid = null, applicantid = null, contractorid=NULL, taskid = NULL;
+UPDATE building_permit SET applicantid = null, taskid = NULL, accessoryid = NULL;
 UPDATE building_permit_section SET taskid = NULL;
+UPDATE building_permit_requirement SET supersederid = NULL;
 DELETE FROM building_permit_section_task;
 DELETE FROM building_permit_task;
 DELETE FROM building_permit_fee;
@@ -11,6 +12,7 @@ DELETE FROM building_permit_section;
 DELETE FROM building_permit_info;
 DELETE FROM building_permit_requirement;
 DELETE FROM building_permit_ancillary;
+DELETE FROM building_permit_accessory;
 DELETE FROM building_permit_rpu;
 DELETE FROM building_permit_professional;
 DELETE FROM building_permit_entity;
