@@ -96,8 +96,8 @@
     @wx:decimal(caption:'Estimated Cost [Php]', context:'project', name:'project.projectcost', required: true, inputClass:'+w200')
 
     <div style="padding-top:20px;"></div>
-    @wx:date(caption:'Proposed Construction Date', context:'project', name:'project.dtproposedconstruction', required: true)
-    @wx:date(caption:'Expected Completion Date', context:'project', name:'project.dtexpectedcompletion', required: true)
+    @wx:date(caption:'Proposed Construction Date', context:'project', name:'project.dtproposedconstruction', required: true, attrs:[hint:'yyyy-MM-dd'])
+    @wx:date(caption:'Expected Completion Date', context:'project', name:'project.dtexpectedcompletion', required: true, attrs:[hint:'yyyy-MM-dd'])
 
   </div>
   @wx:button( caption: 'Save', context:'project', name: 'updateProject' )

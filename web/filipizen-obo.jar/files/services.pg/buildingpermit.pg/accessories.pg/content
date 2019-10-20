@@ -96,7 +96,7 @@
 
 <legend>Accessories</legend>
 <div r:context="accessories" r:visibleWhen="#{ mode == 'select-accessory' }" style="display:none;">
-	<div style="padding-bottom:10px;">Select accessory to add</div>
+	<div style="padding-bottom:10px;">Select accessory to add if applicable</div>
 	<%occupancyTypes.each { o-> %>
 		<div>
 			<input type="checkbox" r:context="accessories" r:name="accessoryTypes.${o.objid.toLowerCase()}" r:checkedValue="1" r:uncheckedValue="0"/>

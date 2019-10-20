@@ -13,12 +13,12 @@ import com.rameses.seti2.views.CrudFormPage;
  * @author elmonazareno
  */
 @Template(CrudFormPage.class)
-public class OboSectionTypePage extends javax.swing.JPanel {
+public class OboSectionPage extends javax.swing.JPanel {
 
     /**
      * Creates new form OboRequirementTypePage
      */
-    public OboSectionTypePage() {
+    public OboSectionPage() {
         initComponents();
     }
 
@@ -35,11 +35,10 @@ public class OboSectionTypePage extends javax.swing.JPanel {
         xTextField1 = new com.rameses.rcp.control.XTextField();
         xTextField2 = new com.rameses.rcp.control.XTextField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
-        xComboBox1 = new com.rameses.rcp.control.XComboBox();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xTextField3 = new com.rameses.rcp.control.XTextField();
-        xComboBox4 = new com.rameses.rcp.control.XComboBox();
-        xCheckBox2 = new com.rameses.rcp.control.XCheckBox();
+        xComboBox2 = new com.rameses.rcp.control.XComboBox();
+        xComboBox1 = new com.rameses.rcp.control.XComboBox();
 
         xFormPanel1.setCaption("General Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -47,7 +46,7 @@ public class OboSectionTypePage extends javax.swing.JPanel {
         xTitledBorder1.setTitle("General Info");
         xFormPanel1.setBorder(xTitledBorder1);
         xFormPanel1.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
-        xFormPanel1.setCaptionWidth(150);
+        xFormPanel1.setCaptionWidth(180);
 
         xTextField1.setCaption("Code");
         xTextField1.setDisableWhen("#{ mode != 'create' }");
@@ -69,14 +68,6 @@ public class OboSectionTypePage extends javax.swing.JPanel {
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLookupField1);
 
-        xComboBox1.setCaption("Activation State");
-        xComboBox1.setItems("workflowStates");
-        xComboBox1.setName("entity.activationstate"); // NOI18N
-        xComboBox1.setDynamic(true);
-        xComboBox1.setPreferredSize(new java.awt.Dimension(150, 22));
-        xComboBox1.setRequired(true);
-        xFormPanel1.add(xComboBox1);
-
         xIntegerField1.setCaption("Sort Index");
         xIntegerField1.setName("entity.sortindex"); // NOI18N
         xIntegerField1.setPreferredSize(new java.awt.Dimension(50, 20));
@@ -88,28 +79,20 @@ public class OboSectionTypePage extends javax.swing.JPanel {
         xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xTextField3);
 
-        xComboBox4.setCaption("Issue Permit");
-        xComboBox4.setExpression("#{ item.objid }");
-        xComboBox4.setItems("permitTypes");
-        xComboBox4.setName("entity.permittype"); // NOI18N
-        xComboBox4.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xComboBox4.setPreferredSize(new java.awt.Dimension(0, 22));
-        xFormPanel1.add(xComboBox4);
+        xComboBox2.setCaption("Building Permit State");
+        xComboBox2.setItems("buildingPermitStates");
+        xComboBox2.setName("entity.buildingpermitstate"); // NOI18N
+        xComboBox2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xComboBox2.setDynamic(true);
+        xComboBox2.setPreferredSize(new java.awt.Dimension(200, 22));
+        xFormPanel1.add(xComboBox2);
 
-        xCheckBox2.setCaption("");
-        xCheckBox2.setCheckValue(1);
-        xCheckBox2.setDisableWhen("#{ mode == 'read' }");
-        xCheckBox2.setName("entity.allowassessment"); // NOI18N
-        xCheckBox2.setUncheckValue(0);
-        xCheckBox2.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
-        xCheckBox2.setShowCaption(false);
-        xCheckBox2.setText("Allow Assessment");
-        xCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xCheckBox2ActionPerformed(evt);
-            }
-        });
-        xFormPanel1.add(xCheckBox2);
+        xComboBox1.setCaption("Occupancy Permit State");
+        xComboBox1.setItems("occupancyPermitStates");
+        xComboBox1.setName("entity.occupancypermitstate"); // NOI18N
+        xComboBox1.setDynamic(true);
+        xComboBox1.setPreferredSize(new java.awt.Dimension(200, 22));
+        xFormPanel1.add(xComboBox1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -124,20 +107,15 @@ public class OboSectionTypePage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(76, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void xCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_xCheckBox2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.rcp.control.XCheckBox xCheckBox2;
     private com.rameses.rcp.control.XComboBox xComboBox1;
-    private com.rameses.rcp.control.XComboBox xComboBox4;
+    private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
     private com.rameses.rcp.control.XLookupField xLookupField1;

@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 
 	<element tablename="obovariable_attribute">
 		<field name="objid" primary="true"/>

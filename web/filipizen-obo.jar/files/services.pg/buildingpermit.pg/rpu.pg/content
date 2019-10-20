@@ -16,13 +16,13 @@
 
   this.findProperty = function() {
     var svc = Service.lookup( app.orgcode + ":OboOnlineService" );
-    svc.findLocation( {refno: self.refno}, function(o,s) {
-      if( s == "error" ) {
-        alert("Error " + o.result);
+    svc.findLocation( {refno: self.refno}, function(s,o) {
+      if( s.status == "ERROR" ) {
+        alert("Error " + s.msg);
       }
       else {
         self.mode = "view-lot";
-        self.prop = o.result;
+        self.prop = o;
         if(self.prop.owner.address.type == 'local' ) {
           self.prop.owner.resident = 1;
         }
@@ -32,8 +32,8 @@
         if( self.prop.owner.address.city ) self.prop.owner.address.citymunicipality = self.prop.owner.address.city;
         if( self.prop.owner.address.municipality ) self.prop.owner.address.citymunicipality = self.prop.owner.address.municipality;        
         self.prop.owner.ctc = {};      //allocate ctc
-        self._controller.refresh();
       }
+      self._controller.refresh();
     });
   }
 
@@ -56,6 +56,9 @@
   this.viewLot = function() { self.mode = "view-lot";}  
   
   this.editOwnerInfo = function() {
+    if(self.prop.bill.amtdue > 0 ) {
+      throw new Error("Please settle all unpaid balances first before proceeding");
+    }
     self.mode = "edit-owner-info"; 
     if(!self.barangayList) {
       var bsvc = Service.lookup("CloudPartnerService", "partner");
@@ -67,6 +70,9 @@
   }
 
   this.saveRpu = function() {
+    if( !self.prop.owner.id ) {
+      throw new Error("Please provide proof of identity for owner/administrator of property");
+    }
     self.prop.appid = app.appid;
     app.service.saveRpu( self.prop );
     self.reloadList();
@@ -122,7 +128,6 @@
   .attachId { color:blue; }
   .wStreet { width: 450px;}
 </style>
-
 
 <div  r:context="location" r:visibleWhen="#{mode=='view-rpus'}" style='display:none'>
   <legend>Lot Information</legend>

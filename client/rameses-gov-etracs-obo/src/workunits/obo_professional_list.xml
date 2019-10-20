@@ -2,6 +2,6 @@
     schemaName="obo_profession" >
     <invokers>
         <invoker folderid="explorer/master/obo" caption="Profession List" action="init" 
-                 cols="entity.name,profession,prcno,ptr,validity" role="MASTER"/>
+                 cols="entity.name,profession,prcno,ptr,validity" role="TMP_MASTER"/>
     </invokers>
 </workunit>

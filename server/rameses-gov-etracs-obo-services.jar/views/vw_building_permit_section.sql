@@ -3,7 +3,6 @@ CREATE VIEW vw_building_permit_section AS
 SELECT 
    a.*,
    et.title AS type_title,
-   et.allowassessment,
    t.state AS task_state,
    t.startdate AS task_startdate,
    t.enddate AS task_enddate,
@@ -20,5 +19,5 @@ SELECT
    
 FROM building_permit_section a 
 INNER JOIN building_permit_section_task t ON a.taskid = t.taskid
-INNER JOIN obo_section_type et ON a.typeid = et.objid
+INNER JOIN obo_section et ON a.typeid = et.objid
 LEFT JOIN building_permit_issuance p ON a.issuanceid = p.objid 

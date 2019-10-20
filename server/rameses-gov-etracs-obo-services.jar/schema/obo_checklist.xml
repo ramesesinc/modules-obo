@@ -1,9 +1,10 @@
 <schema adapter="obodb">
-	<element tablename="obo_evaluation_checklist">
+	<element tablename="obo_checklist">
 		<field name="objid" primary="true" caption="Name" visible="true"/>
-		<field name="evaluationtypeid" />
+		<field name="sectionid" />
 		<field name="title" />
 		<field name="category" />
+		<complex name="params"  serializer="default"/>
 	</element>
 </schema>
 		

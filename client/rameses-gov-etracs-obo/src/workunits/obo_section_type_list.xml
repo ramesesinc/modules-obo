@@ -1,6 +1,0 @@
-<workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" schemaName="obo_section_type">
-    <invokers>
-        <invoker folderid="/explorer/master/obo" caption="OBO Section Types" action="init"
-                 role="MASTER" zpermission="obo_section_type.view"/>
-    </invokers>
-</workunit>

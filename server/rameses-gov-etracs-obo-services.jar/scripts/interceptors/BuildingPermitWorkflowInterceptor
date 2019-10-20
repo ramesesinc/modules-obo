@@ -29,8 +29,8 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("vw_building_permit_section")
 	def vwEvalEm;
 
-	@DataContext("obo_section_type")
-	def evalTypeEm;
+	@DataContext("obo_section")
+	def sectionEm;
 
 	@DataContext("building_permit_requirement")
 	def reqEm;
@@ -93,7 +93,7 @@ class BuildingPermitWorkflowInterceptor {
 
 		//start the next evaluation tasks. fire evaluations for non-ancillary as well as those for ancillary
 		def appid = p.refid;
-		def mlist = evalTypeEm.where("activationstate = :state", [state: result.state] ).list()*.objid;
+		def mlist = sectionEm.where("buildingpermitstate = :state", [state: result.state] ).list()*.objid;
 		if( mlist ) {
 			def dt = dateSvc.getServerDate();
 			mlist.each {

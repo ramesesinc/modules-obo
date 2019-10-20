@@ -41,13 +41,13 @@
 			var p = {email: self.contact.email, phoneno: self.contact.mobileno } 
 			var emailSvc = Service.lookup(app.orgcode+':VerifyEmailService');
 
-			emailSvc.verifyEmail( p, function(o,s) {
-		      if( s == "error" ) {
-		        self.error = o.result;
+			emailSvc.verifyEmail( p, function(s,o) {
+		      if( s.status == "ERROR" ) {
+		        self.error = s.msg;
 		      }
 		      else {
 		      	self.mode = "enter-key";
-		        self.hiddenkey = o.result.key;
+		        self.hiddenkey = o.key;
 		        self.error = null;
 		      }
 		      self._controller.refresh();
@@ -93,7 +93,6 @@
 
 	});
 </script>
-
 
 <div r:context="initial" r:visibleWhen="#{error != null }" style='display:none'>
 	<label r:context="initial" style="color:red;">#{error}</label>

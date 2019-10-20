@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="online_building_permit_info">
 		<field name="objid" primary="true" prefix="OBOBPINFO"/>
 		<field name="appid" required="true"/>

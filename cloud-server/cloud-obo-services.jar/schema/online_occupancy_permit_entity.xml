@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="online_occupancy_permit_entity">
 		<field name="objid" primary="true" prefix="OBBPENT" />
 		<field name="appid" required="true" />

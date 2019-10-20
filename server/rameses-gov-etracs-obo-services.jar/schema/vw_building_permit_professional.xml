@@ -14,6 +14,5 @@
 		
 		<complex name="ptr" serializer="default"/>
 		<complex name="prc" serializer="default"/>
-		<complex name="id" serializer="default"/>		
 	</element>
 </schema>

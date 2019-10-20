@@ -8,10 +8,6 @@
 		<field name="issuedby_name" />	
 		<field name="typeid" />
 		<field name="txnmode" required="true"/>
-		<!--
-		<complex name="type" ref="obo_section_type" jointype="many-to-one">
-			<key field="typeid" target="objid" />
-		</complex> 
-		-->
+		
 	</element>
 </schema>

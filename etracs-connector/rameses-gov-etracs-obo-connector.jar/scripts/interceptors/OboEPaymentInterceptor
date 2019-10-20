@@ -2,7 +2,7 @@ import com.rameses.annotations.*;
 
 class OboEPaymentInterceptor {
 
-	@Service(value="BuildingPermitBillingService", connection="local-obo")
+	@Service(value="BuildingPermitBillingService", connection="local-obo-server")
 	def oboSvc;
 
 	@After(pattern="OnlinePaymentService.getBilling", eval="#{args[0].txntype=='building_permit'}")

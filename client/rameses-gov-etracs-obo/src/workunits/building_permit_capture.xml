@@ -1,10 +1,7 @@
-<workunit>
+<workunit schemaName="building_permit">
     <invokers>
         <invoker folderid="menucategory/obo/building" caption="Capture Application"
                 action="create" index="10" />
-        <!-- ACTIONS -->        
-        <invoker type="formActions" caption="Save" action="save" index="10" />
-
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitCaptureModel" />
     <pages>

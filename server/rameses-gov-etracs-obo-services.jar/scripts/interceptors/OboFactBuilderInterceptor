@@ -19,10 +19,15 @@ class OboFactBuilderInterceptor {
 			createIntegerFact: { return new OboIntegerInfo() },
 			createBooleanFact: { return new OboBooleanInfo() }
 		);
+
 		params.permits?.each {
 			//this is only temporary for discussion purposes
-			if(it.type.toUpperCase() == 'FIRE') it.type = it.type.toLowerCase();
-			it.type = it.type.toUpperCase();
+			if(it.type.toUpperCase() == 'FIRE') {
+				it.type = it.type.toLowerCase();
+			}	
+			else {
+				it.type = it.type.toUpperCase();
+			}	
 			def anc = new AncillaryPermit( it ); 
 			factBuilder.facts << anc;
 		}

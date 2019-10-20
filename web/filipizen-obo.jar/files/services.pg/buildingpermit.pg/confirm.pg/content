@@ -17,22 +17,6 @@
 		app.updateStepNavbar();	
 	}
 
-	this.submit = function() {
-		if(!confirm("You are about to submit this application. Once submitted you cannot make any more changes. Continue?")) return;
-		var svc =  Service.lookup( app.orgcode + ":OboOnlineService" );
-		svc.submitOnlineApplication( {appid: self.appid  }, function(o,s) {
-			if( s == "error" ) {
-				self.error = o.result;
-				self.mode = "error";
-				self._controller.refresh();
-			}
-			else {
-				app.service.moveNextStep( {appid: self.appid } );
-				window.location.reload();
-			}
-		});
-	}
-
 	this.finish = function() {
 		if(!confirm("You are about to complete this application. Once submitted you cannot make any more changes. Continue?")) return;
 		app.service.moveNextStep( {appid: self.appid } );
@@ -52,7 +36,7 @@
 		<legend>Confirm</legend>
 		<label r:context="confirm" style="font-weight:normal;padding-bottom:20px;">
 		Please check the application information carefully before sending data. You can go back and edit 
-		the information. Once ready, click on Submit to send the application. 	
+		the information. Once ready, click on Finish to complete the application. 	
 		</label>
 	</div>
 	
@@ -66,22 +50,6 @@
 	  @wx:label(caption:'Occupancy Type', context:'confirm', expr:'#{info.occupancytype.title}')
 
      <div style="padding-top:20px"></div>
-	@wx:button(caption: 'Submit', context:'confirm', name: 'submit')
-</div>
-
-<div r:context="confirm" r:visibleWhen="#{ mode=='error' }">
-	<legend>Submission Failed</legend>
-	<label r:context="confirm" style="font-weight:normal;padding-bottom:20px;">
-		Your application was not sent successfully. This may be because the server of the local government of #{orgname} 
-		is not available at this time or there may be problems with the connectivity. But don't worry. 
-		There are two options you can do. 
-		<div style="padding-top:10px;">1. You can try again later by clicking on "Retry" button, or</div>
-		<div style="padding-top:10px;">2. Just continue and click "Finish" and download your application data on the next page in a USB or any transferrable device</div>
-	</label>
-
-	@wx:button(caption: 'Retry', context:'confirm', name: 'submit')
 	@wx:button(caption: 'Finish', context:'confirm', name: 'finish')
 </div>
-
-
 

@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="online_building_permit_entity">
 		<field name="objid" primary="true" prefix="OBBPENT" />
 		<field name="appid" required="true" />
@@ -29,7 +29,7 @@
 		<field name="mobileno" />
 		<field name="phoneno" />
 
-		<complex name="id" serializer="default" type="object" />
+		<complex name="id" serializer="default" type="object" required="false"/>
 		
 	</element>
 </schema>		

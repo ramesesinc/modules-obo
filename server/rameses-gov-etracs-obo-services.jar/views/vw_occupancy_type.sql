@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS vw_obo_occupancy_type;
 CREATE VIEW vw_obo_occupancy_type AS 
 SELECT 
 ot.*,  

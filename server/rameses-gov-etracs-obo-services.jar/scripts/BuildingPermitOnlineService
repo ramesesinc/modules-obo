@@ -44,11 +44,16 @@ public class BuildingPermitOnlineService  {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@Service("SequenceService")
-	def seqSvc;
+	@Service(value="OnlineBuildingPermitDownloadService", connection="cloud-obo-server")
+    def cloudBldgSvc;
 
-	@Service("AppnoGeneratorService")
-	def appNoSvc;
+    @Env
+    def env;
+
+    @ProxyMethod
+    public def getApplication( def o  ) {
+		return cloudBldgSvc.getDownloadInfo( [appid: o.appid, orgcode: env.ORGID ] );
+    }
 
 	@ProxyMethod
 	public def upload( def app ) {
@@ -88,7 +93,10 @@ public class BuildingPermitOnlineService  {
 		u.applicantid = applicantid;
 		if( accessoryid ) u.accessoryid = accessoryid;
 		appEm.find( [objid: newapp.objid ] ).update( u );
-		return [status: 'OK'];
+
+		//immediatly accept
+		accept( newapp );
+		return newapp;
 	}
 
 	@ProxyMethod
@@ -130,7 +138,6 @@ public class BuildingPermitOnlineService  {
 		wfSvc.start(p);	
 		return u;
 	}
-
 	
 
 }

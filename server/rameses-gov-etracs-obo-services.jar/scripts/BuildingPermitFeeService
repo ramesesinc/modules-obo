@@ -30,8 +30,8 @@ public class BuildingPermitFeeService  {
 	@DataContext("building_permit_ancillary")
 	def ancillaryEm;
 
-	@DataContext("obo_section_type")
-	def evalTypeEm;
+	@DataContext("obo_section")
+	def sectionEm;
 
 	@DataContext("building_permit_fee")
 	def feeEm;
@@ -64,14 +64,8 @@ public class BuildingPermitFeeService  {
         params.occupancytype = occ;
 
         params.permits = [];
-        /*
-		def list1 = evalTypeEm.where( "permitid IS NULL OR permittype.type <> 'ANCILLARY' ").list()*.objid;
-		def list2 = ancillaryEm.select("type.evaluationtypeid").find( [appid: o.appid ] ).list()*.type.evaluationtypeid;
-		(list1+list2).each {
-			params.permits << [type: it ];
-		}
-		*/
-		def list1 = evalTypeEm.where( "1=1").list()*.objid;
+       
+		def list1 = sectionEm.where( "1=1").list()*.objid;
 		list1.each {
 			params.permits << [type: it ];
 		}
@@ -98,7 +92,7 @@ public class BuildingPermitFeeService  {
 			}
 		}
 
-		def amount = res.billitems.sum{ it.amount };
+		def amount = feeEm.find([appid:o.appid ]).select("c:{SUM(amount)}").val();
 		appEm.find( [objid: o.appid] ).update( [amount: amount ]);
 
 		result.amount = amount;

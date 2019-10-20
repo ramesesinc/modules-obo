@@ -41,21 +41,20 @@
 		this.loadBill = function() {
 			var svc = Service.lookup(self.orgcode + ":EPaymentService");
 			var params = {refno: this.refno, txntype: 'building_permit'};
-			svc.getBilling( params, function(o,s) {
-				if( s == "error" ) {
-					self.error = o.result;
-					self._controller.refresh();
+			svc.getBilling( params, function(s,o) {
+				if( s.status == "ERROR" ) {
+					self.error = s.msg;
 				}
 				else {
 					self.error = null;
 					self.mode = "viewbill";
-					self.bill = o.result;	
+					self.bill = o;	
 					//self.barcode = "51010:"+self.bill.billno; 					
 					if( self.bill.amount == 0 ) {
 						self.bill.items = [];	
 					}
-					self._controller.refresh();
 				}
+				self._controller.refresh();				
 			});
 		}
 
@@ -84,12 +83,12 @@
 		    pp.origin = "filipizen";
 		    pp.txntype = self.bill.txntype;
 		    var pmtSvc = Service.lookup(self.orgcode + ":EPaymentService");
-		    pmtSvc.createPaymentOrder( pp, function(o,s) {
-		        if( s == "error" ) {
-		          alert("error " + o.result );
+		    pmtSvc.createPaymentOrder( pp, function(s,o) {
+		        if( s.status == "ERROR" ) {
+		          alert("error " + o.msg );
 		        }
 		        else {
-		          var refno = o.result.objid;
+		          var refno = o.objid;
 		          WindowUtil.load( "/epayment/paymentorder", {refno: refno});          
 		        }  
 		    });

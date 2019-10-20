@@ -13,12 +13,12 @@ import com.rameses.rcp.ui.annotations.Template;
  * @author elmonazareno
  */
 @Template(OKCancelPage.class)
-public class BuildingPermitEvaluationCheckListPage extends javax.swing.JPanel {
+public class BuildingPermitCheckListPage extends javax.swing.JPanel {
 
     /**
      * Creates new form BuildingPermitEvaluationCheckListPage
      */
-    public BuildingPermitEvaluationCheckListPage() {
+    public BuildingPermitCheckListPage() {
         initComponents();
     }
 

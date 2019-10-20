@@ -10,7 +10,9 @@ class OboVariableListInterceptor {
 		def result = evt.result;
 		def nodes = subType.orderBy("sortindex").list();
 		nodes.each {
-			result << [title: it.title, id: it.objid ];		
+			def title = it.title;
+			if( it.accessory == 1 ) title = it.objid +":" +it.title;
+			result << [title: title, id: it.objid ];		
 		}
 	}
 

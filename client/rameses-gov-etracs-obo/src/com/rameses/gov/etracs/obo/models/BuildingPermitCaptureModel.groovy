@@ -10,22 +10,16 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingPermitCaptureModel extends PageFlowController {
+class BuildingPermitCaptureModel extends CrudFormModel {
     
     @Service("BuildingPermitService")
     def appService;
     
-    def entity;
     def appTypes = ["NEW", "RENEW","ADDITIONAL"];
     
-    void create() {
-        entity = [numunits: 1, professionals: [] ];
+    void afterCreate() {
+        entity = [numunits: 1, professionals: [], worktypes: [] ];
         entity.txnmode = "CAPTURE";
-    }
-    
-    def save() {
-        entity = appService.saveCapture( entity );
-        return "_close";
     }
     
     /*

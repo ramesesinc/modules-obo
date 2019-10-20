@@ -30,9 +30,17 @@ public class OnlineBuildingPermitDownloadService  {
 
 	//This is called by the local client
 	@ProxyMethod
-	public def getInfo(def parm) {
+	public def getDownloadInfo(def parm) {
 		def appid = parm.appid;
 		def app = appEm.find([objid: appid ] ).first();
+
+		if( parm.orgcode != app.orgcode ) {
+			throw new Exception("This application is not for this organization");
+		}	
+		if( app.step < 9 ) {
+			throw new Exception("This application is not yet completed");
+		}
+
 		app.entities = entityEm.find( [appid: appid ]).list();
 		app.rpus = rpuEm.find( [appid: appid] ).list();
 		app.professionals = professionalEm.find( [appid:appid] ).list();

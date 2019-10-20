@@ -36,7 +36,7 @@ public class OboItemAccountPage extends javax.swing.JPanel {
         xTextField2 = new com.rameses.rcp.control.XTextField();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
-        xLookupField2 = new com.rameses.rcp.control.XLookupField();
+        xLookupField3 = new com.rameses.rcp.control.XLookupField();
 
         xFormPanel1.setCaptionWidth(150);
 
@@ -45,7 +45,6 @@ public class OboItemAccountPage extends javax.swing.JPanel {
         xTextField1.setName("entity.objid"); // NOI18N
         xTextField1.setPreferredSize(new java.awt.Dimension(150, 20));
         xTextField1.setRequired(true);
-        xTextField1.setSpaceChar('_');
         xFormPanel1.add(xTextField1);
 
         xTextField2.setCaption("Title");
@@ -67,13 +66,13 @@ public class OboItemAccountPage extends javax.swing.JPanel {
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLookupField1);
 
-        xLookupField2.setCaption("Section");
-        xLookupField2.setExpression("#{ entity.type.objid }");
-        xLookupField2.setHandler("obo_section_type:lookup");
-        xLookupField2.setName("entity.type"); // NOI18N
-        xLookupField2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLookupField2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLookupField2);
+        xLookupField3.setCaption("Section");
+        xLookupField3.setExpression("#{ entity.sectionid }");
+        xLookupField3.setHandler("lookupSection");
+        xLookupField3.setName("entity.sectionid"); // NOI18N
+        xLookupField3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLookupField3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLookupField3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,7 +97,7 @@ public class OboItemAccountPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
     private com.rameses.rcp.control.XLookupField xLookupField1;
-    private com.rameses.rcp.control.XLookupField xLookupField2;
+    private com.rameses.rcp.control.XLookupField xLookupField3;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
     // End of variables declaration//GEN-END:variables

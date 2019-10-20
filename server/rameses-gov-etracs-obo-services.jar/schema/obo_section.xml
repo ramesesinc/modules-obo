@@ -1,19 +1,14 @@
 <schema adapter="obodb">
-	<element tablename="obo_section_type">
+	<element tablename="obo_section">
 		<field name="objid" primary="true" caption="Name" visible="true"/>
 		<field name="title" caption="Title" searchable="true"/>
 		<field name="org_objid" />
 		<field name="org_name" />
-		<field name="activationstate" />
 		<field name="sortindex" />
 		<field name="role" />
 
-		<field name="permitid" />
-		<field name="allowassessment" />
-
-		<complex name="permittype" ref="obo_permit_type" jointype="many-to-one" required="false">
-			<key field="permitid" target="objid" />
-		</complex>	
+		<field name="buildingpermitstate" />
+		<field name="occupancypermitstate" />
 
 	</element>
 </schema>

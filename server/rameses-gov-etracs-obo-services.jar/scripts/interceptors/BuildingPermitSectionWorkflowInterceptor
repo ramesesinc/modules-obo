@@ -1,6 +1,6 @@
 import com.rameses.annotations.*; 
 
-class BuildingPermitEvaluationWorkflowInterceptor { 
+class BuildingPermitSectionWorkflowInterceptor { 
 
 	@Service("WorkflowTaskService")
 	def wfSvc;

@@ -42,6 +42,7 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
         xLabel1 = new com.rameses.rcp.control.XLabel();
         xRadio1 = new com.rameses.rcp.control.XRadio();
         xRadio2 = new com.rameses.rcp.control.XRadio();
+        xRadio3 = new com.rameses.rcp.control.XRadio();
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 150));
 
@@ -65,7 +66,7 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -138,7 +139,7 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(schemaList6, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
+                .addComponent(schemaList6, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -153,14 +154,20 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
         xRadio1.setCaption("Status");
         xRadio1.setName("entity.checked"); // NOI18N
         xRadio1.setOptionValue(1);
-        xRadio1.setText("Pass");
+        xRadio1.setText("Pass - compliant");
         xFormPanel2.add(xRadio1);
 
         xRadio2.setCaption("");
         xRadio2.setName("entity.checked"); // NOI18N
         xRadio2.setOptionValue(0);
-        xRadio2.setText("Deficient");
+        xRadio2.setText("Deficient - Non compliant");
         xFormPanel2.add(xRadio2);
+
+        xRadio3.setCaption("");
+        xRadio3.setName("entity.checked"); // NOI18N
+        xRadio3.setOptionValue(3);
+        xRadio3.setText("Not applicable");
+        xFormPanel2.add(xRadio3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -177,9 +184,9 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(xTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -195,6 +202,7 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XRadio xRadio1;
     private com.rameses.rcp.control.XRadio xRadio2;
+    private com.rameses.rcp.control.XRadio xRadio3;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     private com.rameses.rcp.control.XTextArea xTextArea1;
     // End of variables declaration//GEN-END:variables

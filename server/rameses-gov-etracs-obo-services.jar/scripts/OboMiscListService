@@ -28,8 +28,8 @@ public class OboMiscListService  {
 	@DataContext("obo_variable")
 	def itemEm;
 
-	@DataContext("obo_section_type")
-	def evalTypeEm;
+	@DataContext("obo_section")
+	def sectionEm;
 
 	@ProxyMethod
 	public def getOccupancyTypeGroups() {
@@ -91,12 +91,15 @@ public class OboMiscListService  {
 	}
 
 	
-
 	@ProxyMethod 
-	public def getEvaluationTypeStates() {
-		return evalTypeEm.getStates();
+	public def getBuildingPermitStates() {
+		return sectionEm.getBuildingPermitStates();
 	}
 
+	@ProxyMethod 
+	public def getOccupancyPermitStates() {
+		return sectionEm.getOccupancyPermitStates();
+	}
 
 	/* To do 
 	public def getRequirementList( def o ){;}

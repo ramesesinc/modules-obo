@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="obo_costitem">
 		<field name="objid" primary="true" visible="true"  />
 		<field name="category" />

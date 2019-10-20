@@ -21,12 +21,12 @@
 	this.findApplicant = function(){
 		var profileSvc = Service.lookup( app.orgcode + ':RemoteEntityProfileService' );
 		var p = {idno: self.idno };
-		profileSvc.findByIdno( p, function(o,s) {
-	      if( s == "error" ) {
-	        self.iderror = o.result;
+		profileSvc.findByIdno( p, function(s,o) {
+	      if( s.status == "ERROR" ) {
+	        self.iderror = s.msg;
 	      }
 	      else {
-	      	self.applicant = o.result;
+	      	self.applicant = o;
 	        self.iderror = null;		
 			    self.mode = "show-applicant";
 	      }

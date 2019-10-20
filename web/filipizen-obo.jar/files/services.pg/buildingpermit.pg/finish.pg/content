@@ -39,8 +39,8 @@
 		</div>
 	<%}%>
 
-	<div style="padding-top:20px;font-weight:bold;">3) 
-		Please read the ff. requirements and download this checklist 
+	<div style="padding-top:20px;font-weight:bold;">
+	3) Please download and print the Building and Ancillary Permit forms, prepare the requirements listed below, and submit at the receiving window of our One-Stop Shop for Construction Permits (OSCP) located at the Ground Floor, City Engineering Office, Miguel Lopez de Legazpi Boulevard, Dapdap, Legazpi City.
 	</div> 
 	<div style="padding-top:40px;" ></div>
 
@@ -60,10 +60,10 @@
 				<div>
 					<div class="body-content-subtext">
 						<div>
-						<p>a. In case the applicant is the registered owner of the lot, one (1) certified true copy of latest OCT/TCT, on file with the Registry of  Deeds</p></div>
+						<p>a. In case the applicant is the registered owner of the lot, one (1) certified true copy of latest Original Certificate of Title (OCT)/ Transfer Certficate of Title (TCT), on file with the Registry of  Deeds</p></div>
 					</div>
 					<div class="body-content-subtext">
-						<div><p>b. In case the applicant is not the registered owner of the lot, in addition to the certified true copy of latest OCT/TCT, duly notarized copy of the Contract of Lease, Award Notice, Deed of Absolute Sale, Contract to Sell, Extra-Judicial Settlement or Authority from the registered owner</p></div>
+						<div><p>b. In case the applicant is not the registered owner of the lot, in addition to the certified true copy of latest Original Certificate of Title (OCT)/ Transfer Certficate of Title (TCT), duly notarized copy of the Contract of Lease, Award Notice, Deed of Absolute Sale, Contract to Sell, Extra-Judicial Settlement or Authority from the registered owner</p></div>
 					</div>
 				</div>
 			</div>
@@ -78,7 +78,7 @@
 				<div style="display: flex">
 					<div>
 						<ul>
-							<li>Architectural Documents</li>
+							<li>Architectural Documents (Architect)</li>
 							<li>Civil/Structural Documents (Civil/Structural Engineer)</li>
 							<li>Electrical Documents (Professional Electrical Engineer)</li>
 							<li>Mechanical Documents (Professional Mechanical Engineer</li>
