@@ -21,3 +21,5 @@ FROM building_permit_section a
 INNER JOIN building_permit_section_task t ON a.taskid = t.taskid
 INNER JOIN obo_section et ON a.typeid = et.objid
 LEFT JOIN building_permit_issuance p ON a.issuanceid = p.objid 
+
+WHERE NOT(buildingpermitstate IS NULL) 

@@ -153,7 +153,9 @@
             <Component class="com.rameses.rcp.control.XFileBrowser" name="xFileBrowser1">
               <Properties>
                 <Property name="caption" type="java.lang.String" value="Select File name"/>
+                <Property name="editable" type="boolean" value="true"/>
                 <Property name="name" type="java.lang.String" value="filename" noResource="true"/>
+                <Property name="visibleWhen" type="java.lang.String" value=""/>
                 <Property name="captionWidth" type="int" value="150"/>
                 <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                   <Insets value="[0, 30, 0, 0]"/>
@@ -170,25 +172,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="com.rameses.rcp.control.XFileBrowser" name="xFileBrowser2">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Select File name"/>
-            <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="source"/>
-              </StringArray>
-            </Property>
-            <Property name="name" type="java.lang.String" value="filename" noResource="true"/>
-            <Property name="visibleWhen" type="java.lang.String" value="#{ source == &apos;file&apos; }"/>
-            <Property name="captionWidth" type="int" value="150"/>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 30, 0, 0]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[0, 20]"/>
-            </Property>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">

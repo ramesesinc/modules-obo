@@ -41,7 +41,6 @@ public class BuildingPermitInitialPage extends javax.swing.JPanel {
         xRadio3 = new com.rameses.rcp.control.XRadio();
         xPanel1 = new com.rameses.rcp.control.XPanel();
         xFileBrowser1 = new com.rameses.rcp.control.XFileBrowser();
-        xFileBrowser2 = new com.rameses.rcp.control.XFileBrowser();
         jLabel1 = new javax.swing.JLabel();
 
         xFormPanel1.setCaptionWidth(160);
@@ -102,22 +101,15 @@ public class BuildingPermitInitialPage extends javax.swing.JPanel {
         xPanel1.setLayout(new java.awt.BorderLayout());
 
         xFileBrowser1.setCaption("Select File name");
+        xFileBrowser1.setEditable(true);
         xFileBrowser1.setName("filename"); // NOI18N
+        xFileBrowser1.setVisibleWhen("");
         xFileBrowser1.setCaptionWidth(150);
         xFileBrowser1.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
         xFileBrowser1.setPreferredSize(new java.awt.Dimension(0, 20));
         xPanel1.add(xFileBrowser1, java.awt.BorderLayout.CENTER);
 
         xFormPanel1.add(xPanel1);
-
-        xFileBrowser2.setCaption("Select File name");
-        xFileBrowser2.setDepends(new String[] {"source"});
-        xFileBrowser2.setName("filename"); // NOI18N
-        xFileBrowser2.setVisibleWhen("#{ source == 'file' }");
-        xFileBrowser2.setCaptionWidth(150);
-        xFileBrowser2.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xFileBrowser2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xFileBrowser2);
 
         jLabel1.setText("Please enter the tracking number or select a file.");
 
@@ -154,7 +146,6 @@ public class BuildingPermitInitialPage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private com.rameses.rcp.control.XFileBrowser xFileBrowser1;
-    private com.rameses.rcp.control.XFileBrowser xFileBrowser2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XRadio xRadio1;

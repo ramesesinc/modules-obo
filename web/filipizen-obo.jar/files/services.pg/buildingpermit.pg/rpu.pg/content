@@ -16,7 +16,7 @@
 
   this.findProperty = function() {
     var svc = Service.lookup( app.orgcode + ":OboOnlineService" );
-    svc.findLocation( {refno: self.refno}, function(s,o) {
+    return svc.findLocation( {refno: self.refno}, function(s,o) {
       if( s.status == "ERROR" ) {
         alert("Error " + s.msg);
       }
@@ -56,7 +56,7 @@
   this.viewLot = function() { self.mode = "view-lot";}  
   
   this.editOwnerInfo = function() {
-    if(self.prop.bill.amtdue > 0 ) {
+    if(self.prop.bill !=null && self.prop.bill.amtdue !=null &&  self.prop.bill.amtdue > 0 ) {
       throw new Error("Please settle all unpaid balances first before proceeding");
     }
     self.mode = "edit-owner-info"; 
@@ -92,6 +92,12 @@
     self.prop = self.selectedItem;
     self.mode = "view-lot";
     self.editmode = "view";
+  }
+
+  this.editInfo = function() {
+    if(!self.selectedItem) throw new Error("Please select an item");
+    self.prop = self.selectedItem;
+    self.editOwnerInfo();
   }
 
   this.removeRpu = function() {
@@ -153,8 +159,10 @@
           <td style="width:40px;">#{item.classcode}</td>
           <td style="width:100px;">#{item.areasqm}</td>        
           <td style="width:130px;">#{item.owner.name}</td>
-          <td >
-            <a href="#" r:context="location" r:name="viewInfo" class="link-edit-action">Edit</a> 
+          <td>
+            <a href="#" r:context="location" r:name="viewInfo" class="link-edit-action">View</a> 
+            &nbsp;&nbsp;
+            <a href="#" r:context="location" r:name="editInfo" class="link-edit-action">Edit</a> 
             &nbsp;&nbsp;
             <a href="#" r:context="location" r:name="removeRpu" class="link-edit-action">Remove</a>
           </td>
@@ -217,8 +225,13 @@
         @wx:label( caption:'Class Code', context:'location', expr:'#{prop.classcode}' )
       </div>
 
-     <hr> 
-     <h2>Lot Owner Information</h2>
+      <h2 style="padding-top:20px;">Lot ownership</h2>
+      <div style="padding-bottom:10px;">
+        <input type="radio" r:context="location" r:name="prop.lotowned" value="1" disabled>&nbsp;Lot Owned &nbsp;&nbsp;
+        <input type="radio" r:context="location" r:name="prop.lotowned" value="0" disabled>&nbsp;Leased &nbsp;&nbsp;          
+      </div>
+
+     <h2 style="padding-top:20px;">Lot Owner Information</h2>
      <div>
           @wx:label( caption:'Profile No', context:'location', expr:'#{prop.owner.profileno}' )              
           @wx:label( caption:'Type', context:'location', expr:'#{prop.owner.entitytype}' )
@@ -244,6 +257,12 @@
   <h2>Lot Owner Details</h2>
   <p>Please update the information if necessary</p>
   <div class="form">
+    <div style="padding-bottom:10px;">
+      <div>Lot ownership</div>
+      <input type="radio" r:context="location" r:name="prop.lotowned" value="1">&nbsp;Lot Owned &nbsp;&nbsp;
+      <input type="radio" r:context="location" r:name="prop.lotowned" value="0">&nbsp;Leased &nbsp;&nbsp;          
+    </div>
+
     @wx:label( caption:'Profile No', context:'location', expr:'#{prop.owner.profileno}', captionClass:'+w200' )
     @wx:label( caption:'Type', context:'location', expr:'#{prop.owner.entitytype}' )  
     <div  r:context="location" r:visibleWhen="#{prop.owner.entitytype != 'INDIVIDUAL' }">  

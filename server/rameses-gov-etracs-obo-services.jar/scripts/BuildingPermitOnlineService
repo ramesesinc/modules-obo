@@ -44,7 +44,7 @@ public class BuildingPermitOnlineService  {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@Service(value="OnlineBuildingPermitDownloadService", connection="cloud-obo-server")
+	@Service(value="obo/OnlineBuildingPermitDownloadService", connection="ext/cloud-server")
     def cloudBldgSvc;
 
     @Env

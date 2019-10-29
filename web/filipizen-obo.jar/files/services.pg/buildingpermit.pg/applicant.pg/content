@@ -16,12 +16,12 @@
   this.entityTypes = ["INDIVIDUAL", "CORPORATION", "GOVERNMENT", "OTHER"];
 
 	var app = \$get("app").code;
-  var appSvc = Service.lookup( 'OnlineBuildingPermitService', 'obo' );
+ 
 
 	this.findApplicant = function(){
 		var profileSvc = Service.lookup( app.orgcode + ':RemoteEntityProfileService' );
 		var p = {idno: self.idno };
-		profileSvc.findByIdno( p, function(s,o) {
+		return profileSvc.findByIdno( p, function(s,o) {
 	      if( s.status == "ERROR" ) {
 	        self.iderror = s.msg;
 	      }
@@ -51,7 +51,7 @@
 
   this.onload = function() {
     self.orgname = app.orgname;
-    self.applicant = appSvc.getApplicant( {appid: app.appid} );
+    self.applicant = app.service.getApplicant( {appid: app.appid} );
     if(!self.applicant) {
       self.viewInitial();             
     }
@@ -95,7 +95,6 @@
     }
     return new PopupOpener( "id_entry", { onselect: h, entry: self.applicant.id},  {width:'500', title:'Select Proof of Identity'} );
   }
-
 
 });
 
@@ -186,6 +185,7 @@
     @wx:idproof( context:'applicant', name:'applicant.id', action:'attachId' )
     <br>
     @wx:button( caption:'Next', context:'applicant', name:'saveApplicant')
+
 </div>
 
 

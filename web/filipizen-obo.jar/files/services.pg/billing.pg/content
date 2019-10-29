@@ -41,7 +41,7 @@
 		this.loadBill = function() {
 			var svc = Service.lookup(self.orgcode + ":EPaymentService");
 			var params = {refno: this.refno, txntype: 'building_permit'};
-			svc.getBilling( params, function(s,o) {
+			return svc.getBilling( params, function(s,o) {
 				if( s.status == "ERROR" ) {
 					self.error = s.msg;
 				}
@@ -83,7 +83,7 @@
 		    pp.origin = "filipizen";
 		    pp.txntype = self.bill.txntype;
 		    var pmtSvc = Service.lookup(self.orgcode + ":EPaymentService");
-		    pmtSvc.createPaymentOrder( pp, function(s,o) {
+		    return pmtSvc.createPaymentOrder( pp, function(s,o) {
 		        if( s.status == "ERROR" ) {
 		          alert("error " + o.msg );
 		        }

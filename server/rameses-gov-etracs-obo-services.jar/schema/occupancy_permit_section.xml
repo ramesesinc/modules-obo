@@ -1,6 +1,6 @@
 <schema adapter="obodb">
-	<element tablename="occupancy_permit_evaluation">
-		<field name="objid" primary="true" prefix="OBOBPEVAL"/>
+	<element tablename="occupancy_permit_section">
+		<field name="objid" primary="true" prefix="OBOOPSEC"/>
 		<field name="appid" />
 		<field name="typeid" />
 		<field name="taskid" />

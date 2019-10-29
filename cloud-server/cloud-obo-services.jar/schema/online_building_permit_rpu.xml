@@ -15,9 +15,9 @@
 		<field name="street" />
 		<field name="areasqm" />
 		<field name="classcode" />
-		<field name="bill_amtdue"  datatype="decimal"/>
 		<field name="ownerid" required="true"/>
-		
+		<field name="lotowned" datatype="integer" />
+
 		<complex name="owner" ref="online_building_permit_entity" jointype="many-to-one">
 			<key field="ownerid" target="objid" />
 		</complex>	

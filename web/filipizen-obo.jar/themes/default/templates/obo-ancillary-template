@@ -1,3 +1,5 @@
+TESSSTTT
+
 <%
 	def app = [:];
 	try {
@@ -177,18 +179,6 @@
 				</tr>
 			</table>		
 		</div>
-		
-		<!-- 
-		<pre style="white-space:normal">
-		${app}
-		</pre>
-		-->
-
-		<!-- PAGE 2 
-		<div class="page">
-			${_page2}
-		</div>
-		-->
 	</body>
 </html>
 

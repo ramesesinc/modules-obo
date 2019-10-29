@@ -168,7 +168,12 @@ public class OnlineBuildingPermitService  {
 		def entityOwner = saveEntity(lotowner);
 		o.ownerid = entityOwner.objid;
 		o.owner = [objid: o.ownerid ];
-		return rpuEm.create( o );
+		if(o.objid) {
+			return rpuEm.find([objid: o.objid]).update( o );
+		}
+		else {
+			return rpuEm.create( o );
+		}
 	}
 
 	@ProxyMethod

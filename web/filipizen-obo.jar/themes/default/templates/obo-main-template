@@ -1,0 +1,46 @@
+<%
+	def app = [:];
+	try {
+		def svc = SERVICE.lookup("OnlineBuildingPermitService", "obo");
+	 	app = svc.getApplication([ appid: PARAMS.appid ]);
+	 	app.org = [ name:'Legazpi City', formalname: 'City of Legazpi', province: 'Province of Albay'];
+		app.lotowner  = app.location.owner;
+		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename.charAt(0) : '');
+
+	} catch(Throwable e){
+		app = [:];
+	}
+
+	PARAMS.app = app;
+%>
+
+<!DOCTYPE html>
+
+<style type="text/css">
+	.fill{background: #4a4a4a}
+	table.sidebox tr td{height:26px;padding-left: 10px;padding-right: 10px;}
+</style>
+
+<html lang="en"> 
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<link href="/themes/default/css/obo-ancillary.css?ver=1" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		<button onclick="window.print();return false;" class="btn-print">Print</button>
+		<div class="page">
+			<table align="center" width="100%" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						${_content}
+					</td>	
+				</tr>
+			</table>		
+		</div>
+	</body>
+</html>
+
+
+
+
+

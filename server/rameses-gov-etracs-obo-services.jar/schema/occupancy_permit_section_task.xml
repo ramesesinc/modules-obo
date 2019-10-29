@@ -1,6 +1,6 @@
 <schema adapter="obodb">
-	<element tablename="occupancy_permit_evaluation_task">
-		<field name="taskid" primary="true"  prefix="OBOOCCEVALTSK" visible="true"/>
+	<element tablename="occupancy_permit_section_task">
+		<field name="taskid" primary="true"  prefix="OBOOPSECTSK" visible="true"/>
 		<field name="refid" />		
 		<field name="parentprocessid" />
 		<field name="state" required="true"/>

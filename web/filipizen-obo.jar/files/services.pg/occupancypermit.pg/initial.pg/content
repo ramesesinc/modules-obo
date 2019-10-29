@@ -46,7 +46,7 @@
 			var p = {email: self.contact.email, phoneno: self.contact.mobileno } 
 			var emailSvc = Service.lookup(app.orgcode+':VerifyEmailService');
 
-			emailSvc.verifyEmail( p, function(s,o) {
+			return emailSvc.verifyEmail( p, function(s,o) {
 		      if( s.status == "ERROR" ) {
 		        self.error = s.msg;
 		      }
@@ -75,7 +75,7 @@
 
 		this.lookupPermit = function() {
 			var p = { permitno: this.permitno };
-			svc.findPermitNo( p, function(s,o) {
+			return svc.findPermitNo( p, function(s,o) {
 				if( s.status == "ERROR") {
 					self.error = s.msg;
 				}
