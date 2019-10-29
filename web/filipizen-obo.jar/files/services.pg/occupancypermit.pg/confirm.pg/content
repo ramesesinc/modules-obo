@@ -19,7 +19,18 @@
 	this.submit = function() {
 		if(!confirm("You are about to submit this application. Proceed")) return;
 		var svc =  Service.lookup( app.orgcode + ":OboOnlineService" );
-		app.moveNextStep();
+		svc.submitOnlineApplication( {appid: self.appid  }, function(o,s) {
+			if( s == "error" ) {
+				this.error = o.result;
+			}
+			else {
+				app.moveNextStep();
+				alert("Upload successful")
+				
+				self.mode = "success";
+				self._controller.refresh();
+			}
+		});
 	}
 
 

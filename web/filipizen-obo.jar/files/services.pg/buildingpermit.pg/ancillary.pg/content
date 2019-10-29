@@ -109,7 +109,7 @@
 	</div>
 	<br> 	
 
-	<p>Please check applicable items and fill the required values and click Save and complete when done</p>
+	<p>Please check applicable items and fill the required values and click Submit when done</p>
 	<%grpList.each{ o-> def g = o.key; def v = o.value; %>
 		<br>
 		<h2>${g==null?'':g}</h2>
@@ -130,7 +130,23 @@
 				</div> 
 	 	<%}%>
 	<%}%>
-	<div style="padding-top:20px"></div>
+
+	<hr>
+	<b>Requirements</b>
+	<br><br>
+	Please review the ff. requirements. Please prepare (5) of each<br><br>
+	<table r:context="ancillary" r:varName="item" r:items="permit.requirements" style="width:100%" class="customtable">
+		<tbody>
+			<tr>
+				<td class="lp-title">#{item.type.title}</td>
+				<td class="lp-attach">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Attach Document</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<br>
+	<br>
+
 	@wx:button( caption:'Save And Complete', context:'ancillary', name:'saveAndComplete' )
 
 </div>

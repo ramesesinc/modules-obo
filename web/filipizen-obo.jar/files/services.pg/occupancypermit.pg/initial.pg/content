@@ -52,7 +52,7 @@
 		      }
 		      else {
 		      	self.mode = "enter-key";
-		        self.hiddenkey = o.key;
+		        self.hiddenkey = o.result.key;
 		        self.error = null;
 		      }
 		      self._controller.refresh();
@@ -81,7 +81,8 @@
 				}
 				else {
 					self.mode = "view-building-permit";	
-					self.permit = o;
+					self.permit = o.result;
+					console.log(self.permit);
 					self.error = null;
 				}
 				self._controller.refresh();

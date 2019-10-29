@@ -48,13 +48,13 @@
 				else {
 					self.error = null;
 					self.mode = "viewbill";
-					self.bill = o;	
+					self.bill = o.result;	
 					//self.barcode = "51010:"+self.bill.billno; 					
 					if( self.bill.amount == 0 ) {
 						self.bill.items = [];	
 					}
+					self._controller.refresh();
 				}
-				self._controller.refresh();				
 			});
 		}
 
@@ -88,7 +88,7 @@
 		          alert("error " + o.msg );
 		        }
 		        else {
-		          var refno = o.objid;
+		          var refno = o.result.objid;
 		          WindowUtil.load( "/epayment/paymentorder", {refno: refno});          
 		        }  
 		    });
