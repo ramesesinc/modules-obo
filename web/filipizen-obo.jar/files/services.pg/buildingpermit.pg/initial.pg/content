@@ -47,7 +47,7 @@
 		      }
 		      else {
 		      	self.mode = "enter-key";
-		        self.hiddenkey = o.result.key;
+		        self.hiddenkey = o.key;
 		        self.error = null;
 		      }
 		      self._controller.refresh();
@@ -93,7 +93,6 @@
 
 	});
 </script>
-
 
 <div r:context="initial" r:visibleWhen="#{error != null }" style='display:none'>
 	<label r:context="initial" style="color:red;">#{error}</label>

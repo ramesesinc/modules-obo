@@ -13,6 +13,8 @@
   this.applicant;
   this.orgname;
 
+  this.entityTypes = ["INDIVIDUAL", "CORPORATION", "GOVERNMENT", "OTHER"];
+
 	var app = \$get("app").code;
  
 
@@ -24,7 +26,7 @@
 	        self.iderror = s.msg;
 	      }
 	      else {
-	      	self.applicant = o.result;
+	      	self.applicant = o;
 	        self.iderror = null;		
 			    self.mode = "show-applicant";
 	      }
@@ -39,7 +41,7 @@
 	}
 
   this.viewInitial = function() {
-    self.applicant = {address:{barangay:{}}, resident:1, ctc:{}};
+    self.applicant = {address:{barangay:{}}, resident:1, ctc:{}, entitytype:'INDIVIDUAL'};
     self.applicant.address.citymunicipality = app.orgname;    
     self.applicant.address.province = app.province;    
     self.error = null;
@@ -105,6 +107,7 @@
   .profile-caption { width: 120px; }
   .profile-block { padding-left:20px;  }
   .iderror {color:red; padding-left: 20px;} 
+  .w500 { width:500px }
 </style>
 
 
@@ -133,13 +136,18 @@
 </div>
 
 <div r:context="applicant" r:visibleWhen="#{mode=='view-applicant'}" style="display:none">
-    <div class="subtitle">Applicant Info</div>
   <div class="form">
     @wx:label(caption:'Profile No', context:'applicant', expr:'#{applicant.profileno}', visibleWhen:'#{applicant.profileno !=null }' )
+    @wx:label(caption:'Applicant Type', context:'applicant', expr:'#{applicant.entitytype}' )
+
+    <div r:context="applicant" r:visibleWhen="#{ applicant.entitytype != 'INDIVIDUAL' }">
+    @wx:label(caption:'Applicant Name', context:'applicant', expr:'#{applicant.name}' )
+    <div style="padding-top:20px;padding-bottom:10px;"><i>Administrator/contact name of applicant</i></div>
+    </div>
+    
     @wx:label(caption:'Last Name', context:'applicant', expr:'#{applicant.lastname}' )
     @wx:label(caption:'First Name', context:'applicant', expr:'#{applicant.firstname}' )
     @wx:label(caption:'Middle Name', context:'applicant', expr:'#{applicant.middlename}' )
-    @wx:gender(caption:'Gender', context:'applicant', name:'applicant.gender', readonly:true )
     @wx:address_nonlocal( caption: 'Address', context:'applicant', name:'applicant.address',  readonly:true )    
     @wx:label(caption:'Email', context:'applicant', expr:'#{applicant.email }' )
     @wx:label(caption:'Mobile No', context:'applicant', expr:'#{applicant.mobileno }' )
@@ -155,12 +163,18 @@
   </div>
   <div class="form">
     @wx:label(caption:'Profile No', context:'applicant', expr:'#{applicant.profileno}', visibleWhen:'#{applicant.profileno !=null }' )  
+
+    @wx:combo( caption:'Type of Applicant', context:'applicant', name:'applicant.entitytype', attrs: [items:"entityTypes"] )
+
+    <div r:context="applicant" r:visibleWhen="#{ applicant.entitytype != 'INDIVIDUAL' }" r:depends="applicant.entitytype">
+      @wx:text(caption:'Name', context:'applicant', name:'applicant.name', required: true, hint:'Name', inputClass:'+w500' )
+      <div style="padding-top:20px;padding-bottom:10px;"><i>Enter administrator or contact name of applicant</i></div>
+    </div>
+
     @wx:text(caption:'Last Name', context:'applicant', name:'applicant.lastname', required: true, hint:'Last Name', attrs: [ disableWhen: '#{applicant.profileno !=null }' ] )
     @wx:text(caption:'First Name', context:'applicant', name:'applicant.firstname', required: true, hint:'First Name', attrs: [ disableWhen: '#{applicant.profileno !=null }']  )
     @wx:text(caption:'Middle Name', context:'applicant', name:'applicant.middlename', required: true, hint:'Middle Name'  )
-    @wx:date(caption:'Birthdate', context:'applicant', name:'applicant.birthdate', required: true, hint:'Birth date in YYYY-MM-DD', attrs: [ disableWhen: '#{applicant.profileno !=null }']  )  
-    @wx:gender(caption:'Gender', context:'applicant', name:'applicant.gender', required:true )
-    @wx:radiolist( caption:'Resident', context:'applicant', name:'applicant.resident', required:true, items: [ [key:'1', value:'Resident'], [key:'0', value:'Non-resident' ] ] )
+    @wx:radiolist( caption:'Resident', context:'applicant', name:'applicant.resident', items: [ [key:'1', value:'Resident'], [key:'0', value:'Non-resident' ] ] )
     @wx:address_local( caption: 'Address', context:'applicant', name:'applicant.address', depends: 'applicant.resident', visibleWhen: '#{ applicant.resident == \'1\' }', required:true )
     @wx:address_nonlocal( caption: 'Address', context:'applicant', name:'applicant.address', depends: 'applicant.resident', visibleWhen: '#{ applicant.resident == \'0\' }', required:true )
     <br>

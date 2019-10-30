@@ -10,8 +10,19 @@
 
   var app = \$get("app").code;
 
-	this.professions = ["ARCHITECT", "CIVIL ENGINEER","GEODETIC ENGINEER", "PROFESSIONAL ELECTRICAL ENGINEER", "REGISTERED ELECTRICAL ENGINEER", "MECHANICAL ENGINEER"];
-  this.professionalList;
+  this.professions = [];
+  this.professions.push("ARCHITECT");
+  this.professions.push("CIVIL/STRUCTURAL ENGINEER");
+  this.professions.push("PROFESSIONAL ELECTRICAL ENGINEER");
+  this.professions.push("REGISTERED ELECTRICAL ENGINEER");
+  this.professions.push("PROFESSIONAL MECHANICAL ENGINEER");
+  this.professions.push("REGISTERED MECHANICAL ENGINEER");
+  this.professions.push("SANITARY ENGINEER");
+  this.professions.push("MASTER PLUMBER");
+  this.professions.push("ELECTRONICS ENGINEER");
+  this.professions.push("GEODETIC ENGINEER");
+
+  this.professionalList = [];
 
   var loadList = function() {
     self.professionalList = app.service.getProfessionalList( {appid: app.appid } ); 
@@ -24,7 +35,7 @@
         self.mode = "entry-not-found";
       }
       else {
-        self.prof = o.result;
+        self.prof = o;
         self.mode = "view-entry";
       }
       self._controller.refresh();
@@ -82,6 +93,9 @@
   }
 
   this.finish = function() {
+    if( self.professionalList.length == 0 ) {
+      throw new Error( "Please include at least one professional" );
+    }
     app.moveNextStep();
   }
 
@@ -94,14 +108,6 @@
     loadList();
     self.mode = "view-list";
     app.updateStepNavbar();
-  }
-
-  this.attachId = function() {
-    var h = function(v) {
-      self.prof.entity.id = v;
-      self._controller.refresh();
-    }
-    return new PopupOpener( "id_entry", { onselect: h, entry: self.prof.entity.id},  {width:'500', title:'Select Proof of Identity'} );
   }
 
   this.attachPRC = function() {
@@ -156,15 +162,14 @@
 </div>
 
 <div  r:context="professional" r:visibleWhen="#{mode == 'view-list'}">
-  <label class="control-label">List of Professionals</label>
   <table r:context="professional" r:items="professionalList" r:varName="item" r:name="selectedItem"  style="width:100%" class="customtable">
     <thead>
       <tr>
         <td class="lp-prcno">PRC No</td>
         <td class="lp-profession">Profession</td>        
         <td class="lp-name">Name</td>
-        <td class="lp-adddress">Address</td>
-        <td class="lp-action">&nbsp;</td>        
+        <td class="lp-address">Address</td>
+        <td class="lp-action">Actions</td>        
       </tr>
     </thead>
     <tbody>
@@ -174,9 +179,9 @@
         <td class="lp-name">#{item.entity.name}</td>
         <td class="lp-address">#{item.entity.address.text}</td>
         <td class="lp-action">
-          <a href="#" r:context="professional" r:name="editItem">Edit</a> 
+          <a href="#" r:context="professional" r:name="editItem" class="link-edit-action">Edit</a> 
           &nbsp;&nbsp;
-          <a href="#" r:context="professional" r:name="removeItem">Remove</a> 
+          <a href="#" r:context="professional" r:name="removeItem" class="link-edit-action">Remove</a> 
         </td>
       </tr>
     </tbody>
@@ -195,18 +200,14 @@
     @wx:text(caption:'Last Name', context:'professional', name:'prof.entity.lastname', required: true, hint:'Last Name')
     @wx:text(caption:'First Name', context:'professional', name:'prof.entity.firstname', required: true, hint:'First Name' )
     @wx:text(caption:'Middle Name', context:'professional', name:'prof.entity.middlename', required: true, hint:'Middle Name')
-    @wx:date(caption:'Birthdate', context:'professional', name:'prof.entity.birthdate', required: true, hint:'Birth date in YYYY-MM-DD')
-    @wx:gender(context:'professional', name:'prof.entity.gender', required:true )
 
     @wx:radiolist( caption:'Resident', context:'professional', name:'prof.entity.resident', required:true, items: [ [key:'1', value:'Resident'], [key:'0', value:'Non-resident' ] ] )
     @wx:address_local( caption: 'Address', context:'professional', name:'prof.entity.address', depends: 'prof.entity.resident', visibleWhen: '#{ prof.entity.resident == \'1\' }', required:true )
     @wx:address_nonlocal( caption: 'Address', context:'professional', name:'prof.entity.address', depends: 'prof.entity.resident', visibleWhen: '#{ prof.entity.resident == \'0\' }', required:true )
 
-    @wx:email(context:'professional', name:'prof.entity.email', required:true)
+    @wx:email(context:'professional', name:'prof.entity.email')
     @wx:mobile(context:'professional', name:'prof.entity.mobileno' )
 
-    <br>
-    @wx:idproof( context:'professional', name:'prof.entity.id', action:'attachId' )
     <br>
     @wx:idproof( context:'professional', name:'prof.prc', action:'attachPRC', caption:'Professional Regulation Commission [PRC]' )
     <br>
