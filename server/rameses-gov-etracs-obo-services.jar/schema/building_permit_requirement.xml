@@ -1,14 +1,12 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="building_permit_requirement">
 		<field name="objid" primary="true" prefix="BLDPMTREQ"/>
 		<field name="appid" />
 		<field name="parentid" />
-		<field name="typeid" required="true"/>
 
-		<!-- 0 = editable, 1 = non editable -->
+		<!-- 0=not touched 1=pass, 2=for-revision 3=not applicable-->
 		<field name="state" />
 		
-		<field name="checked" type="integer"/>
 		<field name="remarks" />
 		<field name="modifiedby_objid" />
 		<field name="modifiedby_name" />
@@ -16,7 +14,7 @@
 
 		<field name="supersederid" />
 
-		<complex name="type" ref="obo_requirement_type" jointype="many-to-one" includefields="title,sortorder">
+		<complex name="type" ref="obo_requirement_type" jointype="many-to-one" includefields="title,sortorder" required="true">
 			<key field="typeid" target="objid"/>
 		</complex>
 	</element>

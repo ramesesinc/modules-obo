@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="vw_building_permit_professional">
 		<field name="objid" primary="true" />
 		<field name="appid" />

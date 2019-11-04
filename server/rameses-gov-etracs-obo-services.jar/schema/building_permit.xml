@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="building_permit">
 		<field name="objid" primary="true" prefix="OBOBP" visible="true"/>
 		<field name="orgcode" />

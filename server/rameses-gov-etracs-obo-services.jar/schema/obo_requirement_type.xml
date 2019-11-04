@@ -4,7 +4,7 @@
    1 = optional. To be provided by applicant
 
 -->
-<schema adapter="obodb">
+<schema>
 	<element tablename="obo_requirement_type">
 		<field name="objid" primary="true"/>
 		<field name="title" />

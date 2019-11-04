@@ -36,7 +36,6 @@ public class OboSectionPage extends javax.swing.JPanel {
         xTextField2 = new com.rameses.rcp.control.XTextField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
-        xTextField3 = new com.rameses.rcp.control.XTextField();
         xComboBox2 = new com.rameses.rcp.control.XComboBox();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
 
@@ -52,6 +51,7 @@ public class OboSectionPage extends javax.swing.JPanel {
         xTextField1.setDisableWhen("#{ mode != 'create' }");
         xTextField1.setName("entity.objid"); // NOI18N
         xTextField1.setRequired(true);
+        xTextField1.setSpaceChar('_');
         xFormPanel1.add(xTextField1);
 
         xTextField2.setCaption("Title");
@@ -73,11 +73,6 @@ public class OboSectionPage extends javax.swing.JPanel {
         xIntegerField1.setPreferredSize(new java.awt.Dimension(50, 20));
         xIntegerField1.setRequired(true);
         xFormPanel1.add(xIntegerField1);
-
-        xTextField3.setCaption("Role");
-        xTextField3.setName("entity.role"); // NOI18N
-        xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xTextField3);
 
         xComboBox2.setCaption("Building Permit State");
         xComboBox2.setItems("buildingPermitStates");
@@ -121,6 +116,5 @@ public class OboSectionPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLookupField xLookupField1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
-    private com.rameses.rcp.control.XTextField xTextField3;
     // End of variables declaration//GEN-END:variables
 }

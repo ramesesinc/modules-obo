@@ -44,7 +44,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
                 if(it.role) {
                     boolean b = secProvider.checkPermission( workunit.workunit.module.domain, it.role, ".*" );
                     if(!b) return;
-                }
+                };
                 def id = title + "/" + it.objid;
                 def notid = it.objid.toLowerCase();
                 subitems << [ id: id, caption: it.title, index: (i++), notificationid: notid, event: title ];

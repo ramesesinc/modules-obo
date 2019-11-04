@@ -50,7 +50,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
     }
     
     public String getTitle() {
-        return (entity.appno==null? 'Tracking No '+ entity.trackingno: 'App No ' + entity.appno) + "[ " +  task?.title + "]" ;
+        return (entity.appno==null? 'Tracking No '+ entity.trackingno: 'App No ' + entity.appno) + " [" +  task?.title + "]" ;
     }
     
     public String getWindowTitle() {
@@ -74,15 +74,13 @@ class BuildingPermitModel extends WorkflowTaskModel {
     }
     
     def updateZoneclass() {
-        def h = { zc ->
-            def m = [_schemaname:'building_permit'];
-            m.findBy = [objid: entity.objid ];
-            m.zoneclassid = zc.objid;
-            persistenceService.update(m);
-            entity.zoneclass = zc;
-            binding.refresh();
+        def app = [objid: entity.objid, zoneclass: entity.zoneclass, zone: entity.zone ];
+        def h = { o->
+            entity.zoneclass = o.zoneclass;
+            entity.zone = o.zone;
+            binding.refresh("entity.zone.*");
         }
-        return Inv.lookupOpener("obo_zoneclass:lookup", [ onselect:  h] );
+        return Inv.lookupOpener("building_permit_zoneclass:view", [app: app, handler: h ] );
     }
     
     def feeListModel = [
@@ -114,5 +112,8 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return Inv.lookupOpener("building_permit_issuance:create", m );
     }
     
+    void printClaimStub() {
+        MsgBox.alert('print claim stub');
+    }
     
 }

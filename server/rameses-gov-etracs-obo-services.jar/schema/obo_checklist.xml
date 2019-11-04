@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="obo_checklist">
 		<field name="objid" primary="true" caption="Name" visible="true"/>
 		<field name="sectionid" />

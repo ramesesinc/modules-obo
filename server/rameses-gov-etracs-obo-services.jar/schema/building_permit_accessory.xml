@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="building_permit_accessory">
 		<field name="objid" primary="true" prefix="OBOBPACC"/>
 		<field name="appid" required="true"/>

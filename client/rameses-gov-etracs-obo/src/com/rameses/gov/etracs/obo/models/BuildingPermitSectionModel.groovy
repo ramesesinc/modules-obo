@@ -10,9 +10,9 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingPermitEvaluationModel extends WorkflowTaskModel {
+class BuildingPermitSectionModel extends WorkflowTaskModel {
 
-    @Service("BuildingPermitEvaluationService")
+    @Service("BuildingPermitSectionService")
     def appSvc;
     
     @Service("BuildingPermitInfoService")
@@ -115,5 +115,6 @@ class BuildingPermitEvaluationModel extends WorkflowTaskModel {
         }
         return Inv.lookupOpener("building_permit_issuance:create", m );
     }
+    
     
 }

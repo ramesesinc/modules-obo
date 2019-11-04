@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="building_permit_section_task">
 		<field name="taskid" primary="true"  prefix="BLDPMTSECTSK" visible="true"/>
 		<field name="refid" />		

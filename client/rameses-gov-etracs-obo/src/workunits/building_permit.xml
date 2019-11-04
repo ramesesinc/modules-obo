@@ -1,14 +1,20 @@
 <workunit schemaName="vw_building_permit" processName="building_permit">
     <invokers>
         <invoker type="vw_building_permit:open" caption="Building Permit Application" action="open" index="1"/>
-        <invoker type="formActions" 
-                caption="Issue Building Permit"
-                action="issuePermit" target="popup"
-                visibleWhen="#{ task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"    />
 
-        <invoker type="formActions" 
-                caption="Reports"
+         <invoker type="extActions" 
+                caption="Print Claim Stub"
+                role="RECEIVER"
+                action="printClaimStub"/>
+         
+          <invoker type="extActions" 
+                caption="Print Forms"
                 action="showMenu" context="reports"/>
+
+        <invoker type="extActions" 
+                caption="Issue Permit"
+                action="issuePermit" target="popup"
+                xvisibleWhen="#{ task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"    />
 
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />

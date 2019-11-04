@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 
 	<element tablename="occupancy_permit_task">
 		<field name="taskid" primary="true"  prefix="OBOTSK" visible="true"/>

@@ -1,0 +1,9 @@
+"entity.remarks" [ entity.state != 0 ] {
+    enabled: false;
+    editable: false;
+}
+
+"entity.remarks" [ entity.state == 0 ] {
+    enabled: true;
+    editable : true;
+}

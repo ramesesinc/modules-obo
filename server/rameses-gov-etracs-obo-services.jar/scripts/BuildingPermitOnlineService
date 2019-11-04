@@ -44,7 +44,7 @@ public class BuildingPermitOnlineService  {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@Service(value="obo/OnlineBuildingPermitDownloadService", connection="ext/cloud-server")
+	@Service(value="obo/OnlineBuildingPermitDownloadService", connection="cloud-server")
     def cloudBldgSvc;
 
     @Env
@@ -52,6 +52,10 @@ public class BuildingPermitOnlineService  {
 
     @ProxyMethod
     public def getApplication( def o  ) {
+    	//check first if the application already exists
+    	def app = appEm.find( [trackingno: o.appid ]).first();
+    	if(app) throw new Exception("Application already exists. It is currently at " + app.task );
+
 		return cloudBldgSvc.getDownloadInfo( [appid: o.appid, orgcode: env.ORGID ] );
     }
 

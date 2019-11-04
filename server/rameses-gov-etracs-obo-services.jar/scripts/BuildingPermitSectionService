@@ -6,7 +6,7 @@ import java.text.*;
 import treasury.utils.*;
 import treasury.facts.*;
 
-public class BuildingPermitEvaluationService  {
+public class BuildingPermitSectionService  {
 	
 	@DataContext("building_permit_info")
 	def infoEm;

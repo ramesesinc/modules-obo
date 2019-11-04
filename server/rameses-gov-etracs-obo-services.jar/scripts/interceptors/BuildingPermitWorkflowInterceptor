@@ -44,6 +44,51 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit_fee")
 	def feeEm;
 
+	/* *********************************************************************
+	//Specific before action tasks
+	************************************************************************ */
+	//Check prior to send-for-revision. There must be at least one finding
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }") 
+	public void doActionBeforeRevision( def evt ) {
+		def p = evt.args[0];
+		if(p.taskstate == "receiving") {
+			def c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("state = 0").val();
+			if( c>0) throw new Exception("All requirements must be checked first");
+
+			c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("state = 2").val();
+			if( c<=0) throw new Exception("Please ensure that there is at least one requirement that needs revision");
+		}
+		else {
+			//check there must be at least one finding
+			def c = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("checked=0").val();
+			if( c == 0) throw new Exception("There must be at least one finding");
+		}
+	}
+
+	//This is the part where you need to check for application specific routines
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
+	public void doActionBeforeApproval( def evt ) {
+		def p = evt.args[0];
+
+		//check if there are open findings
+		def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("checked=0").val();
+		if( t > 0) throw new Exception("All findings must be resolved first.");
+
+		if(p.taskstate == "receiving") {
+			def c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("state = 0").val();
+			if( c>0) throw new Exception("All requirements must be checked first");
+
+			c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("state = 2").val();
+			if( c>0) throw new Exception("There are still requirements that need to be revised");
+		}
+		else if( p.to == "payment") {
+			def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").val();
+			if( c == 0 )
+				throw new Exception("There must be at least one fee");		
+		}
+	}
+
+
 
 	/* *********************************************************************
 	//Evaluation-related triggers
@@ -113,43 +158,7 @@ class BuildingPermitWorkflowInterceptor {
 		}		
 	}
 
-	/* *********************************************************************
-	//Specific before action tasks
-	************************************************************************ */
-	//Check prior to send-for-revision. There must be at least one finding
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }") 
-	public void doActionBeforeRevision( def evt ) {
-		def p = evt.args[0];
-		if(p.taskstate == "receiving") {
-			def c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("checked=0 AND remarks IS NULL").val();
-			if( c>0) throw new Exception("Please ensure that all requirements have remarks");
-		}
-		else {
-			//check there must be at least one finding
-			def c = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("checked=0").val();
-			if( c == 0) throw new Exception("There must be at least one finding");
-		}
-	}
-	//This is the part where you need to check for application specific routines
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
-	public void doActionBeforeApproval( def evt ) {
-		def p = evt.args[0];
-
-		//check if there are open findings
-		def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("checked=0").val();
-		if( t > 0) throw new Exception("All findings must be resolved first.");
-
-		if(p.taskstate == "receiving") {
-			def c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("checked=0").val();
-			if( c>0) throw new Exception("Please check first all requirements");
-		}
-		else if( p.to == "payment") {
-			def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").val();
-			if( c == 0 )
-				throw new Exception("There must be at least one fee");		
-		}
-	}
-
+	
 	//application specific routines after worksflow step
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' && args[0].taskstate == 'receiving' }") 
 	public void doActionsAfterApprovedReceiving( def evt ) {
