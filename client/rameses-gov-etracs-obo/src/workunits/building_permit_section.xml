@@ -1,25 +1,24 @@
 <workunit schemaName="vw_building_permit_section" processName="building_permit_section">
     <invokers>
-        <invoker type="vw_building_permit_section:open" caption="Building Application Section"
-                action="open" index="1"/>
+        <invoker type="vw_building_permit_section:open" caption="Building Application Section" action="open" index="1"/>
 
+        <invoker type="extActions" caption="View Application" action="viewApplication" index="0" />
         <!-- context related actions -->
         <invoker type="extActions" caption="Update Zone Class"
-            action="updateZoneClass" index="1" xvisibleWhen="#{entity.typeid.toLowerCase() == 'zoning' }"/>
-
-        <invoker type="extActions" caption="View Ancillary"
-            action="viewAncillary" index="2" />
-        
-        <invoker type="extActions" caption="View Application"
-            action="viewApplication" index="3" />
-
-        <invoker type="extActions" caption="Add Finding"
-        action="addFinding" index="4" />
-
+            action="updateZoneclass" visibleWhen="#{entity.typeid.toLowerCase() == 'zoning' }" index="1" />
         <invoker type="extActions" caption="Issue Permit/Clearance" index="20"
             action="issuePermit" visibleWhen="#{task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"/>
+
+
+        <!-- Fee Related Actions -->
+        <invoker type="feeActions" caption="Auto Assess" action="viewAssessment" index="1" />
+        <invoker type="feeActions" caption="Add Fee Manually" action="addFee" index="2" />
+        <invoker type="feeActions" caption="View Ancillary Info" action="viewAncillaryPermit" index="3" 
+                 visibleWhen="#{entity.ancillaryid != null }"/>
         
-        
+        <!-- finding related actions -->         
+        <invoker type="findingActions" caption="Add New Finding" action="addFinding" index="1" />
+
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitSectionModel" />
     <pages>

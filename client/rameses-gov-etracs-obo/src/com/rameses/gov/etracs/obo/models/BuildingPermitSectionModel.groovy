@@ -51,14 +51,9 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
     }
     
     def viewAncillaryPermit() {
-        //find first the objid of ancillary permit
-        def m = [_schemaname: 'building_permit_ancillary'];
-        m.findBy = [appid: entity.appid,permittypeid: entity.typeid ];
-        def zz = queryService.findFirst( m );
-        if(!zz )
-            throw new Exception("There is no associated ancillary permit for this section");
-        
-        def op = Inv.lookupOpener("building_permit_ancillary:open", [entity: [objid: zz.objid ] ] );
+        if(!entity.ancillaryid ) 
+            throw new Exception("There is no associated ancillary permit ");
+        def op = Inv.lookupOpener("building_permit_ancillary:open", [entity: [objid: entity.ancillaryid ] ] );
         op.target = "popup";
         return op;
     }
@@ -67,28 +62,10 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
         if(! entity.app.zoneclass?.objid )
             throw new Exception("Please specify a zone class first");
         def f = [:];
-        f.app = [ 
-            appid: entity.app.objid,
-            appno:entity.app.appno, 
-            appdate:entity.app.appdate, 
-            apptype:entity.app.apptype, 
-            projectcost: entity.app.projectcost, 
-            fixedcost: entity.app.fixedcost,
-            height: ((entity.app.height == null)?0:entity.app.height),
-            numunits: entity.app.numunits,
-            totalfloorarea: entity.app.totalfloorarea,
-            zoneclass: entity.app.zoneclass?.objid
-        ];
-        def occ = entity.app.occupancytype;
-        f.occupancytype = [division:occ.division.objid, group:occ.group.objid, type:occ.objid ];
-        if( entity.ancillarypermitid != null  ) {
-            def m = [_schemaname: 'building_permit_ancillary'];
-            m.findBy = [appid: entity.appid,permittypeid: entity.ancillarypermitid ];
-            def zz = queryService.findFirst( m );
-            f.infos = infoSvc.getInfos( [parentid: zz.objid ]);            
-        }
-        f.permits = [ [type: entity.typeid ] ];
+        f.appid = entity.app.objid;
         f.sectionid = entity.typeid;
+        f.ancillaryid = entity.ancillaryid;
+        f.save_fees = false;
         def h  = { list->
             list.each {
                 it.appid = entity.appid;
@@ -98,14 +75,37 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
             feeSvc.saveFees( list );
             feeListHandler.reload();
         }
-        return Inv.lookupOpener("view_assessment", [params: f, handler: h] );
+        return Inv.lookupOpener("building_permit_assessment", [params: f, handler: h] );
     }
     
     def addFee() {
         def m = [appid: entity.appid, parentid: entity.objid, typeid: entity.typeid ];
+        m.handler = { o->
+            feeListHandler.reload();
+        }
         return Inv.lookupOpener("building_permit_fee:create", m );
     }
     
+    def updateZoneclass() {
+        def app = [objid: entity.appid, zoneclass: entity.app.zoneclass, zone: entity.app.zone ];
+        def h = { o->
+            entity.app.zoneclass = o.zoneclass;
+            entity.app.zone = o.zone;
+            binding.refresh("entity.app.zone.*");
+        }
+        return Inv.lookupOpener("building_permit_zoneclass:view", [app: app, handler: h ] );
+    }
+    
+    def addFinding() {
+        def m = [:];
+        m.sectionid = entity.objid;
+        m.appid = entity.appid;
+        m.parent = [typeid: entity.typeid ];
+        m.handler = { o->
+            findingListHandler.reload();
+        }
+        return Inv.lookupOpener("building_permit_finding:create", m );
+    }
     
     def issuePermit() {
         def m = [showpermitno:true, appid:entity.appid, evaluationid: entity.objid, typeid: entity.typeid ];

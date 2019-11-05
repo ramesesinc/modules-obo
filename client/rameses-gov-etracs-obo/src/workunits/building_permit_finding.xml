@@ -5,6 +5,23 @@
         
         <invoker type="building_permit_finding:open" caption="Finding"
                 action="open" index="1" target="popup"/>
+        
+        <!-- finding actions -->
+        <invoker type="formActions" caption="Cancel"
+                action="_close" index="1" />
+
+        <invoker type="formActions" caption="Save"
+                action="save" index="2" visibleWhen="#{entity.objid == null}"/>
+        
+        <invoker type="formActions" caption="Supersede"
+                action="supersede" index="1" visibleWhen="#{entity.objid != null  &amp;&amp; entity.state == 0}"/>
+
+        <invoker type="formActions" caption="Close Issue"
+            action="closeIssue" index="2" visibleWhen="#{entity.objid != null &amp;&amp; entity.state == 0}"/>
+        
+        <invoker type="formActions" caption="View History"
+            action="viewHistory" index="3" visibleWhen="#{entity.objid != null}"/>
+        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitFindingModel" />
     <pages>

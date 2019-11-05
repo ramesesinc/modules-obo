@@ -117,6 +117,8 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
 
         add(xPanel2, "card2");
 
+        xPanel3.setLayout(new java.awt.BorderLayout());
+
         schemaList6.setAllowOpen(false);
         schemaList6.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
@@ -178,33 +180,19 @@ public class BuildingPermitRequirementPage extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(schemaList6, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(schemaList6, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addComponent(schemaList6, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         xTabbedPane1.addTab("History", jPanel2);
 
-        javax.swing.GroupLayout xPanel3Layout = new javax.swing.GroupLayout(xPanel3);
-        xPanel3.setLayout(xPanel3Layout);
-        xPanel3Layout.setHorizontalGroup(
-            xPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(xPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        xPanel3Layout.setVerticalGroup(
-            xPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(xPanel3Layout.createSequentialGroup()
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 156, Short.MAX_VALUE))
-        );
+        xPanel3.add(xTabbedPane1, java.awt.BorderLayout.CENTER);
 
         add(xPanel3, "card3");
     }// </editor-fold>//GEN-END:initComponents

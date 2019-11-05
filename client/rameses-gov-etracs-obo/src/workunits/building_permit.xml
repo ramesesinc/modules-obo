@@ -2,12 +2,25 @@
     <invokers>
         <invoker type="vw_building_permit:open" caption="Building Permit Application" action="open" index="1"/>
 
-         <invoker type="extActions" 
+        <invoker type="appActions" 
+                caption="Receive"
+                role="RECEIVER"
+                action="receive" visibleWhen="#{task.state=='receiving' &amp;&amp; task.assignee?.objid!=null &amp;&amp; entity.appno == null}"/>
+        
+        <invoker type="appActions" 
                 caption="Print Claim Stub"
                 role="RECEIVER"
-                action="printClaimStub"/>
+                action="printAck"
+                visibleWhen="#{task.state=='receiving' &amp;&amp; entity.appno != null}"/> 
          
-          <invoker type="extActions" 
+        <invoker type="appActions" 
+                caption="Print Req. Checklist"
+                role="RECEIVER"
+                action="printReqChecklist"
+                visibleWhen="#{task.state == 'receiving-revision' }"/> 
+
+        <!--
+                <invoker type="extActions" 
                 caption="Print Forms"
                 action="showMenu" context="reports"/>
 
@@ -15,7 +28,7 @@
                 caption="Issue Permit"
                 action="issuePermit" target="popup"
                 xvisibleWhen="#{ task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"    />
-
+        -->        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />
     <pages>

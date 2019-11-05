@@ -16,12 +16,6 @@ class BuildingPermitWorkflowInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-	@Service("SequenceService")
-	def seqSvc;
-
-	@Service("AppnoGeneratorService")
-	def appNoSvc;
-
 
 	@DataContext("building_permit_section")
 	def evalEm;
@@ -60,7 +54,7 @@ class BuildingPermitWorkflowInterceptor {
 		}
 		else {
 			//check there must be at least one finding
-			def c = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("checked=0").val();
+			def c = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("state=0").val();
 			if( c == 0) throw new Exception("There must be at least one finding");
 		}
 	}
@@ -71,15 +65,12 @@ class BuildingPermitWorkflowInterceptor {
 		def p = evt.args[0];
 
 		//check if there are open findings
-		def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("checked=0").val();
+		def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("state=0").val();
 		if( t > 0) throw new Exception("All findings must be resolved first.");
 
 		if(p.taskstate == "receiving") {
-			def c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("state = 0").val();
-			if( c>0) throw new Exception("All requirements must be checked first");
-
-			c = reqEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("state = 2").val();
-			if( c>0) throw new Exception("There are still requirements that need to be revised");
+			def appno = appEm.find( [objid: p.refid ] ).select("appno").val();
+			if(!appno ) throw new Exception("Please generate the application number first");
 		}
 		else if( p.to == "payment") {
 			def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").val();
@@ -87,7 +78,6 @@ class BuildingPermitWorkflowInterceptor {
 				throw new Exception("There must be at least one fee");		
 		}
 	}
-
 
 
 	/* *********************************************************************
@@ -115,7 +105,7 @@ class BuildingPermitWorkflowInterceptor {
 	public void sendEvaluationTaskForRevision( def evt ) {
 		def p = evt.args[0];
 		//check first findings that are yet open. These are tasks that need to be sent-for-revision
-		def list = findingEm.find( [appid: p.refid ] ).where("checked = 0").list();
+		def list = findingEm.find( [appid: p.refid ] ).where("state = 0").list();
 		def inIds = " objid IN ('" + list*.parentid.join("','") + "') ";
 		def notInIds = " objid NOT IN ('" + list*.parentid.join("','") + "') AND task.state = 'for-verification' ";
 		fireEvaluationWorkflow( p.refid, inIds, "send-for-revision" );
@@ -164,13 +154,7 @@ class BuildingPermitWorkflowInterceptor {
 	public void doActionsAfterApprovedReceiving( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;
-		//update the appno first
-		int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
-		def appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  );
-		def u = [:];
-		u.appdate = dateSvc.getServerDate();
-		u.appno = appno;
-		appEm.find( [objid: appid ] ).update( u );
+		
 	}
 
 	//send for assessment, payment and post payment

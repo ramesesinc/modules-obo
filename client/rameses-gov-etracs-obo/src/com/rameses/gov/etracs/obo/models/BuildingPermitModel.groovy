@@ -17,6 +17,8 @@ class BuildingPermitModel extends WorkflowTaskModel {
     @Service("BuildingPermitFeeService")
     def feeSvc;
     
+    @Service("BuildingPermitService")
+    def bldgSvc;
     
     def showOption = "showall";
     def query = [:];
@@ -73,15 +75,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return (task.state == "zoning-evaluation");
     }
     
-    def updateZoneclass() {
-        def app = [objid: entity.objid, zoneclass: entity.zoneclass, zone: entity.zone ];
-        def h = { o->
-            entity.zoneclass = o.zoneclass;
-            entity.zone = o.zone;
-            binding.refresh("entity.zone.*");
-        }
-        return Inv.lookupOpener("building_permit_zoneclass:view", [app: app, handler: h ] );
-    }
+   
     
     def feeListModel = [
         fetchList: { o->
@@ -103,6 +97,21 @@ class BuildingPermitModel extends WorkflowTaskModel {
         binding.refresh("entity.amount");
     }
     
+    void receive() {
+        if(!MsgBox.confirm("You are about to receive this application. Proceed?")) return;
+        def o = bldgSvc.generateAppNo( [appid: entity.objid ] );
+        entity.putAll( o );
+        MsgBox.alert("App no " + o.appno + " is successfully generated");
+    }
+    
+    def printAck() {
+        return Inv.lookupOpener("building_permit_claimstub", [entity: [objid: entity.objid] ]);
+    }
+    
+    def printReqChecklist() {
+        return Inv.lookupOpener("building_permit_requirement_checklist", [entity: [objid: entity.objid] ]);
+    }
+
     def issuePermit() {
         def m = [appid:entity.objid];
         m.handler = { o->
@@ -110,10 +119,6 @@ class BuildingPermitModel extends WorkflowTaskModel {
             reload();
         }
         return Inv.lookupOpener("building_permit_issuance:create", m );
-    }
-    
-    void printClaimStub() {
-        MsgBox.alert('print claim stub');
     }
     
 }

@@ -11,6 +11,9 @@ class BuildingPermitFormReportInterceptor {
 	@DataContext("building_permit_task")
 	def taskEm;
 
+	@DataContext("building_permit_requirement")
+	def reqEm;
+
 	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_claimstub'}")
 	public void getBuildingPermitClaimStubReport( def evt ) {
 		def p = evt.args[0];
@@ -30,6 +33,9 @@ class BuildingPermitFormReportInterceptor {
 		def result = evt.result;
 		def id = p.parameters.objid;
 		def ea = vwAppEm.find( [objid: id ] ).first();
+		def v = taskEm.find( [refid: id ] ).where( "state = 'receiving' ").select("actor.name").first()?.actor;
+		ea.receiver = v;
+		ea.items = reqEm.find( [appid: id ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
 		result.data = ea;
 	}	
 

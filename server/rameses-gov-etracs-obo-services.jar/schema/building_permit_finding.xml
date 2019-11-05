@@ -1,8 +1,10 @@
 <schema>
 	<element tablename="building_permit_finding">
 		<field name="objid" primary="true" prefix="BLDPMTFND"/>
-		<field name="appid" />
+		<field name="appid" required="true"/>
 		<field name="parentid" />
+		<field name="rootid" required="true"/>
+
 		<field name="particulars" />
 		<field name="dtcreated" />
 		<field name="createdby_objid" />
@@ -16,7 +18,7 @@
 		<field name="resolvedby_name" />
 		<field name="dtresolved" />
 		<field name="remarks" />
-		<field name="checked" />
+		<field name="supersederid" />
 
 		<complex name="parent" ref="building_permit_section" jointype="many-to-one" includefields="typeid" required="false">
 			<key field="parentid" target="objid"/>

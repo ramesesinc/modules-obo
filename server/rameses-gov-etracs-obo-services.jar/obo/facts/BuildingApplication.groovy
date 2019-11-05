@@ -4,6 +4,7 @@ import java.util.*;
 
 public class BuildingApplication {
 
+	String appid;
 	String appno;
 	Date appdate;
 	String apptype;				//NEW OR RENEW
@@ -16,13 +17,13 @@ public class BuildingApplication {
 	double highercost;			//whichever is higher = computed or fixed
 
 	int numstoreys;
-	double floorarea; 
+	double floorarea; 			//deprecated
 	double totalfloorarea; 		
 	double height;
 	int numunits;
 
 	String zoneclass;
-
+	String zone;
 }
 
 

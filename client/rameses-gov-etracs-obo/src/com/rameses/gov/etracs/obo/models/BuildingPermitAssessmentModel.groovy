@@ -10,9 +10,9 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class OboViewAssessmentModel extends PageFlowController {
+class BuildingPermitAssessmentModel extends PageFlowController {
     
-    @Service("OboAssessmentService")
+    @Service("BuildingPermitAssessmentService")
     def assmtSvc;
 
     def params;
@@ -26,7 +26,8 @@ class OboViewAssessmentModel extends PageFlowController {
     ] as BasicListModel;
 
     void execute() {
-        list = assmtSvc.assess( params );
+        params.savefees = false;
+        list = assmtSvc.assess( params ).items;
     }
 
     def doClose() {

@@ -2,6 +2,7 @@
 UPDATE building_permit SET applicantid = null, taskid = NULL, accessoryid = NULL;
 UPDATE building_permit_section SET taskid = NULL;
 UPDATE building_permit_requirement SET supersederid = NULL;
+UPDATE building_permit_finding SET supersederid = NULL;
 DELETE FROM building_permit_section_task;
 DELETE FROM building_permit_task;
 DELETE FROM building_permit_fee;

@@ -1,0 +1,41 @@
+import com.rameses.annotations.*; 
+import java.rmi.server.*;
+
+class BuildingPermitFindingService {
+
+	@DataContext("building_permit_finding")
+	def findingEm;
+
+	@Env
+	def env;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@ProxyMethod
+	public def create( def o ) { 
+		o.createdby = [objid: env.USERID, name: env.FULLNAME ];
+		o.dtcreated = dateSvc.getServerDate();
+		o.state = 0;
+		o.objid = "BLDGPMTFIND" + new UID();
+		if( o.previd ) {
+			def z = findingEm.create(o);
+			findingEm.find( [objid: o.previd] ).update( [supersederid: z.objid ] );
+		}
+		else {
+			o.rootid = o.objid;
+			findingEm.create(o);
+		}
+	}
+
+	@ProxyMethod
+	public def closeIssue( def o ) { 
+		def u = [:];
+		u.state = 1;
+		u.resolvedby = [objid: env.USERID, name: env.FULLNAME ];
+		u.dtresolved = dateSvc.getServerDate();
+		findingEm.find([objid: o.objid]).update(u);
+
+	}
+
+}

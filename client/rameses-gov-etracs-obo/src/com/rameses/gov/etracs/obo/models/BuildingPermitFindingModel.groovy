@@ -12,47 +12,65 @@ import com.rameses.enterprise.models.*;
 
 class BuildingPermitFindingModel {
 
-    @Service("OboFindingService")
+    @Service("BuildingPermitFindingService")
     def findingSvc;
 
     @Caller
     def caller;
-
+    
+    def appid;
+    def sectionid;
     def entity;
+    
+    def pagename = "view";
 
+    
     void create() {
         entity = [:];
-        if( caller.schemaName == "vw_building_permit") {
-            entity.appid = caller.entity.objid;
+        if( !sectionid ) {
+            entity.appid = appid;
         }
         else {
-            entity.appid = caller.entity.appid;
-            entity.parentid = caller.entity.objid;
+            entity.appid = appid;
+            entity.parentid = sectionid;
         }
-        entity.checked = 0;
     }
     
     void open() {
+        
     }
     
-    void afterSave(def o ) {
-        if(caller) {
-            caller.findingListHandler.reload();
-        }
+    def save() {
+        findingSvc.create( entity );
+        caller.findingListHandler.reload();
+        return "_close";
+    }
+
+    void supersede() {
+        def preventity = entity;
+        entity = [:];
+        entity.objid = null;
+        entity.previd = preventity.objid;
+        entity.appid = preventity.appid;
+        entity.parentid = preventity.parentid;
+        entity.rootid = preventity.rootid;        
+        entity.particulars = preventity.particulars;
     }
     
-    def doOk() {
-        entity.tag = "building_permit_finding";
-        findingSvc.save( entity );
-        if(caller.findingListHandler ) {
-            caller.findingListHandler.reload();
-        }
+    def closeIssue() {
+        if(!MsgBox.confirm("This will close this finding. Proceed?")) return;
+        findingSvc.closeIssue( entity );
+        caller.findingListHandler.reload();
         return "_close";
     }
     
-    def doCancel() {
-        return "_close";
+    
+    void viewHistory() {
+        pagename = "hist";
     }
     
-    
+    void viewBack() {
+        pagename = "view";
+    }
+
 }
