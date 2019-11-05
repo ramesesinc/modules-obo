@@ -58,7 +58,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid"/>
 </box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
 				<text><![CDATA[REQUIREMENTS]]></text>
 				</staticText>
@@ -78,7 +78,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid"/>
 </box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
 				<text><![CDATA[REMARKS]]></text>
 				</staticText>
@@ -97,7 +97,7 @@
 						isPrintWhenDetailOverflows="true"/>
 					<box></box>
 					<textElement>
-						<font size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{type.title}]]></textFieldExpression>
 				</textField>
@@ -112,7 +112,7 @@
 						isPrintWhenDetailOverflows="true"/>
 					<box></box>
 					<textElement>
-						<font size="8"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{remarks}]]></textFieldExpression>
 				</textField>

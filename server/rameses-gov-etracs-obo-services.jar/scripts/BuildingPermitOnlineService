@@ -129,7 +129,6 @@ public class BuildingPermitOnlineService  {
 			r.state = 0;
 			r.typeid = it.objid;
 			r.type = [objid: it.objid];
-			r.checked = 0;
 			reqEm.create( r );
 		}
 

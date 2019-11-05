@@ -12,8 +12,8 @@ import com.rameses.enterprise.models.*;
 
 class BuildingPermitRequirementModel {
 
-    @Service("PersistenceService")
-    def persistenceSvc;
+    @Service("BuildingPermitRequirementService")
+    def reqSvc;
 
     @Binding
     def binding;
@@ -23,14 +23,21 @@ class BuildingPermitRequirementModel {
 
     def entity;
 
-    String title = "Requirement"
+    String pagename = "view"
+    String title = "Review Requirement";
     
     boolean getShowNavigation() {
         return true;
     }
     
     void open() {
-       
+        def ctask = caller.task;
+        if( ctask.state != 'receiving' ) throw new Exception("Requirement can only be edited in receiving state");
+        if( ctask.assignee?.objid == null ) throw new Exception("Please assign first a person to the receiving task.");
+    }
+    
+    public boolean getForRevision() {
+        return true;
     }
 
     def moveUp() {
@@ -61,28 +68,49 @@ class BuildingPermitRequirementModel {
         return null;
     }
     
-    def updateState( int state ) {
-        entity.checked = state;
-        def m  = [ state: state, remarks: entity.remarks ];
-        m._schemaname = "building_permit_requirement";
-        m.findBy = [objid: entity.objid];
-        def e = persistenceSvc.update( m );    
+    void updateState( int state ) {
+        entity.state = state;
+        def e = reqSvc.update( entity );    
         caller.reqListHandler.getSelectedItem().item.putAll( e );
-        def r = moveDown();
+        moveDown();
         binding.refresh();
-        return r;
     }
     
-    def accept() {
-        return updateState(1); 
+    void accept() {
+        updateState(1); 
     }
-    def revise() {
+    void revise() {
         if(!entity.remarks) throw new Exception("Please specify remarks")
-        return updateState(2);         
+        updateState(2);         
     }
-    def na() {
-        return updateState(3) 
+    void na() {
+        updateState(3); 
     }
     
+    void supersede() {
+        def prev = entity;
+        entity = [:];
+        entity.remarks = prev.remarks
+        entity.appid = prev.appid;
+        entity.parentid = prev.parentid;
+        entity.type = prev.type;
+        entity.previd = prev.objid;
+        entity.state = 0;
+    }
+    
+    void closeIssue() {
+        if(!MsgBox.confirm("You are about to close this issue. Continue?")) return;
+        supersede();
+        updateState( 1 );
+    }
+    
+    
+    
+    void back() {
+        pagename = "view";
+    }
+    void viewHist() {
+        pagename = "hist"
+    }
     
 }

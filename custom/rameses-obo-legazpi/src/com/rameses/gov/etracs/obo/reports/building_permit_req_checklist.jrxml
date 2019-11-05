@@ -88,7 +88,7 @@
 						key="staticText-2"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="9"/>
 					</textElement>
 				<text><![CDATA[C  I  T  Y    O  F    L  E  G  A  Z  P  I]]></text>
 				</staticText>
@@ -101,7 +101,7 @@
 						key="staticText-3"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="11" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
 				<text><![CDATA[OFFICE OF THE LOCAL BUILDING OFFICIAL]]></text>
 				</staticText>
@@ -137,7 +137,7 @@
 						key="staticText-5"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" size="8"/>
+						<font fontName="Arial" size="7"/>
 					</textElement>
 				<text><![CDATA[Ground Floor, City Engineering Office, Miguel Lopez de Legazpi Boulevard, Dapdap, Legazpi City | Contact Nos.: 0948 359 1219 and 0965 601 8727]]></text>
 				</staticText>
@@ -176,7 +176,7 @@
 						key="staticText-8"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<text><![CDATA[Date         ]]></text>
 				</staticText>
@@ -189,7 +189,7 @@
 						key="staticText-9"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<text><![CDATA[Tracking Number                         ]]></text>
 				</staticText>
@@ -202,7 +202,7 @@
 						key="staticText-10"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<text><![CDATA[Evaluation Officer         ]]></text>
 				</staticText>
@@ -215,7 +215,7 @@
 						key="staticText-11"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<text><![CDATA[Name of Applicant   ]]></text>
 				</staticText>
@@ -228,7 +228,7 @@
 						key="staticText-12"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<text><![CDATA[Name of Project    ]]></text>
 				</staticText>
@@ -241,7 +241,7 @@
 						key="staticText-13"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<text><![CDATA[Project Location    ]]></text>
 				</staticText>
@@ -308,7 +308,7 @@
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
-						<font fontName="Arial Narrow"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtfiled}]]></textFieldExpression>
 				</textField>
@@ -321,7 +321,7 @@
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
-						<font fontName="Arial Narrow"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{trackingno}]]></textFieldExpression>
 				</textField>
@@ -334,7 +334,7 @@
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
-						<font fontName="Arial Narrow"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
@@ -347,7 +347,7 @@
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
-						<font fontName="Arial Narrow"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
 				</textField>
@@ -360,7 +360,7 @@
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
-						<font fontName="Arial Narrow"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
 				</textField>
@@ -373,7 +373,7 @@
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
-						<font fontName="Arial Narrow"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{receiver.name}]]></textFieldExpression>
 				</textField>
@@ -501,14 +501,14 @@
 				</rectangle>
 				<staticText>
 					<reportElement
-						x="42"
-						y="26"
-						width="273"
+						x="38"
+						y="27"
+						width="283"
 						height="31"
 						key="staticText-222"/>
 					<box></box>
 					<textElement verticalAlignment="Top" isStyledText="true">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="9" isBold="false"/>
+						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="false"/>
 					</textElement>
 				<text><![CDATA[I fully understand my deficiencies listed herein, the reason that my application was
 returned to me. Accordingly, I hereby undertake to correct and/or comply such
@@ -545,20 +545,20 @@ deficiencies on my resubmission.]]></text>
 						key="staticText-224"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Top" isStyledText="true">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="9" isBold="false"/>
+						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="7" isBold="false"/>
 					</textElement>
 				<text><![CDATA[Applicant/Authorized Representative Signature over Printed Name]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="371"
-						y="43"
+						x="378"
+						y="44"
 						width="19"
 						height="12"
 						key="staticText-225"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Top" isStyledText="true">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="9" isBold="false"/>
+						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="7" isBold="false"/>
 					</textElement>
 				<text><![CDATA[Date:]]></text>
 				</staticText>

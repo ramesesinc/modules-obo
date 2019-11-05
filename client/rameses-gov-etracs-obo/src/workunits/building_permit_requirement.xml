@@ -1,7 +1,17 @@
 <workunit>
     <invokers>
-        <invoker type="building_permit_requirement:open" caption="Requirement Finding"
-                action="open" index="1" target="popup"/>        
+        <invoker type="building_permit_requirement:open" caption="Requirement Finding" action="open" index="1" target="popup"/>    
+        
+        <!-- buttons -->
+        <invoker type="formActions" caption="Accept"  action="accept" index="0" visibleWhen="#{ entity.state == 0 }" />    
+        <invoker type="formActions" caption="For Revision"  action="revise" index="1" visibleWhen="#{ entity.state == 0 }"/>    
+        <invoker type="formActions" caption="Not Applicable"  action="na" index="2" visibleWhen="#{ entity.state == 0  }"/>    
+        
+        <!-- buttons -->
+        <invoker type="formActions" caption="Supersede"  action="supersede" index="0" visibleWhen="#{ entity.state == 2 }"/>    
+        <invoker type="formActions" caption="Close Issue"  action="closeIssue" index="1" visibleWhen="#{ entity.state == 2 }"/>    
+        <invoker type="formActions" caption="View History"  action="viewHist" index="2" visibleWhen="#{ entity.state == 2 }"/>    
+            
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitRequirementModel" />
     <pages>

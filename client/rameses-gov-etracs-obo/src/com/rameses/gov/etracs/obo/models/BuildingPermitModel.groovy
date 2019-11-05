@@ -27,6 +27,9 @@ class BuildingPermitModel extends WorkflowTaskModel {
     def findingListHandler;
     def receipt;
     
+    def reqViewType = "all";
+    def reqQuery = [:];
+    
     @PropertyChangeListener
     def listener = [
         "showOption" : { o->
@@ -40,8 +43,28 @@ class BuildingPermitModel extends WorkflowTaskModel {
                 query.remove("where");                
             }
             evaluationHandler.reload();            
+        },
+        "reqViewType": { o->
+            //this is the entire filter for requirements
+            if (o == "open") {
+                reqQuery.where = reqQuery._filter + " AND state IN (0,2) ";
+            }
+            else if( o == "applicable") {
+                reqQuery.where = reqQuery._filter + " AND state <> 3 ";                
+            }
+            else {
+                reqQuery.where = reqQuery._filter ;
+            }
+            reqListHandler.reload();
         }
-    ]
+    ];
+    
+    
+    void buildReqQuery()  {
+        reqQuery.appid = entity.objid;
+        reqQuery._filter = "appid = :appid AND supersederid IS NULL";
+        reqQuery.where = reqQuery._filter;        
+    }
     
     String getFormName() {
         return getSchemaName() + ":form";
@@ -65,6 +88,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
     
     public void afterInit() {
         query.objid = entity.objid;
+        buildReqQuery();
     }
     
     public boolean getShowAssessAction() {

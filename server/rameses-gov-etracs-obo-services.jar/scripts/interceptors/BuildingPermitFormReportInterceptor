@@ -20,10 +20,10 @@ class BuildingPermitFormReportInterceptor {
 		def result = evt.result;
 		def id = p.parameters.objid;
 		def ea = vwAppEm.find( [objid: id ] ).first();
-		def r = taskEm.find( [refid: id, state: 'receiving'] ).first();
+		def r = taskEm.find( [refid: id, state: 'receiving'] ).orderBy("startdate DESC").first();
 		ea.startdate = r.startdate;
 		ea.enddate = r.enddate;
-		ea.receivedby = r.actor.name;
+		ea.receiver = r.assignee;
 		result.data = ea;
 	}	
 

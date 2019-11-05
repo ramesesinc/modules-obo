@@ -8,13 +8,13 @@
 		<field name="state" />
 		
 		<field name="remarks" />
-		<field name="modifiedby_objid" />
-		<field name="modifiedby_name" />
-		<field name="dtmodified" />
+		<field name="reviewer_objid" />
+		<field name="reviewer_name" />
+		<field name="dtreviewed" />
 
 		<field name="supersederid" />
 
-		<complex name="type" ref="obo_requirement_type" jointype="many-to-one" includefields="title,sortorder" required="true">
+		<complex name="type" ref="obo_requirement_type" jointype="many-to-one" includefields="objid,title,sortorder" required="true">
 			<key field="typeid" target="objid"/>
 		</complex>
 	</element>
