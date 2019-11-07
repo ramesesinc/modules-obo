@@ -23,6 +23,9 @@ class BuildingPermitModel extends WorkflowTaskModel {
     @Service("BuildingPermitRequirementService")
     def reqSvc;
     
+    @Service("BuildingPermitFindingService")
+    def findingSvc;
+    
     def showOption = "showall";
     def query = [:];
     def receipt;
@@ -170,6 +173,25 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return Inv.lookupOpener("building_permit_requirement_checklist", p );
     }
 
+    /**************************************************************************
+    * coordinator actions
+    ***************************************************************************/
+    void buildFindingChecklist() {
+        if( !MsgBox.confirm("You are about to finalize the findings checklist. You cannot undo this transaction. Proceed?") ) return;
+        def t = findingSvc.buildCheckList( [appid: entity.objid, taskid: task.taskid ]);
+        entity.transmittalid = t.objid;
+    }
+    
+    def printFindingChecklist() {
+        def p = [:];
+        p.put("query.transmittalid", entity.transmittalid );
+        return Inv.lookupOpener("building_permit_finding_checklist", p );
+    }
+    
+    void transmitFindingChecklist() {
+        findingSvc.transmitCheckList( [transmittalid: entity.transmittalid ]);
+    }
+    
     /**************************************************************************
     * assessment actions
     ***************************************************************************/

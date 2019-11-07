@@ -25,13 +25,15 @@
                 index="2"
                 visibleWhen="#{ entity.reqtransmittalid != null }"/>
         
+        <!--        
         <invoker type="appActions" 
                 caption="Remove Checklist"
                 role="ADMIN"
                 action="removeChecklist" 
                 index="2"
                 visibleWhen="#{ entity.reqtransmittalid != null }"/>    
-
+        -->
+                
         <invoker type="appActions" 
                 caption="Accept Application"
                 role="REQUIREMENT_REVIEWER"
@@ -56,15 +58,31 @@
                 visibleWhen="#{ task.state =='requirement-verification' &amp;&amp; task.assignee?.objid==userInfo.userid 
                     &amp;&amp; entity.appno != null}"/> 
 
-        <invoker type="appActions" 
-                caption="Transmit Acknowledgement"
-                role="REQUIREMENT_REVIEWER"
-                action="transmitApplication"
-                index="3"
-                visibleWhen="#{ task.state =='requirement-verification' &amp;&amp; task.assignee?.objid==userInfo.userid 
-                    &amp;&amp; entity.appno != null}"/> 
               
+        <!-- COORDINATOR ACTIONS -->      
+        <invoker type="appActions" 
+                caption="Build Finding Checklist"
+                role="COORDINATOR"
+                action="buildFindingChecklist" 
+                index="0"
+                visibleWhen="#{ task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.transmittalid == null }"/>
         
+        <invoker type="appActions" 
+                caption="Print Verification Checklist"
+                role="COORDINATOR"
+                action="printFindingChecklist"
+                index ="1"
+                visibleWhen="#{entity.transmittalid !=null}"/>
+        
+        <invoker type="appActions" 
+                caption="Transmit Checklist"
+                role="COORDINATOR"
+                action="transmitFindingChecklist" 
+                index="2"
+                visibleWhen="#{ entity.transmittalid != null }"/>
+            
+                
         <!--
                 <invoker type="extActions" 
                 caption="Print Forms"

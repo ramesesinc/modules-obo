@@ -48,22 +48,8 @@ class BuildingPermitWorkflowInterceptor {
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }") 
 	public void doActionBeforeRevision( def evt ) {
 		def p = evt.args[0];
-		if(p.taskstate == "requirement-verification") {
-			def t = transmittalEm.find( [taskid: p.taskid] ).first();
-			if(!t) throw new Exception("Please create a document verification checklist first");
-		}
-		else {
-			//check there must be at least one finding
-			def c = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("state=0").val();
-			if( c == 0) throw new Exception("There must be at least one finding");
-
-			c = findingEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("supersederid IS NULL AND state = 2 AND NOT(transmittalid IS NULL)").val();
-			if( c > 0 ) throw new Exception("Please either close or resend previous open items")
-
-			c = findingEm.select("c:{COUNT(*)}").find([appid:p.refid]).where("supersederid IS NULL AND state = 2 AND transmittalid IS NULL").val();
-			if( c<=0) throw new Exception("Please ensure that there is at least one finding that needs revision");			
-
-		}
+		def t = transmittalEm.find( [taskid: p.taskid] ).first();
+		if(!t) throw new Exception("Please create a verification checklist first");
 	}
 
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-zoning-evaluation' }") 
@@ -79,7 +65,7 @@ class BuildingPermitWorkflowInterceptor {
 		def p = evt.args[0];
 
 		//check if there are open findings
-		def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("state=0").val();
+		def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("supersederid IS NULL AND state=2").val();
 		if( t > 0) throw new Exception("All findings must be resolved first.");
 
 		if( p.to == "payment") {

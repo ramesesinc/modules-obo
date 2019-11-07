@@ -34,16 +34,25 @@ class BuildingPermitPersistenceInterceptor {
 	@After(pattern="PersistenceService.read", eval="#{args[0]._schemaname == 'vw_building_permit' }")
 	public void afterOpenBuildingPermit(def evt) {
 		def a = evt.result;
-		if( a.task.state == "requirement-verification" ) {
+		if( a.task.state.matches(".*verification") ) {
 			def t = transmittalEm.find( [taskid: a.taskid ]).first();
-			a.reqtransmittalid = t?.objid;
+			if( a.task.state.matches(".*requirement.*") ) {
+				a.reqtransmittalid = t?.objid;
+			}
+			else {
+				a.transmittalid = t?.objid;
+			}
 		}
-		else if( a.task.state == "requirement-revision" ) {
+		else if( a.task.state.matches(".*revision") ) {
 			def prevtaskid = taskEm.find( [taskid: a.taskid] ).select("prevtaskid").val();
 			def t = transmittalEm.find( [taskid: prevtaskid ]).first();
-			a.reqtransmittalid = t?.objid;
+			if( a.task.state.matches(".*requirement.*") ) {
+				a.reqtransmittalid = t?.objid;
+			}
+			else {
+				a.transmittalid = t?.objid;
+			}
 		}
-
 	}
 
 

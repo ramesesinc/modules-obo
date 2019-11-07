@@ -3,14 +3,23 @@ import java.rmi.server.*;
 
 class BuildingPermitFindingService {
 
-	@DataContext("building_permit_finding")
-	def findingEm;
+	@Service("SequenceService")
+	def seqSvc;
 
-	@Env
-	def env;
+	@Service("AppnoGeneratorService")
+	def appNoSvc;
 
 	@Service("DateService")
 	def dateSvc;
+
+	@DataContext("building_permit_finding")
+	def findingEm;
+
+	@DataContext("building_permit_transmittal")
+	def transmittalEm;
+
+	@Env
+	def env;
 
 	@ProxyMethod
 	public def create( def o ) { 
@@ -34,5 +43,33 @@ class BuildingPermitFindingService {
 		return o;
 	}
 
+
+	@ProxyMethod
+	public def buildCheckList( def o ) {
+		if(!o.taskid) throw new Exception("taskid is required in build requirement transmittal");
+		if(!o.appid) throw new Exception("appid is required in build requirement transmittal");
+
+		//check there must be at least one finding
+		def c = findingEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("supersederid IS NULL AND state = 2 AND NOT(transmittalid IS NULL)").val();
+		if( c > 0 ) throw new Exception("Please either close or resend previous open items")
+
+		c = findingEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("supersederid IS NULL AND state = 2 AND transmittalid IS NULL").val();
+		if( c<=0) throw new Exception("Please ensure that there is at least one finding that needs revision");			
+
+		def t = [:];
+		int nextNo = seqSvc.getNextSeries( "OBO_FINDING_TRANSMITTAL");
+		t.objid = appNoSvc.generate( "BTF-[yyyyMM]-[%05d]", nextNo  );
+		t.appid = o.appid;
+		t.type = "finding";
+		t.createdby = [objid: env.USERID, name: env.FULLNAME ];
+		t.dtcreated = dateSvc.getServerDate();
+		t.taskid = o.taskid;
+		t.state = 0;
+		transmittalEm.create( t );
+
+		//update all open  
+		findingEm.find([appid: o.appid]).where("transmittalid IS NULL").update( [transmittalid: t.objid] );
+		return t;	
+	}
 
 }

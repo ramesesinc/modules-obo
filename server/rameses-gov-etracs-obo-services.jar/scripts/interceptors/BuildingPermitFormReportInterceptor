@@ -55,16 +55,17 @@ class BuildingPermitFormReportInterceptor {
 	public void getBuildingPermitFindingChecklistReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		def id = p.parameters.objid;
-		def taskid = p.parameters.txnid;
+		def transmittalid = p.parameters.transmittalid;
+		if(!transmittalid) throw new Exception("transmittalid is required in requirement checklist report")
 
-		if(!taskid) throw new Exception("txnid is required in getFindingCheckList");
+		def t = transmittalEm.find([objid: transmittalid]).first();
+		if(!t) throw new Exception("Transmittal " + transmittalid + " not found ");
 
-		//update first all items that do not have transmittalid
-		findingEm.find([appid: id]).where("transmittalid IS NULL").update( [transmittalid: taskid] );	
+		def ea = vwAppEm.find( [objid: t.appid ] ).first();
+		ea.receiver = t.createdby;
+		ea.transmittalno = t.objid;
+		ea.items = findingEm.find( [transmittalid : t.objid ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
 
-		def ea = vwAppEm.find( [objid: id ] ).first();
-		ea.items = findingEm.find( [transmittalid : taskid ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
 		result.data = ea;
 	}	
 

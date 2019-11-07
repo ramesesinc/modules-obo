@@ -12,6 +12,12 @@
                  reportName="com/rameses/gov/etracs/obo/reports/building_permit_req_checklist.jasper"
                  action="preview" target="popup"/>
         
+        <invoker type="building_permit_finding_checklist" 
+                 caption="Findings Checklist"
+                 reportId="building_permit_finding_checklist"
+                 reportName="com/rameses/gov/etracs/obo/reports/building_permit_finding_checklist.jasper"
+                 action="preview" target="popup"/>
+        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
 </workunit>
