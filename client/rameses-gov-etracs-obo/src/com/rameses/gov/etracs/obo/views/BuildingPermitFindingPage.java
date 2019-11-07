@@ -5,13 +5,16 @@
  */
 package com.rameses.gov.etracs.obo.views;
 
+import com.rameses.osiris2.themes.FormPage;
 import com.rameses.rcp.ui.annotations.StyleSheet;
+import com.rameses.rcp.ui.annotations.Template;
 
 /**
  *
  * @author elmonazareno
  */
 @StyleSheet
+@Template(FormPage.class)
 public class BuildingPermitFindingPage extends javax.swing.JPanel {
 
     /**
@@ -36,11 +39,8 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         xTextArea2 = new com.rameses.rcp.control.XTextArea();
         xLabel3 = new com.rameses.rcp.control.XLabel();
-        xActionBar2 = new com.rameses.rcp.control.XActionBar();
         xPanel2 = new com.rameses.rcp.control.XPanel();
         schemaList7 = new com.rameses.seti2.components.SchemaList();
-        xPanel3 = new com.rameses.rcp.control.XPanel();
-        xButton1 = new com.rameses.rcp.control.XButton();
 
         setLayout(new java.awt.CardLayout());
 
@@ -52,7 +52,7 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
         xFormPanel2.setCaptionWidth(100);
 
         xLabel2.setCaption("Section");
-        xLabel2.setExpression("#{ entity.parent.typeid }");
+        xLabel2.setExpression("#{ entity.section.type.title }");
         xLabel2.setVisibleWhen("#{ entity.objid != null }");
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel2);
@@ -74,12 +74,6 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
         xFormPanel2.add(xLabel3);
 
         xPanel1.add(xFormPanel2, java.awt.BorderLayout.CENTER);
-
-        xActionBar2.setFormName("formName");
-        xActionBar2.setName("formActions"); // NOI18N
-        xActionBar2.setHorizontalAlignment(0);
-        xActionBar2.setUseToolBar(false);
-        xPanel1.add(xActionBar2, java.awt.BorderLayout.SOUTH);
 
         add(xPanel1, "card4");
 
@@ -142,15 +136,6 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
         schemaList7.setSchemaName("building_permit_finding");
         xPanel2.add(schemaList7, java.awt.BorderLayout.CENTER);
 
-        xPanel3.setPreferredSize(new java.awt.Dimension(0, 30));
-        xPanel3.setLayout(new java.awt.BorderLayout());
-
-        xButton1.setName("viewBack"); // NOI18N
-        xButton1.setText("Back");
-        xPanel3.add(xButton1, java.awt.BorderLayout.WEST);
-
-        xPanel2.add(xPanel3, java.awt.BorderLayout.PAGE_START);
-
         add(xPanel2, "card5");
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,14 +143,11 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
     private com.rameses.seti2.components.SchemaList schemaList7;
-    private com.rameses.rcp.control.XActionBar xActionBar2;
-    private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel2;
-    private com.rameses.rcp.control.XPanel xPanel3;
     private com.rameses.rcp.control.XTextArea xTextArea2;
     // End of variables declaration//GEN-END:variables
 }

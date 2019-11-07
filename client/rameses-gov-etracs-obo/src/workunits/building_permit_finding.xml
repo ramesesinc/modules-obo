@@ -10,17 +10,23 @@
         <invoker type="formActions" caption="Cancel"
                 action="_close" index="1" />
 
+        <invoker type="formActions" caption="Edit"
+                action="edit" visibleWhen="#{editable == true }" index="2"/>
+
         <invoker type="formActions" caption="Save"
-                action="save" index="2" visibleWhen="#{entity.objid == null}"/>
+                action="save" index="2" visibleWhen="#{entity.state == 0}"/>
         
         <invoker type="formActions" caption="Supersede"
-                action="supersede" index="1" visibleWhen="#{entity.objid != null  &amp;&amp; entity.state == 0}"/>
+                action="supersede" index="1" visibleWhen="#{closeable == true}"/>
 
         <invoker type="formActions" caption="Close Issue"
-            action="closeIssue" index="2" visibleWhen="#{entity.objid != null &amp;&amp; entity.state == 0}"/>
+            action="closeIssue" index="2" visibleWhen="#{closeable == true}"/>
         
         <invoker type="formActions" caption="View History"
-            action="viewHistory" index="3" visibleWhen="#{entity.objid != null}"/>
+            action="viewHistory" index="3" visibleWhen="#{pagename == 'view'}" />
+
+        <invoker type="formActions" caption="Back"
+            action="viewBack" index="3" visibleWhen="#{pagename == 'hist'}" />
         
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitFindingModel" />

@@ -20,30 +20,27 @@ class BuildingPermitModel extends WorkflowTaskModel {
     @Service("BuildingPermitService")
     def bldgSvc;
     
+    @Service("BuildingPermitRequirementService")
+    def reqSvc;
+    
     def showOption = "showall";
     def query = [:];
-    def evaluationHandler;
-    def reqListHandler;
-    def findingListHandler;
     def receipt;
     
     def reqViewType = "all";
     def reqQuery = [:];
+    def reqListHandler;
+    
+    def sectionView = "all";
+    def sectionQry = [:];
+    def sectionListHandler;
+    
+    def findingView = "all"
+    def findingQry = [:];
+    def findingListHandler;
     
     @PropertyChangeListener
     def listener = [
-        "showOption" : { o->
-            if(o == "showunfinished") {
-                query.where = " task.state IN ('evaluation', 'review', 'approval' ) ";
-            }
-            else if(o == "showfinished") {
-                query.where = " task.state = 'end' ";
-            }            
-            else {
-                query.remove("where");                
-            }
-            evaluationHandler.reload();            
-        },
         "reqViewType": { o->
             //this is the entire filter for requirements
             if (o == "open") {
@@ -53,17 +50,44 @@ class BuildingPermitModel extends WorkflowTaskModel {
                 reqQuery.where = reqQuery._filter + " AND state <> 3 ";                
             }
             else {
-                reqQuery.where = reqQuery._filter ;
+                reqQuery.where = reqQuery._filter;
             }
             reqListHandler.reload();
+        },
+        "sectionView" : { o->
+            if(o == "open") {
+                sectionQry.where = sectionQry._filter +  " AND task.state IN ('evaluation', 'review', 'approval' ) ";
+            }
+            else if(o == "closed") {
+                sectionQry.where = sectionQry._filter +  " AND task.state = 'end' ";
+            }            
+            else {
+                sectionQry.where = sectionQry._filter;                
+            }
+            sectionListHandler.reload();            
+        },
+        "findingView" : { o->
+            findingListHandler.reload();
         }
     ];
     
-    
-    void buildReqQuery()  {
+    void buildQuery()  {
         reqQuery.appid = entity.objid;
         reqQuery._filter = "appid = :appid AND supersederid IS NULL";
-        reqQuery.where = reqQuery._filter;        
+        reqQuery.where = reqQuery._filter;   
+        
+        sectionQry.appid = entity.objid;
+        sectionQry._filter = "appid = :appid ";
+        sectionQry.where = sectionQry._filter;
+        
+        findingQry.appid = entity.objid;
+        findingQry._filter = "appid = :appid AND supersederid IS NULL";
+        findingQry.where = findingQry._filter;
+    }
+    
+    public void afterInit() {
+        query.objid = entity.objid;
+        buildQuery();
     }
     
     String getFormName() {
@@ -86,10 +110,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return entity.objid;
     }
     
-    public void afterInit() {
-        query.objid = entity.objid;
-        buildReqQuery();
-    }
+  
     
     public boolean getShowAssessAction() {
         return true;
@@ -107,6 +128,51 @@ class BuildingPermitModel extends WorkflowTaskModel {
         }
     ] as BasicListModel;
     
+    /**************************************************************************
+    * requirement-verification actions
+    ***************************************************************************/
+    void acceptApplication() {
+        if(!MsgBox.confirm("You are about to receive this application. Proceed?")) return;
+        def o = bldgSvc.generateAppNo( [appid: entity.objid ] );
+        entity.putAll( o );
+        MsgBox.alert("App no " + o.appno + " is successfully generated");
+    }
+    
+    def printClaimstub() {
+        def p = [:];
+        p.put("query.objid", entity.objid );
+        return Inv.lookupOpener("building_permit_claimstub", p );
+    }
+    
+    void transmitApplication() {
+        bldgSvc.transmitApplication( [appid: entity.objid ]);
+    }
+        
+    void buildRequirementChecklist() {
+        if( !MsgBox.confirm("You are about to finalize the requirement checklist. You cannot undo this transaction. Proceed?") ) return;
+        def t = reqSvc.buildCheckList( [appid: entity.objid, taskid: task.taskid ]);
+        entity.reqtransmittalid = t.objid;
+    }
+    
+    void removeChecklist() {
+        if( !MsgBox.confirm("You are about to remove this checklist. Proceed?") ) return;
+        def t = reqSvc.removeCheckList( [transmittalid: entity.reqtransmittalid ]);
+        entity.reqtransmittalid = null;        
+    }
+    
+    void transmitChecklist() {
+        reqSvc.transmitCheckList( [transmittalid: entity.reqtransmittalid ]);
+    }
+    
+    def printReqChecklist() {
+        def p = [:];
+        p.put("query.transmittalid", entity.reqtransmittalid );
+        return Inv.lookupOpener("building_permit_requirement_checklist", p );
+    }
+
+    /**************************************************************************
+    * assessment actions
+    ***************************************************************************/
     void assess() {
         def result  = feeSvc.assess( [appid: entity.objid ] );
         entity.amount = result.amount;
@@ -121,21 +187,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
         binding.refresh("entity.amount");
     }
     
-    void receive() {
-        if(!MsgBox.confirm("You are about to receive this application. Proceed?")) return;
-        def o = bldgSvc.generateAppNo( [appid: entity.objid ] );
-        entity.putAll( o );
-        MsgBox.alert("App no " + o.appno + " is successfully generated");
-    }
     
-    def printAck() {
-        return Inv.lookupOpener("building_permit_claimstub", [entity: [objid: entity.objid] ]);
-    }
-    
-    def printReqChecklist() {
-        return Inv.lookupOpener("building_permit_requirement_checklist", [entity: [objid: entity.objid] ]);
-    }
-
     def issuePermit() {
         def m = [appid:entity.objid];
         m.handler = { o->
@@ -144,5 +196,8 @@ class BuildingPermitModel extends WorkflowTaskModel {
         }
         return Inv.lookupOpener("building_permit_issuance:create", m );
     }
+    
+    
+    
     
 }

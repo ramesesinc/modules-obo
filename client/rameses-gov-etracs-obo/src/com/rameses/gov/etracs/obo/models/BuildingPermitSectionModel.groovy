@@ -18,7 +18,7 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
     @Service("BuildingPermitInfoService")
     def infoSvc;
     
-     @Service("BuildingPermitFeeService")
+    @Service("BuildingPermitFeeService")
     def feeSvc;
     
     def infos;
@@ -69,7 +69,7 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
         def h  = { list->
             list.each {
                 it.appid = entity.appid;
-                it.parentid = entity.objid;
+                it.sectionid = entity.typeid;
                 it.amtpaid = 0;
             }
             feeSvc.saveFees( list );
@@ -79,7 +79,7 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
     }
     
     def addFee() {
-        def m = [appid: entity.appid, parentid: entity.objid, typeid: entity.typeid ];
+        def m = [appid: entity.appid, typeid: entity.typeid ];
         m.handler = { o->
             feeListHandler.reload();
         }
@@ -100,7 +100,7 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
         def m = [:];
         m.sectionid = entity.objid;
         m.appid = entity.appid;
-        m.parent = [typeid: entity.typeid ];
+        m.section = [typeid: entity.typeid ];
         m.handler = { o->
             findingListHandler.reload();
         }
@@ -114,6 +114,10 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
             reload();
         }
         return Inv.lookupOpener("building_permit_issuance:create", m );
+    }
+    
+    public boolean isActionable() {
+        return (task.assignee.objid == userInfo.userid);
     }
     
     

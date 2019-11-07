@@ -14,9 +14,14 @@ class BuildingPermitFindingService {
 
 	@ProxyMethod
 	public def create( def o ) { 
+		if(o.objid) {
+			findingEm.find( [objid: o.objid] ).update( o );
+			return o;			
+		}
+
 		o.createdby = [objid: env.USERID, name: env.FULLNAME ];
 		o.dtcreated = dateSvc.getServerDate();
-		o.state = 0;
+		o.state = o.state;
 		o.objid = "BLDGPMTFIND" + new UID();
 		if( o.previd ) {
 			def z = findingEm.create(o);
@@ -26,16 +31,8 @@ class BuildingPermitFindingService {
 			o.rootid = o.objid;
 			findingEm.create(o);
 		}
+		return o;
 	}
 
-	@ProxyMethod
-	public def closeIssue( def o ) { 
-		def u = [:];
-		u.state = 1;
-		u.resolvedby = [objid: env.USERID, name: env.FULLNAME ];
-		u.dtresolved = dateSvc.getServerDate();
-		findingEm.find([objid: o.objid]).update(u);
-
-	}
 
 }

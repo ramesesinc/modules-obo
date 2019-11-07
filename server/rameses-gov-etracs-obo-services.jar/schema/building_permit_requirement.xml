@@ -13,6 +13,7 @@
 		<field name="dtreviewed" />
 
 		<field name="supersederid" />
+		<field name="transmittalid" />
 
 		<complex name="type" ref="obo_requirement_type" jointype="many-to-one" includefields="objid,title,sortorder" required="true">
 			<key field="typeid" target="objid"/>

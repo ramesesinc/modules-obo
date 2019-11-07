@@ -257,7 +257,7 @@ public class BuildingPermitSectionPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
-        schemaList2.setCustomFilter("parentid = :objid");
+        schemaList2.setCustomFilter("appid = :appid AND sectionid = :typeid");
         schemaList2.setHandlerName("feeListHandler");
         schemaList2.setName(""); // NOI18N
         schemaList2.setQueryName("entity");

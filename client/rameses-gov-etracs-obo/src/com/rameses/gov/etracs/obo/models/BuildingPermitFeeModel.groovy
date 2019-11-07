@@ -19,7 +19,7 @@ class BuildingPermitFeeModel extends CrudFormModel {
     
     void afterCreate() {
         entity.appid = appid;
-        entity.parentid = parentid;
+        entity.sectionid = typeid;
         entity.amtpaid = 0;
     }
     
@@ -29,6 +29,7 @@ class BuildingPermitFeeModel extends CrudFormModel {
     }
     
     void afterSave(o) {
+        MsgBox.alert("after save");
         if(handler) handler(o);
     }
 }

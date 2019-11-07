@@ -15,10 +15,7 @@ import com.rameses.io.*;
 
 class OboFormReportModel extends com.rameses.seti2.models.FormReportModel {
     
-    def entity;
+    def query = [:];
     
-    public def getQuery() {
-        return [objid: entity?.objid ];
-    }
     
 }

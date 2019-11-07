@@ -3,14 +3,26 @@ import java.rmi.server.*;
 
 class BuildingPermitRequirementService {
 
+	@Service("DateService")
+	def dateSvc;
+
+	@Service("SequenceService")
+	def seqSvc;
+
+	@Service("AppnoGeneratorService")
+	def appNoSvc;
+
 	@DataContext("building_permit_requirement")
 	def reqEm;
 
+	@DataContext("building_permit_transmittal")
+	def transmittalEm;
+
+	@DataContext("building_permit")
+	def appEm;
+
 	@Env
 	def env;
-
-	@Service("DateService")
-	def dateSvc;
 
 	@ProxyMethod
 	public def update( def o ) {
@@ -26,6 +38,50 @@ class BuildingPermitRequirementService {
 		return o;
 	}
 
+	@ProxyMethod
+	public def buildCheckList( def o ) {
+		if(!o.taskid) throw new Exception("taskid is required in build requirement transmittal");
+		if(!o.appid) throw new Exception("appid is required in build requirement transmittal");
 
+		//validate first if there are existing open items that need to be transmitted
+		def c = reqEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("state = 0").val();
+		if( c>0) throw new Exception("All requirements must be checked first");
+
+		c = reqEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("supersederid IS NULL AND state = 2 AND NOT(transmittalid IS NULL)").val();
+		if( c > 0 ) throw new Exception("Please either close or resend previous open items")
+
+		c = reqEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("supersederid IS NULL AND state = 2 AND transmittalid IS NULL").val();
+		if( c<=0) throw new Exception("Please ensure that there is at least one requirement that needs revision");	
+
+		def t = [:];
+		int nextNo = seqSvc.getNextSeries( "OBO_REQUIREMENT_TRANSMITTAL");
+		t.objid = appNoSvc.generate( "BTR-[yyyyMM]-[%05d]", nextNo  );
+		t.appid = o.appid;
+		t.type = "requirement";
+		t.createdby = [objid: env.USERID, name: env.FULLNAME ];
+		t.dtcreated = dateSvc.getServerDate();
+		t.taskid = o.taskid;
+		t.state = 0;
+		transmittalEm.create( t );
+
+		//update all open  
+		reqEm.find([appid: o.appid]).where("transmittalid IS NULL").update( [transmittalid: t.objid] );
+		return t;	
+	}
+
+	//just include this but it will be called from the admin side.
+	@ProxyMethod
+	public def removeCheckList( def o ) {
+		if(!o.transmittalid) throw new Exception("Please include transmittalid");
+		reqEm.find([transmittalid: o.transmittalid ]).update( [transmittalid: "{NULL}"] );
+		transmittalEm.find( [objid: o.transmittalid ]).delete();
+	}
+	
+	@ProxyMethod
+	public void transmitCheckList( def o ) {
+		def t = transmittalEm.find( [objid: o.transmittalid ]).first();
+		def app = appEm.find( [objid: t.appid ]).first();
+		throw new Exception("sending checklist to email " + app.contact.email + " " + app.contact.mobileno );		
+	}
 
 }

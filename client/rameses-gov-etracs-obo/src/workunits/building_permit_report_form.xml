@@ -8,7 +8,7 @@
         
         <invoker type="building_permit_requirement_checklist" 
                  caption="Document Verification Checklist"
-                 reportId="building_permit_doc_verification_checklist"
+                 reportId="building_permit_requirement_checklist"
                  reportName="com/rameses/gov/etracs/obo/reports/building_permit_req_checklist.jasper"
                  action="preview" target="popup"/>
         

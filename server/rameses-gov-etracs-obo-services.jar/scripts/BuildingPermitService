@@ -49,7 +49,7 @@ public class BuildingPermitService  {
 		def c = reqEm.select("c:{COUNT(*)}").find([appid:appid]).where("state = 0").val();
 		if( c>0) throw new Exception("All requirements must be checked first");
 
-		c = reqEm.select("c:{COUNT(*)}").find([appid:appid]).where("state = 2").val();
+		c = reqEm.select("c:{COUNT(*)}").find([appid:appid]).where("supersederid IS NULL AND state = 2").val();
 		if( c>0) throw new Exception("There are still requirements that need to be revised");
 
 		//update the appno first
@@ -60,6 +60,14 @@ public class BuildingPermitService  {
 		u.appno = appno;
 		appEm.find( [objid: appid ] ).update( u );
 		return u;
+	}
+
+	@ProxyMethod
+	public void transmitApplication( def o ) {
+		if(!o.appid ) throw new Exception("appid is required in transmit application");
+		def appid = o.appid;
+		def app = appEm.find([objid: appid ]).first();
+		throw new Exception("app" + app.contact.email + " " + app.contact.mobileno );
 	}
 
 	@ProxyMethod

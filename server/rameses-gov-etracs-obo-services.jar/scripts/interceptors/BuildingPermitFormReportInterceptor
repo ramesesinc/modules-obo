@@ -11,8 +11,15 @@ class BuildingPermitFormReportInterceptor {
 	@DataContext("building_permit_task")
 	def taskEm;
 
+	@DataContext("building_permit_transmittal")
+	def transmittalEm;
+
+
 	@DataContext("building_permit_requirement")
 	def reqEm;
+
+	@DataContext("building_permit_finding")
+	def findingEm;
 
 	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_claimstub'}")
 	public void getBuildingPermitClaimStubReport( def evt ) {
@@ -27,17 +34,41 @@ class BuildingPermitFormReportInterceptor {
 		result.data = ea;
 	}	
 
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_doc_verification_checklist'}")
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_requirement_checklist'}")
 	public void getBuildingPermitVerificationChecklistReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		def id = p.parameters.objid;
-		def ea = vwAppEm.find( [objid: id ] ).first();
-		def v = taskEm.find( [refid: id ] ).where( "state = 'receiving' ").select("actor.name").first()?.actor;
-		ea.receiver = v;
-		ea.items = reqEm.find( [appid: id ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
+		def transmittalid = p.parameters.transmittalid;
+		if(!transmittalid) throw new Exception("transmittalid is required in requirement checklist report")
+
+		def t = transmittalEm.find([objid: transmittalid]).first();
+		if(!t) throw new Exception("Transmittal " + transmittalid + " not found ");
+
+		def ea = vwAppEm.find( [objid: t.appid ] ).first();
+		ea.receiver = t.createdby;
+		ea.transmittalno = t.objid;
+		ea.items = reqEm.find( [transmittalid : t.objid ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
 		result.data = ea;
 	}	
+
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_finding_checklist'}")
+	public void getBuildingPermitFindingChecklistReport( def evt ) {
+		def p = evt.args[0];
+		def result = evt.result;
+		def id = p.parameters.objid;
+		def taskid = p.parameters.txnid;
+
+		if(!taskid) throw new Exception("txnid is required in getFindingCheckList");
+
+		//update first all items that do not have transmittalid
+		findingEm.find([appid: id]).where("transmittalid IS NULL").update( [transmittalid: taskid] );	
+
+		def ea = vwAppEm.find( [objid: id ] ).first();
+		ea.items = findingEm.find( [transmittalid : taskid ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
+		result.data = ea;
+	}	
+
+
 
 	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit'}")
 	public void getBuildingPermitReport( def evt ) {

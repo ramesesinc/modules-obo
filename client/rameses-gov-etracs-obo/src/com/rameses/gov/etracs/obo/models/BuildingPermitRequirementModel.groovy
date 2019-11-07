@@ -18,11 +18,13 @@ class BuildingPermitRequirementModel {
     @Binding
     def binding;
     
+    @Script("User")
+    def user;
+    
     @Caller
     def caller;
 
     def entity;
-
     String pagename = "view"
     String title = "Review Requirement";
     
@@ -31,9 +33,46 @@ class BuildingPermitRequirementModel {
     }
     
     void open() {
-        def ctask = caller.task;
-        if( ctask.state != 'receiving' ) throw new Exception("Requirement can only be edited in receiving state");
-        if( ctask.assignee?.objid == null ) throw new Exception("Please assign first a person to the receiving task.");
+    }
+    
+    //can display the pass, fail or NA buttons
+    public boolean isActionable() {
+        def task = caller.task;
+        if( caller.entity.appno != null ) return false;
+        if( task.state != 'requirement-verification' ) return false;
+        if(pagename!="view") return false;
+        if( entity.state == 0 ) {
+            if( task.assignee?.objid == user.userid ) return true;
+            return false;
+        }    
+        else {
+            return false;
+        }; 
+    }
+        
+    //can display the editable button
+    public boolean isEditable() {
+        def task = caller.task;
+        if( caller.entity.appno != null ) return false;
+        if( task.state != 'requirement-verification' ) return false;
+        if(pagename!="view") return false;
+        if( entity.state == 0 ) return false;
+        if( entity.transmittalid != null ) return false;
+        if(task.assignee.objid != user.userid ) return false;
+        return ( entity.reviewer.objid == user.userid );
+    }
+    
+    public boolean isOverridable() {
+        def task = caller.task;
+        if( caller.entity.appno != null ) return false;        
+        if( task.state != 'requirement-verification' ) return false;        
+        if(pagename!="view") return false;
+        if( caller.entity.reqtransmittalid ) return false; 
+        if( entity.state == 0 ) return false;
+        if( entity.transmittalid !=null ) {
+            return ( task.assignee.objid == user.userid );
+        }
+        return false;
     }
     
     public boolean getForRevision() {
@@ -86,6 +125,11 @@ class BuildingPermitRequirementModel {
     void na() {
         updateState(3); 
     }
+    
+    void edit() {
+        entity.state = 0;
+    }
+    
     
     void supersede() {
         def prev = entity;

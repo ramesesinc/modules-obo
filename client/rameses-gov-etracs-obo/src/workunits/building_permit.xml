@@ -2,23 +2,69 @@
     <invokers>
         <invoker type="vw_building_permit:open" caption="Building Permit Application" action="open" index="1"/>
 
+        
+        <!-- requirement verification buttons -->
         <invoker type="appActions" 
-                caption="Receive"
-                role="RECEIVER"
-                action="receive" visibleWhen="#{task.state=='receiving' &amp;&amp; task.assignee?.objid!=null &amp;&amp; entity.appno == null}"/>
+                caption="Build Doc. Verification Checklist"
+                role="REQUIREMENT_REVIEWER"
+                action="buildRequirementChecklist" 
+                index="0"
+                visibleWhen="#{ task.assignee?.objid==userInfo.userid &amp;&amp; entity.reqtransmittalid == null &amp;&amp; entity.appno == null }"/>
+        
+        <invoker type="appActions" 
+                caption="Print Verification Checklist"
+                role="REQUIREMENT_REVIEWER"
+                action="printReqChecklist"
+                index ="1"
+                visibleWhen="#{entity.reqtransmittalid !=null}"/>
+        
+        <invoker type="appActions" 
+                caption="Transmit Checklist"
+                role="REQUIREMENT_REVIEWER"
+                action="transmitChecklist" 
+                index="2"
+                visibleWhen="#{ entity.reqtransmittalid != null }"/>
+        
+        <invoker type="appActions" 
+                caption="Remove Checklist"
+                role="ADMIN"
+                action="removeChecklist" 
+                index="2"
+                visibleWhen="#{ entity.reqtransmittalid != null }"/>    
+
+        <invoker type="appActions" 
+                caption="Accept Application"
+                role="REQUIREMENT_REVIEWER"
+                action="acceptApplication" 
+                index="3"
+                visibleWhen="#{ task.state =='requirement-verification' &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno == null  &amp;&amp; entity.reqtransmittalid == null }"/>
         
         <invoker type="appActions" 
                 caption="Print Claim Stub"
-                role="RECEIVER"
-                action="printAck"
-                visibleWhen="#{task.state=='receiving' &amp;&amp; entity.appno != null}"/> 
+                role="REQUIREMENT_REVIEWER"
+                action="printClaimstub"
+                index="3"
+                visibleWhen="#{ task.state =='requirement-verification' &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno != null}"/> 
          
         <invoker type="appActions" 
-                caption="Print Req. Checklist"
-                role="RECEIVER"
-                action="printReqChecklist"
-                visibleWhen="#{task.state == 'receiving-revision' }"/> 
+                caption="Transmit Acknowledgement"
+                role="REQUIREMENT_REVIEWER"
+                action="transmitApplication"
+                index="3"
+                visibleWhen="#{ task.state =='requirement-verification' &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno != null}"/> 
 
+        <invoker type="appActions" 
+                caption="Transmit Acknowledgement"
+                role="REQUIREMENT_REVIEWER"
+                action="transmitApplication"
+                index="3"
+                visibleWhen="#{ task.state =='requirement-verification' &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno != null}"/> 
+              
+        
         <!--
                 <invoker type="extActions" 
                 caption="Print Forms"

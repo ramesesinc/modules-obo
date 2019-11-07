@@ -10,6 +10,12 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
+/******
+* state is similar to the requirements
+* 0 = editing state
+* 1 =  
+******/
+
 class BuildingPermitFindingModel {
 
     @Service("BuildingPermitFindingService")
@@ -17,6 +23,9 @@ class BuildingPermitFindingModel {
 
     @Caller
     def caller;
+
+    @Script("User")
+    def userInfo;
     
     def appid;
     def sectionid;
@@ -24,7 +33,6 @@ class BuildingPermitFindingModel {
     
     def pagename = "view";
 
-    
     void create() {
         entity = [:];
         if( !sectionid ) {
@@ -34,16 +42,44 @@ class BuildingPermitFindingModel {
             entity.appid = appid;
             entity.parentid = sectionid;
         }
+        entity.state = 0;
     }
     
     void open() {
-        
+    }
+
+    boolean isEditable() {
+        def task = caller.task;
+        if( task.assignee.objid != userInfo.userid ) return false;
+        if( pagename != "view") return false;
+        if( entity.state == 0 ) return false;
+        if( entity.transmittalid != null ) return false;
+        if( entity.createdby.objid == userInfo.userid ) return true;
+        return false;
+    }
+    
+    boolean isCloseable() {
+         def task = caller.task;
+        if( task.assignee.objid != userInfo.userid ) return false;
+        if( pagename != "view") return false;
+        if(!entity.objid) return false;
+        if( entity.createdby.objid != userInfo.userid ) return true;
+        return false;
+    }
+    
+    void edit() {
+        entity.state = 0;
     }
     
     def save() {
+        return save(2);
+    }
+    
+    def save( int state ) {
+        entity.state = state;
         findingSvc.create( entity );
         caller.findingListHandler.reload();
-        return "_close";
+        return "_close";        
     }
 
     void supersede() {
@@ -55,15 +91,13 @@ class BuildingPermitFindingModel {
         entity.parentid = preventity.parentid;
         entity.rootid = preventity.rootid;        
         entity.particulars = preventity.particulars;
+        entity.state = 0;
     }
     
     def closeIssue() {
         if(!MsgBox.confirm("This will close this finding. Proceed?")) return;
-        findingSvc.closeIssue( entity );
-        caller.findingListHandler.reload();
-        return "_close";
+        return save(1);
     }
-    
     
     void viewHistory() {
         pagename = "hist";

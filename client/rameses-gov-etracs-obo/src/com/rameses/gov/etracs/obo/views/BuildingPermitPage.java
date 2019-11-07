@@ -92,7 +92,6 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         schemaList5 = new com.rameses.seti2.components.SchemaList();
         xPanel6 = new com.rameses.rcp.control.XPanel();
         schemaList3 = new com.rameses.seti2.components.SchemaList();
-        jPanel8 = new javax.swing.JPanel();
         xPanel7 = new com.rameses.rcp.control.XPanel();
         xButton4 = new com.rameses.rcp.control.XButton();
         xButton5 = new com.rameses.rcp.control.XButton();
@@ -610,6 +609,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
 
         xTabbedPane1.addTab("Application Info", jPanel1);
 
+        xPanel2.setVisibleWhen("#{ task.idx >= 3 }");
         xPanel2.setLayout(new java.awt.BorderLayout());
 
         schemaList6.setColumns(new com.rameses.rcp.common.Column[]{
@@ -688,6 +688,21 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.DateColumnHandler(null, null, null)}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "transmittalid"}
+                , new Object[]{"caption", "Transmittal No"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 120}
+                , new Object[]{"maxWidth", 200}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
         schemaList6.setHandlerName("reqListHandler");
@@ -720,8 +735,8 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xRadio5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xRadio6, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 732, Short.MAX_VALUE))
+                .addComponent(xRadio6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 780, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -730,35 +745,45 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                     .addComponent(xRadio4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(xRadio5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(xRadio6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         xPanel2.add(jPanel9, java.awt.BorderLayout.PAGE_START);
 
         xTabbedPane1.addTab("Requirements", xPanel2);
 
-        xPanel3.setVisibleWhen("#{ task.idx >= 4 }");
+        xPanel3.setVisibleWhen("#{ task.idx >= 5 }");
+        xPanel3.setLayout(new java.awt.BorderLayout());
 
         xFormPanel2.setOrientation(com.rameses.rcp.constant.UIConstants.HORIZONTAL);
+        xFormPanel2.setPreferredSize(new java.awt.Dimension(448, 30));
 
-        xRadio1.setName("showOption"); // NOI18N
-        xRadio1.setOptionValue("showall");
+        xRadio1.setName("sectionView"); // NOI18N
+        xRadio1.setOptionValue("all");
         xRadio1.setShowCaption(false);
-        xRadio1.setText("Show all items");
+        xRadio1.setText("Show all");
+        xRadio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xRadio1ActionPerformed(evt);
+            }
+        });
         xFormPanel2.add(xRadio1);
 
-        xRadio2.setName("showOption"); // NOI18N
-        xRadio2.setOptionValue("showunfinished");
+        xRadio2.setName("sectionView"); // NOI18N
+        xRadio2.setOptionValue("open");
         xRadio2.setShowCaption(false);
-        xRadio2.setText("Show only unresolved items");
+        xRadio2.setText("Show only open items");
         xFormPanel2.add(xRadio2);
 
-        xRadio3.setName("showOption"); // NOI18N
-        xRadio3.setOptionValue("showfinished");
+        xRadio3.setName("sectionView"); // NOI18N
+        xRadio3.setOptionValue("closed");
         xRadio3.setShowCaption(false);
-        xRadio3.setText("Show only resolved items");
+        xRadio3.setText("Show only closed items");
         xFormPanel2.add(xRadio3);
 
+        xPanel3.add(xFormPanel2, java.awt.BorderLayout.NORTH);
+
+        schemaList5.setAllowOpen(false);
         schemaList5.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "type.title"}
@@ -834,44 +859,36 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.DateColumnHandler(null, null, null)}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "message"}
+                , new Object[]{"caption", "Message"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
-        schemaList5.setCustomFilter("appid = :objid");
-        schemaList5.setHandlerName("evaluationHandler");
-        schemaList5.setQueryName("query");
+        schemaList5.setHandlerName("sectionListHandler");
+        schemaList5.setQueryName("sectionQuery");
         schemaList5.setSchemaName("vw_building_permit_section");
-
-        javax.swing.GroupLayout xPanel3Layout = new javax.swing.GroupLayout(xPanel3);
-        xPanel3.setLayout(xPanel3Layout);
-        xPanel3Layout.setHorizontalGroup(
-            xPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(xPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(xPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(xPanel3Layout.createSequentialGroup()
-                        .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 694, Short.MAX_VALUE))
-                    .addComponent(schemaList5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        xPanel3Layout.setVerticalGroup(
-            xPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(xPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(schemaList5, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                .addGap(24, 24, 24))
-        );
+        xPanel3.add(schemaList5, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Sections", xPanel3);
 
+        xPanel6.setVisibleWhen("#{ task.idx >= 5 }");
         xPanel6.setLayout(new java.awt.BorderLayout());
 
-        schemaList3.setAllowCreate(true);
         schemaList3.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "parent.typeid"}
+                new Object[]{"name", "section.type.title"}
                 , new Object[]{"caption", "Section"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 250}
@@ -916,8 +933,8 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "state"}
-                , new Object[]{"caption", "Closed"}
+                new Object[]{"name", "transmittalid"}
+                , new Object[]{"caption", "Transmittal No"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
@@ -928,45 +945,14 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                 , new Object[]{"visible", true}
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.CheckBoxColumnHandler(java.lang.Integer.class, 1, 0)}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "resolvedby.name"}
-                , new Object[]{"caption", "Closed By"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 150}
-                , new Object[]{"maxWidth", 200}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
-        schemaList3.setCustomFilter("appid = :objid AND supersederid IS NULL AND state = 0 ");
         schemaList3.setHandlerName("findingListHandler");
-        schemaList3.setQueryName("entity");
+        schemaList3.setQueryName("findingQry");
         schemaList3.setRowHeight(20);
         schemaList3.setSchemaName("building_permit_finding");
         xPanel6.add(schemaList3, java.awt.BorderLayout.CENTER);
-
-        jPanel8.setPreferredSize(new java.awt.Dimension(0, 30));
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1302, Short.MAX_VALUE)
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 30, Short.MAX_VALUE)
-        );
-
-        xPanel6.add(jPanel8, java.awt.BorderLayout.NORTH);
 
         xTabbedPane1.addTab("Findings", xPanel6);
 
@@ -1175,6 +1161,11 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xActionBar2.setPreferredSize(new java.awt.Dimension(91, 30));
         add(xActionBar2, java.awt.BorderLayout.NORTH);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void xRadio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xRadio1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xRadio1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -1182,7 +1173,6 @@ public class BuildingPermitPage extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private com.rameses.seti2.components.SchemaList schemaList3;
     private com.rameses.seti2.components.SchemaList schemaList4;

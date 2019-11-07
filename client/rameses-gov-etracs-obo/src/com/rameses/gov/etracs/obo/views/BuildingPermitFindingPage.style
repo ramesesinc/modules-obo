@@ -1,9 +1,9 @@
-"entity.particulars" [ entity.objid != null ] {
+"entity.particulars" [ entity.state != 0 ] {
     enabled: false;
     editable: false;
 }
 
-"entity.particulars" [ entity.objid == null ] {
+"entity.particulars" [ entity.state == 0 ] {
     enabled: true;
     editable : true;
 }

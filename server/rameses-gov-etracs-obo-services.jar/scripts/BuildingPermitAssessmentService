@@ -105,6 +105,7 @@ public class BuildingPermitAssessmentService  {
 			def p = itemAcctEm.find( [objid: it.billcode ] ).first();
 			if( o.sectionid ==null || p.sectionid == o.sectionid ) {
 				it.item = p;
+				if(o.sectionid) it.sectionid = o.sectionid;
 				it.amtpaid = 0;
 				it.appid = o.appid;
 				it.sortorder = (p.sortorder == null ? 100 : p.sortorder);

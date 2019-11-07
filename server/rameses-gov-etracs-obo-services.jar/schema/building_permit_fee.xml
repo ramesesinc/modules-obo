@@ -2,7 +2,7 @@
 	<element tablename="building_permit_fee">
 		<field name="objid" primary="true" prefix="OBOPF"/>
 		<field name="appid" required="true" />
-		<field name="parentid" />
+		<field name="sectionid" />
 		<field name="remarks" />
 		<field name="amount" required="true" />
 		<field name="amtpaid" required="true" />
