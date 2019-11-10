@@ -6,11 +6,11 @@ class BuildingPermitEmailSenderInterceptor {
 	@Service("TemplateService")
 	def templateService;
 
-	@Service(value="SmtpService", connection="email-sms-server")
+	@Service("SmtpService")
 	def smtpSvc;
 
-	@Service(value="SMSService", connection="email-sms-server")
-	def smsSvc;
+	//@Service(value="SMSService", connection="email-sms-server")
+	//def smsSvc;
 
 	@DataContext("building_permit_finding")
 	def findingEm;
@@ -27,17 +27,18 @@ class BuildingPermitEmailSenderInterceptor {
 	@DataContext("building_permit_fee")
 	def feeEm;
 
-	@Async
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' && args[0].taskstate == 'receiving'}", index=1000)
+	//@Async
+	@After(pattern="BuildingPermitService.accept")
 	public void sendEmailAfterAcceptance( def evt ) {
 		def p = evt.args[0];
-		def appid = p.refid;
-		def app = appEm.find( [objid: appid ] ).first();
-		String msg = "Your application has been confirmed. Your application number is " + app.appno + ". Please wait for evaluation. From Legazpi City OBO";
+		def app = appEm.find( [objid: p.appid ] ).first();
+
+		String msg = "Your application has been confirmed. Your application number is " + app.appno + ". Please wait for evaluation. ";
 		smtpSvc.send( [to: app.contact.email, subject:"Building Permit Application Confirmation", message: msg] );
-		if(app.contact.mobileno) {
-			smsSvc.send( [phoneno: app.contact.mobileno, message: msg ]);
-		}
+
+		//if(app.contact.mobileno) {
+		//	smsSvc.send( [phoneno: app.contact.mobileno, message: msg ]);
+		//}
 	}	
 
 	//Check prior to send-for-revision. There must be at least one finding

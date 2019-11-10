@@ -21,7 +21,10 @@ class BuildingPermitWorkflowInterceptor {
 	def evalEm;
 
 	@DataContext("vw_building_permit_section")
-	def vwEvalEm;
+	def vwSectionEm;
+
+	@DataContext("vw_building_permit_ancillary")
+	def vwAncillaryEm;
 
 	@DataContext("obo_section")
 	def sectionEm;
@@ -52,26 +55,23 @@ class BuildingPermitWorkflowInterceptor {
 		if(!t) throw new Exception("Please create a verification checklist first");
 	}
 
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-zoning-evaluation' }") 
-	public void doActionBeforeSendForZoning( def evt ) {
-		def p = evt.args[0];
-		def appno = appEm.find( [objid: p.refid ] ).select("appno").val();
-		if(!appno ) throw new Exception("Please generate the application number first");
-	}
-
 	//This is the part where you need to check for application specific routines
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
 	public void doActionBeforeApproval( def evt ) {
 		def p = evt.args[0];
-
-		//check if there are open findings
-		def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("supersederid IS NULL AND state=2").val();
-		if( t > 0) throw new Exception("All findings must be resolved first.");
-
-		if( p.to == "payment") {
+		if( p.to == 'zoning-evaluation' ) {
+			def appno = appEm.find( [objid: p.refid ] ).select("appno").val();
+			if(!appno ) throw new Exception("Please generate the application number first");
+		} 
+		else if( p.to == "payment") {
 			def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").val();
 			if( c == 0 )
 				throw new Exception("There must be at least one fee");		
+		}
+		else {
+			//check if there are open findings
+			def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("supersederid IS NULL AND state=2").val();
+			if( t > 0) throw new Exception("All findings must be resolved first.");
 		}
 	}
 
@@ -80,7 +80,7 @@ class BuildingPermitWorkflowInterceptor {
 	//Evaluation-related triggers
 	************************************************************************ */
 	private void fireEvaluationWorkflow( refid, filter, action ) {
-		def list = vwEvalEm.select("objid,taskid").find( [appid: refid ] ).where( filter ).list();
+		def list = vwSectionEm.select("objid,taskid").find( [appid: refid ] ).where( filter ).list();
 		if( list ) {
 			def dt = dateSvc.getServerDate();
 			list.each {
@@ -96,41 +96,31 @@ class BuildingPermitWorkflowInterceptor {
 		}
 	}
 
-	//move all evaluations from for-verification to for-revision. For those that do not have issues send for approval.
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }") 
-	public void sendEvaluationTaskForRevision( def evt ) {
-		def p = evt.args[0];
-		//check first findings that are yet open. These are tasks that need to be sent-for-revision
-		def list = findingEm.find( [appid: p.refid ] ).where("state = 0").list();
-		def inIds = " objid IN ('" + list*.parentid.join("','") + "') ";
-		def notInIds = " objid NOT IN ('" + list*.parentid.join("','") + "') AND task.state = 'for-verification' ";
-		fireEvaluationWorkflow( p.refid, inIds, "send-for-revision" );
-		fireEvaluationWorkflow( p.refid, notInIds, "approve" );
-	}
-
-	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'reactivate' }" ) 
-	public void reactivateEvaluationTasks( def evt ) {
-		def p = evt.args[0];
-		fireEvaluationWorkflow( p.refid, " task.state = 'for-revision' ", "reactivate" );
-	}
-
 	//approve. check if there are evaluations where the task state is for-revision and reactivate each
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }" ) 
 	public void approveEvaluationTasks( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		fireEvaluationWorkflow( p.refid, " task.state = 'for-verification' ", "approve" );
-
-		//start the next evaluation tasks. fire evaluations for non-ancillary as well as those for ancillary
 		def appid = p.refid;
-		def mlist = sectionEm.where("buildingpermitstate = :state", [state: result.state] ).list()*.objid;
+
+
+		//start the next evaluation tasks. fire evaluations for required sections as well as optional that has existing ancillary 
+		def mlist = sectionEm.where(" buildingpermitstate = :state  AND optional=0 ", [state: result.state] ).list()*.objid;
+		//throw new Exception("state is " + mlist );
+
+		//find sections that are optional and check if it has ancillary 
+		def olist = sectionEm.where(" buildingpermitstate = :state AND optional=1 ", [state: result.state] ).list()*.objid;
+		def alist = vwAncillaryEm.find( [appid: appid ] ).list()*.sectionid;
+		olist.each {
+			if( alist.contains(it) ) mlist << it;
+		}
+
 		if( mlist ) {
 			def dt = dateSvc.getServerDate();
 			mlist.each {
 				//create each evaluation but check first if task exists
 				def m = [appid: appid, typeid: it ]
-				boolean b = evalEm.find( m ).where("taskid IS NULL").exists();
+				boolean b = evalEm.find( m ).exists();
 				if(!b) {
 					m = evalEm.create( m );
 					def f = [:];
@@ -144,11 +134,11 @@ class BuildingPermitWorkflowInterceptor {
 		}		
 	}
 
-	//send for assessment, payment and post payment
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action.matches('send-for-assessment|send-for-payment') }") 
-	public void doActionsAfterAssessment( def evt ) {
+	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'reactivate' }" ) 
+	public void reactivateEvaluationTasks( def evt ) {
 		def p = evt.args[0];
-		fireEvaluationWorkflow( p.refid, " NOT(task.state IS NULL) ", p.action );
+		fireEvaluationWorkflow( p.refid, " task.state = 'for-revision' ", "reactivate" );
 	}
 
 	//actions after payment

@@ -20,7 +20,7 @@ class BuildingPermitSectionWorkflowInterceptor {
 	/**********************************************************************************************
 	* REMEMBER: This is the building_permit_section process flow
 	***********************************************************************************************/
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' && args[0].action == 'send-for-verification' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' }") 
 	public void beforeSendForVerification( def evt ) {
 		def p = evt.args[0];
 		def v = evalEm.find( [objid: p.refid ]).first();
@@ -31,8 +31,22 @@ class BuildingPermitSectionWorkflowInterceptor {
 		}
 	} 
 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section'  && args[0].action == 'send-for-revision' }") 
+	public void beforeSendForRevision( def evt ) {
+		def p = evt.args[0];
+		def list = findingEm.find( [parentid: p.refid ] ).list();
+		if(!list) throw new Exception("There must be at least one finding");
+	} 
+
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section'  && args[0].action == 'send-for-obo-processing' }") 
+	public void beforeSendForOboProcessing( def evt ) {
+		def p = evt.args[0];
+		def list = findingEm.find( [parentid: p.refid ] ).list();
+		if(list) throw new Exception("There must be no finding. If there are findings select Send for Revision instead");
+	} 
+
 	//signal the parent 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' && args[0].action == 'send-for-verification' }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' && args[0].action.matches('send-for-revision|send-for-obo-processing') }") 
 	public void signalParent( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;

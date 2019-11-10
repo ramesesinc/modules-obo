@@ -103,7 +103,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xActionBar1 = new com.rameses.rcp.control.XActionBar();
         xActionBar2 = new com.rameses.rcp.control.XActionBar();
 
-        setPreferredSize(new java.awt.Dimension(500, 300));
+        setPreferredSize(new java.awt.Dimension(1200, 620));
         setLayout(new java.awt.BorderLayout());
 
         xTabbedPane1.setItems("sections");
@@ -228,7 +228,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xFormPanel3.add(xLabel9);
 
         xLabel12.setCaption("App Date");
-        xLabel12.setExpression("#{entity.appdate}");
+        xLabel12.setExpression("#{entity.dtfiled}");
         xLabel12.setName("entity.rptinfo.text"); // NOI18N
         xLabel12.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel12);
@@ -340,7 +340,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,7 +352,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                         .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         xTabbedPane2.addTab("General", jPanel3);
@@ -542,6 +542,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
             })
         });
         schemaList9.setCustomFilter("appid = :objid");
+        schemaList9.setFormActions("accessoryActions");
         schemaList9.setQueryName("entity");
         schemaList9.setSchemaName("building_permit_accessory");
         jPanel5.add(schemaList9, java.awt.BorderLayout.CENTER);
@@ -599,6 +600,8 @@ public class BuildingPermitPage extends javax.swing.JPanel {
             })
         });
         schemaList4.setCustomFilter("appid = :objid");
+        schemaList4.setFormActions("ancillaryActions");
+        schemaList4.setHandlerName("ancillaryListModel");
         schemaList4.setQueryName("entity");
         schemaList4.setSchemaName("building_permit_ancillary");
         jPanel6.add(schemaList4, java.awt.BorderLayout.CENTER);
@@ -736,7 +739,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                 .addComponent(xRadio5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xRadio6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 780, Short.MAX_VALUE))
+                .addGap(0, 749, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1067,7 +1070,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                         .addComponent(xButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(xButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(xFormPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         xTabbedPane1.addTab("Assessment", xPanel7);

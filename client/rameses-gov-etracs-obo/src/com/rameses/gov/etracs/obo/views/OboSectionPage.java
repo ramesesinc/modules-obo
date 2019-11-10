@@ -38,6 +38,7 @@ public class OboSectionPage extends javax.swing.JPanel {
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xComboBox2 = new com.rameses.rcp.control.XComboBox();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
+        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
 
         xFormPanel1.setCaption("General Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -89,6 +90,14 @@ public class OboSectionPage extends javax.swing.JPanel {
         xComboBox1.setPreferredSize(new java.awt.Dimension(200, 22));
         xFormPanel1.add(xComboBox1);
 
+        xCheckBox1.setCheckValue(1);
+        xCheckBox1.setName("entity.optional"); // NOI18N
+        xCheckBox1.setUncheckValue(0);
+        xCheckBox1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xCheckBox1.setShowCaption(false);
+        xCheckBox1.setText("Optional. Activate only if there is associated permit required");
+        xFormPanel1.add(xCheckBox1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,6 +118,7 @@ public class OboSectionPage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;

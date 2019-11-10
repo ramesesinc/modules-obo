@@ -85,7 +85,7 @@ public class BuildingPermitOnlineService  {
 		}
 		app.ancillaries.each {
 			it.appid = newapp.objid;
-			it.type = [ permittypeid: it.permittypeid ];
+			it.type = [ permittypeid: it.permittypeid.toUpperCase() ];
 			ancillaryEm.create( it );
 		}
 		app.infos.each {

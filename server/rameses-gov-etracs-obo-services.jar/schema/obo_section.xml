@@ -10,6 +10,8 @@
 		<field name="buildingpermitstate" />
 		<field name="occupancypermitstate" />
 
+		<!-- if optional=0 then it is always fired. if 1 depends only if there are associated ancillary permits -->
+		<field name="optional" />
 	</element>
 </schema>
 		

@@ -21,7 +21,7 @@
         
         <!-- finding related actions -->         
         <invoker type="findingActions" caption="Add New Finding" action="addFinding" index="1" 
-                visibleWhen="#{ actionable == true }" />
+                xvisibleWhen="#{ actionable == true }" />
 
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitSectionModel" />

@@ -9,7 +9,9 @@
                 role="REQUIREMENT_REVIEWER"
                 action="buildRequirementChecklist" 
                 index="0"
-                visibleWhen="#{ task.assignee?.objid==userInfo.userid &amp;&amp; entity.reqtransmittalid == null &amp;&amp; entity.appno == null }"/>
+                visibleWhen="#{ task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.reqtransmittalid == null 
+                    &amp;&amp; entity.appno == null }"/>
         
         <invoker type="appActions" 
                 caption="Print Verification Checklist"
@@ -19,9 +21,9 @@
                 visibleWhen="#{entity.reqtransmittalid !=null}"/>
         
         <invoker type="appActions" 
-                caption="Transmit Checklist"
+                caption="Send Email"
                 role="REQUIREMENT_REVIEWER"
-                action="transmitChecklist" 
+                action="sendReqChecklist" 
                 index="2"
                 visibleWhen="#{ entity.reqtransmittalid != null }"/>
         
@@ -39,7 +41,8 @@
                 role="REQUIREMENT_REVIEWER"
                 action="acceptApplication" 
                 index="3"
-                visibleWhen="#{ task.state =='requirement-verification' &amp;&amp; task.assignee?.objid==userInfo.userid 
+                visibleWhen="#{ task.state =='requirement-verification' 
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
                     &amp;&amp; entity.appno == null  &amp;&amp; entity.reqtransmittalid == null }"/>
         
         <invoker type="appActions" 
@@ -47,15 +50,17 @@
                 role="REQUIREMENT_REVIEWER"
                 action="printClaimstub"
                 index="3"
-                visibleWhen="#{ task.state =='requirement-verification' &amp;&amp; task.assignee?.objid==userInfo.userid 
+                visibleWhen="#{ task.state =='requirement-verification' 
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
                     &amp;&amp; entity.appno != null}"/> 
          
         <invoker type="appActions" 
-                caption="Transmit Acknowledgement"
+                caption="Email Claim Stub"
                 role="REQUIREMENT_REVIEWER"
-                action="transmitApplication"
+                action="sendClaimstub"
                 index="3"
-                visibleWhen="#{ task.state =='requirement-verification' &amp;&amp; task.assignee?.objid==userInfo.userid 
+                visibleWhen="#{ task.state =='requirement-verification' 
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
                     &amp;&amp; entity.appno != null}"/> 
 
               
@@ -65,7 +70,8 @@
                 role="COORDINATOR"
                 action="buildFindingChecklist" 
                 index="0"
-                visibleWhen="#{ task.assignee?.objid==userInfo.userid 
+                visibleWhen="#{ task.state.matches('zoning-verification|verification')
+                    &amp;&amp;task.assignee?.objid==userInfo.userid 
                     &amp;&amp; entity.transmittalid == null }"/>
         
         <invoker type="appActions" 
@@ -78,10 +84,15 @@
         <invoker type="appActions" 
                 caption="Transmit Checklist"
                 role="COORDINATOR"
-                action="transmitFindingChecklist" 
+                action="sendFindingChecklist" 
                 index="2"
                 visibleWhen="#{ entity.transmittalid != null }"/>
             
+        <invoker type="ancillaryActions" 
+                caption="Add Ancillary"
+                role="COORDINATOR"
+                action="lookupAncillary" 
+                index="2"/>
                 
         <!--
                 <invoker type="extActions" 

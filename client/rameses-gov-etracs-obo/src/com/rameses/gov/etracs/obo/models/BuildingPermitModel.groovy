@@ -42,6 +42,8 @@ class BuildingPermitModel extends WorkflowTaskModel {
     def findingQry = [:];
     def findingListHandler;
     
+    def ancillaryListModel;
+    
     @PropertyChangeListener
     def listener = [
         "reqViewType": { o->
@@ -136,7 +138,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
     ***************************************************************************/
     void acceptApplication() {
         if(!MsgBox.confirm("You are about to receive this application. Proceed?")) return;
-        def o = bldgSvc.generateAppNo( [appid: entity.objid ] );
+        def o = bldgSvc.accept( [appid: entity.objid ] );
         entity.putAll( o );
         MsgBox.alert("App no " + o.appno + " is successfully generated");
     }
@@ -147,8 +149,8 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return Inv.lookupOpener("building_permit_claimstub", p );
     }
     
-    void transmitApplication() {
-        bldgSvc.transmitApplication( [appid: entity.objid ]);
+    def sendClaimstub() {
+        return Inv.lookupOpener("obo_mailer:claimstub", [entity:entity]);
     }
         
     void buildRequirementChecklist() {
@@ -163,16 +165,16 @@ class BuildingPermitModel extends WorkflowTaskModel {
         entity.reqtransmittalid = null;        
     }
     
-    void transmitChecklist() {
-        reqSvc.transmitCheckList( [transmittalid: entity.reqtransmittalid ]);
-    }
-    
     def printReqChecklist() {
         def p = [:];
         p.put("query.transmittalid", entity.reqtransmittalid );
         return Inv.lookupOpener("building_permit_requirement_checklist", p );
     }
-
+    
+    def sendReqChecklist() {
+        return Inv.lookupOpener("obo_mailer:reqchecklist", [entity:entity]);
+    }
+    
     /**************************************************************************
     * coordinator actions
     ***************************************************************************/
@@ -188,8 +190,8 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return Inv.lookupOpener("building_permit_finding_checklist", p );
     }
     
-    void transmitFindingChecklist() {
-        findingSvc.transmitCheckList( [transmittalid: entity.transmittalid ]);
+    def sendFindingChecklist() {
+        return Inv.lookupOpener("obo_mailer:findingchecklist", [entity:entity]);
     }
     
     /**************************************************************************
@@ -209,6 +211,15 @@ class BuildingPermitModel extends WorkflowTaskModel {
         binding.refresh("entity.amount");
     }
     
+    
+    def lookupAncillary() {
+        def h = { o->
+            def v = [appid: entity.objid, items: o*.objid ]
+            bldgSvc.addAncillary( v );
+            ancillaryListModel.reload();
+        }
+        return Inv.lookupOpener("obo_ancillary:lookup", [onselect: h]);
+    }
     
     def issuePermit() {
         def m = [appid:entity.objid];

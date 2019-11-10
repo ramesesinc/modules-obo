@@ -26,6 +26,9 @@ public class BuildingPermitService  {
 	@DataContext("building_permit")
 	def appEm;
 
+	@DataContext("building_permit_ancillary")
+	def ancillaryEm;
+
 	@Service("OboConstructionCostService")
 	def costSvc;
 
@@ -42,7 +45,7 @@ public class BuildingPermitService  {
 	def env;
 
 	@ProxyMethod
-	public def generateAppNo(def o ) {
+	public def accept(def o ) {
 		def appid = o.appid;
 		if(!appid) throw new Exception("Appid must not be null in generate application no.");
 
@@ -82,6 +85,15 @@ public class BuildingPermitService  {
 		return perm;
 	}	
 
+	@ProxyMethod
+	public void addAncillary( def o ) {
+		o.items.each {
+			def v = ancillaryEm.find( [objid: it ] ).exists();
+			if( !v ) {
+				ancillaryEm.create( [appid: o.appid, state:'PENDING', type: [objid:it], permittypeid: it ] );
+			}
+		}
+	}
 
 	@ProxyMethod
 	public def saveCapture( def app ) {
