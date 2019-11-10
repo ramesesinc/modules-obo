@@ -169,11 +169,14 @@ public class OnlineBuildingPermitService  {
 		o.ownerid = entityOwner.objid;
 		o.owner = [objid: o.ownerid ];
 		if(o.objid) {
-			return rpuEm.find([objid: o.objid]).update( o );
+			def oo = rpuEm.find([objid: o.objid]).select('objid').first(); 
+			if ( oo?.objid ) {
+				return rpuEm.find([objid: o.objid]).update( o );	
+			}
+			o.remove('objid'); 
 		}
-		else {
-			return rpuEm.create( o );
-		}
+
+		return rpuEm.create( o );
 	}
 
 	@ProxyMethod
