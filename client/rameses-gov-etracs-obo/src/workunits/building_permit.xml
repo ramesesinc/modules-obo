@@ -56,10 +56,10 @@
          
         <invoker type="appActions" 
                 caption="Email Claim Stub"
-                role="REQUIREMENT_REVIEWER"
+                xrole="REQUIREMENT_REVIEWER"
                 action="sendClaimstub"
                 index="3"
-                visibleWhen="#{ task.state =='requirement-verification' 
+                xvisibleWhen="#{ task.state =='requirement-verification' 
                     &amp;&amp; task.assignee?.objid==userInfo.userid 
                     &amp;&amp; entity.appno != null}"/> 
 
@@ -93,17 +93,42 @@
                 role="COORDINATOR"
                 action="lookupAncillary" 
                 index="2"/>
+        
+        <!-- assessment actions -->        
+        <invoker type="feeActions" 
+                caption="Assess"
+                action="assess" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
                 
-        <!--
-                <invoker type="extActions" 
-                caption="Print Forms"
-                action="showMenu" context="reports"/>
+        <invoker type="feeActions" 
+                caption="Add Fee"
+                action="addFee" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />        
 
-        <invoker type="extActions" 
-                caption="Issue Permit"
-                action="issuePermit" target="popup"
+        <invoker type="feeActions" 
+                caption="Clear Fees"
+                action="clearFees" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
+
+        <!-- releasing actions -->        
+        <invoker type="appActions" 
+                caption="Start Release Process"
+                action="startRelease" target="popup"
                 xvisibleWhen="#{ task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"    />
-        -->        
+                
+        <invoker type="rpuActions" 
+                caption="Issue Tax Dec True Copy"
+                action="issueTrueCopy" target="popup"
+                xvisibleWhen="#{ task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"    />
+
+        <invoker type="rpuActions" 
+                caption="View Clearance"
+                action="viewClearance" target="popup"
+                xvisibleWhen="#{ task.state == 'zoning-evaluation' }"    />
+
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />
     <pages>

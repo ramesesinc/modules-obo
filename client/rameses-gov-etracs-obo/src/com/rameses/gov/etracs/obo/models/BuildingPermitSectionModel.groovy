@@ -15,12 +15,6 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
     @Service("BuildingPermitSectionService")
     def appSvc;
     
-    @Service("BuildingPermitInfoService")
-    def infoSvc;
-    
-    @Service("BuildingPermitFeeService")
-    def feeSvc;
-    
     def infos;
     def receipt;
     def findingListHandler;
@@ -29,7 +23,6 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
     String getFormName() {
         return getSchemaName() + ":form";
     }
-    
     
     @FormTitle
     public String getTitle() {
@@ -58,21 +51,14 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
         return op;
     }
 
-    def viewAssessment() {
+    def assess() {
         if(! entity.app.zoneclass?.objid )
             throw new Exception("Please specify a zone class first");
         def f = [:];
         f.appid = entity.app.objid;
         f.sectionid = entity.typeid;
         f.ancillaryid = entity.ancillaryid;
-        f.save_fees = false;
-        def h  = { list->
-            list.each {
-                it.appid = entity.appid;
-                it.sectionid = entity.typeid;
-                it.amtpaid = 0;
-            }
-            feeSvc.saveFees( list );
+        def h  = { u->
             feeListHandler.reload();
         }
         return Inv.lookupOpener("building_permit_assessment", [params: f, handler: h] );

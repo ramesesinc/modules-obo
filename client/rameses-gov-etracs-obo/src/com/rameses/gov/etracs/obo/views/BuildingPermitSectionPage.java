@@ -294,8 +294,8 @@ public class BuildingPermitSectionPage extends javax.swing.JPanel {
                 new Object[]{"name", "createdby.name"}
                 , new Object[]{"caption", "Created By"}
                 , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 150}
-                , new Object[]{"maxWidth", 200}
+                , new Object[]{"minWidth", 200}
+                , new Object[]{"maxWidth", 250}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}
@@ -306,10 +306,10 @@ public class BuildingPermitSectionPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "state"}
-                , new Object[]{"caption", "Closed"}
-                , new Object[]{"width", 80}
-                , new Object[]{"minWidth", 80}
+                new Object[]{"name", null}
+                , new Object[]{"caption", "Status"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 100}
                 , new Object[]{"maxWidth", 100}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
@@ -318,11 +318,12 @@ public class BuildingPermitSectionPage extends javax.swing.JPanel {
                 , new Object[]{"visible", true}
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.CheckBoxColumnHandler(java.lang.Integer.class, 1, 0)}
+                , new Object[]{"expression", "#{ item.state == 1 ? 'CLOSED' : '' }"}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.LabelColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "resolvedby.name"}
-                , new Object[]{"caption", "Closed By"}
+                new Object[]{"name", "transmittalid"}
+                , new Object[]{"caption", "Transmittal No"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 150}
                 , new Object[]{"maxWidth", 200}

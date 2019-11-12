@@ -44,6 +44,11 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit_transmittal")
 	def transmittalEm;
 
+	@DataContext("obo_issuance_type")
+	def issuanceTypeEm;
+
+	@DataContext("building_permit_issuance")
+	def bldgIssuanceEm;
 
 	/* *********************************************************************
 	//Specific before action tasks
@@ -141,12 +146,16 @@ class BuildingPermitWorkflowInterceptor {
 		fireEvaluationWorkflow( p.refid, " task.state = 'for-revision' ", "reactivate" );
 	}
 
-	//actions after payment
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action=='post-payment' }") 
-	public void doActionsOnPostPayment( def evt ) {
+	//release process. Make sure there is at least one building_permit_issuance
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'release' }" ) 
+	public void doActionBeforeRelease( def evt ) {
 		def p = evt.args[0];
-		fireEvaluationWorkflow( p.refid, " permitid IS NULL ", 'end-task' );
-		fireEvaluationWorkflow( p.refid, " NOT(permitid IS NULL) ", 'send-for-release' );		
+		def c = bldgIssuanceEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").val();
+		if(c<=0)
+			throw new Exception("There must be at least one permit/clearance issued");
+		c = bldgIssuanceEm.find( [appid: p.refid ] ).where(" NOT(task.state = 'end') ").val();	
+		if(c > 0 )
+			throw new Exception("Please ensure that all issuance tasks are completed");
 	}
 
 

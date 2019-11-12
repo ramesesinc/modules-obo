@@ -30,11 +30,14 @@ public class BuildingPermitAssessmentService  {
 	@DataContext("building_permit_ancillary")
 	def ancillaryEm;
 
-	@DataContext("obo_section")
-	def sectionEm;
-
 	@DataContext("building_permit_fee")
 	def feeEm;
+
+	@DataContext("building_permit_section")
+	def sectionEm;
+
+	@DataContext("building_permit_rpu")
+	def rpuEm;
 
 	@ProxyMethod
 	public def assess(o) {
@@ -75,20 +78,21 @@ public class BuildingPermitAssessmentService  {
 			}
 		}
 		else {
-			//loop all sections and permits
-			/*
-			params.permits?.each {
-				//this is only temporary for discussion purposes
-				if(it.type.toUpperCase() == 'FIRE') {
-					it.type = it.type.toLowerCase();
-				}	
-				else {
-					it.type = it.type.toUpperCase();
-				}	
-				def anc = new AncillaryPermit( it ); 
-				factBuilder.facts << anc;
+			//exclude already sections that already computed.
+			def delSections = feeEm.find( [ appid: o.appid ] ).select("sectionid").where("NOT(sectionid IS NULL)").groupBy("sectionid").list()*.sectionid;
+			//loop all sections 
+			def sections = sectionEm.find( [appid: o.appid] ).list()*.typeid;
+			def newSections = sections - delSections;
+			newSections.each {
+				factBuilder.facts << new BuildingPermitSection( name: it );
 			}
-			*/
+			infos = infoSvc.getInfos( [appid: o.appid ] );	
+
+			//load count of RPUs
+			def rpu = new RpuCount();
+			rpu.byownercount = rpuEm.find( [appid: o.appid ] ).select("c:{COUNT( DISTINCT ownerid )}").val();
+			rpu.totalcount = rpuEm.find( [appid: o.appid ] ).select("c:{COUNT(*)}").val();
+			factBuilder.facts << rpu;
 		}
 
 		def req = [:];
@@ -96,7 +100,6 @@ public class BuildingPermitAssessmentService  {
 		req.rulename = "oboassessment";
 		req.params = [infos: infos];
 		req.include_items = false;
-
 
 		def res = billingRuleSvc.execute( req );
 
@@ -135,16 +138,23 @@ public class BuildingPermitAssessmentService  {
 
 	@ProxyMethod
 	public def saveFees(o) {
-		o.each {
+		o.items.each {
 			it.itemid = it.item?.objid;
 			it.amtpaid = 0;
 			feeEm.create(it);
 		}
+		def result = [:];
+		if(o.appid) {
+			def amount = feeEm.find([appid:o.appid ]).select("c:{SUM(amount)}").val();
+			appEm.find( [objid: o.appid] ).update( [amount: amount ]);
+			result.amount = amount;		
+		}
+		return result;
 	}
 
 	@ProxyMethod
-	public def clearAssessment(def o ) {
-		feeEm.find( [appid: o.appid ]).where("parentid IS NULL").delete();
+	public def clearFees(def o ) {
+		feeEm.find( [appid: o.appid ]).where("sectionid IS NULL").delete();
 		def val = feeEm.find( [appid: o.appid ]).select("c:{SUM(amount)}").val();
 		appEm.find( [objid: o.appid] ).update( [amount: val ]);
 		return [amount: val];

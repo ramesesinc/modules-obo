@@ -1,0 +1,45 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import java.rmi.server.*;
+import obo.facts.*;
+import java.text.*;
+import treasury.utils.*;
+import treasury.facts.*;
+import enterprise.utils.*;
+
+public class BuildingPermitRptService  {
+
+	@DataContext("building_permit_rpu")
+	def rpuEm;
+
+	@DataContext("building_permit_entity")
+	def entityEm;
+
+	@DataContext("building_permit")
+	def appEm;
+
+	@Service(value="RptisOboService", connection="local-rpt-server")
+	def rptSvc;
+
+
+	@ProxyMethod
+	public def issueTrueCopy( def o ) {
+		def app = appEm.find( [objid: o.appid ]).first();
+
+		def list =  rpuEm.find( [appid: o.appid] ).list();
+		def certs = [];
+		list.each {
+			def params = [:];
+			params.entityid = entityEm.find( [objid: it.ownerid] ).first().profileid ;
+			params.faas = [objid:  it.refid, tdno: it.tdno];
+			params.refid = app.objid;
+			params.refno = app.appno;
+			params.refdate = app.dtfiled;
+
+			def cert = rptSvc.issueTrueCopy(params);
+			certs << cert;
+		}
+
+	}
+
+}

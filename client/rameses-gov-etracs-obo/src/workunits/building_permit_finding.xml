@@ -10,18 +10,22 @@
         <invoker type="formActions" caption="Cancel"
                 action="_close" index="1" />
 
-        <invoker type="formActions" caption="Edit"
-                action="edit" visibleWhen="#{editable == true }" index="2"/>
-
         <invoker type="formActions" caption="Save"
-                action="save" index="2" visibleWhen="#{entity.state == 0}"/>
-        
+                action="save" index="2" visibleWhen="#{entity.state == 0 &amp;&amp; pagename == 'view' }"/>
+
+        <invoker type="formActions" caption="Edit"
+                action="edit" visibleWhen="#{editable == true &amp;&amp; pagename == 'view' }" index="2"/>
+
+        <invoker type="formActions" caption="Revert Changes"
+                action="revert" visibleWhen="#{editable == true &amp;&amp; pagename == 'view' }" index="2"/>
+
         <invoker type="formActions" caption="Supersede"
-                action="supersede" index="1" visibleWhen="#{closeable == true}"/>
+                action="supersede" index="1" visibleWhen="#{closeable == true &amp;&amp; pagename == 'view' }"/>
 
         <invoker type="formActions" caption="Close Issue"
-            action="closeIssue" index="2" visibleWhen="#{closeable == true}"/>
+            action="closeIssue" index="2" visibleWhen="#{closeable == true &amp;&amp; pagename == 'view' }"/>
         
+        <!-- non dynamic actions -->
         <invoker type="formActions" caption="View History"
             action="viewHistory" index="3" visibleWhen="#{pagename == 'view'}" />
 
@@ -30,7 +34,7 @@
         
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitFindingModel" />
-    <pages>
+    <pages> 
         <page template="com.rameses.gov.etracs.obo.views.BuildingPermitFindingPage" />
     </pages>
 </workunit>

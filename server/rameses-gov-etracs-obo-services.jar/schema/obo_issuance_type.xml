@@ -1,0 +1,17 @@
+<schema>
+	<element tablename="obo_issuance_type">
+		<field name="objid" primary="true" visible="true" searchable="true" />
+		<field name="title" />
+		<field name="role" />
+		
+		<field name="controlnopattern" />
+		<field name="template" />
+
+		<!-- txntype is building permit or occupancy permit -->
+		<field name="txntype" />
+		<complex name="section" ref="obo_section" jointype="many-to-one" required="false">
+			<key field="sectionid" target="objid" />
+		</complex>	
+
+	</element>
+</schema>

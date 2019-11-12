@@ -18,6 +18,12 @@
 		<field name="bill_amtdue"  datatype="decimal"/>
 		<field name="lotowned" datatype="integer" />		
 		<field name="ownerid" required="true"/>
+
+		<!-- tax clearance id -->
+		<field name="taxclrid" />
+
+		<!-- certificate of true copy -->
+		<field name="certid"/>
 		
 		<complex name="owner" ref="building_permit_entity" jointype="many-to-one">
 			<key field="ownerid" target="objid" />

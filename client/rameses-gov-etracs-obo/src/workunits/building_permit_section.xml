@@ -5,23 +5,29 @@
         <invoker type="extActions" caption="View Application" action="viewApplication" index="0" />
         <!-- context related actions -->
         <invoker type="extActions" caption="Update Zone Class"
-            action="updateZoneclass" visibleWhen="#{entity.typeid.toLowerCase() == 'zoning' &amp;&amp; actionable == true }" index="1" />
+            action="updateZoneclass" visibleWhen="#{ entity.typeid.toLowerCase() == 'zoning' 
+                &amp;&amp; task.assignee?.objid !=null
+                &amp;&amp; !task.state.matches( 'end|for-revision') }" index="1" />
         
-        <invoker type="extActions" caption="Issue Permit/Clearance" index="20"
+            <invoker type="extActions" caption="Issue Permit/Clearance" index="20"
             action="issuePermit" visibleWhen="#{task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null  &amp;&amp; actionable == true }"/>
 
-
         <!-- Fee Related Actions -->
-        <invoker type="feeActions" caption="Auto Assess" action="viewAssessment" index="1" 
-                visibleWhen="#{ actionable == true }"   />
+        <invoker type="feeActions" caption="Auto Assess" action="assess" index="1" 
+                xvisibleWhen="#{ task.assignee?.objid !=null 
+                    &amp;&amp; !task.state.matches( 'end|for-revision') }"   />
+                    
         <invoker type="feeActions" caption="Add Fee Manually" action="addFee" index="2" 
-                visibleWhen="#{ actionable == true }" />
+                visibleWhen="#{ task.assignee?.objid !=null 
+                    &amp;&amp; !task.state.matches( 'end|for-revision') }" />
+        
         <invoker type="feeActions" caption="View Ancillary Info" action="viewAncillaryPermit" index="3" 
-                visibleWhen="#{entity.ancillaryid != null  &amp;&amp; actionable == true}"/>
+                visibleWhen="#{entity.ancillaryid != null  &amp;&amp; !task.state.matches( 'end|for-revision') }"/>
         
         <!-- finding related actions -->         
         <invoker type="findingActions" caption="Add New Finding" action="addFinding" index="1" 
-                xvisibleWhen="#{ actionable == true }" />
+                visibleWhen="#{ task.assignee?.objid !=null 
+                    &amp;&amp; !task.state.matches( 'end|for-revision') }" />
 
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitSectionModel" />

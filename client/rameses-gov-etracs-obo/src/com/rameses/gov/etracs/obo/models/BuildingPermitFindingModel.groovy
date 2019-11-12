@@ -32,7 +32,10 @@ class BuildingPermitFindingModel {
     def entity;
     
     def pagename = "view";
-
+    
+    boolean editable = false;
+    boolean closeable = false;
+    
     void create() {
         entity = [:];
         if( !sectionid ) {
@@ -48,7 +51,7 @@ class BuildingPermitFindingModel {
     void open() {
     }
 
-    boolean isEditable() {
+    boolean getEditable() {
         def task = caller.task;
         if( task.assignee.objid != userInfo.userid ) return false;
         if( pagename != "view") return false;
@@ -58,17 +61,23 @@ class BuildingPermitFindingModel {
         return false;
     }
     
-    boolean isCloseable() {
-         def task = caller.task;
+    boolean getCloseable() {
+        def task = caller.task;
         if( task.assignee.objid != userInfo.userid ) return false;
         if( pagename != "view") return false;
         if(!entity.objid) return false;
+        if( entity.transmittalid !=null ) return true;
         if( entity.createdby.objid != userInfo.userid ) return true;
         return false;
     }
     
     void edit() {
         entity.state = 0;
+    }
+    
+    def revert() {
+        return save( 1 );
+        entity.state = 1;
     }
     
     def save() {

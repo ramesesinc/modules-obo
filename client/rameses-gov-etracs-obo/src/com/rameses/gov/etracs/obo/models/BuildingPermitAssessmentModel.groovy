@@ -30,16 +30,21 @@ class BuildingPermitAssessmentModel extends PageFlowController {
         list = assmtSvc.assess( params ).items;
     }
 
-    def doClose() {
-        return "_close";
-    }
-    
     def doCancel() {
         return "_close";
     }
 
     def doOk() {
-        if(handler) handler( list );
+        if(!list) return;
+        //save it here
+        list.each {
+            it.appid = params.appid;
+            it.sectionid = params.sectionid;
+            it.amtpaid = 0;
+        }
+        def pp = [appid: params.appid, items: list ];
+        def u = assmtSvc.saveFees( pp );
+        handler( u );
         return "_close";
     }
 

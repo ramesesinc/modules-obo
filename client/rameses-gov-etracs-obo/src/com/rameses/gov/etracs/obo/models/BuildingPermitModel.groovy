@@ -12,9 +12,10 @@ import com.rameses.enterprise.models.*;
 import javax.swing.*;
 import com.rameses.io.*;
 
+
 class BuildingPermitModel extends WorkflowTaskModel {
 
-    @Service("BuildingPermitFeeService")
+    @Service("BuildingPermitAssessmentService")
     def feeSvc;
     
     @Service("BuildingPermitService")
@@ -26,8 +27,12 @@ class BuildingPermitModel extends WorkflowTaskModel {
     @Service("BuildingPermitFindingService")
     def findingSvc;
     
-    def showOption = "showall";
-    def query = [:];
+    @Service("BuildingPermitRptService")
+    def rptSvc;
+    
+    @Service("BuildingPermitIssuanceService")
+    def issuanceSvc;
+    
     def receipt;
     
     def reqViewType = "all";
@@ -41,6 +46,9 @@ class BuildingPermitModel extends WorkflowTaskModel {
     def findingView = "all"
     def findingQry = [:];
     def findingListHandler;
+
+    def feeQry = [:];
+    def feeListHandler;
     
     def ancillaryListModel;
     
@@ -61,7 +69,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
         },
         "sectionView" : { o->
             if(o == "open") {
-                sectionQry.where = sectionQry._filter +  " AND task.state IN ('evaluation', 'review', 'approval' ) ";
+                sectionQry.where = sectionQry._filter +  " AND NOT(task.state = 'end' )";
             }
             else if(o == "closed") {
                 sectionQry.where = sectionQry._filter +  " AND task.state = 'end' ";
@@ -69,7 +77,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
             else {
                 sectionQry.where = sectionQry._filter;                
             }
-            sectionListHandler.reload();            
+            sectionListHandler.reload();           
         },
         "findingView" : { o->
             findingListHandler.reload();
@@ -77,21 +85,23 @@ class BuildingPermitModel extends WorkflowTaskModel {
     ];
     
     void buildQuery()  {
-        reqQuery.appid = entity.objid;
-        reqQuery._filter = "appid = :appid AND supersederid IS NULL";
-        reqQuery.where = reqQuery._filter;   
-        
         sectionQry.appid = entity.objid;
-        sectionQry._filter = "appid = :appid ";
+        sectionQry._filter = "appid = :appid";
         sectionQry.where = sectionQry._filter;
         
+        reqQuery.appid =  entity.objid;
+        reqQuery._filter = "appid = :appid AND supersederid IS NULL";
+        reqQuery.where = reqQuery._filter; 
+        
         findingQry.appid = entity.objid;
-        findingQry._filter = "appid = :appid AND supersederid IS NULL";
+        findingQry._filter = "appid = :appid AND supersederid IS NULL AND transmittalid IS NULL";
         findingQry.where = findingQry._filter;
+        
+        feeQry.appid = entity.objid;
+        feeQry.where  = "appid = :appid";
     }
     
     public void afterInit() {
-        query.objid = entity.objid;
         buildQuery();
     }
     
@@ -115,8 +125,6 @@ class BuildingPermitModel extends WorkflowTaskModel {
         return entity.objid;
     }
     
-  
-    
     public boolean getShowAssessAction() {
         return true;
     }
@@ -124,14 +132,6 @@ class BuildingPermitModel extends WorkflowTaskModel {
     public boolean getShowUpdateZoneclass() {
         return (task.state == "zoning-evaluation");
     }
-    
-   
-    
-    def feeListModel = [
-        fetchList: { o->
-            return feeSvc.getFees( [appid: entity.objid ] );
-        }
-    ] as BasicListModel;
     
     /**************************************************************************
     * requirement-verification actions
@@ -193,25 +193,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
     def sendFindingChecklist() {
         return Inv.lookupOpener("obo_mailer:findingchecklist", [entity:entity]);
     }
-    
-    /**************************************************************************
-    * assessment actions
-    ***************************************************************************/
-    void assess() {
-        def result  = feeSvc.assess( [appid: entity.objid ] );
-        entity.amount = result.amount;
-        feeListModel.reload();
-        binding.refresh("entity.amount");
-    }
-    
-    void clearAssessment() {
-        def result = feeSvc.clearAssessment( [appid: entity.objid ] );
-        entity.amount = result.amount;
-        feeListModel.reload();
-        binding.refresh("entity.amount");
-    }
-    
-    
+
     def lookupAncillary() {
         def h = { o->
             def v = [appid: entity.objid, items: o*.objid ]
@@ -220,17 +202,59 @@ class BuildingPermitModel extends WorkflowTaskModel {
         }
         return Inv.lookupOpener("obo_ancillary:lookup", [onselect: h]);
     }
-    
-    def issuePermit() {
-        def m = [appid:entity.objid];
-        m.handler = { o->
-            entity.permit = o;
-            reload();
+
+    /**************************************************************************
+    * assessment actions
+    ***************************************************************************/
+    def assess() {
+        def f = [:];
+        f.appid = entity.objid;
+        def h  = { u->
+            feeListHandler.reload();
+            entity.amount = u.amount;
+            binding.refresh("entity.amount")
         }
-        return Inv.lookupOpener("building_permit_issuance:create", m );
+        return Inv.lookupOpener("building_permit_assessment", [params: f, handler: h] );
+    }
+    
+    def addFee() {
+        def m = [appid: entity.objid ];
+        m.handler = { o->
+            feeListHandler.reload();
+        }
+        return Inv.lookupOpener("building_permit_fee:create", m );
+    }
+    
+    def clearFees() {
+        def u = feeSvc.clearFees( [appid: entity.objid ] );
+        entity.amount = u.amount;
+        feeListHandler.reload();
+    }
+    
+    def startRelease() {
+        def p = issuanceSvc.startRelease( [appid: entity.objid ] );
+        MsgBox.alert("Released");
+    }
+    
+    /**************
+    * RPT Clearances
+    **************/
+    def selectedRpu;
+    void issueTrueCopy() {
+        rptSvc.issueTrueCopy([appid: entity.objid] );
+    }
+
+    def viewClearance() {
+        if(!selectedRpu) throw new Exception("Please select an RPU Entry");
+        
+        def op= Inv.lookupOpener("tdtruecopy:open", [entity: [objid: selectedRpu.certid ]] );
+        File f = new File("tdprint.pdf")
+        op.handle.report.exportToPDF( f );
+        op.target = "popup";
+        return op;
     }
     
     
-    
-    
 }
+
+
