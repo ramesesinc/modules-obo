@@ -23,32 +23,43 @@ class BuildingPermitIssuanceService {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
+	@Env
+	def env;
+
+	//This is for CAPTURE
 	@ProxyMethod
-	public void startRelease( def o ) {
-		def dt = dateSvc.getServerDate();
-
-		//find first sections of this application
-		def sections = sectionEm.find([appid: o.appid ] ).list()*.typeid;
-		def filter = "('" + sections.join("','") + "')"
-		def list = typeEm.find( [txntype:"buildingpermit"] ).where("sectionid IS NULL OR sectionid IN " + filter).list()*.objid;
-
-		list.each {
-			if(!issuanceEm.find([appid: o.appid, typeid: it] ).exists()) {
-				def m = [:];
-				m.appid = o.appid;
-				m.type = [objid: it];
-				m.txnmode = "ONLINE";
-				m.typeid = it;
-				m = issuanceEm.create(m);
-				
-				def f = [:];
-				f.processname = 'building_permit_issuance';
-				f.refid = m.objid;
-				f.startdate = dt;
-				f.info = [ type: it ];
-				wfSvc.start(f);			
-			}
+	public def create( def o ) { 
+		if(!o.controlno) {
+			o.controlno = controlNoSvc.getNextNo( "BP[org][yyyy]-[%06d]" );	
 		}
+		if(!o.dtissued) o.dtissued = dateSvc.getServerDate();
+		env.issuedby = [objid: env.USERID, name: env.FULLNAME ];
+		o = issuanceEm.create( o );
+
+		/*
+		if( o.evaluationid == null ) {
+			bpEm.find( [objid: o.appid ] ).update( [issuanceid: o.objid ] );
+		}
+		else {
+			evalEm.find( [objid: o.evaluationid ]
+		}
+		*/	
+		return o;
+ 	}	
+
+	
+	@ProxyMethod
+	public def updateControl( def o ) {
+		def u = [:];
+		u.dtissued = o.dtissued == null ? dateSvc.getServerDate() : o.dtissued;
+		u.controlno = o.controlno;
+		if(!u.controlno) {
+			u.controlno = controlNoSvc.getNextNo( o.type.controlnopattern );	
+		}
+		u.remarks = o.remarks;
+		u.issuedby = [objid: env.USERID, name: env.FULLNAME ];
+		issuanceEm.find( [objid: o.objid ] ).update( u );
+		return u;
 	}
 
 

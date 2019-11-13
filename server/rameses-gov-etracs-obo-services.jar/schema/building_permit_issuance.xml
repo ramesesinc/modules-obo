@@ -8,6 +8,9 @@
 		<field name="issuedby_objid" />		
 		<field name="issuedby_name" />	
 		<field name="txnmode" required="true"/>
+		<field name="taskid" />
+		<field name="remarks" />
+
 
 		<!-- this is used for txns that have a record. example request for tax clearance. Reference is txnref=tdno, txnreftype=taxdeclaration -->		
 		<field name="txnref" />	

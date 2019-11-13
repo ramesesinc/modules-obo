@@ -6,6 +6,7 @@
 		
 		<field name="controlnopattern" />
 		<field name="template" />
+		<field name="sortindex" />
 
 		<!-- txntype is building permit or occupancy permit -->
 		<field name="txntype" />

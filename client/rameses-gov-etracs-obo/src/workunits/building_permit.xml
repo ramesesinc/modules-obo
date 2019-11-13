@@ -113,12 +113,6 @@
                 index="1"
                 visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
 
-        <!-- releasing actions -->        
-        <invoker type="appActions" 
-                caption="Start Release Process"
-                action="startRelease" target="popup"
-                xvisibleWhen="#{ task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"    />
-                
         <invoker type="rpuActions" 
                 caption="Issue Tax Dec True Copy"
                 action="issueTrueCopy" target="popup"

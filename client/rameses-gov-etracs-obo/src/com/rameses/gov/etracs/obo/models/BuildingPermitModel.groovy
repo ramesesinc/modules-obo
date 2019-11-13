@@ -50,6 +50,9 @@ class BuildingPermitModel extends WorkflowTaskModel {
     def feeQry = [:];
     def feeListHandler;
     
+    def issuanceQry = [:];
+    def issuanceListHandler;
+    
     def ancillaryListModel;
     
     @PropertyChangeListener
@@ -99,6 +102,9 @@ class BuildingPermitModel extends WorkflowTaskModel {
         
         feeQry.appid = entity.objid;
         feeQry.where  = "appid = :appid";
+        
+        issuanceQry.appid = entity.objid;
+        issuanceQry.where = "appid = :appid";
     }
     
     public void afterInit() {

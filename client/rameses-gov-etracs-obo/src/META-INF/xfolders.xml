@@ -19,10 +19,10 @@
         <folder id="obo" caption="OBO">
             <folder id="application" caption="Application" index="0" icon="home/icons/folder.png"/>
             <folder id="building" caption="Building Permit" index="0" icon="home/icons/folder.png"/>
-            <folder id="building_permit_section" caption="Building Permit Section" index="0" icon="home/icons/folder.png"/>
+            <folder id="building_permit_section" caption="Building Permit (For Evaluation)" index="0" icon="home/icons/folder.png"/>
             <folder id="occupancy" caption="Occupancy Permit" index="1" icon="home/icons/folder.png"/>
-            <folder id="occupancy_permit_section" caption="Occupancy Permit Section" index="1" icon="home/icons/folder.png"/>
-            <folder id="permit_issuance" caption="Permits/Clearances" index="0" icon="home/icons/folder.png"/>
+            <folder id="occupancy_permit_section" caption="Occupancy Permit (For Inspection)" index="1" icon="home/icons/folder.png"/>
+            <folder id="permit_issuance" caption="Permits/Clearances (For Release)" index="5" icon="home/icons/folder.png"/>
             <!--
             <folder id="occupancy" caption="Occupancy Permit" index="0" icon="home/icons/folder.png"/>
             <folder id="occupancy_other" caption="Occupancy Permit (Others)" index="0" icon="home/icons/folder.png"/>
