@@ -200,7 +200,6 @@ class BuildingPermitWorkflowInterceptor {
 		if( c ) throw new Exception("Please generate the tax declaration documents ");
 		c = rpuEm.find( [appid: p.refid ]).where("truecopycertid IS NULL").exists();
 		if( c ) throw new Exception("Please generate the tax declaration documents ");
-		throw new Exception("Passed!");
 	}
 
 

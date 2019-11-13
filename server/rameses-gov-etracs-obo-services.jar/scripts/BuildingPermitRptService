@@ -25,6 +25,7 @@ public class BuildingPermitRptService  {
 	public def issueTDDocs( def o ) {
 		def app = appEm.find( [objid: o.appid ]).first();
 		def list =  rpuEm.find( [appid: o.appid] ).list();
+		
 		list.each {
 			def u = [:];
 			def params = [:];
@@ -41,6 +42,7 @@ public class BuildingPermitRptService  {
 				u.truecopycertid = cert.objid;
 			}
 			if( !it.taxclearanceid ) {
+				params.faases = [params.faas];
 				def cert = rptSvc.issueTaxClearance(params);
 				u.taxclearanceid = cert.objid;
 			}

@@ -37,7 +37,7 @@ class BuildingPermitSectionWorkflowInterceptor {
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section'  && args[0].action == 'send-for-revision' }") 
 	public void beforeSendForRevision( def evt ) {
 		def p = evt.args[0];
-		def list = findingEm.find( [parentid: p.refid ] ).where("supersederid IS NULL AND state = 2 AND NOT(transmittalid IS NULL)").list();
+		def list = findingEm.find( [parentid: p.refid ] ).where("supersederid IS NULL AND state = 2 AND transmittalid IS NULL").list();
 		if(!list) throw new Exception("There must be at least one finding");
 	} 
 

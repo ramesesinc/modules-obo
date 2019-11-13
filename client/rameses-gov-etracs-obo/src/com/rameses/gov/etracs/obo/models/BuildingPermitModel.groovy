@@ -244,6 +244,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
     def selectedRpu;
     void issueTDDocs() {
         rptSvc.issueTDDocs([appid: entity.objid] );
+        MsgBox.alert("Tax Declaration docs generated");
     }
 
     def viewTaxClearance() {
