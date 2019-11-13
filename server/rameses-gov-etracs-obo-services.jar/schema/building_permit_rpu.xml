@@ -20,10 +20,10 @@
 		<field name="ownerid" required="true"/>
 
 		<!-- tax clearance id -->
-		<field name="taxclrid" />
+		<field name="taxclearanceid" />
 
 		<!-- certificate of true copy -->
-		<field name="certid"/>
+		<field name="truecopycertid"/>
 		
 		<complex name="owner" ref="building_permit_entity" jointype="many-to-one">
 			<key field="ownerid" target="objid" />

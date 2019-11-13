@@ -21,6 +21,7 @@ DELETE FROM building_permit_entity;
 DELETE FROM building_permit_payment;
 DELETE FROm building_permit_transmittal;
 DELETE FROM building_permit;
+DELETE FROM sys_sequence;
 
 [cleanup-for-online]
 UPDATE building_permit SET taskid = NULL,appno=NULL;

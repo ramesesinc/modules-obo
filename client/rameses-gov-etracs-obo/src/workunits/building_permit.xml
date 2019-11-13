@@ -2,16 +2,25 @@
     <invokers>
         <invoker type="vw_building_permit:open" caption="Building Permit Application" action="open" index="1"/>
 
-        
+        <!-- RPT ACTIONS -->        
+        <invoker type="appActions" 
+                caption="Generate Tax Dec Documents"
+                action="issueTDDocs" target="popup"
+                visibleWhen="#{ task.state =='requirement-verification'
+                &amp;&amp; task.assignee?.objid==userInfo.userid }"    />
+                
         <!-- requirement verification buttons -->
         <invoker type="appActions" 
                 caption="Build Doc. Verification Checklist"
                 role="REQUIREMENT_REVIEWER"
                 action="buildRequirementChecklist" 
                 index="0"
-                visibleWhen="#{ task.assignee?.objid==userInfo.userid 
+                visibleWhen="#{ task.state =='requirement-verification'
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
                     &amp;&amp; entity.reqtransmittalid == null 
                     &amp;&amp; entity.appno == null }"/>
+        
+        
         
         <invoker type="appActions" 
                 caption="Print Verification Checklist"
@@ -59,7 +68,7 @@
                 xrole="REQUIREMENT_REVIEWER"
                 action="sendClaimstub"
                 index="3"
-                xvisibleWhen="#{ task.state =='requirement-verification' 
+                visibleWhen="#{ task.state =='requirement-verification' 
                     &amp;&amp; task.assignee?.objid==userInfo.userid 
                     &amp;&amp; entity.appno != null}"/> 
 
@@ -113,15 +122,15 @@
                 index="1"
                 visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
 
-        <invoker type="rpuActions" 
-                caption="Issue Tax Dec True Copy"
-                action="issueTrueCopy" target="popup"
-                xvisibleWhen="#{ task.state == 'releasing' &amp;&amp; entity.issuance?.objid == null }"    />
+        
 
         <invoker type="rpuActions" 
-                caption="View Clearance"
-                action="viewClearance" target="popup"
-                xvisibleWhen="#{ task.state == 'zoning-evaluation' }"    />
+                caption="View Tax Clearance"
+                action="viewTaxClearance" target="popup"   />
+
+        <invoker type="rpuActions" 
+                caption="View Certificate of True Copy"
+                action="viewTrueCopy" target="popup"   />
 
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />

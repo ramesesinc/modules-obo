@@ -38,6 +38,9 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit_finding")
 	def findingEm;
 
+	@DataContext("building_permit_rpu")
+	def rpuEm;
+
 	@DataContext("building_permit_fee")
 	def feeEm;
 
@@ -190,10 +193,14 @@ class BuildingPermitWorkflowInterceptor {
 
 
 	//This is newly added. Do not send to zoning if there is no tax clearance and tax declaration true copy
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' && args[0].to == 'zoning-evaluation' }" ) 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].taskstate == 'requirement-verification' && args[0].action == 'approve' }" ) 
 	public void doActionBeforeZoningEvaluation( def evt ) {
 		def p = evt.args[0];
-		throw new Exception("Before zoning evaluation");
+		def c = rpuEm.find( [appid: p.refid ]).where("taxdeclarationid IS NULL").exists();
+		if( c ) throw new Exception("Please generate the tax declaration documents ");
+		c = rpuEm.find( [appid: p.refid ]).where("truecopycertid IS NULL").exists();
+		if( c ) throw new Exception("Please generate the tax declaration documents ");
+		throw new Exception("Passed!");
 	}
 
 

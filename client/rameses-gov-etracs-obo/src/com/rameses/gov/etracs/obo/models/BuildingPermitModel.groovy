@@ -237,29 +237,42 @@ class BuildingPermitModel extends WorkflowTaskModel {
         feeListHandler.reload();
     }
     
-    def startRelease() {
-        def p = issuanceSvc.startRelease( [appid: entity.objid ] );
-        MsgBox.alert("Released");
-    }
     
     /**************
     * RPT Clearances
     **************/
     def selectedRpu;
-    void issueTrueCopy() {
-        rptSvc.issueTrueCopy([appid: entity.objid] );
+    void issueTDDocs() {
+        rptSvc.issueTDDocs([appid: entity.objid] );
     }
 
-    def viewClearance() {
+    def viewTaxClearance() {
         if(!selectedRpu) throw new Exception("Please select an RPU Entry");
-        
-        def op= Inv.lookupOpener("tdtruecopy:open", [entity: [objid: selectedRpu.certid ]] );
+        if(!selectedRpu.taxclearanceid) throw new Exception("Please generate Tax Dec documents first");
+        def op = Inv.lookupOpener("rpttaxclearance:view", [entity: [objid: selectedRpu.taxclearanceid ]] );
+        op.target = "popup";
+        return op;
+        /*
+        File f = new File("tdprint.pdf")
+        op.handle.exportToPDF( f );
+        op.target = "popup";
+        return op;
+        */
+    }
+    
+    def viewTrueCopy() {
+        if(!selectedRpu) throw new Exception("Please select an RPU Entry");
+        if(!selectedRpu.truecopycertid) throw new Exception("Please generate Tax Dec documents first");
+        def op = Inv.lookupOpener("tdtruecopy:view", [entity: [objid: selectedRpu.truecopycertid ]] );
+        op.target = "popup";
+        return op;
+        /*
         File f = new File("tdprint.pdf")
         op.handle.report.exportToPDF( f );
         op.target = "popup";
         return op;
+        */
     }
-    
     
 }
 
