@@ -6,6 +6,7 @@ SELECT
    bi.*,
    ot.title AS type_title,
    ot.controlnopattern AS type_controlnopattern,
+   ot.template AS type_template,
    t.state AS task_state,
    t.startdate AS task_startdate,
    t.enddate AS task_enddate,

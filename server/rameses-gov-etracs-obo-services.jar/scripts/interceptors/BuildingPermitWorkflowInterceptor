@@ -111,7 +111,6 @@ class BuildingPermitWorkflowInterceptor {
 		def result = evt.result;
 		def appid = p.refid;
 
-
 		//start the next evaluation tasks. fire evaluations for required sections as well as optional that has existing ancillary 
 		def mlist = sectionEm.where(" buildingpermitstate = :state  AND optional=0 ", [state: result.state] ).list()*.objid;
 		//throw new Exception("state is " + mlist );
@@ -156,18 +155,18 @@ class BuildingPermitWorkflowInterceptor {
 
 		def dt = dateSvc.getServerDate();
 		//find first sections of this application
-		def sections = sectionEm.find([appid: appid ] ).list()*.typeid;
+		def sections = evalEm.find([appid: appid ] ).list()*.typeid;
 		def filter = "('" + sections.join("','") + "')"
-		def list = typeEm.find( [txntype:"buildingpermit"] ).where("sectionid IS NULL OR sectionid IN " + filter).list()*.objid;
+		def list = issuanceTypeEm.find( [txntype:"buildingpermit"] ).where("sectionid IS NULL OR sectionid IN " + filter).list()*.objid;
 
 		list.each {
-			if(!issuanceEm.find([appid: appid, typeid: it] ).exists()) {
+			if(!bldgIssuanceEm.find([appid: appid, typeid: it] ).exists()) {
 				def m = [:];
 				m.appid = appid;
 				m.type = [objid: it];
 				m.txnmode = "ONLINE";
 				m.typeid = it;
-				m = issuanceEm.create(m);
+				m = bldgIssuanceEm.create(m);
 				
 				def f = [:];
 				f.processname = 'building_permit_issuance';

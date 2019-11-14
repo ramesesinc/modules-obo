@@ -82,7 +82,6 @@ public class OboIssuanceTypePage extends javax.swing.JPanel {
         xTextField3.setName("entity.controlnopattern"); // NOI18N
         xTextField3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField3.setRequired(true);
         xTextField3.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         xFormPanel1.add(xTextField3);
 

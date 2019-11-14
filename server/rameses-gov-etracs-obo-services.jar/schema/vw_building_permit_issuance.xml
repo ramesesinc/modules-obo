@@ -9,6 +9,8 @@
 		<field name="typeid" />
 		<field name="type_title" />
 		<field name="type_controlnopattern" />
+		<field name="type_template" />
+
 
 		<field name="controlno" />
 		<field name="dtissued" />

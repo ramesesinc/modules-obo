@@ -74,7 +74,12 @@ class BuildingPermitModel extends WorkflowTaskModel {
     }
     
     def print() {
-        
+        if(! entity.type.template)
+            throw new Exception("Please indicate a report template from the obo issuance type");
+        def m = [:];
+        m.template = entity.type.template;
+        m.id = entity.objid;
+        return Inv.lookupOpener("building_permit_issuance:printout", m );
     }
     
 }
