@@ -10,5 +10,8 @@
                  customFilter="NOT(occupancypermitstate IS NULL)"
                  action="init" orderBy="sortindex" target="popup"/>
         
+         <invoker type="obo_section:lookup" caption="Lookup Section" 
+                 cols="objid,title"
+                 action="init" orderBy="sortindex" target="popup"/>
     </invokers>
 </workunit>

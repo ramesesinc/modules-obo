@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : etracs-mysql
+ Source Server         : aa_obo
  Source Server Type    : MySQL
  Source Server Version : 50640
  Source Host           : localhost:3306
@@ -11,246 +11,313 @@
  Target Server Version : 50640
  File Encoding         : 65001
 
- Date: 24/04/2019 21:54:20
+ Date: 13/11/2019 12:00:33
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for obo_billitemtype
+-- Table structure for building_permit
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_billitemtype`;
-CREATE TABLE `obo_billitemtype` (
+DROP TABLE IF EXISTS `building_permit`;
+CREATE TABLE `building_permit` (
   `objid` varchar(50) NOT NULL,
-  `title` varchar(50) DEFAULT NULL,
-  `item_objid` varchar(50) DEFAULT NULL,
-  `item_title` varchar(50) DEFAULT NULL,
-  `sortorder` int(255) DEFAULT NULL,
-  PRIMARY KEY (`objid`),
-  UNIQUE KEY `uix_obo_itemaccount_itemobjid` (`item_objid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of obo_billitemtype
--- ----------------------------
-BEGIN;
-INSERT INTO `obo_billitemtype` VALUES ('ACCESSORY_FEE', 'ACCESSORY FEE', 'ITMACCT-7c07cdf9:16a4d035b31:-7a6b', 'OBO - ACCESSORY FEE', 5);
-INSERT INTO `obo_billitemtype` VALUES ('ACCESSORY_STRUCTURE_FEE', 'ACCESSORY STRUCTURE FEE', 'ITMACCT59515aa4:16a3a32fa5e:-6ba5', 'OBO - ACCESSORY TO BUILDING STRUCTURE FEE', 1);
-INSERT INTO `obo_billitemtype` VALUES ('BUILDING_PERMIT_FEE', 'BUILDING PERMIT FEE', 'ITMACCT1fc2e40d:169eb7a6037:-680b', 'OBO BUILDING PERMIT FEE', -1);
-INSERT INTO `obo_billitemtype` VALUES ('ELECTRICAL_FEE', 'ELECTRICAL FEE', 'ITMACCT218320f2:169ddb21fdc:-7dbc', 'OBO - ELECTRICAL FEE', 0);
-INSERT INTO `obo_billitemtype` VALUES ('ELECTRONIC_FEE', 'ELECTRONIC FEE', 'ITMACCT55d9e7c7:16a3522d159:-7c11', 'OBO - ELECTRONIC FEE', 0);
-INSERT INTO `obo_billitemtype` VALUES ('FIRE_INSPECTION_FEE', 'FIRE INSPECTION FEE', 'ITMACCT5f39e2a5:1669a2c74e6:-7d58:BFP', 'CERTIFICATIONS BUREAU OF FIRE DEPARTMENT', 50);
-INSERT INTO `obo_billitemtype` VALUES ('LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', 'ITMACCT-7385ffbe:16a438b05b7:-7a2b', 'LOCATIONAL CLEARANCE', 1);
-INSERT INTO `obo_billitemtype` VALUES ('MECHANICAL_FEE', 'MECHANICAL FEE', 'ITMACCT556b1af5:16a3311c7aa:-784c', 'OBO - MECHANICAL FEES', 0);
-INSERT INTO `obo_billitemtype` VALUES ('PLUMBING_FEE', 'PLUMBING FEE', 'ITMACCT-685b3759:16a2fd8270e:-6a93', 'OBO - PLUMBING FEE', 0);
-INSERT INTO `obo_billitemtype` VALUES ('SANITARY_FEE', 'SANITARY FEE', NULL, NULL, 0);
-COMMIT;
-
--- ----------------------------
--- Table structure for obo_building_account
--- ----------------------------
-DROP TABLE IF EXISTS `obo_building_account`;
-CREATE TABLE `obo_building_account` (
-  `objid` varchar(50) NOT NULL,
-  `controlno` varchar(50) NOT NULL,
-  `appid` varchar(50) DEFAULT '',
-  PRIMARY KEY (`objid`),
-  UNIQUE KEY `uix_controlno` (`controlno`),
-  KEY `fk_obo_application_appid` (`appid`),
-  CONSTRAINT `fk_obo_application_appid` FOREIGN KEY (`appid`) REFERENCES `obo_building_application` (`objid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of obo_building_account
--- ----------------------------
-BEGIN;
-INSERT INTO `obo_building_account` VALUES ('-1926a056:169e62d2be6:-7fff', 'OBOACCT-1926a056:169e62d2be6:-8000', NULL);
-INSERT INTO `obo_building_account` VALUES ('-233e3ae3:169eb79c3ee:-7d6a', 'OBOACCT-233e3ae3:169eb79c3ee:-7d6b', NULL);
-INSERT INTO `obo_building_account` VALUES ('-313a80cf:16a1fb777ee:-7fef', 'OBOACCT-313a80cf:16a1fb777ee:-7ff0', NULL);
-INSERT INTO `obo_building_account` VALUES ('-3c7448e7:169d8f2f0f1:-7ff8', 'OBOACCT-3c7448e7:169d8f2f0f1:-7ff9', NULL);
-INSERT INTO `obo_building_account` VALUES ('-406ba102:169eadba2c5:-7fef', 'OBOACCT-406ba102:169eadba2c5:-7ff0', NULL);
-INSERT INTO `obo_building_account` VALUES ('-46d59f93:169c768c99a:-7fff', 'OBOACCT-46d59f93:169c768c99a:-8000', NULL);
-INSERT INTO `obo_building_account` VALUES ('-5397924:16975c69410:-7ffc', 'OBOACCT-5397924:16975c69410:-7ffd', NULL);
-INSERT INTO `obo_building_account` VALUES ('-53a91b53:169e7c62dbc:-7ffd', 'OBOACCT-53a91b53:169e7c62dbc:-7ffe', NULL);
-INSERT INTO `obo_building_account` VALUES ('-56ad31d6:16a11056c13:-7ff4', 'OBOACCT-56ad31d6:16a11056c13:-7ff5', NULL);
-INSERT INTO `obo_building_account` VALUES ('-57e8c02f:169e679cd51:-7feb', 'OBOACCT-57e8c02f:169e679cd51:-7fec', NULL);
-INSERT INTO `obo_building_account` VALUES ('-64be5c7:169cedecdde:-7ffb', 'OBOACCT-64be5c7:169cedecdde:-7ffc', NULL);
-INSERT INTO `obo_building_account` VALUES ('-6dd4b63f:169d350ca66:-7ffb', 'OBOACCT-6dd4b63f:169d350ca66:-7ffc', NULL);
-INSERT INTO `obo_building_account` VALUES ('-744b42b3:169e1098b5e:-7fc9', 'OBOACCT-744b42b3:169e1098b5e:-7fca', NULL);
-INSERT INTO `obo_building_account` VALUES ('-bce02bf:169e283251a:-7fcc', 'OBOACCT-bce02bf:169e283251a:-7fcd', NULL);
-INSERT INTO `obo_building_account` VALUES ('-bce02bf:169e283251a:-7fef', 'OBOACCT-bce02bf:169e283251a:-7ff0', NULL);
-INSERT INTO `obo_building_account` VALUES ('1933158b:16a19c4a2ba:-7fff', 'OBOACCT1933158b:16a19c4a2ba:-8000', NULL);
-INSERT INTO `obo_building_account` VALUES ('202f2f2:16a1f247088:-7ed8', 'OBOACCT202f2f2:16a1f247088:-7ed9', NULL);
-INSERT INTO `obo_building_account` VALUES ('202f2f2:16a1f247088:-7f8e', 'OBOACCT202f2f2:16a1f247088:-7f8f', NULL);
-INSERT INTO `obo_building_account` VALUES ('22745f39:169e7b64c9e:-7ff1', 'OBOACCT22745f39:169e7b64c9e:-7ff2', NULL);
-INSERT INTO `obo_building_account` VALUES ('233d3fbb:169b99303e5:-7fff', 'OBOACCT233d3fbb:169b99303e5:-8000', NULL);
-INSERT INTO `obo_building_account` VALUES ('24510394:16a1ee8dc28:-7ffc', 'OBOACCT24510394:16a1ee8dc28:-7ffd', NULL);
-INSERT INTO `obo_building_account` VALUES ('2c18faa6:169cdc39d15:-7ffa', 'OBOACCT2c18faa6:169cdc39d15:-7ffb', NULL);
-INSERT INTO `obo_building_account` VALUES ('3a41e3df:16a163a19a0:-7ffe', 'OBOACCT3a41e3df:16a163a19a0:-7fff', NULL);
-INSERT INTO `obo_building_account` VALUES ('3b3e7b3:169b895cd1b:-7fe4', 'OBOACCT3b3e7b3:169b895cd1b:-7fe5', NULL);
-INSERT INTO `obo_building_account` VALUES ('3c75d488:16a48582ae2:-7fff', 'OBOACCT3c75d488:16a48582ae2:-8000', NULL);
-INSERT INTO `obo_building_account` VALUES ('3de4b7e2:169b9757791:-7ff9', 'OBOACCT3de4b7e2:169b9757791:-7ffa', NULL);
-INSERT INTO `obo_building_account` VALUES ('411dc1c1:169e17058e3:-7f54', 'OBOACCT411dc1c1:169e17058e3:-7f55', NULL);
-INSERT INTO `obo_building_account` VALUES ('5b7c6049:169e87b63cb:-7fec', 'OBOACCT5b7c6049:169e87b63cb:-7fed', NULL);
-INSERT INTO `obo_building_account` VALUES ('622e983b:169e79db386:-7ffc', 'OBOACCT622e983b:169e79db386:-7ffd', NULL);
-INSERT INTO `obo_building_account` VALUES ('62f6d5a1:169ebc68875:-7934', 'OBOACCT62f6d5a1:169ebc68875:-7935', NULL);
-INSERT INTO `obo_building_account` VALUES ('62f6d5a1:169ebc68875:-79a6', 'OBOACCT62f6d5a1:169ebc68875:-79a7', NULL);
-INSERT INTO `obo_building_account` VALUES ('62f6d5a1:169ebc68875:-7e01', 'OBOACCT62f6d5a1:169ebc68875:-7e02', NULL);
-INSERT INTO `obo_building_account` VALUES ('68ef90e:16a1ef7e067:-7ffa', 'OBOACCT68ef90e:16a1ef7e067:-7ffb', NULL);
-INSERT INTO `obo_building_account` VALUES ('6b5da3da:169e25482e8:-7f28', 'OBOACCT6b5da3da:169e25482e8:-7f29', NULL);
-INSERT INTO `obo_building_account` VALUES ('6b5da3da:169e25482e8:-7f8b', 'OBOACCT6b5da3da:169e25482e8:-7f8c', NULL);
-INSERT INTO `obo_building_account` VALUES ('6c021c52:169fc305ecc:-7fe9', 'OBOACCT6c021c52:169fc305ecc:-7fea', NULL);
-INSERT INTO `obo_building_account` VALUES ('71e0fa9e:169e7bdab4e:-7ffd', 'OBOACCT71e0fa9e:169e7bdab4e:-7ffe', NULL);
-INSERT INTO `obo_building_account` VALUES ('7330e2a3:169ebc42b20:-7ffb', 'OBOACCT7330e2a3:169ebc42b20:-7ffc', NULL);
-INSERT INTO `obo_building_account` VALUES ('78d4c9dd:16975ce58ca:-7ffb', 'OBOACCT78d4c9dd:16975ce58ca:-7ffc', NULL);
-COMMIT;
-
--- ----------------------------
--- Table structure for obo_building_application
--- ----------------------------
-DROP TABLE IF EXISTS `obo_building_application`;
-CREATE TABLE `obo_building_application` (
-  `objid` varchar(50) NOT NULL,
-  `acctid` varchar(50) DEFAULT NULL,
   `appno` varchar(50) DEFAULT NULL,
-  `appdate` date DEFAULT NULL,
+  `orgcode` varchar(50) DEFAULT NULL,
+  `trackingno` varchar(50) DEFAULT NULL,
   `apptype` varchar(50) DEFAULT NULL,
+  `permittype` varchar(50) DEFAULT NULL,
+  `contact_name` varchar(50) DEFAULT NULL,
+  `contact_detail` varchar(255) DEFAULT NULL,
+  `contact_email` varchar(255) DEFAULT NULL,
+  `contact_mobileno` varchar(50) DEFAULT NULL,
+  `dtfiled` datetime DEFAULT NULL,
+  `applicantid` varchar(50) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `owner_objid` varchar(50) DEFAULT NULL,
-  `owner_name` varchar(255) DEFAULT NULL,
-  `owner_address_text` varchar(255) DEFAULT NULL,
-  `owner_ctcid` varchar(50) DEFAULT NULL,
   `occupancytypeid` varchar(50) DEFAULT NULL,
-  `worktypeid` varchar(50) DEFAULT NULL,
   `numunits` smallint(3) DEFAULT NULL,
-  `floorarea` decimal(8,2) DEFAULT NULL,
-  `estimatedcost` decimal(16,2) DEFAULT NULL,
+  `fixedcost` decimal(16,2) DEFAULT NULL,
   `projectcost` decimal(16,2) DEFAULT NULL,
   `dtproposedconstruction` date DEFAULT NULL,
   `dtexpectedcompletion` date DEFAULT NULL,
-  `supervisorid` varchar(50) DEFAULT NULL,
-  `taskid` varchar(50) DEFAULT NULL,
   `totalfloorarea` decimal(16,2) DEFAULT NULL,
-  `bldgtypeid` varchar(50) DEFAULT NULL,
   `height` decimal(16,2) DEFAULT NULL,
+  `numfloors` smallint(255) DEFAULT NULL,
+  `worktypes` tinytext,
+  `taskid` varchar(50) DEFAULT NULL,
   `zoneclassid` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`objid`),
-  UNIQUE KEY `uix_controlno` (`appno`),
-  KEY `ix_apptype` (`apptype`),
-  KEY `ix_ownerid` (`owner_objid`),
-  KEY `fk_app_occupancyuseid` (`occupancytypeid`),
-  KEY `fk_app_classificationid` (`worktypeid`),
-  KEY `ix_units` (`numunits`),
-  KEY `ix_floorarea` (`floorarea`),
-  KEY `ix_estimatedcost` (`estimatedcost`),
-  KEY `ix_dtproposedconstruction` (`dtproposedconstruction`),
-  KEY `ix_dtexpectedcompletion` (`dtexpectedcompletion`),
-  KEY `ix_supervisorid` (`supervisorid`),
-  CONSTRAINT `fk_obo_building_application_occupancytypeid` FOREIGN KEY (`occupancytypeid`) REFERENCES `obo_occupancy_type` (`objid`)
+  `zone` varchar(50) DEFAULT NULL,
+  `amount` decimal(16,2) DEFAULT NULL,
+  `issuanceid` varchar(50) DEFAULT NULL,
+  `txnmode` varchar(50) DEFAULT NULL,
+  `location_lotno` varchar(50) DEFAULT NULL,
+  `location_blockno` varchar(50) DEFAULT NULL,
+  `location_street` varchar(255) DEFAULT NULL,
+  `location_barangay_name` varchar(255) DEFAULT NULL,
+  `location_barangay_objid` varchar(50) DEFAULT NULL,
+  `accessoryid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  UNIQUE KEY `uix_building_permit_appno` (`appno`),
+  KEY `fk_app_occupancyuseid` (`occupancytypeid`) USING BTREE,
+  KEY `ix_units` (`numunits`) USING BTREE,
+  KEY `ix_estimatedcost` (`fixedcost`) USING BTREE,
+  KEY `ix_dtproposedconstruction` (`dtproposedconstruction`) USING BTREE,
+  KEY `ix_dtexpectedcompletion` (`dtexpectedcompletion`) USING BTREE,
+  KEY `online_building_application_applicantid` (`applicantid`) USING BTREE,
+  KEY `building_permit_taskid` (`taskid`),
+  KEY `building_permit_issuanceid` (`issuanceid`),
+  KEY `building_permit_accessoryid` (`accessoryid`),
+  CONSTRAINT `building_permit_accessoryid` FOREIGN KEY (`accessoryid`) REFERENCES `building_permit_accessory` (`objid`),
+  CONSTRAINT `building_permit_applicantid` FOREIGN KEY (`applicantid`) REFERENCES `building_permit_entity` (`objid`),
+  CONSTRAINT `building_permit_issuanceid` FOREIGN KEY (`issuanceid`) REFERENCES `building_permit_issuance` (`objid`),
+  CONSTRAINT `building_permit_occupancytypeid` FOREIGN KEY (`occupancytypeid`) REFERENCES `obo_occupancy_type` (`objid`),
+  CONSTRAINT `building_permit_taskid` FOREIGN KEY (`taskid`) REFERENCES `building_permit_task` (`taskid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of obo_building_application
+-- Records of building_permit
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_building_application` VALUES ('OBOAPP-313a80cf:16a1fb777ee:-7fec', '-313a80cf:16a1fb777ee:-7fef', 'BP-201904-00022', '2019-04-15', 'NEW', NULL, 'TEST 1', 'IND-1001d137:15dde15991e:-10b6', 'EPE, FLORENCIO M', 'MANGA, TAGBILARAN CITY', NULL, 'A1', 'NEW CONSTRUCTION', 1, 2000.00, 1500000.00, 20000000.00, '2019-04-15', '2019-04-15', NULL, 'OBOTSK-3bec9b1e:16a200ea43d:-7fbf', NULL, NULL, NULL, NULL);
-INSERT INTO `obo_building_application` VALUES ('OBOAPP3c75d488:16a48582ae2:-7ffc', '3c75d488:16a48582ae2:-7fff', 'BP-201904-00023', '2019-04-23', 'NEW', '2bedroom apartment', '2BR APARTMENT', 'IND-1001d137:15dde15991e:-1374', 'JANUHAN, MARIA ANA', 'CATIGBIAN\nBOHOL', NULL, NULL, 'ORIGINAL', 1, 200.00, 1500000.00, NULL, '2019-04-23', '2019-04-23', NULL, 'OBOTSK3c75d488:16a48582ae2:-7ff0', 20000.00, 'APSH', 100.00, NULL);
+INSERT INTO `building_permit` VALUES ('OBOBP7215dfd6:16e62a18c2f:-8000', 'BP-201911-00027', '137', '137-E7TYAJD3', 'NEW', NULL, 'CLEMENTE, KEN MARTIN', 'OWNER', 'oh_see_15@yahoo.com.ph', '09083341823', '2019-11-08 03:10:19', 'OBBPENT-425d2c0b:16e26d7f47e:-7f63', 'TWO-STOREY RESIDENTIAL BUILDING WITH GARAGE', 'TWO-STOREY RESIDENTIAL BUILDING WITH GARAGE', 'A102', 1, 2400000.00, 2974527.80, '2019-10-01', '2020-02-01', 240.00, 9.80, NULL, '[]', 'OBOTSK-11f79e1e:16e62b3d34e:-8000', NULL, NULL, NULL, NULL, NULL, '1', '3', 'ST. VINCENT VILLAGE', 'CABANGAN EAST', '13702020', NULL);
 COMMIT;
 
 -- ----------------------------
--- Table structure for obo_building_application_fee
+-- Table structure for building_permit_accessory
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_building_application_fee`;
-CREATE TABLE `obo_building_application_fee` (
+DROP TABLE IF EXISTS `building_permit_accessory`;
+CREATE TABLE `building_permit_accessory` (
+  `objid` varchar(50) NOT NULL,
+  `appid` varchar(50) DEFAULT NULL,
+  `occupancytypeid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  KEY `fk_online_building_permit_accessory_occupancytypeid` (`occupancytypeid`) USING BTREE,
+  KEY `fk_building_permit_accessory_appid` (`appid`),
+  CONSTRAINT `fk_building_permit_accessory_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
+  CONSTRAINT `fk_building_permit_accessory_occupancytypeid` FOREIGN KEY (`occupancytypeid`) REFERENCES `obo_occupancy_type` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for building_permit_ancillary
+-- ----------------------------
+DROP TABLE IF EXISTS `building_permit_ancillary`;
+CREATE TABLE `building_permit_ancillary` (
+  `objid` varchar(50) NOT NULL,
+  `appid` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `permittypeid` varchar(255) DEFAULT NULL,
+  `designprofessionalid` varchar(50) DEFAULT NULL,
+  `supervisorid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  UNIQUE KEY `uix_online_building_application_ancillary_appid_permit_type` (`appid`,`permittypeid`) USING BTREE,
+  KEY `fk_online_building_application_ancillary_permittypeid` (`permittypeid`) USING BTREE,
+  KEY `fk_online_building_application_ancillary_professionalid` (`designprofessionalid`) USING BTREE,
+  KEY `fk_online_building_application_ancillary_supervisorid` (`supervisorid`) USING BTREE,
+  CONSTRAINT `fk_building_permit_ancillary_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
+  CONSTRAINT `fk_building_permit_ancillary_permittypeid` FOREIGN KEY (`permittypeid`) REFERENCES `obo_permit_type` (`objid`),
+  CONSTRAINT `fk_building_permit_ancillary_professionalid` FOREIGN KEY (`designprofessionalid`) REFERENCES `building_permit_professional` (`objid`),
+  CONSTRAINT `fk_building_permit_ancillary_supervisorid` FOREIGN KEY (`supervisorid`) REFERENCES `building_permit_professional` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of building_permit_ancillary
+-- ----------------------------
+BEGIN;
+INSERT INTO `building_permit_ancillary` VALUES ('OBOBPANC75e87344:16e49de6e06:-7ef6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'COMPLETED', 'electrical', 'OBOBPPROF75e87344:16e49de6e06:-7fc0', 'OBOBPPROF75e87344:16e49de6e06:-7fbd');
+INSERT INTO `building_permit_ancillary` VALUES ('OBOBPANC75e87344:16e49de6e06:-7ef8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'COMPLETED', 'plumbing', 'OBOBPPROF75e87344:16e49de6e06:-7fc6', 'OBOBPPROF75e87344:16e49de6e06:-7fc3');
+INSERT INTO `building_permit_ancillary` VALUES ('OBOBPANC75e87344:16e49de6e06:-7efa', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'COMPLETED', 'civil_structural', 'OBOBPPROF75e87344:16e49de6e06:-7fcc', 'OBOBPPROF75e87344:16e49de6e06:-7fc9');
+INSERT INTO `building_permit_ancillary` VALUES ('OBOBPANC75e87344:16e49de6e06:-7efc', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'COMPLETED', 'architectural', 'OBOBPPROF75e87344:16e49de6e06:-7fcf', 'OBOBPPROF75e87344:16e49de6e06:-7fd9');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for building_permit_entity
+-- ----------------------------
+DROP TABLE IF EXISTS `building_permit_entity`;
+CREATE TABLE `building_permit_entity` (
+  `objid` varchar(50) NOT NULL DEFAULT '',
+  `appid` varchar(50) DEFAULT NULL,
+  `profileid` varchar(50) DEFAULT NULL,
+  `entitytype` varchar(50) DEFAULT NULL,
+  `profileno` varchar(50) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `firstname` varchar(100) DEFAULT NULL,
+  `middlename` varchar(100) DEFAULT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `resident` int(255) DEFAULT NULL,
+  `address_objid` varchar(50) DEFAULT NULL,
+  `address_text` varchar(255) DEFAULT NULL,
+  `address_unitno` varchar(50) DEFAULT NULL,
+  `address_bldgno` varchar(50) DEFAULT NULL,
+  `address_bldgname` varchar(100) DEFAULT NULL,
+  `address_street` varchar(255) DEFAULT NULL,
+  `address_subdivision` varchar(255) DEFAULT NULL,
+  `address_barangay_objid` varchar(50) DEFAULT NULL,
+  `address_barangay_name` varchar(50) DEFAULT NULL,
+  `address_citymunicipality` varchar(50) DEFAULT NULL,
+  `address_province` varchar(50) DEFAULT NULL,
+  `tin` varchar(50) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `mobileno` varchar(50) DEFAULT NULL,
+  `phoneno` varchar(50) DEFAULT NULL,
+  `id` mediumtext,
+  PRIMARY KEY (`objid`) USING BTREE,
+  KEY `fx_building_application_entity_appid_role` (`appid`) USING BTREE,
+  CONSTRAINT `fk_building_permit_entity_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of building_permit_entity
+-- ----------------------------
+BEGIN;
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT-425d2c0b:16e26d7f47e:-7f5e', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'JUR-7cfe9735:1696f4785d2:-5a22', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'KEN MARTIN', 'P', 'CLEMENTE', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'ST. VINCENT VILLAGE,CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT-425d2c0b:16e26d7f47e:-7f63', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'CLEMENTE, KEN MARTIN P.', 'KEN MARTIN', 'P', 'CLEMENTE', 1, NULL, 'ST. VINCENT VILLAGE,CABANGAN EAST,LEGAZPI CITY,ALBAY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'LEGAZPI CITY', 'ALBAY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT-45fb6a27:16e49d8fe6d:-7ff9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'JUR-7cfe9735:1696f4785d2:-5a22', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'TEST', 'TEST', 'TEST', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, NULL, '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'test', 'test', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"TEST\",dtissued:\"2019-11-08\",placeissued:\"LEGAZPI CITY\"]');
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT1643e3d8:16e490ac747:-7ff4', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'JUR-7cfe9735:1696f4785d2:-5a22', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'KEN MARTIN', 'P', 'CLEMENTE', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'ST. VINCENT VILLAGE,CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT1643e3d8:16e490ac747:-7ffe', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'JUR-7cfe9735:1696f4785d2:-5a22', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'KEN MARTIN', 'P', 'CLEMENTE', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'ST. VINCENT VILLAGE,CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fbe', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'CASIA, ROMEO C.', 'ROMEO', 'C', 'CASIA', 1, NULL, 'TAYSAN', NULL, NULL, NULL, NULL, NULL, '13701056', 'TAYSAN', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fc1', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'LIRIO, GILDO J.', 'GILDO', 'J', 'LIRIO', 0, NULL, '48,VENUS COMPOUND,ANGONO,ANGONO,RIZAL', NULL, '48', NULL, NULL, 'VENUS COMPOUND', NULL, 'ANGONO', 'ANGONO', 'RIZAL', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fc4', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'AREVALO, ALBERT N.', 'ALBERT', 'N', 'AREVALO', 1, NULL, 'TAYSAN', NULL, NULL, NULL, NULL, NULL, '13701056', 'TAYSAN', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fc7', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'DOMINGO, RUEL D.', 'RUEL', 'D', 'DOMINGO', 0, NULL, 'MALOLOS,MALOLOS CITY,BULACAN', NULL, NULL, NULL, NULL, NULL, NULL, 'MALOLOS', 'MALOLOS CITY', 'BULACAN', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fca', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'VILLALUZ, RUBY ANN B.', 'RUBY ANN', 'B', 'VILLALUZ', 0, NULL, 'BAAO,BAAO,CAMARINES SUR', NULL, NULL, NULL, NULL, NULL, NULL, 'BAAO', 'BAAO', 'CAMARINES SUR', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fcd', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'REGIDOR, DANIEL C.', 'DANIEL', 'C', 'REGIDOR', 0, NULL, '49,ROAD 13,PAG-ASA,QUEZON CITY,METRO MANILA', NULL, '49', NULL, 'ROAD 13', NULL, NULL, 'PAG-ASA', 'QUEZON CITY', 'METRO MANILA', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fd0', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'EVANGELISTA, ALEX F.', 'ALEX', 'F', 'EVANGELISTA', 0, NULL, '2F 154,MAGINHAWA STREET,DILIMAN,QUEZON CITY,METRO MANILA', '2F', '154', NULL, 'MAGINHAWA STREET', NULL, NULL, 'DILIMAN', 'QUEZON CITY', 'METRO MANILA', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fda', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'AREVALO, ALBERT N.', 'ALBERT', 'N', 'AREVALO', 1, NULL, 'TAYSAN', NULL, NULL, NULL, NULL, NULL, '13701056', 'TAYSAN', NULL, NULL, NULL, 'oh_see_15@yahoo.com.ph', '0908341823', NULL, NULL);
+INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fe0', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'MULENT15e49c91:1511d183410:-5183', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'KEN MARTIN', 'P', 'CLEMENTE', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'ST. VINCENT VILLAGE,CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for building_permit_fee
+-- ----------------------------
+DROP TABLE IF EXISTS `building_permit_fee`;
+CREATE TABLE `building_permit_fee` (
   `objid` varchar(50) NOT NULL,
   `appid` varchar(50) DEFAULT NULL,
   `sectionid` varchar(50) DEFAULT NULL,
-  `item_objid` varchar(50) DEFAULT NULL,
-  `item_code` varchar(50) DEFAULT NULL,
-  `item_title` varchar(255) DEFAULT NULL,
+  `itemid` varchar(50) DEFAULT NULL,
   `amount` decimal(16,4) DEFAULT NULL,
   `amtpaid` decimal(16,4) DEFAULT NULL,
-  `txntype` varchar(50) DEFAULT NULL,
-  `sortorder` int(11) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`objid`),
   KEY `ix_appid` (`appid`),
-  KEY `ix_item_objid` (`item_objid`),
-  CONSTRAINT `fk_obo_application_fee` FOREIGN KEY (`appid`) REFERENCES `obo_building_application` (`objid`)
+  KEY `fk_building_permit_fee_itemid` (`itemid`),
+  CONSTRAINT `fk_building_permit_fee_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
+  CONSTRAINT `fk_building_permit_fee_itemid` FOREIGN KEY (`itemid`) REFERENCES `obo_itemaccount` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for obo_building_application_finding
+-- Table structure for building_permit_finding
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_building_application_finding`;
-CREATE TABLE `obo_building_application_finding` (
+DROP TABLE IF EXISTS `building_permit_finding`;
+CREATE TABLE `building_permit_finding` (
   `objid` varchar(50) NOT NULL,
   `appid` varchar(50) DEFAULT NULL,
-  `subappid` varchar(50) DEFAULT NULL,
-  `particulars` varchar(100) DEFAULT NULL,
+  `parentid` varchar(50) DEFAULT NULL,
+  `rootid` varchar(50) DEFAULT NULL,
+  `particulars` mediumtext,
   `dtcreated` datetime DEFAULT NULL,
   `createdby_objid` varchar(50) DEFAULT NULL,
   `createdby_name` varchar(255) DEFAULT NULL,
-  `status` varchar(50) DEFAULT NULL,
-  `resolvedby_objid` varchar(50) DEFAULT NULL,
-  `resolvedby_name` varchar(255) DEFAULT NULL,
-  `dtresolved` datetime DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`objid`)
+  `state` int(50) DEFAULT NULL,
+  `supersederid` varchar(50) DEFAULT NULL,
+  `transmittalid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`),
+  KEY `fk_building_permit_finding_appid` (`appid`),
+  KEY `fk_building_permit_finding_parentid` (`parentid`),
+  KEY `fk_building_permit_finding_supersederid` (`supersederid`),
+  CONSTRAINT `fk_building_permit_finding_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
+  CONSTRAINT `fk_building_permit_finding_parentid` FOREIGN KEY (`parentid`) REFERENCES `building_permit_section` (`objid`),
+  CONSTRAINT `fk_building_permit_finding_supersederid` FOREIGN KEY (`supersederid`) REFERENCES `building_permit_finding` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of obo_building_application_finding
+-- Table structure for building_permit_info
 -- ----------------------------
-BEGIN;
-INSERT INTO `obo_building_application_finding` VALUES ('OBOAPPREQ-2f8e13bc:16a1f8d30de:-7c33', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe5', 'test finding', '2019-04-15 14:39:43', 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', 'APPROVED', NULL, NULL, NULL, NULL);
-INSERT INTO `obo_building_application_finding` VALUES ('OBOAPPREQ48d63a81:16a1f8fa10d:-74b7', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe6', 'finding out now...', '2019-04-15 15:40:14', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', 'APPROVED', NULL, NULL, NULL, NULL);
-COMMIT;
-
--- ----------------------------
--- Table structure for obo_building_application_info
--- ----------------------------
-DROP TABLE IF EXISTS `obo_building_application_info`;
-CREATE TABLE `obo_building_application_info` (
+DROP TABLE IF EXISTS `building_permit_info`;
+CREATE TABLE `building_permit_info` (
   `objid` varchar(50) NOT NULL,
   `appid` varchar(50) DEFAULT NULL,
-  `subappid` varchar(50) DEFAULT NULL,
+  `parentid` varchar(50) DEFAULT NULL,
   `name` varchar(50) DEFAULT NULL,
   `stringvalue` varchar(255) DEFAULT NULL,
   `decimalvalue` decimal(18,2) DEFAULT NULL,
   `intvalue` int(11) DEFAULT NULL,
   `datevalue` date DEFAULT NULL,
   `booleanvalue` int(11) DEFAULT NULL,
-  PRIMARY KEY (`objid`),
-  UNIQUE KEY `uix_obo_building_application_info_appid_name` (`appid`,`name`),
-  KEY `ix_appid` (`appid`),
-  KEY `ix_varname` (`name`),
-  CONSTRAINT `fk_obo_building_application_info_appid` FOREIGN KEY (`appid`) REFERENCES `obo_building_application` (`objid`),
-  CONSTRAINT `fk_obo_building_application_info_varname` FOREIGN KEY (`name`) REFERENCES `obo_variable` (`objid`)
+  PRIMARY KEY (`objid`) USING BTREE,
+  UNIQUE KEY `uix_parentid_varname` (`parentid`,`name`) USING BTREE,
+  KEY `ix_varname` (`name`) USING BTREE,
+  KEY `ix_parentid` (`parentid`) USING BTREE,
+  KEY `fk_building_permit_info_appid` (`appid`),
+  CONSTRAINT `fk_building_permit_info_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for obo_building_application_requirement
+-- Records of building_permit_info
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_building_application_requirement`;
-CREATE TABLE `obo_building_application_requirement` (
-  `objid` varchar(50) NOT NULL,
-  `appid` varchar(50) DEFAULT NULL,
-  `typeid` varchar(50) DEFAULT NULL,
-  `status` int(10) DEFAULT NULL,
-  PRIMARY KEY (`objid`),
-  KEY `fk_req_appid` (`appid`),
-  KEY `fk_req_typeid` (`typeid`),
-  CONSTRAINT `fk_req_appid` FOREIGN KEY (`appid`) REFERENCES `obo_building_application` (`objid`),
-  CONSTRAINT `fk_req_typeid` FOREIGN KEY (`typeid`) REFERENCES `obo_requirement_type` (`objid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+BEGIN;
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eb6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'SEPTIC_TANK', NULL, 7.73, NULL, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eb7', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'WATER_METER', NULL, NULL, 1, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eb8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'GREASE_TRAP', NULL, NULL, 2, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eb9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'KITCHEN_SINK', NULL, NULL, 2, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eba', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'SHOWER_HEAD', NULL, NULL, 4, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ebb', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'FAUCET', NULL, NULL, 10, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ebc', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'LAVATORY', NULL, NULL, 5, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ebd', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'FLOOR_DRAIN', NULL, NULL, 6, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ebe', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'WATER_CLOSET', NULL, NULL, 5, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ec8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef6', 'ELECTRIC_METER', NULL, NULL, 1, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ec9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef6', 'TOTAL_CONNECTED_LOAD', NULL, 45.66, NULL, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed5', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'TANKS', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'WALLS', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed7', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'SLABS', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'CONCRETE_FRAMING', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'FOUNDATION', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eda', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'EXCAVATION', NULL, 60.00, NULL, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7edb', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'STAKING', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee5', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'FLOOR_FINISHES', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'HANDRAILS', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee7', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'SWITCH_CONTROL_BUZZERS', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'PARKING_AREAS', NULL, NULL, 2, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'RAMPS', NULL, NULL, 1, NULL, NULL);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eea', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'WASHROOM_AND_TOILETS', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eeb', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'DOORS_ENTRANCE_THRESHOLDS', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eec', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'CORRIDORS', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eed', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'WALKWAYS', NULL, NULL, NULL, NULL, 1);
+INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eee', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'STAIRS', NULL, NULL, NULL, NULL, 1);
+COMMIT;
 
 -- ----------------------------
--- Table structure for obo_building_application_task
+-- Table structure for building_permit_issuance
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_building_application_task`;
-CREATE TABLE `obo_building_application_task` (
+DROP TABLE IF EXISTS `building_permit_issuance`;
+CREATE TABLE `building_permit_issuance` (
+  `objid` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `appid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `typeid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `controlno` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `dtissued` date DEFAULT NULL,
+  `issuedby_objid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `issuedby_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `txnmode` varchar(50) DEFAULT NULL,
+  `txnref` varchar(50) DEFAULT NULL,
+  `txnreftype` varchar(50) DEFAULT NULL,
+  `taskid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`objid`),
+  UNIQUE KEY `uix_building_permit_issuance_controlno` (`controlno`),
+  KEY `fk_building_permit_issuance_taskid` (`taskid`),
+  KEY `fk_building_permit_issuance_typeid` (`typeid`),
+  KEY `fk_building_permit_issuance_appid` (`appid`),
+  CONSTRAINT `fk_building_permit_issuance_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
+  CONSTRAINT `fk_building_permit_issuance_taskid` FOREIGN KEY (`taskid`) REFERENCES `building_permit_issuance_task` (`taskid`),
+  CONSTRAINT `fk_building_permit_issuance_typeid` FOREIGN KEY (`typeid`) REFERENCES `obo_issuance_type` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for building_permit_issuance_task
+-- ----------------------------
+DROP TABLE IF EXISTS `building_permit_issuance_task`;
+CREATE TABLE `building_permit_issuance_task` (
   `taskid` varchar(50) NOT NULL,
   `refid` varchar(50) DEFAULT NULL,
   `parentprocessid` varchar(50) DEFAULT NULL,
@@ -265,7 +332,6 @@ CREATE TABLE `obo_building_application_task` (
   `dtcreated` datetime DEFAULT NULL,
   `prevtaskid` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`taskid`),
-  KEY `FK_obo_application_task_obo_application` (`refid`),
   KEY `ix_refid` (`refid`),
   KEY `ix_parentprocessid` (`parentprocessid`),
   KEY `ix_startdate` (`startdate`),
@@ -274,127 +340,218 @@ CREATE TABLE `obo_building_application_task` (
   KEY `ix_actor_objid` (`actor_objid`),
   KEY `ix_dtcreated` (`dtcreated`),
   KEY `ix_prevtaskid` (`prevtaskid`),
-  CONSTRAINT `fk_obo_application_task_refid` FOREIGN KEY (`refid`) REFERENCES `obo_building_application` (`objid`)
+  CONSTRAINT `fk_building_permit_issuance_refid` FOREIGN KEY (`refid`) REFERENCES `building_permit_issuance` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of obo_building_application_task
+-- Table structure for building_permit_payment
+-- ----------------------------
+DROP TABLE IF EXISTS `building_permit_payment`;
+CREATE TABLE `building_permit_payment` (
+  `objid` varchar(50) DEFAULT NULL,
+  `appid` varchar(50) DEFAULT NULL,
+  `refno` varchar(50) DEFAULT NULL,
+  `refdate` date DEFAULT NULL,
+  `refid` varchar(50) DEFAULT NULL,
+  `reftype` varchar(50) DEFAULT NULL,
+  `amount` decimal(16,2) DEFAULT NULL,
+  `voided` smallint(1) DEFAULT NULL,
+  KEY `fk_building_permit_payment_appid` (`appid`),
+  CONSTRAINT `fk_building_permit_payment_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for building_permit_professional
+-- ----------------------------
+DROP TABLE IF EXISTS `building_permit_professional`;
+CREATE TABLE `building_permit_professional` (
+  `objid` varchar(50) NOT NULL DEFAULT '',
+  `appid` varchar(50) DEFAULT NULL,
+  `entityid` varchar(50) DEFAULT NULL,
+  `profession` varchar(255) DEFAULT NULL,
+  `ptr` mediumtext,
+  `prc` mediumtext,
+  PRIMARY KEY (`objid`) USING BTREE,
+  KEY `fx_building_application_entity_appid_role` (`appid`) USING BTREE,
+  KEY `online_building_permit_professional_entityid` (`entityid`) USING BTREE,
+  CONSTRAINT `fk_building_permit_professional_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
+  CONSTRAINT `fk_building_permit_professional_entityid` FOREIGN KEY (`entityid`) REFERENCES `building_permit_entity` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of building_permit_professional
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK-313a80cf:16a1fb777ee:-7fcb', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', NULL, 'zoning-evaluation', NULL, '2019-04-15 15:30:07', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 14:39:13', 'OBOTSK-313a80cf:16a1fb777ee:-7fe0');
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK-313a80cf:16a1fb777ee:-7fe0', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', NULL, 'receiving', '2019-04-15 14:39:06', '2019-04-15 14:39:13', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 14:39:07', 'OBOTSK-313a80cf:16a1fb777ee:-7fe4');
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK-313a80cf:16a1fb777ee:-7fe4', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', NULL, 'start', '2019-04-15 14:39:07', '2019-04-15 14:39:07', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 14:39:07', NULL);
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK-3bec9b1e:16a200ea43d:-7fbf', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', NULL, 'verification', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-04-15 16:14:14', 'OBOTSK7f46ce59:16a1fe73580:-7cb4');
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK3c75d488:16a48582ae2:-7ff0', 'OBOAPP3c75d488:16a48582ae2:-7ffc', NULL, 'receiving', '2019-04-23 11:58:19', NULL, NULL, NULL, NULL, NULL, NULL, '2019-04-23 11:58:19', 'OBOTSK3c75d488:16a48582ae2:-7ff4');
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK3c75d488:16a48582ae2:-7ff4', 'OBOAPP3c75d488:16a48582ae2:-7ffc', NULL, 'start', '2019-04-23 11:58:19', '2019-04-23 11:58:19', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-23 11:58:19', NULL);
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK7f46ce59:16a1fe73580:-7cb4', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', NULL, 'trade-evaluation', NULL, '2019-04-15 16:14:14', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:45:08', 'OBOTSK7f46ce59:16a1fe73580:-7cfa');
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK7f46ce59:16a1fe73580:-7cfa', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', NULL, 'trade-evaluation-revision', NULL, '2019-04-15 15:45:08', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:44:36', 'OBOTSK7f46ce59:16a1fe73580:-7f30');
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK7f46ce59:16a1fe73580:-7f30', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', NULL, 'trade-evaluation', NULL, '2019-04-15 15:44:36', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:32:57', 'OBOTSK7f46ce59:16a1fe73580:-7f7c');
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK7f46ce59:16a1fe73580:-7f7c', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', NULL, 'zoning-evaluation', NULL, '2019-04-15 15:32:57', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:32:21', 'OBOTSK7f46ce59:16a1fe73580:-7fee');
-INSERT INTO `obo_building_application_task` VALUES ('OBOTSK7f46ce59:16a1fe73580:-7fee', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', NULL, 'zoning-evaluation-revision', NULL, '2019-04-15 15:32:21', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:30:07', 'OBOTSK-313a80cf:16a1fb777ee:-7fcb');
+INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fbd', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fbe', 'PROFESSIONAL ELECTRICAL ENGINEER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"4599650\",dtissued:\"2019-01-03\",placeissued:\"LEGAZPI CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"1716\",dtissued:\"2019-01-16\",placeissued:\"LEGAZPI CITY\",dtvalid:\"2022-01-10\"]');
+INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fc0', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fc1', 'PROFESSIONAL ELECTRICAL ENGINEER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"10222196\",dtissued:\"2019-01-03\",placeissued:\"ANGONO, RIZAL\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"1855\",dtissued:\"2018-05-07\",placeissued:\"ANGONO\",dtvalid:\"2021-04-13\"]');
+INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fc3', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fc4', 'MASTER PLUMBER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"4614773\",dtissued:\"2019-01-18\",placeissued:\"LEGAZPI CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"5897\",dtissued:\"2018-06-25\",placeissued:\"LEGAZPI CITY\",dtvalid:\"2021-10-29\"]');
+INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fc6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fc7', 'MASTER PLUMBER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"1456357\",dtissued:\"2019-01-08\",placeissued:\"MALOLOS CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"3288\",dtissued:\"2017-09-28\",placeissued:\"MANILA\",dtvalid:\"2020-09-30\"]');
+INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fc9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fca', 'CIVIL/STRUCTURAL ENGINEER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"4605995\",dtissued:\"2019-01-03\",placeissued:\"LEGAZPI CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"112485\",dtissued:\"2018-04-11\",placeissued:\"LEGAZPI CITY\",dtvalid:\"2021-04-30\"]');
+INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fcc', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fcd', 'CIVIL/STRUCTURAL ENGINEER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"7324797\",dtissued:\"2019-01-04\",placeissued:\"QUEZON CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"74338\",dtissued:\"2019-03-21\",placeissued:\"MANILA\",dtvalid:\"2022-03-25\"]');
+INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fcf', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fd0', 'ARCHITECT', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"7573864\",dtissued:\"2019-01-24\",placeissued:\"QUEZON CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"12185\",dtissued:\"2017-07-11\",placeissued:\"MANILA\",dtvalid:\"2020-07-12\"]');
+INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fd9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fda', 'ARCHITECT', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"4614773\",dtissued:\"2019-01-18\",placeissued:\"LEGAZPI CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"21769\",dtissued:\"2018-06-25\",placeissued:\"LEGAZPI CITY\",dtvalid:\"2021-10-29\"]');
 COMMIT;
 
 -- ----------------------------
--- Table structure for obo_building_parcel
+-- Table structure for building_permit_requirement
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_building_parcel`;
-CREATE TABLE `obo_building_parcel` (
+DROP TABLE IF EXISTS `building_permit_requirement`;
+CREATE TABLE `building_permit_requirement` (
   `objid` varchar(50) NOT NULL,
   `appid` varchar(50) DEFAULT NULL,
-  `refid` varchar(50) DEFAULT NULL,
-  `tdno` varchar(50) DEFAULT NULL,
-  `tctno` varchar(50) DEFAULT NULL,
-  `lotno` varchar(50) DEFAULT NULL,
-  `blockno` varchar(50) DEFAULT NULL,
-  `street` varchar(150) DEFAULT NULL,
-  `barangay_name` varchar(100) DEFAULT NULL,
-  `barangay_objid` varchar(50) DEFAULT NULL,
-  `city` varchar(150) DEFAULT NULL,
-  `province` varchar(100) DEFAULT NULL,
-  `ownerid` int(11) DEFAULT NULL,
-  `text` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`objid`),
-  KEY `fk_app_lot` (`appid`),
-  KEY `ix_refid` (`refid`),
-  KEY `ix_tdno` (`tdno`),
-  KEY `ix_addresslotno` (`lotno`),
-  KEY `ix_addressblockno` (`blockno`),
-  KEY `ix_addressstreet` (`street`),
-  KEY `ix_addressbarangay` (`barangay_name`),
-  KEY `ix_addresscity` (`city`),
-  KEY `ix_addressprovince` (`province`),
-  KEY `ix_tctno` (`tctno`) USING BTREE,
-  CONSTRAINT `fk_app_lot` FOREIGN KEY (`appid`) REFERENCES `obo_building_application` (`objid`)
+  `parentid` varchar(50) DEFAULT NULL,
+  `typeid` varchar(50) DEFAULT NULL,
+  `state` int(10) DEFAULT NULL,
+  `remarks` mediumtext,
+  `reviewer_objid` varchar(50) DEFAULT NULL,
+  `reviewer_name` varchar(255) DEFAULT NULL,
+  `dtreviewed` datetime DEFAULT NULL,
+  `supersederid` varchar(50) DEFAULT NULL,
+  `transmittalid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  KEY `fk_req_appid` (`appid`) USING BTREE,
+  KEY `fk_req_typeid` (`typeid`) USING BTREE,
+  KEY `fk_building_permit_requirement_parentid` (`parentid`) USING BTREE,
+  KEY `fk_building_permit_requirement_supersederid` (`supersederid`),
+  CONSTRAINT `fk_building_permit_requirement_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
+  CONSTRAINT `fk_building_permit_requirement_parentid` FOREIGN KEY (`parentid`) REFERENCES `building_permit_ancillary` (`objid`),
+  CONSTRAINT `fk_building_permit_requirement_supersederid` FOREIGN KEY (`supersederid`) REFERENCES `building_permit_requirement` (`objid`),
+  CONSTRAINT `fk_building_permit_requirement_typeid` FOREIGN KEY (`typeid`) REFERENCES `obo_requirement_type` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for obo_building_subapplication
+-- Records of building_permit_requirement
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_building_subapplication`;
-CREATE TABLE `obo_building_subapplication` (
+BEGIN;
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fdc', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R36', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:26', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fdd', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R35', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:25', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fde', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R34', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:25', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fdf', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R33', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:24', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe0', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R32', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:17', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe1', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R31', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:17', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe2', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R30', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:17', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe3', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R29', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:17', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe4', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R28', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe5', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R27', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe6', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R26', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe7', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R25', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe8', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R24', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe9', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R23', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fea', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R22', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7feb', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R21', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fec', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R20', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fed', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R19', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fee', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R18', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fef', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R17', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff0', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R16', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff1', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R15', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff2', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R14', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff3', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R13', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff4', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R12', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff5', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R11', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff6', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R10', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff7', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R09', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff8', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R08', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff9', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R07', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffa', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R06', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffb', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R05', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:12', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffc', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R04', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:12', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffd', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R03', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:12', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffe', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R02', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:12', NULL, NULL);
+INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fff', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R01', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:11', NULL, NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for building_permit_rpu
+-- ----------------------------
+DROP TABLE IF EXISTS `building_permit_rpu`;
+CREATE TABLE `building_permit_rpu` (
+  `objid` varchar(50) NOT NULL DEFAULT '',
+  `appid` varchar(50) DEFAULT NULL,
+  `tdno` varchar(50) DEFAULT NULL,
+  `tctno` varchar(50) DEFAULT NULL,
+  `pin` varchar(50) DEFAULT NULL,
+  `barangay` varchar(50) DEFAULT NULL,
+  `titleno` varchar(50) DEFAULT NULL,
+  `lotno` varchar(50) DEFAULT NULL,
+  `blockno` varchar(50) DEFAULT NULL,
+  `areasqm` decimal(16,4) DEFAULT NULL,
+  `classcode` varchar(255) DEFAULT NULL,
+  `ownerid` varchar(50) DEFAULT NULL,
+  `street` varchar(255) DEFAULT NULL,
+  `refid` varchar(50) DEFAULT NULL,
+  `bill_amtdue` decimal(16,2) DEFAULT NULL,
+  `lotowned` int(255) DEFAULT NULL,
+  `taxclearanceid` varchar(50) DEFAULT NULL,
+  `truecopycertid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  UNIQUE KEY `uix_building_application_appid_refid` (`appid`,`refid`) USING BTREE,
+  CONSTRAINT `fk_building_permit_rpu_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of building_permit_rpu
+-- ----------------------------
+BEGIN;
+INSERT INTO `building_permit_rpu` VALUES ('OBOBPRPU75e87344:16e49de6e06:-7fde', 'OBOBP7215dfd6:16e62a18c2f:-8000', '0080941', NULL, '137-02-0020-001-13', NULL, '085-2019000328', '1 BLOCK 3', NULL, 264.0000, 'R', 'OBBPENT75e87344:16e49de6e06:-7fe0', NULL, 'F-10099d76:1511ce27c31:-5bd1', NULL, 1, 'RC1511e735:16e62d0d8c8:-7aca', 'RC1511e735:16e62d0d8c8:-7aca');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for building_permit_section
+-- ----------------------------
+DROP TABLE IF EXISTS `building_permit_section`;
+CREATE TABLE `building_permit_section` (
   `objid` varchar(50) NOT NULL,
   `appid` varchar(50) DEFAULT NULL,
   `typeid` varchar(50) DEFAULT NULL,
-  `designerid` varchar(50) DEFAULT NULL,
-  `contractorid` varchar(50) DEFAULT NULL,
   `taskid` varchar(50) DEFAULT NULL,
+  `issuanceid` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`objid`),
-  KEY `ix_dpid` (`designerid`),
-  KEY `fk_subapp_appid` (`appid`),
-  KEY `fk_subapp_sectionid` (`typeid`),
-  KEY `ix_svfirstname` (`contractorid`),
-  KEY `fk_building_subapplication_task` (`taskid`),
-  CONSTRAINT `fk_building_subapplication_task` FOREIGN KEY (`taskid`) REFERENCES `obo_building_subapplication_task` (`taskid`),
-  CONSTRAINT `fk_subapp_appid` FOREIGN KEY (`appid`) REFERENCES `obo_building_application` (`objid`)
+  UNIQUE KEY `uix_building_permit_section_appid_typeid` (`appid`,`typeid`),
+  KEY `fk_building_permit_section_issuanceid` (`issuanceid`),
+  KEY `fk_building_permit_section_taskid` (`taskid`),
+  KEY `fk_building_permit_section_typeid` (`typeid`),
+  CONSTRAINT `fk_building_permit_section_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
+  CONSTRAINT `fk_building_permit_section_issuanceid` FOREIGN KEY (`issuanceid`) REFERENCES `building_permit_issuance` (`objid`),
+  CONSTRAINT `fk_building_permit_section_taskid` FOREIGN KEY (`taskid`) REFERENCES `building_permit_section_task` (`taskid`),
+  CONSTRAINT `fk_building_permit_section_typeid` FOREIGN KEY (`typeid`) REFERENCES `obo_section` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of obo_building_subapplication
+-- Table structure for building_permit_section_task
 -- ----------------------------
-BEGIN;
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP-313a80cf:16a1fb777ee:-7fe5', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', 'ZONING', NULL, NULL, 'OBOSUBTSK7f46ce59:16a1fe73580:-7f3b');
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP-313a80cf:16a1fb777ee:-7fe6', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', 'SITE_VERIFICATION', NULL, NULL, 'OBOSUBTSK-3bec9b1e:16a200ea43d:-7fca');
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP-313a80cf:16a1fb777ee:-7fe7', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', 'FSIC', NULL, NULL, 'OBOSUBTSK7f46ce59:16a1fe73580:-7e10');
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP-313a80cf:16a1fb777ee:-7fe8', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', 'PLUMBING', NULL, NULL, 'OBOSUBTSK7f46ce59:16a1fe73580:-7db3');
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP-313a80cf:16a1fb777ee:-7fe9', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', 'ELECTRONIC', NULL, NULL, 'OBOSUBTSK7f46ce59:16a1fe73580:-7d82');
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP-313a80cf:16a1fb777ee:-7fea', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', 'ELECTRICAL', NULL, NULL, 'OBOSUBTSK7f46ce59:16a1fe73580:-7d4a');
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP-313a80cf:16a1fb777ee:-7feb', 'OBOAPP-313a80cf:16a1fb777ee:-7fec', 'ARCHITECTURAL', NULL, NULL, 'OBOSUBTSK7f46ce59:16a1fe73580:-7d05');
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP3c75d488:16a48582ae2:-7ff5', 'OBOAPP3c75d488:16a48582ae2:-7ffc', 'ZONING', NULL, NULL, NULL);
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP3c75d488:16a48582ae2:-7ff6', 'OBOAPP3c75d488:16a48582ae2:-7ffc', 'SITE_VERIFICATION', NULL, NULL, NULL);
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP3c75d488:16a48582ae2:-7ff7', 'OBOAPP3c75d488:16a48582ae2:-7ffc', 'FSIC', NULL, NULL, NULL);
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP3c75d488:16a48582ae2:-7ff8', 'OBOAPP3c75d488:16a48582ae2:-7ffc', 'ELECTRICAL', NULL, NULL, NULL);
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP3c75d488:16a48582ae2:-7ff9', 'OBOAPP3c75d488:16a48582ae2:-7ffc', 'ARCHITECTURAL', NULL, NULL, NULL);
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP3c75d488:16a48582ae2:-7ffa', 'OBOAPP3c75d488:16a48582ae2:-7ffc', 'ACCESSORY_STRUCTURE', NULL, NULL, NULL);
-INSERT INTO `obo_building_subapplication` VALUES ('OBOSUBAPP3c75d488:16a48582ae2:-7ffb', 'OBOAPP3c75d488:16a48582ae2:-7ffc', 'ACCESSORIES', NULL, NULL, NULL);
-COMMIT;
-
--- ----------------------------
--- Table structure for obo_building_subapplication_item
--- ----------------------------
-DROP TABLE IF EXISTS `obo_building_subapplication_item`;
-CREATE TABLE `obo_building_subapplication_item` (
-  `objid` varchar(50) NOT NULL,
-  `parentid` varchar(50) DEFAULT NULL,
-  `category` varchar(255) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `value` text,
-  `intvalue` mediumint(255) DEFAULT NULL,
-  `decimalvalue` decimal(10,2) DEFAULT NULL,
-  `booleanvalue` smallint(3) DEFAULT NULL,
-  `stringvalue` text,
-  PRIMARY KEY (`objid`),
-  KEY `fk_subapp_variable` (`name`),
-  KEY `fk_subapp_item` (`parentid`),
-  KEY `ix_category` (`category`),
-  CONSTRAINT `fk_subapp_item` FOREIGN KEY (`parentid`) REFERENCES `obo_building_subapplication` (`objid`),
-  CONSTRAINT `fk_subapp_variable` FOREIGN KEY (`name`) REFERENCES `obo_variable` (`objid`)
+DROP TABLE IF EXISTS `building_permit_section_task`;
+CREATE TABLE `building_permit_section_task` (
+  `taskid` varchar(50) NOT NULL,
+  `refid` varchar(50) DEFAULT NULL,
+  `parentprocessid` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `startdate` datetime DEFAULT NULL,
+  `enddate` datetime DEFAULT NULL,
+  `assignee_objid` varchar(50) DEFAULT NULL,
+  `assignee_name` varchar(100) DEFAULT NULL,
+  `actor_objid` varchar(50) DEFAULT NULL,
+  `actor_name` varchar(100) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `dtcreated` datetime DEFAULT NULL,
+  `prevtaskid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`taskid`),
+  KEY `ix_refid` (`refid`),
+  KEY `ix_parentprocessid` (`parentprocessid`),
+  KEY `ix_startdate` (`startdate`),
+  KEY `ix_enddate` (`enddate`),
+  KEY `ix_assignee_objid` (`assignee_objid`),
+  KEY `ix_actor_objid` (`actor_objid`),
+  KEY `ix_dtcreated` (`dtcreated`),
+  KEY `ix_prevtaskid` (`prevtaskid`),
+  CONSTRAINT `fk_building_permit_evaluation_task_refid` FOREIGN KEY (`refid`) REFERENCES `building_permit_section` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for obo_building_subapplication_task
+-- Table structure for building_permit_task
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_building_subapplication_task`;
-CREATE TABLE `obo_building_subapplication_task` (
+DROP TABLE IF EXISTS `building_permit_task`;
+CREATE TABLE `building_permit_task` (
   `taskid` varchar(50) NOT NULL,
   `refid` varchar(50) DEFAULT NULL,
   `parentprocessid` varchar(50) DEFAULT NULL,
@@ -418,308 +575,212 @@ CREATE TABLE `obo_building_subapplication_task` (
   KEY `ix_actor_objid` (`actor_objid`),
   KEY `ix_dtcreated` (`dtcreated`),
   KEY `ix_prevtaskid` (`prevtaskid`),
-  CONSTRAINT `fk_obo_building_subapplication_task_refid` FOREIGN KEY (`refid`) REFERENCES `obo_building_subapplication` (`objid`)
+  CONSTRAINT `fx_building_permit_task_refid` FOREIGN KEY (`refid`) REFERENCES `building_permit` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of obo_building_subapplication_task
+-- Records of building_permit_task
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK-313a80cf:16a1fb777ee:-7f8a', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe5', NULL, 'approval', NULL, '2019-04-15 15:30:07', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 14:39:34', 'OBOSUBTSK-313a80cf:16a1fb777ee:-7fc0');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK-313a80cf:16a1fb777ee:-7fc0', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe5', NULL, 'review', '2019-04-15 14:39:13', '2019-04-15 14:39:34', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 14:39:13', 'OBOSUBTSK-313a80cf:16a1fb777ee:-7fc4');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK-313a80cf:16a1fb777ee:-7fc4', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe5', NULL, 'start', '2019-04-15 14:39:13', '2019-04-15 14:39:13', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 14:39:13', NULL);
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK-3bec9b1e:16a200ea43d:-7fca', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe6', NULL, 'end', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-04-15 16:14:14', 'OBOSUBTSK7f46ce59:16a1fe73580:-7ca9');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7ca9', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe6', NULL, 'revision-review', NULL, '2019-04-15 16:14:14', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:45:08', 'OBOSUBTSK7f46ce59:16a1fe73580:-7e8c');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7d05', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7feb', NULL, 'end', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-04-15 15:44:36', 'OBOSUBTSK7f46ce59:16a1fe73580:-7d18');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7d18', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7feb', NULL, 'approval', NULL, '2019-04-15 15:44:36', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:44:33', 'OBOSUBTSK7f46ce59:16a1fe73580:-7ef8');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7d4a', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fea', NULL, 'end', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-04-15 15:44:20', 'OBOSUBTSK7f46ce59:16a1fe73580:-7d5d');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7d5d', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fea', NULL, 'approval', NULL, '2019-04-15 15:44:20', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:44:18', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f01');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7d82', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe9', NULL, 'end', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-04-15 15:43:58', 'OBOSUBTSK7f46ce59:16a1fe73580:-7d95');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7d95', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe9', NULL, 'approval', NULL, '2019-04-15 15:43:58', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:43:55', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f0a');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7db3', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe8', NULL, 'end', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-04-15 15:43:44', 'OBOSUBTSK7f46ce59:16a1fe73580:-7dc6');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7dc6', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe8', NULL, 'approval', NULL, '2019-04-15 15:43:44', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:43:41', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f13');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7e10', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe7', NULL, 'end', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-04-15 15:42:50', 'OBOSUBTSK7f46ce59:16a1fe73580:-7e24');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7e24', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe7', NULL, 'approval', NULL, '2019-04-15 15:42:50', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:42:47', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f1c');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7e8c', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe6', NULL, 'revision', NULL, '2019-04-15 15:45:08', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:40:21', 'OBOSUBTSK7f46ce59:16a1fe73580:-7ea0');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7ea0', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe6', NULL, 'approval', NULL, '2019-04-15 15:40:21', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:40:18', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f25');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7ef8', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7feb', NULL, 'review', '2019-04-15 15:32:57', '2019-04-15 15:44:33', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:32:57', 'OBOSUBTSK7f46ce59:16a1fe73580:-7efc');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7efc', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7feb', NULL, 'start', '2019-04-15 15:32:57', '2019-04-15 15:32:57', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:32:57', NULL);
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f01', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fea', NULL, 'review', '2019-04-15 15:32:57', '2019-04-15 15:44:18', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:32:57', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f05');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f05', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fea', NULL, 'start', '2019-04-15 15:32:57', '2019-04-15 15:32:57', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:32:57', NULL);
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f0a', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe9', NULL, 'review', '2019-04-15 15:32:57', '2019-04-15 15:43:55', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:32:57', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f0e');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f0e', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe9', NULL, 'start', '2019-04-15 15:32:57', '2019-04-15 15:32:57', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:32:57', NULL);
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f13', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe8', NULL, 'review', '2019-04-15 15:32:57', '2019-04-15 15:43:41', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:32:57', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f17');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f17', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe8', NULL, 'start', '2019-04-15 15:32:57', '2019-04-15 15:32:57', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:32:57', NULL);
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f1c', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe7', NULL, 'review', '2019-04-15 15:32:57', '2019-04-15 15:42:47', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:32:57', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f20');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f20', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe7', NULL, 'start', '2019-04-15 15:32:57', '2019-04-15 15:32:57', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:32:57', NULL);
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f25', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe6', NULL, 'review', '2019-04-15 15:32:57', '2019-04-15 15:40:18', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:32:57', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f29');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f29', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe6', NULL, 'start', '2019-04-15 15:32:57', '2019-04-15 15:32:57', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:32:57', NULL);
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f3b', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe5', NULL, 'end', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-04-15 15:32:57', 'OBOSUBTSK7f46ce59:16a1fe73580:-7f71');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7f71', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe5', NULL, 'revision-review', NULL, '2019-04-15 15:32:57', NULL, NULL, 'USR-553c3216:163ed25cf14:-7f39', 'ELMO M NAZARENO', NULL, '2019-04-15 15:32:22', 'OBOSUBTSK7f46ce59:16a1fe73580:-7ffa');
-INSERT INTO `obo_building_subapplication_task` VALUES ('OBOSUBTSK7f46ce59:16a1fe73580:-7ffa', 'OBOSUBAPP-313a80cf:16a1fb777ee:-7fe5', NULL, 'revision', NULL, '2019-04-15 15:32:22', NULL, NULL, 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN . ADMIN', NULL, '2019-04-15 15:30:07', 'OBOSUBTSK-313a80cf:16a1fb777ee:-7f8a');
+INSERT INTO `building_permit_task` VALUES ('OBOTSK-11f79e1e:16e62b3d34e:-8000', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'requirement-verification', '2019-11-13 10:59:49', NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', NULL, NULL, NULL, '2019-11-13 10:59:42', 'OBOTSK7215dfd6:16e62a18c2f:-7fda');
+INSERT INTO `building_permit_task` VALUES ('OBOTSK7215dfd6:16e62a18c2f:-7fda', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'receiving', '2019-11-13 10:41:04', '2019-11-13 10:59:42', 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', NULL, '2019-11-13 10:39:45', 'OBOTSK7215dfd6:16e62a18c2f:-7fdb');
+INSERT INTO `building_permit_task` VALUES ('OBOTSK7215dfd6:16e62a18c2f:-7fdb', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'start', '2019-11-13 10:39:45', '2019-11-13 10:39:45', NULL, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', NULL, '2019-11-13 10:39:45', NULL);
 COMMIT;
 
 -- ----------------------------
--- Table structure for obo_building_type
+-- Table structure for building_permit_transmittal
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_building_type`;
-CREATE TABLE `obo_building_type` (
+DROP TABLE IF EXISTS `building_permit_transmittal`;
+CREATE TABLE `building_permit_transmittal` (
+  `objid` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `appid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `state` int(1) DEFAULT NULL,
+  `type` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `taskid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `dtcreated` datetime DEFAULT NULL,
+  `createdby_objid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `createdby_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  UNIQUE KEY `uix_building_permit_transmittal_taskid` (`taskid`) USING BTREE,
+  KEY `fk_building_permit_transmittal_appid` (`appid`),
+  CONSTRAINT `fk_building_permit_transmittal_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Table structure for obo_checklist
+-- ----------------------------
+DROP TABLE IF EXISTS `obo_checklist`;
+CREATE TABLE `obo_checklist` (
   `objid` varchar(50) NOT NULL,
-  `defaultuseid` varchar(50) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `classid` varchar(50) DEFAULT NULL,
+  `title` varchar(500) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `params` varchar(255) DEFAULT NULL,
+  `sectionid` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`objid`),
-  KEY `fk_occupancy_use_typeid` (`defaultuseid`),
-  CONSTRAINT `fk_occupancy_use_typeid` FOREIGN KEY (`defaultuseid`) REFERENCES `obo_occupancy_type` (`objid`)
+  KEY `fk_obo_evaluation_checklist_sectionid` (`sectionid`),
+  CONSTRAINT `fk_obo_evaluation_checklist_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `obo_section` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of obo_building_type
+-- Records of obo_checklist
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_building_type` VALUES ('AAMF', 'G1', 'ARMORIES, ARSENALS AND MUNITIONS FACTORIES', 'G');
-INSERT INTO `obo_building_type` VALUES ('ADTM', 'H1', 'AUDITORIUM', 'H');
-INSERT INTO `obo_building_type` VALUES ('AMHP', 'C2', 'AMUSEMENT HALLS AND PARLORS', 'C');
-INSERT INTO `obo_building_type` VALUES ('AOGP', 'G1', 'ACETYLENE AND OXYGEN GENERATING PLANTS', 'G');
-INSERT INTO `obo_building_type` VALUES ('APMT', 'B1', 'TENEMENTS AND APARTMENTS', 'B');
-INSERT INTO `obo_building_type` VALUES ('APSH', 'E2', 'APPLIANCE SHOP', 'E');
-INSERT INTO `obo_building_type` VALUES ('APTL', 'B1', 'APARTELS', 'B');
-INSERT INTO `obo_building_type` VALUES ('ARTG', 'A2', 'ART GALLERIES', 'A');
-INSERT INTO `obo_building_type` VALUES ('AUTM', 'E2', 'AUTOMAT', 'E');
-INSERT INTO `obo_building_type` VALUES ('BDHS', 'B1', 'BOARDING AND LODGING HOUSES', 'B');
-INSERT INTO `obo_building_type` VALUES ('BKRS', 'E2', 'BAKERIES, PASTRY AND BAKE SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('BLIB', 'A2', 'BRANCH LIBRARY', 'A');
-INSERT INTO `obo_building_type` VALUES ('BLPR', 'C2', 'BILLIARD HALLS / POOL ROOMS', 'C');
-INSERT INTO `obo_building_type` VALUES ('BOXA', 'H4', 'BOXING ARENAS', 'H');
-INSERT INTO `obo_building_type` VALUES ('BRWS', 'F1', 'BREWERIES, BOTTLING PLANTS, CANNERIES, AND TANNERIES', 'F');
-INSERT INTO `obo_building_type` VALUES ('BSAR', 'E2', 'BATTERY SHOPS AND AUTO REPAIR SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('BWLA', 'C2', 'BOWLING ALLEY', 'C');
-INSERT INTO `obo_building_type` VALUES ('C013', 'C2', 'DANCING SCHOOLS, DISCO PADS', 'C');
-INSERT INTO `obo_building_type` VALUES ('C014', 'C2', 'GYMNASIA', 'C');
-INSERT INTO `obo_building_type` VALUES ('CAMP', 'H4', 'COVERED AMUSEMENT PARKS', 'H');
-INSERT INTO `obo_building_type` VALUES ('CFSC', 'A1', 'COMMUNITY FACILITIES AND SOCIAL CENTERS', 'A');
-INSERT INTO `obo_building_type` VALUES ('CHRC', 'C1', 'CHURCHES, MOSQUE, TEMPLES. SHRINES, CHAPELS AND SIMILAR PLACES OF WORSHIP', 'C');
-INSERT INTO `obo_building_type` VALUES ('CIVC', 'C1', 'CIVIC AND COMMUNITY CENTERS.', 'C');
-INSERT INTO `obo_building_type` VALUES ('CKFA', 'H2', 'COCKFIGHTING ARENAS', 'H');
-INSERT INTO `obo_building_type` VALUES ('CKSP', 'G1', 'COOKING OIL AND SOAP PROCESSING PLANTS', 'G');
-INSERT INTO `obo_building_type` VALUES ('CLNC', 'A2', 'CLINICS', 'A');
-INSERT INTO `obo_building_type` VALUES ('CLPT', 'E2', 'CELL (MOBILE) PHONE TOWERS', 'E');
-INSERT INTO `obo_building_type` VALUES ('CLRC', 'A1', 'CLUBHOUSES AND RECREATIONAL USES', 'A');
-INSERT INTO `obo_building_type` VALUES ('CNCT', 'H1', 'CONCERT HALLS AND OPEN HOUSES', 'H');
-INSERT INTO `obo_building_type` VALUES ('CNTN', 'E2', 'CANTEEN', 'E');
-INSERT INTO `obo_building_type` VALUES ('CNVH', 'H1', 'CONVENTION HALLS', 'H');
-INSERT INTO `obo_building_type` VALUES ('CNVT', 'A2', 'CONVENTS AND MONASTERIES', 'A');
-INSERT INTO `obo_building_type` VALUES ('COLI', 'I1', 'COLISEA AND SPORTS COMPLEXES', 'I');
-INSERT INTO `obo_building_type` VALUES ('COLM', 'E2', 'COLUMBARIUM', 'E');
-INSERT INTO `obo_building_type` VALUES ('COND', 'B1', 'CONDOMINIUM', 'B');
-INSERT INTO `obo_building_type` VALUES ('CONF', 'E2', 'CONFECTIONERY SHOP', 'E');
-INSERT INTO `obo_building_type` VALUES ('CONH', 'I1', 'CONCERT HALLS AND OPEN HOUSES', 'I');
-INSERT INTO `obo_building_type` VALUES ('CONV', 'I1', 'CONVENTION CENTERS', 'I');
-INSERT INTO `obo_building_type` VALUES ('COUN', 'B1', 'MULTIPLE PRIVATELY-OWNED CONDOMINIUM UNITS ', 'B');
-INSERT INTO `obo_building_type` VALUES ('CREC', 'A1', 'CHURCH RECTORIES', 'A');
-INSERT INTO `obo_building_type` VALUES ('CSIL', 'G1', 'CEMENT SILOS', 'G');
-INSERT INTO `obo_building_type` VALUES ('D001', 'D1', 'MENTAL HOSPITALS, MENTAL SANITARIA AND MENTAL ASYLUMS', 'D');
-INSERT INTO `obo_building_type` VALUES ('D002', 'D1', 'POLICE AND FIRE STATIONS, GUARD HOUSES', 'D');
-INSERT INTO `obo_building_type` VALUES ('D003', 'D1', 'JAILS, PRISONS, REFORMATORIES AND CORRECTIONAL INSTITUTIONS', 'D');
-INSERT INTO `obo_building_type` VALUES ('D004', 'D1', 'REHABILITATION CENTERS', 'D');
-INSERT INTO `obo_building_type` VALUES ('D005', 'D1', 'LEPROSARIA AND QUARANTINE STATION', 'D');
-INSERT INTO `obo_building_type` VALUES ('D006', 'D2', 'HOSPITALS, SANITARIA, AND HOMES FOR THE AGED', 'D');
-INSERT INTO `obo_building_type` VALUES ('D007', 'D2', 'NURSERIES FOR CHILDREN OF KINDERGARTEN AGE OR NON-AMBULATORY PATIENTS ACCOMMODATING MORE THAN FIVE (5) PERSONS', 'D');
-INSERT INTO `obo_building_type` VALUES ('D008', 'D3', 'NURSING HOMES FOR AMBULATORY PATIENTS', 'D');
-INSERT INTO `obo_building_type` VALUES ('D009', 'D3', 'SCHOOL AND HOME, FOR CHILDREN OVER KINDERGARTEN AGE', 'D');
-INSERT INTO `obo_building_type` VALUES ('D010', 'D3', 'ORPHANAGES', 'D');
-INSERT INTO `obo_building_type` VALUES ('DCAR', 'E1', 'DISPLAY FOR CARS', 'E');
-INSERT INTO `obo_building_type` VALUES ('DCFL', 'G2', 'DRY CLEANING PLANTS USING FLAMMABLE LIQUIDS', 'G');
-INSERT INTO `obo_building_type` VALUES ('DELI', 'E2', 'DELICATESSEN SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('DHBR', 'H3', 'DANCE HALLS, CABARETS, BALLROOMS', 'H');
-INSERT INTO `obo_building_type` VALUES ('DNCB', 'E2', 'DAY/NIGHT CLUBS, BARS, COCKTAILS, SING-ALONG LOUNGES, BISTROS, PUBS, BEER GARDENS', 'E');
-INSERT INTO `obo_building_type` VALUES ('DPLX', 'A2', 'DUPLEX', 'A');
-INSERT INTO `obo_building_type` VALUES ('E002', 'E1', 'STORAGE GARAGE AND BOAT STORAGE.', 'E');
-INSERT INTO `obo_building_type` VALUES ('E004', 'E1', 'BUS AND RAILWAYS DEPOTS AND TERMINALS AND OFFICES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E005', 'E1', 'PORT FACILITIES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E006', 'E1', 'AIRPORTS AND HELIPORT FACILITIES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E007', 'E1', 'TRANSPORTATION COMPLEXES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E008', 'E1', 'LARGE COMPLEXES FOR PUBLIC SERVICES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E010', 'E1', 'BAKESHOPS AND BAKERY GOODS STORES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E011', 'E1', 'STORES FOR CONSTRUCTION SUPPLIES AND BUILDING MATERIALS SUCH AS ELECTRICAL AND ELECTRONICS, \nPLUMBING SUPPLIES, CERAMIC CLAY CEMENT AND OTHER SIMILAR PRODUCTS EXCEPT CHBS, GRAVEL AND SAND AND OTHER CONCRETE PRODUCTS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E012', 'E2', 'WHOLESALE AND RETAIL STORES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E022', 'E2', 'PHOTOGRAPHER AND PAINTER STUDIOS, TAILORING AND HABERDASHERY SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E023', 'E2', 'FACTORIES AND WORKSHOPS, USING LESS FLAMMABLE OR NON-COMBUSTIBLE MATERIALS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E024', 'E2', 'BATTERY SHOPS AND REPAIR SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E025', 'E2', 'PAINT STORES WITHOUT BULK HANDLING', 'E');
-INSERT INTO `obo_building_type` VALUES ('E035', 'E2', 'GLASSWARE AND METALWARE STORES, HOUSEHOLD EQUIPMENT AND APPLIANCE SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E036', 'E2', 'MANUFACTURE OF INSIGNIA, BADGES AND SIMILAR EMBLEMS EXCEPT METAL', 'E');
-INSERT INTO `obo_building_type` VALUES ('E037', 'E2', 'GENERAL RETAIL ESTABLISHMENTS SUCH AS CURIO OR ANTIQUE SHOPS, PET SHOPS AND AQUARIUM \nSTORES, BOOKSTORES, ART SUPPLIES AND NOVELTIES, JEWELRY SHOPS, LIQUOR WINE STORES AND FLOWER SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E040', 'E2', 'OTHER STORES AND SHOPS FOR CONDUCTING RETAIL BUSINESS AND LOCAL SHOPPING ESTABLISHMENT', 'E');
-INSERT INTO `obo_building_type` VALUES ('E041', 'E2', 'RADIO, TELEVISION AND OTHER ELECTRICAL APPLIANCE REPAIR SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E042', 'E2', 'FURNITURE, REPAIR AND UPHOLSTERING JOB', 'E');
-INSERT INTO `obo_building_type` VALUES ('E043', 'E2', 'COMPUTER STORES AND VIDEO SHOPS, INCLUDING REPAIR', 'E');
-INSERT INTO `obo_building_type` VALUES ('E044', 'E2', 'INTERNET CAFES AND CYBER STATIONS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E045', 'E2', 'GARMENT MANUFACTURING WITH NO MORE THAN TWENTY (20) MACHINES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E046', 'E2', 'SIGNBOARD AND STREAMER PAINTING AND SILK SCREENING', 'E');
-INSERT INTO `obo_building_type` VALUES ('E047', 'E2', 'CAR BARNS FOR JEEPNEYS AND TAXIS NOT MORE THAN SIX (6) UNITS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E048', 'E2', 'LOTTO TERMINALS, OFF-FRONTON, ON-LINE BINGO OUTLETS AND OFF-TRACK BETTING STATIONS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E049', 'E2', 'GARDENS AND LANDSCAPING SUPPLY/ CONTRACTORS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E050', 'E2', 'PRINTING, TYPESETTING, COPIERS AND DUPLICATING SERVICES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E051', 'E2', 'PHOTO SUPPLY AND DEVELOPING', 'E');
-INSERT INTO `obo_building_type` VALUES ('E053', 'E2', 'GROCERIES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E054', 'E2', 'LAUNDRIES AND LAUNDROMATS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E055', 'E2', 'RECORDING AND FILM LABORATORIES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E056', 'E2', 'AUTO REPAIR, TIRE, VULCANIZING SHOPS AND CARWASH WITH MINIMUM 100 SQ. METERS SERVICE AREA', 'E');
-INSERT INTO `obo_building_type` VALUES ('E057', 'E2', 'PHYSICAL FITNESS GYMS/CENTERS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E058', 'E3', 'AIRCRAFT HANGARS', 'E');
-INSERT INTO `obo_building_type` VALUES ('E059', 'E3', 'COMMERCIAL PARKING LOTS AND GARAGES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E060', 'E3', 'DEPARTMENT STORES, SHOPPING MALLS/CENTERS, COMMERCIAL AND SPORTS COMPLEXES/ AREA', 'E');
-INSERT INTO `obo_building_type` VALUES ('E061', 'E3', 'INSTITUTIONAL USES AS UNIVERSITY COMPLEXES', 'E');
-INSERT INTO `obo_building_type` VALUES ('E062', 'E3', 'OTHER COMMERCIAL/ BUSINESS ACTIVITIES NOT ELSEWHERE CLASSIFIED (N.E.C.)', 'E');
-INSERT INTO `obo_building_type` VALUES ('EDUC', 'C1', 'EDUCATIONAL INSTITUTION (SUCH AS SCHOOL, UNIVERSITY )', 'C');
-INSERT INTO `obo_building_type` VALUES ('EMPA', 'E2', 'EMPLOYMENT/RECRUITMENT AGENCIES', 'E');
-INSERT INTO `obo_building_type` VALUES ('EPDS', 'E2', 'ENGRAVING, PHOTO DEVELOPING AND PRINTING SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('ETRY', 'E2', 'EATERIES', 'E');
-INSERT INTO `obo_building_type` VALUES ('EXHA', 'C1', 'EXHIBITION HALLS', 'C');
-INSERT INTO `obo_building_type` VALUES ('F001', 'F1', 'ICE PLANTS AND COLD STORAGE BUILDINGS', 'F');
-INSERT INTO `obo_building_type` VALUES ('F002', 'F1', 'POWER PLANTS (THERMAL, HYDRO OR GEOTHERMAL)', 'F');
-INSERT INTO `obo_building_type` VALUES ('F003', 'F1', 'PUMPING PLANTS (WATER SUPPLY, STORM DRAINAGE,SEWERAGE, IRRIGATION AND WASTE TREATMENT PLANTS)', 'F');
-INSERT INTO `obo_building_type` VALUES ('F004', 'F1', 'DAIRIES AND CREAMERIES', 'F');
-INSERT INTO `obo_building_type` VALUES ('FHFC', 'G1', 'FACTORIES FOR HIGHLY FLAMMABLE CHEMICALS', 'G');
-INSERT INTO `obo_building_type` VALUES ('FINI', 'E2', 'FINANCIAL INSTITUTIONS', 'E');
-INSERT INTO `obo_building_type` VALUES ('FLCF', 'G3', 'FACTORIES WHERE LOOSE COMBUSTIBLE FIBER OR DIRT ARE MANUFACTURED, PROCESSED OR GENERATED', 'G');
-INSERT INTO `obo_building_type` VALUES ('FPRL', 'E2', 'FUNERAL PARLORS', 'E');
-INSERT INTO `obo_building_type` VALUES ('FSTF', 'E2', 'FASTFOOD', 'E');
-INSERT INTO `obo_building_type` VALUES ('FWIM', 'F1', 'FACTORIES AND WORKSHOPS USING INCOMBUSTIBLE OR NON-EXPLOSIVE MATERIALS', 'F');
-INSERT INTO `obo_building_type` VALUES ('G017', 'G3', 'WOOD WORKING ESTABLISHMENTS, LUMBER AND TIMBER YARDS', 'G');
-INSERT INTO `obo_building_type` VALUES ('G028', 'G4', 'FACTORIES FOR ENGINES AND TURBINES AND ATTACHED TESTING FACILITIES', 'G');
-INSERT INTO `obo_building_type` VALUES ('GASS', 'E1', 'GASOLINE FILLING AND SERVICE STATIONS', 'E');
-INSERT INTO `obo_building_type` VALUES ('GLFC', 'C2', 'GOLF CLUBHOUSES', 'C');
-INSERT INTO `obo_building_type` VALUES ('GOVB', 'C1', 'OTHER TYPES OF GOVERNMENT BUILDINGS', 'C');
-INSERT INTO `obo_building_type` VALUES ('GRSI', 'G3', 'GRAINS SILOS', 'G');
-INSERT INTO `obo_building_type` VALUES ('GRSP', 'G4', 'REPAIR GARAGES AND SHOPS', 'G');
-INSERT INTO `obo_building_type` VALUES ('GSBL', 'H4', 'GRANDSTAND AND BLEACHERS', 'H');
-INSERT INTO `obo_building_type` VALUES ('GUNG', 'G3', 'GARMENT AND UNDERGARMENT', 'G');
-INSERT INTO `obo_building_type` VALUES ('HNGR', 'G5', 'HANGARS', 'G');
-INSERT INTO `obo_building_type` VALUES ('HOTL', 'B1', 'HOTEL', 'B');
-INSERT INTO `obo_building_type` VALUES ('HSRS', 'C2', 'HEALTH STUDIOS AND REDUCING SALONS', 'C');
-INSERT INTO `obo_building_type` VALUES ('INDU', 'A1', 'INDIGENOUS FAMILY DWELLING UNITS', 'A');
-INSERT INTO `obo_building_type` VALUES ('JAIA', 'H4', 'JAI ALAI STADIUM', 'H');
-INSERT INTO `obo_building_type` VALUES ('LAVR', 'H1', 'LITTLE THEATERS, AUDIO-VISUAL ROOMS', 'H');
-INSERT INTO `obo_building_type` VALUES ('LCPU', 'G1', 'LARGE COMPLEXES FOR PUBLIC UTILITIES', 'G');
-INSERT INTO `obo_building_type` VALUES ('LSDU', 'B1', 'LEASED SINGLE-DETACHED DWELLING UNIT, COTTAGE AND DUPLEXES', 'B');
-INSERT INTO `obo_building_type` VALUES ('LSWM', 'G1', 'LIQUID AND SOLID WASTE MANAGEMENT FACILITIES', 'G');
-INSERT INTO `obo_building_type` VALUES ('MAAE', 'G5', 'MANUFACTURE AND ASSEMBLY PLANTS OF AIRCRAFT ENGINE', 'G');
-INSERT INTO `obo_building_type` VALUES ('MEMC', 'E2', 'MEMORIAL AND MORTUARY CHAPELS, CREMATORIES', 'E');
-INSERT INTO `obo_building_type` VALUES ('MFWK', 'G1', 'MATCH AND FIREWORKS FACTORIES', 'G');
-INSERT INTO `obo_building_type` VALUES ('MOTL', 'B1', 'MOTELS', 'B');
-INSERT INTO `obo_building_type` VALUES ('MSHP', 'E1', 'MONEY SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('MSSP', 'C2', 'MASSAGE AND SAUNA PARLORS', 'C');
-INSERT INTO `obo_building_type` VALUES ('MSUS', 'B1', 'MULTIPLE-HOUSING UNITS FOR LEASE OR STILL FOR SALE', 'B');
-INSERT INTO `obo_building_type` VALUES ('MTRY', 'A2', 'MILITARY OR POLICE BARRACKS', 'A');
-INSERT INTO `obo_building_type` VALUES ('MUSM', 'A2', 'MUSEUM', 'A');
-INSERT INTO `obo_building_type` VALUES ('NSSV', 'E2', 'NEWS SYNDICATE SERVICES AND OFFICE EQUIPMENT', 'E');
-INSERT INTO `obo_building_type` VALUES ('OAEC', 'H4', 'OTHER AMUSEMENT AND ENTERTAINMENT COMPLEXES', 'H');
-INSERT INTO `obo_building_type` VALUES ('OCDM', 'B1', 'SCHOOL DORMITORIES (OFF-CAMPUS)', 'B');
-INSERT INTO `obo_building_type` VALUES ('OFCB', 'E2', 'OFFICE BUILDINGS', 'E');
-INSERT INTO `obo_building_type` VALUES ('PCPP', 'G1', 'PLASTICS COMPOUNDING AND PROCESSING PLANTS', 'G');
-INSERT INTO `obo_building_type` VALUES ('PELC', 'C2', 'PELOTA COURTS', 'C');
-INSERT INTO `obo_building_type` VALUES ('PFRS', 'E2', 'POLICE AND FIRE STATIONS', 'E');
-INSERT INTO `obo_building_type` VALUES ('PHTS', 'E1', 'PHOTO AND PORTRAIT STUDIO', 'E');
-INSERT INTO `obo_building_type` VALUES ('PMSV', 'G3', 'PLANING MILLS AND SAWMILLS, VENEER PLANTS', 'G');
-INSERT INTO `obo_building_type` VALUES ('PNHS', 'B1', 'PENSION HOUSES AND INNS', 'B');
-INSERT INTO `obo_building_type` VALUES ('PPPF', 'G3', 'PULP, PAPER AND PAPERBOARD FACTORIES', 'G');
-INSERT INTO `obo_building_type` VALUES ('PRKB', 'E1', 'COMMERCIAL GARAGES AND PARKING BUILDINGS', 'E');
-INSERT INTO `obo_building_type` VALUES ('PRKS', 'A1', 'PARKS, PLAYGROUNDS, POCKET PARKS, PARKWAYS, PROMENADES AND PLAYLOTS', 'A');
-INSERT INTO `obo_building_type` VALUES ('PRMP', 'G1', 'PLASTICS RESIN PLANTS (MONOMER AND POLYMER)', 'G');
-INSERT INTO `obo_building_type` VALUES ('PRNP', 'E2', 'PRINTING AND PUBLISHING PLANTS AND OFFICES', 'E');
-INSERT INTO `obo_building_type` VALUES ('PRTY', 'A2', 'PARTY NEEDS AND ACCESSORIES ', 'A');
-INSERT INTO `obo_building_type` VALUES ('PSBH', 'G2', 'PAINT STORES WITH BULK HANDLING', 'G');
-INSERT INTO `obo_building_type` VALUES ('PSCH', 'A2', 'PRE-SCHOOLS, ELEMENTARY AND HIGH SCHOOLS', 'A');
-INSERT INTO `obo_building_type` VALUES ('PSSP', 'G2', 'PAINT SHOPS AND SPRAY PAINTING ROOMS', 'G');
-INSERT INTO `obo_building_type` VALUES ('PWNS', 'E1', 'PAWNSHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('RCML', 'F1', 'RICE MILLS', 'F');
-INSERT INTO `obo_building_type` VALUES ('REST', 'E2', 'RESTAURANT', 'E');
-INSERT INTO `obo_building_type` VALUES ('RETD', 'E1', 'RETAIL DRUGSTORES', 'E');
-INSERT INTO `obo_building_type` VALUES ('RSCP', 'H4', 'RESORT COMPLEXES', 'H');
-INSERT INTO `obo_building_type` VALUES ('RTAE', 'G5', 'REPAIRS AND TESTING SHOPS FOR AIRCRAFT ENGINES AND PARTS', 'G');
-INSERT INTO `obo_building_type` VALUES ('RTRK', 'H4', 'RACE TRACKS AND HIPPODROMES', 'H');
-INSERT INTO `obo_building_type` VALUES ('RVWS', 'H4', 'REVIEWING STANDS', 'H');
-INSERT INTO `obo_building_type` VALUES ('RWHS', 'B1', 'ROWHOUSES', 'B');
-INSERT INTO `obo_building_type` VALUES ('SADT', 'A2', 'SINGLE-ATTACHED DUPLEX OR TOWN-HOUSE (PRIVATELY OWNED)', 'A');
-INSERT INTO `obo_building_type` VALUES ('SBPS', 'G2', 'SIGN AND BILLBOARD PAINTING SHOPS', 'G');
-INSERT INTO `obo_building_type` VALUES ('SCSH', 'A1', 'SCHOOL OR COMPANY STAFF HOUSING', 'A');
-INSERT INTO `obo_building_type` VALUES ('SDCO', 'A2', 'STEAM/ DRY CLEANING OUTLETS', 'A');
-INSERT INTO `obo_building_type` VALUES ('SDRM', 'A2', 'SCHOOL DORMITORIES (ON CAMPUS)', 'A');
-INSERT INTO `obo_building_type` VALUES ('SHCN', 'E2', 'SHOPPING CENTERS, MALLS AND SUPERMARKETS', 'E');
-INSERT INTO `obo_building_type` VALUES ('SHPH', 'B1', 'SHOP-HOUSES', 'B');
-INSERT INTO `obo_building_type` VALUES ('SHRS', 'E1', 'SHOESHINE/REPAIR STANDS', 'E');
-INSERT INTO `obo_building_type` VALUES ('SIDU', 'A1', 'SINGLE-DETACHED DWELLING UNITS', 'A');
-INSERT INTO `obo_building_type` VALUES ('SKTR', 'H3', 'SKATING RINKS', 'H');
-INSERT INTO `obo_building_type` VALUES ('SMNR', 'C1', 'SEMINAR WORKSHOP FACILITIES', 'C');
-INSERT INTO `obo_building_type` VALUES ('SNFD', 'A1', 'SINGLE (NUCLEAR) FAMILY DWELLINGS', 'A');
-INSERT INTO `obo_building_type` VALUES ('SPST', 'H4', 'SPORTS STANDS', 'H');
-INSERT INTO `obo_building_type` VALUES ('SPTC', 'C2', 'SPORTS COMPLEX', 'C');
-INSERT INTO `obo_building_type` VALUES ('STNK', 'G1', 'STORAGE TANKS, BUILDINGS FOR STORING GASOLINE, ACETYLENE, LPG, CALCIUM, CARBIDES, OXYGEN, HYDROGEN, AND THE LIKE', 'G');
-INSERT INTO `obo_building_type` VALUES ('SUGC', 'F1', 'SUGAR CENTRALS', 'F');
-INSERT INTO `obo_building_type` VALUES ('TCOM', 'E2', 'TELECOMMUNICATIONS,MEDIA AND PUBLIC INFORMATION COMPLEXES INCLUDING RADIO AND TV BROADCASTING STUDIOS\n', 'E');
-INSERT INTO `obo_building_type` VALUES ('TELE', 'E2', 'TELEPHONE AND TELEGRAPH EXCHANGES', 'E');
-INSERT INTO `obo_building_type` VALUES ('TFSM', 'G3', 'TEXTILE AND FIBER SPINNING MILLS', 'G');
-INSERT INTO `obo_building_type` VALUES ('THEA', 'I1', 'THEATER', 'I');
-INSERT INTO `obo_building_type` VALUES ('TLDS', 'E1', 'TAILORING AND DRESS SHOPS', 'E');
-INSERT INTO `obo_building_type` VALUES ('TRNC', 'C1', 'TRAINING CENTERS', 'C');
-INSERT INTO `obo_building_type` VALUES ('TWNH', 'B1', 'TOWNHOUSES ( EACH PRIVATELY OWNED )', 'B');
-INSERT INTO `obo_building_type` VALUES ('WCBF', 'G3', 'WOOD AND CARDBOARD BOX FACTORIES', 'G');
-INSERT INTO `obo_building_type` VALUES ('WDKN', 'G3', 'WOOD DRYING KILNS', 'G');
-INSERT INTO `obo_building_type` VALUES ('WDMK', 'E2', 'WET AND DRY MARKETS', 'E');
-INSERT INTO `obo_building_type` VALUES ('WHLC', 'G3', 'WAREHOUSES (HIGHLY COMBUSTIBLE MATERIALS ARE STORED)', 'G');
-INSERT INTO `obo_building_type` VALUES ('WPDC', 'G1', 'WATER AND POWER GENERATION/ DISTRIBUTION COMPLEXES\n', 'G');
-INSERT INTO `obo_building_type` VALUES ('WSSV', 'E2', 'WATCH SALES AND SERVICES, LOCKSMITH AND OTHER RELATED SERVICES', 'E');
+INSERT INTO `obo_checklist` VALUES ('FSC01', 'Building exits must abut a public street or approved alley. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC02', 'Provide at least two (2) means of egress for each floor, room. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC03', 'Provide secondary stair/exit as far/remote from main stair/entrance/exit, to serve _the whole area__. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC04', 'Enclose all stairways and fire escapes with walls having ____ hours of fire resistance with access thru self-closing fire doors. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC05', 'Provide two (2) doors as exit ways from all rooms. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC06', 'Interconnect stairs and fire escapes with fire resistive passageways on corridors at least ______ meters wide. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC07', 'Enclose walls, doors, stairs ramps, escalators and other components of exits systems. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC08', 'Provide protected/enclosed horizontal exits with self-closing fire doors. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC09', 'Travel distance to an exit shall not be more than ________  meters. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC10', 'Exit doors shall swing in the direction of exit travel. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC11', 'Revolving doors shall not be used as means of egress except __________________________ ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC12', 'Exit door/s should be openable from the inside without the use of keys, special knowledge or effort flush bolts or surface bolts are prohibited. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC13', 'Exit door should have a minimum width of 71 cm and a maximum width 122 cm and shall not restrict the opening. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC14', 'A floor or landing is required not less than the width of exit door. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC15', 'Door should be not project into the required corridor width when fully opened so as not to reduced the corridor width to less than 76.17 cm. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC16', 'Exit doors should provide immediate access to an approved means of egress. Exiting through a bathroom, bedroom or other room subject to locking does not comply. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC17', 'Corridors should have a minimum width of _____ meters. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC18', 'Required corridors in ___________________ occupancies shall have 2.43 meters (8 ft) minimum width. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC19', 'Dead-end corridors and exit balconies is limited to 6.08 m (20 ft). ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC20', 'Aisles in auditorium shall be minimum of ____ meters in width. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC21', 'Walls and ceilings of corridors should be fire resistive construction materials. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC22', 'Interior openings into corridor should be protected as set forth in ___________________________. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC23', 'Main stairways should have a minimum width of 112 cm. Trims and handrails should not project more than 8.90 cm (3 1/2 in) into the required width. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC24', 'Landings on stairways should have a minimum dimension of 112 cm (44 in) in the direction of travel. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC25', 'Risers on stairways should not exceed 19 cm and tread exclusive of nosing or projections should not be less than 25 cm. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC26', 'Doors between guests rooms and corridors shall be self-closing and shall have a fire protection rating at least twenty (20) minutes. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC27', 'Openings in corridor partitions other than door openings shall be prohibited. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC28', 'Basement portion of stairways should be provided with an approved barrier where continuous to upper floor in an exit enclosure. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC29', 'Vertical distance between stairway landings are limited to 3.69 m (12 ft) in assembly occupancies, distance is 2.43 m (8 ft) ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC30', 'Handrails should be placed not less than 81.28 cm (32 in) above the tread. Two (2) handrails are required when stairways exceed 111.7 cm in width. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC31', 'Guardrails for stairs, balconies, stair landings, ramps & aisles located along the edge of openside floors and mezzanines shall be provided. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC32', 'There shall be no enclosed usable space under the stairs in an exit enclosure nor shall the open space under such stairs be used for any purpose. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC33', 'Non-combustible outside stairs are required to have 2.03 m (6 ft, 8 in) minimum headroom clearance for stairways which should be indicated on plans. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC34', 'Ramp slopes should have be roughened or with nonslip surface. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC35', 'Ramp slopes should not exceed 30.3 cm. (1 ft) in 3.03 m (10 ft.). ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC36', 'No openings other than the required exits are permitted and exit passageways should be one (1) hr fire resistive construction for a three (3) storey building or less and two (2) hrs for four (4) storey building or more. Any opening therein shall be protected with an approved self-closing fire doors. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC37', 'Exit illumination and directional EXIT signs shall be provided. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC38', 'Panic hardware is required on exit doors. In lieu of this, doors shall have no locks or latches. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC39', 'Provide fire break up to the roof for ceiling areas. ', 'COMPARTMENTATION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC40', 'Provide monitored and curtained roof of sheetmetal or non-combustible material of a minimum of 1.82m (6 ft) high spaced not more than 76 m (250 ft) & curtained area limited to a minimum of 4, 630 m2 (50,000 ft2). ', 'COMPARTMENTATION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC41', 'Provide smoke partition at enclosed areas of 2, 083 m2 (22, 500 ft2) or less with the length of 45.7m (150 ft) or less, with self-closing fire doors. ', 'COMPARTMENTATION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC42', 'Provide partition walls of two (2) hour fire resistance from floor to underside of floor above. ', 'COMPARTMENTATION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC43', 'Provide interior finish as follows; Exit; Class________    \r\n\r\nAccess to Exit; Class ___________                            \r\n\r\nOther Spaces;  Class __________ ', 'COMPARTMENTATION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC44', 'Provide fire stopping for all concealed spaces.  ', 'COMPARTMENTATION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC45', 'Provide standard fire wall with at least 100 cm (39.38 in) high parapets on all portion of the building on the property line. ', 'WALLS', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC46', 'Extend exterior masonry walls to form parapets or wings.', 'WALLS', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC47', 'Provide protection of all exterior walls. All exterior walls facing approved alleys which are dead-ended must have a fire resistance of _____ hours. ', 'WALLS', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC48', 'Provide automatic fire dampers on wall openings. ', 'WALLS', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC49', 'Provide approved emergency alarm bell system on each floor with adequate number of sending stations. ', 'WARNING SYSTEMS', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC50', 'Provide approved type heat and smoke detection system. ', 'WARNING SYSTEMS', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC51', 'Provide efficient communication system for warning occupants and calling fire department. ', 'WARNING SYSTEMS', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC52', 'Provide approved type portable fire extinguisher (dry chemical) ABC type, ____ lbs. capacity for every 200 sq.m of floor area(low hazard), 100 sq. m floor area(moderate hazard) and 75 sq. m floor area(high hazard) areas or 22.8 m (75 ft) travel distance on every floor level. ', 'FIRE PROTECTION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC53', 'Provide ______________ with ____ mm riser and coupling of fire department standards with pumps of reliable pressure & connected to an adequate water supply tank. Hose and hose cabinet shall be provided at every hose gate valve on all floors. ', 'FIRE PROTECTION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC54', 'Provide Fire Service connection with a standard outlet of 64 mm, and 102 mm dry standpipe, and shall located on a street front. ', 'FIRE PROTECTION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC55', 'Provide automatic fire extinguishing system where kitchen equipment is located (Kitchenhood). ', 'FIRE PROTECTION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC56', 'Provide automatic chemical extinguishing system on all areas where electronic/electrical equipment are located. ', 'FIRE PROTECTION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC57', 'Provide approved-type automatic fire extinguishing system in accordance with NFPA 13.  Approval of system plan is required prior to installation ', 'FIRE PROTECTION ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC58', 'Provide outside window opening on bedrooms with a clear opening of not less than fifty six (56) cm in least dimension and forty five-hundredths (0.45) m2 in area. The bottom of the window shall be not more than one hundred twenty two (122) cm above the floor. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC59', 'All liquefied petroleum gas equipment including such equipment installed at utility gas plants shall be installed in accordance with the provisions of NFPA 59. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC60', 'No grills or any obstruction shall be installed on window openings and/or fire exits. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC61', 'Provide emergency lighting facilities with automatic transfer switch to AC/DC power source. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC62', 'Air conditioning ducts must be provided with approved fire dampers. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC63', 'Roof covering must be of non-combustible materials. Combustible roof covering must have fire retardant treatment. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC64', 'Provide fire escape ladder/s on every dwelling unit. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC65', 'Provide fire escape stair/s. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC66', 'All unit partition wall shall be extended up to upper floor slab and/or one (1) meter above the roofline. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC67', 'Provide effective means of smoke ventilation such as access panels, movable windows. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC68', 'Project activity shall not affect the effectivity of the existing fire protection facilities. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC69', 'Provide/post allowable occupant load sign/s. Such signs shall be conspicuously and suitably located. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC70', 'Provide fire protection/suppression during construction. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC71', 'Provide fire exit plan for each floor of the building showing the routes from each room to appropriate exits, displayed prominently on the door of each room. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC72', 'No heating or lighting apparatus or equipment capable of igniting flammable materials shall be used in any storage or work area where rags, excelsior, hair or other highly flammable or combustible materials are stored or used. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC73', 'Provide/post \"NO SMOKING\" sign/s where combustible materials are stored or handled. Such signs shall be conspicuously and suitable located. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC74', 'If high hazard commodities will be stored/handled, automatic fire suppression system shall be provided ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC75', 'Provide/post \"DO NOT USE ELEVATOR IN CASE OF FIRE\" sign/s. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC76', 'LPG tank/s must be installed outside the building and should be provided with safety devices that automatically stop the flow of gas should a leak develop. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC77', 'Provide fire resistive walls between stair & kitchen area. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC78', 'Provide outside window/s for rescue and ventilation with a minimum clear opening of 55 cm and approximately one half (0.5) m2 in area; the bottom of window opening is not more than eighty two (82) cm above the floor; it can readily be opened from the inside without the use of tools; where storm windows, screens, or antiburglar devices are used, these be provided with quick mechanism so that they may be so arranged that when opened they will not drop to the ground. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC79', 'Rooms used for kindergarten, first or second grade pupils shall not be located above or below the floor of exit discharge. Rooms used for second grade pupils shall not be located more than one (1) storey above the floor of exit discharge. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC80', 'Provide firefighters’ elevator. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC81', 'All correction indicated on the original approved plan from this office on ____________shall be followed. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC82', 'Any changes in occupancy other than stated shall be in accordance with Rule 10.  ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC83', 'Subject to inspection during construction.  ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC84', 'Fire Safety Inspection Certificate must be secured before/prior to issuance of Certificate of Occupancy. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `obo_checklist` VALUES ('FSC85', 'Subject to additional requirements upon recommendation of the Fire Safety Inspector during construction phase and final inspection. ', 'MISCELLANEOUS ', NULL, 'FIRE');
 COMMIT;
 
 -- ----------------------------
--- Table structure for obo_classification
+-- Table structure for obo_issuance_type
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_classification`;
-CREATE TABLE `obo_classification` (
-  `objid` varchar(50) DEFAULT NULL,
+DROP TABLE IF EXISTS `obo_issuance_type`;
+CREATE TABLE `obo_issuance_type` (
+  `objid` varchar(50) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `sortorder` smallint(3) DEFAULT NULL,
-  KEY `ix_title` (`title`),
-  KEY `ix_sortorder` (`sortorder`),
-  KEY `objid` (`objid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of obo_classification
--- ----------------------------
-BEGIN;
-INSERT INTO `obo_classification` VALUES ('BUSINESS', 'BUSINESS', 1);
-COMMIT;
-
--- ----------------------------
--- Table structure for obo_entity
--- ----------------------------
-DROP TABLE IF EXISTS `obo_entity`;
-CREATE TABLE `obo_entity` (
-  `objid` varchar(50) NOT NULL DEFAULT '',
-  `entityid` varchar(50) DEFAULT NULL,
-  `entitytype` varchar(50) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `firstname` varchar(100) DEFAULT NULL,
-  `middlename` varchar(100) DEFAULT NULL,
-  `lastname` varchar(100) DEFAULT NULL,
-  `address_text` varchar(255) DEFAULT NULL,
-  `ctcno` varchar(50) DEFAULT NULL,
-  `ctcdtissued` date DEFAULT NULL,
-  `ctcdtexpiry` date DEFAULT NULL,
-  `ctcplaceissued` varchar(255) DEFAULT NULL,
-  `prcno` varchar(50) DEFAULT NULL,
-  `prcdtexpiry` date DEFAULT NULL,
-  `ptrno` varchar(50) DEFAULT NULL,
-  `ptrdate` date DEFAULT NULL,
-  `tin` varchar(50) DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `mobileno` varchar(50) DEFAULT NULL,
-  `phoneno` varchar(50) DEFAULT NULL,
+  `role` varchar(50) DEFAULT NULL,
+  `controlnopattern` varchar(100) DEFAULT NULL,
+  `txntype` varchar(50) DEFAULT NULL,
+  `sectionid` varchar(50) DEFAULT NULL,
+  `template` varchar(100) DEFAULT NULL,
+  `sortindex` int(255) DEFAULT NULL,
   PRIMARY KEY (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of obo_issuance_type
+-- ----------------------------
+BEGIN;
+INSERT INTO `obo_issuance_type` VALUES ('BFP_CHECKLIST', 'BFP Checklist', NULL, NULL, 'buildingpermit', 'FIRE', NULL, 11);
+INSERT INTO `obo_issuance_type` VALUES ('BLDG_PERMIT', 'Building Permit', NULL, 'BP[org][yyyy]-[%06d]', 'buildingpermit', NULL, NULL, 0);
+INSERT INTO `obo_issuance_type` VALUES ('FSEC', 'Fire Safety Evaluation Clearance (FSEC)', NULL, NULL, 'buildingpermit', 'FIRE', NULL, 10);
+INSERT INTO `obo_issuance_type` VALUES ('FSIC', 'Fire Safety Inspection Clearance (FSIC)', NULL, NULL, 'occupancypermit', 'FIRE', NULL, 12);
+INSERT INTO `obo_issuance_type` VALUES ('HOT_WORKS_PERMIT', 'Hot Works Permit', NULL, NULL, 'buildingpermit', 'HOT_WORKS', NULL, 13);
+INSERT INTO `obo_issuance_type` VALUES ('LOCATIONAL_CLEARANCE', 'Locational Clearance', NULL, NULL, 'buildingpermit', 'ZONING', NULL, 1);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for obo_itemaccount
+-- ----------------------------
+DROP TABLE IF EXISTS `obo_itemaccount`;
+CREATE TABLE `obo_itemaccount` (
+  `objid` varchar(50) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `item_objid` varchar(50) DEFAULT NULL,
+  `item_code` varchar(50) DEFAULT NULL,
+  `item_title` varchar(255) DEFAULT NULL,
+  `item_fund_objid` varchar(50) DEFAULT NULL,
+  `item_fund_title` varchar(50) DEFAULT NULL,
+  `sortorder` int(10) DEFAULT NULL,
+  `sectionid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`),
+  UNIQUE KEY `uix_obo_itemaccount_itemobjid` (`item_objid`),
+  KEY `fk_obo_itemaccount_sectionid` (`sectionid`),
+  CONSTRAINT `fk_obo_itemaccount_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `obo_section` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of obo_itemaccount
+-- ----------------------------
+BEGIN;
+INSERT INTO `obo_itemaccount` VALUES ('ACCESSORY_FEE', 'ACCESSORY FEE', 'FTFA00000769', '4-01-03-030-04', 'RET GASUL ACCESSORIES', 'GENERAL', 'GENERAL', 5, NULL);
+INSERT INTO `obo_itemaccount` VALUES ('ACCESSORY_STRUCTURE_FEE', 'ACCESSORY STRUCTURE FEE', 'FTFA00000556', '4-02-01-010-02-1', 'BUILDING INSPECTION FEES', 'GENERAL', 'GENERAL', 1, NULL);
+INSERT INTO `obo_itemaccount` VALUES ('BFP_V1', 'VIOLATION 1', 'ITMACCT-1c97b5d1:15b1d1f6c89:-7e41', '4-02-01-070-2', 'VIOLATION OF CITY ORDINANCE', 'GENERAL', 'GENERAL', 1, 'FIRE');
+INSERT INTO `obo_itemaccount` VALUES ('BUILDING_PERMIT_FEE', 'BUILDING PERMIT FEE', 'FTFA00000409', '4-02-01-010-02-1', 'BUILDING PERMIT FEE', 'GENERAL', 'GENERAL', -1, NULL);
+INSERT INTO `obo_itemaccount` VALUES ('ELECTRICAL_FEE', 'ELECTRICAL FEE', 'FTFA00001016', '4-02-01-010-02-1', 'ELECTRICAL PERMIT', 'GENERAL', 'GENERAL', 0, 'ELECTRICAL');
+INSERT INTO `obo_itemaccount` VALUES ('ELECTRONIC_FEE', 'ELECTRONIC FEE', 'FTFA00000563', '4-02-01-010-02-1', 'ELECTRONICS FEE', 'GENERAL', 'GENERAL', 0, 'ELECTRONIC');
+INSERT INTO `obo_itemaccount` VALUES ('FIRE_CONS_TAX', 'FIRE CODE CONTRUCTION TAX', 'TFA10000148', '430-A', 'BASIC FIRE CODE', 'GENERAL', 'GENERAL', 0, 'FIRE');
+INSERT INTO `obo_itemaccount` VALUES ('FIRE_INSPECTION_FEE', 'FIRE CODE CONSTRUCTION TAX', 'FTFA00000574', '2-02-01-050-2', 'FIRE INSPECTION FEE', 'GENERAL', 'GENERAL', 50, 'FIRE');
+INSERT INTO `obo_itemaccount` VALUES ('HOTWORKS', 'HOT WORKS', 'FTFA00000631', '4-02-01-040-02', 'CLEARANCE(FIRE)', 'GENERAL', 'GENERAL', 1, 'HOT_WORKS');
+INSERT INTO `obo_itemaccount` VALUES ('LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', 'FTFA00000425', '4-02-01-010-03', 'LOCATIONAL CLEARANCES - ZONING FEES', 'GENERAL', 'GENERAL', 1, 'ZONING');
+INSERT INTO `obo_itemaccount` VALUES ('MECHANICAL_FEE', 'MECHANICAL FEE', 'FTFA00000614', '4-02-01-010-02-1', 'MECHANICAL INSPECTION FEE', 'GENERAL', 'GENERAL', 0, 'MECHANICAL');
+INSERT INTO `obo_itemaccount` VALUES ('PLUMBING_FEE', 'PLUMBING FEE', 'FTFA00000411', '4-02-01-010-02-1', 'PLUMBING PERMIT FEE', 'GENERAL', 'GENERAL', 0, 'PLUMBING');
+INSERT INTO `obo_itemaccount` VALUES ('SANITARY_FEE', 'SANITARY FEE', 'FTFA00000562', '4-02-02-200-1', 'SANITARY FEE', 'GENERAL', 'GENERAL', 0, 'SANITARY');
+INSERT INTO `obo_itemaccount` VALUES ('TAX_CLEARANCE', 'TAX CLEARANCE', 'FTFA00000385', '4-02-01-040-04', 'TAX CLEARANCE', 'GENERAL', 'GENERAL', 100, NULL);
+INSERT INTO `obo_itemaccount` VALUES ('TAX_DEC', 'TAX DECLARATION', 'FTFA00000520', '4-02-01-040-04', 'CERT. TC- TAX DECLARATION', 'GENERAL', 'GENERAL', 101, NULL);
+INSERT INTO `obo_itemaccount` VALUES ('UPLR', 'UP LEGAL RESEARCH', 'FTFA00000471', '4-06-01-010-6', 'APPLICATION FORM-(UPAO)', 'GENERAL', 'GENERAL', 102, 'ZONING');
+INSERT INTO `obo_itemaccount` VALUES ('ZONING_FEE_VIOLATION', 'ZONING FEE VIOLATION', 'FTFA00000681', '4-02-01-010-03', 'ZONING PENALTY', 'GENERAL', 'GENERAL', 1, 'ZONING');
+COMMIT;
 
 -- ----------------------------
 -- Table structure for obo_occupancy_type
@@ -727,53 +788,313 @@ CREATE TABLE `obo_entity` (
 DROP TABLE IF EXISTS `obo_occupancy_type`;
 CREATE TABLE `obo_occupancy_type` (
   `objid` varchar(50) NOT NULL,
-  `parentid` varchar(50) DEFAULT NULL,
-  `description` text,
-  `type` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`objid`),
-  KEY `fk_occupancyuse` (`parentid`),
-  CONSTRAINT `fk_occupancytype_parentid` FOREIGN KEY (`parentid`) REFERENCES `obo_occupancy_type` (`objid`)
+  `divisionid` varchar(50) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  KEY `fk_occupancy_use_typeid` (`divisionid`) USING BTREE,
+  CONSTRAINT `fk_obo_occupancytype_divisionid` FOREIGN KEY (`divisionid`) REFERENCES `obo_occupancy_type_division` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of obo_occupancy_type
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_occupancy_type` VALUES ('A', NULL, 'RESIDENTIAL DWELLINGS', 'group');
-INSERT INTO `obo_occupancy_type` VALUES ('A1', 'A', 'INDIGENOUS FAMILY DWELLING UNITS\nSINGLE-DETACHED UNITS\nSCHOOL OR COMPANY STAFF HOUSING\nSINGLE (NUCLEAR) FAMILY DWELLINGS\nCHURCHES OR SIMILAR PLACES OF WORSHIP\nCHURCH RECTORIES\nCOMMUNITY FACILITIES AND SOCIAL CENTERS\nPARKS, PLAYGROUNDS, POCKET PARKS, PARKWAYS, PROMENADES AND PLAYLOTS\nCLUBHOUSES AND RECREATIONAL USES\nSINGLE-DETACHED UNITS\nSCHOOL OR COMPANY STAFF HOUSING\nSINGLE (NUCLEAR) FAMILY DWELLINGS\nCHURCHES OR SIMILAR PLACES OF WORSHIP\nCHURCH RECTORIES\nCOMMUNITY FACILITIES AND SOCIAL CENTERS\nPARKS, PLAYGROUNDS, POCKET PARKS, PARKWAYS, PROMENADES AND PLAYLOTS\nCLUBHOUSES AND RECREATIONAL USES', 'item');
-INSERT INTO `obo_occupancy_type` VALUES ('A2', 'A', 'SINGLE-ATTACHED OR DUPLEX OR TOWN- HOUSES, EACH PRIVATELY OWNED\nSCHOOL DORMITORIES (ON CAMPUS)\nCONVENTS AND MONASTERIES\nMILITARY OR POLICE BARRACKS/\nALL USES ALLOWED IN DIVISION A-1 (OR FOR R-1 CLASS) BUILDINGS/STRUCTURES\nPRE-SCHOOLS, ELEMENTARY AND HIGH SCHOOLS, PROVIDED THAT THEY DO NOT EXCEED SIXTEEN (16) CLASSROOMS\nOUTPATIENT CLINICS, FAMILY PLANNING CLINICS, LYING-IN CLINICS, DIAGNOSTIC CLINICS, MEDICAL AND CLINICAL LABORATORIES\nBRANCH LIBRARY AND MUSEUM\nSTEAM/ DRY CLEANING OUTLETS\nPARTY NEEDS AND ACCESSORIES (LEASING OF TABLES AND CHAIRS, ETC.)', 'item');
-INSERT INTO `obo_occupancy_type` VALUES ('B', NULL, 'RESIDENTIALS, HOTELS AND APARTMENTS', 'group');
-INSERT INTO `obo_occupancy_type` VALUES ('B1', 'B', 'MULTIPLE DWELLING UNITS', 'item');
-INSERT INTO `obo_occupancy_type` VALUES ('C', NULL, 'EDUCATION AND RECREATION ', 'group');
-INSERT INTO `obo_occupancy_type` VALUES ('C1', 'C', 'EDUCATIONAL INSTITUTION LIKE SCHOOLS', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('C2', 'C', 'AMUSEMENT HALLS AND PARLORS', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('D', NULL, 'INSTITUTIONAL (GOVERNMENT AND HEALTH SERVICES)', 'group');
-INSERT INTO `obo_occupancy_type` VALUES ('D1', 'D', 'MENTAL HOSPITALS, MENTAL SANITARIA AND MENTAL ASYLUMS\nPOLICE AND FIRE STATIONS, GUARD HOUSES\nJAILS, PRISONS, REFORMATORIES AND CORRECTIONAL INSTITUTIONS\nREHABILITATION CENTERS\nLEPROSARIA AND QUARANTINE STATION', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('D2', 'D', 'HOSPITALS, SANITARIA, AND HOMES FOR THE AGED\nNURSERIES FOR CHILDREN OF KINDERGARTEN AGE OR NON-AMBULATORY PATIENTS ACCOMMODATING MORE THAN FIVE (5) PERSONS', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('D3', 'D', 'NURSING HOMES FOR AMBULATORY PATIENTS\nSCHOOL AND HOME, FOR CHILDREN OVER KINDERGARTEN AGE\nORPHANAGES', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('E', NULL, 'BUSINESS AND MERCANTILE (COMMERCIAL)', 'group');
-INSERT INTO `obo_occupancy_type` VALUES ('E1', 'E', 'GASOLINE FILLING AND SERVICE STATIONS.\nSTORAGE GARAGE AND BOAT STORAGE.\nCOMMERCIAL GARAGES AND PARKING BUILDINGS,DISPLAY FOR CARS, TRACTORS, ETC\nBUS AND RAILWAYS DEPOTS AND TERMINALS AND OFFICES\nPORT FACILITIES\nAIRPORTS AND HELIPORT FACILITIES\nALL OTHER TYPES OF TRANSPORTATION COMPLEXES\nALL OTHER TYPES OF LARGE COMPLEXES FOR PUBLIC SERVICES\nPAWNSHOPS, MONEY SHOPS, PHOTO AND PORTRAIT        \nSTUDIOS, SHOESHINE/REPAIR STANDS, RETAIL DRUGSTORES, \nTAILORING AND DRESS SHOPS\nBAKESHOPS AND BAKERY GOODS STORES\nSTORES FOR CONSTRUCTION SUPPLIES AND BUILDING \nMATERIALS SUCH AS ELECTRICAL AND ELECTRONICS, \nPLUMBING SUPPLIES, CERAMIC CLAY CEMENT AND OTHER \nSIMILAR PRODUCTS EXCEPT CHBS, GRAVEL AND SAND \nAND OTHER CONCRETE PRODUCTS', 'item');
-INSERT INTO `obo_occupancy_type` VALUES ('E2', 'E', 'WHOLESALE AND RETAIL STORES', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('E3', 'E', 'BUSINESS WHERE NO REPAIR WORK IS DONE EXCEPT EXCHANGE OF PARTS AND MAINTENANCE REQ. NO OPEN FLAMES, WELDING OR USE OF HIGHLY FLAMMABLE LIQUIDS', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('F', NULL, 'INDUSTRIAL (NON POLLUTIVE/NON HAZARDOUS INDUSTRIES AND NON-POLLUTIVE HAZARDOUS INDUSTRIES)', 'group');
-INSERT INTO `obo_occupancy_type` VALUES ('F1', 'F', 'LIGHT INDUSTRIAL', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('G', NULL, 'STORAGE AND HAZARDOUS INDUSTRIAL (POLLUTIVE/NON-HAZARDOUS INDUSTRIES AND POLLUTIVE/HAZARDOUS INDUSTRIES ONLY', 'group');
-INSERT INTO `obo_occupancy_type` VALUES ('G1', 'G', 'MEDIUM INDUSTRIAL WHICH INC. STORAGE AND HANDLING OF HAZARDOUS AND HIGHLY FLAMMABLE MATERIALS', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('G2', 'G', 'MEDIUM INDUSTRIAL FOR STORAGE AND HANDLING OF FLAMMABLE MATERIALS', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('G3', 'G', 'MEDIUM INDUSTRIAL FOR WOOD WORKING ACTIVITIES, PAPERS CARDBOARD MANUFACTURERS, TEXTILE AND GARMENT FACTORIES', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('G4', 'G', 'MEDIUM INDUSTRIAL FOR REPAIR GARAGES AND ENGINE MANUFACTURE', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('G5', 'G', 'MEDIUM INDUSTRIAL FOR AIRCRAFT FACILITIES', 'G5');
-INSERT INTO `obo_occupancy_type` VALUES ('H', NULL, 'ASSEMBLY FOR LESS THAN 1000 (CULTURAL AND/OR RECREATIONAL)', 'group');
-INSERT INTO `obo_occupancy_type` VALUES ('H1', 'H', 'RECREATIONAL, WHICH ARE ASSEMBLY BUILDINGS WITH STAGE AND HAVING AN OCCUPANT LOAD OF LESS THAN 1000', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('H2', 'H', NULL, NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('H3', 'H', NULL, '`');
-INSERT INTO `obo_occupancy_type` VALUES ('H4', 'H', NULL, NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('I', NULL, 'ASSEMBLY FOR MORE THAN 1000 (CULTURAL AND/OR RECREATIONAL)', 'group');
-INSERT INTO `obo_occupancy_type` VALUES ('I1', 'I', NULL, NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('J', NULL, 'ACCESSORY', NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('J1', 'J', NULL, NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('J2', 'J', NULL, NULL);
-INSERT INTO `obo_occupancy_type` VALUES ('J3', 'J', NULL, NULL);
+INSERT INTO `obo_occupancy_type` VALUES ('A101', 'A1', 'indigenous family dwelling units');
+INSERT INTO `obo_occupancy_type` VALUES ('A102', 'A1', 'single-detached units');
+INSERT INTO `obo_occupancy_type` VALUES ('A103', 'A1', 'school or company staff housing');
+INSERT INTO `obo_occupancy_type` VALUES ('A104', 'A1', 'single (nuclear) family dwellings');
+INSERT INTO `obo_occupancy_type` VALUES ('A105', 'A1', 'churches or similar places of worship');
+INSERT INTO `obo_occupancy_type` VALUES ('A106', 'A1', 'church rectories');
+INSERT INTO `obo_occupancy_type` VALUES ('A107', 'A1', 'community facilities and social centers');
+INSERT INTO `obo_occupancy_type` VALUES ('A108', 'A1', 'parks, playgrounds, pocket parks, parkways, promenades and playlots');
+INSERT INTO `obo_occupancy_type` VALUES ('A109', 'A1', 'clubhouses and recreational uses such as as golf courses, tennis courts, basketball courts, swimming pools and similar uses operated by the government or private individuals as membership organizations for the benefit of their members, families, and guest');
+INSERT INTO `obo_occupancy_type` VALUES ('A201', 'A2', 'single-attached or duplex or town-houses each privately owned');
+INSERT INTO `obo_occupancy_type` VALUES ('A202', 'A2', 'school dormitories (on campus)');
+INSERT INTO `obo_occupancy_type` VALUES ('A203', 'A2', 'convents and monasteries');
+INSERT INTO `obo_occupancy_type` VALUES ('A204', 'A2', 'military or police barracks/dormitories');
+INSERT INTO `obo_occupancy_type` VALUES ('A205', 'A2', 'all uses allowed in division a-1 ( or for r-1 class) buildings/structures');
+INSERT INTO `obo_occupancy_type` VALUES ('A206', 'A2', 'pre-schools, elementary and high schools provided that they do not exceed sixteen (16) classrooms');
+INSERT INTO `obo_occupancy_type` VALUES ('A207', 'A2', 'outpatient clinics, family planning clinics, lying-in clinics, diagnostic clinics, medical and clinical laboratories');
+INSERT INTO `obo_occupancy_type` VALUES ('A208', 'A2', 'branch library and museum');
+INSERT INTO `obo_occupancy_type` VALUES ('A209', 'A2', 'steam/ dry cleaning outlets');
+INSERT INTO `obo_occupancy_type` VALUES ('A210', 'A2', 'party needs and accessories (leasing of tables and chairs etc)');
+INSERT INTO `obo_occupancy_type` VALUES ('B101', 'B1', 'all uses permitted in divisions a-1 and a- 2 (or for r-1 class and r-2 class) buildings/structures');
+INSERT INTO `obo_occupancy_type` VALUES ('B102', 'B1', 'leased single-detached dwelling unit, cottage wit more than one (1) independent unit and duplexes');
+INSERT INTO `obo_occupancy_type` VALUES ('B103', 'B1', 'boarding and lodging houses');
+INSERT INTO `obo_occupancy_type` VALUES ('B104', 'B1', 'multiple-housing units for lease or still for sale');
+INSERT INTO `obo_occupancy_type` VALUES ('B105', 'B1', 'townhouses ( each privately owned )');
+INSERT INTO `obo_occupancy_type` VALUES ('B106', 'B1', 'boarding houses');
+INSERT INTO `obo_occupancy_type` VALUES ('B107', 'B1', 'accessorias (shop-houses), rowhouses, townhouses, tenements and apartments');
+INSERT INTO `obo_occupancy_type` VALUES ('B108', 'B1', 'multiple privately-owned condominium units or tenement houses (residential building for thex exclusive use of non-leasing occupants not exceeding ten (10) persons and of low-rise type (up to five (5) storeys maximum building height)');
+INSERT INTO `obo_occupancy_type` VALUES ('B109', 'B1', 'hotels, motels, inns, pension houses and apartels');
+INSERT INTO `obo_occupancy_type` VALUES ('B110', 'B1', 'private or off-campus dormitories');
+INSERT INTO `obo_occupancy_type` VALUES ('B111', 'B1', 'elementary schools and high schools provided that these will not exceed twenty (20) classrooms');
+INSERT INTO `obo_occupancy_type` VALUES ('C101', 'C1', 'educational institution (like schools, colleges, universities, vocational institutions, seminaries, convents, including school auditoriums, gymnasia, reviewing stands, little theaters, concert halls, opera houses');
+INSERT INTO `obo_occupancy_type` VALUES ('C102', 'C1', 'seminar workshop facilities');
+INSERT INTO `obo_occupancy_type` VALUES ('C103', 'C1', 'training centers/facilities');
+INSERT INTO `obo_occupancy_type` VALUES ('C104', 'C1', 'libraries, museums, exhibition halls, and art galleries');
+INSERT INTO `obo_occupancy_type` VALUES ('C105', 'C1', 'civic centers, clubhouses, lodges, community centers');
+INSERT INTO `obo_occupancy_type` VALUES ('C106', 'C1', 'churches, mosque, temples. shrines, chapels and similar places of worship');
+INSERT INTO `obo_occupancy_type` VALUES ('C107', 'C1', 'civic or government centers');
+INSERT INTO `obo_occupancy_type` VALUES ('C108', 'C1', 'other types of government buildings');
+INSERT INTO `obo_occupancy_type` VALUES ('C201', 'C2', 'amusement halls and parlors');
+INSERT INTO `obo_occupancy_type` VALUES ('C202', 'C2', 'massage and sauna parlors');
+INSERT INTO `obo_occupancy_type` VALUES ('C203', 'C2', 'health studios and reducing salons');
+INSERT INTO `obo_occupancy_type` VALUES ('C204', 'C2', 'billiard halls, pool rooms, bowling alleys and golf clubhouses');
+INSERT INTO `obo_occupancy_type` VALUES ('C205', 'C2', 'dancing schools, disco pads, dance and amusement halls');
+INSERT INTO `obo_occupancy_type` VALUES ('C206', 'C2', 'gymnasia, pelota courts and sports complex');
+INSERT INTO `obo_occupancy_type` VALUES ('D101', 'D1', 'mental hospitals, mental sanitaria and mental asylums');
+INSERT INTO `obo_occupancy_type` VALUES ('D102', 'D1', 'police and fire stations, guard houses');
+INSERT INTO `obo_occupancy_type` VALUES ('D103', 'D1', 'jails, prisons, reformatories and correctional institutions');
+INSERT INTO `obo_occupancy_type` VALUES ('D104', 'D1', 'rehabilitation centers');
+INSERT INTO `obo_occupancy_type` VALUES ('D105', 'D1', 'leprosaria and quarantine station');
+INSERT INTO `obo_occupancy_type` VALUES ('D201', 'D2', 'hospitals, sanitaria, and homes for the aged');
+INSERT INTO `obo_occupancy_type` VALUES ('D202', 'D2', 'nurseries for children of kindergarten age or non-ambulatory patients accommodating more than five (5) persons');
+INSERT INTO `obo_occupancy_type` VALUES ('D301', 'D3', 'nursing homes for ambulatory patients');
+INSERT INTO `obo_occupancy_type` VALUES ('D302', 'D3', 'school and home, for children over kindergarten age');
+INSERT INTO `obo_occupancy_type` VALUES ('D303', 'D3', 'orphanages');
+INSERT INTO `obo_occupancy_type` VALUES ('E101', 'E1', 'all uses allowed in division b-1 ( or for r-3 class) buildings/structures');
+INSERT INTO `obo_occupancy_type` VALUES ('E102', 'E1', 'gasoline filling and service stations');
+INSERT INTO `obo_occupancy_type` VALUES ('E103', 'E1', 'storage garage and boat storage');
+INSERT INTO `obo_occupancy_type` VALUES ('E104', 'E1', 'commercial garages and parking buildings, display for cars, tractors, etc.');
+INSERT INTO `obo_occupancy_type` VALUES ('E105', 'E1', 'bus and railways depots and terminals and offices');
+INSERT INTO `obo_occupancy_type` VALUES ('E106', 'E1', 'port facilities');
+INSERT INTO `obo_occupancy_type` VALUES ('E107', 'E1', 'airports and heliport facilities');
+INSERT INTO `obo_occupancy_type` VALUES ('E108', 'E1', 'all other types of transportation complexes');
+INSERT INTO `obo_occupancy_type` VALUES ('E109', 'E1', 'all other types of large complexes for public services');
+INSERT INTO `obo_occupancy_type` VALUES ('E110', 'E1', 'pawnshops, money shops, photo and portrait studios, shoeshine/repair stands, retails drugstores, tailoring and dress shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E111', 'E1', 'bakeshops and bakery goods stores');
+INSERT INTO `obo_occupancy_type` VALUES ('E112', 'E1', 'stores for construction supplies and building materials such as electrical and electronics, plumbing supplies, ceramic clay cement and other similar products except chbs, gravel and sand and other concrete products\nplumbing supplies, ceramic clay cement a');
+INSERT INTO `obo_occupancy_type` VALUES ('E201', 'E2', 'wholesale and retail stores');
+INSERT INTO `obo_occupancy_type` VALUES ('E202', 'E2', 'shopping centers, malls and supermarkets');
+INSERT INTO `obo_occupancy_type` VALUES ('E203', 'E2', 'wet and dry markets');
+INSERT INTO `obo_occupancy_type` VALUES ('E204', 'E2', 'restaurants, drinking and dining establishments with less than 100 occupancies');
+INSERT INTO `obo_occupancy_type` VALUES ('E205', 'E2', 'day/night clubs, bars, cocktails, sing-along lounges, bistros, pubs, beer gardens');
+INSERT INTO `obo_occupancy_type` VALUES ('E206', 'E2', 'bakeries, pastry and bake shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E207', 'E2', 'office buildings');
+INSERT INTO `obo_occupancy_type` VALUES ('E208', 'E2', 'financial institutions');
+INSERT INTO `obo_occupancy_type` VALUES ('E209', 'E2', 'printing and publishing plants and offices');
+INSERT INTO `obo_occupancy_type` VALUES ('E210', 'E2', 'engraving, photo developing and printing shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E211', 'E2', 'photographer and painter studios, tailoring and haberdashery shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E212', 'E2', 'factories and workshops, using less flammable or non-combustible materials');
+INSERT INTO `obo_occupancy_type` VALUES ('E213', 'E2', 'battery shops and repair shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E214', 'E2', 'paint stores without bulk handling');
+INSERT INTO `obo_occupancy_type` VALUES ('E215', 'E2', 'funeral parlors');
+INSERT INTO `obo_occupancy_type` VALUES ('E216', 'E2', 'memorial and mortuary chapels, crematories');
+INSERT INTO `obo_occupancy_type` VALUES ('E217', 'E2', 'columbarium');
+INSERT INTO `obo_occupancy_type` VALUES ('E218', 'E2', 'telephone and telegraph exchanges');
+INSERT INTO `obo_occupancy_type` VALUES ('E219', 'E2', 'telecommunications,media and public information complexes including radio and tv broadcasting studios\n');
+INSERT INTO `obo_occupancy_type` VALUES ('E220', 'E2', 'cell (mobile) phone towers');
+INSERT INTO `obo_occupancy_type` VALUES ('E221', 'E2', 'battery shops and auto repair shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E222', 'E2', 'bakeries, pastry and bake shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E223', 'E2', 'police and fire stations');
+INSERT INTO `obo_occupancy_type` VALUES ('E224', 'E2', 'glassware and metalware stores, household equipment and appliance shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E225', 'E2', 'manufacture of insignia, badges and similar emblems except metal');
+INSERT INTO `obo_occupancy_type` VALUES ('E226', 'E2', 'general retail establishments such as curio or antique shops, pet shops and aquarium \nstores, bookstores, art supplies and novelties, jewelry shops, liquor wine stores and flower shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E227', 'E2', 'employment/recruitment agencies, news syndicate services and office equipment and repair shops and other offices');
+INSERT INTO `obo_occupancy_type` VALUES ('E228', 'E2', 'watch sales and services, locksmith and other related services');
+INSERT INTO `obo_occupancy_type` VALUES ('E229', 'E2', 'other stores and shops for conducting retail business and local shopping establishment');
+INSERT INTO `obo_occupancy_type` VALUES ('E230', 'E2', 'radio, television and other electrical appliance repair shops');
+INSERT INTO `obo_occupancy_type` VALUES ('E231', 'E2', 'furniture, repair and upholstering job');
+INSERT INTO `obo_occupancy_type` VALUES ('E232', 'E2', 'computer stores and video shops, including repair');
+INSERT INTO `obo_occupancy_type` VALUES ('E233', 'E2', 'internet cafes and cyber stations');
+INSERT INTO `obo_occupancy_type` VALUES ('E234', 'E2', 'garment manufacturing with no more than twenty (20) machines');
+INSERT INTO `obo_occupancy_type` VALUES ('E234B', 'E2', 'signboard and streamer painting and silk screening');
+INSERT INTO `obo_occupancy_type` VALUES ('E235', 'E2', 'car barns for jeepneys and taxis not more than six (6) units');
+INSERT INTO `obo_occupancy_type` VALUES ('E236', 'E2', 'lotto terminals, off-fronton, on-line bingo outlets and off-track betting stations');
+INSERT INTO `obo_occupancy_type` VALUES ('E237', 'E2', 'gardens and landscaping supply/ contractors');
+INSERT INTO `obo_occupancy_type` VALUES ('E238', 'E2', 'printing, typesetting, copiers and duplicating services');
+INSERT INTO `obo_occupancy_type` VALUES ('E239', 'E2', 'photo supply and developing');
+INSERT INTO `obo_occupancy_type` VALUES ('E240', 'E2', 'restaurants, canteens, eateries, delicatessen shops, confectionery shops and automats/fastfoods');
+INSERT INTO `obo_occupancy_type` VALUES ('E241', 'E2', 'groceries');
+INSERT INTO `obo_occupancy_type` VALUES ('E242', 'E2', 'laundries and laundromats');
+INSERT INTO `obo_occupancy_type` VALUES ('E243', 'E2', 'recording and film laboratories');
+INSERT INTO `obo_occupancy_type` VALUES ('E244', 'E2', 'auto repair, tire, vulcanizing shops and carwash with minimum 100 sq. meters service area');
+INSERT INTO `obo_occupancy_type` VALUES ('E245', 'E2', 'physical fitness gyms/centers');
+INSERT INTO `obo_occupancy_type` VALUES ('E301', 'E3', 'all permitted uses in division e-1(or for c-1 and c-2 class) buildings / structures');
+INSERT INTO `obo_occupancy_type` VALUES ('E302', 'E3', 'aircraft hangars');
+INSERT INTO `obo_occupancy_type` VALUES ('E303', 'E3', 'commercial parking lots and garages');
+INSERT INTO `obo_occupancy_type` VALUES ('E304', 'E3', 'department stores, shopping malls/centers, commercial and sports complexes/ areas');
+INSERT INTO `obo_occupancy_type` VALUES ('E305', 'E3', 'institutional uses as university complexes');
+INSERT INTO `obo_occupancy_type` VALUES ('E306', 'E3', 'other commercial/ business activities not elsewhere classified (n.e.c.)');
+INSERT INTO `obo_occupancy_type` VALUES ('F101', 'F1', 'ice plants and cold storage buildings');
+INSERT INTO `obo_occupancy_type` VALUES ('F102', 'F1', 'power plants (thermal, hydro or geothermal)');
+INSERT INTO `obo_occupancy_type` VALUES ('F103', 'F1', 'pumping plants (water supply, storm drainage,sewerage, irrigation and waste treatment plants)');
+INSERT INTO `obo_occupancy_type` VALUES ('F104', 'F1', 'dairies and creameries');
+INSERT INTO `obo_occupancy_type` VALUES ('F105', 'F1', 'rice mills and sugar centrals');
+INSERT INTO `obo_occupancy_type` VALUES ('F106', 'F1', 'breweries, bottling plants, canneries, and tanneries');
+INSERT INTO `obo_occupancy_type` VALUES ('F107', 'F1', 'factories and workshops using incombustible or non-explosive materials');
+INSERT INTO `obo_occupancy_type` VALUES ('G101', 'G1', 'storage tanks, buildings for storing gasoline, acetylene, lpg, calcium, carbides, oxygen, hydrogen, and the like');
+INSERT INTO `obo_occupancy_type` VALUES ('G102', 'G1', 'armories, arsenals and munitions factories');
+INSERT INTO `obo_occupancy_type` VALUES ('G103', 'G1', 'match and fireworks factories');
+INSERT INTO `obo_occupancy_type` VALUES ('G104', 'G1', 'plastics resin plants (monomer and polymer)');
+INSERT INTO `obo_occupancy_type` VALUES ('G105', 'G1', 'plastics compounding and processing plants');
+INSERT INTO `obo_occupancy_type` VALUES ('G106', 'G1', 'acetylene and oxygen generating plants');
+INSERT INTO `obo_occupancy_type` VALUES ('G107', 'G1', 'cooking oil and soap processing plants');
+INSERT INTO `obo_occupancy_type` VALUES ('G108', 'G1', 'factories for highly flammable chemicals');
+INSERT INTO `obo_occupancy_type` VALUES ('G109', 'G1', 'water and power generation/ distribution complexes\n');
+INSERT INTO `obo_occupancy_type` VALUES ('G110', 'G1', 'liquid and solid waste management facilities');
+INSERT INTO `obo_occupancy_type` VALUES ('G111', 'G1', 'large complexes for public utilities');
+INSERT INTO `obo_occupancy_type` VALUES ('G201', 'G2', 'all used permitted in i-1 class');
+INSERT INTO `obo_occupancy_type` VALUES ('G202', 'G2', 'dry cleaning plants using flammable liquids');
+INSERT INTO `obo_occupancy_type` VALUES ('G203', 'G2', 'paint stores with bulk handling');
+INSERT INTO `obo_occupancy_type` VALUES ('G204', 'G2', 'paint shops and spray painting rooms');
+INSERT INTO `obo_occupancy_type` VALUES ('G205', 'G2', 'sign and billboard painting shops');
+INSERT INTO `obo_occupancy_type` VALUES ('G301', 'G3', 'wood working establishments, lumber and timber yards');
+INSERT INTO `obo_occupancy_type` VALUES ('G302', 'G3', 'planing mills and sawmills, veneer plants');
+INSERT INTO `obo_occupancy_type` VALUES ('G303', 'G3', 'wood drying kilns');
+INSERT INTO `obo_occupancy_type` VALUES ('G304', 'G3', 'pulp, paper and paperboard factories');
+INSERT INTO `obo_occupancy_type` VALUES ('G305', 'G3', 'wood and cardboard box factories');
+INSERT INTO `obo_occupancy_type` VALUES ('G306', 'G3', 'textile and fiber spinning mills');
+INSERT INTO `obo_occupancy_type` VALUES ('G307', 'G3', 'grains and cement silos');
+INSERT INTO `obo_occupancy_type` VALUES ('G308', 'G3', 'warehouses where highly combustible materials are stored');
+INSERT INTO `obo_occupancy_type` VALUES ('G309', 'G3', 'factories where loose combustible fiber or dirt are manufactured, processed or generated');
+INSERT INTO `obo_occupancy_type` VALUES ('G310', 'G3', 'garment and undergarment');
+INSERT INTO `obo_occupancy_type` VALUES ('G401', 'G4', 'repair garages and shops');
+INSERT INTO `obo_occupancy_type` VALUES ('G402', 'G4', 'factories for engines and turbines and attached testing facilities');
+INSERT INTO `obo_occupancy_type` VALUES ('G501', 'G5', 'hangars');
+INSERT INTO `obo_occupancy_type` VALUES ('G502', 'G5', 'manufacture and assembly plants of aircraft engine');
+INSERT INTO `obo_occupancy_type` VALUES ('G503', 'G5', 'repairs and testing shops for aircraft engines and parts');
+INSERT INTO `obo_occupancy_type` VALUES ('H101', 'H1', 'theaters and auditoriums');
+INSERT INTO `obo_occupancy_type` VALUES ('H102', 'H1', 'concert halls and open houses');
+INSERT INTO `obo_occupancy_type` VALUES ('H103', 'H1', 'convention halls');
+INSERT INTO `obo_occupancy_type` VALUES ('H104', 'H1', 'little theaters, audio-visual rooms');
+INSERT INTO `obo_occupancy_type` VALUES ('H201', 'H2', 'dance halls, cabarets, ballrooms');
+INSERT INTO `obo_occupancy_type` VALUES ('H202', 'H2', 'skating rinks');
+INSERT INTO `obo_occupancy_type` VALUES ('H203', 'H2', 'cockfighting arenas');
+INSERT INTO `obo_occupancy_type` VALUES ('H301', 'H3', 'dance halls, ballrooms');
+INSERT INTO `obo_occupancy_type` VALUES ('H302', 'H3', 'skating rinks');
+INSERT INTO `obo_occupancy_type` VALUES ('H401', 'H4', 'sports stands');
+INSERT INTO `obo_occupancy_type` VALUES ('H402', 'H4', 'reviewing stands');
+INSERT INTO `obo_occupancy_type` VALUES ('H403', 'H4', 'grandstand and bleachers');
+INSERT INTO `obo_occupancy_type` VALUES ('H404', 'H4', 'covered amusement parks');
+INSERT INTO `obo_occupancy_type` VALUES ('H405', 'H4', 'boxing arenas, jai-alai stadiums');
+INSERT INTO `obo_occupancy_type` VALUES ('H406', 'H4', 'race tracks and hippodromes');
+INSERT INTO `obo_occupancy_type` VALUES ('H407', 'H4', 'all types of resort complexes');
+INSERT INTO `obo_occupancy_type` VALUES ('H408', 'H4', 'all other amusement and entertainment complexes');
+INSERT INTO `obo_occupancy_type` VALUES ('I101', 'I1', 'colisea and sports complexes');
+INSERT INTO `obo_occupancy_type` VALUES ('I102', 'I1', 'theaters and convention centers');
+INSERT INTO `obo_occupancy_type` VALUES ('I103', 'I1', 'concert halls and open houses');
+INSERT INTO `obo_occupancy_type` VALUES ('I104', 'I1', 'convention centers');
+INSERT INTO `obo_occupancy_type` VALUES ('J101', 'J1', 'agricultural structures (sheds, barns, poultry houses, piggeries, hatcheries, stables, greenhouses, granaries,silos)');
+INSERT INTO `obo_occupancy_type` VALUES ('J201', 'J2', 'private garages, carports');
+INSERT INTO `obo_occupancy_type` VALUES ('J202', 'J2', 'towers, smokestacks, chimneys');
+INSERT INTO `obo_occupancy_type` VALUES ('J203', 'J2', 'swimming pools including shower and locker room');
+INSERT INTO `obo_occupancy_type` VALUES ('J204', 'J2', 'fence over 1.8 meters high, separate firewalls');
+INSERT INTO `obo_occupancy_type` VALUES ('J205', 'J2', 'steel and or concrete tanks');
+INSERT INTO `obo_occupancy_type` VALUES ('J301', 'J3', 'stages, platforms and similar structures');
+INSERT INTO `obo_occupancy_type` VALUES ('J302', 'J3', 'pelota, tennis, badminton or basketball courts');
+INSERT INTO `obo_occupancy_type` VALUES ('J304', 'J3', 'aviaries and aquariums and zoo structures');
+INSERT INTO `obo_occupancy_type` VALUES ('J305', 'J3', 'banks and record vaults');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for obo_occupancy_type_division
+-- ----------------------------
+DROP TABLE IF EXISTS `obo_occupancy_type_division`;
+CREATE TABLE `obo_occupancy_type_division` (
+  `objid` varchar(50) NOT NULL,
+  `groupid` varchar(50) DEFAULT NULL,
+  `title` text,
+  `type` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  KEY `fk_occupancyuse` (`groupid`) USING BTREE,
+  CONSTRAINT `obo_occupancy_type_division_ibfk_1` FOREIGN KEY (`groupid`) REFERENCES `obo_occupancy_type_group` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of obo_occupancy_type_division
+-- ----------------------------
+BEGIN;
+INSERT INTO `obo_occupancy_type_division` VALUES ('A1', 'A', 'residential building/ structure for exclusive use of single family occupants', 'item');
+INSERT INTO `obo_occupancy_type_division` VALUES ('A2', 'A', 'residential building for the exclusive use of non-leasing occupants not exceeding 10 persons', 'item');
+INSERT INTO `obo_occupancy_type_division` VALUES ('B1', 'B', 'multiple dwelling units including boarding or lodging houses, hotels, apartment buildings, row houses, convents, monasteries and other similar building each of which accommodates more than 10 persons', 'item');
+INSERT INTO `obo_occupancy_type_division` VALUES ('C1', 'C', 'buildings used for school or day-care purposes, involving assemblage for instruction, education, or recreation, and not classified in group i or in division 1 and 2 or group h occupancies', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('C2', 'C', 'amusement halls and parlors', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('D1', 'D', 'institutional, where personal liberties of in-mates are restrained, or quarters of those rendering public assistance and maintaining peace and order', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('D2', 'D', 'institutional, for health care\nbuildings', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('D3', 'D', 'institutional, for ambulatory patients or children over kindergarten age', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('E1', 'E', 'business and mercantile, where no work is done except change of parts and maintenance requiring no open flames, welding, or use of highly flammable liquids', 'item');
+INSERT INTO `obo_occupancy_type_division` VALUES ('E2', 'E', 'business and mercantile in nature', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('E3', 'E', 'business and mercantile, where no repair work is done except exchange of parts and maintenance requiring no open flames, welding or use of highly flammable liquid', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('F1', 'F', 'light industrial', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('G1', 'G', 'medium industrial, which shall include storage and handling of hazardous and highly flammable materials', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('G2', 'G', 'medium industrial buildings for storage and handling of flammable materials', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('G3', 'G', 'medium industrial buildings for wood working activities, papers cardboard manufactures, textile and garment factories', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('G4', 'G', 'medium industrial, for repair garages and engine manufacture', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('G5', 'G', 'medium industrial, for aircraft facilities', 'G5');
+INSERT INTO `obo_occupancy_type_division` VALUES ('H1', 'H', 'recreational, which are assembly buildings with stage and having an occupant load of less than 1,000', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('H2', 'H', 'recreational, which are assembly buildings with stage and having an occupant load of 300 or more', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('H3', 'H', 'recreational, which are assembly buildings with stage and having an occupant load of less than 300', '`');
+INSERT INTO `obo_occupancy_type_division` VALUES ('H4', 'H', 'recreational, tourism estate developments or tourism-oriented establishments, which are structures not included in divisions h-1', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('I1', 'I', 'recreational, assembly buildings with stage and an occupant load of 1,000 or more in the building', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('J1', 'J', 'agricultural structures', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('J2', 'J', 'private garages, carports, fences over 1.80 meters high, tanks, swimming pools and towers', NULL);
+INSERT INTO `obo_occupancy_type_division` VALUES ('J3', 'J', 'stages, platforms, pelota, tennis, badminton or basketball courts, tombs, mausoleums, niches, aviaries, aquariums, zoo structures, banks and record vaults other subgroupings or divisions within groups a to j may be determined by the secretary. any other occupancy not mentioned specifically in this section, or about which there is any question, shall be included in the group which it most nearly resembles based on the existing or proposed life and fire hazard', NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for obo_occupancy_type_group
+-- ----------------------------
+DROP TABLE IF EXISTS `obo_occupancy_type_group`;
+CREATE TABLE `obo_occupancy_type_group` (
+  `objid` varchar(50) NOT NULL,
+  `title` text,
+  PRIMARY KEY (`objid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of obo_occupancy_type_group
+-- ----------------------------
+BEGIN;
+INSERT INTO `obo_occupancy_type_group` VALUES ('A', 'residential dwellings');
+INSERT INTO `obo_occupancy_type_group` VALUES ('B', 'residentials, hotels and apartments');
+INSERT INTO `obo_occupancy_type_group` VALUES ('C', 'education and recreation ');
+INSERT INTO `obo_occupancy_type_group` VALUES ('D', 'institutional (government and health services)');
+INSERT INTO `obo_occupancy_type_group` VALUES ('E', 'business and mercantile (commercial)');
+INSERT INTO `obo_occupancy_type_group` VALUES ('F', 'industrial (non pollutive/non hazardous industries and non-pollutive hazardous industries)');
+INSERT INTO `obo_occupancy_type_group` VALUES ('G', 'storage and hazardous industrial (pollutive/non-hazardous industries and pollutive/hazardous industries only');
+INSERT INTO `obo_occupancy_type_group` VALUES ('H', 'assembly for less than 1000 (cultural and/or recreational)');
+INSERT INTO `obo_occupancy_type_group` VALUES ('I', 'assembly for more than 1000 (cultural and/or recreational)');
+INSERT INTO `obo_occupancy_type_group` VALUES ('J', 'accessory');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for obo_permit_type
+-- ----------------------------
+DROP TABLE IF EXISTS `obo_permit_type`;
+CREATE TABLE `obo_permit_type` (
+  `objid` varchar(50) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `sortorder` smallint(1) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `handler` varchar(50) DEFAULT NULL,
+  `sectionid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  KEY `fk_obo_permit_type_sectionid` (`sectionid`),
+  CONSTRAINT `fk_obo_permit_type_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `obo_section` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of obo_permit_type
+-- ----------------------------
+BEGIN;
+INSERT INTO `obo_permit_type` VALUES ('ARCHITECTURAL', 'ARCHITECTURAL PERMIT', 1, 'ANCILLARY', NULL, 'ARCHITECTURAL');
+INSERT INTO `obo_permit_type` VALUES ('CIVIL_STRUCTURAL', 'CIVIL/STRUCTURAL PERMIT', 2, 'ANCILLARY', NULL, 'CIVIL_STRUCTURAL');
+INSERT INTO `obo_permit_type` VALUES ('DEMOLITION', 'DEMOLITION PERMIT', 8, 'ANCILLARY', NULL, NULL);
+INSERT INTO `obo_permit_type` VALUES ('ELECTRICAL', 'ELECTRICAL PERMIT', 3, 'ANCILLARY', NULL, 'ELECTRICAL');
+INSERT INTO `obo_permit_type` VALUES ('ELECTRONIC', 'ELECTRONICS PERMIT', 7, 'ANCILLARY', NULL, 'ELECTRONIC');
+INSERT INTO `obo_permit_type` VALUES ('EXCAVATION', 'EXCAVATION AND GROUND PERMIT', 8, 'ANCILLARY', NULL, NULL);
+INSERT INTO `obo_permit_type` VALUES ('FENCING', 'FENCING PERMIT', 9, 'ANCILLARY', NULL, NULL);
+INSERT INTO `obo_permit_type` VALUES ('HOT_WORKS', 'HOT WORKS PERMIT', 15, 'ANCILLARY', NULL, 'HOT_WORKS');
+INSERT INTO `obo_permit_type` VALUES ('MECHANICAL', 'MECHANICAL PERMIT', 4, 'ANCILLARY', NULL, 'MECHANICAL');
+INSERT INTO `obo_permit_type` VALUES ('PLUMBING', 'PLUMBING PERMIT', 6, 'ANCILLARY', NULL, 'PLUMBING');
+INSERT INTO `obo_permit_type` VALUES ('SANITARY', 'SANITARY PERMIT', 5, 'ANCILLARY', NULL, 'SANITARY');
+INSERT INTO `obo_permit_type` VALUES ('SCAFFOLDING', 'SCAFFOLDING PERMIT', 12, 'ANCILLARY', NULL, NULL);
+INSERT INTO `obo_permit_type` VALUES ('SIDEWALK_CONSTRUCTION', 'SIDEWALK CONSTRUCTION PERMIT', 10, 'ANCILLARY', NULL, NULL);
+INSERT INTO `obo_permit_type` VALUES ('SIGN', 'SIGN PERMIT', 13, 'ANCILLARY', NULL, NULL);
+INSERT INTO `obo_permit_type` VALUES ('TEMPORARY_SERVICE_CONNECTION', 'PERMIT FOR TEMPORARY SERVICE CONNECTION', 14, 'MAIN', NULL, NULL);
+INSERT INTO `obo_permit_type` VALUES ('TEMPORARY_SIDEWALK_ENCLOSURE_AND_OCCUPANCY', 'TEMPORARY SIDEWALK ENCLOSURE AND OCCUPANCY PERMIT', 11, 'ANCILLARY', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -807,63 +1128,92 @@ DROP TABLE IF EXISTS `obo_requirement_type`;
 CREATE TABLE `obo_requirement_type` (
   `objid` varchar(50) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
-  `type` varchar(50) DEFAULT NULL,
-  `system` int(11) DEFAULT NULL,
-  `org_objid` varchar(50) DEFAULT NULL,
-  `org_name` varchar(255) DEFAULT NULL,
-  `activationstate` varchar(50) DEFAULT NULL,
-  `validationstate` varchar(50) DEFAULT NULL,
-  `processname` varchar(50) DEFAULT NULL,
-  `sortindex` int(11) DEFAULT NULL,
-  `role` varchar(50) DEFAULT NULL,
-  `selectiontype` int(11) DEFAULT NULL,
-  PRIMARY KEY (`objid`)
+  `sortorder` int(255) DEFAULT NULL,
+  `permittype` varchar(100) DEFAULT NULL,
+  `sectionid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  KEY `fk_obo_requirement_type_sectionid` (`sectionid`),
+  CONSTRAINT `fk_obo_requirement_type_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `obo_section` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of obo_requirement_type
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_requirement_type` VALUES ('BPLAN', 'BUILDING PLAN', 'DOC', 0, NULL, NULL, 'receiving', 'receiving', 'obo_building_application', 1, NULL, 0);
+INSERT INTO `obo_requirement_type` VALUES ('R01', '4 copies Duly accomplished and notarized Application Form for Building Permit', 1, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R02', '4 copies Duly accomplished Architectural Permit Form', 2, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R03', '4 copies Duly accomplished Civil/Structural Permit Form', 3, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R04', '4 copies Duly accomplished Electrical Permit Form', 4, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R05', '4 copies Duly accomplished Mechanical Permit Form', 5, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R06', '4 copies Duly accomplished Sanitary Permit Form', 6, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R07', '4 copies Duly accomplished Plumbing Permit Form', 7, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R08', '4 copies Duly accomplished Electronics Permit Form', 8, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R09', '4 copies Duly accomplished Sign Permit Form', 9, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R10', '4 copies Duly accomplished Fencing Permit Form', 10, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R11', '1 copy Certified true copy of latest OCT/TCT, on file with the Registry of Deeds (in case the applicant is the registered owner of the lot)', 11, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R12', '1 copy Duly notarized copy of the Contract of Lease, Award Notice,Deed of Absolute Sale, Contract to Sell, Extra-Judicial Settlement or Authority from the registered owner (in case the applicant is not the registered owner of the lot, in addition to the c', 12, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R13', '4 sets Certification from a duly licensed and registered Geodetic Engineer that the proposed construction, renovation, alteration, repair or addition shall be within the property of the owner/applicant and will not encroach any adjoining property (incorpo', 13, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R14', '4 sets Architectural Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Architect, and approved by the owner/applicant', 14, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R15', '4 sets Civil/Structural Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Civil/Structural Engineer, and approved by the owner/applicant', 15, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R16', '4 sets Electrical Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Professional Electrical Engineer, and approved by the owner/applicant', 16, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R17', '4 sets Mechanical Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Professional Mechanical Engineer, and approved by the owner/applicant', 17, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R18', '4 sets Sanitary Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Sanitary Engineer, and approved by the owner/applicant', 18, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R19', '4 sets Plumbing Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Master Plumber, and approved by the owner/applicant', 19, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R20', '4 sets Electronics Design Plans/Drawings and other documents prepared, signed and sealed over the printed name of the duly licensed and registered Electronics Engineer, and approved by the owner/applicant', 20, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R21', '3 sets Three (3) sets of Structural Analysis and Design, signed and sealed over the printed name of the duly licensed and registered Civil/ Structural Engineer (Applicable for all buildings/structures except for one storey and single detached building/str', 21, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R22', '1 set Boring and Load Test (Applicable for buildings/structures of three (3) storeys and higher, lower building structures for areas with potential geological/geotechnical hazards, or if necessary in accordance with the provisions of the National Structur', 22, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R23', '3 sets Three (3) sets of Electrical Analysis and Design, signed and sealed over the printed name of the duly licensed and registered Professional Electrical Engineer', 23, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R24', '1 copy Photocopy of latest PRC Identification Card and Professional Tax Receipt, signed (three specimen signatures) and sealed by the respective professionals', 24, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R25', '4 sets Duly notarized Bill of Materials/Cost Estimate of the building or structure to be erected, signed and sealed over the printed name by a duly licensed and registered Architect or Civil Engineer, and approved by the owner/applicant', 25, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R26', '1 set Construction Logbook, signed and sealed over the printed name of the duly licensed and registered Civil Engineer or Architect- In-Charge of construction, and signed by the owner/applicant', 26, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R27', '1 copy Original Certificate of Approval of Construction Safety and Health Program (CSHP) (Department of Labor and Employment)', 27, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R28', '1 copy Affidavit of Undertaking (for clearances from National Government Agencies which can be submitted 30 days or less after the issuance of the Building Permit, per JMC No. 2018-01)', 28, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R29', '1 copy Special Power of Attorney (for individuals) or Board Resolution/Secretary’s Certificate (for corporations) for the authorized representative/signatory in behalf of the owner/applicant', 29, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R30', '1 copy Affidavit of Non-Objection', 30, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R31', '1 copy Affidavit of Undertaking on Lot Occupancy', 31, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R32', '1 copy Barangay Resolution/Endorsement', 32, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R33', '1 copy Manifestation', 33, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R34', '1 copy Simple Subdivision Approval/Copy of Approved Subdivision Plan', 34, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R35', 'Other pertinent documents', 35, 'building_permit', NULL);
+INSERT INTO `obo_requirement_type` VALUES ('R36', 'Size of Building Plans', 36, 'building_permit', NULL);
 COMMIT;
 
 -- ----------------------------
--- Table structure for obo_subapplication_type
+-- Table structure for obo_section
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_subapplication_type`;
-CREATE TABLE `obo_subapplication_type` (
-  `objid` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `title` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
-  `org_objid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `org_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `output` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+DROP TABLE IF EXISTS `obo_section`;
+CREATE TABLE `obo_section` (
+  `objid` varchar(50) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `org_objid` varchar(50) DEFAULT NULL,
+  `org_name` varchar(255) DEFAULT NULL,
   `sortindex` int(255) DEFAULT NULL,
   `required` int(255) DEFAULT NULL,
-  `role` varchar(50) DEFAULT NULL,
-  `activationstate` varchar(50) DEFAULT NULL,
+  `role` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `buildingpermitstate` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `occupancypermitstate` varchar(50) DEFAULT NULL,
+  `optional` int(255) DEFAULT NULL,
   PRIMARY KEY (`objid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of obo_subapplication_type
+-- Records of obo_section
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_subapplication_type` VALUES ('ACCESSORIES', 'ACCESSORIES', NULL, NULL, 'PERMIT', 0, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('ACCESSORY_STRUCTURE', 'ACCESSORIES TO BUILDING STRUCTURE', NULL, NULL, 'PERMIT', 0, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('ARCHITECTURAL', 'ARCHITECTURAL', NULL, NULL, 'PERMIT', 0, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('ELECTRICAL', 'ELECTRICAL', NULL, NULL, 'PERMIT', 0, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('ELECTRONIC', 'ELECTRONIC', NULL, NULL, 'PERMIT', 0, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('FENCING', 'FENCING', NULL, NULL, 'ACCESSORY', 1, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('FSIC', 'FIRE SAFETY INSPECTION', 'BFP', 'BFP', 'PERMIT', 1, 1, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('GROUND_PREP_EXCAVATION', 'GROUND PREPARATION AND EXCAVATION', NULL, NULL, 'ACCESSORY', 1, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('MECHANICAL', 'MECHANICAL', NULL, NULL, 'PERMIT', 0, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('PLUMBING', 'PLUMBING', NULL, NULL, 'PERMIT', 0, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('SANITARY', 'SANITARY', NULL, NULL, 'PERMIT', 0, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('SCAFFOLDING', 'ERECTION OF SCAFFOLDING IN PUBLIC AREAS', NULL, NULL, 'ACCESSORY', 1, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('SIGNAGE', 'SIGNAGE', NULL, NULL, 'ACCESSORY', 1, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('SITE_VERIFICATION', 'SITE VERIFICATION', NULL, NULL, 'PROC', 1, 1, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('STRUCTURAL', 'CIVIL/STRUCTURAL', NULL, NULL, 'PERMIT', 0, 0, NULL, 'trade-evaluation');
-INSERT INTO `obo_subapplication_type` VALUES ('ZONING', 'ZONING', 'CPDO', 'CPDO', 'LOCATIONAL_CLEARANCE', 1, 1, NULL, 'zoning-evaluation');
+INSERT INTO `obo_section` VALUES ('ARCHITECTURAL', 'Architectural', 'PERMIT', NULL, NULL, 3, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('CIVIL_STRUCTURAL', 'Civil/Structural', NULL, NULL, NULL, 4, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('ELECTRICAL', 'Electrical', NULL, NULL, NULL, 5, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('ELECTRONIC', 'Electronic', NULL, NULL, NULL, 9, 0, NULL, 'trade-evaluation', 'joint-inspection', 1);
+INSERT INTO `obo_section` VALUES ('FIRE', 'Fire Safety', 'PROC', 'BFP', 'BUREAU OF FIRE', 10, 1, NULL, 'trade-evaluation', 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('GEODETIC', 'Geodetic', NULL, NULL, NULL, 2, NULL, NULL, 'trade-evaluation', 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('HOT_WORKS', 'Hot Works', NULL, 'BFP', 'BFP - BUREAU OF FIRE', 20, NULL, NULL, 'trade-evaluation', NULL, 1);
+INSERT INTO `obo_section` VALUES ('MECHANICAL', 'Mechanical', NULL, NULL, NULL, 6, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('PLUMBING', 'Plumbing', NULL, NULL, NULL, 8, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('RPT', 'ASSESSORS OFFICE', NULL, NULL, NULL, 0, NULL, NULL, NULL, 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('SANITARY', 'Sanitary', NULL, NULL, NULL, 7, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('SITE_VERIFICATION', 'Site Verification', NULL, NULL, NULL, 1, 1, NULL, 'trade-evaluation', NULL, 0);
+INSERT INTO `obo_section` VALUES ('ZONING', 'Zoning', 'PROC', 'CPDO', 'CPDO', 0, 1, NULL, 'zoning-evaluation', 'joint-inspection', 0);
 COMMIT;
 
 -- ----------------------------
@@ -883,177 +1233,248 @@ CREATE TABLE `obo_variable` (
   `system` smallint(3) DEFAULT NULL,
   `arrayvalues` text,
   `unit` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`objid`),
-  UNIQUE KEY `uix_obo_variable_name` (`name`),
-  KEY `fk_obo_section_variable` (`typeid`),
-  KEY `ix_state` (`state`),
-  KEY `ix_caption` (`caption`),
-  KEY `ix_datatype` (`datatype`),
-  KEY `ix_category` (`category`),
-  KEY `ix_sortorder` (`sortorder`),
-  KEY `ix_system` (`system`),
-  KEY `ix_unit` (`unit`),
-  CONSTRAINT `fk_obo_variable_subapptype` FOREIGN KEY (`typeid`) REFERENCES `obo_subapplication_type` (`objid`)
+  `sectionid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  UNIQUE KEY `uix_obo_variable_name` (`name`) USING BTREE,
+  KEY `fk_obo_section_variable` (`typeid`) USING BTREE,
+  KEY `ix_state` (`state`) USING BTREE,
+  KEY `ix_caption` (`caption`) USING BTREE,
+  KEY `ix_datatype` (`datatype`) USING BTREE,
+  KEY `ix_category` (`category`) USING BTREE,
+  KEY `ix_sortorder` (`sortorder`) USING BTREE,
+  KEY `ix_system` (`system`) USING BTREE,
+  KEY `ix_unit` (`unit`) USING BTREE,
+  KEY `obo_variable_sectionid` (`sectionid`),
+  CONSTRAINT `obo_variable_ibfk_1` FOREIGN KEY (`typeid`) REFERENCES `obo_variable_type` (`objid`),
+  CONSTRAINT `obo_variable_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `obo_section` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of obo_variable
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_variable` VALUES ('ANTENNA_TOWER_COMMUNICATION', 'DRAFT', 'ANTENNA_TOWER_COMMUNICATION', 'ANTENNA TOWERS/MASTS OR OTHER STRUCTURES FOR COMMUNICATIONS TRANSMISSION', NULL, 'integer', 'ELECTRONIC', 'G', 29, 0, NULL, 'STRUCTURE');
-INSERT INTO `obo_variable` VALUES ('ATM_TICKETING', 'DRAFT', 'ATM_TICKETING', 'AUTOMATED TELLER MACHINES TICKETING', NULL, 'integer', 'ELECTRONIC', 'C', 3, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('AUDITORIUM', 'DRAFT', 'AUDITORIUM', 'AUDITORIUM', NULL, 'integer', 'ELECTRONIC', 'F', 27, 0, NULL, 'LOCATION');
-INSERT INTO `obo_variable` VALUES ('BALCONY_TERRACE', 'DRAFT', 'BALCONY_TERRACE', 'BALCONY, TERRACES, LANAI', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 0, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('BANK_AND_RECORD_VAULT', 'DRAFT', 'BANK_AND_RECORD_VAULT', 'BANK AND RECORD VAULT', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 2, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('BARRIER_CONTROL', 'DRAFT', 'BARRIER_CONTROL', 'BARRIER CONTROLS', NULL, 'integer', 'ELECTRONIC', 'E', 17, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('BAR_SINK', 'DRAFT', 'BAR_SINK', 'BAR SINK', NULL, 'integer', 'PLUMBING', 'SPECIAL', 19, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('BATH_TUB', 'DRAFT', 'BATH_TUB', 'BATH TUB', NULL, 'integer', 'PLUMBING', 'SPECIAL', 12, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('BIDET', 'DRAFT', 'BIDET', 'BIDET', NULL, 'integer', 'PLUMBING', 'SPECIAL', 15, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('BOILER', 'DRAFT', 'BOILER', 'BOILER', NULL, 'decimal', 'MECHANICAL', 'BOILERS', 30, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('BROADCASTING_SYSTEM', 'DRAFT', 'BROADCASTING_SYSTEM', 'BROADCASTING SYSTEM', NULL, 'integer', 'ELECTRONIC', 'B', 2, 0, NULL, 'LOCATION');
-INSERT INTO `obo_variable` VALUES ('BUILDING_AUTOMATION_MANAGEMENT_SYSTEM', 'DRAFT', 'BUILDING_AUTOMATION_MANAGEMENT_SYSTEM', 'BUILDING AUTOMATION MANAGEMENT SYSTEMS', NULL, 'integer', 'ELECTRONIC', 'E', 24, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('BUILDING_HEIGHT_ABOVE_8_METER', 'DRAFT', 'BUILDING_HEIGHT_ABOVE_8_METER', 'BUILDING HEIGHT ABOVE 8 METERS', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 1, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('CABLE_CAR', 'DRAFT', 'CABLE_CAR', 'CABLE CAR (KW)', NULL, 'decimal', 'MECHANICAL', 'ESCALATORS AND MOVING WALKS', 15, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('CABLE_CAR_LINEAL', 'DRAFT', 'CABLE_CAR_LINEAL', 'CABLE CAR LINEAL METER', NULL, 'decimal', 'MECHANICAL', 'ESCALATORS AND MOVING WALKS', 15, 0, NULL, 'LM');
-INSERT INTO `obo_variable` VALUES ('CAR_ELEVATOR', 'DRAFT', 'CAR_ELEVATOR', 'CAR ELEVATOR', NULL, 'integer', 'MECHANICAL', 'ELEVATORS', 24, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('CCTV', 'DRAFT', 'CCTV', 'CATV/MATV/CCTV AND OFF-AIR TELEVISION', NULL, 'integer', 'ELECTRONIC', 'E', 21, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('CENTRAILIZED_AIRCON', 'DRAFT', 'CENTRAILIZED_AIRCON', 'CENTRALIZED AIRCONDITION', NULL, 'decimal', 'MECHANICAL', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 4, 0, NULL, 'TON');
-INSERT INTO `obo_variable` VALUES ('CENTRALIZED_CLOCK_SYSTEM', 'DRAFT', 'CENTRALIZED_CLOCK_SYSTEM', 'CENTRALIZED_CLOCK_SYSTEM', NULL, 'integer', 'ELECTRONIC', 'E', 25, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('CHIMNEY', 'DRAFT', 'CHIMNEY', 'CHIMNEY', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 11, 0, NULL, 'HEIGHT(M)');
-INSERT INTO `obo_variable` VALUES ('COIN_CHANGER', 'DRAFT', 'COIN_CHANGER', 'COIN CHANGERS', NULL, 'integer', 'ELECTRONIC', 'C', 6, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('COLUMBARIUM', 'DRAFT', 'COLUMBARIUM', 'COLUMBARIUM', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 19, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('COMPRESSED_AIR_VACUUM', 'DRAFT', 'COMPRESSED_AIR_VACUUM', 'COMPRESSED AIR VACUUM INST. OR INDUSTRIAL GAS', NULL, 'integer', 'MECHANICAL', 'OTHERS', 45, 0, NULL, 'OUTLET');
-INSERT INTO `obo_variable` VALUES ('CONCRETE_FRAMING', 'DRAFT', 'CONCRETE_FRAMING', 'CONCRETE FRAMING', NULL, 'boolean', 'STRUCTURAL', NULL, 7, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('CONCRETE_OR_STEEL_TANK', 'DRAFT', 'CONCRETE_OR_STEEL_TANK', 'REINFORCED CONCRETE OR STEEL TANK', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 20, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('CONCRETE_OR_STEEL_TANK_UNDERGROUND', 'DRAFT', 'CONCRETE_OR_STEEL_TANK_UNDERGROUND', 'CONCRETE OR STEEL TANK (UNDERGROUND)', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 21, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('CONSTRUCTION_ELEVATOR', 'DRAFT', 'CONSTRUCTION_ELEVATOR', 'CONSTRUCTION ELEVATOR (FOR MATERIALS)', NULL, 'integer', 'MECHANICAL', 'ELEVATORS', 21, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('DENTAL_CUSPIDOR', 'DRAFT', 'DENTAL_CUSPIDOR', 'DENTAL CUSPIDOR', NULL, 'integer', 'PLUMBING', 'SPECIAL', 16, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('DIESEL_GASOLINE_ENGINE', 'DRAFT', 'DIESEL_GASOLINE_ENGINE', 'DIESEL/GASOLINE ENGINE', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 44, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('DRINKING_FOUNTAIN', 'DRAFT', 'DRINKING_FOUNTAIN', 'DRINKING FOUNTAIN', NULL, 'integer', 'PLUMBING', 'SPECIAL', 18, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('DUMBWAITER', 'DRAFT', 'DUMBWAITER', 'DUMBWAITER', NULL, 'integer', 'MECHANICAL', 'ELEVATORS', 20, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('ELECTRIC_METER', 'DRAFT', 'ELECTRIC_METER', 'ELECTRIC METER', NULL, 'integer', 'ELECTRICAL', 'MISCELLANEOUS', 6, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('ELECTRONIC_CONVEYANCE_SYSTEM', 'DRAFT', 'ELECTRONIC_CONVEYANCE_SYSTEM', 'ELECTRONICALLY-CONTROLLED CONVEYENCE SYSTEMS', NULL, 'integer', 'ELECTRONIC', 'E', 22, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('ELECTRONIC_FIRE_ALARM_SYSTEM', 'DRAFT', 'ELECTRONIC_FIRE_ALARM_SYSTEM', 'ELECTRONIC FIRE ALARM', NULL, 'integer', 'ELECTRONIC', 'E', 19, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('ELECTRONIC_POLE', 'DRAFT', 'ELECTRONIC_POLE', 'POLES', NULL, 'integer', 'ELECTRONIC', 'I', 31, 0, NULL, 'POLE');
-INSERT INTO `obo_variable` VALUES ('ELECTRONIC_POLE_ATTACHMENT', 'DRAFT', 'ELECTRONIC_POLE_ATTACHMENT', 'POLE ATTACHMENT', NULL, 'integer', 'ELECTRONIC', 'I', 32, 0, NULL, 'ATTACHMENT');
-INSERT INTO `obo_variable` VALUES ('ELECTRONIC_PROCESS_CONTROL_SYSTEM', 'DRAFT', 'ELECTRONIC_PROCESS_CONTROL_SYSTEM', 'ELECTRONIC PROCESS CONTROL SYSTEM', NULL, 'integer', 'ELECTRONIC', 'E', 23, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('ELECTRONIC_SIGNAGE', 'DRAFT', 'ELECTRONIC_SIGNAGE', 'ELECTRONIC INDOOR AND OUTDOOR SIGNAGES AND DISPLAY SYSTEMS', NULL, 'integer', 'ELECTRONIC', 'H', 30, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('ENCROACHMENT_FOOTING', 'DRAFT', 'ENCROACHMENT_FOOTING', 'ENCROACHMENT OF FOOTINGS OR FOUNDATIONS OF BLDGS', NULL, 'decimal', 'GROUND_PREP_EXCAVATION', NULL, 5, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('ENGINE_NON_LTO', 'DRAFT', 'ENGINE_NON_LTO', 'OTHER INTERNAL COMBUSTION ENGINE (CRANE, FORKLIFT,ETC)', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 48, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('ERECTION', 'DRAFT', 'ERECTION', 'ERECTION/LIFTING', NULL, 'boolean', 'STRUCTURAL', NULL, 6, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('ESCALATOR', 'DRAFT', 'ESCALATOR', 'ESCALATOR AND MOVING WALK (KW)', NULL, 'decimal', 'MECHANICAL', 'ESCALATORS AND MOVING WALKS', 10, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('ESCALATOR_LINEAL', 'DRAFT', 'ESCALATOR_LINEAL', 'ESCALATOR AND MOVING WALK (LINEAL METER)', NULL, 'decimal', 'MECHANICAL', 'ESCALATORS AND MOVING WALKS', 11, 0, NULL, 'LM');
-INSERT INTO `obo_variable` VALUES ('EXCAVATION', 'DRAFT', 'EXCAVATION', 'EXCAVATION', NULL, 'decimal', 'GROUND_PREP_EXCAVATION', NULL, 2, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('EXCAVATION_BASEMENT', 'DRAFT', 'EXCAVATION_BASEMENT', 'EXCAVATION FOR FOUNDATION WITH BASEMENT', NULL, 'decimal', 'GROUND_PREP_EXCAVATION', NULL, 3, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('EXCAVATION_NON_BASEMENT', 'DRAFT', 'EXCAVATION_NON_BASEMENT', 'EXCAVATION OTHER THAN FOUNDATION OR BASEMENT', NULL, 'decimal', 'GROUND_PREP_EXCAVATION', NULL, 4, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('FAUCET', 'DRAFT', 'FAUCET', 'FAUCET', NULL, 'integer', 'PLUMBING', 'GENERAL', 6, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('FENCE_MADE_OF_INDIGENOUS_MATERIAL', 'DRAFT', 'FENCE_MADE_OF_INDIGENOUS_MATERIAL', 'FENCE MADE OF INDIGENOUS MATERIAL,BARBED,CHICKEN OR HOG WIRE', NULL, 'decimal', 'FENCING', NULL, 3, 0, NULL, 'LM');
-INSERT INTO `obo_variable` VALUES ('FENCE_MADE_OF_MASONRY_METAL_UPTO_1_8_M', 'DRAFT', 'FENCE_MADE_OF_MASONRY_METAL_UPTO_1_8_M', 'FENCE MADE OF MASONRY OR METAL UP TO 1.8 METER IN HEIGHT', NULL, 'decimal', 'FENCING', NULL, 1, 0, NULL, 'LM');
-INSERT INTO `obo_variable` VALUES ('FENCE_MADE_OF_MASONRY_OR_METAL_ABOVE_1_8_M', 'DRAFT', 'FENCE_MADE_OF_MASONRY_OR_METAL_ABOVE_1_8_M', 'FENCE MADE OF MASONRY OR METAL MORE THAN 1.8 METER IN HEIGHT', NULL, 'decimal', 'FENCING', NULL, 2, 0, NULL, 'LNM');
-INSERT INTO `obo_variable` VALUES ('FIREWALL', 'DRAFT', 'FIREWALL', 'FIREWALL (SEPARATE FROM BUILDING)', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 6, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('FIRE_SPRINKLER', 'DRAFT', 'FIRE_SPRINKLER', 'AUTOMATIC FIRE SPRINKLER', NULL, 'integer', 'MECHANICAL', 'OTHERS', 43, 0, NULL, 'HEAD');
-INSERT INTO `obo_variable` VALUES ('FIXED_OVEN', 'DRAFT', 'FIXED_OVEN', 'COMMERCIAL/INDUSTRIAL FIXED OVEN', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 12, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('FIXED_TYPE_STERILIZER', 'DRAFT', 'FIXED_TYPE_STERILIZER', 'FIXED TYPE STERILIZER', NULL, 'integer', 'PLUMBING', 'SPECIAL', 22, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('FLOOR_DRAIN', 'DRAFT', 'FLOOR_DRAIN', 'FLOOR DRAIN', NULL, 'integer', 'PLUMBING', 'GENERAL', 3, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('FOUNDATION', 'DRAFT', 'FOUNDATION', 'FOUNDATION', NULL, 'boolean', 'STRUCTURAL', NULL, 5, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('FREIGHT_ELEVATOR', 'DRAFT', 'FREIGHT_ELEVATOR', 'FREIGHT ELEVATOR', NULL, 'integer', 'MECHANICAL', 'ELEVATORS', 23, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('FUNICULAR', 'DRAFT', 'FUNICULAR', 'FUNICULAR (KW)', NULL, 'decimal', 'MECHANICAL', 'ESCALATORS AND MOVING WALKS', 14, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('FUNICULAR_LINEAL', 'DRAFT', 'FUNICULAR_LINEAL', 'FUNICULAR (LINEAL METER)', NULL, 'decimal', 'MECHANICAL', 'ESCALATORS AND MOVING WALS', 14, 0, NULL, 'LM');
-INSERT INTO `obo_variable` VALUES ('GARAGE_TRAP', 'DRAFT', 'GARAGE_TRAP', 'GARAGE TRAP', NULL, 'integer', 'PLUMBING', 'SPECIAL', 14, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('GAS_FIRED_WATER_HEATER', 'DRAFT', 'GAS_FIRED_WATER_HEATER', 'GAS FIRED WATER HEATER', NULL, 'integer', 'PLUMBING', 'SPECIAL', 17, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('GAS_METER', 'DRAFT', 'GAS_METER', 'GAS METER', NULL, 'integer', 'MECHANICAL', 'OTHERS', 50, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('GREASE_TRAP', 'DRAFT', 'GREASE_TRAP', 'GREASE TRAP', NULL, 'integer', 'PLUMBING', 'SPECIAL', 13, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('GUYING_ATTACHMENT', 'DRAFT', 'GUYING_ATTACHMENT', 'GUYING ATTACHMENT', NULL, 'integer', 'ELECTRICAL', 'POLE/ATTACHMENT LOCATION PLAN PERMIT', 5, 0, NULL, 'ATTACHMENT');
-INSERT INTO `obo_variable` VALUES ('HYDRO_NUCLEAR_SOLAR_GEN_UNIT', 'DRAFT', 'HYDRO_NUCLEAR_SOLAR_GEN_UNIT', 'HYDRO NUCLEAR OR SOLAR GENERATING UNIT', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 44, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('ICE_PLANT', 'DRAFT', 'ICE_PLANT', 'ICE PLANT', NULL, 'decimal', 'MECHANICAL', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 2, 0, NULL, 'TON');
-INSERT INTO `obo_variable` VALUES ('ILLUMINATED_ADVERTISING_SIGN', 'DRAFT', 'ILLUMINATED_ADVERTISING_SIGN', 'ILLUMINATED ADVERTISING SIGN', NULL, 'decimal', 'SIGNAGE', NULL, 4, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('ILLUMINATED_BUSINESS_SIGN', 'DRAFT', 'ILLUMINATED_BUSINESS_SIGN', 'ILLUMINATED BUSINESS SIGN', NULL, 'decimal', 'SIGNAGE', NULL, 3, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('INFORMATION_TECHNOLOGY_SYSTEM', 'DRAFT', 'INFORMATION_TECHNOLOGY_SYSTEM', 'INFORMATION TECHNOLOGY SYSTEM (WORKSTATION,SERVER,ROUTER)', NULL, 'integer', 'ELECTRONIC', 'D', 12, 0, NULL, 'OUTLET');
-INSERT INTO `obo_variable` VALUES ('INSPECTION_AND_VERIFICATION', 'DRAFT', 'INSPECTION_AND_VERIFICATION', 'INSPECTION AND VERIFICATION', NULL, 'integer', 'GROUND_PREP_EXCAVATION', NULL, 0, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('KILN_FURNACE', 'DRAFT', 'KILN_FURNACE', 'INDUSTRIAL KILN/FURNACE', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 13, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('KITCHEN_SINK', 'DRAFT', 'KITCHEN_SINK', 'KITCHEN SINK', NULL, 'integer', 'PLUMBING', 'GENERAL', 10, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('LAB_SINK', 'DRAFT', 'LAB_SINK', 'LABORATORY SINK', NULL, 'integer', 'PLUMBING', 'SPECIAL', 21, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('LAUNDRY_SINK', 'DRAFT', 'LAUNDRY_SINK', 'LAUNDRY SINK', NULL, 'integer', 'PLUMBING', 'SPECIAL', 20, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('LAUNDRY_TRAY', 'DRAFT', 'LAUNDRY_TRAY', 'LAUNDRY TRAY', NULL, 'integer', 'PLUMBING', 'SPECIAL', 20, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('LAVATORY', 'DRAFT', 'LAVATORY', 'LAVATORY', NULL, 'integer', 'PLUMBING', 'GENERAL', 5, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('LIGHTING_CONTROL', 'DRAFT', 'LIGHTING_CONTROL', 'LIGHTING CONTROLS', NULL, 'integer', 'ELECTRONIC', 'E', 14, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('LOCATION_FINDING_SYSTEM', 'DRAFT', 'LOCATION_FINDING_SYSTEM', 'LOCATION OR DIRECTION-FINDING SYSTEMS', NULL, 'integer', 'ELECTRONIC', 'C', 7, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('MATERIAL_TESTING', 'DRAFT', 'MATERIAL_TESTING', 'MATERIAL TESTING', NULL, 'boolean', 'STRUCTURAL', NULL, 12, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('MECHANICAL_VENTILATION', 'DRAFT', 'MECHANICAL_VENTILATION', 'MECHANICAL VENTILATION (BLOWER, FAN)', NULL, 'decimal', 'MECHANICAL', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 6, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('MEDICAL_ELECTRONIC_EQUIPMENT', 'DRAFT', 'MEDICAL_ELECTRONIC_EQUIPMENT', 'ELECTRONIC EQUIPMENT USED FOR MEDICAL (ULTRASOUND AND LAB TESTING) ', NULL, 'integer', 'ELECTRONIC', 'C', 11, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('MOVING_WALK', 'DRAFT', 'MOVING_WALK', 'MOVING WALK', NULL, 'decimal', 'MECHANICAL', 'ESCALATORS AND MOVING WALKS', 12, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('MOVING_WALK_20LM', 'DRAFT', 'MOVING_WALK_20LM', 'MOVING WALK (20 LINEAL METERS OR LESS)', NULL, 'decimal', 'MECHANICAL', 'ESCALATORS AND MOVING WALKS', 13, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('NAVIGATIONAL_EQUIPMENT', 'DRAFT', 'NAVIGATIONAL_EQUIPMENT', 'NAVIGATIONAL EQUIPMENT USED FOR LAND,AERONAUTICAL OR MARITIME APPLICATIONS', NULL, 'integer', 'ELECTRONIC', 'C', 8, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('NEON_ADVERTISING_SIGN', 'DRAFT', 'NEON_ADVERTISING_SIGN', 'NEON ADVERTISING SIGN', NULL, 'decimal', 'SIGNAGE', NULL, 2, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('NEON_BUSINESS_SIGN', 'DRAFT', 'NEON_BUSINESS_SIGN', 'NEON BUSINESS SIGN', NULL, 'decimal', 'SIGNAGE', NULL, 1, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('OTHER_ADVERTISING_SIGN', 'DRAFT', 'OTHER_ADVERTISING_SIGN', 'OTHER ADVERTISING SIGN', NULL, 'decimal', 'SIGNAGE', NULL, 8, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('OTHER_BUSINESS_SIGN', 'DRAFT', 'OTHER_BUSINESS_SIGN', 'OTHER BUSINESS SIGN', NULL, 'decimal', 'SIGNAGE', NULL, 7, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('OTHER_ELECTRONIC_EQUIPMENT', 'DRAFT', 'OTHER_ELECTRONIC_EQUIPMENT', 'OTHER TYPES OR ELECTRONICS OR ELECTRONICALLY-CONTROLLED EQUIPMENT', NULL, 'integer', 'ELECTRONIC', 'J', 33, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('OTHER_MACHINERY_EQUIPMENT', 'DRAFT', 'OTHER_MACHINERY_EQUIPMENT', 'OTHER MACHINERY/EQUIPMENT', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 50, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('PACKAGED_SPLIT_TYPE_AIRCON', 'DRAFT', 'PACKAGED_SPLIT_TYPE_AIRCON', 'PACKAGED/SPLIT TYPE AIRCONDITIONG', NULL, 'decimal', 'MECHANICAL', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 3, 0, NULL, 'TON');
-INSERT INTO `obo_variable` VALUES ('PAINTEDON_ADVERTISING_SIGN', 'DRAFT', 'PAINTEDON_ADVERTISING_SIGN', 'PAINTED-ON ADVERTISING SIGN', NULL, 'decimal', 'SIGNAGE', NULL, 6, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('PAINTEDON_BUSINESS_SIGN', 'DRAFT', 'PAINTEDON_BUSINESS_SIGN', 'PAINTED-ON BUSINESS SIGN', NULL, 'decimal', 'SIGNAGE', NULL, 5, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('PARKING_MANAGEMENT_SYSTEM', 'DRAFT', 'PARKING_MANAGEMENT_SYSTEM', 'PARKING MANAGEMENT SYSTEM', NULL, 'integer', 'ELECTRONIC', 'E', 16, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('PASSENGER_ELEVATOR', 'DRAFT', 'PASSENGER_ELEVATOR', 'PASSENGER ELEVATOR', NULL, 'integer', 'MECHANICAL', 'ELEVATORS', 22, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('PHOTO_REPRODUCTION_MACHINE', 'DRAFT', 'PHOTO_REPRODUCTION_MACHINE', 'PHOTOGRAPHY AND REPRODUCTION MACHINES', NULL, 'integer', 'ELECTRONIC', 'C', 9, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('PILING_WORKS', 'DRAFT', 'PILING_WORKS', 'PILING WORKS', NULL, 'boolean', 'STRUCTURAL', NULL, 4, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('PLUMBING_UNIT', 'DRAFT', 'PLUMBING_UNIT', 'PLUMBING UNIT', '1 water closet, 2 floor drains,1 lavatory,1 sink w ord. trap, 3 faucets, 1 shower head', 'integer', 'PLUMBING', 'GENERAL', 1, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('PNEUMATIC_TUBE_CONVEYOR_MONORAIL', 'DRAFT', 'PNEUMATIC_TUBE_CONVEYOR_MONORAIL', 'PNEUMATIC TUBES, CONVEYORS AND MONORAILS', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 51, 0, NULL, 'LM');
-INSERT INTO `obo_variable` VALUES ('POWER_PIPING_CUBIC', 'DRAFT', 'POWER_PIPING_CUBIC', 'POWER PIPING (CUBIC)', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 47, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('POWER_PIPING_LINEAL', 'DRAFT', 'POWER_PIPING_LINEAL', 'POWER PIPING (LINEAL METER)', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 46, 0, NULL, 'LM');
-INSERT INTO `obo_variable` VALUES ('POWER_SUPPLY_POLE_LOCATION', 'DRAFT', 'POWER_SUPPLY_POLE_LOCATION', 'POWER SUPPLY POLE LOCATION', NULL, 'integer', 'ELECTRICAL', 'POLE/ATTACHMENT LOCATION PLAN PERMIT', 4, 0, NULL, 'POLE');
-INSERT INTO `obo_variable` VALUES ('PRESSURE_VESSEL', 'DRAFT', 'PRESSURE_VESSEL', 'PRESSURE VESSEL', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 49, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('PRESSURIZED_WATER_HEATER', 'DRAFT', 'PRESSURIZED_WATER_HEATER', 'PRESSURIZED WATER HEATER', NULL, 'integer', 'MECHANICAL', 'OTHERS', 40, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('PRESTRESS_WORKS', 'DRAFT', 'PRESTRESS_WORKS', 'PRESTRESS WORKS', NULL, 'boolean', 'STRUCTURAL', NULL, 11, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('PUMP', 'DRAFT', 'PUMP', 'PUMP', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 42, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('REFRIGERATION', 'DRAFT', 'REFRIGERATION', 'REFRIGERATION (COLD STORAGE)', NULL, 'decimal', 'MECHANICAL', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 1, 0, NULL, 'TON');
-INSERT INTO `obo_variable` VALUES ('SCAFFOLDING', 'DRAFT', 'SCAFFOLDING', 'SCAFFOLDING', NULL, 'decimal', 'SCAFFOLDING', NULL, 1, 0, NULL, 'LM');
-INSERT INTO `obo_variable` VALUES ('SECURITY_ALARM_SYSTEM', 'DRAFT', 'SECURITY_ALARM_SYSTEM', 'SECURITY AND ALARM SYSTEMS', NULL, 'integer', 'ELECTRONIC', 'E', 13, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('SEMI_ENCLOSED_MAUSOLEUM', 'DRAFT', 'SEMI_ENCLOSED_MAUSOLEUM', 'SEMI-ENCLOSED MAUSOLEUM', 'Canopied or not, per sqm of built up area', 'decimal', 'ACCESSORY_STRUCTURE', NULL, 17, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('SEPTIC_TANK', 'DRAFT', 'SEPTIC_TANK', 'SEPTIC TANK', NULL, 'decimal', 'PLUMBING', 'OTHERS', 40, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('SEWAGE_PUMP', 'DRAFT', 'SEWAGE_PUMP', 'SEWAGE PUMP', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 41, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('SHOWER_HEAD', 'DRAFT', 'SHOWER_HEAD', 'SHOWER HEAD', NULL, 'integer', 'PLUMBING', 'GENERAL', 7, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('SIGNAGE_ERECTION_AND_ANCHORAGE_OF_DISPLAY_SURFACE', 'DRAFT', 'SIGNAGE_ERECTION_AND_ANCHORAGE_OF_DISPLAY_SURFACE', 'ERECTION AND ANCHORAGE OF DISPLAY SURFACE', NULL, 'decimal', 'SIGNAGE', NULL, 0, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('SIGNAL_LIGHT', 'DRAFT', 'SIGNAL_LIGHT', 'SIGNAL LIGHTS', NULL, 'integer', 'ELECTRONIC', 'E', 18, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('SINK', 'DRAFT', 'SINK', 'SINK', NULL, 'integer', 'PLUMBING', 'GENERAL', 4, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('SLABS', 'DRAFT', 'SLABS', 'SLABS', NULL, 'boolean', 'STRUCTURAL', NULL, 9, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('SLOP_SINK', 'DRAFT', 'SLOP_SINK', 'SLOP SINK', NULL, 'integer', 'PLUMBING', 'SPECIAL', 10, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('SMOKESTACK', 'DRAFT', 'SMOKESTACK', 'SMOKESTACK', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 10, 0, NULL, 'HEIGHT(M)');
-INSERT INTO `obo_variable` VALUES ('SODA_FOUNTAIN_SINK', 'DRAFT', 'SODA_FOUNTAIN_SINK', 'SODA FOUNTAIN SINK', NULL, 'integer', 'PLUMBING', 'SPECIAL', 19, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('SOIL_STABILIZATION', 'DRAFT', 'SOIL_STABILIZATION', 'SOIL STABILIZATION', NULL, 'boolean', 'STRUCTURAL', NULL, 3, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('SOUND_COMMUNICATION_SYSTEM', 'DRAFT', 'SOUND_COMMUNICATION_SYSTEM', 'SOUND COMMUNICATION SYSTEMS', NULL, 'integer', 'ELECTRONIC', 'E', 20, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('STAKING', 'DRAFT', 'STAKING', 'STAKING', NULL, 'boolean', 'STRUCTURAL', NULL, 1, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('STEAM_GAS_TURBINE_ENGINE', 'DRAFT', 'STEAM_GAS_TURBINE_ENGINE', 'STEAM/GAS TURBINE ENGINE', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 44, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('STEEL_TOWER', 'DRAFT', 'STEEL_TOWER', 'STEEL TOWERS', NULL, 'boolean', 'STRUCTURAL', NULL, 13, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('STORAGE_SILO', 'DRAFT', 'STORAGE_SILO', 'STORAGE SILO', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 9, 0, NULL, 'HEIGHT(M)');
-INSERT INTO `obo_variable` VALUES ('STRUCTURAL_STEEL_FRAMING', 'DRAFT', 'STRUCTURAL_STEEL_FRAMING', 'STRUCTURAL STEEL FRAMING', NULL, 'boolean', 'STRUCTURAL', NULL, 8, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('STUDIO', 'DRAFT', 'STUDIO', 'STUDIOS (AUDIO,VIDEO PRODUCTION)', NULL, 'integer', 'ELECTRONIC', 'F', 26, 0, NULL, 'LOCATION');
-INSERT INTO `obo_variable` VALUES ('SURVEILLANCE_SYSTEM', 'DRAFT', 'SURVEILLANCE_SYSTEM', 'MONITORING AND SURVEILLLANCE SYSTEM', NULL, 'integer', 'ELECTRONIC', 'E', 15, 0, NULL, 'TERMINATION');
-INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL', 'DRAFT', 'SWIMMING_POOL', 'SWIMMING POOL', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 3, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL_SHOWER_LOCKER_ROOM', 'DRAFT', 'SWIMMING_POOL_SHOWER_LOCKER_ROOM', 'SWIMMING POOL SHOWER/LOCKER ROOM', NULL, 'integer', 'ACCESSORY_STRUCTURE', NULL, 5, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL_USING_INDIGENOUS_MATERIALS', 'DRAFT', 'SWIMMING_POOL_USING_INDIGENOUS_MATERIALS', 'SWIMMING POOL USING INDIGENOUS MATERIALS', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 4, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('TANKS', 'DRAFT', 'TANKS', 'TANKS', NULL, 'boolean', 'STRUCTURAL', NULL, 14, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('TELECOM_SYSTEM', 'DRAFT', 'TELECOM_SYSTEM', 'TELECOMMUNICATION SYSTEM', NULL, 'integer', 'ELECTRONIC', 'A', 1, 0, NULL, 'PORT');
-INSERT INTO `obo_variable` VALUES ('TELEPHONE_BOOTH', 'DRAFT', 'TELEPHONE_BOOTH', 'TELEPHONE BOOTHS / PAY PHONE', NULL, 'integer', 'ELECTRONIC', 'C', 5, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('THEATER', 'DRAFT', 'THEATER', 'THEATER', NULL, 'integer', 'ELECTRONIC', 'F', 28, 0, NULL, 'LOCATION');
-INSERT INTO `obo_variable` VALUES ('TOMB', 'DRAFT', 'TOMB', 'TOMB', 'Area per covered ground', 'decimal', 'ACCESSORY_STRUCTURE', NULL, 16, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('TOTALLY_ENCLOSED_MAUSOLEUM', 'DRAFT', 'TOTALLY_ENCLOSED_MAUSOLEUM', 'TOTALLY ENCLOSED MAUSOLEUM', NULL, 'decimal', 'ACCESSORY_STRUCTURE', NULL, 18, 0, NULL, 'SQM');
-INSERT INTO `obo_variable` VALUES ('TOTAL_CONNECTED_LOAD', 'DRAFT', 'TOTAL_CONNECTED_LOAD', 'TOTAL CONNECTED LOAD', NULL, 'decimal', 'ELECTRICAL', 'GENERAL', 1, 0, NULL, 'KVA');
-INSERT INTO `obo_variable` VALUES ('TOTAL_GENERATOR_UPS_CAPACITY', 'DRAFT', 'TOTAL_GENERATOR_UPS_CAPACITY', 'TOTAL GENERATOR/UPS CAPACITY', 'TGC', 'decimal', 'ELECTRICAL', 'GENERAL', 3, 0, NULL, 'KVA');
-INSERT INTO `obo_variable` VALUES ('TOTAL_TRANSFORMER_CAPACITY', 'DRAFT', 'TOTAL_TRANSFORMER_CAPACITY', 'TOTAL TRANSFORMER CAPACITY', NULL, 'decimal', 'ELECTRICAL', 'GENERAL', 2, 0, NULL, 'KVA');
-INSERT INTO `obo_variable` VALUES ('TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING', 'DRAFT', 'TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING', 'TOWER AND OTHER STRUCTURES (SELF-SUPPORTING)', 'TV AND RADIO TOWER, WATER TANK SUPPORTING STRUCTURES', 'decimal', 'ACCESSORY_STRUCTURE', NULL, 7, 0, NULL, 'HEIGHT(M)');
-INSERT INTO `obo_variable` VALUES ('TOWER_AND_OTHER_STRUCTURE_TRILON_GUYED', 'DRAFT', 'TOWER_AND_OTHER_STRUCTURE_TRILON_GUYED', 'TOWER AND OTHER STRUCTURE (TRILON GUYED)', 'TV AND RADIO TOWER, WATER TANK SUPPORTING STRUCTURES', 'decimal', 'ACCESSORY_STRUCTURE', NULL, 8, 0, NULL, 'HEIGHT(M)');
-INSERT INTO `obo_variable` VALUES ('URINAL', 'DRAFT', 'URINAL', 'URINAL', NULL, 'integer', 'PLUMBING', 'SPECIAL', 11, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('VENDING_DISPENSING_MACHINE', 'DRAFT', 'VENDING_DISPENSING_MACHINE', 'VENDING AND OTHER TYPES OF ELECTRONIC DISPENSING MACHINES', NULL, 'integer', 'ELECTRONIC', 'C', 4, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('WALLS', 'DRAFT', 'WALLS', 'WALLS', NULL, 'boolean', 'STRUCTURAL', NULL, 10, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('WATER_AND_WASTE_WATER_TREATMENT_TANK', 'DRAFT', 'WATER_AND_WASTE_WATER_TREATMENT_TANK', 'WATER AND WASTE WATER TREATMENT TANK', 'Incuding Cisterns, Sedimentation, and Chemical Treatment', 'decimal', 'ACCESSORY_STRUCTURE', NULL, 15, 0, NULL, 'CUM');
-INSERT INTO `obo_variable` VALUES ('WATER_CLOSET', 'DRAFT', 'WATER_CLOSET', 'WATER CLOSET', NULL, 'integer', 'PLUMBING', 'GENERAL', 2, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('WATER_METER', 'DRAFT', 'WATER_METER', 'WATER METER', NULL, 'integer', 'PLUMBING', 'OTHERS', 23, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('WATER_METER_12_25', 'DRAFT', 'WATER_METER_12_25', 'WATER METER (12-25 mm Ø )', NULL, 'integer', 'PLUMBING', 'OTHERS', 23, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('WATER_METER_25', 'DRAFT', 'WATER_METER_25', 'WATER METER (ABOVE 25 mm Ø)', NULL, 'integer', 'PLUMBING', 'OTHERS', 31, 0, NULL, 'UNIT');
-INSERT INTO `obo_variable` VALUES ('WATER_SUMP', 'DRAFT', 'WATER_SUMP', 'WATER SUMP', NULL, 'decimal', 'MECHANICAL', 'OTHERS', 41, 0, NULL, 'KW');
-INSERT INTO `obo_variable` VALUES ('WINDOW_TYPE_AIRCON', 'DRAFT', 'WINDOW_TYPE_AIRCON', 'WINDOW TYPE AIRCONDITIONING', NULL, 'integer', 'MECHANICAL', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 5, 0, NULL, 'EA');
-INSERT INTO `obo_variable` VALUES ('XRAY_SCANNER', 'DRAFT', 'XRAY_SCANNER', ' X-RAY SCANNERS', NULL, 'integer', 'ELECTRONIC', 'C', 10, 0, NULL, 'UNIT');
+INSERT INTO `obo_variable` VALUES ('ACCESS_TO_PUBLIC_STREET', 'DRAFT', 'ACCESS_TO_PUBLIC_STREET', 'ACCESS TO PUBLIC STREET', NULL, 'decimal', 'architectural', 'C', 22, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('ANTENNA_TOWER_COMMUNICATION', 'DRAFT', 'ANTENNA_TOWER_COMMUNICATION', 'ANTENNA TOWERS/MASTS OR OTHER STRUCTURES FOR COMMUNICATIONS TRANSMISSION', NULL, 'integer', 'electronic', 'G', 29, 0, NULL, 'STRUCTURE', NULL);
+INSERT INTO `obo_variable` VALUES ('ATM_TICKETING', 'DRAFT', 'ATM_TICKETING', 'AUTOMATED TELLER MACHINES TICKETING', NULL, 'integer', 'electronic', 'C', 3, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('AUDITORIUM', 'DRAFT', 'AUDITORIUM', 'AUDITORIUM', NULL, 'integer', 'electronic', 'F', 27, 0, NULL, 'LOCATION', NULL);
+INSERT INTO `obo_variable` VALUES ('BALCONY_TERRACE', 'DRAFT', 'BALCONY_TERRACE', 'BALCONY, TERRACES, LANAI', NULL, 'decimal', 'J201', 'BALCONY,TERRACES AND LANAI', 0, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('BANK_AND_RECORD_VAULT', 'DRAFT', 'BANK_AND_RECORD_VAULT', 'BANK AND RECORD VAULT', NULL, 'decimal', 'J305', 'BANK AND RECORD VAULTS', 2, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('BARRIER_CONTROL', 'DRAFT', 'BARRIER_CONTROL', 'BARRIER CONTROLS', NULL, 'integer', 'electronic', 'E', 17, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('BAR_SINK', 'DRAFT', 'BAR_SINK', 'BAR SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 19, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('BATH_TUB', 'DRAFT', 'BATH_TUB', 'BATH TUB', NULL, 'integer', 'plumbing', 'SPECIAL', 12, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('BIDET', 'DRAFT', 'BIDET', 'BIDET', NULL, 'integer', 'plumbing', 'SPECIAL', 15, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('BOILER', 'DRAFT', 'BOILER', 'BOILER', NULL, 'decimal', 'mechanical', 'BOILERS', 30, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('BROADCASTING_SYSTEM', 'DRAFT', 'BROADCASTING_SYSTEM', 'BROADCASTING SYSTEM', NULL, 'integer', 'electronic', 'B', 2, 0, NULL, 'LOCATION', NULL);
+INSERT INTO `obo_variable` VALUES ('BUILDING_AUTOMATION_MANAGEMENT_SYSTEM', 'DRAFT', 'BUILDING_AUTOMATION_MANAGEMENT_SYSTEM', 'BUILDING AUTOMATION MANAGEMENT SYSTEMS', NULL, 'integer', 'electronic', 'E', 24, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('CABLE_CAR', 'DRAFT', 'CABLE_CAR', 'CABLE CAR (KW)', NULL, 'decimal', 'mechanical', 'ESCALATORS AND MOVING WALKS', 15, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('CABLE_CAR_LINEAL', 'DRAFT', 'CABLE_CAR_LINEAL', 'CABLE CAR LINEAL METER', NULL, 'decimal', 'mechanical', 'ESCALATORS AND MOVING WALKS', 15, 0, NULL, 'LM', NULL);
+INSERT INTO `obo_variable` VALUES ('CAR_ELEVATOR', 'DRAFT', 'CAR_ELEVATOR', 'CAR ELEVATOR', NULL, 'integer', 'mechanical', 'ELEVATORS', 24, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('CCTV', 'DRAFT', 'CCTV', 'CATV/MATV/CCTV AND OFF-AIR TELEVISION', NULL, 'integer', 'electronic', 'E', 21, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('CENTRAILIZED_AIRCON', 'DRAFT', 'CENTRAILIZED_AIRCON', 'CENTRALIZED AIRCONDITION', NULL, 'decimal', 'mechanical', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 4, 0, NULL, 'TON', NULL);
+INSERT INTO `obo_variable` VALUES ('CENTRALIZED_CLOCK_SYSTEM', 'DRAFT', 'CENTRALIZED_CLOCK_SYSTEM', 'CENTRALIZED_CLOCK_SYSTEM', NULL, 'integer', 'electronic', 'E', 25, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('CHIMNEY', 'DRAFT', 'CHIMNEY', 'CHIMNEY', NULL, 'decimal', 'J202', NULL, 11, 0, NULL, 'height in meters', NULL);
+INSERT INTO `obo_variable` VALUES ('COIN_CHANGER', 'DRAFT', 'COIN_CHANGER', 'COIN CHANGERS', NULL, 'integer', 'electronic', 'C', 6, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('COLUMBARIUM', 'DRAFT', 'COLUMBARIUM', 'COLUMBARIUM', NULL, 'decimal', 'J303', 'CEMETERIES', 19, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('COMPRESSED_AIR_VACUUM', 'DRAFT', 'COMPRESSED_AIR_VACUUM', 'COMPRESSED AIR VACUUM INST. OR INDUSTRIAL GAS', NULL, 'integer', 'mechanical', 'OTHERS', 45, 0, NULL, 'OUTLET', NULL);
+INSERT INTO `obo_variable` VALUES ('CONCRETE_FRAMING', 'DRAFT', 'CONCRETE_FRAMING', 'CONCRETE FRAMING', NULL, 'boolean', 'civil_structural', NULL, 7, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('CONCRETE_OR_STEEL_TANK', 'DRAFT', 'CONCRETE_OR_STEEL_TANK', 'REINFORCED CONCRETE OR STEEL TANK', NULL, 'decimal', 'J205', NULL, 20, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('CONCRETE_OR_STEEL_TANK_UNDERGROUND', 'DRAFT', 'CONCRETE_OR_STEEL_TANK_UNDERGROUND', 'CONCRETE OR STEEL TANK (UNDERGROUND)', NULL, 'decimal', 'J205', NULL, 21, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('CONSTRUCTION_ELEVATOR', 'DRAFT', 'CONSTRUCTION_ELEVATOR', 'CONSTRUCTION ELEVATOR (FOR MATERIALS)', NULL, 'integer', 'mechanical', 'ELEVATORS', 21, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('CORRIDORS', 'DRAFT', 'CORRIDORS', 'CORRIDORS', NULL, 'boolean', 'architectural', 'A', 3, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('DENTAL_CUSPIDOR', 'DRAFT', 'DENTAL_CUSPIDOR', 'DENTAL CUSPIDOR', NULL, 'integer', 'plumbing', 'SPECIAL', 16, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('DIESEL_GASOLINE_ENGINE', 'DRAFT', 'DIESEL_GASOLINE_ENGINE', 'DIESEL/GASOLINE ENGINE', NULL, 'decimal', 'mechanical', 'OTHERS', 44, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('DISTANCE_TO_FIRE_EXITS', 'DRAFT', 'DISTANCE_TO_FIRE_EXITS', 'DISTANCE TO FIRE EXITS', NULL, 'decimal', 'architectural', 'C', 21, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('DOORS_ENTRANCE_THRESHOLDS', 'DRAFT', 'DOORS_ENTRANCE_THRESHOLDS', 'DOORS, ENTRANCES AND THRESHOLDS', NULL, 'boolean', 'architectural', 'A', 4, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('DRINKING_FOUNTAIN', 'DRAFT', 'DRINKING_FOUNTAIN', 'DRINKING FOUNTAIN', NULL, 'integer', 'plumbing', 'SPECIAL', 18, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('DRINKING_FOUNTAINS', 'DRAFT', 'DRINKING_FOUNTAINS', 'DRINKING FOUNTAINS', NULL, 'boolean', 'architectural', 'A', 13, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('DUMBWAITER', 'DRAFT', 'DUMBWAITER', 'DUMBWAITER', NULL, 'integer', 'mechanical', 'ELEVATORS', 20, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('ELECTRIC_METER', 'DRAFT', 'ELECTRIC_METER', 'ELECTRIC METER', NULL, 'integer', 'electrical', 'MISCELLANEOUS', 6, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('ELECTRONIC_CONVEYANCE_SYSTEM', 'DRAFT', 'ELECTRONIC_CONVEYANCE_SYSTEM', 'ELECTRONICALLY-CONTROLLED CONVEYENCE SYSTEMS', NULL, 'integer', 'electronic', 'E', 22, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('ELECTRONIC_FIRE_ALARM_SYSTEM', 'DRAFT', 'ELECTRONIC_FIRE_ALARM_SYSTEM', 'ELECTRONIC FIRE ALARM', NULL, 'integer', 'electronic', 'E', 19, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('ELECTRONIC_POLE', 'DRAFT', 'ELECTRONIC_POLE', 'POLES', NULL, 'integer', 'electronic', 'I', 31, 0, NULL, 'POLE', NULL);
+INSERT INTO `obo_variable` VALUES ('ELECTRONIC_POLE_ATTACHMENT', 'DRAFT', 'ELECTRONIC_POLE_ATTACHMENT', 'POLE ATTACHMENT', NULL, 'integer', 'electronic', 'I', 32, 0, NULL, 'ATTACHMENT', NULL);
+INSERT INTO `obo_variable` VALUES ('ELECTRONIC_PROCESS_CONTROL_SYSTEM', 'DRAFT', 'ELECTRONIC_PROCESS_CONTROL_SYSTEM', 'ELECTRONIC PROCESS CONTROL SYSTEM', NULL, 'integer', 'electronic', 'E', 23, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('ELECTRONIC_SIGNAGE', 'DRAFT', 'ELECTRONIC_SIGNAGE', 'ELECTRONIC INDOOR AND OUTDOOR SIGNAGES AND DISPLAY SYSTEMS', NULL, 'integer', 'electronic', 'H', 30, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('EMERGENCY_LIGHTS', 'DRAFT', 'EMERGENCY_LIGHTS', 'EMERGENCY LIGHTS', NULL, 'integer', 'architectural', 'C', 26, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('ENCROACHMENT_FOOTING', 'DRAFT', 'ENCROACHMENT_FOOTING', 'ENCROACHMENT OF FOOTINGS OR FOUNDATIONS OF BLDGS', NULL, 'decimal', 'ground_prep_excavation', NULL, 5, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('ENGINE_NON_LTO', 'DRAFT', 'ENGINE_NON_LTO', 'OTHER INTERNAL COMBUSTION ENGINE (CRANE, FORKLIFT,ETC)', NULL, 'decimal', 'mechanical', 'OTHERS', 48, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('ERECTION', 'DRAFT', 'ERECTION', 'ERECTION/LIFTING', NULL, 'boolean', 'civil_structural', NULL, 6, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('ESCALATOR', 'DRAFT', 'ESCALATOR', 'ESCALATOR AND MOVING WALK (KW)', NULL, 'decimal', 'mechanical', 'ESCALATORS AND MOVING WALKS', 10, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('ESCALATOR_LINEAL', 'DRAFT', 'ESCALATOR_LINEAL', 'ESCALATOR AND MOVING WALK (LINEAL METER)', NULL, 'decimal', 'mechanical', 'ESCALATORS AND MOVING WALKS', 11, 0, NULL, 'LM', NULL);
+INSERT INTO `obo_variable` VALUES ('EXCAVATION', 'DRAFT', 'EXCAVATION', 'EXCAVATION', NULL, 'decimal', 'civil_structural', NULL, 2, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('EXCAVATION_BASEMENT', 'DRAFT', 'EXCAVATION_BASEMENT', 'EXCAVATION FOR FOUNDATION WITH BASEMENT', NULL, 'decimal', 'accessories', 'GROUND PREPARATION AND EXCAVATION', 3, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('EXCAVATION_NON_BASEMENT', 'DRAFT', 'EXCAVATION_NON_BASEMENT', 'EXCAVATION OTHER THAN FOUNDATION OR BASEMENT', NULL, 'decimal', 'accessories', 'GROUND PREPARATION AND EXCAVATION', 4, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('FAUCET', 'DRAFT', 'FAUCET', 'FAUCET', NULL, 'integer', 'plumbing', 'GENERAL', 6, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('FENCE_MADE_OF_INDIGENOUS_MATERIAL', 'DRAFT', 'FENCE_MADE_OF_INDIGENOUS_MATERIAL', 'FENCE MADE OF INDIGENOUS MATERIAL,BARBED,CHICKEN OR HOG WIRE', NULL, 'decimal', 'fencing', 'FENCING', 3, 0, NULL, 'LM', NULL);
+INSERT INTO `obo_variable` VALUES ('FENCE_MADE_OF_MASONRY_METAL_UPTO_1_8_M', 'DRAFT', 'FENCE_MADE_OF_MASONRY_METAL_UPTO_1_8_M', 'FENCE MADE OF MASONRY OR METAL UP TO 1.8 METER IN HEIGHT', NULL, 'decimal', 'fencing', 'FENCING', 1, 0, NULL, 'LM', NULL);
+INSERT INTO `obo_variable` VALUES ('FENCE_MADE_OF_MASONRY_OR_METAL_ABOVE_1_8_M', 'DRAFT', 'FENCE_MADE_OF_MASONRY_OR_METAL_ABOVE_1_8_M', 'FENCE MADE OF MASONRY OR METAL MORE THAN 1.8 METER IN HEIGHT', NULL, 'decimal', 'fencing', 'FENCING', 2, 0, NULL, 'LNM', NULL);
+INSERT INTO `obo_variable` VALUES ('FIREWALL', 'DRAFT', 'FIREWALL', 'FIREWALL (SEPARATE FROM BUILDING)', NULL, 'decimal', 'fencing', 'FENCING', 6, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('FIRE_FIGHTING_AND_SAFETY_FACILITIES', 'DRAFT', 'FIRE_FIGHTING_AND_SAFETY_FACILITIES', 'FIRE FIGHTING AND SAFETY FACILITIES', NULL, 'integer', 'architectural', 'C', 24, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('FIRE_SPRINKLER', 'DRAFT', 'FIRE_SPRINKLER', 'AUTOMATIC FIRE SPRINKLER', NULL, 'integer', 'mechanical', 'OTHERS', 43, 0, NULL, 'HEAD', NULL);
+INSERT INTO `obo_variable` VALUES ('FIRE_WALLS', 'DRAFT', 'FIRE_WALLS', 'FIRE WALLS', NULL, 'integer', 'architectural', 'C', 23, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('FIXED_OVEN', 'DRAFT', 'FIXED_OVEN', 'COMMERCIAL/INDUSTRIAL FIXED OVEN', NULL, 'decimal', 'J202', 'OVEN', 12, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('FIXED_TYPE_STERILIZER', 'DRAFT', 'FIXED_TYPE_STERILIZER', 'FIXED TYPE STERILIZER', NULL, 'integer', 'plumbing', 'SPECIAL', 22, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('FLOOR_DRAIN', 'DRAFT', 'FLOOR_DRAIN', 'FLOOR DRAIN', NULL, 'integer', 'plumbing', 'GENERAL', 3, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('FLOOR_FINISHES', 'DRAFT', 'FLOOR_FINISHES', 'FLOOR FINISHES', NULL, 'boolean', 'architectural', 'A', 12, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('FOUNDATION', 'DRAFT', 'FOUNDATION', 'FOUNDATION', NULL, 'boolean', 'civil_structural', NULL, 5, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('FREIGHT_ELEVATOR', 'DRAFT', 'FREIGHT_ELEVATOR', 'FREIGHT ELEVATOR', NULL, 'integer', 'mechanical', 'ELEVATORS', 23, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('FUNICULAR', 'DRAFT', 'FUNICULAR', 'FUNICULAR (KW)', NULL, 'decimal', 'mechanical', 'ESCALATORS AND MOVING WALKS', 14, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('FUNICULAR_LINEAL', 'DRAFT', 'FUNICULAR_LINEAL', 'FUNICULAR (LINEAL METER)', NULL, 'decimal', 'mechanical', 'ESCALATORS AND MOVING WALS', 14, 0, NULL, 'LM', NULL);
+INSERT INTO `obo_variable` VALUES ('GARAGE_TRAP', 'DRAFT', 'GARAGE_TRAP', 'GARAGE TRAP', NULL, 'integer', 'plumbing', 'SPECIAL', 14, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('GAS_FIRED_WATER_HEATER', 'DRAFT', 'GAS_FIRED_WATER_HEATER', 'GAS FIRED WATER HEATER', NULL, 'integer', 'plumbing', 'SPECIAL', 17, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('GAS_METER', 'DRAFT', 'GAS_METER', 'GAS METER', NULL, 'integer', 'mechanical', 'OTHERS', 50, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('GREASE_TRAP', 'DRAFT', 'GREASE_TRAP', 'GREASE TRAP', NULL, 'integer', 'plumbing', 'SPECIAL', 13, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('GUYING_ATTACHMENT', 'DRAFT', 'GUYING_ATTACHMENT', 'GUYING ATTACHMENT', NULL, 'integer', 'electrical', 'POLE/ATTACHMENT LOCATION PLAN PERMIT', 5, 0, NULL, 'ATTACHMENT', NULL);
+INSERT INTO `obo_variable` VALUES ('HANDRAILS', 'DRAFT', 'HANDRAILS', 'HANDRAILS', NULL, 'boolean', 'architectural', 'A', 10, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('HYDRO_NUCLEAR_SOLAR_GEN_UNIT', 'DRAFT', 'HYDRO_NUCLEAR_SOLAR_GEN_UNIT', 'HYDRO NUCLEAR OR SOLAR GENERATING UNIT', NULL, 'decimal', 'mechanical', 'OTHERS', 44, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('ICE_PLANT', 'DRAFT', 'ICE_PLANT', 'ICE PLANT', NULL, 'decimal', 'mechanical', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 2, 0, NULL, 'TON', NULL);
+INSERT INTO `obo_variable` VALUES ('ILLUMINATED_ADVERTISING_SIGN', 'DRAFT', 'ILLUMINATED_ADVERTISING_SIGN', 'ILLUMINATED ADVERTISING SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 4, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('ILLUMINATED_BUSINESS_SIGN', 'DRAFT', 'ILLUMINATED_BUSINESS_SIGN', 'ILLUMINATED BUSINESS SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 3, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('INFORMATION_TECHNOLOGY_SYSTEM', 'DRAFT', 'INFORMATION_TECHNOLOGY_SYSTEM', 'INFORMATION TECHNOLOGY SYSTEM (WORKSTATION,SERVER,ROUTER)', NULL, 'integer', 'electronic', 'D', 12, 0, NULL, 'OUTLET', NULL);
+INSERT INTO `obo_variable` VALUES ('KILN_FURNACE', 'DRAFT', 'KILN_FURNACE', 'INDUSTRIAL KILN/FURNACE', NULL, 'decimal', 'J202', 'OVEN', 13, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('KITCHEN_SINK', 'DRAFT', 'KITCHEN_SINK', 'KITCHEN SINK', NULL, 'integer', 'plumbing', 'GENERAL', 10, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('LAB_SINK', 'DRAFT', 'LAB_SINK', 'LABORATORY SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 21, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('LAUNDRY_SINK', 'DRAFT', 'LAUNDRY_SINK', 'LAUNDRY SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 20, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('LAUNDRY_TRAY', 'DRAFT', 'LAUNDRY_TRAY', 'LAUNDRY TRAY', NULL, 'integer', 'plumbing', 'SPECIAL', 20, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('LAVATORY', 'DRAFT', 'LAVATORY', 'LAVATORY', NULL, 'integer', 'plumbing', 'GENERAL', 5, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('LIFTS_ELEVATORS', 'DRAFT', 'LIFTS_ELEVATORS', 'LIFTS / ELEVATORS', NULL, 'boolean', 'architectural', 'A', 6, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('LIGHTING_CONTROL', 'DRAFT', 'LIGHTING_CONTROL', 'LIGHTING CONTROLS', NULL, 'integer', 'electronic', 'E', 14, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('LOCATION_FINDING_SYSTEM', 'DRAFT', 'LOCATION_FINDING_SYSTEM', 'LOCATION OR DIRECTION-FINDING SYSTEMS', NULL, 'integer', 'electronic', 'C', 7, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('MATERIAL_TESTING', 'DRAFT', 'MATERIAL_TESTING', 'MATERIAL TESTING', NULL, 'boolean', 'civil_structural', NULL, 12, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('MECHANICAL_VENTILATION', 'DRAFT', 'MECHANICAL_VENTILATION', 'MECHANICAL VENTILATION (BLOWER, FAN)', NULL, 'decimal', 'mechanical', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 6, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('MEDICAL_ELECTRONIC_EQUIPMENT', 'DRAFT', 'MEDICAL_ELECTRONIC_EQUIPMENT', 'ELECTRONIC EQUIPMENT USED FOR MEDICAL (ULTRASOUND AND LAB TESTING) ', NULL, 'integer', 'electronic', 'C', 11, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('MOVING_WALK', 'DRAFT', 'MOVING_WALK', 'MOVING WALK', NULL, 'decimal', 'mechanical', 'ESCALATORS AND MOVING WALKS', 12, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('MOVING_WALK_20LM', 'DRAFT', 'MOVING_WALK_20LM', 'MOVING WALK (20 LINEAL METERS OR LESS)', NULL, 'decimal', 'mechanical', 'ESCALATORS AND MOVING WALKS', 13, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('NAVIGATIONAL_EQUIPMENT', 'DRAFT', 'NAVIGATIONAL_EQUIPMENT', 'NAVIGATIONAL EQUIPMENT USED FOR LAND,AERONAUTICAL OR MARITIME APPLICATIONS', NULL, 'integer', 'electronic', 'C', 8, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('NEON_ADVERTISING_SIGN', 'DRAFT', 'NEON_ADVERTISING_SIGN', 'NEON ADVERTISING SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 2, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('NEON_BUSINESS_SIGN', 'DRAFT', 'NEON_BUSINESS_SIGN', 'NEON BUSINESS SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 1, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('NUMBER_AND_WIDTH_OF_EXIT_DOORS', 'DRAFT', 'NUMBER_AND_WIDTH_OF_EXIT_DOORS', 'NUMBER AND WIDTH OF EXIT DOORS', NULL, 'integer', 'architectural', 'C', 19, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('OTHER_ADVERTISING_SIGN', 'DRAFT', 'OTHER_ADVERTISING_SIGN', 'OTHER ADVERTISING SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 8, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('OTHER_BUSINESS_SIGN', 'DRAFT', 'OTHER_BUSINESS_SIGN', 'OTHER BUSINESS SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 7, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('OTHER_ELECTRONIC_EQUIPMENT', 'DRAFT', 'OTHER_ELECTRONIC_EQUIPMENT', 'OTHER TYPES OR ELECTRONICS OR ELECTRONICALLY-CONTROLLED EQUIPMENT', NULL, 'integer', 'electronic', 'J', 33, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('OTHER_MACHINERY_EQUIPMENT', 'DRAFT', 'OTHER_MACHINERY_EQUIPMENT', 'OTHER MACHINERY/EQUIPMENT', NULL, 'decimal', 'mechanical', 'OTHERS', 50, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('PACKAGED_SPLIT_TYPE_AIRCON', 'DRAFT', 'PACKAGED_SPLIT_TYPE_AIRCON', 'PACKAGED/SPLIT TYPE AIRCONDITIONG', NULL, 'decimal', 'mechanical', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 3, 0, NULL, 'TON', NULL);
+INSERT INTO `obo_variable` VALUES ('PAINTEDON_ADVERTISING_SIGN', 'DRAFT', 'PAINTEDON_ADVERTISING_SIGN', 'PAINTED-ON ADVERTISING SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 6, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('PAINTEDON_BUSINESS_SIGN', 'DRAFT', 'PAINTEDON_BUSINESS_SIGN', 'PAINTED-ON BUSINESS SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 5, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('PARKING_AREAS', 'DRAFT', 'PARKING_AREAS', 'PARKING AREAS', NULL, 'integer', 'architectural', 'A', 8, 0, NULL, 'SLOTS', NULL);
+INSERT INTO `obo_variable` VALUES ('PARKING_MANAGEMENT_SYSTEM', 'DRAFT', 'PARKING_MANAGEMENT_SYSTEM', 'PARKING MANAGEMENT SYSTEM', NULL, 'integer', 'electronic', 'E', 16, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('PASSENGER_ELEVATOR', 'DRAFT', 'PASSENGER_ELEVATOR', 'PASSENGER ELEVATOR', NULL, 'integer', 'mechanical', 'ELEVATORS', 22, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('PERCENTAGE_BUILDING_FOOTPRINT', 'DRAFT', 'PERCENTAGE_BUILDING_FOOTPRINT', 'PERCENTAGE OF BUILDING FOOTPRINT', NULL, 'decimal', 'architectural', 'B', 16, 0, NULL, '%', NULL);
+INSERT INTO `obo_variable` VALUES ('PERCENTAGE_IMPERVIOUS_SURFACE_AREA', 'DRAFT', 'PERCENTAGE_IMPERVIOUS_SURFACE_AREA', 'PERCENTAGE OF IMPERVIOUS SURFACE AREA', NULL, 'decimal', 'architectural', 'B', 17, 0, NULL, '%', NULL);
+INSERT INTO `obo_variable` VALUES ('PERCENTAGE_UNPAVED_SURFACE_AREA', 'DRAFT', 'PERCENTAGE_UNPAVED_SURFACE_AREA', 'PERCENTAGE OF UNPAVED SURFACE AREA', NULL, 'decimal', 'architectural', 'B', 18, 0, NULL, '%', NULL);
+INSERT INTO `obo_variable` VALUES ('PHOTO_REPRODUCTION_MACHINE', 'DRAFT', 'PHOTO_REPRODUCTION_MACHINE', 'PHOTOGRAPHY AND REPRODUCTION MACHINES', NULL, 'integer', 'electronic', 'C', 9, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('PILING_WORKS', 'DRAFT', 'PILING_WORKS', 'PILING WORKS', NULL, 'boolean', 'civil_structural', NULL, 4, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('PNEUMATIC_TUBE_CONVEYOR_MONORAIL', 'DRAFT', 'PNEUMATIC_TUBE_CONVEYOR_MONORAIL', 'PNEUMATIC TUBES, CONVEYORS AND MONORAILS', NULL, 'decimal', 'mechanical', 'OTHERS', 51, 0, NULL, 'LM', NULL);
+INSERT INTO `obo_variable` VALUES ('POWER_PIPING_CUBIC', 'DRAFT', 'POWER_PIPING_CUBIC', 'POWER PIPING (CUBIC)', NULL, 'decimal', 'mechanical', 'OTHERS', 47, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('POWER_PIPING_LINEAL', 'DRAFT', 'POWER_PIPING_LINEAL', 'POWER PIPING (LINEAL METER)', NULL, 'decimal', 'mechanical', 'OTHERS', 46, 0, NULL, 'LM', NULL);
+INSERT INTO `obo_variable` VALUES ('POWER_SUPPLY_POLE_LOCATION', 'DRAFT', 'POWER_SUPPLY_POLE_LOCATION', 'POWER SUPPLY POLE LOCATION', NULL, 'integer', 'electrical', 'POLE/ATTACHMENT LOCATION PLAN PERMIT', 4, 0, NULL, 'POLE', NULL);
+INSERT INTO `obo_variable` VALUES ('PRESSURE_VESSEL', 'DRAFT', 'PRESSURE_VESSEL', 'PRESSURE VESSEL', NULL, 'decimal', 'mechanical', 'OTHERS', 49, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('PRESSURIZED_WATER_HEATER', 'DRAFT', 'PRESSURIZED_WATER_HEATER', 'PRESSURIZED WATER HEATER', NULL, 'integer', 'mechanical', 'OTHERS', 40, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('PRESTRESS_WORKS', 'DRAFT', 'PRESTRESS_WORKS', 'PRESTRESS WORKS', NULL, 'boolean', 'civil_structural', NULL, 11, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('PUBLIC_TELEPHONES', 'DRAFT', 'PUBLIC_TELEPHONES', 'PUBLIC TELEPHONES', NULL, 'boolean', 'architectural', 'A', 14, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('PUMP', 'DRAFT', 'PUMP', 'PUMP', NULL, 'decimal', 'mechanical', 'OTHERS', 42, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('RAMPS', 'DRAFT', 'RAMPS', 'RAMPS', NULL, 'integer', 'architectural', 'A', 7, 0, NULL, 'SLOTS', NULL);
+INSERT INTO `obo_variable` VALUES ('REFRIGERATION', 'DRAFT', 'REFRIGERATION', 'REFRIGERATION (COLD STORAGE)', NULL, 'decimal', 'mechanical', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 1, 0, NULL, 'TON', NULL);
+INSERT INTO `obo_variable` VALUES ('SCAFFOLDING', 'DRAFT', 'SCAFFOLDING', 'SCAFFOLDING', NULL, 'decimal', 'scaffolding', 'SCAFFOLDING', 1, 0, NULL, 'LM', NULL);
+INSERT INTO `obo_variable` VALUES ('SEATING_ACCOMODATIONS', 'DRAFT', 'SEATING_ACCOMODATIONS', 'SEATING ACCOMODATIONS', NULL, 'boolean', 'architectural', 'A', 15, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('SECURITY_ALARM_SYSTEM', 'DRAFT', 'SECURITY_ALARM_SYSTEM', 'SECURITY AND ALARM SYSTEMS', NULL, 'integer', 'electronic', 'E', 13, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('SEMI_ENCLOSED_MAUSOLEUM', 'DRAFT', 'SEMI_ENCLOSED_MAUSOLEUM', 'SEMI-ENCLOSED MAUSOLEUM', 'Canopied or not, per sqm of built up area', 'decimal', 'J303', 'CEMETERIES', 17, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('SEPTIC_TANK', 'DRAFT', 'SEPTIC_TANK', 'SEPTIC TANK', NULL, 'decimal', 'plumbing', 'OTHERS', 40, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('SEWAGE_PUMP', 'DRAFT', 'SEWAGE_PUMP', 'SEWAGE PUMP', NULL, 'decimal', 'mechanical', 'OTHERS', 41, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('SHOWER_HEAD', 'DRAFT', 'SHOWER_HEAD', 'SHOWER HEAD', NULL, 'integer', 'plumbing', 'GENERAL', 7, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('SIGNAGE_ERECTION_AND_ANCHORAGE_OF_DISPLAY_SURFACE', 'DRAFT', 'SIGNAGE_ERECTION_AND_ANCHORAGE_OF_DISPLAY_SURFACE', 'ERECTION AND ANCHORAGE OF DISPLAY SURFACE', NULL, 'decimal', 'sign', NULL, 0, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('SIGNAL_LIGHT', 'DRAFT', 'SIGNAL_LIGHT', 'SIGNAL LIGHTS', NULL, 'integer', 'electronic', 'E', 18, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('SINK', 'DRAFT', 'SINK', 'SINK', NULL, 'integer', 'plumbing', 'GENERAL', 4, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('SLABS', 'DRAFT', 'SLABS', 'SLABS', NULL, 'boolean', 'civil_structural', NULL, 9, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('SLOP_SINK', 'DRAFT', 'SLOP_SINK', 'SLOP SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 10, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('SMOKESTACK', 'DRAFT', 'SMOKESTACK', 'SMOKESTACK', NULL, 'decimal', 'J202', NULL, 10, 0, NULL, 'height in meters', NULL);
+INSERT INTO `obo_variable` VALUES ('SMOKE_DETECTORS', 'DRAFT', 'SMOKE_DETECTORS', 'SMOKE DETECTORS', NULL, 'integer', 'architectural', 'C', 25, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('SODA_FOUNTAIN_SINK', 'DRAFT', 'SODA_FOUNTAIN_SINK', 'SODA FOUNTAIN SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 19, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('SOIL_STABILIZATION', 'DRAFT', 'SOIL_STABILIZATION', 'SOIL STABILIZATION', NULL, 'boolean', 'civil_structural', NULL, 3, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('SOUND_COMMUNICATION_SYSTEM', 'DRAFT', 'SOUND_COMMUNICATION_SYSTEM', 'SOUND COMMUNICATION SYSTEMS', NULL, 'integer', 'electronic', 'E', 20, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('STAIRS', 'DRAFT', 'STAIRS', 'STAIRS', NULL, 'boolean', 'architectural', 'A', 1, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('STAKING', 'DRAFT', 'STAKING', 'STAKING', NULL, 'boolean', 'civil_structural', NULL, 1, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('STEAM_GAS_TURBINE_ENGINE', 'DRAFT', 'STEAM_GAS_TURBINE_ENGINE', 'STEAM/GAS TURBINE ENGINE', NULL, 'decimal', 'mechanical', 'OTHERS', 44, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('STEEL_TOWER', 'DRAFT', 'STEEL_TOWER', 'STEEL TOWERS', NULL, 'boolean', 'civil_structural', NULL, 13, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('STORAGE_SILO', 'DRAFT', 'STORAGE_SILO', 'STORAGE SILO', NULL, 'decimal', 'J101', NULL, 9, 0, NULL, 'height in meters', NULL);
+INSERT INTO `obo_variable` VALUES ('STRUCTURAL_STEEL_FRAMING', 'DRAFT', 'STRUCTURAL_STEEL_FRAMING', 'STRUCTURAL STEEL FRAMING', NULL, 'boolean', 'civil_structural', NULL, 8, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('STUDIO', 'DRAFT', 'STUDIO', 'STUDIOS (AUDIO,VIDEO PRODUCTION)', NULL, 'integer', 'electronic', 'F', 26, 0, NULL, 'LOCATION', NULL);
+INSERT INTO `obo_variable` VALUES ('SURVEILLANCE_SYSTEM', 'DRAFT', 'SURVEILLANCE_SYSTEM', 'MONITORING AND SURVEILLLANCE SYSTEM', NULL, 'integer', 'electronic', 'E', 15, 0, NULL, 'TERMINATION', NULL);
+INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL', 'DRAFT', 'SWIMMING_POOL', 'SWIMMING POOL', NULL, 'decimal', 'J203', NULL, 3, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL_SHOWER_LOCKER_ROOM', 'DRAFT', 'SWIMMING_POOL_SHOWER_LOCKER_ROOM', 'SWIMMING POOL SHOWER/LOCKER ROOM', NULL, 'integer', 'J203', NULL, 5, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL_USING_INDIGENOUS_MATERIALS', 'DRAFT', 'SWIMMING_POOL_USING_INDIGENOUS_MATERIALS', 'SWIMMING POOL USING INDIGENOUS MATERIALS', NULL, 'decimal', 'J203', NULL, 4, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('SWITCH_CONTROL_BUZZERS', 'DRAFT', 'SWITCH_CONTROL_BUZZERS', 'SWITCHES, CONTROLS, BUZZERS', NULL, 'boolean', 'architectural', 'A', 9, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('TANKS', 'DRAFT', 'TANKS', 'TANKS', NULL, 'boolean', 'civil_structural', NULL, 14, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('TELECOM_SYSTEM', 'DRAFT', 'TELECOM_SYSTEM', 'TELECOMMUNICATION SYSTEM', NULL, 'integer', 'electronic', 'A', 1, 0, NULL, 'PORT', NULL);
+INSERT INTO `obo_variable` VALUES ('TELEPHONE_BOOTH', 'DRAFT', 'TELEPHONE_BOOTH', 'TELEPHONE BOOTHS / PAY PHONE', NULL, 'integer', 'electronic', 'C', 5, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('THEATER', 'DRAFT', 'THEATER', 'THEATER', NULL, 'integer', 'electronic', 'F', 28, 0, NULL, 'LOCATION', NULL);
+INSERT INTO `obo_variable` VALUES ('THRESHOLDS', 'DRAFT', 'THRESHOLDS', 'THRESHOLDS', NULL, 'boolean', 'architectural', 'A', 11, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('TOMB', 'DRAFT', 'TOMB', 'TOMB', 'Area per covered ground', 'decimal', 'J303', 'CEMETERIES', 16, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('TOTALLY_ENCLOSED_MAUSOLEUM', 'DRAFT', 'TOTALLY_ENCLOSED_MAUSOLEUM', 'TOTALLY ENCLOSED MAUSOLEUM', NULL, 'decimal', 'J303', 'CEMETERIES', 18, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('TOTAL_CONNECTED_LOAD', 'DRAFT', 'TOTAL_CONNECTED_LOAD', 'TOTAL CONNECTED LOAD', NULL, 'decimal', 'electrical', 'GENERAL', 1, 0, NULL, 'KVA', NULL);
+INSERT INTO `obo_variable` VALUES ('TOTAL_GENERATOR_UPS_CAPACITY', 'DRAFT', 'TOTAL_GENERATOR_UPS_CAPACITY', 'TOTAL GENERATOR/UPS CAPACITY', 'TGC', 'decimal', 'electrical', 'GENERAL', 3, 0, NULL, 'KVA', NULL);
+INSERT INTO `obo_variable` VALUES ('TOTAL_TRANSFORMER_CAPACITY', 'DRAFT', 'TOTAL_TRANSFORMER_CAPACITY', 'TOTAL TRANSFORMER CAPACITY', NULL, 'decimal', 'electrical', 'GENERAL', 2, 0, NULL, 'KVA', NULL);
+INSERT INTO `obo_variable` VALUES ('TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING', 'DRAFT', 'TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING', 'TOWER AND OTHER STRUCTURES (SELF-SUPPORTING)', 'TV AND RADIO TOWER, WATER TANK SUPPORTING STRUCTURES', 'decimal', 'J202', NULL, 7, 0, NULL, 'height in meters', NULL);
+INSERT INTO `obo_variable` VALUES ('TOWER_AND_OTHER_STRUCTURE_TRILON_GUYED', 'DRAFT', 'TOWER_AND_OTHER_STRUCTURE_TRILON_GUYED', 'TOWER AND OTHER STRUCTURE (TRILON GUYED)', 'TV AND RADIO TOWER, WATER TANK SUPPORTING STRUCTURES', 'decimal', 'J202', NULL, 8, 0, NULL, 'height in meters', NULL);
+INSERT INTO `obo_variable` VALUES ('URINAL', 'DRAFT', 'URINAL', 'URINAL', NULL, 'integer', 'plumbing', 'SPECIAL', 11, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('VENDING_DISPENSING_MACHINE', 'DRAFT', 'VENDING_DISPENSING_MACHINE', 'VENDING AND OTHER TYPES OF ELECTRONIC DISPENSING MACHINES', NULL, 'integer', 'electronic', 'C', 4, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('WALKWAYS', 'DRAFT', 'WALKWAYS', 'WALKWAYS', NULL, 'boolean', 'architectural', 'A', 2, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('WALLS', 'DRAFT', 'WALLS', 'WALLS', NULL, 'boolean', 'civil_structural', NULL, 10, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('WASHROOM_AND_TOILETS', 'DRAFT', 'WASHROOM_AND_TOILETS', 'WASH ROOMS AND TOILETS', NULL, 'boolean', 'architectural', 'A', 5, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('WATER_AND_WASTE_WATER_TREATMENT_TANK', 'DRAFT', 'WATER_AND_WASTE_WATER_TREATMENT_TANK', 'WATER AND WASTE WATER TREATMENT TANK', 'Incuding Cisterns, Sedimentation, and Chemical Treatment', 'decimal', 'J205', NULL, 15, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('WATER_CLOSET', 'DRAFT', 'WATER_CLOSET', 'WATER CLOSET', NULL, 'integer', 'plumbing', 'GENERAL', 2, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('WATER_METER', 'DRAFT', 'WATER_METER', 'WATER METER', NULL, 'integer', 'plumbing', 'OTHERS', 23, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('WATER_METER_12_25', 'DRAFT', 'WATER_METER_12_25', 'WATER METER (12-25 mm Ø )', NULL, 'integer', 'plumbing', 'OTHERS', 23, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('WATER_METER_25', 'DRAFT', 'WATER_METER_25', 'WATER METER (ABOVE 25 mm Ø)', NULL, 'integer', 'plumbing', 'OTHERS', 31, 0, NULL, 'unit', NULL);
+INSERT INTO `obo_variable` VALUES ('WATER_SUMP', 'DRAFT', 'WATER_SUMP', 'WATER SUMP', NULL, 'decimal', 'mechanical', 'OTHERS', 41, 0, NULL, 'KW', NULL);
+INSERT INTO `obo_variable` VALUES ('WIDTH_OF_CORRIDORS', 'DRAFT', 'WIDTH_OF_CORRIDORS', 'WIDTH OF CORRIDORS', NULL, 'decimal', 'architectural', 'C', 20, 0, NULL, 'UNIT', NULL);
+INSERT INTO `obo_variable` VALUES ('WINDOW_TYPE_AIRCON', 'DRAFT', 'WINDOW_TYPE_AIRCON', 'WINDOW TYPE AIRCONDITIONING', NULL, 'integer', 'mechanical', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 5, 0, NULL, 'EA', NULL);
+INSERT INTO `obo_variable` VALUES ('XRAY_SCANNER', 'DRAFT', 'XRAY_SCANNER', ' X-RAY SCANNERS', NULL, 'integer', 'electronic', 'C', 10, 0, NULL, 'unit', NULL);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for obo_variable_type
+-- ----------------------------
+DROP TABLE IF EXISTS `obo_variable_type`;
+CREATE TABLE `obo_variable_type` (
+  `objid` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `title` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `sortindex` int(255) DEFAULT NULL,
+  `accessory` int(255) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of obo_variable_type
+-- ----------------------------
+BEGIN;
+INSERT INTO `obo_variable_type` VALUES ('accessories', 'ACCESSORIES', 0, NULL);
+INSERT INTO `obo_variable_type` VALUES ('architectural', 'ARCHITECTURAL', 1, NULL);
+INSERT INTO `obo_variable_type` VALUES ('civil_structural', 'CIVIL/STRUCTURAL', 2, NULL);
+INSERT INTO `obo_variable_type` VALUES ('electrical', 'ELECTRICAL', 3, NULL);
+INSERT INTO `obo_variable_type` VALUES ('electronic', 'ELECTRONIC', 4, NULL);
+INSERT INTO `obo_variable_type` VALUES ('excavation', 'EXCAVATION AND GROUND PREPARATION', 8, 0);
+INSERT INTO `obo_variable_type` VALUES ('fencing', 'FENCING', 9, NULL);
+INSERT INTO `obo_variable_type` VALUES ('fsic', 'FIRE SAFETY INSPECTION', 100, 0);
+INSERT INTO `obo_variable_type` VALUES ('ground_prep_excavation', 'GROUND PREPARATION AND EXCAVATION', 10, NULL);
+INSERT INTO `obo_variable_type` VALUES ('J101', 'agricultural structures (sheds, barns, poultry houses, piggeries, hatcheries, stables, greenhouses, ', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J201', 'private garages, carports', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J202', 'towers, smokestacks, chimneys', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J203', 'swimming pools including shower and locker room', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J204', 'fence over 1.8 meters high, separate firewalls', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J205', 'steel and or concrete tanks', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J301', 'stages, platforms and similar structures', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J302', 'pelota, tennis, badminton or basketball courts', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J303', 'tombs and mausoleums', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J304', 'aviaries and aquariums and zoo structures', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('J305', 'banks and record vaults', 0, 1);
+INSERT INTO `obo_variable_type` VALUES ('mechanical', 'MECHANICAL', 5, NULL);
+INSERT INTO `obo_variable_type` VALUES ('plumbing', 'PLUMBING', 6, NULL);
+INSERT INTO `obo_variable_type` VALUES ('sanitary', 'SANITARY', 7, NULL);
+INSERT INTO `obo_variable_type` VALUES ('scaffolding', 'ERECTION OF SCAFFOLDING IN PUBLIC AREAS', 8, NULL);
+INSERT INTO `obo_variable_type` VALUES ('sign', 'SIGNAGE', 11, NULL);
+INSERT INTO `obo_variable_type` VALUES ('site_verification', 'SITE VERIFICATION', 60, 0);
+INSERT INTO `obo_variable_type` VALUES ('zoning', 'ZONING', 0, 0);
 COMMIT;
 
 -- ----------------------------
@@ -1084,7 +1505,7 @@ COMMIT;
 DROP TABLE IF EXISTS `obo_zoneclass`;
 CREATE TABLE `obo_zoneclass` (
   `objid` varchar(50) NOT NULL,
-  `description` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1109,6 +1530,154 @@ INSERT INTO `obo_zoneclass` VALUES ('R4', 'MEDIUM TO HIGH DENSITY RESIDENTIAL US
 INSERT INTO `obo_zoneclass` VALUES ('R5', 'VERY HIGH DENSITY RESIDENTIAL USE');
 INSERT INTO `obo_zoneclass` VALUES ('SPE', 'SPECIAL');
 INSERT INTO `obo_zoneclass` VALUES ('UTS', 'UTILITIES, TRANSPORTATION AND SERVICES');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for occupancy_permit
+-- ----------------------------
+DROP TABLE IF EXISTS `occupancy_permit`;
+CREATE TABLE `occupancy_permit` (
+  `objid` varchar(50) NOT NULL,
+  `appno` varchar(50) DEFAULT NULL,
+  `orgcode` varchar(50) DEFAULT NULL,
+  `trackingno` varchar(50) DEFAULT NULL,
+  `apptype` varchar(50) DEFAULT NULL,
+  `permittype` varchar(50) DEFAULT NULL,
+  `contact_name` varchar(50) DEFAULT NULL,
+  `contact_detail` varchar(255) DEFAULT NULL,
+  `contact_email` varchar(255) DEFAULT NULL,
+  `contact_mobileno` varchar(50) DEFAULT NULL,
+  `dtfiled` datetime DEFAULT NULL,
+  `locationid` varchar(50) DEFAULT NULL,
+  `applicantid` varchar(50) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `occupancytypeid` varchar(50) DEFAULT NULL,
+  `numunits` smallint(3) DEFAULT NULL,
+  `fixedcost` decimal(16,2) DEFAULT NULL,
+  `projectcost` decimal(16,2) DEFAULT NULL,
+  `dtproposedconstruction` date DEFAULT NULL,
+  `dtexpectedcompletion` date DEFAULT NULL,
+  `totalfloorarea` decimal(16,2) DEFAULT NULL,
+  `height` decimal(16,2) DEFAULT NULL,
+  `numfloors` smallint(255) DEFAULT NULL,
+  `worktypes` tinytext,
+  `taskid` varchar(50) DEFAULT NULL,
+  `zoneclassid` varchar(50) DEFAULT NULL,
+  `amount` decimal(16,2) DEFAULT NULL,
+  `contractorid` varchar(50) DEFAULT NULL,
+  `permitid` varchar(50) DEFAULT NULL,
+  `txnmode` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  UNIQUE KEY `uix_building_permit_appno` (`appno`),
+  KEY `fk_app_occupancyuseid` (`occupancytypeid`) USING BTREE,
+  KEY `ix_units` (`numunits`) USING BTREE,
+  KEY `ix_estimatedcost` (`fixedcost`) USING BTREE,
+  KEY `ix_dtproposedconstruction` (`dtproposedconstruction`) USING BTREE,
+  KEY `ix_dtexpectedcompletion` (`dtexpectedcompletion`) USING BTREE,
+  KEY `online_building_application_locationid` (`locationid`) USING BTREE,
+  KEY `online_building_application_applicantid` (`applicantid`) USING BTREE,
+  KEY `building_permit_taskid` (`taskid`),
+  KEY `building_permit_contractorid` (`contractorid`),
+  KEY `building_permit_permitid` (`permitid`),
+  CONSTRAINT `occupancy_permit_ibfk_6` FOREIGN KEY (`taskid`) REFERENCES `occupancy_permit_task` (`taskid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for occupancy_permit_section
+-- ----------------------------
+DROP TABLE IF EXISTS `occupancy_permit_section`;
+CREATE TABLE `occupancy_permit_section` (
+  `objid` varchar(50) NOT NULL,
+  `appid` varchar(50) DEFAULT NULL,
+  `typeid` varchar(50) DEFAULT NULL,
+  `taskid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`),
+  KEY `fk_building_permit_evaluation_appid` (`appid`),
+  KEY `fk_building_permit_evaluation_typeid` (`typeid`),
+  KEY `fk_building_permit_evaluation_taskid` (`taskid`),
+  CONSTRAINT `occupancy_permit_evaluation_appid` FOREIGN KEY (`appid`) REFERENCES `occupancy_permit` (`objid`),
+  CONSTRAINT `occupancy_permit_evaluation_taskid` FOREIGN KEY (`taskid`) REFERENCES `occupancy_permit_section_task` (`taskid`),
+  CONSTRAINT `occupancy_permit_evaluation_typeid` FOREIGN KEY (`typeid`) REFERENCES `obo_section` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for occupancy_permit_section_task
+-- ----------------------------
+DROP TABLE IF EXISTS `occupancy_permit_section_task`;
+CREATE TABLE `occupancy_permit_section_task` (
+  `taskid` varchar(50) NOT NULL,
+  `refid` varchar(50) DEFAULT NULL,
+  `parentprocessid` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `startdate` datetime DEFAULT NULL,
+  `enddate` datetime DEFAULT NULL,
+  `assignee_objid` varchar(50) DEFAULT NULL,
+  `assignee_name` varchar(100) DEFAULT NULL,
+  `actor_objid` varchar(50) DEFAULT NULL,
+  `actor_name` varchar(100) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `dtcreated` datetime DEFAULT NULL,
+  `prevtaskid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`taskid`),
+  KEY `ix_refid` (`refid`),
+  KEY `ix_parentprocessid` (`parentprocessid`),
+  KEY `ix_startdate` (`startdate`),
+  KEY `ix_enddate` (`enddate`),
+  KEY `ix_assignee_objid` (`assignee_objid`),
+  KEY `ix_actor_objid` (`actor_objid`),
+  KEY `ix_dtcreated` (`dtcreated`),
+  KEY `ix_prevtaskid` (`prevtaskid`),
+  CONSTRAINT `occupancy_permit_evaluation_task_refid` FOREIGN KEY (`refid`) REFERENCES `occupancy_permit_section` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for occupancy_permit_task
+-- ----------------------------
+DROP TABLE IF EXISTS `occupancy_permit_task`;
+CREATE TABLE `occupancy_permit_task` (
+  `taskid` varchar(50) NOT NULL,
+  `refid` varchar(50) DEFAULT NULL,
+  `parentprocessid` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `startdate` datetime DEFAULT NULL,
+  `enddate` datetime DEFAULT NULL,
+  `assignee_objid` varchar(50) DEFAULT NULL,
+  `assignee_name` varchar(100) DEFAULT NULL,
+  `actor_objid` varchar(50) DEFAULT NULL,
+  `actor_name` varchar(100) DEFAULT NULL,
+  `message` varchar(255) DEFAULT NULL,
+  `dtcreated` datetime DEFAULT NULL,
+  `prevtaskid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`taskid`),
+  KEY `FK_obo_subproc_task_refid` (`refid`),
+  KEY `ix_refid` (`refid`),
+  KEY `ix_parentprocessid` (`parentprocessid`),
+  KEY `ix_startdate` (`startdate`),
+  KEY `ix_enddate` (`enddate`),
+  KEY `ix_assignee_objid` (`assignee_objid`),
+  KEY `ix_actor_objid` (`actor_objid`),
+  KEY `ix_dtcreated` (`dtcreated`),
+  KEY `ix_prevtaskid` (`prevtaskid`),
+  CONSTRAINT `occupancy_permit_task_ibfk_1` FOREIGN KEY (`refid`) REFERENCES `occupancy_permit` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for sys_email_template
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_email_template`;
+CREATE TABLE `sys_email_template` (
+  `objid` varchar(50) NOT NULL,
+  `message` mediumtext,
+  PRIMARY KEY (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_email_template
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_email_template` VALUES ('building_permit_claimstub', 'Dear ${entity.contact.name}, <br>\n\nCongratulations! Your application was accepted. We will now proceed with the evaluation process. \nFor reference your application number is \n\n<h2>${entity.appno}</h2>\n\nPlease use this number to follow up on the progress of your application. To check on the progress of your application\nplease visit the ff <a href=\"https://www.filipizen.com/partners/albay_legazpi/services/obo/monitorbuildingpermit?appno=${entity.appno}\">link</a>\n <br>\n\nRegards, <br>\n\nThe Legazpi OBO Team');
+INSERT INTO `sys_email_template` VALUES ('building_permit_requirement_checklist', 'Dear ${entity.contact.name}, <br>\n\nWe have checked through your requirements and it seems you have deficiencies in the sent requirements. Please see \nattached for the details. \n\nAccomplish them and send them back to the OBO Office. <br>\n\nRegards, <br>\n\nThe Legazpi OBO Team');
 COMMIT;
 
 -- ----------------------------
@@ -1142,7 +1711,6 @@ CREATE TABLE `sys_rule` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_rule` VALUES ('RUL-108b4192:15b3d234d5c:-67b1', 'DEPLOYED', 'ADD_PLUMBING_FEE', 'oboassessment', 'initial', 'ADD PLUMBING FEE', NULL, 50000, NULL, NULL, '2017-04-04 21:21:21', 'USR-ADMIN', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL-108b4192:15b3d234d5c:-67fc', 'DEPLOYED', 'PLUMBING_FEE_INSTALLATION', 'oboassessment', 'compute-plumbing-fee', 'PLUMBING FEE INSTALLATION', NULL, 50000, NULL, NULL, '2017-04-04 21:20:30', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-108b4192:15b3d234d5c:-698a', 'DRAFT', 'MECHANICAL_FEE_WEIGHING_SCALE_STRUCTURE', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE WEIGHING SCALE STRUCTURE', NULL, 50000, NULL, NULL, '2017-04-04 21:13:39', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-108b4192:15b3d234d5c:-6ad6', 'DEPLOYED', 'MECHANICAL_FEE_PNEUMATIC_TUBES_LNM', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE PNEUMATIC TUBES CONVEYORS MONORAILS LNM', NULL, 50000, NULL, NULL, '2017-04-04 21:11:19', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-108b4192:15b3d234d5c:-6c55', 'DEPLOYED', 'MECHANICAL_FEE_OTHER_MACHINERY_EQUIPMENT', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE OTHER MACHINERY EQUIPMENT', NULL, 50000, NULL, NULL, '2017-04-04 20:57:00', 'USR-ADMIN', 'ADMIN', 1);
@@ -1181,6 +1749,12 @@ INSERT INTO `sys_rule` VALUES ('RUL-181817d3:15bf4e3b890:-af9', 'DEPLOYED', 'AD_
 INSERT INTO `sys_rule` VALUES ('RUL-181817d3:15bf4e3b890:-b2e', 'DEPLOYED', 'AD_SIGNAGE_OTHER_NEW', 'oboassessment', 'compute-accessory', 'AD SIGNAGE OTHER NEW', NULL, 50000, NULL, NULL, '2017-05-11 06:30:53', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-181817d3:15bf4e3b890:-d87', 'DEPLOYED', 'AD_SIGNAGE_ILLUMINATED_NEW', 'oboassessment', 'compute-accessory', 'AD SIGNAGE ILLUMINATED NEW', NULL, 50000, NULL, NULL, '2017-05-11 06:28:55', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-26004fad:15b36e43946:-7e78', 'DEPLOYED', 'MECHANICAL_FEE_REF_COLD_STORAGE', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE REF COLD STORAGE', NULL, 50000, NULL, NULL, '2017-04-03 16:12:20', 'USR-ADMIN', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL-29595738:16a4fbe79ee:-79fe', 'APPROVED', 'SPECIAL_LOCATIONAL_CLEARANCE', 'oboassessment', 'compute-zoning-fee', 'SPECIAL_LOCATIONAL_CLEARANCE', NULL, 50000, NULL, NULL, '2019-04-24 23:02:12', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL-29595738:16a4fbe79ee:-7bd1', 'DEPLOYED', 'COMMERCIAL_INDUSTRIAL_LOCATIONAL_CLEARANCE', 'oboassessment', 'compute-zoning-fee', 'COMMERCIAL INDUSTRIAL LOCATIONAL CLEARANCE', NULL, 40000, NULL, NULL, '2019-04-24 22:57:06', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL-29595738:16a4fbe79ee:-7d01', 'DEPLOYED', 'INSTITUTIONAL_LOCATIONAL_CLEARANCE', 'oboassessment', 'compute-zoning-fee', 'INSTITUTIONAL LOCATIONAL CLEARANCE', NULL, 40000, NULL, NULL, '2019-04-24 22:54:56', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL-29595738:16a4fbe79ee:-7de3', 'DEPLOYED', 'DORMITORIES_BOARDING_HOUSE_LOCATIONAL_CLEARANCE', 'oboassessment', 'compute-zoning-fee', 'DORMITORIES AND BOARDING HOUSE_LOCATIONAL_CLEARANCE', NULL, 50000, NULL, NULL, '2019-04-24 22:52:22', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL-29595738:16a4fbe79ee:-7ef1', 'DEPLOYED', 'APARTMENT_TOWNHOUSES_LOCATIONAL_CLEARANCE', 'oboassessment', 'compute-zoning-fee', 'APARTMENT_TOWNHOUSES_LOCATIONAL_CLEARANCE', NULL, 50000, NULL, NULL, '2019-04-24 22:48:14', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL-2a4f39d0:16e35fe5e74:-7bc2', 'DEPLOYED', 'LOCATIONAL_FEE_MEDIUM_DENSITY', 'oboassessment', 'compute-zoning-fee', 'LOCATIONAL_FEE_MEDIUM_DENSITY', NULL, 50000, NULL, NULL, '2019-11-04 18:41:06', 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-2fbca757:15bf25c4add:-7b95', 'DRAFT', 'ACCESSORY_BLDG_FEE_C2_D123', 'oboassessment', 'compute-accessory', 'ACCESSORY COMPUTE BLDG FEE FOR C-2/D-1,2,3', NULL, 50000, NULL, NULL, '2017-05-10 12:47:54', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-2fbca757:15bf25c4add:-7bbe', 'DRAFT', 'ACC_BLDG_FEE_B1_C1_E123_F1_G12345_H1234_I1_J123', 'oboassessment', 'compute-accessory', 'ACCESSORY BLDG FEE FOR B-1/ C-1/ E-1,2,3/ F-1/G-1,2,3,4,5 /H-1,2,3,4/I-1 AND J-1,2,3', NULL, 50000, NULL, NULL, '2017-05-10 12:47:29', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-301ccfbb:16a4e3ad539:-7c37', 'DEPLOYED', 'ACC_FEE_EXCAVATION', 'oboassessment', 'compute-accessory', 'ACC_FEE_EXCAVATION', NULL, 50000, NULL, NULL, '2019-04-24 15:47:57', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
@@ -1226,6 +1800,7 @@ INSERT INTO `sys_rule` VALUES ('RUL-5a2a6f0f:15b37b47575:-72e4', 'DEPLOYED', 'ME
 INSERT INTO `sys_rule` VALUES ('RUL-5a2a6f0f:15b37b47575:-72f5', 'DEPLOYED', 'MECHANICAL_FEE_FUNICULAR_KW', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE FUNICULAR KW', NULL, 50000, NULL, NULL, '2017-04-03 19:49:22', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-5a2a6f0f:15b37b47575:-7306', 'DEPLOYED', 'MECHANICAL_FEE_ESCALATOR_LNM', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE ESCALATOR LINEAL METER', NULL, 50000, NULL, NULL, '2017-04-03 19:49:00', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-5a2a6f0f:15b37b47575:-7317', 'DEPLOYED', 'MECHANICAL_FEE_ESCALATOR_KW', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE ESCALATOR KW', NULL, 50000, NULL, NULL, '2017-04-03 19:48:39', 'USR-ADMIN', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL-70eb32d:16c2d244c23:-7a5e', 'DEPLOYED', 'TAX_CLEARANCE', 'oboassessment', 'pre-summary', 'TAX CLEARANCE', NULL, 50000, NULL, NULL, '2019-07-26 15:25:47', 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-7385ffbe:16a438b05b7:-5b9d', 'DEPLOYED', 'CHIMNEY_ACCESSORY_FEE_GROUP_B_E_F_G', 'oboassessment', 'compute-accessory-structure', 'INDUSTRIAL COMMERCIAL CHIMNEY ACCESSORY_FEE GROUP B,E,F,G ', NULL, 50000, NULL, NULL, '2019-04-22 15:51:58', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-7385ffbe:16a438b05b7:-5cab', 'DEPLOYED', 'SMOKESTACK_ACCESSORY_FEE_GROUP_B_E_F_G', 'oboassessment', 'compute-accessory-structure', 'INDUSTRIAL COMMERCIAL SMOKESTACK ACCESSORY_FEE GROUP B,E,F,G ', NULL, 50000, NULL, NULL, '2019-04-22 15:50:47', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-7385ffbe:16a438b05b7:-5fc5', 'DEPLOYED', 'STORAGE_SILO_ACCESSORY_FEE', 'oboassessment', 'compute-accessory-structure', 'STORAGE_SILO_ACCESSORY_FEE', NULL, 50000, NULL, NULL, '2019-04-22 15:44:17', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
@@ -1238,8 +1813,7 @@ INSERT INTO `sys_rule` VALUES ('RUL-7385ffbe:16a438b05b7:-7085', 'DEPLOYED', 'TO
 INSERT INTO `sys_rule` VALUES ('RUL-7385ffbe:16a438b05b7:-7482', 'DEPLOYED', 'FIREWALL_ACCESSORY_FEE', 'oboassessment', 'compute-accessory-structure', 'FIREWALL_ACCESSORY_FEE', NULL, 50000, NULL, NULL, '2019-04-22 15:13:07', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-7385ffbe:16a438b05b7:-7cab', 'DEPLOYED', 'SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE', 'oboassessment', 'compute-zoning-fee', 'SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE', NULL, 50000, NULL, NULL, '2019-04-22 14:01:32', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-75b995c:15b18c6b9a6:-6dbc', 'DEPLOYED', 'BLDG_FEE_A1', 'oboassessment', 'compute-bldgfee', 'COMPUTE BLDG FEE FOR A1', NULL, 50000, NULL, NULL, '2017-03-28 19:33:18', 'USR-ADMIN', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL-75b995c:15b18c6b9a6:-7076', 'DRAFT', 'COMPUTE_CONSTRUCTION_COST_FOR_J', 'oboconstructioncost', 'initial', 'COMPUTE CONSTRUCTION COST FOR J', NULL, 50000, NULL, NULL, '2017-03-28 19:30:10', 'USR-ADMIN', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL-75b995c:15b18c6b9a6:-7087', 'DRAFT', 'COMPUTE_CONSTRUCTION_COST_FOR_F', 'oboconstructioncost', 'initial', 'COMPUTE CONSTRUCTION COST FOR F', NULL, 50000, NULL, NULL, '2017-03-28 19:29:59', 'USR-ADMIN', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL-75b995c:15b18c6b9a6:-7087', 'DEPLOYED', 'COMPUTE_CONSTRUCTION_COST_FOR_F', 'oboconstructioncost', 'initial', 'COMPUTE CONSTRUCTION COST FOR F', NULL, 50000, NULL, NULL, '2017-03-28 19:29:59', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-75b995c:15b18c6b9a6:-73a0', 'DEPLOYED', 'COMPUTE_CONSTRUCTION_COST_FOR_A_B_C_D_E_G_H_I', 'oboconstructioncost', 'initial', 'COMPUTE CONSTRUCTION COST FOR A,B,C,D,E,G,H,I', NULL, 50000, NULL, NULL, '2017-03-28 19:12:39', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL-7c07cdf9:16a4d035b31:-79a9', 'DEPLOYED', 'ADD_ACCESSORY_FEE', 'oboassessment', 'initial', 'ADD ACCESSORY FEE', NULL, 50000, NULL, NULL, '2019-04-24 09:58:59', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL10bc2a9b:15b3805d39e:-6ef4', 'DEPLOYED', 'MECHANICAL_FEE_FIRE_SPRINKLER_SYSTEM', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE FIRE SPRINKLER SYSTEM', NULL, 50000, NULL, NULL, '2017-04-03 20:53:01', 'USR-ADMIN', 'ADMIN', 1);
@@ -1263,6 +1837,8 @@ INSERT INTO `sys_rule` VALUES ('RUL27db1036:16a38f07d48:-7952', 'DEPLOYED', 'ELE
 INSERT INTO `sys_rule` VALUES ('RUL2e43f3c6:15b48c07f72:-78ea', 'DEPLOYED', 'PLUMBING_FEE_VALUE_AT_7', 'oboassessment', 'compute-plumbing-fee', 'PLUMBING FEE @ 7 PESOS PER UNIT', NULL, 50000, NULL, NULL, '2017-04-07 02:21:09', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL36ece640:15b3cf0a031:-779a', 'DEPLOYED', 'MECHANICAL_FEE_ENGINES', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE FOR DIESEL GASOLINE STEAM HYDRO NUCLEAR SOLAR ENGINES', NULL, 50000, NULL, NULL, '2017-04-04 19:27:55', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL38a7c1c3:15b23504df7:-7667', 'DEPLOYED', 'ADD_MECHANICAL_FEE_DEFAULT', 'oboassessment', 'initial', 'ADD MECHANICAL FEE DEFAULT', NULL, 50000, NULL, NULL, '2017-03-30 20:05:35', 'USR-ADMIN', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL3b31d1e8:16a5826cfa5:-72a3', 'DEPLOYED', 'UPLR_FEE', 'oboassessment', 'summary', 'UPLR FEE', NULL, 50000, NULL, NULL, '2019-04-26 14:56:31', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL3b3fed41:16bdd640b5c:-74d3', 'DEPLOYED', 'NEW_CONSTRUCTION_COST_FOR_ACCESSORY', 'oboconstructioncost', 'initial', 'NEW CONSTRUCTION COST FOR ACCESSORY for j group', NULL, 50000, NULL, NULL, '2019-07-11 03:53:35', 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL3f65f585:15b74b1144b:-5fa3', 'DRAFT', 'FIXED_OVEN_COMMERCIAL_INDUSTRIAL', 'oboassessment', 'compute-accessory', 'FIXED_OVEN_COMMERCIAL_INDUSTRIAL', NULL, 50000, NULL, NULL, '2017-04-15 18:45:52', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL3f65f585:15b74b1144b:-61c9', 'DRAFT', 'CHIMNEY', 'oboassessment', 'compute-accessory', 'CHIMNEY', NULL, 50000, NULL, NULL, '2017-04-15 18:43:43', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL3f65f585:15b74b1144b:-6396', 'DRAFT', 'SMOKESTACK_B_E_F_G', 'oboassessment', 'compute-accessory', 'SMOKE STACK FOR GROUP B,E,F,G', NULL, 50000, NULL, NULL, '2017-04-15 18:41:23', 'USR-ADMIN', 'ADMIN', 1);
@@ -1287,8 +1863,8 @@ INSERT INTO `sys_rule` VALUES ('RUL544e84a6:15b372b5faf:-782f', 'DEPLOYED', 'MEC
 INSERT INTO `sys_rule` VALUES ('RUL544e84a6:15b372b5faf:-7959', 'DEPLOYED', 'MECHANICAL_FEE_WINDOW_TYPE_AC', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE WINDOW TYPE AIRCONDITIONING', NULL, 50000, NULL, NULL, '2017-04-03 18:24:27', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL544e84a6:15b372b5faf:-7c53', 'DEPLOYED', 'MECHANICAL_FEE_PC_AC', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE PACKAGED CENTRALIZED AIR CONDITIONING SYSTEM', NULL, 50000, NULL, NULL, '2017-04-03 16:34:26', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL544e84a6:15b372b5faf:-7d4b', 'DEPLOYED', 'MECHANICAL_FEE_ICE_PLANT', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE ICE PLANT', NULL, 50000, NULL, NULL, '2017-04-03 16:32:44', 'USR-ADMIN', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL55d9e7c7:16a3522d159:-71db', 'DEPLOYED', 'ADD_FIRE_INSPECTION_FEE', 'oboassessment', 'initial', 'ADD FIRE INSPECTION FEE', NULL, 50000, NULL, NULL, '2019-04-19 19:21:26', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL55d9e7c7:16a3522d159:-7417', 'DEPLOYED', 'COMPUTE_FIRE_INSPECTION_FEE', 'oboassessment', 'pre-summary', 'COMPUTE_FIRE_INSPECTION_FEE', NULL, 50000, NULL, NULL, '2019-04-19 19:18:58', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL55d9e7c7:16a3522d159:-71db', 'DEPLOYED', 'ADD_FIRE_INSPECTION_FEE', 'oboassessment', 'compute-zoning-fee', 'ADD FIRE INSPECTION FEE', NULL, 50000, NULL, NULL, '2019-04-19 19:21:26', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL55d9e7c7:16a3522d159:-7417', 'DEPLOYED', 'COMPUTE_FIRE_INSPECTION_FEE', 'oboassessment', 'compute-permit-fee', 'COMPUTE_FIRE_INSPECTION_FEE', NULL, 50000, NULL, NULL, '2019-04-19 19:18:58', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL55d9e7c7:16a3522d159:-7c8e', 'DEPLOYED', 'ADD_ELECTRONIC_FEE', 'oboassessment', 'initial', 'ADD ELECTRONIC FEE', NULL, 50000, NULL, NULL, '2019-04-19 19:14:51', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL59515aa4:16a3a32fa5e:-3fb8', 'DEPLOYED', 'SWIMMING_POOL_INDIGENOUS_FEE_GROUP_C_D_H_I', 'oboassessment', 'compute-accessory-structure', 'SWIMMING POOL INDIGENOUS MATERIALS FEE GROUP C,D,H,I', NULL, 50000, NULL, NULL, '2019-04-20 23:18:51', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL59515aa4:16a3a32fa5e:-3fec', 'DEPLOYED', 'SWIMMING_POOL_INDIGENOUS_FEE_GROUP_B_E_F_G', 'oboassessment', 'compute-accessory-structure', 'SWIMMING POOL INDIGENOUS MATERIALS FEE GROUP B E F G', NULL, 50000, NULL, NULL, '2019-04-20 23:18:29', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
@@ -1304,11 +1880,11 @@ INSERT INTO `sys_rule` VALUES ('RUL59515aa4:16a3a32fa5e:-77c6', 'DEPLOYED', 'BAL
 INSERT INTO `sys_rule` VALUES ('RUL59515aa4:16a3a32fa5e:-77fa', 'DEPLOYED', 'BALCONY_FEE_C2_D123', 'oboassessment', 'compute-accessory-structure', 'COMPUTE BALCONY FEE FOR C-2/D-1,2,3', NULL, 50000, NULL, NULL, '2019-04-20 18:22:27', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL59515aa4:16a3a32fa5e:-782e', 'APPROVED', 'BALCONY_FEE_A1_NOT_NEW', 'oboassessment', 'compute-accessory-structure', 'COMPUTE BALCONY FEE A1 NOT NEW', NULL, 50000, NULL, NULL, '2019-04-20 18:22:06', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL59515aa4:16a3a32fa5e:-7883', 'APPROVED', 'BALCONY_FEE_A2_NOT_NEW', 'oboassessment', 'compute-accessory-structure', 'COMPUTE BALCONY FEE  A2 NOT ORIGINAL', NULL, 50000, NULL, NULL, '2019-04-20 18:21:41', 'USR-1b82c604:14cc29913bb:-7fec', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7bbc', 'DRAFT', 'OCCUPANCY_FEE_J2', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR J2 CLASSIFICATION', NULL, 50000, NULL, NULL, '2017-04-08 16:50:53', 'USR-ADMIN', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7bcd', 'DRAFT', 'OCCUPANCY_FEE_J1', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR J1 CLASSIFICATION', NULL, 50000, NULL, NULL, '2017-04-08 16:50:33', 'USR-ADMIN', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7bde', 'DRAFT', 'OCCUPANCY_FEE_C12_D123', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR C12, D123', NULL, 50000, NULL, NULL, '2017-04-08 16:50:14', 'USR-ADMIN', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7bef', 'DRAFT', 'OCCUPANCY_FEE_B1_E123_F1_G12345_H123_I1', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR B1, E123, F1, G12345, H123, I1', NULL, 50000, NULL, NULL, '2017-04-08 16:49:41', 'USR-ADMIN', 'ADMIN', 1);
-INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7ea4', 'DRAFT', 'OCCUPANCY_FEE_A1_A2', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR A1 AND A2 CLASSIFICATION', NULL, 50000, NULL, NULL, '2017-04-08 16:40:39', 'USR-ADMIN', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7bbc', 'APPROVED', 'OCCUPANCY_FEE_J2', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR J2 CLASSIFICATION', NULL, 50000, NULL, NULL, '2017-04-08 16:50:53', 'USR-ADMIN', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7bcd', 'APPROVED', 'OCCUPANCY_FEE_J1', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR J1 CLASSIFICATION', NULL, 50000, NULL, NULL, '2017-04-08 16:50:33', 'USR-ADMIN', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7bde', 'APPROVED', 'OCCUPANCY_FEE_C12_D123', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR C12, D123', NULL, 50000, NULL, NULL, '2017-04-08 16:50:14', 'USR-ADMIN', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7bef', 'APPROVED', 'OCCUPANCY_FEE_B1_E123_F1_G12345_H123_I1', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR B1, E123, F1, G12345, H123, I1', NULL, 50000, NULL, NULL, '2017-04-08 16:49:41', 'USR-ADMIN', 'ADMIN', 1);
+INSERT INTO `sys_rule` VALUES ('RUL67dafb9:15b5100218a:-7ea4', 'APPROVED', 'OCCUPANCY_FEE_A1_A2', 'oboassessment', 'compute-permit-fee', 'OCCUPANCY FEE FOR A1 AND A2 CLASSIFICATION', NULL, 50000, NULL, NULL, '2017-04-08 16:40:39', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL67f85531:15b22c52b19:-7925', 'DRAFT', 'REMOVE_ZERO_VALUE_FEES', 'oboassessment', 'summary', 'REMOVE FEES WITH ZERO VALUE', NULL, 50000, NULL, NULL, '2017-03-30 17:13:57', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL6a083481:15b1d42e454:-7e47', 'DEPLOYED', 'ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD', 'oboassessment', 'compute-electrical-fee', 'ELECTRICAL FEE TOTAL CONNECTED LOAD', NULL, 50000, NULL, NULL, '2017-03-30 03:32:38', 'USR-ADMIN', 'ADMIN', 1);
 INSERT INTO `sys_rule` VALUES ('RUL6cc4d33e:15b3c1e2e72:-4e7a', 'DEPLOYED', 'MECHANICAL_FEE_PASSENGER_FREIGHT_CAR_ELEVATOR', 'oboassessment', 'compute-mechanical-fee', 'MECHANICAL FEE FOR PASSENGER, FREIGHT, AND CAR ELEVATOR', NULL, 50000, NULL, NULL, '2017-04-04 18:55:41', 'USR-ADMIN', 'ADMIN', 1);
@@ -1352,8 +1928,6 @@ INSERT INTO `sys_rule_action` VALUES ('RA-1b89c680:16a38f14701:-7f5a', 'RUL27db1
 INSERT INTO `sys_rule_action` VALUES ('RA-1b89c680:16a38f14701:-7f63', 'RUL27db1036:16a38f07d48:-7606', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-1b89c680:16a38f14701:-7f6c', 'RUL27db1036:16a38f07d48:-7617', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-1b89c680:16a38f14701:-7fb5', 'RUL27db1036:16a38f07d48:-7952', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
-INSERT INTO `sys_rule_action` VALUES ('RA-212ba8c3:15b18f65197:-7fe9', 'RUL-75b995c:15b18c6b9a6:-7076', 'RULADEF-75b995c:15b18c6b9a6:-7ad0', 'compute-construction-cost', 0);
-INSERT INTO `sys_rule_action` VALUES ('RA-212ba8c3:15b18f65197:-7ff0', 'RUL-75b995c:15b18c6b9a6:-7087', 'RULADEF-75b995c:15b18c6b9a6:-7ad0', 'compute-construction-cost', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-3394437b:16a4396e5cb:-7a71', 'RUL-4267ff2c:16a444aba70:-6950', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-3394437b:16a4396e5cb:-7a91', 'RUL-4267ff2c:16a444aba70:-6a5e', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-3394437b:16a4396e5cb:-7ad0', 'RUL-4267ff2c:16a444aba70:-6f9a', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
@@ -1368,6 +1942,11 @@ INSERT INTO `sys_rule_action` VALUES ('RA-3394437b:16a4396e5cb:-7eb9', 'RUL-7385
 INSERT INTO `sys_rule_action` VALUES ('RA-3394437b:16a4396e5cb:-7ecb', 'RUL-7385ffbe:16a438b05b7:-6feb', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-3394437b:16a4396e5cb:-7ed5', 'RUL-7385ffbe:16a438b05b7:-6ffc', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-3394437b:16a4396e5cb:-7ef3', 'RUL-7385ffbe:16a438b05b7:-7085', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
+INSERT INTO `sys_rule_action` VALUES ('RA-37d558f5:16a4fd0d79e:-7f69', 'RUL-29595738:16a4fbe79ee:-79fe', 'treasury.actions.AddBillItem', 'add-billitem', 0);
+INSERT INTO `sys_rule_action` VALUES ('RA-37d558f5:16a4fd0d79e:-7fa1', 'RUL-29595738:16a4fbe79ee:-7bd1', 'treasury.actions.AddBillItem', 'add-billitem', 0);
+INSERT INTO `sys_rule_action` VALUES ('RA-37d558f5:16a4fd0d79e:-7fb8', 'RUL-29595738:16a4fbe79ee:-7d01', 'treasury.actions.AddBillItem', 'add-billitem', 0);
+INSERT INTO `sys_rule_action` VALUES ('RA-37d558f5:16a4fd0d79e:-7fd5', 'RUL-29595738:16a4fbe79ee:-7de3', 'treasury.actions.AddBillItem', 'add-billitem', 0);
+INSERT INTO `sys_rule_action` VALUES ('RA-37d558f5:16a4fd0d79e:-7ff4', 'RUL-29595738:16a4fbe79ee:-7ef1', 'treasury.actions.AddBillItem', 'add-billitem', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-39c9f5f6:16a4e3b1db2:-7f9e', 'RUL-301ccfbb:16a4e3ad539:-7c37', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-41519066:15b76f8cd83:-7fe6', 'RUL2671fb3e:15b76f0ce63:-74ce', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-4dbf9d19:15bf4e01a24:-7fb2', 'RUL-181817d3:15bf4e3b890:-73e2', 'treasury.actions.AddBillItem', 'add-billitem', 0);
@@ -1393,6 +1972,7 @@ INSERT INTO `sys_rule_action` VALUES ('RA-59612f04:15b6c1c41a7:-7fd6', 'RUL6e008
 INSERT INTO `sys_rule_action` VALUES ('RA-59612f04:15b6c1c41a7:-7fe1', 'RUL6e008a5f:15b6c73a9f2:-7ba0', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-59612f04:15b6c1c41a7:-7fec', 'RUL6e008a5f:15b6c73a9f2:-7bdf', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-66680c7b:15b3c241e07:-7fef', 'RUL6cc4d33e:15b3c1e2e72:-708f', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
+INSERT INTO `sys_rule_action` VALUES ('RA-694f0728:16e35852ae8:-7ed5', 'RUL-2a4f39d0:16e35fe5e74:-7bc2', 'treasury.actions.AddBillItem', 'add-billitem', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-d80e3d1:15b50f8025e:-7fd9', 'RUL67dafb9:15b5100218a:-7bbc', 'treasury.actions.AddBillItem', 'add-billitem', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-d80e3d1:15b50f8025e:-7fe0', 'RUL67dafb9:15b5100218a:-7bcd', 'treasury.actions.AddBillItem', 'add-billitem', 0);
 INSERT INTO `sys_rule_action` VALUES ('RA-d80e3d1:15b50f8025e:-7fe7', 'RUL67dafb9:15b5100218a:-7bde', 'treasury.actions.AddBillItem', 'add-billitem', 0);
@@ -1490,6 +2070,8 @@ INSERT INTO `sys_rule_action` VALUES ('RACT-50300c99:15b7626649d:-6427', 'RUL-50
 INSERT INTO `sys_rule_action` VALUES ('RACT-50300c99:15b7626649d:-727a', 'RUL-50300c99:15b7626649d:-7440', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT-50300c99:15b7626649d:-7596', 'RUL-50300c99:15b7626649d:-77a6', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT-50300c99:15b7626649d:-7acb', 'RUL-50300c99:15b7626649d:-7ebc', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
+INSERT INTO `sys_rule_action` VALUES ('RACT-70eb32d:16c2d244c23:-773a', 'RUL-70eb32d:16c2d244c23:-7a5e', 'treasury.actions.AddBillItem', 'add-billitem', 0);
+INSERT INTO `sys_rule_action` VALUES ('RACT-70eb32d:16c2d244c23:-78f6', 'RUL-70eb32d:16c2d244c23:-7a5e', 'treasury.actions.AddBillItem', 'add-billitem', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT-7385ffbe:16a438b05b7:-5db4', 'RUL-7385ffbe:16a438b05b7:-5fc5', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT-7385ffbe:16a438b05b7:-726b', 'RUL-7385ffbe:16a438b05b7:-7482', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT-7385ffbe:16a438b05b7:-78ec', 'RUL-7385ffbe:16a438b05b7:-7cab', 'treasury.actions.AddBillItem', 'add-billitem', 0);
@@ -1498,7 +2080,9 @@ INSERT INTO `sys_rule_action` VALUES ('RACT1fc2e40d:169eb7a6037:-6610', 'RUL1fc2
 INSERT INTO `sys_rule_action` VALUES ('RACT2671fb3e:15b76f0ce63:-72b0', 'RUL2671fb3e:15b76f0ce63:-73e5', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT2671fb3e:15b76f0ce63:-7545', 'RUL2671fb3e:15b76f0ce63:-76ce', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT2671fb3e:15b76f0ce63:-772a', 'RUL2671fb3e:15b76f0ce63:-78d2', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
-INSERT INTO `sys_rule_action` VALUES ('RACT2e43f3c6:15b48c07f72:-766d', 'RUL-108b4192:15b3d234d5c:-67fc', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
+INSERT INTO `sys_rule_action` VALUES ('RACT3b31d1e8:16a5826cfa5:-711a', 'RUL3b31d1e8:16a5826cfa5:-72a3', 'treasury.actions.AddBillItem', 'add-billitem', 0);
+INSERT INTO `sys_rule_action` VALUES ('RACT3b31d1e8:16a5826cfa5:-7a13', 'RUL-75b995c:15b18c6b9a6:-7087', 'obo.actions.ComputeConstructionCost', 'compute-construction-cost', 0);
+INSERT INTO `sys_rule_action` VALUES ('RACT3b3fed41:16bdd640b5c:-727e', 'RUL3b3fed41:16bdd640b5c:-74d3', 'obo.actions.ComputeConstructionCost', 'compute-construction-cost', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT3f65f585:15b74b1144b:-5d63', 'RUL3f65f585:15b74b1144b:-5fa3', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT3f65f585:15b74b1144b:-5fed', 'RUL3f65f585:15b74b1144b:-61c9', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
 INSERT INTO `sys_rule_action` VALUES ('RACT3f65f585:15b74b1144b:-6211', 'RUL3f65f585:15b74b1144b:-6396', 'treasury.actions.UpdateBillItemAmount', 'update-billitem-amount', 0);
@@ -1585,10 +2169,6 @@ INSERT INTO `sys_rule_action_param` VALUES ('RAP-1b89c680:16a38f14701:-7f6b', 'R
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-1b89c680:16a38f14701:-7fb2', 'RA-1b89c680:16a38f14701:-7fb5', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC-1b89c680:16a38f14701:-7fb7', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-1b89c680:16a38f14701:-7fb3', 'RA-1b89c680:16a38f14701:-7fb5', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-1b89c680:16a38f14701:-7fb4', 'RA-1b89c680:16a38f14701:-7fb5', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'PORT * 2.4', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP-212ba8c3:15b18f65197:-7fe7', 'RA-212ba8c3:15b18f65197:-7fe9', 'ACTPARAM-75b995c:15b18c6b9a6:-7ac8', NULL, NULL, 'RC-212ba8c3:15b18f65197:-7fed', 'APP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP-212ba8c3:15b18f65197:-7fe8', 'RA-212ba8c3:15b18f65197:-7fe9', 'ACTPARAM-75b995c:15b18c6b9a6:-7ab9', NULL, NULL, NULL, NULL, '6000 * AREA', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP-212ba8c3:15b18f65197:-7fee', 'RA-212ba8c3:15b18f65197:-7ff0', 'ACTPARAM-75b995c:15b18c6b9a6:-7ac8', NULL, NULL, 'RC-212ba8c3:15b18f65197:-7ff4', 'APP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP-212ba8c3:15b18f65197:-7fef', 'RA-212ba8c3:15b18f65197:-7ff0', 'ACTPARAM-75b995c:15b18c6b9a6:-7ab9', NULL, NULL, NULL, NULL, '8000 * AREA', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-3394437b:16a4396e5cb:-7a6e', 'RA-3394437b:16a4396e5cb:-7a71', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'SQM * 18', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-3394437b:16a4396e5cb:-7a6f', 'RA-3394437b:16a4396e5cb:-7a71', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-3394437b:16a4396e5cb:-7a70', 'RA-3394437b:16a4396e5cb:-7a71', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC-3394437b:16a4396e5cb:-7a73', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -1619,6 +2199,16 @@ INSERT INTO `sys_rule_action_param` VALUES ('RAP-3394437b:16a4396e5cb:-7eb8', 'R
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-3394437b:16a4396e5cb:-7eca', 'RA-3394437b:16a4396e5cb:-7ecb', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC-3394437b:16a4396e5cb:-7ecd', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-3394437b:16a4396e5cb:-7ed4', 'RA-3394437b:16a4396e5cb:-7ed5', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC-3394437b:16a4396e5cb:-7ed7', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-3394437b:16a4396e5cb:-7ef1', 'RA-3394437b:16a4396e5cb:-7ef3', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC-3394437b:16a4396e5cb:-7efa', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7f67', 'RA-37d558f5:16a4fd0d79e:-7f69', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7f68', 'RA-37d558f5:16a4fd0d79e:-7f69', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-748a', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n    \n        <tr>\n            <th>Greater than or equal to</th>\n            <th>Less than</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n        <tr>\n            <td></td>\n            <td>2000000.00</td>\n            <td>7000</td>\n        </tr>\n    \n        <tr>\n            <td>2000000.00</td>\n            <td></td>\n            <td>8000 + (( COST-2000000) * 0.10 * 0.01 )</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:2000000.00,value:\"7000\",from:0],[value:\"8000 + (( COST-2000000) * 0.10 * 0.01 )\",from:2000000.00]]', NULL, 0);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7f9f', 'RA-37d558f5:16a4fd0d79e:-7fa1', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-71f2', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n    \n        <tr>\n            <th>Greater than or equal to</th>\n            <th>Less than</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n        <tr>\n            <td></td>\n            <td>100000.00</td>\n            <td>1500</td>\n        </tr>\n    \n        <tr>\n            <td>100000.00</td>\n            <td>500000.00</td>\n            <td>2000</td>\n        </tr>\n    \n        <tr>\n            <td>500000.00</td>\n            <td>1000000.00</td>\n            <td>2600</td>\n        </tr>\n    \n        <tr>\n            <td>1000000.00</td>\n            <td>2000000.00</td>\n            <td>4000</td>\n        </tr>\n    \n        <tr>\n            <td>2000000.00</td>\n            <td></td>\n            <td>7000  + ((COST-2000000)* 0.10 * 0.01)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:100000.00,value:\"1500\",from:0],[to:500000.00,value:\"2000\",from:100000.00],[to:1000000.00,value:\"2600\",from:500000.00],[to:2000000.00,value:\"4000\",from:1000000.00],[value:\"7000  + ((COST-2000000)* 0.10 * 0.01)\",from:2000000.00]]', NULL, 0);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7fa0', 'RA-37d558f5:16a4fd0d79e:-7fa1', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7fb6', 'RA-37d558f5:16a4fd0d79e:-7fb8', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7fb7', 'RA-37d558f5:16a4fd0d79e:-7fb8', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-7027', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n    \n        <tr>\n            <th>Greater than or equal to</th>\n            <th>Less than</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n        <tr>\n            <td></td>\n            <td>2000000.00</td>\n            <td>3000</td>\n        </tr>\n    \n        <tr>\n            <td>2000000.00</td>\n            <td></td>\n            <td>4000 + (( COST - 2000000 ) * 0.10 * 0.01)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:2000000.00,value:\"3000\",from:0],[value:\"4000 + (( COST - 2000000 ) * 0.10 * 0.01)\",from:2000000.00]]', NULL, 0);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7fd3', 'RA-37d558f5:16a4fd0d79e:-7fd5', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-6e5c', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n    \n        <tr>\n            <th>Greater than or equal to</th>\n            <th>Less than</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n        <tr>\n            <td></td>\n            <td>2000000.00</td>\n            <td>3000</td>\n        </tr>\n    \n        <tr>\n            <td>2000000.00</td>\n            <td></td>\n            <td>4000 + (( COST - 2000000 ) * 0.10 * 0.01)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:2000000.00,value:\"3000\",from:0],[value:\"4000 + (( COST - 2000000 ) * 0.10 * 0.01)\",from:2000000.00]]', NULL, 0);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7fd4', 'RA-37d558f5:16a4fd0d79e:-7fd5', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7ff2', 'RA-37d558f5:16a4fd0d79e:-7ff4', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-37d558f5:16a4fd0d79e:-7ff3', 'RA-37d558f5:16a4fd0d79e:-7ff4', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-6c91', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n    \n        <tr>\n            <th>Greater than or equal to</th>\n            <th>Less than</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n        <tr>\n            <td></td>\n            <td>500000.00</td>\n            <td>1500</td>\n        </tr>\n    \n        <tr>\n            <td>500000.00</td>\n            <td>2000000.00</td>\n            <td>2000</td>\n        </tr>\n    \n        <tr>\n            <td>2000000.00</td>\n            <td></td>\n            <td>3600 + (( COST - 2000000 ) * 0.10 * 0.01)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:500000.00,value:\"1500\",from:0],[to:2000000.00,value:\"2000\",from:500000.00],[value:\"3600 + (( COST - 2000000 ) * 0.10 * 0.01)\",from:2000000.00]]', NULL, 0);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-39c9f5f6:16a4e3b1db2:-7f9b', 'RA-39c9f5f6:16a4e3b1db2:-7f9e', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'CUM * 3', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-39c9f5f6:16a4e3b1db2:-7f9c', 'RA-39c9f5f6:16a4e3b1db2:-7f9e', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-39c9f5f6:16a4e3b1db2:-7f9d', 'RA-39c9f5f6:16a4e3b1db2:-7f9e', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC-39c9f5f6:16a4e3b1db2:-7fa0', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -1690,14 +2280,16 @@ INSERT INTO `sys_rule_action_param` VALUES ('RAP-59612f04:15b6c1c41a7:-7feb', 'R
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-66680c7b:15b3c241e07:-7fec', 'RA-66680c7b:15b3c241e07:-7fef', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC-66680c7b:15b3c241e07:-7ff2', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-66680c7b:15b3c241e07:-7fed', 'RA-66680c7b:15b3c241e07:-7fef', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, 'RCONST6cc4d33e:15b3c1e2e72:-6fd9', 'KVA', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: KVA</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>5.00</td>\n            <td>40</td>\n        </tr>\n    \n        <tr>\n            <td>5.00</td>\n            <td>50.00</td>\n            <td>40 + ( (KVA-5) * 4)</td>\n        </tr>\n    \n        <tr>\n            <td>50.00</td>\n            <td>300.00</td>\n            <td>220 + ((KVA-50) * 2)</td>\n        </tr>\n    \n        <tr>\n            <td>300.00</td>\n            <td>1500.00</td>\n            <td>720 + ( (KVA-300) * 1)</td>\n        </tr>\n    \n        <tr>\n            <td>1500.00</td>\n            <td>6000.00</td>\n            <td>1920 + ( (KVA-1500) * 0.5)</td>\n        </tr>\n    \n        <tr>\n            <td>6000.00</td>\n            <td></td>\n            <td>4170 + ( (KVA-6000) * 0.25)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:5.00,value:\"40\",from:0.00],[to:50.00,value:\"40 + ( (KVA-5) * 4)\",from:5.00],[to:300.00,value:\"220 + ((KVA-50) * 2)\",from:50.00],[to:1500.00,value:\"720 + ( (KVA-300) * 1)\",from:300.00],[to:6000.00,value:\"1920 + ( (KVA-1500) * 0.5)\",from:1500.00],[value:\"4170 + ( (KVA-6000) * 0.25)\",from:6000.00]]', NULL, 1);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-66680c7b:15b3c241e07:-7fee', 'RA-66680c7b:15b3c241e07:-7fef', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-694f0728:16e35852ae8:-7ed3', 'RA-694f0728:16e35852ae8:-7ed5', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCC-694f0728:16e35852ae8:-7eda', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n    \n        <tr>\n            <th>Greater than or equal to</th>\n            <th>Less than</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n        <tr>\n            <td></td>\n            <td>2000000.00</td>\n            <td>7000</td>\n        </tr>\n    \n        <tr>\n            <td>2000000.00</td>\n            <td></td>\n            <td>8000 + (( COST-2000000) * 0.10 * 0.01 )</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:2000000.00,value:\"7000\",from:0],[value:\"8000 + (( COST-2000000) * 0.10 * 0.01 )\",from:2000000.00]]', NULL, 0);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-694f0728:16e35852ae8:-7ed4', 'RA-694f0728:16e35852ae8:-7ed5', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fd7', 'RA-d80e3d1:15b50f8025e:-7fd9', 'treasury.actions.AddBillItem.account', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ITMACCT-3859e913:15625f2385d:-6919', 'BUILDING OCCUPANCY FEE', NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fd8', 'RA-d80e3d1:15b50f8025e:-7fd9', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCC-d80e3d1:15b50f8025e:-7fdc', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>150000.00</td>\n            <td>100</td>\n        </tr>\n    \n        <tr>\n            <td>150000.00</td>\n            <td>400000.00</td>\n            <td>200</td>\n        </tr>\n    \n        <tr>\n            <td>400000.00</td>\n            <td>850000.00</td>\n            <td>400</td>\n        </tr>\n    \n        <tr>\n            <td>850000.00</td>\n            <td>1200000.00</td>\n            <td>800</td>\n        </tr>\n    \n        <tr>\n            <td>1200000.00</td>\n            <td></td>\n            <td>800 +  (Math.ceil((COST-1200000)/1000000) * 800)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:150000.00,value:\"100\",from:0],[to:400000.00,value:\"200\",from:150000.00],[to:850000.00,value:\"400\",from:400000.00],[to:1200000.00,value:\"800\",from:850000.00],[value:\"800 +  (Math.ceil((COST-1200000)/1000000) * 800)\",from:1200000.00]]', NULL, 1);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fd8', 'RA-d80e3d1:15b50f8025e:-7fd9', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-6639', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>150000.00</td>\n            <td>100</td>\n        </tr>\n    \n        <tr>\n            <td>150000.00</td>\n            <td>400000.00</td>\n            <td>200</td>\n        </tr>\n    \n        <tr>\n            <td>400000.00</td>\n            <td>850000.00</td>\n            <td>400</td>\n        </tr>\n    \n        <tr>\n            <td>850000.00</td>\n            <td>1200000.00</td>\n            <td>800</td>\n        </tr>\n    \n        <tr>\n            <td>1200000.00</td>\n            <td></td>\n            <td>800 +  (Math.ceil((COST-1200000)/1000000) * 800)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:150000.00,value:\"100\",from:0],[to:400000.00,value:\"200\",from:150000.00],[to:850000.00,value:\"400\",from:400000.00],[to:1200000.00,value:\"800\",from:850000.00],[value:\"800 +  (Math.ceil((COST-1200000)/1000000) * 800)\",from:1200000.00]]', NULL, 1);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fde', 'RA-d80e3d1:15b50f8025e:-7fe0', 'treasury.actions.AddBillItem.account', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ITMACCT-3859e913:15625f2385d:-6919', 'BUILDING OCCUPANCY FEE', NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fdf', 'RA-d80e3d1:15b50f8025e:-7fe0', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST-45a00793:15b5125428a:-7b2d', 'AREA', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: AREA</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>20.00</td>\n            <td>50</td>\n        </tr>\n    \n        <tr>\n            <td>20.00</td>\n            <td>500.00</td>\n            <td>240</td>\n        </tr>\n    \n        <tr>\n            <td>500.00</td>\n            <td>1000.00</td>\n            <td>360</td>\n        </tr>\n    \n        <tr>\n            <td>1000.00</td>\n            <td>5000.00</td>\n            <td>480</td>\n        </tr>\n    \n        <tr>\n            <td>5000.00</td>\n            <td>10000.00</td>\n            <td>200</td>\n        </tr>\n    \n        <tr>\n            <td>10000.00</td>\n            <td></td>\n            <td>2400</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:20.00,value:\"50\",from:0],[to:500.00,value:\"240\",from:20.00],[to:1000.00,value:\"360\",from:500.00],[to:5000.00,value:\"480\",from:1000.00],[to:10000.00,value:\"200\",from:5000.00],[value:\"2400\",from:10000.00]]', NULL, 1);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fdf', 'RA-d80e3d1:15b50f8025e:-7fe0', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-631f', 'AREA', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: AREA</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>20.00</td>\n            <td>50</td>\n        </tr>\n    \n        <tr>\n            <td>20.00</td>\n            <td>500.00</td>\n            <td>240</td>\n        </tr>\n    \n        <tr>\n            <td>500.00</td>\n            <td>1000.00</td>\n            <td>360</td>\n        </tr>\n    \n        <tr>\n            <td>1000.00</td>\n            <td>5000.00</td>\n            <td>480</td>\n        </tr>\n    \n        <tr>\n            <td>5000.00</td>\n            <td>10000.00</td>\n            <td>200</td>\n        </tr>\n    \n        <tr>\n            <td>10000.00</td>\n            <td></td>\n            <td>2400</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:20.00,value:\"50\",from:0],[to:500.00,value:\"240\",from:20.00],[to:1000.00,value:\"360\",from:500.00],[to:5000.00,value:\"480\",from:1000.00],[to:10000.00,value:\"200\",from:5000.00],[value:\"2400\",from:10000.00]]', NULL, 1);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fe5', 'RA-d80e3d1:15b50f8025e:-7fe7', 'treasury.actions.AddBillItem.account', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ITMACCT-3859e913:15625f2385d:-6919', 'BUILDING OCCUPANCY FEE', NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fe6', 'RA-d80e3d1:15b50f8025e:-7fe7', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCC-d80e3d1:15b50f8025e:-7fea', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>150000.00</td>\n            <td>150</td>\n        </tr>\n    \n        <tr>\n            <td>150000.00</td>\n            <td>400000.00</td>\n            <td>250</td>\n        </tr>\n    \n        <tr>\n            <td>400000.00</td>\n            <td>850000.00</td>\n            <td>600</td>\n        </tr>\n    \n        <tr>\n            <td>850000.00</td>\n            <td>1200000.00</td>\n            <td>900</td>\n        </tr>\n    \n        <tr>\n            <td>1200000.00</td>\n            <td></td>\n            <td>900 +  (Math.ceil((COST-1200000)/1000000) * 900)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:150000.00,value:\"150\",from:0],[to:400000.00,value:\"250\",from:150000.00],[to:850000.00,value:\"600\",from:400000.00],[to:1200000.00,value:\"900\",from:850000.00],[value:\"900 +  (Math.ceil((COST-1200000)/1000000) * 900)\",from:1200000.00]]', NULL, 1);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fe6', 'RA-d80e3d1:15b50f8025e:-7fe7', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-6014', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>150000.00</td>\n            <td>150</td>\n        </tr>\n    \n        <tr>\n            <td>150000.00</td>\n            <td>400000.00</td>\n            <td>250</td>\n        </tr>\n    \n        <tr>\n            <td>400000.00</td>\n            <td>850000.00</td>\n            <td>600</td>\n        </tr>\n    \n        <tr>\n            <td>850000.00</td>\n            <td>1200000.00</td>\n            <td>900</td>\n        </tr>\n    \n        <tr>\n            <td>1200000.00</td>\n            <td></td>\n            <td>900 +  (Math.ceil((COST-1200000)/1000000) * 900)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:150000.00,value:\"150\",from:0],[to:400000.00,value:\"250\",from:150000.00],[to:850000.00,value:\"600\",from:400000.00],[to:1200000.00,value:\"900\",from:850000.00],[value:\"900 +  (Math.ceil((COST-1200000)/1000000) * 900)\",from:1200000.00]]', NULL, 1);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fec', 'RA-d80e3d1:15b50f8025e:-7fee', 'treasury.actions.AddBillItem.account', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ITMACCT-3859e913:15625f2385d:-6919', 'BUILDING OCCUPANCY FEE', NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fed', 'RA-d80e3d1:15b50f8025e:-7fee', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCC-d80e3d1:15b50f8025e:-7ff1', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>150000.00</td>\n            <td>200</td>\n        </tr>\n    \n        <tr>\n            <td>150000.00</td>\n            <td>400000.00</td>\n            <td>400</td>\n        </tr>\n    \n        <tr>\n            <td>400000.00</td>\n            <td>850000.00</td>\n            <td>800</td>\n        </tr>\n    \n        <tr>\n            <td>850000.00</td>\n            <td>1200000.00</td>\n            <td>1000</td>\n        </tr>\n    \n        <tr>\n            <td>1200000.00</td>\n            <td></td>\n            <td>1000 +  (Math.ceil((COST-1200000)/1000000) * 1000)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:150000.00,value:\"200\",from:0],[to:400000.00,value:\"400\",from:150000.00],[to:850000.00,value:\"800\",from:400000.00],[to:1200000.00,value:\"1000\",from:850000.00],[value:\"1000 +  (Math.ceil((COST-1200000)/1000000) * 1000)\",from:1200000.00]]', NULL, 1);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP-d80e3d1:15b50f8025e:-7fed', 'RA-d80e3d1:15b50f8025e:-7fee', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-5d9c', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>150000.00</td>\n            <td>200</td>\n        </tr>\n    \n        <tr>\n            <td>150000.00</td>\n            <td>400000.00</td>\n            <td>400</td>\n        </tr>\n    \n        <tr>\n            <td>400000.00</td>\n            <td>850000.00</td>\n            <td>800</td>\n        </tr>\n    \n        <tr>\n            <td>850000.00</td>\n            <td>1200000.00</td>\n            <td>1000</td>\n        </tr>\n    \n        <tr>\n            <td>1200000.00</td>\n            <td></td>\n            <td>1000 +  (Math.ceil((COST-1200000)/1000000) * 1000)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:150000.00,value:\"200\",from:0],[to:400000.00,value:\"400\",from:150000.00],[to:850000.00,value:\"800\",from:400000.00],[to:1200000.00,value:\"1000\",from:850000.00],[value:\"1000 +  (Math.ceil((COST-1200000)/1000000) * 1000)\",from:1200000.00]]', NULL, 1);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-d96c4a7:15bf6365df9:-7fdd', 'RA-d96c4a7:15bf6365df9:-7fe0', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'Math.ceil( SQM ) * 18', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-d96c4a7:15bf6365df9:-7fde', 'RA-d96c4a7:15bf6365df9:-7fe0', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP-d96c4a7:15bf6365df9:-7fdf', 'RA-d96c4a7:15bf6365df9:-7fe0', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC-d96c4a7:15bf6365df9:-7fe8', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -1811,8 +2403,8 @@ INSERT INTO `sys_rule_action_param` VALUES ('RAP33115abb:15b366b9fbd:-7fd5', 'RA
 INSERT INTO `sys_rule_action_param` VALUES ('RAP33115abb:15b366b9fbd:-7fdb', 'RA33115abb:15b366b9fbd:-7fde', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC33115abb:15b366b9fbd:-7fe2', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP33115abb:15b366b9fbd:-7fdc', 'RA33115abb:15b366b9fbd:-7fde', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP33115abb:15b366b9fbd:-7fdd', 'RA33115abb:15b366b9fbd:-7fde', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'Math.ceil( TONS )  * 60', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP475d0d9e:16a330d4f71:-7cd8', 'RA475d0d9e:16a330d4f71:-7cda', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'FIRE_INSPECTION_FEE', 'FIRE INSPECTION FEE', NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP475d0d9e:16a330d4f71:-7cd9', 'RA475d0d9e:16a330d4f71:-7cda', 'treasury.actions.AddBillItem.amount', NULL, NULL, NULL, NULL, '0', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP475d0d9e:16a330d4f71:-7cd8', 'RA475d0d9e:16a330d4f71:-7cda', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'FIRE_CONS_TAX', 'FIRE CODE CONTRUCTION TAX', NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP475d0d9e:16a330d4f71:-7cd9', 'RA475d0d9e:16a330d4f71:-7cda', 'treasury.actions.AddBillItem.amount', NULL, NULL, NULL, NULL, 'COST * 0.01', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP475d0d9e:16a330d4f71:-7d30', 'RA475d0d9e:16a330d4f71:-7d32', 'treasury.actions.AddBillItem.amount', NULL, NULL, NULL, NULL, '0', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP475d0d9e:16a330d4f71:-7d31', 'RA475d0d9e:16a330d4f71:-7d32', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ELECTRONIC_FEE', 'ELECTRONIC FEE', NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP525da928:16a4d03cbc9:-7f88', 'RA525da928:16a4d03cbc9:-7f8a', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ACCESSORY_FEE', 'ACCESSORY FEE', NULL, NULL, NULL);
@@ -1841,13 +2433,13 @@ INSERT INTO `sys_rule_action_param` VALUES ('RAP73b3316:15bf60d669e:-7fea', 'RA7
 INSERT INTO `sys_rule_action_param` VALUES ('RAP73b3316:15bf60d669e:-7feb', 'RA73b3316:15bf60d669e:-7fec', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'Math.ceil( SQM ) * 24', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fb9', 'RA7a7a989e:15b22fce173:-7fbc', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC7a7a989e:15b22fce173:-7fc2', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fba', 'RA7a7a989e:15b22fce173:-7fbc', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fbb', 'RA7a7a989e:15b22fce173:-7fbc', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'UNIT  * 30', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fbb', 'RA7a7a989e:15b22fce173:-7fbc', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'UNIT  * (30 + 12)', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fc3', 'RA7a7a989e:15b22fce173:-7fc6', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC7a7a989e:15b22fce173:-7fcc', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fc4', 'RA7a7a989e:15b22fce173:-7fc6', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fc5', 'RA7a7a989e:15b22fce173:-7fc6', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'UNIT *  60', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fc5', 'RA7a7a989e:15b22fce173:-7fc6', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'UNIT *  (60 + 36 )', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fcd', 'RA7a7a989e:15b22fce173:-7fd0', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC7a7a989e:15b22fce173:-7fd6', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fce', 'RA7a7a989e:15b22fce173:-7fd0', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fcf', 'RA7a7a989e:15b22fce173:-7fd0', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'NUM_METER * 15', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fcf', 'RA7a7a989e:15b22fce173:-7fd0', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'NUM_METER * ( 15 + 15 )', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7feb', 'RA7a7a989e:15b22fce173:-7fee', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RC7a7a989e:15b22fce173:-7ff2', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fec', 'RA7a7a989e:15b22fce173:-7fee', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RAP7a7a989e:15b22fce173:-7fed', 'RA7a7a989e:15b22fce173:-7fee', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'UNIT * 30', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
@@ -1961,6 +2553,10 @@ INSERT INTO `sys_rule_action_param` VALUES ('RULACT-685b3759:16a2fd8270e:-7063',
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-685b3759:16a2fd8270e:-731e', 'RA604f6df3:15b197ab5de:-7fda', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'BUILDING_PERMIT_FEE', 'BUILDING PERMIT FEE', NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-685b3759:16a2fd8270e:-7562', 'RA-4dbf9d19:15bf4e01a24:-7fba', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'BUILDING_PERMIT_FEE', 'BUILDING PERMIT FEE', NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-685b3759:16a2fd8270e:-77fc', 'RA-4dbf9d19:15bf4e01a24:-7fb2', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'BUILDING_PERMIT_FEE', 'BUILDING PERMIT FEE', NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT-70eb32d:16c2d244c23:-76db', 'RACT-70eb32d:16c2d244c23:-773a', 'treasury.actions.AddBillItem.amount', NULL, NULL, NULL, NULL, '50 * TOTAL', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT-70eb32d:16c2d244c23:-7710', 'RACT-70eb32d:16c2d244c23:-773a', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TAX_DEC', 'TAX DECLARATION', NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT-70eb32d:16c2d244c23:-7897', 'RACT-70eb32d:16c2d244c23:-78f6', 'treasury.actions.AddBillItem.amount', NULL, NULL, NULL, NULL, '50 * BYOWNER', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT-70eb32d:16c2d244c23:-78cc', 'RACT-70eb32d:16c2d244c23:-78f6', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TAX_CLEARANCE', 'TAX CLEARANCE', NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-5d5c', 'RACT-7385ffbe:16a438b05b7:-5db4', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, 'RCONST-7385ffbe:16a438b05b7:-5e33', 'HEIGHT', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: HEIGHT</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>10.00</td>\n            <td>HEIGHT * 2400</td>\n        </tr>\n    \n        <tr>\n            <td>10.00</td>\n            <td></td>\n            <td>24000 + ((HEIGHT-10)*150)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:10.00,value:\"HEIGHT * 2400\",from:0],[value:\"24000 + ((HEIGHT-10)*150)\",from:10.00]]', NULL, 1);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-5d7d', 'RACT-7385ffbe:16a438b05b7:-5db4', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-5d9c', 'RACT-7385ffbe:16a438b05b7:-5db4', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND-7385ffbe:16a438b05b7:-5f5a', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -1979,7 +2575,7 @@ INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-6ded',
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-7213', 'RACT-7385ffbe:16a438b05b7:-726b', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'return  ((SQM * 3) < 48) ? 48 : (SQM * 3) ;', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-7234', 'RACT-7385ffbe:16a438b05b7:-726b', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-7253', 'RACT-7385ffbe:16a438b05b7:-726b', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND-7385ffbe:16a438b05b7:-741b', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-788a', 'RACT-7385ffbe:16a438b05b7:-78ec', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST-7385ffbe:16a438b05b7:-7c16', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>100000.00</td>\n            <td>500</td>\n        </tr>\n    \n        <tr>\n            <td>100000.00</td>\n            <td>200000.00</td>\n            <td>700</td>\n        </tr>\n    \n        <tr>\n            <td>200000.00</td>\n            <td></td>\n            <td>800 + (( COST - 200000) * 0.10 * 0.01) </td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:100000.00,value:\"500\",from:0],[to:200000.00,value:\"700\",from:100000.00],[value:\"800 + (( COST - 200000) * 0.10 * 0.01) \",from:200000.00]]', NULL, 1);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-788a', 'RACT-7385ffbe:16a438b05b7:-78ec', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-6ac6', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n    \n        <tr>\n            <th>Greater than or equal to</th>\n            <th>Less than</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n        <tr>\n            <td></td>\n            <td>100000.00</td>\n            <td>500</td>\n        </tr>\n    \n        <tr>\n            <td>100000.00</td>\n            <td>200000.00</td>\n            <td>700</td>\n        </tr>\n    \n        <tr>\n            <td>200000.00</td>\n            <td></td>\n            <td>720 + ((( COST - 200000) * 0.01)/10) </td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:100000.00,value:\"500\",from:0],[to:200000.00,value:\"700\",from:100000.00],[value:\"720 + ((( COST - 200000) * 0.01)/10) \",from:200000.00]]', NULL, 0);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7385ffbe:16a438b05b7:-78c2', 'RACT-7385ffbe:16a438b05b7:-78ec', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7c07cdf9:16a4d035b31:-756e', 'RACT-7c07cdf9:16a4d035b31:-75c6', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, '200', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT-7c07cdf9:16a4d035b31:-758f', 'RACT-7c07cdf9:16a4d035b31:-75c6', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
@@ -1996,9 +2592,12 @@ INSERT INTO `sys_rule_action_param` VALUES ('RULACT2671fb3e:15b76f0ce63:-7544', 
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT2671fb3e:15b76f0ce63:-7727', 'RACT2671fb3e:15b76f0ce63:-772a', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, 'RCONST2671fb3e:15b76f0ce63:-7799', 'TON', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: TON</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>100.00</td>\n            <td>25 * TON</td>\n        </tr>\n    \n        <tr>\n            <td>100.00</td>\n            <td>150.00</td>\n            <td>2500 + ((TON-100)*20)</td>\n        </tr>\n    \n        <tr>\n            <td>150.00</td>\n            <td>300.00</td>\n            <td>2500 + 1000 + ((TON-150)*15)</td>\n        </tr>\n    \n        <tr>\n            <td>300.00</td>\n            <td>500.00</td>\n            <td>2500 + 1000 + 2250 + ((TON-300)*10)</td>\n        </tr>\n    \n        <tr>\n            <td>500.00</td>\n            <td></td>\n            <td>2500 + 1000 + 2250 + 2000 + ((TON-500)*5)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:100.00,value:\"25 * TON\",from:0],[to:150.00,value:\"2500 + ((TON-100)*20)\",from:100.00],[to:300.00,value:\"2500 + 1000 + ((TON-150)*15)\",from:150.00],[to:500.00,value:\"2500 + 1000 + 2250 + ((TON-300)*10)\",from:300.00],[value:\"2500 + 1000 + 2250 + 2000 + ((TON-500)*5)\",from:500.00]]', NULL, 1);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT2671fb3e:15b76f0ce63:-7728', 'RACT2671fb3e:15b76f0ce63:-772a', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT2671fb3e:15b76f0ce63:-7729', 'RACT2671fb3e:15b76f0ce63:-772a', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND2671fb3e:15b76f0ce63:-7884', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RULACT2e43f3c6:15b48c07f72:-766a', 'RACT2e43f3c6:15b48c07f72:-766d', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'UNIT * 24', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RULACT2e43f3c6:15b48c07f72:-766b', 'RACT2e43f3c6:15b48c07f72:-766d', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RULACT2e43f3c6:15b48c07f72:-766c', 'RACT2e43f3c6:15b48c07f72:-766d', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND2e43f3c6:15b48c07f72:-7abe', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT3b31d1e8:16a5826cfa5:-70bd', 'RACT3b31d1e8:16a5826cfa5:-711a', 'treasury.actions.AddBillItem.amount', NULL, NULL, NULL, NULL, '( AMT * 0.01 < 10 ) ? 10 : (AMT * 0.01)', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT3b31d1e8:16a5826cfa5:-70f0', 'RACT3b31d1e8:16a5826cfa5:-711a', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'UPLR', 'UPLR', NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT3b31d1e8:16a5826cfa5:-79e9', 'RACT3b31d1e8:16a5826cfa5:-7a13', 'obo.actions.ComputeConstructionCost.amount', NULL, NULL, NULL, NULL, 'AREA * 8000', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT3b31d1e8:16a5826cfa5:-7a01', 'RACT3b31d1e8:16a5826cfa5:-7a13', 'obo.actions.ComputeConstructionCost.application', NULL, NULL, 'RCOND3b31d1e8:16a5826cfa5:-7c8d', 'APP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT3b3fed41:16bdd640b5c:-7254', 'RACT3b3fed41:16bdd640b5c:-727e', 'obo.actions.ComputeConstructionCost.amount', NULL, NULL, NULL, NULL, 'AREA * 6000', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT3b3fed41:16bdd640b5c:-726c', 'RACT3b3fed41:16bdd640b5c:-727e', 'obo.actions.ComputeConstructionCost.application', NULL, NULL, 'RCOND3b3fed41:16bdd640b5c:-74b1', 'APP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT3f65f585:15b74b1144b:-5d60', 'RACT3f65f585:15b74b1144b:-5d63', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'AREA * 48', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT3f65f585:15b74b1144b:-5d61', 'RACT3f65f585:15b74b1144b:-5d63', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT3f65f585:15b74b1144b:-5d62', 'RACT3f65f585:15b74b1144b:-5d63', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND3f65f585:15b74b1144b:-5f56', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -2033,7 +2632,7 @@ INSERT INTO `sys_rule_action_param` VALUES ('RULACT544e84a6:15b372b5faf:-7da3', 
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT544e84a6:15b372b5faf:-7da4', 'RACT544e84a6:15b372b5faf:-7da6', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT544e84a6:15b372b5faf:-7da5', 'RACT544e84a6:15b372b5faf:-7da6', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND544e84a6:15b372b5faf:-7e18', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT556b1af5:16a3311c7aa:-78cc', 'RACT-24f6e11b:15b6c092725:-7dca', 'treasury.actions.AddBillItem.billcode', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'MECHANICAL_FEE', 'MECHANICAL FEE', NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RULACT55d9e7c7:16a3522d159:-6e20', 'RACT55d9e7c7:16a3522d159:-6e7c', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'AMT * 0.10', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT55d9e7c7:16a3522d159:-6e20', 'RACT55d9e7c7:16a3522d159:-6e7c', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'def d = @IIF(  FIXEDCOST > PROJCOST ,  FIXEDCOST * 0.01,  PROJCOST * 0.01 )', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT55d9e7c7:16a3522d159:-6e43', 'RACT55d9e7c7:16a3522d159:-6e7c', 'treasury.actions.UpdateBillItemAmount.type', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ADD', NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT55d9e7c7:16a3522d159:-6e64', 'RACT55d9e7c7:16a3522d159:-6e7c', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND55d9e7c7:16a3522d159:-6f32', 'FIREFEE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT59515aa4:16a3a32fa5e:-45c6', 'RACT59515aa4:16a3a32fa5e:-45de', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND59515aa4:16a3a32fa5e:-4696', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
@@ -2051,7 +2650,7 @@ INSERT INTO `sys_rule_action_param` VALUES ('RULACT59515aa4:16a3a32fa5e:-5d0e', 
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT59515aa4:16a3a32fa5e:-5d2f', 'RACT59515aa4:16a3a32fa5e:-5d47', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND59515aa4:16a3a32fa5e:-62ac', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT59515aa4:16a3a32fa5e:-5e10', 'RACT59515aa4:16a3a32fa5e:-5e5b', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, 'RCONST59515aa4:16a3a32fa5e:-74ed', 'AREA', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: AREA</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>20.00</td>\n            <td>2.0 * AREA * 0.50</td>\n        </tr>\n    \n        <tr>\n            <td>20.00</td>\n            <td>50.00</td>\n            <td>3.40 * AREA * 0.50</td>\n        </tr>\n    \n        <tr>\n            <td>50.00</td>\n            <td>100.00</td>\n            <td>4.80 * AREA * 0.50</td>\n        </tr>\n    \n        <tr>\n            <td>100.00</td>\n            <td>150.00</td>\n            <td>6.0 * AREA * 0.50</td>\n        </tr>\n    \n        <tr>\n            <td>150.00</td>\n            <td></td>\n            <td>7.20 * AREA * 0.50</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:20.00,value:\"2.0 * AREA * 0.50\",from:0],[to:50.00,value:\"3.40 * AREA * 0.50\",from:20.00],[to:100.00,value:\"4.80 * AREA * 0.50\",from:50.00],[to:150.00,value:\"6.0 * AREA * 0.50\",from:100.00],[value:\"7.20 * AREA * 0.50\",from:150.00]]', NULL, 1);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT59515aa4:16a3a32fa5e:-5e43', 'RACT59515aa4:16a3a32fa5e:-5e5b', 'treasury.actions.UpdateBillItemAmount.billitem', NULL, NULL, 'RCOND59515aa4:16a3a32fa5e:-63aa', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_action_param` VALUES ('RULACT67dafb9:15b5100218a:-7c98', 'RACT67dafb9:15b5100218a:-7c9a', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST67dafb9:15b5100218a:-7ce6', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>150000.00</td>\n            <td>100</td>\n        </tr>\n    \n        <tr>\n            <td>150000.00</td>\n            <td>400000.00</td>\n            <td>200</td>\n        </tr>\n    \n        <tr>\n            <td>400000.00</td>\n            <td>850000.00</td>\n            <td>400</td>\n        </tr>\n    \n        <tr>\n            <td>850000.00</td>\n            <td>1200000.00</td>\n            <td>800</td>\n        </tr>\n    \n        <tr>\n            <td>1200000.00</td>\n            <td></td>\n            <td>800 +  (Math.ceil((COST-1200000)/1000000) * 800)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:150000.00,value:\"100\",from:0],[to:400000.00,value:\"200\",from:150000.00],[to:850000.00,value:\"400\",from:400000.00],[to:1200000.00,value:\"800\",from:850000.00],[value:\"800 +  (Math.ceil((COST-1200000)/1000000) * 800)\",from:1200000.00]]', NULL, 1);
+INSERT INTO `sys_rule_action_param` VALUES ('RULACT67dafb9:15b5100218a:-7c98', 'RACT67dafb9:15b5100218a:-7c9a', 'treasury.actions.AddBillItem.amount', NULL, NULL, 'RCONST2bdcadbe:16c2d9fc74a:-5ba6', 'COST', '<table border=\"1\" cellpadding=\"1\" cellspacing=\"0\">\n    <tr>\n        <td colspan=\"3\">Use Variable: COST</td>\n    </tr>\n    \n        <tr>\n            <th>Greater than</th>\n            <th>Less than or equal to</th>\n            <th>Formula</th>\n        </tr>\n    \n    \n    \n        <tr>\n            <td></td>\n            <td>150000.00</td>\n            <td>100</td>\n        </tr>\n    \n        <tr>\n            <td>150000.00</td>\n            <td>400000.00</td>\n            <td>200</td>\n        </tr>\n    \n        <tr>\n            <td>400000.00</td>\n            <td>850000.00</td>\n            <td>400</td>\n        </tr>\n    \n        <tr>\n            <td>850000.00</td>\n            <td>1200000.00</td>\n            <td>800</td>\n        </tr>\n    \n        <tr>\n            <td>1200000.00</td>\n            <td></td>\n            <td>800 +  (Math.ceil((COST-1200000)/1000000) * 800)</td>\n        </tr>\n    \n</table>', 'range', NULL, NULL, NULL, '[[to:150000.00,value:\"100\",from:0],[to:400000.00,value:\"200\",from:150000.00],[to:850000.00,value:\"400\",from:400000.00],[to:1200000.00,value:\"800\",from:850000.00],[value:\"800 +  (Math.ceil((COST-1200000)/1000000) * 800)\",from:1200000.00]]', NULL, 1);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT67dafb9:15b5100218a:-7c99', 'RACT67dafb9:15b5100218a:-7c9a', 'treasury.actions.AddBillItem.account', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ITMACCT-3859e913:15625f2385d:-6919', 'BUILDING OCCUPANCY FEE', NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT67f85531:15b22c52b19:-7893', 'RACT67f85531:15b22c52b19:-7894', 'ACTPARAM-1bc7542a:15b22baf4c3:-7eb9', NULL, NULL, 'RCOND67f85531:15b22c52b19:-78f7', 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_action_param` VALUES ('RULACT6e008a5f:15b6c73a9f2:-7c34', 'RACT6e008a5f:15b6c73a9f2:-7c37', 'treasury.actions.UpdateBillItemAmount.amount', NULL, NULL, NULL, NULL, 'CUM * 3', 'expression', NULL, NULL, NULL, NULL, NULL, NULL);
@@ -2131,7 +2730,7 @@ INSERT INTO `sys_rule_actiondef_param` VALUES ('obo.actions.ComputeConstructionC
 INSERT INTO `sys_rule_actiondef_param` VALUES ('obo.actions.ComputeConstructionCost.application', 'obo.actions.ComputeConstructionCost', 'application', 1, 'OBO Building Application', NULL, 'var', NULL, NULL, NULL, 'obo.facts.BuildingApplication', NULL);
 INSERT INTO `sys_rule_actiondef_param` VALUES ('treasury.actions.AddBillItem.account', 'treasury.actions.AddBillItem', 'account', 1, 'Account', NULL, 'lookup', 'revenueitem:lookup', 'objid', 'title', NULL, NULL);
 INSERT INTO `sys_rule_actiondef_param` VALUES ('treasury.actions.AddBillItem.amount', 'treasury.actions.AddBillItem', 'amount', 2, 'Amount', NULL, 'expression', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `sys_rule_actiondef_param` VALUES ('treasury.actions.AddBillItem.billcode', 'treasury.actions.AddBillItem', 'billcode', 4, 'Bill Code', NULL, 'lookup', 'billitemcode:lookup', 'objid', 'title', 'string', NULL);
+INSERT INTO `sys_rule_actiondef_param` VALUES ('treasury.actions.AddBillItem.billcode', 'treasury.actions.AddBillItem', 'billcode', 4, 'Bill Code', NULL, 'lookup', 'obo_itemaccount:lookup', 'objid', 'title', 'string', NULL);
 INSERT INTO `sys_rule_actiondef_param` VALUES ('treasury.actions.AddBillItem.txntype', 'treasury.actions.AddBillItem', 'txntype', 3, 'Txn Type', NULL, 'lookup', 'billitemtype:lookup', 'objid', 'title', 'string', NULL);
 INSERT INTO `sys_rule_actiondef_param` VALUES ('treasury.actions.UpdateBillItemAmount.amount', 'treasury.actions.UpdateBillItemAmount', 'amount', 3, 'Amount', NULL, 'expression', NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `sys_rule_actiondef_param` VALUES ('treasury.actions.UpdateBillItemAmount.billitem', 'treasury.actions.UpdateBillItemAmount', 'billitem', 1, 'Bill Item', NULL, 'var', NULL, NULL, NULL, 'treasury.facts.AbstractBillItem', NULL);
@@ -2185,10 +2784,6 @@ INSERT INTO `sys_rule_condition` VALUES ('RC-1b89c680:16a38f14701:-7f6f', 'RUL27
 INSERT INTO `sys_rule_condition` VALUES ('RC-1b89c680:16a38f14701:-7f71', 'RUL27db1036:16a38f07d48:-7617', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-1b89c680:16a38f14701:-7fb7', 'RUL27db1036:16a38f07d48:-7952', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-1b89c680:16a38f14701:-7fba', 'RUL27db1036:16a38f07d48:-7952', 'obo.facts.OboIntegerInfo', 'obo.facts.OboIntegerInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-212ba8c3:15b18f65197:-7feb', 'RUL-75b995c:15b18c6b9a6:-7076', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-212ba8c3:15b18f65197:-7fed', 'RUL-75b995c:15b18c6b9a6:-7076', 'obo.facts.OboApplication', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'APP', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-212ba8c3:15b18f65197:-7ff2', 'RUL-75b995c:15b18c6b9a6:-7087', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-212ba8c3:15b18f65197:-7ff4', 'RUL-75b995c:15b18c6b9a6:-7087', 'obo.facts.OboApplication', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'APP', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-3394437b:16a4396e5cb:-7a73', 'RUL-4267ff2c:16a444aba70:-6950', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-3394437b:16a4396e5cb:-7a76', 'RUL-4267ff2c:16a444aba70:-6950', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-3394437b:16a4396e5cb:-7a94', 'RUL-4267ff2c:16a444aba70:-6a5e', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2227,6 +2822,16 @@ INSERT INTO `sys_rule_condition` VALUES ('RC-3394437b:16a4396e5cb:-7edc', 'RUL-7
 INSERT INTO `sys_rule_condition` VALUES ('RC-3394437b:16a4396e5cb:-7ef6', 'RUL-7385ffbe:16a438b05b7:-7085', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-3394437b:16a4396e5cb:-7ef8', 'RUL-7385ffbe:16a438b05b7:-7085', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-3394437b:16a4396e5cb:-7efa', 'RUL-7385ffbe:16a438b05b7:-7085', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7f6b', 'RUL-29595738:16a4fbe79ee:-79fe', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7f6d', 'RUL-29595738:16a4fbe79ee:-79fe', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7fa5', 'RUL-29595738:16a4fbe79ee:-7bd1', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7fa7', 'RUL-29595738:16a4fbe79ee:-7bd1', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7fba', 'RUL-29595738:16a4fbe79ee:-7d01', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7fbc', 'RUL-29595738:16a4fbe79ee:-7d01', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7fd9', 'RUL-29595738:16a4fbe79ee:-7de3', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7fdb', 'RUL-29595738:16a4fbe79ee:-7de3', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7ff6', 'RUL-29595738:16a4fbe79ee:-7ef1', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-37d558f5:16a4fd0d79e:-7ff8', 'RUL-29595738:16a4fbe79ee:-7ef1', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-39c9f5f6:16a4e3b1db2:-7fa0', 'RUL-301ccfbb:16a4e3ad539:-7c37', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-39c9f5f6:16a4e3b1db2:-7fa3', 'RUL-301ccfbb:16a4e3ad539:-7c37', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-41519066:15b76f8cd83:-7fe2', 'RUL2671fb3e:15b76f0ce63:-73e5', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2285,14 +2890,8 @@ INSERT INTO `sys_rule_condition` VALUES ('RC-59612f04:15b6c1c41a7:-7fee', 'RUL6e
 INSERT INTO `sys_rule_condition` VALUES ('RC-59612f04:15b6c1c41a7:-7ff1', 'RUL6e008a5f:15b6c73a9f2:-7bdf', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-59612f04:15b6c1c41a7:-7ff3', 'RUL6e008a5f:15b6c73a9f2:-7bdf', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-66680c7b:15b3c241e07:-7ff2', 'RUL6cc4d33e:15b3c1e2e72:-708f', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-d80e3d1:15b50f8025e:-7fdb', 'RUL67dafb9:15b5100218a:-7bbc', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-d80e3d1:15b50f8025e:-7fdd', 'RUL67dafb9:15b5100218a:-7bbc', 'obo.facts.OboApplication', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'APP', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-d80e3d1:15b50f8025e:-7fe2', 'RUL67dafb9:15b5100218a:-7bcd', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-d80e3d1:15b50f8025e:-7fe4', 'RUL67dafb9:15b5100218a:-7bcd', 'obo.facts.OboApplication', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'APP', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-d80e3d1:15b50f8025e:-7fe9', 'RUL67dafb9:15b5100218a:-7bde', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-d80e3d1:15b50f8025e:-7feb', 'RUL67dafb9:15b5100218a:-7bde', 'obo.facts.OboApplication', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'APP', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-d80e3d1:15b50f8025e:-7ff0', 'RUL67dafb9:15b5100218a:-7bef', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC-d80e3d1:15b50f8025e:-7ff2', 'RUL67dafb9:15b5100218a:-7bef', 'obo.facts.OboApplication', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'APP', 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-694f0728:16e35852ae8:-7ed7', 'RUL-2a4f39d0:16e35fe5e74:-7bc2', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 3, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RC-694f0728:16e35852ae8:-7edb', 'RUL-2a4f39d0:16e35fe5e74:-7bc2', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-d96c4a7:15bf6365df9:-7fe3', 'RUL-181817d3:15bf4e3b890:-8e0', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC-d96c4a7:15bf6365df9:-7fe8', 'RUL-181817d3:15bf4e3b890:-8e0', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC16c3fcb:16a3a19e4b9:-7a7b', 'RUL59515aa4:16a3a32fa5e:-3fb8', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2387,7 +2986,6 @@ INSERT INTO `sys_rule_condition` VALUES ('RC33115abb:15b366b9fbd:-7fca', 'RUL544
 INSERT INTO `sys_rule_condition` VALUES ('RC33115abb:15b366b9fbd:-7fd2', 'RUL544e84a6:15b372b5faf:-7959', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC33115abb:15b366b9fbd:-7fda', 'RUL544e84a6:15b372b5faf:-7c53', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC33115abb:15b366b9fbd:-7fe2', 'RUL544e84a6:15b372b5faf:-7d4b', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RC475d0d9e:16a330d4f71:-7d34', 'RUL55d9e7c7:16a3522d159:-7c8e', 'obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC525da928:16a4d03cbc9:-7f8c', 'RUL-7c07cdf9:16a4d035b31:-79a9', 'obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC6ad88b42:15bf25a2e71:-7fe1', 'RUL-2fbca757:15bf25c4add:-7b95', 'obo.facts.OboApplication', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'APP', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RC6ad88b42:15bf25a2e71:-7fe3', 'RUL-2fbca757:15bf25c4add:-7b95', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 0, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2418,7 +3016,6 @@ INSERT INTO `sys_rule_condition` VALUES ('RCOND-108b4192:15b3d234d5c:-7989', 'RU
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-108b4192:15b3d234d5c:-7b31', 'RUL-108b4192:15b3d234d5c:-7bfd', 'obo.facts.OboIntegerInfo', 'obo.facts.OboIntegerInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-108b4192:15b3d234d5c:-7bb0', 'RUL-108b4192:15b3d234d5c:-7bfd', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-130f43a2:15b805032ec:-7b75', 'RUL-130f43a2:15b805032ec:-7bc7', 'obo.facts.OboApplication', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'APP', 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND-13ef5da5:16a2fc4602f:-7e2e', 'RUL-108b4192:15b3d234d5c:-67b1', 'obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-181817d3:15bf4e3b890:-12b7', 'RUL-181817d3:15bf4e3b890:-14ca', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-181817d3:15bf4e3b890:-147b', 'RUL-181817d3:15bf4e3b890:-14ca', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-181817d3:15bf4e3b890:-191e', 'RUL-181817d3:15bf4e3b890:-1a11', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2442,11 +3039,9 @@ INSERT INTO `sys_rule_condition` VALUES ('RCOND-2fbca757:15bf25c4add:-6723', 'RU
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-2fbca757:15bf25c4add:-6932', 'RUL-2fbca757:15bf25c4add:-7b95', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 3, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-2fbca757:15bf25c4add:-7625', 'RUL-2fbca757:15bf25c4add:-7b95', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-2fbca757:15bf25c4add:-770f', 'RUL-2fbca757:15bf25c4add:-7bbe', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 2, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND-330a7643:169eb59ff00:-7e45', 'RUL75928924:15b1d4d1c53:-7929', 'obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-3e1b1387:169e65ec32c:-7db0', 'RUL-75b995c:15b18c6b9a6:-73a0', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-41499999:15b23048395:-7df2', 'RUL-41499999:15b23048395:-7ed8', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-4267ff2c:16a444aba70:-592c', 'RUL59515aa4:16a3a32fa5e:-6790', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND-4267ff2c:16a444aba70:-5bbc', 'RUL55d9e7c7:16a3522d159:-7417', 'obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-4267ff2c:16a444aba70:-6bde', 'RUL-4267ff2c:16a444aba70:-6d3b', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-4267ff2c:16a444aba70:-6cd2', 'RUL-4267ff2c:16a444aba70:-6d3b', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-4267ff2c:16a444aba70:-6eb7', 'RUL-4267ff2c:16a444aba70:-6f9a', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2469,6 +3064,8 @@ INSERT INTO `sys_rule_condition` VALUES ('RCOND-50300c99:15b7626649d:-7759', 'RU
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-50300c99:15b7626649d:-7b79', 'RUL-50300c99:15b7626649d:-7ebc', 'obo.facts.OboIntegerInfo', 'obo.facts.OboIntegerInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-50300c99:15b7626649d:-7d8d', 'RUL-50300c99:15b7626649d:-7ebc', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-50300c99:15b7626649d:-7e29', 'RUL-50300c99:15b7626649d:-7ebc', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 0, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND-5187b96a:16c2cb56fb8:-5d8c', 'RUL55d9e7c7:16a3522d159:-7417', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 3, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND-5b80e99d:16e35dd32fa:-7c93', 'RUL3b31d1e8:16a5826cfa5:-72a3', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-685b3759:16a2fd8270e:-7120', 'RUL-46ef70e6:15b192ccb94:-7783', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-685b3759:16a2fd8270e:-7281', 'RUL-46ef70e6:15b192ccb94:-7783', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-685b3759:16a2fd8270e:-7411', 'RUL-46ef70e6:15b192ccb94:-755f', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2477,11 +3074,11 @@ INSERT INTO `sys_rule_condition` VALUES ('RCOND-685b3759:16a2fd8270e:-76bd', 'RU
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-685b3759:16a2fd8270e:-7757', 'RUL-181817d3:15bf4e3b890:-75db', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-685b3759:16a2fd8270e:-796b', 'RUL-181817d3:15bf4e3b890:-73e2', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-685b3759:16a2fd8270e:-79f9', 'RUL-181817d3:15bf4e3b890:-73e2', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND-70eb32d:16c2d244c23:-79ec', 'RUL-70eb32d:16c2d244c23:-7a5e', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-7385ffbe:16a438b05b7:-5e9b', 'RUL-7385ffbe:16a438b05b7:-5fc5', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-7385ffbe:16a438b05b7:-5f5a', 'RUL-7385ffbe:16a438b05b7:-5fc5', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-7385ffbe:16a438b05b7:-7352', 'RUL-7385ffbe:16a438b05b7:-7482', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-7385ffbe:16a438b05b7:-741b', 'RUL-7385ffbe:16a438b05b7:-7482', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND-7385ffbe:16a438b05b7:-7782', 'RUL-7385ffbe:16a438b05b7:-7cab', 'obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-7385ffbe:16a438b05b7:-7b9a', 'RUL-7385ffbe:16a438b05b7:-7cab', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-7385ffbe:16a438b05b7:-7c4e', 'RUL-7385ffbe:16a438b05b7:-7cab', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-7c07cdf9:16a4d035b31:-73dc', 'RUL-181817d3:15bf4e3b890:-357d', 'obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2489,6 +3086,8 @@ INSERT INTO `sys_rule_condition` VALUES ('RCOND-7c07cdf9:16a4d035b31:-76b9', 'RU
 INSERT INTO `sys_rule_condition` VALUES ('RCOND-7c07cdf9:16a4d035b31:-781e', 'RUL-181817d3:15bf4e3b890:-357d', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND10c3c60a:15bf15917a1:-6830', 'RUL3f65f585:15b74b1144b:-61c9', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND10c3c60a:15bf15917a1:-69ff', 'RUL3f65f585:15b74b1144b:-6396', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND16880e27:16e36452698:-7aae', 'RUL55d9e7c7:16a3522d159:-71db', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND16880e27:16e36452698:-7c60', 'RUL3b31d1e8:16a5826cfa5:-72a3', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND1fc2e40d:169eb7a6037:-5f53', 'RUL-46ef70e6:15b192ccb94:-78f4', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND1fc2e40d:169eb7a6037:-5fd7', 'RUL-46ef70e6:15b192ccb94:-78f4', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND1fc2e40d:169eb7a6037:-6474', 'RUL-75b995c:15b18c6b9a6:-6dbc', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2497,17 +3096,30 @@ INSERT INTO `sys_rule_condition` VALUES ('RCOND1fc2e40d:169eb7a6037:-695a', 'RUL
 INSERT INTO `sys_rule_condition` VALUES ('RCOND1fc2e40d:169eb7a6037:-6c54', 'RUL-41499999:15b23048395:-77db', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND1fc2e40d:169eb7a6037:-6ddd', 'RUL-41499999:15b23048395:-77ec', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND1fc2e40d:169eb7a6037:-6fbc', 'RUL-41499999:15b23048395:-77fd', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2017e4e8:16e5e7415f5:-7a19', 'RUL-70eb32d:16c2d244c23:-7a5e', 'obo.facts.RpuCount', 'obo.facts.RpuCount', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND2671fb3e:15b76f0ce63:-7388', 'RUL2671fb3e:15b76f0ce63:-73e5', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND2671fb3e:15b76f0ce63:-761d', 'RUL2671fb3e:15b76f0ce63:-76ce', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND2671fb3e:15b76f0ce63:-77f8', 'RUL2671fb3e:15b76f0ce63:-78d2', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND2671fb3e:15b76f0ce63:-7884', 'RUL2671fb3e:15b76f0ce63:-78d2', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND2e43f3c6:15b48c07f72:-7718', 'RUL-108b4192:15b3d234d5c:-67fc', 'obo.facts.OboIntegerInfo', 'obo.facts.OboIntegerInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND2e43f3c6:15b48c07f72:-7abe', 'RUL-108b4192:15b3d234d5c:-67fc', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-5c0a', 'RUL67dafb9:15b5100218a:-7ea4', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-5cb4', 'RUL67dafb9:15b5100218a:-7ea4', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-5e00', 'RUL67dafb9:15b5100218a:-7bef', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-5f2c', 'RUL67dafb9:15b5100218a:-7bef', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-6078', 'RUL67dafb9:15b5100218a:-7bde', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-6145', 'RUL67dafb9:15b5100218a:-7bde', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-63f6', 'RUL67dafb9:15b5100218a:-7bcd', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-6498', 'RUL67dafb9:15b5100218a:-7bcd', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-6590', 'RUL67dafb9:15b5100218a:-7bbc', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND2bdcadbe:16c2d9fc74a:-669d', 'RUL67dafb9:15b5100218a:-7bbc', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND36ece640:15b3cf0a031:-76c3', 'RUL36ece640:15b3cf0a031:-779a', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND36ece640:15b3cf0a031:-774c', 'RUL36ece640:15b3cf0a031:-779a', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND36ece640:15b3cf0a031:-7a90', 'RUL10bc2a9b:15b3805d39e:-6ef4', 'obo.facts.OboIntegerInfo', 'obo.facts.OboIntegerInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND36ece640:15b3cf0a031:-7b97', 'RUL10bc2a9b:15b3805d39e:-6f05', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND36ece640:15b3cf0a031:-7cd8', 'RUL10bc2a9b:15b3805d39e:-6f74', 'obo.facts.OboIntegerInfo', 'obo.facts.OboIntegerInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND3b31d1e8:16a5826cfa5:-7c8d', 'RUL-75b995c:15b18c6b9a6:-7087', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', 'APP', 3, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND3b31d1e8:16a5826cfa5:-7d02', 'RUL-75b995c:15b18c6b9a6:-7087', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND3b3fed41:16bdd640b5c:-7351', 'RUL3b3fed41:16bdd640b5c:-74d3', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND3b3fed41:16bdd640b5c:-74b1', 'RUL3b3fed41:16bdd640b5c:-74d3', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', 'APP', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND3f65f585:15b74b1144b:-5d0d', 'RUL3f65f585:15b74b1144b:-5fa3', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND3f65f585:15b74b1144b:-5e11', 'RUL3f65f585:15b74b1144b:-5fa3', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND3f65f585:15b74b1144b:-5f56', 'RUL3f65f585:15b74b1144b:-5fa3', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2528,10 +3140,7 @@ INSERT INTO `sys_rule_condition` VALUES ('RCOND4e513a84:15b291a0165:-7eba', 'RUL
 INSERT INTO `sys_rule_condition` VALUES ('RCOND51c2b1c4:15b69a42d57:-7630', 'RUL51c2b1c4:15b69a42d57:-7855', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND51c2b1c4:15b69a42d57:-779f', 'RUL51c2b1c4:15b69a42d57:-7855', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND544e84a6:15b372b5faf:-7e18', 'RUL-26004fad:15b36e43946:-7e78', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND556b1af5:16a3311c7aa:-7972', 'RUL38a7c1c3:15b23504df7:-7667', 'obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND55d9e7c7:16a3522d159:-6f32', 'RUL55d9e7c7:16a3522d159:-7417', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'FIREFEE', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND55d9e7c7:16a3522d159:-7174', 'RUL55d9e7c7:16a3522d159:-71db', 'obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND55d9e7c7:16a3522d159:-73b8', 'RUL55d9e7c7:16a3522d159:-7417', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND59515aa4:16a3a32fa5e:-4696', 'RUL59515aa4:16a3a32fa5e:-6790', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND59515aa4:16a3a32fa5e:-5578', 'RUL51c2b1c4:15b69a42d57:-7e9a', 'obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND59515aa4:16a3a32fa5e:-5f34', 'RUL59515aa4:16a3a32fa5e:-7883', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 2, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2547,8 +3156,6 @@ INSERT INTO `sys_rule_condition` VALUES ('RCOND59515aa4:16a3a32fa5e:-71bc', 'RUL
 INSERT INTO `sys_rule_condition` VALUES ('RCOND59515aa4:16a3a32fa5e:-735a', 'RUL59515aa4:16a3a32fa5e:-7792', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND59515aa4:16a3a32fa5e:-7412', 'RUL59515aa4:16a3a32fa5e:-775e', 'obo.facts.OccupancyType', 'obo.facts.OccupancyType', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND59515aa4:16a3a32fa5e:-7555', 'RUL59515aa4:16a3a32fa5e:-775e', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND67dafb9:15b5100218a:-7d54', 'RUL67dafb9:15b5100218a:-7ea4', 'obo.facts.OboApplication', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'APP', 1, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition` VALUES ('RCOND67dafb9:15b5100218a:-7e37', 'RUL67dafb9:15b5100218a:-7ea4', 'obo.facts.BuildingUse', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'BU', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND67f85531:15b22c52b19:-78f7', 'RUL67f85531:15b22c52b19:-7925', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND6cc4d33e:15b3c1e2e72:-4bda', 'RUL4e513a84:15b291a0165:-7eee', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND6cc4d33e:15b3c1e2e72:-4d55', 'RUL6cc4d33e:15b3c1e2e72:-4e7a', 'obo.facts.OboIntegerInfo', 'obo.facts.OboIntegerInfo', NULL, 2, NULL, NULL, NULL, NULL, NULL, 0);
@@ -2576,6 +3183,17 @@ INSERT INTO `sys_rule_condition` VALUES ('RCOND6e008a5f:15b6c73a9f2:-7cd4', 'RUL
 INSERT INTO `sys_rule_condition` VALUES ('RCOND6e008a5f:15b6c73a9f2:-7d8d', 'RUL6e008a5f:15b6c73a9f2:-7e6e', 'obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND6e008a5f:15b6c73a9f2:-7e16', 'RUL6e008a5f:15b6c73a9f2:-7e6e', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 0, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition` VALUES ('RCOND75928924:15b1d4d1c53:-7328', 'RUL6a083481:15b1d42e454:-7e47', 'treasury.facts.BillItem', 'treasury.facts.BillItem', 'BILLITEM', 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-71e5', 'RUL-7385ffbe:16a438b05b7:-7cab', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 3, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-72dd', 'RUL-29595738:16a4fbe79ee:-7ef1', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 3, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-73ca', 'RUL-29595738:16a4fbe79ee:-7de3', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 3, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-74b7', 'RUL-29595738:16a4fbe79ee:-7d01', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 3, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-75a4', 'RUL-29595738:16a4fbe79ee:-7bd1', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 3, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-7691', 'RUL-29595738:16a4fbe79ee:-79fe', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 3, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-789b', 'RUL55d9e7c7:16a3522d159:-71db', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-7992', 'RUL75928924:15b1d4d1c53:-7929', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-7a85', 'RUL55d9e7c7:16a3522d159:-7c8e', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-7b72', 'RUL38a7c1c3:15b23504df7:-7667', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition` VALUES ('RCOND78d81fce:16e0d2ac78d:-7c75', 'RUL-108b4192:15b3d234d5c:-67b1', 'obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', NULL, 1, NULL, NULL, NULL, NULL, NULL, 0);
 COMMIT;
 
 -- ----------------------------
@@ -2635,8 +3253,6 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-1b89c680:16a38f14701:-7
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-1b89c680:16a38f14701:-7f70', 'RC-1b89c680:16a38f14701:-7f71', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRONIC_FEE\",value:\"ELECTRONIC FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-1b89c680:16a38f14701:-7fb6', 'RC-1b89c680:16a38f14701:-7fb7', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRONIC_FEE\",value:\"ELECTRONIC FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-1b89c680:16a38f14701:-7fb9', 'RC-1b89c680:16a38f14701:-7fba', 'obo.facts.OboIntegerInfo.value', 'value', 'PORT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-212ba8c3:15b18f65197:-7fec', 'RC-212ba8c3:15b18f65197:-7fed', 'FACTFLD-75b995c:15b18c6b9a6:-7c1f', 'floorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-212ba8c3:15b18f65197:-7ff3', 'RC-212ba8c3:15b18f65197:-7ff4', 'FACTFLD-75b995c:15b18c6b9a6:-7c1f', 'floorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-3394437b:16a4396e5cb:-7a72', 'RC-3394437b:16a4396e5cb:-7a73', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ACCESSORY_STRUCTURE_FEE\",value:\"ACCESSORY STRUCTURE FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-3394437b:16a4396e5cb:-7a74', 'RC-3394437b:16a4396e5cb:-7a76', 'obo.facts.OboDecimalInfo.value', 'value', 'SQM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-3394437b:16a4396e5cb:-7a75', 'RC-3394437b:16a4396e5cb:-7a76', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"COLUMBARIUM\",value:\"COLUMBARIUM\"]]', NULL, 0);
@@ -2687,6 +3303,7 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-3394437b:16a4396e5cb:-7
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-3394437b:16a4396e5cb:-7ef5', 'RC-3394437b:16a4396e5cb:-7ef6', 'obo.facts.OboDecimalInfo.value', 'value', 'HEIGHT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-3394437b:16a4396e5cb:-7ef7', 'RC-3394437b:16a4396e5cb:-7ef8', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"B\",value:\"B\"],[key:\"E\",value:\"E\"],[key:\"F\",value:\"F\"],[key:\"G\",value:\"G\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-3394437b:16a4396e5cb:-7ef9', 'RC-3394437b:16a4396e5cb:-7efa', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ACCESSORY_STRUCTURE_FEE\",value:\"ACCESSORY STRUCTURE FEE\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-37d558f5:16a4fd0d79e:-7fa4', 'RC-37d558f5:16a4fd0d79e:-7fa5', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"E\",value:\"E\"],[key:\"F\",value:\"F\"],[key:\"G\",value:\"G\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-39c9f5f6:16a4e3b1db2:-7fa1', 'RC-39c9f5f6:16a4e3b1db2:-7fa3', 'obo.facts.OboDecimalInfo.value', 'value', 'CUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-39c9f5f6:16a4e3b1db2:-7fa2', 'RC-39c9f5f6:16a4e3b1db2:-7fa3', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"EXCAVATION\",value:\"EXCAVATION\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-41519066:15b76f8cd83:-7fe1', 'RC-41519066:15b76f8cd83:-7fe2', 'treasury.facts.BillItem.txntype', 'txntype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_INSPECTION\",value:\"MECHANICAL INSPECTION FEE\"]]', NULL, 0);
@@ -2748,14 +3365,8 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-59612f04:15b6c1c41a7:-7
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-59612f04:15b6c1c41a7:-7fef', 'RC-59612f04:15b6c1c41a7:-7ff1', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"SWIMMING_POOL\",value:\"SWIMMING POOL (cuM)\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-59612f04:15b6c1c41a7:-7ff0', 'RC-59612f04:15b6c1c41a7:-7ff1', 'obo.facts.OboDecimalInfo.value', 'value', 'CUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-59612f04:15b6c1c41a7:-7ff2', 'RC-59612f04:15b6c1c41a7:-7ff3', 'FACTFLD-75b995c:15b18c6b9a6:-7b5f', 'groupid', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"B\",value:\"B\"],[key:\"E\",value:\"E\"],[key:\"F\",value:\"F\"],[key:\"G\",value:\"G\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d80e3d1:15b50f8025e:-7fda', 'RC-d80e3d1:15b50f8025e:-7fdb', 'FACTFLD-75b995c:15b18c6b9a6:-7bcf', 'id', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A1\",value:\"A1\"],[key:\"A2\",value:\"A2\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d80e3d1:15b50f8025e:-7fdc', 'RC-d80e3d1:15b50f8025e:-7fdd', 'FACTFLD-75b995c:15b18c6b9a6:-7c37', 'constructioncost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d80e3d1:15b50f8025e:-7fe1', 'RC-d80e3d1:15b50f8025e:-7fe2', 'FACTFLD-75b995c:15b18c6b9a6:-7bcf', 'id', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"J1\",value:\"J1\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d80e3d1:15b50f8025e:-7fe3', 'RC-d80e3d1:15b50f8025e:-7fe4', 'FACTFLD-75b995c:15b18c6b9a6:-7c37', 'constructioncost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d80e3d1:15b50f8025e:-7fe8', 'RC-d80e3d1:15b50f8025e:-7fe9', 'FACTFLD-75b995c:15b18c6b9a6:-7bcf', 'id', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"C1\",value:\"C1\"],[key:\"C2\",value:\"C2\"],[key:\"D1\",value:\"D1\"],[key:\"D2\",value:\"D2\"],[key:\"D3\",value:\"D3\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d80e3d1:15b50f8025e:-7fea', 'RC-d80e3d1:15b50f8025e:-7feb', 'FACTFLD-75b995c:15b18c6b9a6:-7c37', 'constructioncost', 'COST', 'greater than', '>', NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d80e3d1:15b50f8025e:-7fef', 'RC-d80e3d1:15b50f8025e:-7ff0', 'FACTFLD-75b995c:15b18c6b9a6:-7bcf', 'id', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"B1\",value:\"B1\"],[key:\"E1\",value:\"E1\"],[key:\"E2\",value:\"E2\"],[key:\"E3\",value:\"E3\"],[key:\"F1\",value:\"F1\"],[key:\"G1\",value:\"G1\"],[key:\"G2\",value:\"G2\"],[key:\"G3\",value:\"G3\"],[key:\"G4\",value:\"G4\"],[key:\"G5\",value:\"G5\"],[key:\"H1\",value:\"H1\"],[key:\"H2\",value:\"H2\"],[key:\"H3\",value:\"H3\"],[key:\"I1\",value:\"I1\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d80e3d1:15b50f8025e:-7ff1', 'RC-d80e3d1:15b50f8025e:-7ff2', 'FACTFLD-75b995c:15b18c6b9a6:-7c37', 'constructioncost', 'COST', 'greater than', '>', NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-694f0728:16e35852ae8:-7ed6', 'RC-694f0728:16e35852ae8:-7ed7', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-694f0728:16e35852ae8:-7eda', 'RC-694f0728:16e35852ae8:-7edb', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d96c4a7:15bf6365df9:-7fe1', 'RC-d96c4a7:15bf6365df9:-7fe3', 'obo.facts.OboDecimalInfo.value', 'value', 'SQM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC-d96c4a7:15bf6365df9:-7fe2', 'RC-d96c4a7:15bf6365df9:-7fe3', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"PAINTEDON_ADVERTISING_SIGN\",value:\"PAINTED-ON ADVERTISING SIGN\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC16c3fcb:16a3a19e4b9:-7a79', 'RC16c3fcb:16a3a19e4b9:-7a7b', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"SWIMMING_POOL_USING_INDIGENOUS_MATERIALS\",value:\"SWIMMING POOL USING INDIGENOUS MATERIALS\"]]', NULL, 0);
@@ -2855,7 +3466,6 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC28a83f44:15b74c946cb:-7f
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC28a83f44:15b74c946cb:-7ff0', 'RC28a83f44:15b74c946cb:-7ff1', 'treasury.facts.BillItem.txntype', 'txntype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BLDG_ACCESSORY\",value:\"BLDG ACCESSORY FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC28a83f44:15b74c946cb:-7ff2', 'RC28a83f44:15b74c946cb:-7ff4', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ERECTION_OF_TOWER_TRILON_GUYED\",value:\"ERECTION OF TOWER - TRILON GUYED (HEIGHT IN M)\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC28a83f44:15b74c946cb:-7ff3', 'RC28a83f44:15b74c946cb:-7ff4', 'obo.facts.OboDecimalInfo.value', 'value', 'M', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC475d0d9e:16a330d4f71:-7d33', 'RC475d0d9e:16a330d4f71:-7d34', 'obo.facts.AncillaryPermit.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRONIC\",value:\"ELECTRONIC\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC6ad88b42:15bf25a2e71:-7fe0', 'RC6ad88b42:15bf25a2e71:-7fe1', 'FACTFLD-75b995c:15b18c6b9a6:-7cce', 'apptype', NULL, 'not exist in', 'not matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"INS\"]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC6ad88b42:15bf25a2e71:-7fe2', 'RC6ad88b42:15bf25a2e71:-7fe3', 'FACTFLD-75b995c:15b18c6b9a6:-7bcf', 'id', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"C2\",value:\"C2\"],[key:\"D1\",value:\"D1\"],[key:\"D2\",value:\"D2\"],[key:\"D3\",value:\"D3\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCC6ad88b42:15bf25a2e71:-7fe7', 'RC6ad88b42:15bf25a2e71:-7fe9', 'FACTFLD-75b995c:15b18c6b9a6:-7cce', 'apptype', NULL, 'not exist in', 'not matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"INS\"]', NULL, 1);
@@ -2885,10 +3495,7 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-1250bbc5:16a4a2f1452
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-1250bbc5:16a4a2f1452:-7500', 'RC33115abb:15b366b9fbd:-7fa1', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-1250bbc5:16a4a2f1452:-78b7', 'RC33115abb:15b366b9fbd:-7fc1', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-1250bbc5:16a4a2f1452:-7a08', 'RC33115abb:15b366b9fbd:-7fb9', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 1);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-130f43a2:15b805032ec:-7485', 'RC-212ba8c3:15b18f65197:-7ff4', 'FACTFLD-75b995c:15b18c6b9a6:-7cce', 'apptype', NULL, 'not exist in', 'not matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"INS\"]', NULL, 1);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-130f43a2:15b805032ec:-755f', 'RC-212ba8c3:15b18f65197:-7fed', 'FACTFLD-75b995c:15b18c6b9a6:-7cce', 'apptype', NULL, 'not exist in', 'not matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"INS\"]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-130f43a2:15b805032ec:-7b4f', 'RCOND-130f43a2:15b805032ec:-7b75', 'FACTFLD-75b995c:15b18c6b9a6:-7cce', 'apptype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"INS\"]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-13ef5da5:16a2fc4602f:-7e1e', 'RCOND-13ef5da5:16a2fc4602f:-7e2e', 'obo.facts.AncillaryPermit.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"PLUMBING\",value:\"PLUMBING\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-181817d3:15bf4e3b890:-126e', 'RCOND-181817d3:15bf4e3b890:-12b7', 'obo.facts.OboDecimalInfo.value', 'value', 'SQM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-181817d3:15bf4e3b890:-12ab', 'RCOND-181817d3:15bf4e3b890:-12b7', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"NEON_BUSINESS_SIGN\",value:\"NEON BUSINESS SIGN\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-181817d3:15bf4e3b890:-18d7', 'RCOND-181817d3:15bf4e3b890:-191e', 'obo.facts.OboDecimalInfo.value', 'value', 'SQM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
@@ -2917,8 +3524,11 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-181817d3:15bf4e3b890
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-181817d3:15bf4e3b890:-6a28', 'RC-4dbf9d19:15bf4e01a24:-7fd9', 'FACTFLD-75b995c:15b18c6b9a6:-7c81', 'worktype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"NEW\"]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-181817d3:15bf4e3b890:-6e06', 'RC-4dbf9d19:15bf4e01a24:-7fe4', 'FACTFLD-75b995c:15b18c6b9a6:-7c81', 'worktype', NULL, 'not exist in', 'not matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"NEW\"]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-181817d3:15bf4e3b890:-6ed7', 'RC-4dbf9d19:15bf4e01a24:-7ff1', 'FACTFLD-75b995c:15b18c6b9a6:-7c81', 'worktype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"NEW\"]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-2107f04d:16d283269b3:-7560', 'RCOND55d9e7c7:16a3522d159:-6f32', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FIRE_CONS_TAX\",value:\"FIRE CODE CONTRUCTION TAX\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-24f6e11b:15b6c092725:-5336', 'RCOND-497dd1bf:15b6a2553bf:-77f2', 'treasury.facts.BillItem.txntype', 'txntype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BLDG_ACCESSORY\",value:\"BLDG ACCESSORY FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-24f6e11b:15b6c092725:-5450', 'RCOND51c2b1c4:15b69a42d57:-779f', 'treasury.facts.BillItem.txntype', 'txntype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BLDG_ACCESSORY\",value:\"BLDG ACCESSORY FEE\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-29595738:16a4fbe79ee:-7c95', 'RC-37d558f5:16a4fd0d79e:-7fbc', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"D\",value:\"D\"]]', NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-2a4f39d0:16e35fe5e74:-7a99', 'RC-694f0728:16e35852ae8:-7edb', 'obo.facts.BuildingApplication.zoneclass', 'zoneclass', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"R2\",value:\"MEDIUM DENSITY RESIDENTIAL USE\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-2fbca757:15bf25c4add:-6694', 'RCOND-2fbca757:15bf25c4add:-6723', 'obo.facts.OboDecimalInfo.value', 'value', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-2fbca757:15bf25c4add:-6716', 'RCOND-2fbca757:15bf25c4add:-6723', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"GARAGE\",value:\"GARAGE (AREA SQM)\"],[key:\"BALCONY_TERRACES_LANAI\",value:\"BALCONY TERRACES LANAI (AREA SQM)\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-2fbca757:15bf25c4add:-68bf', 'RCOND-2fbca757:15bf25c4add:-6932', 'obo.facts.OboDecimalInfo.value', 'value', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
@@ -2945,11 +3555,9 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-31b6d01f:16a47e1bc4e
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-31b6d01f:16a47e1bc4e:-6cb9', 'RCOND1fc2e40d:169eb7a6037:-5f53', 'obo.facts.BuildingApplication.worktype', 'worktype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ORIGINAL\",value:\"ORIGINAL\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-31b6d01f:16a47e1bc4e:-6e65', 'RCOND-685b3759:16a2fd8270e:-76bd', 'obo.facts.BuildingApplication.worktype', 'worktype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ADDITION\",value:\"ADDITION\"],[key:\"RENOVATION\",value:\"RENOVATION\"],[key:\"ALTERATION\",value:\"ALTERATION\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-31b6d01f:16a47e1bc4e:-7154', 'RCOND-685b3759:16a2fd8270e:-796b', 'obo.facts.BuildingApplication.worktype', 'worktype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ADDITION\",value:\"ADDITION\"],[key:\"RENOVATION\",value:\"RENOVATION\"],[key:\"ALTERATION\",value:\"ALTERATION\"]]', NULL, 1);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-330a7643:169eb59ff00:-7e35', 'RCOND-330a7643:169eb59ff00:-7e45', 'obo.facts.AncillaryPermit.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRICAL\",value:\"ELECTRICAL\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-3e1b1387:169e65ec32c:-7d95', 'RCOND-3e1b1387:169e65ec32c:-7db0', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A\",value:\"A\"],[key:\"B\",value:\"B\"],[key:\"C\",value:\"C\"],[key:\"D\",value:\"D\"],[key:\"E\",value:\"E\"],[key:\"G\",value:\"G\"],[key:\"H\",value:\"H\"],[key:\"I\",value:\"I\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70:-589b', 'RCOND-4267ff2c:16a444aba70:-592c', 'obo.facts.BuildingApplication.height', 'height', 'HEIGHT', 'greater than', '>', NULL, NULL, NULL, 8.00, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70:-58f0', 'RCOND-4267ff2c:16a444aba70:-592c', 'obo.facts.BuildingApplication.floorarea', 'floorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70:-5bac', 'RCOND-4267ff2c:16a444aba70:-5bbc', 'obo.facts.AncillaryPermit.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FSIC\",value:\"FIRE SAFETY INSPECTION\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70:-5f34', 'RC-3394437b:16a4396e5cb:-7b36', 'obo.facts.OboDecimalInfo.value', 'value', 'CUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70:-613c', 'RC-3394437b:16a4396e5cb:-7b29', 'obo.facts.OboDecimalInfo.value', 'value', 'CUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70:-6b9e', 'RCOND-4267ff2c:16a444aba70:-6bde', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ACCESSORY_STRUCTURE_FEE\",value:\"ACCESSORY STRUCTURE FEE\"]]', NULL, 0);
@@ -2959,7 +3567,6 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70:-6e58', 'RCOND-4267ff2c:16a444aba70:-6eb7', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"WATER_AND_WASTE_WATER_TREATMENT_TANK\",value:\"WATER AND WASTE WATER TREATMENT TANK\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70:-70e9', 'RCOND-4267ff2c:16a444aba70:-7151', 'obo.facts.OboIntegerInfo.value', 'value', 'UNIT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-4267ff2c:16a444aba70:-7135', 'RCOND-4267ff2c:16a444aba70:-7151', 'obo.facts.OboIntegerInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"SWIMMING_POOL_SHOWER_LOCKER_ROOM\",value:\"SWIMMING POOL SHOWER/LOCKER ROOM\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-45a00793:15b5125428a:-7b2d', 'RC-d80e3d1:15b50f8025e:-7fe4', 'FACTFLD-75b995c:15b18c6b9a6:-7c1f', 'floorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-497dd1bf:15b6a2553bf:-771c', 'RCOND-497dd1bf:15b6a2553bf:-7763', 'obo.facts.OboDecimalInfo.value', 'value', 'CUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-497dd1bf:15b6a2553bf:-7757', 'RCOND-497dd1bf:15b6a2553bf:-7763', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BANK_AND_RECORD_VAULT\",value:\"BANK AND RECORD VAULTS (cuM)\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-497dd1bf:15b6a2553bf:-7912', 'RCOND-497dd1bf:15b6a2553bf:-794e', 'FACTFLD-75b995c:15b18c6b9a6:-7c07', 'height', NULL, 'greater than', '>', NULL, NULL, NULL, 8.00, NULL, NULL, NULL, NULL, 0);
@@ -2987,6 +3594,7 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-50300c99:15b7626649d
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-50300c99:15b7626649d:-7b6d', 'RCOND-50300c99:15b7626649d:-7b79', 'obo.facts.OboIntegerInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"SHOWER_LOCKER_ROOM\",value:\"SHOWER/LOCKER ROOMS (UNIT)\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-50300c99:15b7626649d:-7d6b', 'RCOND-50300c99:15b7626649d:-7d8d', 'treasury.facts.BillItem.txntype', 'txntype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BLDG_ACCESSORY\",value:\"BLDG ACCESSORY FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-50300c99:15b7626649d:-7e04', 'RCOND-50300c99:15b7626649d:-7e29', 'FACTFLD-75b995c:15b18c6b9a6:-7b5f', 'groupid', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A\",value:\"A\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-5b80e99d:16e35dd32fa:-7c83', 'RCOND-5b80e99d:16e35dd32fa:-7c93', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-357e', 'RC33115abb:15b366b9fbd:-7f99', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-3694', 'RCOND544e84a6:15b372b5faf:-7e18', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-3873', 'RCOND-108b4192:15b3d234d5c:-7bb0', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 0);
@@ -3004,22 +3612,17 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-604b', 'RC-53717d20:15b4db8478f:-7fe1', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"PLUMBING_FEE\",value:\"PLUMBING FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-6468', 'RC-53717d20:15b4db8478f:-7ff0', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"PLUMBING_FEE\",value:\"PLUMBING FEE\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-6830', 'RC-10cfc191:15b48bf8d6b:-7ff2', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"PLUMBING_FEE\",value:\"PLUMBING FEE\"]]', NULL, 1);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-6b63', 'RCOND2e43f3c6:15b48c07f72:-7abe', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"PLUMBING_FEE\",value:\"PLUMBING FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-726b', 'RCOND-685b3759:16a2fd8270e:-7281', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"B1\",value:\"B1\"],[key:\"C1\",value:\"C1\"],[key:\"E1\",value:\"E1\"],[key:\"E2\",value:\"E2\"],[key:\"E3\",value:\"E3\"],[key:\"F1\",value:\"F1\"],[key:\"G1\",value:\"G1\"],[key:\"G2\",value:\"G2\"],[key:\"G3\",value:\"G3\"],[key:\"G4\",value:\"G4\"],[key:\"G5\",value:\"G5\"],[key:\"H1\",value:\"H1\"],[key:\"H2\",value:\"H2\"],[key:\"H3\",value:\"H3\"],[key:\"H4\",value:\"H4\"],[key:\"I1\",value:\"I1\"],[key:\"J1\",value:\"J1\"],[key:\"J2\",value:\"J2\"],[key:\"J3\",value:\"J3\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-74a7', 'RCOND-685b3759:16a2fd8270e:-74bd', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"C2\",value:\"C2\"],[key:\"D1\",value:\"D1\"],[key:\"D2\",value:\"D2\"],[key:\"D3\",value:\"D3\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-7735', 'RCOND-685b3759:16a2fd8270e:-7757', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A1\",value:\"A1\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-685b3759:16a2fd8270e:-79e3', 'RCOND-685b3759:16a2fd8270e:-79f9', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A2\",value:\"A2\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-70eb32d:16c2d244c23:-79b1', 'RCOND-70eb32d:16c2d244c23:-79ec', 'obo.facts.BuildingApplication.apptype', 'apptype', 'APPTYPE', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7385ffbe:16a438b05b7:-5e33', 'RCOND-7385ffbe:16a438b05b7:-5e9b', 'obo.facts.OboDecimalInfo.value', 'value', 'HEIGHT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7385ffbe:16a438b05b7:-5e7f', 'RCOND-7385ffbe:16a438b05b7:-5e9b', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"STORAGE_SILO\",value:\"STORAGE SILO\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7385ffbe:16a438b05b7:-5f1a', 'RCOND-7385ffbe:16a438b05b7:-5f5a', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ACCESSORY_STRUCTURE_FEE\",value:\"ACCESSORY STRUCTURE FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7385ffbe:16a438b05b7:-72ea', 'RCOND-7385ffbe:16a438b05b7:-7352', 'obo.facts.OboDecimalInfo.value', 'value', 'SQM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7385ffbe:16a438b05b7:-7336', 'RCOND-7385ffbe:16a438b05b7:-7352', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FIREWALL\",value:\"FIREWALL (SEPARATE FROM BUILDING)\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7385ffbe:16a438b05b7:-73db', 'RCOND-7385ffbe:16a438b05b7:-741b', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ACCESSORY_STRUCTURE_FEE\",value:\"ACCESSORY STRUCTURE FEE\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7385ffbe:16a438b05b7:-7772', 'RCOND-7385ffbe:16a438b05b7:-7782', 'obo.facts.AncillaryPermit.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"ZONING\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7385ffbe:16a438b05b7:-7b61', 'RCOND-7385ffbe:16a438b05b7:-7b9a', 'obo.facts.OccupancyType.bldgtype', 'bldgtype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"SNFD\",value:\"SINGLE (NUCLEAR) FAMILY DWELLINGS\"],[key:\"SIDU\",value:\"SINGLE-DETACHED UNITS\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7385ffbe:16a438b05b7:-7c16', 'RCOND-7385ffbe:16a438b05b7:-7c4e', 'obo.facts.BuildingApplication.projectcost', 'projectcost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-75b995c:15b18c6b9a6:-6f47', 'RC-212ba8c3:15b18f65197:-7feb', 'FACTFLD-75b995c:15b18c6b9a6:-7b5f', 'groupid', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"J\",value:\"J\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-75b995c:15b18c6b9a6:-7015', 'RC-212ba8c3:15b18f65197:-7ff2', 'FACTFLD-75b995c:15b18c6b9a6:-7b5f', 'groupid', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"F\",value:\"F\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7c063a88:16a0c629dde:-75dd', 'RC-66680c7b:15b3c241e07:-7ff2', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRICAL_FEE\",value:\"ELECTRICAL FEE\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7c063a88:16a0c629dde:-7710', 'RCOND75928924:15b1d4d1c53:-7328', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRICAL_FEE\",value:\"ELECTRICAL FEE\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7c063a88:16a0c629dde:-7843', 'RCOND-41499999:15b23048395:-7df2', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRICAL_FEE\",value:\"ELECTRICAL FEE\"]]', NULL, 1);
@@ -3032,14 +3635,21 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7c07cdf9:16a4d035b31
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7c07cdf9:16a4d035b31:-769d', 'RCOND-7c07cdf9:16a4d035b31:-76b9', 'obo.facts.OboIntegerInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"INSPECTION_AND_VERIFICATION\",value:\"INSPECTION AND VERIFICATION\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7c07cdf9:16a4d035b31:-77de', 'RCOND-7c07cdf9:16a4d035b31:-781e', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ACCESSORY_FEE\",value:\"ACCESSORY FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7c07cdf9:16a4d035b31:-7948', 'RC525da928:16a4d03cbc9:-7f8c', 'obo.facts.AncillaryPermit.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"GROUND_PREP_EXCAVATION\",value:\"GROUND PREPARATION AND EXCAVATION\"],[key:\"SCAFFOLDING\",value:\"ERECTION OF SCAFFOLDING IN PUBLIC AREAS\"],[key:\"SIGNAGE\",value:\"SIGNAGE\"],[key:\"FENCING\",value:\"FENCING\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7e113ca0:16be475dc7c:-791c', 'RCOND-7385ffbe:16a438b05b7:-7b9a', 'obo.facts.OccupancyType.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A104\",value:\"single (nuclear) family dwellings\"],[key:\"A102\",value:\"single-detached units\"]]', NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7e113ca0:16be475dc7c:-7b11', 'RC-37d558f5:16a4fd0d79e:-7ff8', 'obo.facts.OccupancyType.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"B107\",value:\"accessorias (shop-houses), rowhouses, townhouses, tenements and apartments\"],[key:\"B108\",value:\"multiple privately-owned condominium units or tenement houses (residential building for thex exclusive use of non-leasing occupants not exceeding ten (10) persons and of low-rise type (up to five (5) storeys maximum building height)\"],[key:\"B105\",value:\"townhouses ( each privately owned )\"],[key:\"A201\",value:\"single-attached or duplex or town-houses each privately owned\"]]', NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST-7e113ca0:16be475dc7c:-7d1f', 'RC-37d558f5:16a4fd0d79e:-7fd9', 'obo.facts.OccupancyType.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A202\",value:\"school dormitories (on campus)\"],[key:\"B103\",value:\"boarding and lodging houses\"],[key:\"B110\",value:\"private or off-campus dormitories\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST10c3c60a:15bf15917a1:-680b', 'RCOND10c3c60a:15bf15917a1:-6830', 'FACTFLD-75b995c:15b18c6b9a6:-7b5f', 'groupid', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"B\",value:\"B\"],[key:\"E\",value:\"E\"],[key:\"F\",value:\"F\"],[key:\"G\",value:\"G\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST10c3c60a:15bf15917a1:-69da', 'RCOND10c3c60a:15bf15917a1:-69ff', 'FACTFLD-75b995c:15b18c6b9a6:-7b5f', 'groupid', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"B\",value:\"B\"],[key:\"E\",value:\"E\"],[key:\"F\",value:\"F\"],[key:\"G\",value:\"G\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST16880e27:16e36452698:-7a43', 'RCOND16880e27:16e36452698:-7aae', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST16880e27:16e36452698:-7bf5', 'RCOND16880e27:16e36452698:-7c60', 'obo.facts.BuildingApplication.highercost', 'highercost', 'AMT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST1fc2e40d:169eb7a6037:-5fc1', 'RCOND1fc2e40d:169eb7a6037:-5fd7', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A2\",value:\"A2\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST1fc2e40d:169eb7a6037:-64ec', 'RCOND1fc2e40d:169eb7a6037:-6502', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A1\",value:\"A1\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST1fc2e40d:169eb7a6037:-6931', 'RCOND1fc2e40d:169eb7a6037:-695a', 'obo.facts.BuildingApplication.apptype', 'apptype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"NEW\"]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST1fc2e40d:169eb7a6037:-6c38', 'RCOND1fc2e40d:169eb7a6037:-6c54', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"C\",value:\"C\"],[key:\"D\",value:\"D\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST1fc2e40d:169eb7a6037:-6dc1', 'RCOND1fc2e40d:169eb7a6037:-6ddd', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"E\",value:\"E\"],[key:\"F\",value:\"F\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST1fc2e40d:169eb7a6037:-6fa0', 'RCOND1fc2e40d:169eb7a6037:-6fbc', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A\",value:\"A\"],[key:\"B\",value:\"B\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2017e4e8:16e5e7415f5:-79d0', 'RCOND2017e4e8:16e5e7415f5:-7a19', 'obo.facts.RpuCount.byownercount', 'byownercount', 'BYOWNER', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2017e4e8:16e5e7415f5:-7a03', 'RCOND2017e4e8:16e5e7415f5:-7a19', 'obo.facts.RpuCount.totalcount', 'totalcount', 'TOTAL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2671fb3e:15b76f0ce63:-7341', 'RCOND2671fb3e:15b76f0ce63:-7388', 'obo.facts.OboDecimalInfo.value', 'value', 'KW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2671fb3e:15b76f0ce63:-737c', 'RCOND2671fb3e:15b76f0ce63:-7388', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BOILER\",value:\"BOILER (kW)\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2671fb3e:15b76f0ce63:-75d6', 'RCOND2671fb3e:15b76f0ce63:-761d', 'obo.facts.OboDecimalInfo.value', 'value', 'KW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
@@ -3050,8 +3660,22 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2671fb3e:15b76f0ce63:
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST27db1036:16a38f07d48:-6f7d', 'RC-1b89c680:16a38f14701:-7f42', 'obo.facts.OboIntegerInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ANTENNA_TOWER_COMMUNICATION\",value:\"ANTENNA TOWERS/MASTS OR OTHER STRUCTURES FOR COMMUNICATIONS TRANSMISSION\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST27db1036:16a38f07d48:-70df', 'RC-1b89c680:16a38f14701:-7f39', 'obo.facts.OboIntegerInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRONIC_SIGNAGE\",value:\"ELECTRONIC INDOOR AND OUTDOOR SIGNAGES AND DISPLAY SYSTEMS\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST27db1036:16a38f07d48:-7817', 'RC-1b89c680:16a38f14701:-7fba', 'obo.facts.OboIntegerInfo.category', 'category', NULL, 'equal to', '==', NULL, NULL, NULL, NULL, NULL, 'A', NULL, NULL, 1);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2e43f3c6:15b48c07f72:-76d0', 'RCOND2e43f3c6:15b48c07f72:-7718', 'obo.facts.OboIntegerInfo.value', 'value', 'UNIT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2e43f3c6:15b48c07f72:-770b', 'RCOND2e43f3c6:15b48c07f72:-7718', 'obo.facts.OboIntegerInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"PLUMBING_UNIT\",value:\"PLUMBING UNIT\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-5ba6', 'RCOND2bdcadbe:16c2d9fc74a:-5c0a', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-5c8c', 'RCOND2bdcadbe:16c2d9fc74a:-5cb4', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A1\",value:\"A1\"],[key:\"A2\",value:\"A2\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-5d9c', 'RCOND2bdcadbe:16c2d9fc74a:-5e00', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-5f04', 'RCOND2bdcadbe:16c2d9fc74a:-5f2c', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"B1\",value:\"B1\"],[key:\"E1\",value:\"E1\"],[key:\"E2\",value:\"E2\"],[key:\"E3\",value:\"E3\"],[key:\"F1\",value:\"F1\"],[key:\"G1\",value:\"G1\"],[key:\"G2\",value:\"G2\"],[key:\"G3\",value:\"G3\"],[key:\"G4\",value:\"G4\"],[key:\"G5\",value:\"G5\"],[key:\"H1\",value:\"H1\"],[key:\"H2\",value:\"H2\"],[key:\"H3\",value:\"H3\"],[key:\"I1\",value:\"I1\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6014', 'RCOND2bdcadbe:16c2d9fc74a:-6078', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-611d', 'RCOND2bdcadbe:16c2d9fc74a:-6145', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"C1\",value:\"C1\"],[key:\"C2\",value:\"C2\"],[key:\"D1\",value:\"D1\"],[key:\"D2\",value:\"D2\"],[key:\"D3\",value:\"D3\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-631f', 'RCOND2bdcadbe:16c2d9fc74a:-63f6', 'obo.facts.BuildingApplication.totalfloorarea', 'totalfloorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-646e', 'RCOND2bdcadbe:16c2d9fc74a:-6498', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"J1\",value:\"J1\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6568', 'RCOND2bdcadbe:16c2d9fc74a:-6590', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A1\",value:\"A1\"],[key:\"A2\",value:\"A2\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6639', 'RCOND2bdcadbe:16c2d9fc74a:-669d', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6ac6', 'RCOND-7385ffbe:16a438b05b7:-7c4e', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6c91', 'RC-37d558f5:16a4fd0d79e:-7ff6', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6e5c', 'RC-37d558f5:16a4fd0d79e:-7fdb', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-7027', 'RC-37d558f5:16a4fd0d79e:-7fba', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-71f2', 'RC-37d558f5:16a4fd0d79e:-7fa7', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-748a', 'RC-37d558f5:16a4fd0d79e:-7f6b', 'obo.facts.BuildingApplication.highercost', 'highercost', 'COST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST36ece640:15b3cf0a031:-7667', 'RCOND36ece640:15b3cf0a031:-76c3', 'obo.facts.OboDecimalInfo.value', 'value', 'KW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST36ece640:15b3cf0a031:-76b6', 'RCOND36ece640:15b3cf0a031:-76c3', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"DIESEL_GASOLINE_ENGINE\",value:\"DIESEL/GASOLINE ENGINE\"],[key:\"STEAM_GAS_TURBINE_ENGINE\",value:\"STEAM/GAS TURBINE ENGINE\"],[key:\"HYDRO_NUCLEAR_SOLAR_GEN_UNIT\",value:\"HYDRO NUCLEAR OR SOLAR GENERATING UNIT\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST36ece640:15b3cf0a031:-7a48', 'RCOND36ece640:15b3cf0a031:-7a90', 'obo.facts.OboIntegerInfo.value', 'value', 'HEAD', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
@@ -3060,6 +3684,11 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST36ece640:15b3cf0a031:
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST36ece640:15b3cf0a031:-7b8b', 'RCOND36ece640:15b3cf0a031:-7b97', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"WATER_SUMP\",value:\"WATER SUMP\"],[key:\"SEWAGE_PUMP\",value:\"SEWAGE PUMP\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST36ece640:15b3cf0a031:-7c91', 'RCOND36ece640:15b3cf0a031:-7cd8', 'obo.facts.OboIntegerInfo.value', 'value', 'UNIT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST36ece640:15b3cf0a031:-7ccc', 'RCOND36ece640:15b3cf0a031:-7cd8', 'obo.facts.OboIntegerInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"PRESSURIZED_WATER_HEATER\",value:\"PRESSURIZED WATER HEATER\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3b31d1e8:16a5826cfa5:-7b8b', 'RCOND48d65dac:169e67264db:-7ec5', 'obo.facts.BuildingApplication.totalfloorarea', 'totalfloorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3b31d1e8:16a5826cfa5:-7c46', 'RCOND3b31d1e8:16a5826cfa5:-7c8d', 'obo.facts.BuildingApplication.totalfloorarea', 'totalfloorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3b31d1e8:16a5826cfa5:-7cd8', 'RCOND3b31d1e8:16a5826cfa5:-7d02', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"F\",value:\"F\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3b3fed41:16bdd640b5c:-7320', 'RCOND3b3fed41:16bdd640b5c:-7351', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"J\",value:\"J\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3b3fed41:16bdd640b5c:-746a', 'RCOND3b3fed41:16bdd640b5c:-74b1', 'obo.facts.BuildingApplication.totalfloorarea', 'totalfloorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3f65f585:15b74b1144b:-5cea', 'RCOND3f65f585:15b74b1144b:-5d0d', 'FACTFLD-75b995c:15b18c6b9a6:-7b80', 'classificationid', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"COM\",value:\"COM\"],[key:\"IND\",value:\"IND\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3f65f585:15b74b1144b:-5dca', 'RCOND3f65f585:15b74b1144b:-5e11', 'obo.facts.OboDecimalInfo.value', 'value', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3f65f585:15b74b1144b:-5e05', 'RCOND3f65f585:15b74b1144b:-5e11', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FIXED_OVEN\",value:\"FIXED OVEN (SQM)\"]]', NULL, 0);
@@ -3080,7 +3709,7 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3f65f585:15b74b1144b:
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3f65f585:15b74b1144b:-7528', 'RCOND3f65f585:15b74b1144b:-756f', 'obo.facts.OboDecimalInfo.value', 'value', 'SQM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3f65f585:15b74b1144b:-7563', 'RCOND3f65f585:15b74b1144b:-756f', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FIREWALL_SEPARATE_FROM_BLDG\",value:\"CONSTRUCTION OF FIREWALL SEPARATE FROM BLDG (sqm)\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST3f65f585:15b74b1144b:-75d8', 'RCOND3f65f585:15b74b1144b:-75fa', 'treasury.facts.BillItem.txntype', 'txntype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BLDG_ACCESSORY\",value:\"BLDG ACCESSORY FEE\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST48d65dac:169e67264db:-7e90', 'RCOND48d65dac:169e67264db:-7ec5', 'obo.facts.BuildingApplication.floorarea', 'floorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST40323fc0:16be40fb66a:-7cab', 'RC-37d558f5:16a4fd0d79e:-7f6d', 'obo.facts.OccupancyType.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"E102\",value:\"gasoline filling and service stations\"],[key:\"E220\",value:\"cell (mobile) phone towers\"]]', NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST4cf13b0:15b4dbc7b17:-755d', 'RCOND4cf13b0:15b4dbc7b17:-75c5', 'obo.facts.OboDecimalInfo.value', 'value', 'CUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST4cf13b0:15b4dbc7b17:-75b9', 'RCOND4cf13b0:15b4dbc7b17:-75c5', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"SEPTIC_TANK\",value:\"SEPTIC TANK\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST51c2b1c4:15b69a42d57:-7555', 'RCOND51c2b1c4:15b69a42d57:-7630', 'obo.facts.OboDecimalInfo.value', 'value', 'CUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
@@ -3096,12 +3725,7 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST556b1af5:16a3311c7aa:
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST556b1af5:16a3311c7aa:-72e5', 'RC33115abb:15b366b9fbd:-7fca', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST556b1af5:16a3311c7aa:-7491', 'RC33115abb:15b366b9fbd:-7fd2', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST556b1af5:16a3311c7aa:-76d5', 'RC33115abb:15b366b9fbd:-7fda', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST556b1af5:16a3311c7aa:-7962', 'RCOND556b1af5:16a3311c7aa:-7972', 'obo.facts.AncillaryPermit.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL\",value:\"MECHANICAL\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST556b1af5:16a3311c7aa:-7cf3', 'RC33115abb:15b366b9fbd:-7fe2', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL_FEE\",value:\"MECHANICAL FEE\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST55d9e7c7:16a3522d159:-6ef2', 'RCOND55d9e7c7:16a3522d159:-6f32', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FIRE_INSPECTION_FEE\",value:\"FIRE INSPECTION FEE\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST55d9e7c7:16a3522d159:-6ffe', 'RCOND55d9e7c7:16a3522d159:-73b8', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'not exist in', 'not matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FIRE_INSPECTION_FEE\",value:\"FIRE INSPECTION FEE\"]]', NULL, 1);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST55d9e7c7:16a3522d159:-7146', 'RCOND55d9e7c7:16a3522d159:-7174', 'obo.facts.BuildingApplication.apptype', 'apptype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[\"NEW\",\"RENEW\",\"AMENDATORY\"]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST55d9e7c7:16a3522d159:-737e', 'RCOND55d9e7c7:16a3522d159:-73b8', 'treasury.facts.BillItem.amount', 'amount', 'AMT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST59515aa4:16a3a32fa5e:-433c', 'RC16c3fcb:16a3a19e4b9:-7aff', 'obo.facts.OccupancyType.group', 'group', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A\",value:\"A\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST59515aa4:16a3a32fa5e:-4656', 'RCOND59515aa4:16a3a32fa5e:-4696', 'treasury.facts.BillItem.billcode', 'billcode', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ACCESSORY_STRUCTURE_FEE\",value:\"ACCESSORY STRUCTURE FEE\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST59515aa4:16a3a32fa5e:-5568', 'RCOND59515aa4:16a3a32fa5e:-5578', 'obo.facts.AncillaryPermit.type', 'type', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ACCESSORY_STRUCTURE\",value:\"ACCESSORIES TO BUILDING STRUCTURE\"]]', NULL, 0);
@@ -3124,8 +3748,8 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST59515aa4:16a3a32fa5e:
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST59515aa4:16a3a32fa5e:-73fc', 'RCOND59515aa4:16a3a32fa5e:-7412', 'obo.facts.OccupancyType.division', 'division', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A1\",value:\"A1\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST59515aa4:16a3a32fa5e:-74ed', 'RCOND59515aa4:16a3a32fa5e:-7555', 'obo.facts.OboDecimalInfo.value', 'value', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST59515aa4:16a3a32fa5e:-7539', 'RCOND59515aa4:16a3a32fa5e:-7555', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BALCONY_TERRACE\",value:\"BALCONY, TERRACES, LANAI\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST67dafb9:15b5100218a:-7ce6', 'RCOND67dafb9:15b5100218a:-7d54', 'FACTFLD-75b995c:15b18c6b9a6:-7c37', 'constructioncost', 'COST', 'greater than', '>', NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST67dafb9:15b5100218a:-7e21', 'RCOND67dafb9:15b5100218a:-7e37', 'FACTFLD-75b995c:15b18c6b9a6:-7bcf', 'id', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"A1\",value:\"A1\"],[key:\"A2\",value:\"A2\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST600be745:16db42dd2f7:-7acf', 'RCOND-5187b96a:16c2cb56fb8:-5d8c', 'obo.facts.BuildingApplication.fixedcost', 'fixedcost', 'FIXEDCOST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST600be745:16db42dd2f7:-7b48', 'RCOND-5187b96a:16c2cb56fb8:-5d8c', 'obo.facts.BuildingApplication.projectcost', 'projectcost', 'PROJCOST', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST67f85531:15b22c52b19:-78d9', 'RCOND67f85531:15b22c52b19:-78f7', 'treasury.facts.BillItem.amount', 'amount', NULL, 'equal to', '==', NULL, NULL, NULL, 0.00, NULL, NULL, NULL, NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST6cc4d33e:15b3c1e2e72:-4b93', 'RCOND6cc4d33e:15b3c1e2e72:-4bda', 'obo.facts.OboDecimalInfo.value', 'value', 'KW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST6cc4d33e:15b3c1e2e72:-4bce', 'RCOND6cc4d33e:15b3c1e2e72:-4bda', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BOILER\",value:\"BOILER\"]]', NULL, 0);
@@ -3175,6 +3799,17 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST6e008a5f:15b6c73a9f2:
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST6e008a5f:15b6c73a9f2:-7d46', 'RCOND6e008a5f:15b6c73a9f2:-7d8d', 'obo.facts.OboDecimalInfo.value', 'value', 'CUM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST6e008a5f:15b6c73a9f2:-7d81', 'RCOND6e008a5f:15b6c73a9f2:-7d8d', 'obo.facts.OboDecimalInfo.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"SWIMMING_POOL\",value:\"SWIMMING POOL (cuM)\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST6e008a5f:15b6c73a9f2:-7df4', 'RCOND6e008a5f:15b6c73a9f2:-7e16', 'treasury.facts.BillItem.txntype', 'txntype', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"BLDG_ACCESSORY\",value:\"BLDG ACCESSORY FEE\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-71d5', 'RCOND78d81fce:16e0d2ac78d:-71e5', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-72cd', 'RCOND78d81fce:16e0d2ac78d:-72dd', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-73ba', 'RCOND78d81fce:16e0d2ac78d:-73ca', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-74a7', 'RCOND78d81fce:16e0d2ac78d:-74b7', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7594', 'RCOND78d81fce:16e0d2ac78d:-75a4', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7681', 'RCOND78d81fce:16e0d2ac78d:-7691', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-788b', 'RCOND78d81fce:16e0d2ac78d:-789b', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FIRE\",value:\"Fire Safety\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7982', 'RCOND78d81fce:16e0d2ac78d:-7992', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRICAL\",value:\"Electrical\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7a75', 'RCOND78d81fce:16e0d2ac78d:-7a85', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRONIC\",value:\"Electronic\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7b62', 'RCOND78d81fce:16e0d2ac78d:-7b72', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL\",value:\"Mechanical\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7c65', 'RCOND78d81fce:16e0d2ac78d:-7c75', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"PLUMBING\",value:\"Plumbing\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST7a4cba33:16a44844397:-7362', 'RCOND1fc2e40d:169eb7a6037:-6474', 'obo.facts.BuildingApplication.totalfloorarea', 'totalfloorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST7a4cba33:16a44844397:-756f', 'RCOND1fc2e40d:169eb7a6037:-5f53', 'obo.facts.BuildingApplication.totalfloorarea', 'totalfloorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST7a4cba33:16a44844397:-770a', 'RCOND-685b3759:16a2fd8270e:-7120', 'obo.facts.BuildingApplication.totalfloorarea', 'totalfloorarea', 'AREA', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
@@ -3212,10 +3847,6 @@ INSERT INTO `sys_rule_condition_var` VALUES ('RC-1b89c680:16a38f14701:-7f5f', 'R
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-1b89c680:16a38f14701:-7f68', 'RC-1b89c680:16a38f14701:-7f68', 'RUL27db1036:16a38f07d48:-7606', 'BILLITEM', 'treasury.facts.BillItem', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-1b89c680:16a38f14701:-7f71', 'RC-1b89c680:16a38f14701:-7f71', 'RUL27db1036:16a38f07d48:-7617', 'BILLITEM', 'treasury.facts.BillItem', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-1b89c680:16a38f14701:-7fb7', 'RC-1b89c680:16a38f14701:-7fb7', 'RUL27db1036:16a38f07d48:-7952', 'BILLITEM', 'treasury.facts.BillItem', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-212ba8c3:15b18f65197:-7feb', 'RC-212ba8c3:15b18f65197:-7feb', 'RUL-75b995c:15b18c6b9a6:-7076', 'BU', 'obo.facts.BuildingUse', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-212ba8c3:15b18f65197:-7fed', 'RC-212ba8c3:15b18f65197:-7fed', 'RUL-75b995c:15b18c6b9a6:-7076', 'APP', 'obo.facts.OboApplication', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-212ba8c3:15b18f65197:-7ff2', 'RC-212ba8c3:15b18f65197:-7ff2', 'RUL-75b995c:15b18c6b9a6:-7087', 'BU', 'obo.facts.BuildingUse', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-212ba8c3:15b18f65197:-7ff4', 'RC-212ba8c3:15b18f65197:-7ff4', 'RUL-75b995c:15b18c6b9a6:-7087', 'APP', 'obo.facts.OboApplication', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-3394437b:16a4396e5cb:-7a73', 'RC-3394437b:16a4396e5cb:-7a73', 'RUL-4267ff2c:16a444aba70:-6950', 'BILLITEM', 'treasury.facts.BillItem', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-3394437b:16a4396e5cb:-7a96', 'RC-3394437b:16a4396e5cb:-7a96', 'RUL-4267ff2c:16a444aba70:-6a5e', 'BILLITEM', 'treasury.facts.BillItem', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-3394437b:16a4396e5cb:-7ad5', 'RC-3394437b:16a4396e5cb:-7ad5', 'RUL-4267ff2c:16a444aba70:-6f9a', 'BILLITEM', 'treasury.facts.BillItem', 2);
@@ -3271,14 +3902,6 @@ INSERT INTO `sys_rule_condition_var` VALUES ('RC-59612f04:15b6c1c41a7:-7fe8', 'R
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-59612f04:15b6c1c41a7:-7fee', 'RC-59612f04:15b6c1c41a7:-7fee', 'RUL6e008a5f:15b6c73a9f2:-7bdf', 'BILLITEM', 'treasury.facts.BillItem', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-59612f04:15b6c1c41a7:-7ff3', 'RC-59612f04:15b6c1c41a7:-7ff3', 'RUL6e008a5f:15b6c73a9f2:-7bdf', 'BU', 'obo.facts.BuildingUse', 2);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-66680c7b:15b3c241e07:-7ff2', 'RC-66680c7b:15b3c241e07:-7ff2', 'RUL6cc4d33e:15b3c1e2e72:-708f', 'BILLITEM', 'treasury.facts.BillItem', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-d80e3d1:15b50f8025e:-7fdb', 'RC-d80e3d1:15b50f8025e:-7fdb', 'RUL67dafb9:15b5100218a:-7bbc', 'BU', 'obo.facts.BuildingUse', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-d80e3d1:15b50f8025e:-7fdd', 'RC-d80e3d1:15b50f8025e:-7fdd', 'RUL67dafb9:15b5100218a:-7bbc', 'APP', 'obo.facts.OboApplication', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-d80e3d1:15b50f8025e:-7fe2', 'RC-d80e3d1:15b50f8025e:-7fe2', 'RUL67dafb9:15b5100218a:-7bcd', 'BU', 'obo.facts.BuildingUse', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-d80e3d1:15b50f8025e:-7fe4', 'RC-d80e3d1:15b50f8025e:-7fe4', 'RUL67dafb9:15b5100218a:-7bcd', 'APP', 'obo.facts.OboApplication', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-d80e3d1:15b50f8025e:-7fe9', 'RC-d80e3d1:15b50f8025e:-7fe9', 'RUL67dafb9:15b5100218a:-7bde', 'BU', 'obo.facts.BuildingUse', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-d80e3d1:15b50f8025e:-7feb', 'RC-d80e3d1:15b50f8025e:-7feb', 'RUL67dafb9:15b5100218a:-7bde', 'APP', 'obo.facts.OboApplication', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-d80e3d1:15b50f8025e:-7ff0', 'RC-d80e3d1:15b50f8025e:-7ff0', 'RUL67dafb9:15b5100218a:-7bef', 'BU', 'obo.facts.BuildingUse', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RC-d80e3d1:15b50f8025e:-7ff2', 'RC-d80e3d1:15b50f8025e:-7ff2', 'RUL67dafb9:15b5100218a:-7bef', 'APP', 'obo.facts.OboApplication', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC-d96c4a7:15bf6365df9:-7fe8', 'RC-d96c4a7:15bf6365df9:-7fe8', 'RUL-181817d3:15bf4e3b890:-8e0', 'BILLITEM', 'treasury.facts.BillItem', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC16c3fcb:16a3a19e4b9:-7a7f', 'RC16c3fcb:16a3a19e4b9:-7a7f', 'RUL59515aa4:16a3a32fa5e:-3fb8', 'BILLITEM', 'treasury.facts.BillItem', 2);
 INSERT INTO `sys_rule_condition_var` VALUES ('RC16c3fcb:16a3a19e4b9:-7a8b', 'RC16c3fcb:16a3a19e4b9:-7a8b', 'RUL59515aa4:16a3a32fa5e:-3fec', 'BILLITEM', 'treasury.facts.BillItem', 2);
@@ -3357,8 +3980,6 @@ INSERT INTO `sys_rule_condition_var` VALUES ('RCC-1b89c680:16a38f14701:-7f5c', '
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-1b89c680:16a38f14701:-7f65', 'RC-1b89c680:16a38f14701:-7f66', 'RUL27db1036:16a38f07d48:-7606', 'UNIT', 'integer', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-1b89c680:16a38f14701:-7f6e', 'RC-1b89c680:16a38f14701:-7f6f', 'RUL27db1036:16a38f07d48:-7617', 'LOC', 'integer', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-1b89c680:16a38f14701:-7fb9', 'RC-1b89c680:16a38f14701:-7fba', 'RUL27db1036:16a38f07d48:-7952', 'PORT', 'integer', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCC-212ba8c3:15b18f65197:-7fec', 'RC-212ba8c3:15b18f65197:-7fed', 'RUL-75b995c:15b18c6b9a6:-7076', 'AREA', 'decimal', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCC-212ba8c3:15b18f65197:-7ff3', 'RC-212ba8c3:15b18f65197:-7ff4', 'RUL-75b995c:15b18c6b9a6:-7087', 'AREA', 'decimal', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-3394437b:16a4396e5cb:-7a74', 'RC-3394437b:16a4396e5cb:-7a76', 'RUL-4267ff2c:16a444aba70:-6950', 'SQM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-3394437b:16a4396e5cb:-7a93', 'RC-3394437b:16a4396e5cb:-7a94', 'RUL-4267ff2c:16a444aba70:-6a5e', 'SQM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-3394437b:16a4396e5cb:-7bd7', 'RC-3394437b:16a4396e5cb:-7bd9', 'RUL-4267ff2c:16a444aba70:-7b89', 'CUM', 'decimal', 1);
@@ -3391,10 +4012,7 @@ INSERT INTO `sys_rule_condition_var` VALUES ('RCC-59612f04:15b6c1c41a7:-7fce', '
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-59612f04:15b6c1c41a7:-7fda', 'RC-59612f04:15b6c1c41a7:-7fdb', 'RUL6e008a5f:15b6c73a9f2:-7250', 'CUM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-59612f04:15b6c1c41a7:-7fe4', 'RC-59612f04:15b6c1c41a7:-7fe6', 'RUL6e008a5f:15b6c73a9f2:-7ba0', 'CUM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-59612f04:15b6c1c41a7:-7ff0', 'RC-59612f04:15b6c1c41a7:-7ff1', 'RUL6e008a5f:15b6c73a9f2:-7bdf', 'CUM', 'decimal', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCC-d80e3d1:15b50f8025e:-7fdc', 'RC-d80e3d1:15b50f8025e:-7fdd', 'RUL67dafb9:15b5100218a:-7bbc', 'COST', 'decimal', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCC-d80e3d1:15b50f8025e:-7fe3', 'RC-d80e3d1:15b50f8025e:-7fe4', 'RUL67dafb9:15b5100218a:-7bcd', 'COST', 'decimal', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCC-d80e3d1:15b50f8025e:-7fea', 'RC-d80e3d1:15b50f8025e:-7feb', 'RUL67dafb9:15b5100218a:-7bde', 'COST', 'decimal', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCC-d80e3d1:15b50f8025e:-7ff1', 'RC-d80e3d1:15b50f8025e:-7ff2', 'RUL67dafb9:15b5100218a:-7bef', 'COST', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCC-694f0728:16e35852ae8:-7eda', 'RC-694f0728:16e35852ae8:-7edb', 'RUL-2a4f39d0:16e35fe5e74:-7bc2', 'COST', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC-d96c4a7:15bf6365df9:-7fe1', 'RC-d96c4a7:15bf6365df9:-7fe3', 'RUL-181817d3:15bf4e3b890:-8e0', 'SQM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC16c3fcb:16a3a19e4b9:-7a7a', 'RC16c3fcb:16a3a19e4b9:-7a7b', 'RUL59515aa4:16a3a32fa5e:-3fb8', 'CUM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCC16c3fcb:16a3a19e4b9:-7a86', 'RC16c3fcb:16a3a19e4b9:-7a87', 'RUL59515aa4:16a3a32fa5e:-3fec', 'CUM', 'decimal', 1);
@@ -3463,8 +4081,9 @@ INSERT INTO `sys_rule_condition_var` VALUES ('RCOND-7c07cdf9:16a4d035b31:-781e',
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND10c3c60a:15bf15917a1:-6830', 'RCOND10c3c60a:15bf15917a1:-6830', 'RUL3f65f585:15b74b1144b:-61c9', 'BU', 'obo.facts.BuildingUse', 2);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND10c3c60a:15bf15917a1:-69ff', 'RCOND10c3c60a:15bf15917a1:-69ff', 'RUL3f65f585:15b74b1144b:-6396', 'BU', 'obo.facts.BuildingUse', 2);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND2671fb3e:15b76f0ce63:-7884', 'RCOND2671fb3e:15b76f0ce63:-7884', 'RUL2671fb3e:15b76f0ce63:-78d2', 'BILLITEM', 'treasury.facts.BillItem', 0);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCOND2e43f3c6:15b48c07f72:-7abe', 'RCOND2e43f3c6:15b48c07f72:-7abe', 'RUL-108b4192:15b3d234d5c:-67fc', 'BILLITEM', 'treasury.facts.BillItem', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND36ece640:15b3cf0a031:-774c', 'RCOND36ece640:15b3cf0a031:-774c', 'RUL36ece640:15b3cf0a031:-779a', 'BILLITEM', 'treasury.facts.BillItem', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCOND3b31d1e8:16a5826cfa5:-7c8d', 'RCOND3b31d1e8:16a5826cfa5:-7c8d', 'RUL-75b995c:15b18c6b9a6:-7087', 'APP', 'obo.facts.BuildingApplication', 3);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCOND3b3fed41:16bdd640b5c:-74b1', 'RCOND3b3fed41:16bdd640b5c:-74b1', 'RUL3b3fed41:16bdd640b5c:-74d3', 'APP', 'obo.facts.BuildingApplication', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND3f65f585:15b74b1144b:-5d0d', 'RCOND3f65f585:15b74b1144b:-5d0d', 'RUL3f65f585:15b74b1144b:-5fa3', 'BU', 'obo.facts.BuildingUse', 2);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND3f65f585:15b74b1144b:-5f56', 'RCOND3f65f585:15b74b1144b:-5f56', 'RUL3f65f585:15b74b1144b:-5fa3', 'BILLITEM', 'treasury.facts.BillItem', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND3f65f585:15b74b1144b:-6129', 'RCOND3f65f585:15b74b1144b:-6129', 'RUL3f65f585:15b74b1144b:-61c9', 'BILLITEM', 'treasury.facts.BillItem', 0);
@@ -3478,7 +4097,6 @@ INSERT INTO `sys_rule_condition_var` VALUES ('RCOND4e513a84:15b291a0165:-7eba', 
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND51c2b1c4:15b69a42d57:-779f', 'RCOND51c2b1c4:15b69a42d57:-779f', 'RUL51c2b1c4:15b69a42d57:-7855', 'BILLITEM', 'treasury.facts.BillItem', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND544e84a6:15b372b5faf:-7e18', 'RCOND544e84a6:15b372b5faf:-7e18', 'RUL-26004fad:15b36e43946:-7e78', 'BILLITEM', 'treasury.facts.BillItem', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND55d9e7c7:16a3522d159:-6f32', 'RCOND55d9e7c7:16a3522d159:-6f32', 'RUL55d9e7c7:16a3522d159:-7417', 'FIREFEE', 'treasury.facts.BillItem', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCOND55d9e7c7:16a3522d159:-73b8', 'RCOND55d9e7c7:16a3522d159:-73b8', 'RUL55d9e7c7:16a3522d159:-7417', 'BILLITEM', 'treasury.facts.BillItem', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND59515aa4:16a3a32fa5e:-4696', 'RCOND59515aa4:16a3a32fa5e:-4696', 'RUL59515aa4:16a3a32fa5e:-6790', 'BILLITEM', 'treasury.facts.BillItem', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND59515aa4:16a3a32fa5e:-5f34', 'RCOND59515aa4:16a3a32fa5e:-5f34', 'RUL59515aa4:16a3a32fa5e:-7883', 'BILLITEM', 'treasury.facts.BillItem', 2);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND59515aa4:16a3a32fa5e:-6012', 'RCOND59515aa4:16a3a32fa5e:-6012', 'RUL59515aa4:16a3a32fa5e:-782e', 'BILLITEM', 'treasury.facts.BillItem', 2);
@@ -3486,8 +4104,6 @@ INSERT INTO `sys_rule_condition_var` VALUES ('RCOND59515aa4:16a3a32fa5e:-60f0', 
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND59515aa4:16a3a32fa5e:-61ce', 'RCOND59515aa4:16a3a32fa5e:-61ce', 'RUL59515aa4:16a3a32fa5e:-77c6', 'BILLITEM', 'treasury.facts.BillItem', 2);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND59515aa4:16a3a32fa5e:-62ac', 'RCOND59515aa4:16a3a32fa5e:-62ac', 'RUL59515aa4:16a3a32fa5e:-7792', 'BILLITEM', 'treasury.facts.BillItem', 2);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND59515aa4:16a3a32fa5e:-63aa', 'RCOND59515aa4:16a3a32fa5e:-63aa', 'RUL59515aa4:16a3a32fa5e:-775e', 'BILLITEM', 'treasury.facts.BillItem', 2);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCOND67dafb9:15b5100218a:-7d54', 'RCOND67dafb9:15b5100218a:-7d54', 'RUL67dafb9:15b5100218a:-7ea4', 'APP', 'obo.facts.OboApplication', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCOND67dafb9:15b5100218a:-7e37', 'RCOND67dafb9:15b5100218a:-7e37', 'RUL67dafb9:15b5100218a:-7ea4', 'BU', 'obo.facts.BuildingUse', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND67f85531:15b22c52b19:-78f7', 'RCOND67f85531:15b22c52b19:-78f7', 'RUL67f85531:15b22c52b19:-7925', 'BILLITEM', 'treasury.facts.BillItem', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND6e008a5f:15b6c73a9f2:-7cd4', 'RCOND6e008a5f:15b6c73a9f2:-7cd4', 'RUL6e008a5f:15b6c73a9f2:-7e6e', 'BU', 'obo.facts.BuildingUse', 2);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCOND6e008a5f:15b6c73a9f2:-7e16', 'RCOND6e008a5f:15b6c73a9f2:-7e16', 'RUL6e008a5f:15b6c73a9f2:-7e6e', 'BILLITEM', 'treasury.facts.BillItem', 0);
@@ -3514,7 +4130,6 @@ INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-4267ff2c:16a444aba70:-613c'
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-4267ff2c:16a444aba70:-6c60', 'RCOND-4267ff2c:16a444aba70:-6cd2', 'RUL-4267ff2c:16a444aba70:-6d3b', 'SQM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-4267ff2c:16a444aba70:-6e09', 'RCOND-4267ff2c:16a444aba70:-6eb7', 'RUL-4267ff2c:16a444aba70:-6f9a', 'CUM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-4267ff2c:16a444aba70:-70e9', 'RCOND-4267ff2c:16a444aba70:-7151', 'RUL-4267ff2c:16a444aba70:-7247', 'UNIT', 'integer', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-45a00793:15b5125428a:-7b2d', 'RC-d80e3d1:15b50f8025e:-7fe4', 'RUL67dafb9:15b5100218a:-7bcd', 'AREA', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-497dd1bf:15b6a2553bf:-771c', 'RCOND-497dd1bf:15b6a2553bf:-7763', 'RUL-497dd1bf:15b6a2553bf:-783f', 'CUM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-50300c99:15b7626649d:-4574', 'RCOND-50300c99:15b7626649d:-460b', 'RUL-50300c99:15b7626649d:-4a94', 'AMT', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-50300c99:15b7626649d:-4c5d', 'RCOND-50300c99:15b7626649d:-4ca4', 'RUL-50300c99:15b7626649d:-4d02', 'UNIT', 'integer', 1);
@@ -3524,34 +4139,50 @@ INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-50300c99:15b7626649d:-623a'
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-50300c99:15b7626649d:-730b', 'RCOND-50300c99:15b7626649d:-7355', 'RUL-50300c99:15b7626649d:-7440', 'CUM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-50300c99:15b7626649d:-7601', 'RCOND-50300c99:15b7626649d:-7649', 'RUL-50300c99:15b7626649d:-77a6', 'CUM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-50300c99:15b7626649d:-7b32', 'RCOND-50300c99:15b7626649d:-7b79', 'RUL-50300c99:15b7626649d:-7ebc', 'UNIT', 'integer', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-70eb32d:16c2d244c23:-79b1', 'RCOND-70eb32d:16c2d244c23:-79ec', 'RUL-70eb32d:16c2d244c23:-7a5e', 'APPTYPE', 'string', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-7385ffbe:16a438b05b7:-5e33', 'RCOND-7385ffbe:16a438b05b7:-5e9b', 'RUL-7385ffbe:16a438b05b7:-5fc5', 'HEIGHT', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-7385ffbe:16a438b05b7:-72ea', 'RCOND-7385ffbe:16a438b05b7:-7352', 'RUL-7385ffbe:16a438b05b7:-7482', 'SQM', 'decimal', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCONST-7385ffbe:16a438b05b7:-7c16', 'RCOND-7385ffbe:16a438b05b7:-7c4e', 'RUL-7385ffbe:16a438b05b7:-7cab', 'COST', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST16880e27:16e36452698:-7a43', 'RCOND16880e27:16e36452698:-7aae', 'RUL55d9e7c7:16a3522d159:-71db', 'COST', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST16880e27:16e36452698:-7bf5', 'RCOND16880e27:16e36452698:-7c60', 'RUL3b31d1e8:16a5826cfa5:-72a3', 'AMT', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2017e4e8:16e5e7415f5:-79d0', 'RCOND2017e4e8:16e5e7415f5:-7a19', 'RUL-70eb32d:16c2d244c23:-7a5e', 'BYOWNER', 'integer', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2017e4e8:16e5e7415f5:-7a03', 'RCOND2017e4e8:16e5e7415f5:-7a19', 'RUL-70eb32d:16c2d244c23:-7a5e', 'TOTAL', 'integer', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2671fb3e:15b76f0ce63:-7341', 'RCOND2671fb3e:15b76f0ce63:-7388', 'RUL2671fb3e:15b76f0ce63:-73e5', 'KW', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2671fb3e:15b76f0ce63:-75d6', 'RCOND2671fb3e:15b76f0ce63:-761d', 'RUL2671fb3e:15b76f0ce63:-76ce', 'KW', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2671fb3e:15b76f0ce63:-7799', 'RCOND2671fb3e:15b76f0ce63:-77f8', 'RUL2671fb3e:15b76f0ce63:-78d2', 'TON', 'decimal', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2e43f3c6:15b48c07f72:-76d0', 'RCOND2e43f3c6:15b48c07f72:-7718', 'RUL-108b4192:15b3d234d5c:-67fc', 'UNIT', 'integer', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-5ba6', 'RCOND2bdcadbe:16c2d9fc74a:-5c0a', 'RUL67dafb9:15b5100218a:-7ea4', 'COST', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-5d9c', 'RCOND2bdcadbe:16c2d9fc74a:-5e00', 'RUL67dafb9:15b5100218a:-7bef', 'COST', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6014', 'RCOND2bdcadbe:16c2d9fc74a:-6078', 'RUL67dafb9:15b5100218a:-7bde', 'COST', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-631f', 'RCOND2bdcadbe:16c2d9fc74a:-63f6', 'RUL67dafb9:15b5100218a:-7bcd', 'AREA', 'decimal', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6639', 'RCOND2bdcadbe:16c2d9fc74a:-669d', 'RUL67dafb9:15b5100218a:-7bbc', 'COST', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6ac6', 'RCOND-7385ffbe:16a438b05b7:-7c4e', 'RUL-7385ffbe:16a438b05b7:-7cab', 'COST', 'decimal', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6c91', 'RC-37d558f5:16a4fd0d79e:-7ff6', 'RUL-29595738:16a4fbe79ee:-7ef1', 'COST', 'decimal', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-6e5c', 'RC-37d558f5:16a4fd0d79e:-7fdb', 'RUL-29595738:16a4fbe79ee:-7de3', 'COST', 'decimal', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-7027', 'RC-37d558f5:16a4fd0d79e:-7fba', 'RUL-29595738:16a4fbe79ee:-7d01', 'COST', 'decimal', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-71f2', 'RC-37d558f5:16a4fd0d79e:-7fa7', 'RUL-29595738:16a4fbe79ee:-7bd1', 'COST', 'decimal', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST2bdcadbe:16c2d9fc74a:-748a', 'RC-37d558f5:16a4fd0d79e:-7f6b', 'RUL-29595738:16a4fbe79ee:-79fe', 'COST', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST36ece640:15b3cf0a031:-7667', 'RCOND36ece640:15b3cf0a031:-76c3', 'RUL36ece640:15b3cf0a031:-779a', 'KW', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST36ece640:15b3cf0a031:-7a48', 'RCOND36ece640:15b3cf0a031:-7a90', 'RUL10bc2a9b:15b3805d39e:-6ef4', 'HEAD', 'integer', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST36ece640:15b3cf0a031:-7b50', 'RCOND36ece640:15b3cf0a031:-7b97', 'RUL10bc2a9b:15b3805d39e:-6f05', 'KW', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST36ece640:15b3cf0a031:-7c91', 'RCOND36ece640:15b3cf0a031:-7cd8', 'RUL10bc2a9b:15b3805d39e:-6f74', 'UNIT', 'integer', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST3b31d1e8:16a5826cfa5:-7b8b', 'RCOND48d65dac:169e67264db:-7ec5', 'RUL-75b995c:15b18c6b9a6:-73a0', 'AREA', 'decimal', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST3b31d1e8:16a5826cfa5:-7c46', 'RCOND3b31d1e8:16a5826cfa5:-7c8d', 'RUL-75b995c:15b18c6b9a6:-7087', 'AREA', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST3b3fed41:16bdd640b5c:-746a', 'RCOND3b3fed41:16bdd640b5c:-74b1', 'RUL3b3fed41:16bdd640b5c:-74d3', 'AREA', 'decimal', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST3f65f585:15b74b1144b:-5dca', 'RCOND3f65f585:15b74b1144b:-5e11', 'RUL3f65f585:15b74b1144b:-5fa3', 'AREA', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST3f65f585:15b74b1144b:-6054', 'RCOND3f65f585:15b74b1144b:-609b', 'RUL3f65f585:15b74b1144b:-61c9', 'HEIGHT', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST3f65f585:15b74b1144b:-6278', 'RCOND3f65f585:15b74b1144b:-62bf', 'RUL3f65f585:15b74b1144b:-6396', 'HEIGHT', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST3f65f585:15b74b1144b:-6473', 'RCOND3f65f585:15b74b1144b:-64dd', 'RUL3f65f585:15b74b1144b:-65b4', 'HEIGHT', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST3f65f585:15b74b1144b:-7151', 'RCOND3f65f585:15b74b1144b:-71c9', 'RUL3f65f585:15b74b1144b:-73aa', 'M', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST3f65f585:15b74b1144b:-7528', 'RCOND3f65f585:15b74b1144b:-756f', 'RUL3f65f585:15b74b1144b:-7647', 'SQM', 'decimal', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCONST48d65dac:169e67264db:-7e90', 'RCOND48d65dac:169e67264db:-7ec5', 'RUL-75b995c:15b18c6b9a6:-73a0', 'AREA', 'decimal', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST4cf13b0:15b4dbc7b17:-755d', 'RCOND4cf13b0:15b4dbc7b17:-75c5', 'RUL4cf13b0:15b4dbc7b17:-769d', 'CUM', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST51c2b1c4:15b69a42d57:-7555', 'RCOND51c2b1c4:15b69a42d57:-7630', 'RUL51c2b1c4:15b69a42d57:-7855', 'CUM', 'decimal', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCONST55d9e7c7:16a3522d159:-737e', 'RCOND55d9e7c7:16a3522d159:-73b8', 'RUL55d9e7c7:16a3522d159:-7417', 'AMT', 'decimal', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST59515aa4:16a3a32fa5e:-6c9a', 'RCOND59515aa4:16a3a32fa5e:-6d02', 'RUL59515aa4:16a3a32fa5e:-7883', 'AREA', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST59515aa4:16a3a32fa5e:-6e00', 'RCOND59515aa4:16a3a32fa5e:-6e68', 'RUL59515aa4:16a3a32fa5e:-782e', 'AREA', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST59515aa4:16a3a32fa5e:-6f63', 'RCOND59515aa4:16a3a32fa5e:-6fcb', 'RUL59515aa4:16a3a32fa5e:-77fa', 'AREA', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST59515aa4:16a3a32fa5e:-7154', 'RCOND59515aa4:16a3a32fa5e:-71bc', 'RUL59515aa4:16a3a32fa5e:-77c6', 'AREA', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST59515aa4:16a3a32fa5e:-72f2', 'RCOND59515aa4:16a3a32fa5e:-735a', 'RUL59515aa4:16a3a32fa5e:-7792', 'AREA', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST59515aa4:16a3a32fa5e:-74ed', 'RCOND59515aa4:16a3a32fa5e:-7555', 'RUL59515aa4:16a3a32fa5e:-775e', 'AREA', 'decimal', 1);
-INSERT INTO `sys_rule_condition_var` VALUES ('RCONST67dafb9:15b5100218a:-7ce6', 'RCOND67dafb9:15b5100218a:-7d54', 'RUL67dafb9:15b5100218a:-7ea4', 'COST', 'decimal', 0);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST600be745:16db42dd2f7:-7acf', 'RCOND-5187b96a:16c2cb56fb8:-5d8c', 'RUL55d9e7c7:16a3522d159:-7417', 'FIXEDCOST', 'decimal', 1);
+INSERT INTO `sys_rule_condition_var` VALUES ('RCONST600be745:16db42dd2f7:-7b48', 'RCOND-5187b96a:16c2cb56fb8:-5d8c', 'RUL55d9e7c7:16a3522d159:-7417', 'PROJCOST', 'decimal', 0);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST6cc4d33e:15b3c1e2e72:-4b93', 'RCOND6cc4d33e:15b3c1e2e72:-4bda', 'RUL4e513a84:15b291a0165:-7eee', 'KW', 'decimal', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST6cc4d33e:15b3c1e2e72:-4cf8', 'RCOND6cc4d33e:15b3c1e2e72:-4d55', 'RUL6cc4d33e:15b3c1e2e72:-4e7a', 'UNIT', 'integer', 1);
 INSERT INTO `sys_rule_condition_var` VALUES ('RCONST6cc4d33e:15b3c1e2e72:-4f5a', 'RCOND6cc4d33e:15b3c1e2e72:-4fa2', 'RUL10bc2a9b:15b3805d39e:-7cd0', 'UNIT', 'integer', 1);
@@ -3598,8 +4229,7 @@ CREATE TABLE `sys_rule_deployed` (
 -- Records of sys_rule_deployed
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_rule_deployed` VALUES ('RUL-108b4192:15b3d234d5c:-67b1', '\npackage oboassessment.ADD_PLUMBING_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_PLUMBING_FEE\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.AncillaryPermit (  type matches \"PLUMBING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"PLUMBING_FEE\", \"PLUMBING FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL-108b4192:15b3d234d5c:-67fc', '\npackage oboassessment.PLUMBING_FEE_INSTALLATION;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"PLUMBING_FEE_INSTALLATION\"\n	agenda-group \"compute-plumbing-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OboIntegerInfo (  name matches \"PLUMBING_UNIT\",UNIT:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"PLUMBING_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"UNIT * 24\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-108b4192:15b3d234d5c:-67b1', '\npackage oboassessment.ADD_PLUMBING_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_PLUMBING_FEE\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingPermitSection (  name matches \"PLUMBING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"PLUMBING_FEE\", \"PLUMBING FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-108b4192:15b3d234d5c:-6ad6', '\npackage oboassessment.MECHANICAL_FEE_PNEUMATIC_TUBES_LNM;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_PNEUMATIC_TUBES_LNM\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"PNEUMATIC_TUBE_CONVEYOR_MONORAIL\",LNM:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"LNM\", LNM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( LNM ) * 10\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-108b4192:15b3d234d5c:-6c55', '\npackage oboassessment.MECHANICAL_FEE_OTHER_MACHINERY_EQUIPMENT;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_OTHER_MACHINERY_EQUIPMENT\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"OTHER_MACHINERY_EQUIPMENT\",KW:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"KW\", KW );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( KW ) * 60\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-108b4192:15b3d234d5c:-6fd2', '\npackage oboassessment.MECHANICAL_FEE_PRESSURE_VESSEL;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_PRESSURE_VESSEL\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"PRESSURE_VESSEL\",CUM:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"CUM\", CUM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( CUM ) * 60\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
@@ -3627,10 +4257,15 @@ INSERT INTO `sys_rule_deployed` VALUES ('RUL-181817d3:15bf4e3b890:-af9', '\npack
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-181817d3:15bf4e3b890:-b2e', '\npackage oboassessment.AD_SIGNAGE_OTHER_NEW;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"AD_SIGNAGE_OTHER_NEW\"\n	agenda-group \"compute-accessory\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"OTHER_ADVERTISING_SIGN\",SQM:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"SQM\", SQM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( SQM ) * 24\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-181817d3:15bf4e3b890:-d87', '\npackage oboassessment.AD_SIGNAGE_ILLUMINATED_NEW;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"AD_SIGNAGE_ILLUMINATED_NEW\"\n	agenda-group \"compute-accessory\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"ILLUMINATED_ADVERTISING_SIGN\",SQM:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"SQM\", SQM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( SQM ) * 36\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-26004fad:15b36e43946:-7e78', '\npackage oboassessment.MECHANICAL_FEE_REF_COLD_STORAGE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_REF_COLD_STORAGE\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"REFRIGERATION\",TONS:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"TONS\", TONS );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( TONS )  * 40\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-29595738:16a4fbe79ee:-7bd1', '\npackage oboassessment.COMMERCIAL_INDUSTRIAL_LOCATIONAL_CLEARANCE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"COMMERCIAL_INDUSTRIAL_LOCATIONAL_CLEARANCE\"\n	agenda-group \"compute-zoning-fee\"\n	salience 40000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:highercost ) \n		\n		 obo.facts.OccupancyType (  group matches \"E|F|G\" ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"ZONING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	RangeEntry re0 = new RangeEntry(\"COMMERCIAL_INDUSTRIAL_LOCATIONAL_CLEARANCE\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(COST);\nre0.getParams().put( \"amount\", 0.0 );\nre0.getParams().put( \"billcode\", new KeyValue(\"LOCATIONAL_CLEARANCE_FEE\", \"LOCATIONAL CLEARANCE FEE\") );\ninsert(re0);\n\nend\n\n\n	\nrule \"add-billitem_0_0\"\n	agenda-group \"compute-zoning-fee\"\n	salience 40000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"COMMERCIAL_INDUSTRIAL_LOCATIONAL_CLEARANCE\", decimalvalue < 100000.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"1500\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_1\"\n	agenda-group \"compute-zoning-fee\"\n	salience 40000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"COMMERCIAL_INDUSTRIAL_LOCATIONAL_CLEARANCE\", decimalvalue >= 100000.00, decimalvalue < 500000.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"2000\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_2\"\n	agenda-group \"compute-zoning-fee\"\n	salience 40000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"COMMERCIAL_INDUSTRIAL_LOCATIONAL_CLEARANCE\", decimalvalue >= 500000.00, decimalvalue < 1000000.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"2600\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_3\"\n	agenda-group \"compute-zoning-fee\"\n	salience 40000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"COMMERCIAL_INDUSTRIAL_LOCATIONAL_CLEARANCE\", decimalvalue >= 1000000.00, decimalvalue < 2000000.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"4000\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_4\"\n	agenda-group \"compute-zoning-fee\"\n	salience 40000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"COMMERCIAL_INDUSTRIAL_LOCATIONAL_CLEARANCE\", decimalvalue >= 2000000.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"7000  + ((COST-2000000)* 0.10 * 0.01)\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-29595738:16a4fbe79ee:-7d01', '\npackage oboassessment.INSTITUTIONAL_LOCATIONAL_CLEARANCE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"INSTITUTIONAL_LOCATIONAL_CLEARANCE\"\n	agenda-group \"compute-zoning-fee\"\n	salience 40000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:highercost ) \n		\n		 obo.facts.OccupancyType (  group matches \"D\" ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"ZONING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	RangeEntry re0 = new RangeEntry(\"INSTITUTIONAL_LOCATIONAL_CLEARANCE\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(COST);\nre0.getParams().put( \"amount\", 0.0 );\nre0.getParams().put( \"billcode\", new KeyValue(\"LOCATIONAL_CLEARANCE_FEE\", \"LOCATIONAL CLEARANCE FEE\") );\ninsert(re0);\n\nend\n\n\n	\nrule \"add-billitem_0_0\"\n	agenda-group \"compute-zoning-fee\"\n	salience 40000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"INSTITUTIONAL_LOCATIONAL_CLEARANCE\", decimalvalue < 2000000.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"3000\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_1\"\n	agenda-group \"compute-zoning-fee\"\n	salience 40000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"INSTITUTIONAL_LOCATIONAL_CLEARANCE\", decimalvalue >= 2000000.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"4000 + (( COST - 2000000 ) * 0.10 * 0.01)\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-29595738:16a4fbe79ee:-7de3', '\npackage oboassessment.DORMITORIES_BOARDING_HOUSE_LOCATIONAL_CLEARANCE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"DORMITORIES_BOARDING_HOUSE_LOCATIONAL_CLEARANCE\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:highercost ) \n		\n		 obo.facts.OccupancyType (  type matches \"A202|B103|B110\" ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"ZONING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	RangeEntry re0 = new RangeEntry(\"DORMITORIES_BOARDING_HOUSE_LOCATIONAL_CLEARANCE\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(COST);\nre0.getParams().put( \"amount\", 0.0 );\nre0.getParams().put( \"billcode\", new KeyValue(\"LOCATIONAL_CLEARANCE_FEE\", \"LOCATIONAL CLEARANCE FEE\") );\ninsert(re0);\n\nend\n\n\n	\nrule \"add-billitem_0_0\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"DORMITORIES_BOARDING_HOUSE_LOCATIONAL_CLEARANCE\", decimalvalue < 2000000.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"3000\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_1\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"DORMITORIES_BOARDING_HOUSE_LOCATIONAL_CLEARANCE\", decimalvalue >= 2000000.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"4000 + (( COST - 2000000 ) * 0.10 * 0.01)\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-29595738:16a4fbe79ee:-7ef1', '\npackage oboassessment.APARTMENT_TOWNHOUSES_LOCATIONAL_CLEARANCE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"APARTMENT_TOWNHOUSES_LOCATIONAL_CLEARANCE\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:highercost ) \n		\n		 obo.facts.OccupancyType (  type matches \"B107|B108|B105|A201\" ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"ZONING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	RangeEntry re0 = new RangeEntry(\"APARTMENT_TOWNHOUSES_LOCATIONAL_CLEARANCE\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(COST);\nre0.getParams().put( \"amount\", 0.0 );\nre0.getParams().put( \"billcode\", new KeyValue(\"LOCATIONAL_CLEARANCE_FEE\", \"LOCATIONAL CLEARANCE FEE\") );\ninsert(re0);\n\nend\n\n\n	\nrule \"add-billitem_0_0\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"APARTMENT_TOWNHOUSES_LOCATIONAL_CLEARANCE\", decimalvalue < 500000.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"1500\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_1\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"APARTMENT_TOWNHOUSES_LOCATIONAL_CLEARANCE\", decimalvalue >= 500000.00, decimalvalue < 2000000.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"2000\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_2\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"APARTMENT_TOWNHOUSES_LOCATIONAL_CLEARANCE\", decimalvalue >= 2000000.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"3600 + (( COST - 2000000 ) * 0.10 * 0.01)\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-2a4f39d0:16e35fe5e74:-7bc2', '\npackage oboassessment.LOCATIONAL_FEE_MEDIUM_DENSITY;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"LOCATIONAL_FEE_MEDIUM_DENSITY\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:highercost,zoneclass matches \"R2\" ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"ZONING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	RangeEntry re0 = new RangeEntry(\"LOCATIONAL_FEE_MEDIUM_DENSITY\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(COST);\nre0.getParams().put( \"amount\", 0.0 );\nre0.getParams().put( \"billcode\", new KeyValue(\"LOCATIONAL_CLEARANCE_FEE\", \"LOCATIONAL CLEARANCE FEE\") );\ninsert(re0);\n\nend\n\n\n	\nrule \"add-billitem_0_0\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"LOCATIONAL_FEE_MEDIUM_DENSITY\", decimalvalue < 2000000.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"7000\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_1\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"LOCATIONAL_FEE_MEDIUM_DENSITY\", decimalvalue >= 2000000.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"8000 + (( COST-2000000) * 0.10 * 0.01 )\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-301ccfbb:16a4e3ad539:-7c37', '\npackage oboassessment.ACC_FEE_EXCAVATION;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ACC_FEE_EXCAVATION\"\n	agenda-group \"compute-accessory\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OboDecimalInfo (  name matches \"EXCAVATION\",CUM:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"CUM\", CUM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"CUM * 3\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL-41499999:15b23048395:-77db', '\npackage oboassessment.ELECTRIC_METER_INSTIUTIONAL;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ELECTRIC_METER_INSTIUTIONAL\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n		 obo.facts.OccupancyType (  group matches \"C|D\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"ELECTRIC_METER\",UNIT:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"UNIT  * 30\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL-41499999:15b23048395:-77ec', '\npackage oboassessment.ELECTRIC_METER_COMMERCIAL_INDUSTRIAL;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ELECTRIC_METER_COMMERCIAL_INDUSTRIAL\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n		 obo.facts.OccupancyType (  group matches \"E|F\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"ELECTRIC_METER\",UNIT:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"UNIT *  60\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL-41499999:15b23048395:-77fd', '\npackage oboassessment.ELECTRIC_METER_RESIDENTIAL;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ELECTRIC_METER_RESIDENTIAL\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n		 obo.facts.OccupancyType (  group matches \"A|B\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"ELECTRIC_METER\",NUM_METER:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"NUM_METER\", NUM_METER );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"NUM_METER * 15\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-41499999:15b23048395:-77db', '\npackage oboassessment.ELECTRIC_METER_INSTIUTIONAL;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ELECTRIC_METER_INSTIUTIONAL\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n		 obo.facts.OccupancyType (  group matches \"C|D\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"ELECTRIC_METER\",UNIT:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"UNIT  * (30 + 12)\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-41499999:15b23048395:-77ec', '\npackage oboassessment.ELECTRIC_METER_COMMERCIAL_INDUSTRIAL;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ELECTRIC_METER_COMMERCIAL_INDUSTRIAL\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n		 obo.facts.OccupancyType (  group matches \"E|F\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"ELECTRIC_METER\",UNIT:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"UNIT *  (60 + 36 )\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-41499999:15b23048395:-77fd', '\npackage oboassessment.ELECTRIC_METER_RESIDENTIAL;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ELECTRIC_METER_RESIDENTIAL\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n		 obo.facts.OccupancyType (  group matches \"A|B\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"ELECTRIC_METER\",NUM_METER:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"NUM_METER\", NUM_METER );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"NUM_METER * ( 15 + 15 )\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-41499999:15b23048395:-7d1e', '\npackage oboassessment.GUYING_ATTACHMENT_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"GUYING_ATTACHMENT_FEE\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"GUYING_ATTACHMENT\",UNIT:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"UNIT * 30\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-41499999:15b23048395:-7ed8', '\npackage oboassessment.POLE_ATTACHMENT_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"POLE_ATTACHMENT_FEE\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OboIntegerInfo (  name matches \"POWER_SUPPLY_POLE_LOCATION\",POLES:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"POLES\", POLES );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"POLES * 30\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-4267ff2c:16a444aba70:-6950', '\npackage oboassessment.COLUMBARIUM_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"COLUMBARIUM_FEE\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OboDecimalInfo (  name matches \"COLUMBARIUM\",SQM:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"SQM\", SQM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"SQM * 18\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
@@ -3651,6 +4286,7 @@ INSERT INTO `sys_rule_deployed` VALUES ('RUL-5a2a6f0f:15b37b47575:-72e4', '\npac
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-5a2a6f0f:15b37b47575:-72f5', '\npackage oboassessment.MECHANICAL_FEE_FUNICULAR_KW;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_FUNICULAR_KW\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"FUNICULAR\",KW:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"KW\", KW );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( KW )  * 200\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-5a2a6f0f:15b37b47575:-7306', '\npackage oboassessment.MECHANICAL_FEE_ESCALATOR_LNM;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_ESCALATOR_LNM\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"ESCALATOR_LINEAL\",LNM:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"LNM\", LNM );\n		\n	RangeEntry re0 = new RangeEntry(\"MECHANICAL_FEE_ESCALATOR_LNM\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(LNM);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"MECHANICAL_FEE_ESCALATOR_LNM\", decimalvalue < 20.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"@ROUND( LNM  * 20 )\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"MECHANICAL_FEE_ESCALATOR_LNM\", decimalvalue >= 20.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"400 + (  Math.ceil(LNM-20) * 10 )\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-5a2a6f0f:15b37b47575:-7317', '\npackage oboassessment.MECHANICAL_FEE_ESCALATOR_KW;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_ESCALATOR_KW\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"ESCALATOR\",KW:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"KW\", KW );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( KW  )  * 10\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-70eb32d:16c2d244c23:-7a5e', '\npackage oboassessment.TAX_CLEARANCE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"TAX_CLEARANCE\"\n	agenda-group \"pre-summary\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  APPTYPE:apptype ) \n		\n		 obo.facts.RpuCount (  TOTAL:totalcount,BYOWNER:byownercount ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"APPTYPE\", APPTYPE );\n		\n		bindings.put(\"TOTAL\", TOTAL );\n		\n		bindings.put(\"BYOWNER\", BYOWNER );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"50 * TOTAL\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"TAX_DEC\", \"TAX DECLARATION\") );\naction.execute( \"add-billitem\",_p0,drools);\nMap _p1 = new HashMap();\n_p1.put( \"amount\", (new ActionExpression(\"50 * BYOWNER\", bindings)) );\n_p1.put( \"billcode\", new KeyValue(\"TAX_CLEARANCE\", \"TAX CLEARANCE\") );\naction.execute( \"add-billitem\",_p1,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-7385ffbe:16a438b05b7:-5b9d', '\npackage oboassessment.CHIMNEY_ACCESSORY_FEE_GROUP_B_E_F_G;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"CHIMNEY_ACCESSORY_FEE_GROUP_B_E_F_G\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OccupancyType (  group matches \"B|E|F|G\" ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"CHIMNEY\",HEIGHT:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"HEIGHT\", HEIGHT );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	RangeEntry re0 = new RangeEntry(\"CHIMNEY_ACCESSORY_FEE_GROUP_B_E_F_G\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(HEIGHT);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"CHIMNEY_ACCESSORY_FEE_GROUP_B_E_F_G\", decimalvalue <= 10.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"HEIGHT * 48\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"CHIMNEY_ACCESSORY_FEE_GROUP_B_E_F_G\", decimalvalue > 10.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"480 + (( HEIGHT-10)*2)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-7385ffbe:16a438b05b7:-5cab', '\npackage oboassessment.SMOKESTACK_ACCESSORY_FEE_GROUP_B_E_F_G;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"SMOKESTACK_ACCESSORY_FEE_GROUP_B_E_F_G\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OccupancyType (  group matches \"B|E|F|G\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"SMOKESTACK\",HEIGHT:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"HEIGHT\", HEIGHT );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	RangeEntry re0 = new RangeEntry(\"SMOKESTACK_ACCESSORY_FEE_GROUP_B_E_F_G\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(HEIGHT);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"SMOKESTACK_ACCESSORY_FEE_GROUP_B_E_F_G\", decimalvalue <= 10.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"HEIGHT * 240\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"SMOKESTACK_ACCESSORY_FEE_GROUP_B_E_F_G\", decimalvalue > 10.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"2400 + (( HEIGHT-10)*12)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-7385ffbe:16a438b05b7:-5fc5', '\npackage oboassessment.STORAGE_SILO_ACCESSORY_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"STORAGE_SILO_ACCESSORY_FEE\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"STORAGE_SILO\",HEIGHT:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"HEIGHT\", HEIGHT );\n		\n	RangeEntry re0 = new RangeEntry(\"STORAGE_SILO_ACCESSORY_FEE\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(HEIGHT);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"STORAGE_SILO_ACCESSORY_FEE\", decimalvalue <= 10.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"HEIGHT * 2400\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"STORAGE_SILO_ACCESSORY_FEE\", decimalvalue > 10.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"24000 + ((HEIGHT-10)*150)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
@@ -3661,9 +4297,10 @@ INSERT INTO `sys_rule_deployed` VALUES ('RUL-7385ffbe:16a438b05b7:-6feb', '\npac
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-7385ffbe:16a438b05b7:-6ffc', '\npackage oboassessment.TOWER_SELF_SUPPORTING_ACCESSORY_FEE_GROUP_A;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"TOWER_SELF_SUPPORTING_ACCESSORY_FEE_GROUP_A\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OccupancyType (  group matches \"A\" ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING\",HEIGHT:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"HEIGHT\", HEIGHT );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"HEIGHT * 500;\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-7385ffbe:16a438b05b7:-7085', '\npackage oboassessment.TOWER_SELF_SUPPORTING_ACCESSORY_FEE_GROUP_B_E_F_G;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"TOWER_SELF_SUPPORTING_ACCESSORY_FEE_GROUP_B_E_F_G\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OccupancyType (  group matches \"B|E|F|G\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING\",HEIGHT:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"HEIGHT\", HEIGHT );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	RangeEntry re0 = new RangeEntry(\"TOWER_SELF_SUPPORTING_ACCESSORY_FEE_GROUP_B_E_F_G\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(HEIGHT);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"TOWER_SELF_SUPPORTING_ACCESSORY_FEE_GROUP_B_E_F_G\", decimalvalue <= 10.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"2400 * HEIGHT\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"TOWER_SELF_SUPPORTING_ACCESSORY_FEE_GROUP_B_E_F_G\", decimalvalue > 10.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"24000 + ((HEIGHT-10)*120)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-7385ffbe:16a438b05b7:-7482', '\npackage oboassessment.FIREWALL_ACCESSORY_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"FIREWALL_ACCESSORY_FEE\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"FIREWALL\",SQM:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"SQM\", SQM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"return  ((SQM * 3) < 48) ? 48 : (SQM * 3) ;\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL-7385ffbe:16a438b05b7:-7cab', '\npackage oboassessment.SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:projectcost ) \n		\n		 obo.facts.OccupancyType (  bldgtype matches \"SNFD|SIDU\" ) \n		\n		 obo.facts.AncillaryPermit (  type matches \"ZONING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	RangeEntry re0 = new RangeEntry(\"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(COST);\nre0.getParams().put( \"amount\", 0.0 );\nre0.getParams().put( \"billcode\", new KeyValue(\"LOCATIONAL_CLEARANCE_FEE\", \"LOCATIONAL CLEARANCE FEE\") );\ninsert(re0);\n\nend\n\n\n	\nrule \"add-billitem_0_0\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\", decimalvalue <= 100000.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"500\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_1\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\", decimalvalue > 100000.00, decimalvalue <= 200000.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"700\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_2\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\", decimalvalue > 200000.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"800 + (( COST - 200000) * 0.10 * 0.01) \", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-7385ffbe:16a438b05b7:-7cab', '\npackage oboassessment.SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:highercost ) \n		\n		 obo.facts.OccupancyType (  type matches \"A104|A102\" ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"ZONING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	RangeEntry re0 = new RangeEntry(\"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(COST);\nre0.getParams().put( \"amount\", 0.0 );\nre0.getParams().put( \"billcode\", new KeyValue(\"LOCATIONAL_CLEARANCE_FEE\", \"LOCATIONAL CLEARANCE FEE\") );\ninsert(re0);\n\nend\n\n\n	\nrule \"add-billitem_0_0\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\", decimalvalue < 100000.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"500\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_1\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\", decimalvalue >= 100000.00, decimalvalue < 200000.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"700\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_2\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"SINGLE_RESIDENTIAL_LOCATIONAL_CLEARANCE\", decimalvalue >= 200000.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"720 + ((( COST - 200000) * 0.01)/10) \", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-75b995c:15b18c6b9a6:-6dbc', '\npackage oboassessment.BLDG_FEE_A1;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"BLDG_FEE_A1\"\n	agenda-group \"compute-bldgfee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  worktype matches \"ORIGINAL\",AREA:totalfloorarea ) \n		\n		 obo.facts.OccupancyType (  division matches \"A1\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"AREA\", AREA );\n		\n	RangeEntry re0 = new RangeEntry(\"BLDG_FEE_A1\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(AREA);\nre0.getParams().put( \"amount\", 0.0 );\nre0.getParams().put( \"billcode\", new KeyValue(\"BUILDING_PERMIT_FEE\", \"BUILDING PERMIT FEE\") );\ninsert(re0);\n\nend\n\n\n	\nrule \"add-billitem_0_0\"\n	agenda-group \"compute-bldgfee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"BLDG_FEE_A1\", decimalvalue <= 20.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"2.0 * AREA\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_1\"\n	agenda-group \"compute-bldgfee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"BLDG_FEE_A1\", decimalvalue > 20.00, decimalvalue <= 50.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"3.40 * AREA\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_2\"\n	agenda-group \"compute-bldgfee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"BLDG_FEE_A1\", decimalvalue > 50.00, decimalvalue <= 100.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"4.80 * AREA\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_3\"\n	agenda-group \"compute-bldgfee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"BLDG_FEE_A1\", decimalvalue > 100.00, decimalvalue <= 150.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"6.0 * AREA\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	\nrule \"add-billitem_0_4\"\n	agenda-group \"compute-bldgfee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"BLDG_FEE_A1\", decimalvalue > 150.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"7.20 * AREA\", bindings)) );	\n		 \n		action.execute( \"add-billitem\",params, drools);\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL-75b995c:15b18c6b9a6:-73a0', '\npackage oboconstructioncost.COMPUTE_CONSTRUCTION_COST_FOR_A_B_C_D_E_G_H_I;\nimport oboconstructioncost.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"COMPUTE_CONSTRUCTION_COST_FOR_A_B_C_D_E_G_H_I\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		APP: obo.facts.BuildingApplication (  AREA:floorarea ) \n		\n		 obo.facts.OccupancyType (  group matches \"A|B|C|D|E|G|H|I\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"AREA\", AREA );\n		\n		bindings.put(\"APP\", APP );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"application\", APP );\n_p0.put( \"amount\", (new ActionExpression(\"AREA  * 10000\", bindings)) );\naction.execute( \"compute-construction-cost\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-75b995c:15b18c6b9a6:-7087', '\npackage oboconstructioncost.COMPUTE_CONSTRUCTION_COST_FOR_F;\nimport oboconstructioncost.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"COMPUTE_CONSTRUCTION_COST_FOR_F\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OccupancyType (  group matches \"F\" ) \n		\n		APP: obo.facts.BuildingApplication (  AREA:totalfloorarea ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"AREA\", AREA );\n		\n		bindings.put(\"APP\", APP );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"application\", APP );\n_p0.put( \"amount\", (new ActionExpression(\"AREA * 8000\", bindings)) );\naction.execute( \"compute-construction-cost\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL-75b995c:15b18c6b9a6:-73a0', '\npackage oboconstructioncost.COMPUTE_CONSTRUCTION_COST_FOR_A_B_C_D_E_G_H_I;\nimport oboconstructioncost.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"COMPUTE_CONSTRUCTION_COST_FOR_A_B_C_D_E_G_H_I\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		APP: obo.facts.BuildingApplication (  AREA:totalfloorarea ) \n		\n		 obo.facts.OccupancyType (  group matches \"A|B|C|D|E|G|H|I\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"AREA\", AREA );\n		\n		bindings.put(\"APP\", APP );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"application\", APP );\n_p0.put( \"amount\", (new ActionExpression(\"AREA  * 10000\", bindings)) );\naction.execute( \"compute-construction-cost\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL-7c07cdf9:16a4d035b31:-79a9', '\npackage oboassessment.ADD_ACCESSORY_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_ACCESSORY_FEE\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.AncillaryPermit (  type matches \"GROUND_PREP_EXCAVATION|SCAFFOLDING|SIGNAGE|FENCING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"ACCESSORY_FEE\", \"ACCESSORY FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL10bc2a9b:15b3805d39e:-6ef4', '\npackage oboassessment.MECHANICAL_FEE_FIRE_SPRINKLER_SYSTEM;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_FIRE_SPRINKLER_SYSTEM\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"FIRE_SPRINKLER\",HEAD:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"HEAD\", HEAD );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"HEAD * 4\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL10bc2a9b:15b3805d39e:-6f05', '\npackage oboassessment.MECHANICAL_FEE_WATER_SUMP;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_WATER_SUMP\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"WATER_SUMP|SEWAGE_PUMP\",KW:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"KW\", KW );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil(KW)   * 60\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
@@ -3680,7 +4317,9 @@ INSERT INTO `sys_rule_deployed` VALUES ('RUL27db1036:16a38f07d48:-7617', '\npack
 INSERT INTO `sys_rule_deployed` VALUES ('RUL27db1036:16a38f07d48:-7952', '\npackage oboassessment.ELECTRONIC_FEE_GROUP_A;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ELECTRONIC_FEE_GROUP_A\"\n	agenda-group \"compute-electronic-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRONIC_FEE\" ) \n		\n		 obo.facts.OboIntegerInfo (  PORT:value,category == \"A\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"PORT\", PORT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"PORT * 2.4\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL2e43f3c6:15b48c07f72:-78ea', '\npackage oboassessment.PLUMBING_FEE_VALUE_AT_7;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"PLUMBING_FEE_VALUE_AT_7\"\n	agenda-group \"compute-plumbing-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OboIntegerInfo (  name matches \"WATER_CLOSET|LAVATORY|SLOP_SINK|BATH_TUB|GREASE_TRAP|GARAGE_TRAP|GAS_FIRED_WATER_HEATER\",UNIT:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"PLUMBING_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"7 * UNIT\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL36ece640:15b3cf0a031:-779a', '\npackage oboassessment.MECHANICAL_FEE_ENGINES;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_ENGINES\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"DIESEL_GASOLINE_ENGINE|STEAM_GAS_TURBINE_ENGINE|HYDRO_NUCLEAR_SOLAR_GEN_UNIT\",KW:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"KW\", KW );\n		\n	RangeEntry re0 = new RangeEntry(\"MECHANICAL_FEE_ENGINES\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(KW);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"MECHANICAL_FEE_ENGINES\", decimalvalue <= 50.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"25 * KW\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"MECHANICAL_FEE_ENGINES\", decimalvalue > 50.00, decimalvalue <= 100.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"1250 + (( KW-50) * 20)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_2\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"MECHANICAL_FEE_ENGINES\", decimalvalue > 100.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"2250 + ((KW-100) * 3)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL38a7c1c3:15b23504df7:-7667', '\npackage oboassessment.ADD_MECHANICAL_FEE_DEFAULT;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_MECHANICAL_FEE_DEFAULT\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.AncillaryPermit (  type matches \"MECHANICAL\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"MECHANICAL_FEE\", \"MECHANICAL FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL38a7c1c3:15b23504df7:-7667', '\npackage oboassessment.ADD_MECHANICAL_FEE_DEFAULT;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_MECHANICAL_FEE_DEFAULT\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingPermitSection (  name matches \"MECHANICAL\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"MECHANICAL_FEE\", \"MECHANICAL FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL3b31d1e8:16a5826cfa5:-72a3', '\npackage oboassessment.UPLR_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"UPLR_FEE\"\n	agenda-group \"summary\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  AMT:highercost ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"ZONING\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"AMT\", AMT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"( AMT * 0.01 < 10 ) ? 10 : (AMT * 0.01)\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"UPLR\", \"UPLR\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL3b3fed41:16bdd640b5c:-74d3', '\npackage oboconstructioncost.NEW_CONSTRUCTION_COST_FOR_ACCESSORY;\nimport oboconstructioncost.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"NEW_CONSTRUCTION_COST_FOR_ACCESSORY\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		APP: obo.facts.BuildingApplication (  AREA:totalfloorarea ) \n		\n		 obo.facts.OccupancyType (  group matches \"J\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"APP\", APP );\n		\n		bindings.put(\"AREA\", AREA );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"application\", APP );\n_p0.put( \"amount\", (new ActionExpression(\"AREA * 6000\", bindings)) );\naction.execute( \"compute-construction-cost\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL4cf13b0:15b4dbc7b17:-769d', '\npackage oboassessment.PLUMBING_FEE_SEPTIC_TANK_CONSTRUCTION;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"PLUMBING_FEE_SEPTIC_TANK_CONSTRUCTION\"\n	agenda-group \"compute-plumbing-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"PLUMBING_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"SEPTIC_TANK\",CUM:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"CUM\", CUM );\n		\n	RangeEntry re0 = new RangeEntry(\"PLUMBING_FEE_SEPTIC_TANK_CONSTRUCTION\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(CUM);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-plumbing-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"PLUMBING_FEE_SEPTIC_TANK_CONSTRUCTION\", decimalvalue <= 5.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"Math.ceil( CUM ) * 24\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-plumbing-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"PLUMBING_FEE_SEPTIC_TANK_CONSTRUCTION\", decimalvalue > 5.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"120 + ( Math.ceil(CUM-5) * 7)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL4cf13b0:15b4dbc7b17:-78b3', '\npackage oboassessment.PLUMBING_FEE_WATER_METER_ABOVE_25_MM;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"PLUMBING_FEE_WATER_METER_ABOVE_25_MM\"\n	agenda-group \"compute-plumbing-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OboIntegerInfo (  name matches \"WATER_METER_25\",UNIT:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"PLUMBING_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"10 * UNIT\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL4cf13b0:15b4dbc7b17:-78c4', '\npackage oboassessment.PLUMBING_FEE_WATER_METER_12_TO_25_MM;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"PLUMBING_FEE_WATER_METER_12_TO_25_MM\"\n	agenda-group \"compute-plumbing-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OboIntegerInfo (  name matches \"WATER_METER_12_25\",UNIT:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"PLUMBING_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"8 * UNIT\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
@@ -3693,9 +4332,9 @@ INSERT INTO `sys_rule_deployed` VALUES ('RUL544e84a6:15b372b5faf:-782f', '\npack
 INSERT INTO `sys_rule_deployed` VALUES ('RUL544e84a6:15b372b5faf:-7959', '\npackage oboassessment.MECHANICAL_FEE_WINDOW_TYPE_AC;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_WINDOW_TYPE_AC\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"WINDOW_TYPE_AIRCON\",UNITS:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"UNITS\", UNITS );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"UNITS * 60\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL544e84a6:15b372b5faf:-7c53', '\npackage oboassessment.MECHANICAL_FEE_PC_AC;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_PC_AC\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"PACKAGED_SPLIT_TYPE_AIRCON|CENTRAILIZED_AIRCON\",TONS:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"TONS\", TONS );\n		\n	RangeEntry re0 = new RangeEntry(\"MECHANICAL_FEE_PC_AC\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(TONS);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"MECHANICAL_FEE_PC_AC\", decimalvalue < 100.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"90 * Math.ceil(TONS )\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"MECHANICAL_FEE_PC_AC\", decimalvalue >= 100.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"9000 + (  Math.ceil(TONS - 100) * 40 )\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL544e84a6:15b372b5faf:-7d4b', '\npackage oboassessment.MECHANICAL_FEE_ICE_PLANT;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_ICE_PLANT\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"ICE_PLANT\",TONS:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"TONS\", TONS );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( TONS )  * 60\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-71db', '\npackage oboassessment.ADD_FIRE_INSPECTION_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_FIRE_INSPECTION_FEE\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  apptype matches \"NEW|RENEW|AMENDATORY\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"FIRE_INSPECTION_FEE\", \"FIRE INSPECTION FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-7417', '\npackage oboassessment.COMPUTE_FIRE_INSPECTION_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"COMPUTE_FIRE_INSPECTION_FEE\"\n	agenda-group \"pre-summary\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  AMT:amount,billcode not matches \"FIRE_INSPECTION_FEE\" ) \n		\n		FIREFEE: treasury.facts.BillItem (  billcode matches \"FIRE_INSPECTION_FEE\" ) \n		\n		 obo.facts.AncillaryPermit (  type matches \"FSIC\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"AMT\", AMT );\n		\n		bindings.put(\"FIREFEE\", FIREFEE );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", FIREFEE );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"AMT * 0.10\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-7c8e', '\npackage oboassessment.ADD_ELECTRONIC_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_ELECTRONIC_FEE\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.AncillaryPermit (  type matches \"ELECTRONIC\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"ELECTRONIC_FEE\", \"ELECTRONIC FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-71db', '\npackage oboassessment.ADD_FIRE_INSPECTION_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_FIRE_INSPECTION_FEE\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:highercost ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"FIRE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"COST * 0.01\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"FIRE_CONS_TAX\", \"FIRE CODE CONTRUCTION TAX\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-7417', '\npackage oboassessment.COMPUTE_FIRE_INSPECTION_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"COMPUTE_FIRE_INSPECTION_FEE\"\n	agenda-group \"compute-permit-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		FIREFEE: treasury.facts.BillItem (  billcode matches \"FIRE_CONS_TAX\" ) \n		\n		 obo.facts.BuildingApplication (  PROJCOST:projectcost,FIXEDCOST:fixedcost ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"PROJCOST\", PROJCOST );\n		\n		bindings.put(\"FIREFEE\", FIREFEE );\n		\n		bindings.put(\"FIXEDCOST\", FIXEDCOST );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", FIREFEE );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"def d = @IIF(  FIXEDCOST > PROJCOST ,  FIXEDCOST * 0.01,  PROJCOST * 0.01 )\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-7c8e', '\npackage oboassessment.ADD_ELECTRONIC_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_ELECTRONIC_FEE\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingPermitSection (  name matches \"ELECTRONIC\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"ELECTRONIC_FEE\", \"ELECTRONIC FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL59515aa4:16a3a32fa5e:-3fb8', '\npackage oboassessment.SWIMMING_POOL_INDIGENOUS_FEE_GROUP_C_D_H_I;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"SWIMMING_POOL_INDIGENOUS_FEE_GROUP_C_D_H_I\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OccupancyType (  group matches \"C|D|H|I\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"SWIMMING_POOL_USING_INDIGENOUS_MATERIALS\",CUM:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"CUM\", CUM );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"amount\", (new ActionExpression(\"(CUM * 24) * 0.5\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL59515aa4:16a3a32fa5e:-3fec', '\npackage oboassessment.SWIMMING_POOL_INDIGENOUS_FEE_GROUP_B_E_F_G;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"SWIMMING_POOL_INDIGENOUS_FEE_GROUP_B_E_F_G\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OccupancyType (  group matches \"B|E|F|G\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"SWIMMING_POOL_USING_INDIGENOUS_MATERIALS\",CUM:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"CUM\", CUM );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"amount\", (new ActionExpression(\"CUM * 36 * 0.50\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL59515aa4:16a3a32fa5e:-4020', '\npackage oboassessment.SWIMMING_POOL_INDIGENOUS_FEE_GROUP_A;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"SWIMMING_POOL_INDIGENOUS_FEE_GROUP_A\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OccupancyType (  group matches \"A\" ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"SWIMMING_POOL_USING_INDIGENOUS_MATERIALS\",CUM:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"CUM\", CUM );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"amount\", (new ActionExpression(\"(CUM * 3 ) * 0.5\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
@@ -3711,7 +4350,7 @@ INSERT INTO `sys_rule_deployed` VALUES ('RUL59515aa4:16a3a32fa5e:-77fa', '\npack
 INSERT INTO `sys_rule_deployed` VALUES ('RUL6a083481:15b1d42e454:-7e47', '\npackage oboassessment.ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"TOTAL_CONNECTED_LOAD\",KVA:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"KVA\", KVA );\n		\n	RangeEntry re0 = new RangeEntry(\"ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(KVA);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD\", decimalvalue <= 5.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"200\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD\", decimalvalue > 5.00, decimalvalue <= 50.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"200 +  ( (KVA-5) * 20 )\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_2\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD\", decimalvalue > 50.00, decimalvalue <= 300.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"1100 + ( (KVA-50) * 10)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_3\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD\", decimalvalue > 300.00, decimalvalue <= 1500.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"3600 + ( (KVA-300) * 5)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_4\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD\", decimalvalue > 1500.00, decimalvalue <= 6000.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"9600 + ( (KVA-1500) * 2.5)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_5\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_CONNECTED_LOAD\", decimalvalue > 6000.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"20850 + ( (KVA-6000) * 1.25)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL6cc4d33e:15b3c1e2e72:-4e7a', '\npackage oboassessment.MECHANICAL_FEE_PASSENGER_FREIGHT_CAR_ELEVATOR;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_PASSENGER_FREIGHT_CAR_ELEVATOR\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"PASSENGER_ELEVATOR|FREIGHT_ELEVATOR|CAR_ELEVATOR\",UNIT:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"UNIT\", UNIT );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"UNIT * 5000\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL6cc4d33e:15b3c1e2e72:-708f', '\npackage oboassessment.ELECTRICAL_FEE_TOTAL_TRANSFORMER_GENERATOR_UPS;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ELECTRICAL_FEE_TOTAL_TRANSFORMER_GENERATOR_UPS\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ELECTRICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"TOTAL_TRANSFORMER_CAPACITY|TOTAL_GENERATOR_UPS_CAPACITY\",KVA:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"KVA\", KVA );\n		\n	RangeEntry re0 = new RangeEntry(\"ELECTRICAL_FEE_TOTAL_TRANSFORMER_GENERATOR_UPS\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(KVA);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_TRANSFORMER_GENERATOR_UPS\", decimalvalue <= 5.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"40\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_TRANSFORMER_GENERATOR_UPS\", decimalvalue > 5.00, decimalvalue <= 50.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"40 + ( (KVA-5) * 4)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_2\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_TRANSFORMER_GENERATOR_UPS\", decimalvalue > 50.00, decimalvalue <= 300.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"220 + ((KVA-50) * 2)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_3\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_TRANSFORMER_GENERATOR_UPS\", decimalvalue > 300.00, decimalvalue <= 1500.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"720 + ( (KVA-300) * 1)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_4\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_TRANSFORMER_GENERATOR_UPS\", decimalvalue > 1500.00, decimalvalue <= 6000.00 )\n		\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"1920 + ( (KVA-1500) * 0.5)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_5\"\n	agenda-group \"compute-electrical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"ELECTRICAL_FEE_TOTAL_TRANSFORMER_GENERATOR_UPS\", decimalvalue > 6000.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"4170 + ( (KVA-6000) * 0.25)\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL75928924:15b1d4d1c53:-7929', '\npackage oboassessment.ADD_ELECTRICAL_FEE_DEFAULT;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_ELECTRICAL_FEE_DEFAULT\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.AncillaryPermit (  type matches \"ELECTRICAL\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"ELECTRICAL_FEE\", \"ELECTRICAL FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL75928924:15b1d4d1c53:-7929', '\npackage oboassessment.ADD_ELECTRICAL_FEE_DEFAULT;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_ELECTRICAL_FEE_DEFAULT\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingPermitSection (  name matches \"ELECTRICAL\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"ELECTRICAL_FEE\", \"ELECTRICAL FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
 COMMIT;
 
 -- ----------------------------
@@ -3743,11 +4382,14 @@ CREATE TABLE `sys_rule_fact` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_rule_fact` VALUES ('obo.facts.AncillaryPermit', 'obo.facts.AncillaryPermit', 'Ancillary Permit', 'obo.facts.AncillaryPermit', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', NULL);
-INSERT INTO `sys_rule_fact` VALUES ('obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', 'OBO Building Application', 'obo.facts.BuildingApplication', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', NULL);
+INSERT INTO `sys_rule_fact` VALUES ('obo.facts.BuildingApplication', 'obo.facts.BuildingApplication', 'Building Application', 'obo.facts.BuildingApplication', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', NULL);
+INSERT INTO `sys_rule_fact` VALUES ('obo.facts.BuildingPermitSection', 'obo.facts.BuildingPermitSection', 'Building Permit Section', 'obo.facts.BuildingPermitSection', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', NULL);
 INSERT INTO `sys_rule_fact` VALUES ('obo.facts.OboBooleanInfo', 'obo.facts.OboBooleanInfo', 'Obo Boolean Info', 'obo.facts.OboBooleanInfo', 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', 'obo.facts.OboVariableInfo');
 INSERT INTO `sys_rule_fact` VALUES ('obo.facts.OboDecimalInfo', 'obo.facts.OboDecimalInfo', 'Obo Decimal Info', 'obo.facts.OboDecimalInfo', 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', 'obo.facts.OboVariableInfo');
 INSERT INTO `sys_rule_fact` VALUES ('obo.facts.OboIntegerInfo', 'obo.facts.OboIntegerInfo', 'Obo Integer Info', 'obo.facts.OboIntegerInfo', 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', 'obo.facts.OboVariableInfo');
+INSERT INTO `sys_rule_fact` VALUES ('obo.facts.OccupancyPermitSection', 'obo.facts.OccupancyPermitSection', 'Occupancy Permit Section', 'obo.facts.OccupancyPermitSection', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', NULL);
 INSERT INTO `sys_rule_fact` VALUES ('obo.facts.OccupancyType', 'obo.facts.OccupancyType', 'Occupancy Type', 'obo.facts.OccupancyType', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', NULL);
+INSERT INTO `sys_rule_fact` VALUES ('obo.facts.RpuCount', 'obo.facts.RpuCount', 'RPU Lot Count Summary', 'obo.facts.RpuCount', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', NULL);
 INSERT INTO `sys_rule_fact` VALUES ('RULFACT-75b995c:15b18c6b9a6:-7be0', 'obo.facts.BuildingUse', 'Building Use', 'obo.facts.BuildingUse', 1, NULL, 'BU', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', NULL);
 INSERT INTO `sys_rule_fact` VALUES ('RULFACT-75b995c:15b18c6b9a6:-7cdf', 'obo.facts.OboApplication', 'OBO Application', 'obo.facts.OboApplication', 1, NULL, 'APP', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'OBO', NULL);
 INSERT INTO `sys_rule_fact` VALUES ('treasury.facts.BillItem', 'treasury.facts.BillItem', 'Bill Item', 'treasury.facts.BillItem', 1, NULL, 'BILLITEM', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TREASURY', 'treasury.facts.AbstractBillItem');
@@ -3795,14 +4437,19 @@ INSERT INTO `sys_rule_fact_field` VALUES ('FACTFLD-75b995c:15b18c6b9a6:-7c81', '
 INSERT INTO `sys_rule_fact_field` VALUES ('FACTFLD-75b995c:15b18c6b9a6:-7cce', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'apptype', 'App Type', 'string', 1, 'lov', NULL, NULL, NULL, NULL, NULL, NULL, 'string', 'OBO_APP_TYPE');
 INSERT INTO `sys_rule_fact_field` VALUES ('FACTFLD24162c4e:15b60d63997:-7e90', 'RULFACT-75b995c:15b18c6b9a6:-7be0', 'kind', 'Bldg Kind', 'string', 5, 'lookup', 'obo_building_kind:lookup', 'objid', 'name', NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('FACTFLD36c70620:15b1c27514e:-7e47', 'RULFACT-75b995c:15b18c6b9a6:-7cdf', 'permittype', 'Permit Type', 'string', 8, 'lov', NULL, NULL, NULL, NULL, NULL, NULL, 'string', 'OBO_PERMIT_TYPE');
-INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.AncillaryPermit.type', 'obo.facts.AncillaryPermit', 'type', 'Type', 'string', 1, 'lookup', 'obo_subapplication_type:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.AncillaryPermit.type', 'obo.facts.AncillaryPermit', 'type', 'Type', 'string', 1, 'lookup', 'obo_permit_type:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.apptype', 'obo.facts.BuildingApplication', 'apptype', 'App Type', 'string', 1, 'lov', NULL, NULL, NULL, NULL, NULL, NULL, 'string', 'OBO_APP_TYPE');
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.fixedcost', 'obo.facts.BuildingApplication', 'fixedcost', 'Fixed Cost', 'decimal', 9, 'decimal', NULL, NULL, NULL, NULL, NULL, NULL, 'decimal', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.floorarea', 'obo.facts.BuildingApplication', 'floorarea', 'Floor Area', 'decimal', 4, 'decimal', NULL, NULL, NULL, NULL, NULL, NULL, 'decimal', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.height', 'obo.facts.BuildingApplication', 'height', 'Building Height', 'decimal', 5, 'decimal', NULL, NULL, NULL, NULL, NULL, NULL, 'decimal', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.highercost', 'obo.facts.BuildingApplication', 'highercost', 'Higher Cost', 'decimal', 10, 'decimal', NULL, NULL, NULL, NULL, NULL, NULL, 'decimal', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.numunits', 'obo.facts.BuildingApplication', 'numunits', 'No. of Units', 'integer', 3, 'integer', NULL, NULL, NULL, NULL, NULL, NULL, 'integer', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.projectcost', 'obo.facts.BuildingApplication', 'projectcost', 'Project Cost', 'decimal', 2, 'decimal', NULL, NULL, NULL, NULL, NULL, NULL, 'decimal', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.totalfloorarea', 'obo.facts.BuildingApplication', 'totalfloorarea', 'Total Floor Area', 'decimal', 6, 'decimal', NULL, NULL, NULL, NULL, NULL, NULL, 'decimal', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.worktype', 'obo.facts.BuildingApplication', 'worktype', 'Work Type', 'string', 7, 'lookup', 'obo_work_type:lookup', 'objid', 'description', NULL, 0, NULL, 'string', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.zone', 'obo.facts.BuildingApplication', 'zone', 'Zone', 'string', 11, 'string', NULL, NULL, NULL, NULL, NULL, NULL, 'string', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingApplication.zoneclass', 'obo.facts.BuildingApplication', 'zoneclass', 'Zone Class', 'string', 8, 'lookup', 'obo_zoneclass:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.BuildingPermitSection.name', 'obo.facts.BuildingPermitSection', 'name', 'Name', 'string', 1, 'lookup', 'obo_section:building_permit:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OboBooleanInfo.category', 'obo.facts.OboBooleanInfo', 'category', 'Category', 'string', 3, 'string', NULL, NULL, NULL, NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OboBooleanInfo.name', 'obo.facts.OboBooleanInfo', 'name', 'Name', 'boolean', 1, 'boolean', NULL, NULL, NULL, NULL, NULL, NULL, 'boolean', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OboBooleanInfo.value', 'obo.facts.OboBooleanInfo', 'value', 'Value', 'boolean', 2, 'boolean', NULL, NULL, NULL, NULL, NULL, NULL, 'boolean', NULL);
@@ -3812,14 +4459,18 @@ INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OboDecimalInfo.value', 'obo
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OboIntegerInfo.category', 'obo.facts.OboIntegerInfo', 'category', 'Category', 'string', 3, 'string', NULL, NULL, NULL, NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OboIntegerInfo.name', 'obo.facts.OboIntegerInfo', 'name', 'Name', 'string', 1, 'lookup', 'obovariable_integer:lookup', 'objid', 'caption', NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OboIntegerInfo.value', 'obo.facts.OboIntegerInfo', 'value', 'Value', 'integer', 2, 'integer', NULL, NULL, NULL, NULL, NULL, NULL, 'integer', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OccupancyPermitSection.name', 'obo.facts.OccupancyPermitSection', 'name', 'Name', 'string', 1, 'lookup', 'obo_section:occupancy_permit:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OccupancyType.bldgtype', 'obo.facts.OccupancyType', 'bldgtype', 'Bldg Type', 'string', 3, 'lookup', 'obo_building_type:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
-INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OccupancyType.division', 'obo.facts.OccupancyType', 'division', 'Division', 'string', 1, 'lookup', 'obo_occupancy_type:lookup', 'objid', 'objid', NULL, NULL, NULL, 'string', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OccupancyType.division', 'obo.facts.OccupancyType', 'division', 'Division', 'string', 1, 'lookup', 'obo_occupancy_type_division:lookup', 'objid', 'objid', NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OccupancyType.group', 'obo.facts.OccupancyType', 'group', 'Group', 'string', 2, 'lookup', 'obo_occupancy_type_group:lookup', 'objid', 'objid', NULL, NULL, NULL, 'string', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OccupancyType.type', 'obo.facts.OccupancyType', 'type', 'Type', 'string', 5, 'lookup', 'obo_occupancy_type:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.OccupancyType.zoneclass', 'obo.facts.OccupancyType', 'zoneclass', 'Zone Class', 'string', 4, 'lookup', 'obo_zoneclass:lookup', 'objid', 'description', NULL, NULL, NULL, 'string', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.RpuCount.byownercount', 'obo.facts.RpuCount', 'byownercount', 'Count By Owner', 'integer', 2, 'integer', NULL, NULL, NULL, NULL, NULL, NULL, 'integer', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('obo.facts.RpuCount.totalcount', 'obo.facts.RpuCount', 'totalcount', 'Total Count', 'integer', 1, 'integer', NULL, NULL, NULL, NULL, NULL, NULL, 'integer', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('treasury.facts.BillItem.account', 'treasury.facts.BillItem', 'account', 'Account', 'string', 2, 'lookup', 'revenueitem:lookup', 'objid', 'title', NULL, NULL, NULL, 'object', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('treasury.facts.BillItem.account.objid', 'treasury.facts.BillItem', 'account.objid', 'Account', 'string', 1, 'lookup', 'revenueitem:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('treasury.facts.BillItem.amount', 'treasury.facts.BillItem', 'amount', 'Amount', 'decimal', 3, 'decimal', NULL, NULL, NULL, NULL, NULL, NULL, 'decimal', NULL);
-INSERT INTO `sys_rule_fact_field` VALUES ('treasury.facts.BillItem.billcode', 'treasury.facts.BillItem', 'billcode', 'Bill Code', 'string', 6, 'lookup', 'obo_billitemcode:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
+INSERT INTO `sys_rule_fact_field` VALUES ('treasury.facts.BillItem.billcode', 'treasury.facts.BillItem', 'billcode', 'Bill Code', 'string', 6, 'lookup', 'obo_itemaccount:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('treasury.facts.BillItem.duedate', 'treasury.facts.BillItem', 'duedate', 'Due Date', 'date', 4, 'date', NULL, NULL, NULL, NULL, NULL, NULL, 'date', NULL);
 INSERT INTO `sys_rule_fact_field` VALUES ('treasury.facts.BillItem.txntype', 'treasury.facts.BillItem', 'txntype', 'Txn Type', 'string', 5, 'lookup', 'billitem_txntype:lookup', 'objid', 'title', NULL, NULL, NULL, 'string', NULL);
 COMMIT;
@@ -3926,13 +4577,51 @@ BEGIN;
 INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'obo.facts.AncillaryPermit');
 INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'obo.facts.BuildingApplication');
 INSERT INTO `sys_ruleset_fact` VALUES ('oboconstructioncost', 'obo.facts.BuildingApplication');
+INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'obo.facts.BuildingPermitSection');
 INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'obo.facts.OboBooleanInfo');
 INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'obo.facts.OboDecimalInfo');
 INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'obo.facts.OboIntegerInfo');
+INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'obo.facts.OccupancyPermitSection');
 INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'obo.facts.OccupancyType');
 INSERT INTO `sys_ruleset_fact` VALUES ('oboconstructioncost', 'obo.facts.OccupancyType');
+INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'obo.facts.RpuCount');
 INSERT INTO `sys_ruleset_fact` VALUES ('oboassessment', 'treasury.facts.BillItem');
 COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_sequence
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_sequence`;
+CREATE TABLE `sys_sequence` (
+  `objid` varchar(100) NOT NULL,
+  `nextSeries` int(11) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sys_sequence
+-- ----------------------------
+BEGIN;
+INSERT INTO `sys_sequence` VALUES ('BP1372019-000000', 12);
+INSERT INTO `sys_sequence` VALUES ('BPCPDO2019-000000', 3);
+INSERT INTO `sys_sequence` VALUES ('OBO_BUILDING_APP', 28);
+INSERT INTO `sys_sequence` VALUES ('OBO_FINDING_TRANSMITTAL', 6);
+INSERT INTO `sys_sequence` VALUES ('OBO_REQUIREMENT_TRANSMITTAL', 12);
+COMMIT;
+
+-- ----------------------------
+-- Table structure for sys_usergroup
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_usergroup`;
+CREATE TABLE `sys_usergroup` (
+  `objid` varchar(50) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `domain` varchar(25) DEFAULT NULL,
+  `userclass` varchar(25) DEFAULT NULL,
+  `orgclass` varchar(50) DEFAULT NULL,
+  `role` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for sys_wf
@@ -3949,9 +4638,10 @@ CREATE TABLE `sys_wf` (
 -- Records of sys_wf
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_wf` VALUES ('obo_building_application', 'OBO Application', 'OBO');
-INSERT INTO `sys_wf` VALUES ('obo_building_subapplication', 'OBO Subapplication', 'OBO');
-INSERT INTO `sys_wf` VALUES ('obo_occupancy_application', 'OBO Application', 'OBO');
+INSERT INTO `sys_wf` VALUES ('building_permit', 'Building Permit Workflow', 'OBO');
+INSERT INTO `sys_wf` VALUES ('building_permit_issuance', 'Building Permit Issuance', 'OBO');
+INSERT INTO `sys_wf` VALUES ('building_permit_section', 'Building Permit Section', 'OBO');
+INSERT INTO `sys_wf` VALUES ('occupancy_permit', 'Occupancy Application', 'OBO');
 COMMIT;
 
 -- ----------------------------
@@ -3977,32 +4667,40 @@ CREATE TABLE `sys_wf_node` (
 -- Records of sys_wf_node
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_wf_node` VALUES ('approval', 'obo_building_subapplication', 'Approval', 'state', 3, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[575,84],size:[99,49]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('end', 'obo_building_application', 'Completed', 'end', 11, 0, NULL, NULL, '[fillColor:\"#ff0000\",type:\"end\",pos:[904,161],size:[32,32]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('end', 'obo_building_subapplication', 'Completed', 'end', 6, 0, NULL, NULL, '[fillColor:\"#ff0000\",type:\"end\",pos:[769,35],size:[32,32]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('end', 'obo_occupancy_application', 'Completed', 'end', 9, 0, NULL, NULL, '[fillColor:\"#ff0000\",type:\"end\",pos:[904,161],size:[32,32]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('evaluation', 'obo_occupancy_application', 'Trade Evaluation', 'state', 5, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[356,52],size:[137,57]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('initial', 'obo_occupancy_application', 'Initial Evaluation', 'state', 3, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[155,128],size:[132,53]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('payment', 'obo_building_application', 'Payment', 'state', 9, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[677,152],size:[129,56]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('payment', 'obo_occupancy_application', 'Payment', 'state', 7, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[591,161],size:[129,56]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('receiving', 'obo_building_application', 'Receiving', 'state', 2, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[202,20],size:[116,53]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('receiving', 'obo_occupancy_application', 'Receiving', 'state', 2, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[156,28],size:[116,53]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('receiving-revision', 'obo_building_application', 'Receiving - For Revision', 'state', 3, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[23,109],size:[173,54]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('release', 'obo_building_application', 'Releasing', 'state', 10, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[827,268],size:[119,55]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('release', 'obo_occupancy_application', 'Releasing', 'state', 8, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[757,229],size:[119,55]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('review', 'obo_building_subapplication', 'For Review', 'state', 2, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[233,69],size:[106,46]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('revision', 'obo_building_subapplication', 'For Revision', 'state', 4, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[592,223],size:[108,56]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('revision-review', 'obo_building_subapplication', 'Revision Review', 'state', 5, NULL, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[758,130],size:[130,57]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('start', 'obo_building_application', 'Start', 'start', 1, 0, NULL, NULL, '[fillColor:\"#00ff00\",type:\"start\",pos:[81,21],size:[32,32]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('start', 'obo_building_subapplication', 'Start', 'start', 1, 0, NULL, NULL, '[fillColor:\"#00ff00\",type:\"start\",pos:[156,12],size:[32,32]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('start', 'obo_occupancy_application', 'Start', 'start', 1, 0, NULL, NULL, '[fillColor:\"#00ff00\",type:\"start\",pos:[81,21],size:[32,32]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('trade-evaluation', 'obo_building_application', 'Trade Evaluation', 'state', 6, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[396,55],size:[138,55]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('trade-evaluation-revision', 'obo_building_application', 'Trade Evaluation For Revision', 'state', 7, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[396,171],size:[208,63]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('verification', 'obo_building_application', 'Final Verification', 'state', 8, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[610,49],size:[130,58]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('verification', 'obo_occupancy_application', 'Final Verification', 'state', 6, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[576,52],size:[130,58]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('zoning', 'obo_occupancy_application', 'Zoning Evaluation', 'state', 4, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[208,242],size:[145,59]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('zoning-evaluation', 'obo_building_application', 'Zoning Evaluation', 'state', 4, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[160,200],size:[145,59]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('zoning-evaluation-revision', 'obo_building_application', 'Zoning - For Revision', 'state', 5, 0, NULL, NULL, '[fillColor:\"#c0c0c0\",type:\"state\",pos:[188,320],size:[151,64]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('approval', 'building_permit', 'Assessment Approval', 'state', 12, 0, 'OBO', 'APPROVER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[1117,162],size:[174,61]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('approval', 'building_permit_issuance', 'Approval', 'state', 2, 0, 'OBO', 'ISSUANCE_APPROVER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[512,164],size:[103,62]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('assessment', 'building_permit', 'Assessment', 'state', 11, 0, 'OBO', 'ASSESSOR', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[1119,48],size:[118,59]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('end', 'building_permit', 'Completed', 'end', 16, 0, NULL, NULL, '[type:\"end\",fillColor:\"#ff0000\",pos:[1248,290],size:[32,32]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('end', 'building_permit_issuance', 'Completed', 'end', 3, NULL, NULL, NULL, '[type:\"end\",fillColor:\"#ff0000\",pos:[803,164],size:[32,32]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('end', 'building_permit_section', 'Completed', 'end', 9, 0, NULL, NULL, '[type:\"end\",fillColor:\"#ff0000\",pos:[787,84],size:[32,32]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('end', 'occupancy_permit', 'Completed', 'end', 9, 0, NULL, NULL, '[type:\"end\",fillColor:\"#ff0000\",pos:[904,161],size:[32,32]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('evaluation', 'building_permit_section', 'For Evaluation', 'state', 2, 0, 'OBO', 'SECTION_EVALUATOR', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[130,209],size:[125,58]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('evaluation', 'occupancy_permit', 'Trade Evaluation', 'state', 5, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[356,52],size:[137,57]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('evaluation-approval', 'building_permit_section', 'For Approval', 'state', 4, 0, 'OBO', 'SECTION_APPROVER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[509,59],size:[128,55]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('for-revision', 'building_permit_section', 'For Revision', 'state', 5, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[391,237],size:[108,56]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('issuance', 'building_permit_issuance', 'Issuance', 'state', 1, 0, 'OBO', 'ISSUANCE_ISSUER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[262,84],size:[122,57]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('issuance-process', 'building_permit', 'Issuance Process', 'state', 14, 1, NULL, NULL, '[type:\"state\",fillColor:\"#ffc800\",pos:[983,294],size:[145,65]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('joint-inspection', 'occupancy_permit', 'Joint Inspection', 'state', 1, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[208,152],size:[118,65]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('payment', 'building_permit', 'Payment', 'state', 13, 0, NULL, NULL, '[type:\"state\",fillColor:\"#ff0000\",pos:[879,177],size:[129,56]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('payment', 'occupancy_permit', 'Payment', 'state', 7, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[591,161],size:[129,56]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('receiving', 'building_permit', 'Receiving', 'state', 2, 0, 'OBO', 'RECEIVER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[202,20],size:[116,53]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('receiving', 'occupancy_permit', 'Receiving', 'state', 2, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[156,28],size:[116,53]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('release', 'occupancy_permit', 'Releasing', 'state', 8, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[757,229],size:[119,55]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('releasing', 'building_permit', 'Releasing', 'state', 15, 1, 'OBO', 'RELEASER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[1058,405],size:[134,63]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('requirement-revision', 'building_permit', 'Requirements - For Revision', 'state', 4, 0, NULL, NULL, '[type:\"state\",fillColor:\"#ff0000\",pos:[0,211],size:[211,54]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('requirement-verification', 'building_permit', 'Verification of Requirements', 'state', 3, 1, 'OBO', 'REQUIREMENT_REVIEWER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[256,123],size:[198,59]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('review', 'building_permit_section', 'For Review', 'state', 3, 0, 'OBO', 'SECTION_REVIEWER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[204,83],size:[106,46]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('start', 'building_permit', 'Start', 'start', 1, 0, NULL, NULL, '[type:\"start\",fillColor:\"#00ff00\",pos:[81,21],size:[32,32]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('start', 'building_permit_issuance', 'start', 'start', 0, NULL, NULL, NULL, '[type:\"start\",fillColor:\"#00ff00\",pos:[157,42],size:[32,32]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('start', 'building_permit_section', 'Start', 'start', 1, 0, NULL, NULL, '[type:\"start\",fillColor:\"#00ff00\",pos:[71,33],size:[32,32]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('start', 'occupancy_permit', 'Start', 'start', 1, 0, NULL, NULL, '[type:\"start\",fillColor:\"#00ff00\",pos:[81,21],size:[32,32]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('trade-evaluation', 'building_permit', 'Trade Evaluation', 'state', 8, 0, 'OBO', 'SYSTEM', '[type:\"state\",fillColor:\"#ffc800\",pos:[528,25],size:[138,55]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('trade-evaluation-revision', 'building_permit', 'Trade Evaluation For Revision', 'state', 9, 0, NULL, NULL, '[type:\"state\",fillColor:\"#ff0000\",pos:[679,238],size:[208,63]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('verification', 'building_permit', 'Final Verification', 'state', 10, 0, 'OBO', 'COORDINATOR', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[825,17],size:[130,58]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('verification', 'occupancy_permit', 'Final Verification', 'state', 6, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[576,52],size:[130,58]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('zoning-evaluation', 'building_permit', 'Zoning Evaluation', 'state', 5, 0, 'OBO', 'SYSTEM', '[type:\"state\",fillColor:\"#ffc800\",pos:[203,326],size:[145,59]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('zoning-evaluation-revision', 'building_permit', 'Zoning - For Revision', 'state', 6, 0, NULL, NULL, '[type:\"state\",fillColor:\"#ff0000\",pos:[429,356],size:[151,64]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('zoning-verification', 'building_permit', 'Zoning Verification', 'state', 7, 0, 'OBO', 'COORDINATOR', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[451,200],size:[159,60]]', '[:]', 1);
 COMMIT;
 
 -- ----------------------------
@@ -4027,64 +4725,101 @@ CREATE TABLE `sys_wf_transition` (
 -- Records of sys_wf_transition
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_wf_transition` VALUES ('approval', 'obo_building_subapplication', 'approve', 'end', 0, NULL, '[showConfirm:true,confirmMessage:\"Approve this workitem?\"]', NULL, 'Approve', '[points:[674,94,769,56],type:\"arrow\",pos:[674,56],size:[95,38]]');
-INSERT INTO `sys_wf_transition` VALUES ('approval', 'obo_building_subapplication', 'for-revision', 'revision', 0, NULL, '[:]', NULL, 'Send for Revision', '[points:[642,133,605,228],type:\"arrow\",pos:[605,133],size:[37,95]]');
+INSERT INTO `sys_wf_transition` VALUES ('approval', 'building_permit', 'approve-for-payment', 'payment', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to approve this for payment. Proceed?\"]', NULL, 'Approve', '[points:[1117,193,1008,195],type:\"arrow\",pos:[1008,193],size:[109,2]]');
+INSERT INTO `sys_wf_transition` VALUES ('approval', 'building_permit_issuance', 'approve', 'end', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to approve this evaluation. Continue?\"]', NULL, 'Approve', '[points:[615,191,803,181],type:\"arrow\",pos:[615,181],size:[188,10]]');
+INSERT INTO `sys_wf_transition` VALUES ('assessment', 'building_permit', 'send-for-approval', 'approval', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to submit this for final approval. Proceed?\"]', NULL, 'Send for Approval', '[points:[1179,107,1195,162],type:\"arrow\",pos:[1179,107],size:[16,55]]');
+INSERT INTO `sys_wf_transition` VALUES ('evaluation', 'building_permit_section', 'send-for-review', 'review', 0, NULL, '[:]', NULL, 'Submit for Review', '[points:[205,209,244,129],type:\"arrow\",pos:[205,129],size:[39,80]]');
 INSERT INTO `sys_wf_transition` VALUES ('evaluation', 'obo_occupancy_application', 'submit', 'verification', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Final Verification', '[points:[493,79,576,79],type:\"arrow\",pos:[493,79],size:[83,0]]');
-INSERT INTO `sys_wf_transition` VALUES ('initial', 'obo_occupancy_application', 'submit', 'zoning', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to submit for Zoning Evaluation. Proceed?\"]', NULL, 'Submit for Zoning Evaluation', '[points:[234,181,265,242],type:\"arrow\",pos:[234,181],size:[31,61]]');
-INSERT INTO `sys_wf_transition` VALUES ('payment', 'obo_building_application', 'submit', 'release', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Release', '[points:[766,210,827,271],type:\"arrow\",pos:[766,210],size:[61,61]]');
+INSERT INTO `sys_wf_transition` VALUES ('evaluation', 'occupancy_permit', 'submit', 'verification', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Final Verification', '[points:[493,79,576,79],type:\"arrow\",pos:[493,79],size:[83,0]]');
+INSERT INTO `sys_wf_transition` VALUES ('evaluation-approval', 'building_permit_section', 'approve', 'end', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to approve this evaluation. Continue?\"]', NULL, 'Approve', '[points:[637,99,787,96],type:\"arrow\",pos:[637,96],size:[150,3]]');
+INSERT INTO `sys_wf_transition` VALUES ('evaluation-approval', 'building_permit_section', 'send-for-revision', 'for-revision', 0, NULL, '[:]', NULL, 'Send for Revision', '[points:[552,114,463,237],type:\"arrow\",pos:[463,114],size:[89,123]]');
+INSERT INTO `sys_wf_transition` VALUES ('for-revision', 'building_permit_section', 'reactivate', 'evaluation', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Reactivate', '[points:[391,258,255,244],type:\"arrow\",pos:[255,244],size:[136,14]]');
+INSERT INTO `sys_wf_transition` VALUES ('issuance', 'building_permit_issuance', 'send-for-approval', 'approval', 0, NULL, '[:]', NULL, 'Send for Approval', '[points:[384,132,512,176],type:\"arrow\",pos:[384,132],size:[128,44]]');
+INSERT INTO `sys_wf_transition` VALUES ('issuance-process', 'building_permit', 'send-for-release', 'releasing', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Send for Releasing', '[points:[1075,359,1105,405],type:\"arrow\",pos:[1075,359],size:[30,46]]');
+INSERT INTO `sys_wf_transition` VALUES ('payment', 'building_permit', 'post-payment', 'issuance-process', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Post Payment', '[points:[970,233,1030,294],type:\"arrow\",pos:[970,233],size:[60,61]]');
 INSERT INTO `sys_wf_transition` VALUES ('payment', 'obo_occupancy_application', 'submit', 'release', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Release', '[points:[720,216,757,232],type:\"arrow\",pos:[720,216],size:[37,16]]');
-INSERT INTO `sys_wf_transition` VALUES ('receiving', 'obo_building_application', 'for-revision', 'receiving-revision', 0, NULL, '[:]', NULL, 'Send for Revision', '[points:[205,61,94,112],type:\"arrow\",pos:[94,61],size:[111,51]]');
-INSERT INTO `sys_wf_transition` VALUES ('receiving', 'obo_building_application', 'approve', 'zoning-evaluation', 0, NULL, '[:]', NULL, 'Submit for Zoning Evaluation', '[points:[255,73,235,200],type:\"arrow\",pos:[235,73],size:[20,127]]');
-INSERT INTO `sys_wf_transition` VALUES ('receiving', 'obo_occupancy_application', 'submit', 'initial', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to submit for Initial Evaluation. Proceed?\"]', NULL, 'Submit for Initial Evaluation', '[points:[215,81,217,128],type:\"arrow\",pos:[215,81],size:[2,47]]');
-INSERT INTO `sys_wf_transition` VALUES ('receiving-revision', 'obo_building_application', 'reactivate', 'receiving', 0, NULL, '[:]', NULL, 'Resubmit for Requirement Verification', '[points:[162,109,233,73],type:\"arrow\",pos:[162,73],size:[71,36]]');
-INSERT INTO `sys_wf_transition` VALUES ('release', 'obo_building_application', 'release', 'end', 0, NULL, '[:]', NULL, 'Release', '[points:[920,268,904,187],type:\"arrow\",pos:[904,187],size:[16,81]]');
+INSERT INTO `sys_wf_transition` VALUES ('payment', 'occupancy_permit', 'submit', 'release', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Release', '[points:[720,216,757,232],type:\"arrow\",pos:[720,216],size:[37,16]]');
+INSERT INTO `sys_wf_transition` VALUES ('receiving', 'building_permit', 'send-for-requirement-verification', 'requirement-verification', 0, NULL, '[:]', NULL, 'Submit for Requirement Verification', '[points:[282,75,313,123],type:\"arrow\",pos:[282,75],size:[31,48]]');
+INSERT INTO `sys_wf_transition` VALUES ('receiving', 'obo_occupancy_application', 'submit', 'joint-inspection', 0, NULL, '[:]', NULL, 'Submit', '[points:[224,81,253,152],type:\"arrow\",pos:[224,81],size:[29,71]]');
+INSERT INTO `sys_wf_transition` VALUES ('receiving', 'occupancy_permit', 'submit', 'joint-inspection', 0, NULL, '[:]', NULL, 'Submit', '[points:[224,81,253,152],type:\"arrow\",pos:[224,81],size:[29,71]]');
 INSERT INTO `sys_wf_transition` VALUES ('release', 'obo_occupancy_application', 'release', 'end', 0, NULL, '[:]', NULL, 'Release', '[points:[850,229,904,187],type:\"arrow\",pos:[850,187],size:[54,42]]');
-INSERT INTO `sys_wf_transition` VALUES ('review', 'obo_building_subapplication', 'submit', 'approval', 0, NULL, '[:]', NULL, 'Submit for Approval', '[points:[339,94,575,105],type:\"arrow\",pos:[339,94],size:[236,11]]');
-INSERT INTO `sys_wf_transition` VALUES ('revision', 'obo_building_subapplication', 'reactivate', 'revision-review', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Reactivate', '[points:[698,262,810,186],type:\"arrow\",pos:[698,186],size:[112,76]]');
-INSERT INTO `sys_wf_transition` VALUES ('revision-review', 'obo_building_subapplication', 'approve', 'end', 0, NULL, '[:]', NULL, 'Approve', '[points:[816,130,794,67],type:\"arrow\",pos:[794,67],size:[22,63]]');
-INSERT INTO `sys_wf_transition` VALUES ('revision-review', 'obo_building_subapplication', 'for-revision', 'revision', 0, NULL, '[:]', NULL, 'Send for Revision', '[points:[758,171,699,223],type:\"arrow\",pos:[699,171],size:[59,52]]');
-INSERT INTO `sys_wf_transition` VALUES ('start', 'obo_building_application', 'start', 'receiving', 0, NULL, '[:]', NULL, 'Start', '[points:[113,39,126,41,202,39],type:\"arrow\",pos:[113,39],size:[89,2]]');
-INSERT INTO `sys_wf_transition` VALUES ('start', 'obo_building_subapplication', 'start', 'review', 0, NULL, '[:]', NULL, 'Start', '[points:[188,37,245,69],type:\"arrow\",pos:[188,37],size:[57,32]]');
+INSERT INTO `sys_wf_transition` VALUES ('release', 'occupancy_permit', 'release', 'end', 0, NULL, '[:]', NULL, 'Release', '[points:[850,229,904,187],type:\"arrow\",pos:[850,187],size:[54,42]]');
+INSERT INTO `sys_wf_transition` VALUES ('releasing', 'building_permit', 'release', 'end', 0, NULL, '[:]', NULL, 'Approve', '[points:[1158,405,1250,322],type:\"arrow\",pos:[1158,322],size:[92,83]]');
+INSERT INTO `sys_wf_transition` VALUES ('requirement-revision', 'building_permit', 'reactivate', 'requirement-verification', 0, NULL, '[:]', NULL, 'Reactivate', '[points:[129,210,256,167],type:\"arrow\",pos:[129,167],size:[127,43]]');
+INSERT INTO `sys_wf_transition` VALUES ('requirement-verification', 'building_permit', 'send-for-revision', 'requirement-revision', 0, NULL, '[:]', NULL, 'Send for Revision', '[points:[268,182,184,211],type:\"arrow\",pos:[184,182],size:[84,29]]');
+INSERT INTO `sys_wf_transition` VALUES ('requirement-verification', 'building_permit', 'approve', 'zoning-evaluation', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to submit this for zoning evaluation. Continue?\"]', NULL, 'Submit to Zoning', '[points:[342,182,282,326],type:\"arrow\",pos:[282,182],size:[60,144]]');
+INSERT INTO `sys_wf_transition` VALUES ('review', 'building_permit_section', 'send-for-evaluation-approval', 'evaluation-approval', 0, NULL, '[:]', NULL, 'Send for Approval', '[points:[310,102,509,90],type:\"arrow\",pos:[310,90],size:[199,12]]');
+INSERT INTO `sys_wf_transition` VALUES ('review', 'building_permit_section1', 'send-for-approval', 'approval', 0, NULL, '[:]', NULL, 'Submit for Approval', '[points:[310,89,488,86],type:\"arrow\",pos:[310,86],size:[178,3]]');
+INSERT INTO `sys_wf_transition` VALUES ('start', 'building_permit', 'start', 'receiving', 0, NULL, '[:]', NULL, 'Start', '[points:[113,39,126,41,202,39],type:\"arrow\",pos:[113,39],size:[89,2]]');
+INSERT INTO `sys_wf_transition` VALUES ('start', 'building_permit_issuance', 'start', 'issuance', 0, NULL, '[:]', NULL, 'Start', '[points:[189,63,262,88],type:\"arrow\",pos:[189,63],size:[73,25]]');
+INSERT INTO `sys_wf_transition` VALUES ('start', 'building_permit_section', 'submit', 'evaluation', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Start', '[points:[94,65,175,209],type:\"arrow\",pos:[94,65],size:[81,144]]');
 INSERT INTO `sys_wf_transition` VALUES ('start', 'obo_occupancy_application', 'start', 'receiving', 0, NULL, '[:]', NULL, 'Start', '[points:[113,39,126,41,156,47],type:\"arrow\",pos:[113,39],size:[43,8]]');
-INSERT INTO `sys_wf_transition` VALUES ('trade-evaluation', 'obo_building_application', 'for-revision', 'trade-evaluation-revision', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Send for Revision', '[points:[458,109,467,170],type:\"arrow\",pos:[458,109],size:[9,61]]');
-INSERT INTO `sys_wf_transition` VALUES ('trade-evaluation', 'obo_building_application', 'approve', 'verification', 0, NULL, '[visibleWhen:\"#{false}\"]', NULL, 'Approve', '[points:[534,77,610,71],type:\"arrow\",pos:[534,71],size:[76,6]]');
-INSERT INTO `sys_wf_transition` VALUES ('trade-evaluation-revision', 'obo_building_application', 'reactivate', 'trade-evaluation', 0, NULL, '[:]', NULL, 'Resubmit for Trade Evaluation', '[points:[537,175,524,109],type:\"arrow\",pos:[524,109],size:[13,66]]');
-INSERT INTO `sys_wf_transition` VALUES ('verification', 'obo_building_application', 'approve', 'payment', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to submit this for payment. Proceed?\"]', NULL, 'Approve for Payment', '[points:[694,107,716,152],type:\"arrow\",pos:[694,107],size:[22,45]]');
+INSERT INTO `sys_wf_transition` VALUES ('start', 'occupancy_permit', 'start', 'receiving', 0, NULL, '[:]', NULL, 'Start', '[points:[113,39,126,41,156,47],type:\"arrow\",pos:[113,39],size:[43,8]]');
+INSERT INTO `sys_wf_transition` VALUES ('trade-evaluation', 'building_permit', 'send-for-verification', 'verification', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Send for Verification', '[points:[666,47,825,39],type:\"arrow\",pos:[666,39],size:[159,8]]');
+INSERT INTO `sys_wf_transition` VALUES ('trade-evaluation-revision', 'building_permit', 'reactivate', 'trade-evaluation', 0, NULL, '[:]', NULL, 'Resubmit for Trade Evaluation', '[points:[771,238,674,141,594,80],type:\"arrow\",pos:[594,80],size:[177,158]]');
+INSERT INTO `sys_wf_transition` VALUES ('verification', 'building_permit', 'send-for-assessment', 'assessment', 0, NULL, '[:]', NULL, 'Submit for Assessment', '[points:[955,52,1119,61],type:\"arrow\",pos:[955,52],size:[164,9]]');
+INSERT INTO `sys_wf_transition` VALUES ('verification', 'building_permit', 'send-for-revision', 'trade-evaluation-revision', 0, NULL, '[:]', NULL, 'Send for Revision', '[points:[856,75,817,238],type:\"arrow\",pos:[817,75],size:[39,163]]');
 INSERT INTO `sys_wf_transition` VALUES ('verification', 'obo_occupancy_application', 'submit', 'payment', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Payment', '[points:[645,110,653,161],type:\"arrow\",pos:[645,110],size:[8,51]]');
-INSERT INTO `sys_wf_transition` VALUES ('zoning', 'obo_occupancy_application', 'submit', 'evaluation', 0, NULL, '[:]', NULL, 'Submit for Evaluation', '[points:[302,242,404,109],type:\"arrow\",pos:[302,109],size:[102,133]]');
-INSERT INTO `sys_wf_transition` VALUES ('zoning-evaluation', 'obo_building_application', 'approve', 'trade-evaluation', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Trade Evaluation', '[points:[279,200,428,110],type:\"arrow\",pos:[279,110],size:[149,90]]');
-INSERT INTO `sys_wf_transition` VALUES ('zoning-evaluation', 'obo_building_application', 'for-revision', 'zoning-evaluation-revision', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'For Revision', '[points:[209,261,210,319],type:\"arrow\",pos:[209,261],size:[1,58]]');
-INSERT INTO `sys_wf_transition` VALUES ('zoning-evaluation-revision', 'obo_building_application', 'reactivate', 'zoning-evaluation', 0, NULL, '[:]', NULL, 'Resubmit for Zoning Evaluation', '[points:[293,320,286,257],type:\"arrow\",pos:[286,257],size:[7,63]]');
+INSERT INTO `sys_wf_transition` VALUES ('verification', 'occupancy_permit', 'submit', 'payment', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Payment', '[points:[645,110,653,161],type:\"arrow\",pos:[645,110],size:[8,51]]');
+INSERT INTO `sys_wf_transition` VALUES ('zoning-evaluation', 'building_permit', 'back', 'requirement-verification', 0, NULL, '[:]', NULL, 'Back Test', '[points:[241,325,300,183],type:\"arrow\",pos:[241,183],size:[59,142]]');
+INSERT INTO `sys_wf_transition` VALUES ('zoning-evaluation', 'building_permit', 'send-for-verification', 'zoning-verification', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Send for Verification', '[points:[308,326,377,279,451,255],type:\"arrow\",pos:[308,255],size:[143,71]]');
+INSERT INTO `sys_wf_transition` VALUES ('zoning-evaluation-revision', 'building_permit', 'reactivate', 'zoning-evaluation', 0, NULL, '[:]', NULL, 'Reactivate', '[points:[433,393,346,362],type:\"arrow\",pos:[346,362],size:[87,31]]');
+INSERT INTO `sys_wf_transition` VALUES ('zoning-verification', 'building_permit', 'approve', 'trade-evaluation', 2, NULL, '[:]', NULL, 'Approve', '[points:[535,200,559,78],type:\"arrow\",pos:[535,78],size:[24,122]]');
+INSERT INTO `sys_wf_transition` VALUES ('zoning-verification', 'building_permit', 'send-for-revision', 'zoning-evaluation-revision', 1, NULL, '[:]', NULL, 'Send for Revision', '[points:[524,260,508,356],type:\"arrow\",pos:[508,260],size:[16,96]]');
 COMMIT;
 
 -- ----------------------------
--- View structure for vw_obo_building_application
+-- View structure for vw_building_permit
 -- ----------------------------
-DROP VIEW IF EXISTS `vw_obo_building_application`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_obo_building_application` AS select `a`.`objid` AS `objid`,`a`.`acctid` AS `acctid`,`a`.`appno` AS `appno`,`a`.`appdate` AS `appdate`,`a`.`apptype` AS `apptype`,`a`.`description` AS `description`,`a`.`title` AS `title`,`a`.`owner_objid` AS `owner_objid`,`a`.`owner_name` AS `owner_name`,`a`.`owner_address_text` AS `owner_address_text`,`a`.`owner_ctcid` AS `owner_ctcid`,`a`.`occupancytypeid` AS `occupancytypeid`,`a`.`worktypeid` AS `worktypeid`,`a`.`numunits` AS `numunits`,`a`.`floorarea` AS `floorarea`,`a`.`estimatedcost` AS `estimatedcost`,`a`.`projectcost` AS `projectcost`,`a`.`dtproposedconstruction` AS `dtproposedconstruction`,`a`.`dtexpectedcompletion` AS `dtexpectedcompletion`,`a`.`supervisorid` AS `supervisorid`,`a`.`taskid` AS `taskid`,`a`.`totalfloorarea` AS `totalfloorarea`,`a`.`bldgtypeid` AS `bldgtypeid`,`a`.`height` AS `height`,`a`.`zoneclassid` AS `zoneclassid`,`ot`.`objid` AS `occupancytype_division`,`ot`.`parentid` AS `occupancytype_group`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `sys_wf_node`.`title` from `sys_wf_node` where ((`sys_wf_node`.`processname` = 'obo_application') and (`sys_wf_node`.`name` = `t`.`state`))) AS `task_title`,`bt`.`objid` AS `bldgtype_objid`,`bt`.`title` AS `bldgtype_title` from (((`obo_building_application` `a` join `obo_building_application_task` `t` on((`a`.`taskid` = `t`.`taskid`))) join `obo_building_type` `bt` on((`a`.`bldgtypeid` = `bt`.`objid`))) left join `obo_occupancy_type` `ot` on((`a`.`occupancytypeid` = `ot`.`objid`)));
+DROP VIEW IF EXISTS `vw_building_permit`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit` AS select `a`.`objid` AS `objid`,`a`.`appno` AS `appno`,`a`.`orgcode` AS `orgcode`,`a`.`trackingno` AS `trackingno`,`a`.`apptype` AS `apptype`,`a`.`permittype` AS `permittype`,`a`.`contact_name` AS `contact_name`,`a`.`contact_detail` AS `contact_detail`,`a`.`contact_email` AS `contact_email`,`a`.`contact_mobileno` AS `contact_mobileno`,`a`.`dtfiled` AS `dtfiled`,`a`.`applicantid` AS `applicantid`,`a`.`description` AS `description`,`a`.`title` AS `title`,`a`.`occupancytypeid` AS `occupancytypeid`,`a`.`numunits` AS `numunits`,`a`.`fixedcost` AS `fixedcost`,`a`.`projectcost` AS `projectcost`,`a`.`dtproposedconstruction` AS `dtproposedconstruction`,`a`.`dtexpectedcompletion` AS `dtexpectedcompletion`,`a`.`totalfloorarea` AS `totalfloorarea`,`a`.`height` AS `height`,`a`.`numfloors` AS `numfloors`,`a`.`worktypes` AS `worktypes`,`a`.`taskid` AS `taskid`,`a`.`zoneclassid` AS `zoneclassid`,`a`.`zone` AS `zone`,`a`.`amount` AS `amount`,`a`.`issuanceid` AS `issuanceid`,`a`.`txnmode` AS `txnmode`,`a`.`location_lotno` AS `location_lotno`,`a`.`location_blockno` AS `location_blockno`,`a`.`location_street` AS `location_street`,`a`.`location_barangay_name` AS `location_barangay_name`,`a`.`location_barangay_objid` AS `location_barangay_objid`,`a`.`accessoryid` AS `accessoryid`,`e`.`name` AS `applicant_name`,`e`.`objid` AS `applicant_objid`,`bt`.`objid` AS `occupancytype_objid`,`bt`.`title` AS `occupancytype_title`,`od`.`objid` AS `occupancytype_division_objid`,`od`.`title` AS `occupancytype_division_title`,`og`.`objid` AS `occupancytype_group_objid`,`og`.`title` AS `occupancytype_group_title`,`zc`.`objid` AS `zoneclass_objid`,`zc`.`title` AS `zoneclass_title`,ltrim(concat((case when isnull(`a`.`location_lotno`) then '' else concat(' ',`a`.`location_lotno`) end),(case when isnull(`a`.`location_blockno`) then '' else concat(' ',`a`.`location_blockno`) end),(case when isnull(`a`.`location_street`) then '' else concat(' ',`a`.`location_street`) end),(case when isnull(`a`.`location_barangay_name`) then '' else concat(' ',`a`.`location_barangay_name`) end))) AS `location_address_text`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `sys_wf_node`.`title` from `sys_wf_node` where ((`sys_wf_node`.`processname` = 'building_permit') and (`sys_wf_node`.`name` = `t`.`state`))) AS `task_title`,`p`.`objid` AS `issuance_objid`,`p`.`controlno` AS `issuance_controlno`,`p`.`dtissued` AS `issuance_dtissued` from (((((((`building_permit` `a` join `building_permit_entity` `e` on((`a`.`applicantid` = `e`.`objid`))) join `building_permit_task` `t` on((`a`.`taskid` = `t`.`taskid`))) join `obo_occupancy_type` `bt` on((`a`.`occupancytypeid` = `bt`.`objid`))) join `obo_occupancy_type_division` `od` on((`bt`.`divisionid` = `od`.`objid`))) join `obo_occupancy_type_group` `og` on((`od`.`groupid` = `og`.`objid`))) left join `obo_zoneclass` `zc` on((`a`.`zoneclassid` = `zc`.`objid`))) left join `building_permit_issuance` `p` on((`a`.`issuanceid` = `p`.`objid`)));
 
 -- ----------------------------
--- View structure for vw_obo_building_application_finding
+-- View structure for vw_building_permit_ancillary
 -- ----------------------------
-DROP VIEW IF EXISTS `vw_obo_building_application_finding`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_obo_building_application_finding` AS select `sa`.`typeid` AS `typeid`,`of`.`objid` AS `objid`,`of`.`appid` AS `appid`,`of`.`subappid` AS `subappid`,`of`.`particulars` AS `particulars`,`of`.`dtcreated` AS `dtcreated`,`of`.`createdby_objid` AS `createdby_objid`,`of`.`createdby_name` AS `createdby_name`,`of`.`status` AS `status`,`of`.`resolvedby_objid` AS `resolvedby_objid`,`of`.`resolvedby_name` AS `resolvedby_name`,`of`.`dtresolved` AS `dtresolved`,`of`.`remarks` AS `remarks` from (`obo_building_application_finding` `of` join `obo_building_subapplication` `sa` on((`of`.`subappid` = `sa`.`objid`)));
+DROP VIEW IF EXISTS `vw_building_permit_ancillary`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_ancillary` AS select `a`.`objid` AS `objid`,`a`.`appid` AS `appid`,`a`.`state` AS `state`,`a`.`permittypeid` AS `permittypeid`,`a`.`designprofessionalid` AS `designprofessionalid`,`a`.`supervisorid` AS `supervisorid`,`pt`.`title` AS `title`,`pt`.`sectionid` AS `sectionid`,`pt`.`sortorder` AS `sortorder` from (`building_permit_ancillary` `a` join `obo_permit_type` `pt` on((`a`.`permittypeid` = `pt`.`objid`)));
 
 -- ----------------------------
--- View structure for vw_obo_building_application_info
+-- View structure for vw_building_permit_fee_payment
 -- ----------------------------
-DROP VIEW IF EXISTS `vw_obo_building_application_info`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_obo_building_application_info` AS select `ai`.`objid` AS `objid`,`ai`.`appid` AS `appid`,`ai`.`subappid` AS `subappid`,`ai`.`name` AS `name`,`ai`.`stringvalue` AS `stringvalue`,`ai`.`decimalvalue` AS `decimalvalue`,`ai`.`intvalue` AS `intvalue`,`ai`.`datevalue` AS `datevalue`,`ai`.`booleanvalue` AS `booleanvalue`,`ov`.`datatype` AS `datatype`,`ov`.`typeid` AS `typeid`,`ov`.`unit` AS `unit`,`ov`.`caption` AS `caption`,`ov`.`category` AS `category`,`ov`.`sortorder` AS `sortorder` from (`obo_building_application_info` `ai` join `obo_variable` `ov` on((`ov`.`objid` = `ai`.`name`)));
+DROP VIEW IF EXISTS `vw_building_permit_fee_payment`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_fee_payment` AS select `bf`.`objid` AS `objid`,`bf`.`appid` AS `appid`,`bf`.`sectionid` AS `sectionid`,`bf`.`itemid` AS `itemid`,`bf`.`amount` AS `amount`,`bf`.`amtpaid` AS `amtpaid`,`bf`.`remarks` AS `remarks`,`oi`.`objid` AS `item_objid`,`oi`.`title` AS `item_title`,`oi`.`sortorder` AS `item_sortorder`,`os`.`org_objid` AS `org_objid`,`pt`.`reftype` AS `payment_type`,`pt`.`refno` AS `payment_refno`,`pt`.`refid` AS `payment_refid`,`pt`.`refdate` AS `payment_refdate` from (((`building_permit_fee` `bf` join `obo_itemaccount` `oi` on((`bf`.`itemid` = `oi`.`objid`))) join `building_permit_payment` `pt` on((`bf`.`appid` = `pt`.`appid`))) left join `obo_section` `os` on((`bf`.`sectionid` = `os`.`objid`)));
 
 -- ----------------------------
--- View structure for vw_obo_building_application_requirement
+-- View structure for vw_building_permit_info
 -- ----------------------------
-DROP VIEW IF EXISTS `vw_obo_building_application_requirement`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_obo_building_application_requirement` AS select `sa`.`objid` AS `objid`,`sa`.`appid` AS `appid`,`sa`.`typeid` AS `typeid`,`sa`.`status` AS `status`,`rt`.`title` AS `title` from ((`obo_building_application_requirement` `sa` join `obo_building_application` `a` on((`sa`.`appid` = `a`.`objid`))) join `obo_requirement_type` `rt` on((`rt`.`objid` = `sa`.`typeid`)));
+DROP VIEW IF EXISTS `vw_building_permit_info`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_info` AS select `ai`.`objid` AS `objid`,`ai`.`appid` AS `appid`,`ai`.`parentid` AS `parentid`,`ai`.`name` AS `name`,`ai`.`stringvalue` AS `stringvalue`,`ai`.`decimalvalue` AS `decimalvalue`,`ai`.`intvalue` AS `intvalue`,`ai`.`datevalue` AS `datevalue`,`ai`.`booleanvalue` AS `booleanvalue`,`ov`.`datatype` AS `datatype`,`ov`.`typeid` AS `typeid`,`ov`.`unit` AS `unit`,`ov`.`caption` AS `caption`,`ov`.`category` AS `category`,`ov`.`sortorder` AS `sortorder` from (`building_permit_info` `ai` join `obo_variable` `ov` on((`ov`.`objid` = `ai`.`name`)));
 
 -- ----------------------------
--- View structure for vw_obo_building_subapplication
+-- View structure for vw_building_permit_issuance
 -- ----------------------------
-DROP VIEW IF EXISTS `vw_obo_building_subapplication`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_obo_building_subapplication` AS select `sa`.`objid` AS `objid`,`sa`.`appid` AS `appid`,`sa`.`taskid` AS `taskid`,`oa`.`appno` AS `appno`,`oa`.`appdate` AS `appdate`,`oa`.`apptype` AS `apptype`,`oa`.`owner_objid` AS `owner_objid`,`oa`.`owner_name` AS `owner_name`,`oa`.`owner_address_text` AS `owner_address_text`,`oa`.`owner_ctcid` AS `owner_ctcid`,`oa`.`title` AS `title`,`oa`.`description` AS `description`,`oa`.`occupancytypeid` AS `occupancytype_division`,`ot`.`parentid` AS `occupancytype_group`,`oa`.`numunits` AS `numunits`,`oa`.`floorarea` AS `floorarea`,`oa`.`totalfloorarea` AS `totalfloorarea`,`oa`.`height` AS `height`,`oa`.`estimatedcost` AS `estimatedcost`,`oa`.`dtproposedconstruction` AS `dtproposedconstruction`,`oa`.`dtexpectedcompletion` AS `dtexpectedcompletion`,`oa`.`projectcost` AS `projectcost`,`oa`.`supervisorid` AS `supervisorid`,`sat`.`state` AS `task_state`,`sat`.`assignee_name` AS `task_assignee_name`,`sat`.`assignee_name` AS `task_assignee_objid`,`sat`.`actor_name` AS `task_actor_name`,`sat`.`actor_objid` AS `task_actor_objid`,`sat`.`startdate` AS `task_startdate`,`sat`.`enddate` AS `task_enddate`,`wt`.`title` AS `typetitle`,`wt`.`objid` AS `typeid`,`wt`.`activationstate` AS `activationstate`,(case when isnull(`sa`.`taskid`) then NULL else (select `wt`.`dtcreated` from `obo_building_subapplication_task` `wt` where ((`wt`.`refid` = `sa`.`objid`) and (`wt`.`state` = 'start'))) end) AS `task_fromdate`,(case when isnull(`sa`.`taskid`) then NULL else (select sec_to_time(sum((to_seconds(ifnull(`wt`.`enddate`,now())) - to_seconds(`wt`.`dtcreated`)))) from (`obo_building_subapplication_task` `wt` join `sys_wf_node` `wn` on(((`wn`.`name` = `wt`.`state`) and (`wn`.`processname` = 'obo_building_subapplication')))) where ((`wt`.`refid` = `sa`.`objid`) and (`wt`.`state` not in ('start','end')) and (`wn`.`tracktime` = 1))) end) AS `task_timediff` from ((((`obo_building_subapplication` `sa` join `obo_building_application` `oa` on((`sa`.`appid` = `oa`.`objid`))) left join `obo_building_subapplication_task` `sat` on((`sat`.`taskid` = `sa`.`taskid`))) join `obo_subapplication_type` `wt` on((`sa`.`typeid` = `wt`.`objid`))) left join `obo_occupancy_type` `ot` on((`oa`.`occupancytypeid` = `ot`.`objid`)));
+DROP VIEW IF EXISTS `vw_building_permit_issuance`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_issuance` AS select `bp`.`appno` AS `appno`,`bp`.`title` AS `title`,`bi`.`objid` AS `objid`,`bi`.`appid` AS `appid`,`bi`.`typeid` AS `typeid`,`bi`.`controlno` AS `controlno`,`bi`.`dtissued` AS `dtissued`,`bi`.`issuedby_objid` AS `issuedby_objid`,`bi`.`issuedby_name` AS `issuedby_name`,`bi`.`txnmode` AS `txnmode`,`bi`.`txnref` AS `txnref`,`bi`.`txnreftype` AS `txnreftype`,`bi`.`taskid` AS `taskid`,`bi`.`remarks` AS `remarks`,`ot`.`title` AS `type_title`,`ot`.`controlnopattern` AS `type_controlnopattern`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `sys_wf_node`.`title` from `sys_wf_node` where ((`sys_wf_node`.`processname` = 'building_permit_issuance') and (`sys_wf_node`.`name` = `t`.`state`))) AS `task_title`,`os`.`org_objid` AS `org_objid`,`os`.`org_name` AS `org_name`,`ot`.`sectionid` AS `sectionid` from ((((`building_permit_issuance` `bi` join `obo_issuance_type` `ot` on((`bi`.`typeid` = `ot`.`objid`))) join `building_permit_issuance_task` `t` on((`bi`.`taskid` = `t`.`taskid`))) join `building_permit` `bp` on((`bi`.`appid` = `bp`.`objid`))) left join `obo_section` `os` on((`ot`.`sectionid` = `os`.`objid`)));
+
+-- ----------------------------
+-- View structure for vw_building_permit_professional
+-- ----------------------------
+DROP VIEW IF EXISTS `vw_building_permit_professional`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_professional` AS select `a`.`objid` AS `objid`,`a`.`appid` AS `appid`,`a`.`entityid` AS `entityid`,`a`.`profession` AS `profession`,`a`.`ptr` AS `ptr`,`a`.`prc` AS `prc`,`e`.`name` AS `name`,`e`.`firstname` AS `firstname`,`e`.`lastname` AS `lastname`,`e`.`middlename` AS `middlename`,`e`.`address_text` AS `address_text`,`e`.`tin` AS `tin`,`e`.`id` AS `id` from (`building_permit_professional` `a` join `building_permit_entity` `e` on((`a`.`entityid` = `e`.`objid`)));
+
+-- ----------------------------
+-- View structure for vw_building_permit_section
+-- ----------------------------
+DROP VIEW IF EXISTS `vw_building_permit_section`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_section` AS select `a`.`objid` AS `objid`,`a`.`appid` AS `appid`,`a`.`typeid` AS `typeid`,`a`.`taskid` AS `taskid`,`a`.`issuanceid` AS `issuanceid`,`et`.`title` AS `type_title`,`et`.`sortindex` AS `type_sortindex`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `sys_wf_node`.`title` from `sys_wf_node` where ((`sys_wf_node`.`processname` = 'building_permit_section') and (`sys_wf_node`.`name` = `t`.`state`))) AS `task_title`,`p`.`objid` AS `issuance_objid`,`p`.`controlno` AS `issuance_controlno`,`p`.`dtissued` AS `issuance_dtissued`,`p`.`typeid` AS `issuance_typeid` from (((`building_permit_section` `a` join `building_permit_section_task` `t` on((`a`.`taskid` = `t`.`taskid`))) join `obo_section` `et` on((`a`.`typeid` = `et`.`objid`))) left join `building_permit_issuance` `p` on((`a`.`issuanceid` = `p`.`objid`)));
+
+-- ----------------------------
+-- View structure for vw_obo_occupancy_type
+-- ----------------------------
+DROP VIEW IF EXISTS `vw_obo_occupancy_type`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_obo_occupancy_type` AS select `ot`.`objid` AS `objid`,`ot`.`divisionid` AS `divisionid`,`ot`.`title` AS `title`,`od`.`objid` AS `division_objid`,`od`.`title` AS `division_title`,`og`.`objid` AS `group_objid`,`og`.`title` AS `group_title` from ((`obo_occupancy_type` `ot` join `obo_occupancy_type_division` `od` on((`ot`.`divisionid` = `od`.`objid`))) join `obo_occupancy_type_group` `og` on((`od`.`groupid` = `og`.`objid`)));
+
+-- ----------------------------
+-- View structure for vw_obo_permit_type
+-- ----------------------------
+DROP VIEW IF EXISTS `vw_obo_permit_type`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_obo_permit_type` AS select `ot`.`objid` AS `objid`,`ot`.`title` AS `title`,`ot`.`sortorder` AS `sortorder`,`ot`.`type` AS `type`,`ot`.`handler` AS `handler`,`ot`.`sectionid` AS `sectionid`,`et`.`org_objid` AS `org_objid`,`et`.`org_name` AS `org_name`,`et`.`buildingpermitstate` AS `buildingpermitstate`,`et`.`occupancypermitstate` AS `occupancypermitstate` from (`obo_permit_type` `ot` left join `obo_section` `et` on((`ot`.`sectionid` = `et`.`objid`)));
 
 SET FOREIGN_KEY_CHECKS = 1;

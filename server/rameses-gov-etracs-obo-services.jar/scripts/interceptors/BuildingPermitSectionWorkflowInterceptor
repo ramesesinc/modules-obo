@@ -12,18 +12,21 @@ class BuildingPermitSectionWorkflowInterceptor {
 	def findingEm;
 
 	@DataContext("vw_building_permit_section")
-	def evalEm;
+	def sectionEm;
 
 	@DataContext("building_permit_fee")
 	def buildingEm;
 
+	@DataContext("building_permit")
+	def appEm;
+
 	/**********************************************************************************************
 	* REMEMBER: This is the building_permit_section process flow
 	***********************************************************************************************/
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' && args[0].action == 'send-for-verification' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' }") 
 	public void beforeSendForVerification( def evt ) {
 		def p = evt.args[0];
-		def v = evalEm.find( [objid: p.refid ]).first();
+		def v = sectionEm.find( [objid: p.refid ]).first();
 		if( v.typeid.toLowerCase() == 'zoning' ) {
 			if(v.app.zoneclass?.objid == null ) {
 				throw new Exception("Please specify zone classification");	
@@ -31,22 +34,36 @@ class BuildingPermitSectionWorkflowInterceptor {
 		}
 	} 
 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section'  && args[0].action == 'send-for-revision' }") 
+	public void beforeSendForRevision( def evt ) {
+		def p = evt.args[0];
+		def list = findingEm.find( [parentid: p.refid ] ).where("supersederid IS NULL AND state = 2 AND transmittalid IS NULL").list();
+		if(!list) throw new Exception("There must be at least one finding");
+	} 
+
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section'  && args[0].action == 'approve' }") 
+	public void beforeSendForOboProcessing( def evt ) {
+		def p = evt.args[0];
+		def list = findingEm.find( [parentid: p.refid ] ).where("supersederid IS NULL AND state = 2 AND NOT(transmittalid IS NULL)").list();
+		if(list) throw new Exception("There must be no finding. If there are findings select Send for Revision instead");
+	} 
+
 	//signal the parent 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' && args[0].action == 'send-for-verification' }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' && args[0].action.matches('send-for-revision|approve') }") 
 	public void signalParent( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
-
-		def appid = evalEm.find( [objid: p.refid] ).select("appid").val();
-		//check first of there are other e that have not yet ended. If there are open, do not fire the parent application
-		def openItems = evalEm.find([appid:appid] ).where( "task.state IN ('evaluation', 'review', 'approval' ) ").exists();
-		if(!openItems) {
+		def appid = sectionEm.find( [objid: p.refid] ).select("appid").val();
+		def cnt = sectionEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('end', 'for-revision' ) ").val();
+		if(cnt <=0) {
+			def app = appEm.find([objid:appid]).select("task.*").first();
 			def f = [:];
 			f.processname = 'building_permit';
 			f.refid = appid;
 			f.startdate = dateSvc.getServerDate();
 			f.info = [ app: p.info ];
 			f.action = 'send-for-verification';
+			f.taskid = app.taskid;
 			wfSvc.signal(f);	
 		}
 	} 

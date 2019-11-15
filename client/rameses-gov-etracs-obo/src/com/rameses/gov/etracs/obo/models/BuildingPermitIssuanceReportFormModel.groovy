@@ -13,22 +13,17 @@ import com.rameses.rcp.framework.ClientContext;
 
 public class BuildingPermitIssuanceReportFormModel extends FormReportModel {
     
-    def entity;
-    def permit;
+    String template;
+    String id;
+    
+    String path = "com/rameses/gov/etracs/obo/reports/"
     
     public def getQuery() {
-        return [objid: entity?.objid ];
+        return [objid: id ];
     }
     
     public String getReportName() {
-        if( super.getReportId() == "building_permit") {
-            return super.getReportName();    
-        }
-        else {
-            if( permit == null ) permit = caller.entity.issuance;
-            def type = permit.typeid?.toLowerCase();
-            return "com/rameses/gov/etracs/obo/reports/building_permit_" + type +  ".jasper"
-        }
+        return path + template + ".jasper";
     }
     
 }

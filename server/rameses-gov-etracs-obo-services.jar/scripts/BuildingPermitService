@@ -26,11 +26,52 @@ public class BuildingPermitService  {
 	@DataContext("building_permit")
 	def appEm;
 
+	@DataContext("building_permit_ancillary")
+	def ancillaryEm;
+
 	@Service("OboConstructionCostService")
 	def costSvc;
 
+	@Service("SequenceService")
+	def seqSvc;
+
+	@Service("AppnoGeneratorService")
+	def appNoSvc;
+
+	@DataContext("building_permit_requirement")
+	def reqEm;
+
 	@Env
 	def env;
+
+	@ProxyMethod
+	public def accept(def o ) {
+		def appid = o.appid;
+		if(!appid) throw new Exception("Appid must not be null in generate application no.");
+
+		def c = reqEm.select("c:{COUNT(*)}").find([appid:appid]).where("state = 0").val();
+		if( c>0) throw new Exception("All requirements must be checked first");
+
+		c = reqEm.select("c:{COUNT(*)}").find([appid:appid]).where("supersederid IS NULL AND state = 2").val();
+		if( c>0) throw new Exception("There are still requirements that need to be revised");
+
+		//update the appno first
+		int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
+		def appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  );
+		def u = [:];
+		u.appdate = dateSvc.getServerDate();
+		u.appno = appno;
+		appEm.find( [objid: appid ] ).update( u );
+		return u;
+	}
+
+	@ProxyMethod
+	public void transmitApplication( def o ) {
+		if(!o.appid ) throw new Exception("appid is required in transmit application");
+		def appid = o.appid;
+		def app = appEm.find([objid: appid ]).first();
+		throw new Exception("app" + app.contact.email + " " + app.contact.mobileno );
+	}
 
 	@ProxyMethod
 	public def findByPermitNo( def p ) {
@@ -44,6 +85,15 @@ public class BuildingPermitService  {
 		return perm;
 	}	
 
+	@ProxyMethod
+	public void addAncillary( def o ) {
+		o.items.each {
+			def v = ancillaryEm.find( [objid: it ] ).exists();
+			if( !v ) {
+				ancillaryEm.create( [appid: o.appid, state:'PENDING', type: [objid:it], permittypeid: it ] );
+			}
+		}
+	}
 
 	@ProxyMethod
 	public def saveCapture( def app ) {
@@ -64,5 +114,8 @@ public class BuildingPermitService  {
 		app.orgcode = env.ORGCODE;
 		appEm.create( app );
 	}
+
+	
+
 
 }

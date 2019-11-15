@@ -15,13 +15,11 @@ class BuildingPermitFeeModel extends CrudFormModel {
     def appid;
     def parentid;
     def typeid;
+    def handler;
     
     void afterCreate() {
-        MsgBox.alert("after create");
-        println caller.entity;
-        
         entity.appid = appid;
-        entity.parentid = parentid;
+        entity.sectionid = typeid;
         entity.amtpaid = 0;
     }
     
@@ -30,4 +28,8 @@ class BuildingPermitFeeModel extends CrudFormModel {
         return Inv.lookupOpener( "obo_itemaccount:type:lookup", m );
     }
     
+    void afterSave(o) {
+        MsgBox.alert("after save");
+        if(handler) handler(o);
+    }
 }

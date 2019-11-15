@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="vw_obo_permit_type">		
 		<field name="objid" primary="true"/>
 		<field name="title" />

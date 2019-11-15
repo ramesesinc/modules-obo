@@ -1,13 +1,22 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="building_permit_issuance">
 		<field name="objid" primary="true" prefix="BPISS" />
 		<field name="appid" required="true"/>
+		<field name="typeid" required="true"/>
 		<field name="controlno" searchable="true" />
 		<field name="dtissued" />		
 		<field name="issuedby_objid" />		
 		<field name="issuedby_name" />	
-		<field name="typeid" />
 		<field name="txnmode" required="true"/>
-		
+		<field name="taskid" />
+		<field name="remarks" />
+
+
+		<!-- this is used for txns that have a record. example request for tax clearance. Reference is txnref=tdno, txnreftype=taxdeclaration -->		
+		<field name="txnref" />	
+		<field name="txnreftype" />	
+		<complex name="type" ref="obo_issuance_type" jointype="many-to-one">
+			<key field="typeid" target="objid"/>
+		</complex> 
 	</element>
 </schema>

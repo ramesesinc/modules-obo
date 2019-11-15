@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="obo_professional">
 		<field name="objid" primary="true"/>
 		<field name="state" required="true" defaultValue="ACTIVE"/>

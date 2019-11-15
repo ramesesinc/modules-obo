@@ -44,7 +44,7 @@ public class BuildingPermitOnlineService  {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@Service(value="obo/OnlineBuildingPermitDownloadService", connection="ext/cloud-server")
+	@Service(value="obo/OnlineBuildingPermitDownloadService", connection="cloud-server")
     def cloudBldgSvc;
 
     @Env
@@ -52,6 +52,10 @@ public class BuildingPermitOnlineService  {
 
     @ProxyMethod
     public def getApplication( def o  ) {
+    	//check first if the application already exists
+    	def app = appEm.find( [trackingno: o.appid ]).first();
+    	if(app) throw new Exception("Application already exists. It is currently at " + app.task );
+
 		return cloudBldgSvc.getDownloadInfo( [appid: o.appid, orgcode: env.ORGID ] );
     }
 
@@ -81,7 +85,7 @@ public class BuildingPermitOnlineService  {
 		}
 		app.ancillaries.each {
 			it.appid = newapp.objid;
-			it.type = [ permittypeid: it.permittypeid ];
+			it.type = [ permittypeid: it.permittypeid.toUpperCase() ];
 			ancillaryEm.create( it );
 		}
 		app.infos.each {
@@ -125,7 +129,6 @@ public class BuildingPermitOnlineService  {
 			r.state = 0;
 			r.typeid = it.objid;
 			r.type = [objid: it.objid];
-			r.checked = 0;
 			reqEm.create( r );
 		}
 

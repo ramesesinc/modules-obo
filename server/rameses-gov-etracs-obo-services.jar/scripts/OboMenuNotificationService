@@ -37,6 +37,14 @@ public class OboMenuNotificationService {
 		return getTaskCount(r);		
 	}
 
+	def building_permit_issuance = { o->
+		def r = [processname: 'building_permit_issuance'];
+		r._schemaname = "vw_building_permit_issuance";
+		r.domain = o.domain;
+		r.where = [ " typeid = :typeid", [typeid: o.typeid] ];
+		return getTaskCount(r);		
+	}
+
 	@ProxyMethod
 	public def fetchNotifications( def p ) {
 		def result = p.items;
@@ -56,6 +64,10 @@ public class OboMenuNotificationService {
 			else if( p.event == 'building_permit_section') {
 				p.typeid = it.id;
 				it.count = building_permit_section( p );
+			}
+			else if( p.event == 'building_permit_issuance') {
+				p.typeid = it.id;
+				it.count = building_permit_issuance( p );				
 			}
 		}	
 		return result;

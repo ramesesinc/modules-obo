@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="building_permit_rpu">
 		<field name="objid" primary="true" prefix="OBOBPRPU"/>
 		<field name="appid" required="true"/>
@@ -18,6 +18,12 @@
 		<field name="bill_amtdue"  datatype="decimal"/>
 		<field name="lotowned" datatype="integer" />		
 		<field name="ownerid" required="true"/>
+
+		<!-- tax clearance id -->
+		<field name="taxclearanceid" />
+
+		<!-- certificate of true copy -->
+		<field name="truecopycertid"/>
 		
 		<complex name="owner" ref="building_permit_entity" jointype="many-to-one">
 			<key field="ownerid" target="objid" />

@@ -5,14 +5,16 @@
  */
 package com.rameses.gov.etracs.obo.views;
 
-import com.rameses.osiris2.themes.OKCancelPage;
+import com.rameses.osiris2.themes.FormPage;
+import com.rameses.rcp.ui.annotations.StyleSheet;
 import com.rameses.rcp.ui.annotations.Template;
 
 /**
  *
  * @author elmonazareno
  */
-@Template(OKCancelPage.class)
+@StyleSheet
+@Template(FormPage.class)
 public class BuildingPermitFindingPage extends javax.swing.JPanel {
 
     /**
@@ -31,57 +33,59 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        xPanel1 = new com.rameses.rcp.control.XPanel();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
-        xTabbedPane1 = new com.rameses.rcp.control.XTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        xTextArea1 = new com.rameses.rcp.control.XTextArea();
-        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
-        jPanel2 = new javax.swing.JPanel();
-        schemaList6 = new com.rameses.seti2.components.SchemaList();
+        xLabel2 = new com.rameses.rcp.control.XLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        xTextArea2 = new com.rameses.rcp.control.XTextArea();
+        xLabel3 = new com.rameses.rcp.control.XLabel();
+        xPanel2 = new com.rameses.rcp.control.XPanel();
+        schemaList7 = new com.rameses.seti2.components.SchemaList();
 
-        xFormPanel2.setVisibleWhen("#{ mode != 'create' }");
+        setLayout(new java.awt.CardLayout());
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 150));
+        xPanel1.setVisibleWhen("#{ pagename == 'view' }");
+        xPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        xPanel1.setPreferredSize(new java.awt.Dimension(593, 394));
+        xPanel1.setLayout(new java.awt.BorderLayout());
 
-        xTextArea1.setCaption("Particulars");
-        xTextArea1.setLineWrap(true);
-        xTextArea1.setName("entity.particulars"); // NOI18N
-        xTextArea1.setPreferredSize(new java.awt.Dimension(0, 60));
-        jScrollPane1.setViewportView(xTextArea1);
+        xFormPanel2.setCaptionWidth(100);
 
-        xFormPanel1.add(jScrollPane1);
+        xLabel2.setCaption("Section");
+        xLabel2.setExpression("#{ entity.section.type.title }");
+        xLabel2.setVisibleWhen("#{ entity.objid != null }");
+        xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel2);
 
-        xCheckBox1.setCaption("");
-        xCheckBox1.setCheckValue(1);
-        xCheckBox1.setName("entity.checked"); // NOI18N
-        xCheckBox1.setUncheckValue(0);
-        xCheckBox1.setText("Passed");
-        xFormPanel1.add(xCheckBox1);
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(0, 150));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        xTextArea2.setCaption("Particulars");
+        xTextArea2.setLineWrap(true);
+        xTextArea2.setName("entity.particulars"); // NOI18N
+        xTextArea2.setPreferredSize(new java.awt.Dimension(0, 60));
+        jScrollPane2.setViewportView(xTextArea2);
 
-        xTabbedPane1.addTab("Info", jPanel1);
+        xFormPanel2.add(jScrollPane2);
 
-        schemaList6.setColumns(new com.rameses.rcp.common.Column[]{
+        xLabel3.setCaption("Raised By");
+        xLabel3.setExpression("#{ entity.createdby.name }");
+        xLabel3.setVisibleWhen("#{ entity.objid != null }");
+        xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel3);
+
+        xPanel1.add(xFormPanel2, java.awt.BorderLayout.CENTER);
+
+        add(xPanel1, "card4");
+
+        xPanel2.setVisibleWhen("#{ pagename == 'hist' }");
+        xPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        xPanel2.setLayout(new java.awt.BorderLayout());
+
+        schemaList7.setAllowOpen(false);
+        schemaList7.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "remarks"}
-                , new Object[]{"caption", "Remarks"}
+                new Object[]{"name", "particulars"}
+                , new Object[]{"caption", "Particulars"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
@@ -95,8 +99,8 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "modifiedby.name"}
-                , new Object[]{"caption", "Modified By"}
+                new Object[]{"name", "createdby.name"}
+                , new Object[]{"caption", "Raised By"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 150}
                 , new Object[]{"maxWidth", 200}
@@ -110,7 +114,7 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "dtmodified"}
+                new Object[]{"name", "dtcreated"}
                 , new Object[]{"caption", "Date"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 100}
@@ -125,70 +129,25 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.DateColumnHandler(null, null, null)}
             })
         });
-        schemaList6.setCustomFilter("appid =:appid AND parentid = :parentid AND typeid = :typeid");
-        schemaList6.setOrderBy("dtmodified");
-        schemaList6.setQueryName("entity");
-        schemaList6.setSchemaName("building_permit_finding");
-        schemaList6.setAllowOpen(false);
-        schemaList6.setRowHeight(20);
+        schemaList7.setCustomFilter("rootid = :rootid ");
+        schemaList7.setOrderBy("dtcreated");
+        schemaList7.setQueryName("entity");
+        schemaList7.setRowHeight(40);
+        schemaList7.setSchemaName("building_permit_finding");
+        xPanel2.add(schemaList7, java.awt.BorderLayout.CENTER);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(schemaList6, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(schemaList6, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        xTabbedPane1.addTab("History", jPanel2);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(226, 226, 226)
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
+        add(xPanel2, "card5");
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private com.rameses.seti2.components.SchemaList schemaList6;
-    private com.rameses.rcp.control.XCheckBox xCheckBox1;
-    private com.rameses.rcp.control.XFormPanel xFormPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private com.rameses.seti2.components.SchemaList schemaList7;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
-    private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
-    private com.rameses.rcp.control.XTextArea xTextArea1;
+    private com.rameses.rcp.control.XLabel xLabel2;
+    private com.rameses.rcp.control.XLabel xLabel3;
+    private com.rameses.rcp.control.XPanel xPanel1;
+    private com.rameses.rcp.control.XPanel xPanel2;
+    private com.rameses.rcp.control.XTextArea xTextArea2;
     // End of variables declaration//GEN-END:variables
 }

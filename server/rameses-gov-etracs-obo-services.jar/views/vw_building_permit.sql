@@ -15,12 +15,12 @@ SELECT
    zc.title AS zoneclass_title,
 
 
-   CONCAT(
-      (CASE WHEN a.location_lotno IS NULL THEN '' ELSE CONCAT( 'Lot No. ', a.location_lotno) END),
-      (CASE WHEN a.location_blockno IS NULL THEN '' ELSE CONCAT(' Block No', a.location_blockno) END),
+   LTRIM(CONCAT(
+      (CASE WHEN a.location_lotno IS NULL THEN '' ELSE CONCAT( ' ', a.location_lotno) END),
+      (CASE WHEN a.location_blockno IS NULL THEN '' ELSE CONCAT(' ', a.location_blockno) END),
       (CASE WHEN a.location_street IS NULL THEN '' ELSE CONCAT(' ', a.location_street) END),
       (CASE WHEN a.location_barangay_name IS NULL THEN '' ELSE CONCAT(' ', a.location_barangay_name ) END)
-   ) AS location_address_text,
+   )) AS location_address_text,
 
    t.state AS task_state,
    t.startdate AS task_startdate,

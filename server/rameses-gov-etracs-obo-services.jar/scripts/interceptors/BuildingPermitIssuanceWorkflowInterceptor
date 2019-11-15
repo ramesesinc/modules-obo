@@ -1,0 +1,25 @@
+import com.rameses.annotations.*; 
+
+class BuildingPermitIssuanceWorkflowInterceptor { 
+
+	@Service("WorkflowTaskService")
+	def wfSvc;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("building_permit_issuance")
+	def issuanceEm;
+
+	/**********************************************************************************************
+	* REMEMBER: This is the building_permit_section process flow
+	***********************************************************************************************/
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_issuance' && args[0].action == 'send-for-approval' }") 
+	public void beforeSendForVerification( def evt ) {
+		def p = evt.args[0];
+		def t = issuanceEm.find( [objid: p.refid ]).first();
+		if(! t.controlno ) throw new Exception("Please assign a control no first");
+	} 
+
+
+} 

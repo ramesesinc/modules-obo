@@ -1,4 +1,4 @@
-<schema adapter="obodb">
+<schema>
 	<element tablename="vw_building_permit_section">
 		<field name="objid" primary="true" />
 		<field name="appid" />
@@ -9,6 +9,7 @@
 		<field name="typeid" />
 		<field name="taskid" />
 		<field name="type_title" />
+		<field name="type_sortindex" />
 
 		<field name="task_state" />
 		<field name="task_startdate" />
