@@ -31,9 +31,9 @@
 			<td colspan="3" class="tdborder" align="center"><p class="allcaps">TTotal Generator/Ups Capacity</p></td>
 		</tr>
 		<tr class="last-td">
-			<td colspan="3" align="center"><p class="underline kva"></p>kVA</td>
-			<td colspan="3" class="tdborder" align="center"><p class="underline kva"></p>kVA</td>
-			<td colspan="3" class="tdborder" align="center"><p class="underline kva"></p>kVA</td>
+			<td colspan="3" align="center"><p class="underline data kva">${app.total_connected_load}</p>kVA</td>
+			<td colspan="3" class="tdborder" align="center"><p class="underline data kva">${app.total_transformer_capacity}</p>kVA</td>
+			<td colspan="3" class="tdborder" align="center"><p class="underline data kva">${app.total_generator_ups_capacity}</p>kVA</td>
 		</tr>	
 	</tbody>
 </table>
@@ -51,37 +51,37 @@
 				<p class="title">Box 3</p>
 				<table class="boxpermit" width="100%">
 					<tbody>
-						<tr>
+						<tr class="trborder ">
 							<td colspan="3"><b>Supervisor / In-charge of electrical works</b></td>
 						</tr>
 						<tr>
-							<td><p class="allcaps"><input type="checkbox"> Professional Electrical Engineer</p></td>
-							<td><p class="allcaps"><input type="checkbox">  Registered Electrical Engineer</p></td>
-							<td><p class="allcaps"><input type="checkbox">  Registered Master Electrician</p></td>
+							<td><p class="allcaps"><input type="checkbox" <%if(app.staking !=null){%>checked<%}%>> Professional Electrical Engineer</p></td>
+							<td><p class="allcaps"><input type="checkbox" <%if(app.staking !=null){%>checked<%}%>>  Registered Electrical Engineer</p></td>
+							<td><p class="allcaps"><input type="checkbox" <%if(app.staking !=null){%>checked<%}%>>  Registered Master Electrician</p></td>
 						</tr>
 						<tr class="trborder last-td">
 							<td colspan="3" align="center">
-								<p class="underline signature"></p> 
-								Date <p class="underline signature-date"></p><br>
+								<p class="underline signature data">${app.supervisor.name}</p> 
+								Date <p class="underline signature-date data"></p><br>
 								<p>(Signed and Sealed Over Printed Name)</p><br>
 							</td>
 						</tr>
 					</tbody>
 					<tbody>
 						<tr class="trborder">
-							<td>PRC No.</td>
-							<td colspan="2" class="tdborder">Validity</td>
+							<td>PRC No. : <label class="data">${app.supervisor.prc.idno}</label> </td>
+							<td colspan="2" class="tdborder">Validity : <label class="data">${app.supervisor.prc.dtvalid}</label> </td>
 						</tr>
 						<tr class="trborder">
-							<td>PTR No.</td>
-							<td colspan="2" class="tdborder">Date Issued</td>
+							<td>PTR No. : <label class="data">${app.supervisor.ptr.idno} </label></td>
+							<td colspan="2" class="tdborder">Date Issued : <label class="data">${app.supervisor.ptr.dtissued} </label></td>
 						</tr>
 						<tr class="trborder">
-							<td>Issued at</td>
-							<td colspan="2" class="tdborder">TIN</td>
+							<td>Issued at : <label class="data">${app.supervisor.prc.placeissued}</label></td>
+							<td colspan="2" class="tdborder">TIN : <label class="data">${app.supervisor.tin}</label></td>
 						</tr>
 						<tr>
-							<td colspan="3">Address</td>
+							<td colspan="3">Address : <label class="data">${app.supervisor.address.text}</label></td>
 						</tr>
 					</tbody>
 				</table>
@@ -96,7 +96,7 @@
 			</td>
 			<td class="tdinside">
 				<p class="title">Box 5</p>
-				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.location.owner )
+				@obo:print_owner_box( title: 'WITH MY CONSENT: <b>LOT OWNER</b>', owner: app.location.owner )
 			</td>
 		</tr>
 	</tbody>

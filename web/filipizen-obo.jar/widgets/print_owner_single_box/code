@@ -1,28 +1,29 @@
-<%
-	def owner = OPTIONS.owner;
-	if( owner == null ) owner  = [:];
-%>
+<%def app = PARAMS.app; %>
 <table  class="boxpermit" width="100%" height="100%">
-	<tbody>
-		<tr>
-			<td colspan="4" align="center"><p class="underline ownerbox data">${owner?.firstname} ${owner?.middlename}. ${owner?.lastname}</p> Date <p class="underline ownerbox-date">01-01-2019</p></td>
-		</tr>
-		<tr>
-			<td align="center" colspan="4"><p class="allcaps-bold">APPLICANT</p></td>
-		</tr>
-		<tr class=" trborder last-td">
-			<td align="center" colspan="4"><p>(Signed Over Printed Name)</p></td>
-		</tr>
-	</tbody>
-	<tbody>
-		<tr class="trborder">
-			<td colspan="4"><p>Address:<label class="data"> ${owner?.address?.text}</label></p> </td>
-		</tr>
-		<tr>
-			<td>C.T.C. No. <p class="data">${owner?.id?.idno}</p></td>
-			<td class="tdborder">Date Issued <p class="data">${owner?.id?.dtissued}</p></td>
-			<td class="tdborder">Place Issued <p class="data">${owner?.id?.placeissued}</p></td>
-			<td class="tdborder">TIN <p class="data">${owner?.id?.tin}</p></td>
-		</tr>
-	</tbody>
-</table>
+		<tbody>
+			<tr>
+				<td colspan="4" align="center"><p class="underline ownerbox data">${app.applicant?.name}</p><br> <p class="allcaps-bold">APPLICANT</p></td>
+			</tr>
+			<tr >
+				<td align="center" colspan="4"><p>(Signed Over Printed Name)</p></td>
+			</tr>
+			<tr class="trborder last-td">
+				<td align="center" colspan="4">Date <p class="underline ownerbox-date"></p></td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr class="trborder">
+				<td align="center">C.T.C. No. </td>
+				<td class="tdborder" align="center">Date Issued </td>
+				<td colspan="2" class="tdborder" align="center">Place Issued </td>
+			</tr>
+			<tr class="trborder">
+				<td class="tdborder" align="center"><p class="data">${app.applicant?.id?.idno}</p></td>
+				<td class="tdborder" align="center"><p class="data">${app.applicant?.id?.dtissued}</p></td>
+				<td colspan="2" class="tdborder" align="center"><p class="data">${app.applicant?.id?.placeissued}</p></td>
+			</tr>
+			<tr>
+				<td colspan="4">TIN : <label class="data">${app.applicant?.tin}</label></td>
+			</tr>
+		</tbody>
+	</table>

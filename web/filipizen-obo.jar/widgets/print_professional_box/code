@@ -1,17 +1,13 @@
-<% 
-def prof = OPTIONS.professional;
-if(prof == null ) prof = [:];
-%>
-
-<table class="boxpermit" style="width:99.5%" height="100%">
+<%def app = PARAMS.app; %>
+<table class="boxpermit" style="width:99.5%">
 	<tbody>
 		<tr class="trborder">
 			<td colspan="3"><p class="allcaps-bold">${OPTIONS.title}</p></td>
 		</tr>
 		<tr>
 			<td colspan="3" align="center">
-				<p class="underline signature">${prof?.firstname} ${prof?.middlename}. ${prof?.lastname}</p> 
-				Date <p class="underline signature-date">01-01-2019</p>
+				<p class="underline signature data">${app?.designprofessional?.firstname} ${app?.designprofessional?.middlename}. ${app?.designprofessional?.lastname}</p> 
+				Date <p class="underline signature-date"></p>
 			</td>
 		</tr>
 		<tr>
@@ -23,38 +19,37 @@ if(prof == null ) prof = [:];
 	</tbody>
 	<tbody>
 		<tr class="trborder">
-			<td colspan="3"><p>Address : <label class="data">${prof?.address?.text}</label></p></td>
+			<td colspan="3"><p>Address : <label class="data">${app?.designprofessional?.address?.text}</label></p></td>
 		</tr>
 		<tr class="trborder">
-			<td>PRC No.: <label class="data">${prof?.prc?.idno}</label></td>
-			<td class="tdborder" colspan="2"><p>Validity: <label class="data">${prof?.prc?.validity}</label></p></td>
+			<td>PRC No.: <label class="data">${app?.designprofessional?.prc?.idno}</label></td>
+			<td class="tdborder" colspan="2"><p>Validity : <label class="data">${app?.designprofessional?.prc?.dtvalid}</label></p></td>
 		</tr>
 
 		<%if(! OPTIONS.role.equalsIgnoreCase('architect')) {%>
 			<tr class="trborder">
-				<td>PTR No.: <label class="data">${prof?.ptr?.idno}</label></td>
-				<td class="tdborder" colspan="2"><p>Date Issued <label class="data">${prof?.ptr?.dtissued}</label></p></td>
+				<td>PTR No.: <label class="data">${app?.designprofessional?.ptr?.idno}</label></td>
+				<td class="tdborder" colspan="2"><p>Date Issued : <label class="data">${app?.designprofessional?.ptr?.dtissued}</label></p></td>
 			</tr>
 			<tr class="trborder">
-				<td><p>Issued at: <label class="data">${prof?.ptr?.placeissued}</label></p></td>
-				<td class="tdborder" colspan="2">TIN : <label class="data">${prof?.ptr?.tin}</label></td>
+				<td><p>Issued at: <label class="data">${app?.designprofessional?.ptr?.placeissued}</label></p></td>
+				<td class="tdborder" colspan="2">TIN : <label class="data">${app?.designprofessional?.ptr?.tin}</label></td>
 			</tr>
 		<%}%>
 
 		<%if(OPTIONS.role.equalsIgnoreCase('architect')) {%>
 			<tr class="trborder">
-				<td>IAPOA No. <label class="data">${prof?.ptr?.idno}</label></td>
-				<td class="tdborder">O.R.No.</td>
-				<td class="tdborder"><p>Date Issued <label class="data">${prof?.ptr?.dtissued}</label></p></td>
+				<td>IAPOA No. <label class="data"></label></td>
+				<td class="tdborder">O.R.No. : <label class="data"></label></td>
+				<td class="tdborder"><p>Date Issued : <label class="data"></label></p></td>
 			</tr>
 			<tr class="trborder">
-				<td><p>PTR No.: <label class="data">${prof?.ptr?.placeissued}</label></p></td>
-				<td class="tdborder"><p>Place Issued</p></td>
-				<td class="tdborder">Date Issued <label class="data">${prof?.ptr?.tin}</label></td>
+				<td><p>PTR No.: <label class="data">${app?.designprofessional?.ptr?.idno}</label></p></td>
+				<td class="tdborder"><p>Place Issued : <label class="data">${app?.designprofessional?.ptr?.placeissued}</label></p></td>
+				<td class="tdborder">Date Issued : <label class="data">${app?.designprofessional?.ptr?.dtissued}</label></td>
 			</tr>
 			<tr>
-				<td>TIN</td>
-				<td colspan="2"></td>
+				<td colspan="3" >TIN : <label class="data">${app?.designprofessional?.tin}</label></td>
 			</tr>
 
 		<%}%>

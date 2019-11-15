@@ -16,7 +16,7 @@
 	<tr>
 		<td colspan="3"><input type="checkbox"> ADDTION</td>
 		<td colspan="4"><input type="checkbox"> REPAIR <p class="underline repair"></p></td>
-		<td colspan="2" rowspan="2" valign="top"><input type="checkbox"> OTHERS (specify) <p class="underline others"></p></td>
+		<td colspan="2" rowspan="2" valign="top"><input type="checkbox"> OTHERS (specify) <p class="underline"></p></td>
 	</tr>
 	<tr class="last-td">
 		<td colspan="3"><input type="checkbox"> ALTERATION</td>
@@ -43,7 +43,7 @@
 			</td>
 			<td class="tdinside">
 				<p class="title">Box 5</p>
-				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app?.location?.owner )
+				@obo:print_owner_box( title: 'WITH MY CONSENT: <b>LOT OWNER</b>', owner: app?.location?.owner )
 			</td>
 		</tr>
 		<tr>

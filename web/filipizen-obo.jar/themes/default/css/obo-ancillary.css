@@ -1,11 +1,11 @@
-table {border-collapse: collapse;font-size: 12px; margin: 0; padding: 0;}
+table {border-collapse: collapse;font-size: 12px; margin: 0; padding: 0;font-weight: normal;}
 * {box-sizing: border-box;-moz-box-sizing: border-box;}
-html, body {font-family: 'arial narrow';-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;-webkit-font-smoothing: antialiased;
-    color: #000000;font-size: 14px;}
-h1{text-align: center;margin-top: 10px;font-size: 20px;font-weight: 500;font-family: 'arial narrow';line-height: 35px;
+html, body {font-family: 'Arial';-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;-webkit-font-smoothing: antialiased;
+    color: #000000;font-size: 14px;margin: 0px;}
+h1{text-align: center;margin-top: 10px;font-size: 20px;font-weight: 500;font-family: 'Arial';line-height: 35px;
     margin-bottom: 0px;color: #000000;text-transform: uppercase;}
 h2{text-align: center;font-size: 17px;text-transform: uppercase;}
-h3{text-align: center;text-transform: capitalize !important;margin: 0;font-weight: 600;font-family: 'arial narrow';font-size: 17px;line-height: 19px;}
+h3{text-align: center;text-transform: capitalize !important;margin: 0;font-weight: 600;font-family: 'Arial';font-size: 17px;line-height: 19px;}
 table tr td{padding-left: 10px;padding-right: 10px;}
 input[type="checkbox"]{ outline: 1px solid #000;}
 p {margin: 0px;}
@@ -14,8 +14,14 @@ li::before {content: counter(foo) ".";display: table-cell;text-align: right;padd
 ol ol {counter-reset: list;margin: 0;}
 ol ol > li {list-style: none;position: relative;}
 ol ol > li:before {counter-increment: list;content: counter(list, lower-alpha) ". ";position: absolute;left: 11em;}
+canvas{width: 100px;}
 
-.boxpermit{border: 1px solid #000;}
+.dl{float: right;top:0;padding:5px;background: #D8D7D6;width: 100%;position: fixed;z-index: 999 !important;}
+.dl .btn{float: right;}
+.dl .btn {height: 35px;width: 80px;}
+.smallBox>tbody>tr>td{width: 23px;height: 23px;padding:0px;text-align: center;    border: solid 1px #000000}
+
+.boxpermit{border: 1px solid #000;text-transform: uppercase;}
 .title{margin-top: 5px;margin-bottom: 5px;font-size: 10pt;text-transform: uppercase;font-weight: bold;}
 .tblscope{border-left: 1px solid #000000;border-right: 1px solid #000000;border-bottom: 1px solid #000000;}
 .nopaddingleft{padding-left: 0;}
@@ -31,9 +37,8 @@ ol ol > li:before {counter-increment: list;content: counter(list, lower-alpha) "
 .header {display: inline-block;margin:0 auto;width:60%;}
 .formno {float:left;width:20%;}
 .header-container{width:100%;text-align:center;}
-.page {background: white;padding:0px 20px 0px 20px;width: 100%}
-.barcode{float:right;text-align:center;height: 20px; padding-right:100px;position: relative;width:20%;}
-
+.page {background: white;padding:100px 20px 0px 20px;width: 100%}
+.barcode{float:right;text-align:center;height: 20px; padding-right:100px;position: relative;width:20%;text-transform: uppercase;font-size: 10px;}
 /*Underline CSS*/
 .underline {border-bottom: 1px solid #000000;margin-bottom: 0px; text-align: center;}
 
@@ -90,18 +95,20 @@ tr td p{ display: inline-block;}
 /*Print Media CSS*/
 @page {  margin: 0;}
 @media print {
-    body { margin-left: -4mm; margin-right: -4mm}   
+    body { margin-left: -4mm; margin-right: -4mm}  
+    body { -webkit-print-color-adjust: exact !important;} 
     h1{font-size: 16pt;}
     h2{font-size: 12pt;}
     h3{font-size: 10pt;}
     button{display: none}
     table tr td input {margin-left: 10px !important;margin-bottom: 0px;}
-    table tr td {font-size: 10px;}
-    .page {margin: 0em;page-break-after: always;padding-top: 20px;margin-top:70px;}
+    table tr td {font-size: 7px;height: 19px;}
+    .page {margin: 0em;page-break-after: always;padding-top: 20px;margin-top:5px;}
     .data{font-size: 10px;font-weight: bold;}
     .tdinside{padding-top: 5px;}
     .title{font-size: 10pt;}
     .fixture {font-size: 8px;}
+    .barcode{font-size: 8px;padding-bottom: 5px;text-align: center;}
 
     /*TR CSS*/
     .lotno{width: 40%;}
@@ -120,6 +127,11 @@ tr td p{ display: inline-block;}
     .raising{ width: 76%;}
     .accessory{ width: 43%;}
     .others{ width: 95%;}
+
+    .fill{background: #4a4a4a !important; }
 }
 
 
+
+    .fill{background: #4a4a4a}
+    table.sidebox tr td{height:26px;padding-left: 10px;padding-right: 10px;}

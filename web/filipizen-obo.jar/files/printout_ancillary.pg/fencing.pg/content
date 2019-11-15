@@ -11,7 +11,7 @@
 	<tr >
 		<td colspan="3"><p class="allcaps"><input type="checkbox"> Erection</p></td>
 		<td colspan="3" rowspan="2" valign="top"><p class="allcaps"><input type="checkbox"> Demolition</p> <p class="underline demolition"></p></td>
-		<td colspan="3" rowspan="2" valign="top"><input type="checkbox"> <p class="underline others"></p></td>
+		<td colspan="3" rowspan="2" valign="top"><p class="underline others">&nbsp;</p></td>
 	</tr>
 	<tr class="last-td">
 		<td colspan="3"><p class="allcaps"><input type="checkbox"> Addition</p></td>
@@ -28,7 +28,7 @@
 			</td>
 			<td class="tdinside">
 				<p class="title">Box 3</p>
-				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app.supervisor, role: 'ARCHITECT OR CIVIL ENGINEER' )
+				@obo:print_professional_box( title: 'Full-time inspector and supervisor of works', professional: app.supervisor, role: 'ARCHITECT OR CIVIL ENGINEER' )
 			</td>
 		</tr>
 		<!-- second row. 283 -->
@@ -40,7 +40,7 @@
 				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
 			</td>
 			<td class="tdinside">
-				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+				@obo:print_owner_box( title: 'WITH MY CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
 			</td>
 		</tr>
 		<tr>

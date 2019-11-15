@@ -1,7 +1,7 @@
-TESSSTTT
 
 <%
 	def app = [:];
+	def infos=null;
 	try {
 		def svc = SERVICE.lookup("OnlineBuildingPermitService", "obo");
 	 	app = svc.getAncillaryPermit([ objid: PARAMS.refid ]);
@@ -14,12 +14,18 @@ TESSSTTT
 		app.lotowner  = app.location.owner;
 		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename.charAt(0) : '');
 
+		infos = svc.getAppInfos( [parentid: PARAMS.refid ] );
+		infos.each {
+			app.put( it.name.toLowerCase(), it.value );	
+		}	
+
 	} catch(Throwable e){
 		app = [:];
 	}
 
 	PARAMS.app = app;
 %>
+
 
 
 <!DOCTYPE html>
@@ -29,8 +35,13 @@ TESSSTTT
 		<link href="/themes/default/css/obo-ancillary.css?ver=1" type="text/css" rel="stylesheet" />
 	</head>
 	<body>
+
+	<div class="dl">
+	    <div class="container">
+	        <button onclick="window.print();return false;" class="btn btn-print"><i class="fa fa-print"></i>Print</button>
+	    </div>
+	</div>
 	
-	<button onclick="window.print();return false;" class="btn-print">Print</button>
 		<div class="page">
 			<div class="header-container">
 				<div class="formno">
@@ -45,9 +56,12 @@ TESSSTTT
 					<h1><b>${PAGE.title}</b></h1>
 				</div>
 				<div class="barcode">
-					<h2 ><b>Tracking No. : <label>${app?.objid}</label></b></h2>
+					<p><b>Tracking No. :</b></p>
+					<center><img id='qrcode' src="https://api.qrserver.com/v1/create-qr-code/?data=${app?.objid}&amp;size=250x250" width="80" height="80" class="img-responsive"/></center>
+					<p>${app?.objid}</p>
 				</div>
 			</div>	
+
 			<br>
 			<table align="center" width="100%">
 				<tr>
@@ -67,7 +81,7 @@ TESSSTTT
 							</tr>
 						</table>
 					</td>
-					<td>{PAGE.controlno} 
+					<td>${PAGE.controlname} 
 						<table class="smallBox">
 							<tr>
 								<td></td>
@@ -104,7 +118,7 @@ TESSSTTT
 			<table align="center" width="100%" cellpadding="0" cellspacing="0">
 				<tr>
 					<td colspan="2">
-						<p class="title"><b>Box 1 (To be accomplished in print print by the owner/application)</b></p>
+						<p class="title"><b>Box 1 (To be accomplished in print by the owner/applicant)</b></p>
 						<table align="center" class="boxpermit allcaps" width="100%">
 							<tbody>
 								<tr>
@@ -116,10 +130,10 @@ TESSSTTT
 								</tr>
 								<tr class="trborder">
 									<td></td>
-									<td colspan="2"><p class="data">${app.applicant.lastname} </p></td>
-									<td colspan="3"><p class="data">${app.applicant.firstname}</p></td>
-									<td colspan="1"><p class="data">${app.applicant.middleinitial}</p></td>
-									<td colspan="2" class="tdborder"><p class="data">${app.applicant.tin}</p></td>
+									<td colspan="2"><label class="data">${app.applicant?.lastname} </label></td>
+									<td colspan="3"><label class="data">${app.applicant?.firstname}</label></td>
+									<td colspan="1"><label class="data">${app.applicant.middleinitial}</label></td>
+									<td colspan="2" class="tdborder"><label class="data">${app.applicant?.tin}</label></td>
 								</tr>
 							</tbody>
 							<tbody>
@@ -129,9 +143,9 @@ TESSSTTT
 									<td colspan="4" class="tdborder"> use or character of occupancy</td>
 								</tr>
 								<tr>
-									<td colspan="2"><p class="data"></p></td>
-									<td colspan="3" rowspan="2" class="tdborder"><p class="data"></p></td>
-									<td colspan="4" rowspan="2" class="tdborder"><p class="data">${app.occupancytype.title} - ${app.occupancytype.division.objid}</p></td>
+									<td colspan="2"><label class="data">${app.applicant?.name}</label></td>
+									<td colspan="3" rowspan="2" class="tdborder"><label class="data">${app.applicant?.entitytype}</label></td>
+									<td colspan="4" rowspan="2" class="tdborder"><label class="data">${app.occupancytype?.title} - ${app.occupancytype?.division?.objid}</label></td>
 								</tr>
 								<tr class="trborder">
 									<td colspan="9">By an enterprise</td>
@@ -139,9 +153,9 @@ TESSSTTT
 							</tbody>
 							<tbody>
 								<tr>
-									<td>address no.</td>
-									<td> street </td>
-									<td colspan="2">Barangay</td>
+									<td>address:  no. ,</td>
+									<td> street, </td>
+									<td colspan="2">Barangay,</td>
 									<td colspan="3">City/Municipality</td>
 									<td>Zip Code</td>
 									<td class="tdborder">Telephone No.</td>
@@ -150,23 +164,23 @@ TESSSTTT
 									<td  class="data">${app.applicant.address?.bldgno}</td>
 									<td  class="data">${app.applicant.address?.street}</td>
 									<td colspan="2" class="data">${app.applicant.address?.barangay?.name}</td>
-									<td colspan="3" class="data"></td>
-									<td></td>
-									<td class="tdborder data"></td>
+									<td colspan="3" class="data">${app.applicant?.address?.citymunicipality}</td>
+									<td class="data">${app.applicant?.zipcode}</td>
+									<td class="tdborder data">${app.applicant?.phoneno}</td>
 								</tr>
 							</tbody>
 							<tbody>
 								<tr>
 									<td colspan="2">Location of Construction:</td>
-									<td colspan="2"><p>Lot No.</p><p class="data underline lotno">${app?.location?.lotno}</p></td>
-									<td ><p>Blk No.</p> <p class="data underline blkno">${app?.location?.blockno}</p></td>
-									<td colspan="2"><p>TCT No.</p><p class="data underline tctno">${app?.location?.tctno}</p></td>
-									<td colspan="2"><p>Tax Dec No.</p><p class="data underline taxdecno">${app?.location?.tdno}</p></td>
+									<td colspan="2">Lot No. <label class="underline data">${app.location?.lotno}</label></td>
+									<td  colspan="2">Blk No. <label class="underline data">${app.location?.blockno}</label></td>
+									<td colspan="2">TCT No.  <label class="underline data">${app?.location?.tctno}</label></td>
+									<td >Tax Dec No. <label class="underline data">${app?.location?.tdno}</label></td>
 								</tr>
-								<tr class="last-td">
-									<td colspan="3">Street <p class="data underline street">${app?.location?.street}</p></td>
-									<td colspan="3">Barangay <p class="data underline barangay">${app?.location?.barangay}</p></td>
-									<td colspan="3">City/Municipality <p class="data underline municipality">${app?.org.formalname}</p></td>
+								<tr class="trborder trlocation">
+									<td colspan="3">Street <label class="underline data">${app.location?.street}</label></td>
+									<td colspan="3">Barangay <label class="underline data">${app.location.barangay?.name}</label></td>
+									<td colspan="3">City/Municipality <label class="underline data">${app.org?.formalname}</label></td>
 								</tr>
 							</tbody>
 						</table>
@@ -177,7 +191,8 @@ TESSSTTT
 						${_content}
 					</td>	
 				</tr>
-			</table>		
+			</table>
+			<br><br>		
 		</div>
 	</body>
 </html>

@@ -1,7 +1,6 @@
 <%def app = PARAMS.app; %>
 
 
-	<div class="page">
 	<div class="header-container">
 		<div class="formno">
 			<p>NBC FORM NO. B-01</p>
@@ -15,7 +14,9 @@
 			<h1><b>Application for Building Permit</b></h1>
 		</div>
 		<div class="barcode">
-			<h2 ><b>Tracking No. : <label>1029289383</label></b></h2>
+			<p><b>Tracking No.</b></p>
+			<center><img id='qrcode' src="https://api.qrserver.com/v1/create-qr-code/?data=QWSHYG1234&amp;size=250x250" width="80" height="80" class="img-responsive"/></center>
+			<p>QWSHYG1234</p>
 		</div>
 	</div>	
 
@@ -71,10 +72,10 @@
 					</tr>
 					<tr class="trborder">
 						<td></td>
-						<td colspan="2"><label class="data"></label></td>
-						<td colspan="3"><label class="data"></label></td>
-						<td colspan="1"><label class="data"></label></td>
-						<td colspan="2" class="tdborder"><label class="data"></label></td>
+						<td colspan="2"><label class="data">${app.applicant?.lastname}</label></td>
+						<td colspan="3"><label class="data">${app.applicant?.firstname}</label></td>
+						<td colspan="1"><label class="data">${app.applicant?.middleinitial}</label></td>
+						<td colspan="2" class="tdborder"><label class="data">${app.applicant?.tin}</label></td>
 					</tr>
 				</tbody>
 				<tbody>
@@ -84,9 +85,9 @@
 						<td colspan="4" class="tdborder"> use or character of occupancy</td>
 					</tr>
 					<tr>
-						<td colspan="2"><label class="data">dd</label></td>
-						<td colspan="3" rowspan="2" class="tdborder"><label class="data"></label></td>
-						<td colspan="4" rowspan="2" class="tdborder"><label class="data"></label></td>
+						<td colspan="2"><label class="data">${app.applicant?.name}</label></td>
+						<td colspan="3" rowspan="2" class="tdborder"><label class="data">${app.applicant?.entitytype}</label></td>
+						<td colspan="4" rowspan="2" class="tdborder"><label class="data">${app.occupancytype?.title} -  ${app.occupancytype?.division?.objid}</label></td>
 					</tr>
 					<tr class="trborder">
 						<td colspan="9">By an enterprise</td>
@@ -103,25 +104,25 @@
 						<td class="tdborder">Telephone No.</td>
 					</tr>
 					<tr class="trborder">
-						<td colspan="2"></td>
-						<td colspan="2"></td>
-						<td colspan="3"></td>
-						<td></td>
-						<td class="tdborder"></td>
+						<td colspan="2"><label class="data">${app.applicant.address?.bldgno}, ${app.applicant?.address.street}</label></td>
+						<td colspan="2"><label class="data"><label class="data">${app.applicant.address?.barangay?.name}</label></td>
+						<td colspan="3"><label class="data">${app.applicant?.address?.citymunicipality}</label></td>
+						<td><label class="data">${app.applicant?.address?.zipcode}</label></td>
+						<td class="tdborder"><label class="data">${app.applicant?.phoneno}</label></td>
 					</tr>
 				</tbody>
 				<tbody>
 					<tr>
 						<td colspan="2">Location of Construction:</td>
-						<td colspan="2">Lot No. <label class="underline"></label></td>
-						<td  colspan="2">Blk No. <label class="underline"></label></td>
-						<td colspan="2">TCT No.  <label class="underline"></label></td>
-						<td >Tax Dec No. <label class="underline"></label></td>
+						<td colspan="2">Lot No. <label class="underline data">${app.location?.lotno}</label></td>
+						<td  colspan="2">Blk No. <label class="underline data">${app.location?.blockno}</label></td>
+						<td colspan="2">TCT No.  <label class="underline data">${app?.location?.tctno}</label></td>
+						<td >Tax Dec No. <label class="underline data">${app?.location?.tdno}</label></td>
 					</tr>
 					<tr class="trborder trlocation">
-						<td colspan="3">Street <label class="underline"></label></td>
-						<td colspan="3">Barangay <label class="underline"></label></td>
-						<td colspan="3">City/Municipality <label class="underline"></label></td>
+						<td colspan="3">Street <label class="underline data">${app.location?.street}</label></td>
+						<td colspan="3">Barangay <label class="underline data">${app.location.barangay?.name}</label></td>
+						<td colspan="3">City/Municipality <label class="underline data">${app.org?.formalname}</label></td>
 					</tr>
 					<tr>
 						<td colspan="9"><b>Scope of work</b></td>
@@ -331,7 +332,6 @@
 					</table>
 				</td>
 			</tr>	
-			
 			<!-- second row -->
 			<tr>
 				<td>
@@ -345,7 +345,6 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					
 					<p class="title"><b>Box 5</b></p>
 					<table class="boxpermit" align="center" width="100%">
 						<tr class="trborder" style="height:40px;">
@@ -383,7 +382,4 @@
 				</td>
 			</tr>
 	</table>
-
-
-
 

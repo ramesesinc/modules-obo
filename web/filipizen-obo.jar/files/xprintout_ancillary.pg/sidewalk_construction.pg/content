@@ -1,0 +1,81 @@
+<%def app = PARAMS.app; %>
+
+<table  width="100%" class="tblscope">
+	<tr class="first-td">
+		<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
+	</tr>
+	<tr>
+		<td colspan="3"><p class="allcaps"><input type="checkbox"> New Construction</p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox"> Renovation</p> <p class="underline renovation"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox"> OTHERS (Specify)</p>  <p class="underline civilothers"></p></td>
+	</tr>
+	<tr >
+		<td colspan="3"><p class="allcaps"><input type="checkbox"> Erection</p></td>
+		<td colspan="3" rowspan="2" valign="top"><p class="allcaps"><input type="checkbox"> REPAIR</p> <p class="underline repair"></p></td>
+		<td colspan="3" rowspan="2" valign="top"><input type="checkbox"> <p class="underline others"></p></td>
+	</tr>
+	<tr class="last-td">
+		<td colspan="3"><p class="allcaps"><input type="checkbox"> Addition</p></td>
+	</tr>
+</table>
+<table cellpadding="0" cellspacing="0" width="100%">
+	<tbody>
+		<tr>
+			<td class="tdinside">
+				<p class="title">Box 2</p>
+				@obo:print_professional_box( title: 'Design Professional, Plans and Specifications', professional: app.designprofessional, role:'ARCHITECT' )
+			</td>
+			<td class="tdinside">
+				<p class="title">Box 3</p>
+				@obo:print_professional_box( title: 'Supervisor/In-charge of civil/structural works', professional: app.supervisor, role: 'ARCHITECT' )
+			</td>
+		</tr>
+		<!-- second row. 283 -->
+		<tr>
+			<td class="tdinside">
+				<p class="title">Box 4</p>
+				@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+			</td>
+			<td class="tdinside">
+				<p class="title">Box 5</p>
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+			</td>
+			<tr>
+			<td class="tdinside" colspan="2">
+				<p class="title">Box 5</p>
+				<table  class="boxpermit" width="100%" height="100%">
+					<tbody>
+						<tr>
+							<td colspan="4" align="center"><p class="underline ownerbox data">ELMO NAZARENO</p> </td>
+						</tr>
+						<tr>
+							<td align="center" colspan="4"><p class="allcaps-bold">APPLICANT</p></td>
+						</tr>
+						<tr >
+							<td align="center" colspan="4"><p>(Signed Over Printed Name)</p></td>
+						</tr>
+						<tr class="trborder last-td">
+							<td align="center" colspan="4">Date <p class="underline ownerbox-date">01-01-2019</p></td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr class="trborder">
+							<td>C.T.C. No. <p class="data"></p></td>
+							<td class="tdborder">Date Issued <p class="data"></p></td>
+							<td class="tdborder">Place Issued <p class="data"></p></td>
+						</tr>
+						<tr class="trborder">
+							<td class="tdborder"><p class="data"></p></td>
+							<td class="tdborder"><p class="data"></p></td>
+							<td class="tdborder"><p class="data"></p></td>
+						</tr>
+						<tr>
+							<td colspan="4">TIN</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		</tr>
+	</tbody>
+</table>
