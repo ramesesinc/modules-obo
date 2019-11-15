@@ -99,6 +99,12 @@
     @wx:date(caption:'Proposed Construction Date', context:'project', name:'project.dtproposedconstruction', required: true, attrs:[hint:'yyyy-MM-dd'])
     @wx:date(caption:'Expected Completion Date', context:'project', name:'project.dtexpectedcompletion', required: true, attrs:[hint:'yyyy-MM-dd'])
 
+    <div style="padding-top:20px;">
+      <label class="caption-class">Contractor</label>
+      <label r:context="project" style="width:210px">#{ project.contractor.name }</label>
+      <button r:context="project" r:name="lookupContractor">Lookup</button>
+    </div>
+
   </div>
   @wx:button( caption: 'Save', context:'project', name: 'updateProject' )
 </div>

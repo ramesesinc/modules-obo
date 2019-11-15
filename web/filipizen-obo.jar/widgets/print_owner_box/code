@@ -1,35 +1,32 @@
-<%
-	def owner = OPTIONS.owner;
-	if( owner == null ) owner  = [:];
-%>
-<table  class="boxpermit" style="width:99.5%" height="100%">
+<%def app = PARAMS.app; %>
+<table  class="boxpermit" style="width:99.5%">
 	<tbody>
 		<tr>
 			<td colspan="3">${OPTIONS.title}</td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center"><p class="underline ownerbox data">${owner?.firstname} ${owner?.middlename}. ${owner?.lastname}</p></td>
+			<td colspan="3" align="center"><p class="underline ownerbox data">${app?.applicant?.firstname} ${app?.applicant?.middlename}. ${app?.applicant?.lastname}</p></td>
 		</tr>
 		<tr>
 			<td align="center" colspan="3"><p>(Signed Over Printed Name)</p></td>
 		</tr>
 		<tr class=" trborder last-td">
-			<td align="center" colspan="3">Date <p class="underline ownerbox-date" >01-01-2019</p></td>
+			<td align="center" colspan="3">Date <p class="underline ownerbox-date" ></p></td>
 		</tr>
 	</tbody>
 	<tbody>
 		<tr class="trborder">
-			<td colspan="3"><p>Address:<label class="data"> ${owner?.address?.text}</label></p> </td>
+			<td colspan="3"><p>Address:<label class="data"> ${app?.applicant?.address?.text}</label></p> </td>
 		</tr>
 		<tr>
-			<td><p>${owner.id?.type?.caption}</p></td>
+			<td><p>${app?.id?.type?.caption}</p></td>
 			<td class="tdborder"><p>Date Issued</p></td>
 			<td class="tdborder"><p>Place Issued</p></td>
 		</tr>
 		<tr>
-			<td><label class="data"> ${owner?.id?.idno}</label></td>
-			<td class="tdborder"><label class="data"> ${owner?.id?.dtissued}</label></td>
-			<td class="tdborder"><label class="data"> ${owner?.id?.placeissued}</label></td>
+			<td><label class="data"> ${app?.applicant?.id?.idno}</label></td>
+			<td class="tdborder"><label class="data"> ${app?.applicant?.id?.dtissued}</label></td>
+			<td class="tdborder"><label class="data"> ${app?.applicant?.id?.placeissued}</label></td>
 		</tr>
 	</tbody>
 </table>

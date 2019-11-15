@@ -1,3 +1,4 @@
+<%def app = PARAMS.app; %>
 <table class="boxpermit" align="center" width="100%" >
 		<tbody>
 			<tr class="trborder">
@@ -5,26 +6,29 @@
 			</tr>
 			<tr>
 				<td align="center" rowspan="5" style="padding-bottom:20px;padding-top:20px">
-					<p class="underline signature">dddd</p> 
-					Date <p class="underline signature-date">01-01-2019</p><br>
+					<p class="underline signature data">${app.designprofessional.name}</p> 
+					Date <p class="underline signature-date"></p><br>
 					<p class="allcaps-bold">${OPTIONS.role}</p><br>
 					<p>(Signed and Sealed Over Printed Name)</p><br>
 				</td>
 			</tr>
 			<tr class="trborder">
-				<td class="tdborder" colspan="2">Address</td>
+				<td class="tdborder" colspan="2">Address : <label class="data">${app.designprofessional.address.text}</label></td>
 			</tr>
 			<tr class="trborder">
-				<td class="tdborder">PRC No.</td>
-				<td class="tdborder">Validity</td>
+				<td class="tdborder">PRC No. : <label class="data">${app.designprofessional.prc.idno}</label></td>
+				<td class="tdborder">Validity : <label class="data">${app.designprofessional.prc.dtvalid}</label></td>
 			</tr>
 			<tr class="trborder">
-				<td class="tdborder">PTR No.</td>
-				<td class="tdborder">Daye Issued</td>
+				<td class="tdborder">PTR No. : <label class="data">${app.designprofessional.ptr.idno}</label></td>
+				<td class="tdborder">Daye Issued : <label class="data">${app.designprofessional.ptr.dtissued}</label></td>
 			</tr>
 			<tr class="trborder">
-				<td class="tdborder">Issued at</td>
-				<td class="tdborder">TIN</td>
+				<td class="tdborder">Issued at : <label class="data">${app.designprofessional.prc.placeissued}</label></td>
+				<td class="tdborder">TIN : <label class="data">${app.designprofessional.tin}</label></td>
 			</tr>
 		</tbody>
 	</table> 
+
+
+	

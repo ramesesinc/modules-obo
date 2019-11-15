@@ -43,7 +43,7 @@
 			</td>
 			<td class="tdinside">
 				<p class="title">Box 5</p>
-				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app?.location?.owner )
+				@obo:print_owner_box( title: 'WITH MY CONSENT: <b>LOT OWNER</b>', owner: app?.location?.owner )
 			</td>
 		</tr>
 		<tr>
@@ -54,6 +54,5 @@
 		</tr>
 	</tbody>
 </table>
-
 
 
