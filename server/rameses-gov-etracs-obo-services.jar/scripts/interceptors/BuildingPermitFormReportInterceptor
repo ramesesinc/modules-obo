@@ -21,8 +21,7 @@ class BuildingPermitFormReportInterceptor {
 	@DataContext("building_permit_finding")
 	def findingEm;
 
-	@DataContext("vw_building_permit_issuance")
-	def issuanceEm;
+	
 
 	@DataContext("vw_building_permit_fee_payment")
 	def payEm;

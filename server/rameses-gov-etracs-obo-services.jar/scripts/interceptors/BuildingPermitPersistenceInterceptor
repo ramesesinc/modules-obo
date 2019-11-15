@@ -6,9 +6,6 @@ import com.rameses.annotations.*;
 ***********************************************************************************/
 class BuildingPermitPersistenceInterceptor {
 
-	@DataContext("building_permit_issuance")
-	def issuanceEm;
-
 	@DataContext("building_permit_transmittal")
 	def transmittalEm;
 
@@ -17,19 +14,6 @@ class BuildingPermitPersistenceInterceptor {
 
 	@Env
 	def env;
-
-	@After(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'building_permit' && args[0].txnmode == 'CAPTURE' }")
-	public void afterCreate(def evt) {
-		def a = evt.args[0];
-		def result = evt.result;
-		def p = [:];
-		p.appid = result.objid;
-		p.controlno = a.permitno;
-		p.dtissued = a.appdate;
-		p.typeid = 'building_permit';
-		p.txnmode = 'CAPTURE';
-		issuanceEm.create( p );
-	}
 
 	@After(pattern="PersistenceService.read", eval="#{args[0]._schemaname == 'vw_building_permit' }")
 	public void afterOpenBuildingPermit(def evt) {

@@ -59,17 +59,17 @@
 		<field name="task_actor_name" />
 		<field name="task_title" />
 		<field name="amount" />
-		<field name="issuanceid" />
+		<field name="contractorid" />
 		<field name="txnmode" />
+
+		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one" required="false" includefields="name,prc.*">
+			<key field="contractorid" target="objid" />
+		</complex> 
 
 		<complex name="payment" ref="building_permit_payment" jointype="many-to-one" required="false"
 			includefields="refno,refdate,amount">
 			<key field="objid" target="appid" />
 		</complex>
-
-		<field name="issuance_objid" />
-		<field name="issuance_controlno" />
-		<field name="issuance_dtissued" />
 		
 	</element>
 </schema>	

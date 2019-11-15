@@ -47,12 +47,6 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit_transmittal")
 	def transmittalEm;
 
-	@DataContext("obo_issuance_type")
-	def issuanceTypeEm;
-
-	@DataContext("building_permit_issuance")
-	def bldgIssuanceEm;
-
 	/* *********************************************************************
 	//Specific before action tasks
 	************************************************************************ */
@@ -117,6 +111,7 @@ class BuildingPermitWorkflowInterceptor {
 
 		//find sections that are optional and check if it has ancillary 
 		def olist = sectionEm.where(" buildingpermitstate = :state AND optional=1 ", [state: result.state] ).list()*.objid;
+		//throw new Exception("list trigger is " + olist);
 		def alist = vwAncillaryEm.find( [appid: appid ] ).list()*.sectionid;
 		olist.each {
 			if( alist.contains(it) ) mlist << it;
@@ -152,29 +147,18 @@ class BuildingPermitWorkflowInterceptor {
 	public void postPaymentTasks( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;
-
 		def dt = dateSvc.getServerDate();
-		//find first sections of this application
-		def sections = evalEm.find([appid: appid ] ).list()*.typeid;
-		def filter = "('" + sections.join("','") + "')"
-		def list = issuanceTypeEm.find( [txntype:"buildingpermit"] ).where("sectionid IS NULL OR sectionid IN " + filter).list()*.objid;
-
-		list.each {
-			if(!bldgIssuanceEm.find([appid: appid, typeid: it] ).exists()) {
-				def m = [:];
-				m.appid = appid;
-				m.type = [objid: it];
-				m.txnmode = "ONLINE";
-				m.typeid = it;
-				m = bldgIssuanceEm.create(m);
-				
-				def f = [:];
-				f.processname = 'building_permit_issuance';
-				f.refid = m.objid;
-				f.startdate = dt;
-				f.info = [ type: it ];
-				wfSvc.start(f);			
-			}
+		//find first sections where state is obo-processing. If type.issuepermit = 1 then move task to for releasing 
+		def openList = vwSectionEm.find( [appid: appid ] ).where("task.state = 'obo-processing' ").list();
+		openList.each {
+			def f = [:];
+			f.processname = 'building_permit_section';
+			f.refid = it.objid;
+			f.startdate = dt;
+			f.info = it;
+			f.taskid = it.taskid;
+			f.action = (it.type.issuepermit == 1 ) ? "send-for-releasing" : "end";
+			wfSvc.signal(f);	
 		}
 	}
 
@@ -182,14 +166,10 @@ class BuildingPermitWorkflowInterceptor {
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'release' }" ) 
 	public void doActionBeforeRelease( def evt ) {
 		def p = evt.args[0];
-		def c = bldgIssuanceEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").val();
-		if(c<=0)
-			throw new Exception("There must be at least one permit/clearance issued");
-		c = bldgIssuanceEm.find( [appid: p.refid ] ).where(" NOT(task.state = 'end') ").val();	
-		if(c > 0 )
-			throw new Exception("Please ensure that all issuance tasks are completed");
+		def appid = p.refid;
+		//def app = 
+		throw new Exception("Fire before release");	
 	}
-
 
 	//This is newly added. Do not send to zoning if there is no tax clearance and tax declaration true copy
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].taskstate == 'requirement-verification' && args[0].action == 'approve' }" ) 

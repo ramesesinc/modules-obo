@@ -26,7 +26,7 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
     
     @FormTitle
     public String getTitle() {
-        return entity.app.appno + " " + entity.type.title;
+        return entity.app.appno + " " + entity.type.title + " (" + entity.task?.title + ")";
     }
     
     public String getWindowTitle() {
@@ -94,17 +94,17 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
     }
     
     def issuePermit() {
-        def m = [showpermitno:true, appid:entity.appid, evaluationid: entity.objid, typeid: entity.typeid ];
+        def m = [ appid:entity.appid, sectionid: entity.typeid ];
         m.handler = { o->
-            entity.permit = o;
             reload();
         }
-        return Inv.lookupOpener("building_permit_issuance:create", m );
+        return Inv.lookupOpener(entity.type.permitname, m );
     }
     
     public boolean isActionable() {
         return (task.assignee.objid == userInfo.userid);
     }
+    
     
     
 }

@@ -22,6 +22,10 @@ class BuildingPermitCaptureModel extends CrudFormModel {
         entity.txnmode = "CAPTURE";
     }
     
+    public def onComplete() {
+        return "_close";
+    }
+    
     /*
     public def onComplete() {
         def op =  Inv.lookupOpener("vw_building_permit:open", [entity: entity ] );

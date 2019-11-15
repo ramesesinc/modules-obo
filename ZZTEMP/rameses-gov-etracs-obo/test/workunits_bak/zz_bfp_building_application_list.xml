@@ -1,0 +1,17 @@
+<workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
+          processName="obo_building_application_workitem" schemaName="vw_obo_building_application_workitem"
+          allowDelete="false" allowNotify="false">
+    <invokers>
+        <invoker folderid="menucategory/bfp/building" caption="View Building Application List (30)"
+             cols="appno,appdate,owner.name,description,projectcost,task.state,task.assignee.name"
+                action="init" index="-1"/>
+        
+        <invoker folderid="menucategory/bfp/occupancy" caption="View Occupancy Application List (0)"
+             cols="appno,appdate,owner.name,description,projectcost,task.state,task.assignee.name"
+                action="init" index="1"/>
+        
+        <invoker folderid="menucategory/bfp/business" caption="View Business Application List (20)"
+             cols="appno,appdate,owner.name,description,projectcost,task.state,task.assignee.name"
+                action="init" index="2"/>
+    </invokers>
+</workunit>

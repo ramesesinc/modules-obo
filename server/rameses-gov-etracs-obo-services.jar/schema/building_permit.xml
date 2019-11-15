@@ -39,11 +39,17 @@
 		<complex name="worktypes" type="list" serializer="default" />
 
 		<field name="amount" type="decimal"/>
-		<field name="issuanceid" />
 		<field name="txnmode" />
 
 		<!-- this is used if the building permit applied is for accessory or type J -->
 		<field name="accessoryid" />
+		<field name="contractorid" />
+
+		<field name="permitno" />
+		<field name="dtissued" />
+		<field name="remarks" />
+
+
 	</element>
 </schema>
 

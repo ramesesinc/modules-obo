@@ -72,10 +72,10 @@ class BuildingPermitModel extends WorkflowTaskModel {
         },
         "sectionView" : { o->
             if(o == "open") {
-                sectionQry.where = sectionQry._filter +  " AND NOT(task.state = 'end' )";
+                sectionQry.where = sectionQry._filter +  " AND task.state NOT IN ('obo-processing', 'end') ";
             }
             else if(o == "closed") {
-                sectionQry.where = sectionQry._filter +  " AND task.state = 'end' ";
+                sectionQry.where = sectionQry._filter +  " AND task.state IN ('obo-processing', 'end') ";
             }            
             else {
                 sectionQry.where = sectionQry._filter;                
@@ -107,7 +107,7 @@ class BuildingPermitModel extends WorkflowTaskModel {
         issuanceQry.where = "appid = :appid";
     }
     
-    public void afterInit() {
+    public void afterOpen() {
         buildQuery();
     }
     
@@ -237,6 +237,12 @@ class BuildingPermitModel extends WorkflowTaskModel {
         feeListHandler.reload();
     }
     
+    /***************
+    * capture payment
+    ***************/
+    def capturePayment() {
+        return nInv.lookupOpener("building_permit_capture_payment", [entity: entity] );
+    }
     
     /**************
     * RPT Clearances

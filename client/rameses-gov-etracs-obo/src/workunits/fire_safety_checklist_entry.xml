@@ -1,0 +1,11 @@
+<workunit>
+    <invokers>
+        <invoker type="fire_safety_checklist_entry" caption="Edit Item"
+                action="init" target="popup"/>
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.bfp.models.FireSafetyChecklistEntryModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.bfp.views.FireSafetyChecklistEntryPage" />
+    </pages>
+</workunit>
