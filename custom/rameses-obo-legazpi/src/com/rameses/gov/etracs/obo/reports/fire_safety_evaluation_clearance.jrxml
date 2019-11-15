@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="building_permit_fsec"
+		 name="fire_safety_evaluation_clearance"
 
 		 language="groovy"		 columnCount="1"
 		 printOrder="Vertical"
@@ -88,7 +88,7 @@
 						y="204"
 						width="99"
 						height="15"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
@@ -128,7 +128,7 @@
 						y="265"
 						width="188"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
@@ -142,7 +142,7 @@
 						y="341"
 						width="233"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField"/>
 					<box></box>
 					<textElement>
@@ -663,7 +663,7 @@
 						y="318"
 						width="485"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
@@ -671,13 +671,13 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="###0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="109"
 						y="482"
 						width="76"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
@@ -691,7 +691,7 @@
 						y="494"
 						width="77"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
@@ -705,7 +705,7 @@
 						y="506"
 						width="112"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
@@ -719,7 +719,7 @@
 						y="121"
 						width="128"
 						height="21"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
@@ -760,7 +760,7 @@
 						y="290"
 						width="485"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField-1"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
@@ -774,7 +774,7 @@
 						y="413"
 						width="485"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
 						key="textField-2"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">

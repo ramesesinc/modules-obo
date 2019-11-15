@@ -38,3 +38,9 @@ DELETE FROM building_permit_task;
 DELETE FROM building_permit_fee;
 DELETE FROM building_permit_finding;
 DELETE FROM building_permit_section;
+
+[clean-captured-building-permit]
+UPDATE building_permit SET applicantid = null, taskid = NULL, accessoryid = NULL;
+DELETE FROM building_permit_task;
+delete from building_permit_entity;
+DELETE FROM building_permit;

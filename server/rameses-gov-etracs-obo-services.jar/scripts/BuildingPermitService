@@ -26,6 +26,9 @@ public class BuildingPermitService  {
 	@DataContext("building_permit")
 	def appEm;
 
+	@DataContext("building_permit_task")
+	def taskEm;
+
 	@DataContext("building_permit_ancillary")
 	def ancillaryEm;
 
@@ -112,7 +115,28 @@ public class BuildingPermitService  {
 		app.appno = app.permitno;
 		app.permittype = "BUILDING PERMIT";
 		app.orgcode = env.ORGCODE;
-		appEm.create( app );
+		app.occupancytypeid = app.occupancytype.objid;
+		def applicant = app.remove("applicant");
+
+		//save the application
+		app = appEm.create( app );
+
+		//save the applicant entity
+		applicant.profileid = applicant.remove("objid");
+		applicant.appid = app.objid;
+		applicant.resident = ( applicant.address.type == 'local') ? 1 : 0;
+		def vent = permitEntity.create( applicant );
+
+		//save the dummy task
+		def t = [refid: app.objid, dtcreated: dt, state: 'end'];
+		t = taskEm.create(t);
+
+		def u = [:];
+		u.applicantid = vent.objid;
+		u.taskid = t.taskid;
+		appEm.find( [objid: app.objid ] ).update( u );
+
+		return app;
 	}
 
 	

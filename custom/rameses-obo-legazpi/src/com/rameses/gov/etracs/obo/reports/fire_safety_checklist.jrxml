@@ -3847,21 +3847,6 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement
-						x="16"
-						y="272"
-						width="18"
-						height="17"
-						key="staticText-387">
-							<printWhenExpression><![CDATA[($F{fsc01} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="SansSerif" size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="74"
@@ -3938,726 +3923,6 @@ Other Spaces;  Class ________________ ]]></text>
 				</rectangle>
 				<staticText>
 					<reportElement
-						x="16"
-						y="289"
-						width="18"
-						height="17"
-						key="staticText-388">
-							<printWhenExpression><![CDATA[($F{fsc02} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="327"
-						width="18"
-						height="17"
-						key="staticText-389">
-							<printWhenExpression><![CDATA[($F{fsc04} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="308"
-						width="18"
-						height="17"
-						key="staticText-390">
-							<printWhenExpression><![CDATA[($F{fsc03} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="413"
-						width="18"
-						height="17"
-						key="staticText-391">
-							<printWhenExpression><![CDATA[($F{fsc08} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="389"
-						width="18"
-						height="17"
-						key="staticText-392">
-							<printWhenExpression><![CDATA[($F{fsc07} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="364"
-						width="18"
-						height="17"
-						key="staticText-393">
-							<printWhenExpression><![CDATA[($F{fsc06} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="346"
-						width="18"
-						height="17"
-						key="staticText-394">
-							<printWhenExpression><![CDATA[($F{fsc05} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="432"
-						width="18"
-						height="17"
-						key="staticText-395">
-							<printWhenExpression><![CDATA[($F{fsc09} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="17"
-						y="453"
-						width="18"
-						height="17"
-						key="staticText-396">
-							<printWhenExpression><![CDATA[($F{fsc10} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="473"
-						width="18"
-						height="17"
-						key="staticText-397">
-							<printWhenExpression><![CDATA[($F{fsc11} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="497"
-						width="18"
-						height="17"
-						key="staticText-398">
-							<printWhenExpression><![CDATA[($F{fsc12} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="520"
-						width="18"
-						height="17"
-						key="staticText-399">
-							<printWhenExpression><![CDATA[($F{fsc13} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="539"
-						width="18"
-						height="17"
-						key="staticText-400">
-							<printWhenExpression><![CDATA[($F{fsc14} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="17"
-						y="562"
-						width="18"
-						height="17"
-						key="staticText-401">
-							<printWhenExpression><![CDATA[($F{fsc15} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="17"
-						y="589"
-						width="18"
-						height="17"
-						key="staticText-402">
-							<printWhenExpression><![CDATA[($F{fsc16} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="17"
-						y="612"
-						width="18"
-						height="17"
-						key="staticText-403">
-							<printWhenExpression><![CDATA[($F{fsc17} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="640"
-						width="18"
-						height="17"
-						key="staticText-404">
-							<printWhenExpression><![CDATA[($F{fsc18} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="665"
-						width="18"
-						height="17"
-						key="staticText-405">
-							<printWhenExpression><![CDATA[($F{fsc19} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="689"
-						width="18"
-						height="17"
-						key="staticText-406">
-							<printWhenExpression><![CDATA[($F{fsc20} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="717"
-						width="18"
-						height="17"
-						key="staticText-407">
-							<printWhenExpression><![CDATA[($F{fsc21} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="740"
-						width="18"
-						height="17"
-						key="staticText-408">
-							<printWhenExpression><![CDATA[($F{fsc22} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="17"
-						y="770"
-						width="18"
-						height="17"
-						key="staticText-409">
-							<printWhenExpression><![CDATA[($F{fsc23} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="801"
-						width="18"
-						height="17"
-						key="staticText-410">
-							<printWhenExpression><![CDATA[($F{fsc24} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="829"
-						width="18"
-						height="17"
-						key="staticText-411">
-							<printWhenExpression><![CDATA[($F{fsc25} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="856"
-						width="18"
-						height="17"
-						key="staticText-412">
-							<printWhenExpression><![CDATA[($F{fsc26} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="879"
-						width="18"
-						height="17"
-						key="staticText-413">
-							<printWhenExpression><![CDATA[($F{fsc27} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="16"
-						y="899"
-						width="18"
-						height="17"
-						key="staticText-414">
-							<printWhenExpression><![CDATA[($F{fsc28} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="251"
-						width="13"
-						height="17"
-						key="staticText-415">
-							<printWhenExpression><![CDATA[($F{fsc29} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="280"
-						width="13"
-						height="17"
-						key="staticText-416">
-							<printWhenExpression><![CDATA[($F{fsc30} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="318"
-						width="13"
-						height="17"
-						key="staticText-417">
-							<printWhenExpression><![CDATA[($F{fsc31} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="346"
-						width="13"
-						height="17"
-						key="staticText-418">
-							<printWhenExpression><![CDATA[($F{fsc32} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="365"
-						width="13"
-						height="17"
-						key="staticText-419">
-							<printWhenExpression><![CDATA[($F{fsc33} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="389"
-						width="13"
-						height="17"
-						key="staticText-420">
-							<printWhenExpression><![CDATA[($F{fsc34} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="412"
-						width="13"
-						height="17"
-						key="staticText-421">
-							<printWhenExpression><![CDATA[($F{fsc35} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="443"
-						width="13"
-						height="17"
-						key="staticText-422">
-							<printWhenExpression><![CDATA[($F{fsc36} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="473"
-						width="13"
-						height="17"
-						key="staticText-423">
-							<printWhenExpression><![CDATA[($F{fsc37} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="496"
-						width="13"
-						height="17"
-						key="staticText-424">
-							<printWhenExpression><![CDATA[($F{fsc38} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="539"
-						width="13"
-						height="17"
-						key="staticText-425">
-							<printWhenExpression><![CDATA[($F{fsc39} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="562"
-						width="13"
-						height="17"
-						key="staticText-426">
-							<printWhenExpression><![CDATA[($F{fsc40} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="589"
-						width="13"
-						height="17"
-						key="staticText-427">
-							<printWhenExpression><![CDATA[($F{fsc41} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="612"
-						width="13"
-						height="17"
-						key="staticText-428">
-							<printWhenExpression><![CDATA[($F{fsc42} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="639"
-						width="13"
-						height="17"
-						key="staticText-429">
-							<printWhenExpression><![CDATA[($F{fsc43} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="664"
-						width="13"
-						height="17"
-						key="staticText-430">
-							<printWhenExpression><![CDATA[($F{fsc44} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="716"
-						width="13"
-						height="17"
-						key="staticText-431">
-							<printWhenExpression><![CDATA[($F{fsc45} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="739"
-						width="13"
-						height="17"
-						key="staticText-432">
-							<printWhenExpression><![CDATA[($F{fsc46} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="768"
-						width="13"
-						height="17"
-						key="staticText-433">
-							<printWhenExpression><![CDATA[($F{fsc47} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="799"
-						width="13"
-						height="17"
-						key="staticText-434">
-							<printWhenExpression><![CDATA[($F{fsc48} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="858"
-						width="13"
-						height="17"
-						key="staticText-436">
-							<printWhenExpression><![CDATA[($F{fsc49} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
 						x="300"
 						y="852"
 						width="23"
@@ -4691,36 +3956,6 @@ Other Spaces;  Class ________________ ]]></text>
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="7" isBold="true"/>
 					</textElement>
 				<text><![CDATA[50]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="879"
-						width="13"
-						height="17"
-						key="staticText-439">
-							<printWhenExpression><![CDATA[($F{fsc50} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="899"
-						width="13"
-						height="17"
-						key="staticText-440">
-							<printWhenExpression><![CDATA[($F{fsc51} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -4991,6 +4226,773 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.title}]]></textFieldExpression>
 				</textField>
+				<elementGroup><!--  Start: 1 !-->
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="275"
+						width="12"
+						height="9"
+						key="image-3">
+							<printWhenExpression><![CDATA[($F{fsc01} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				</elementGroup><!-- End 1 !-->
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="294"
+						width="12"
+						height="9"
+						key="image-4">
+							<printWhenExpression><![CDATA[($F{fsc02} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="312"
+						width="12"
+						height="9"
+						key="image-5">
+							<printWhenExpression><![CDATA[($F{fsc03} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="331"
+						width="12"
+						height="9"
+						key="image-6">
+							<printWhenExpression><![CDATA[($F{fsc04} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="416"
+						width="12"
+						height="9"
+						key="image-7">
+							<printWhenExpression><![CDATA[($F{fsc08} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="393"
+						width="12"
+						height="9"
+						key="image-8">
+							<printWhenExpression><![CDATA[($F{fsc07} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="370"
+						width="12"
+						height="9"
+						key="image-9">
+							<printWhenExpression><![CDATA[($F{fsc06} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="351"
+						width="12"
+						height="9"
+						key="image-10">
+							<printWhenExpression><![CDATA[($F{fsc05} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="566"
+						width="12"
+						height="9"
+						key="image-11">
+							<printWhenExpression><![CDATA[($F{fsc15} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="542"
+						width="12"
+						height="9"
+						key="image-12">
+							<printWhenExpression><![CDATA[($F{fsc14} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="524"
+						width="12"
+						height="9"
+						key="image-13">
+							<printWhenExpression><![CDATA[($F{fsc13} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="500"
+						width="12"
+						height="9"
+						key="image-14">
+							<printWhenExpression><![CDATA[($F{fsc12} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="477"
+						width="12"
+						height="9"
+						key="image-15">
+							<printWhenExpression><![CDATA[($F{fsc11} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="456"
+						width="12"
+						height="9"
+						key="image-16">
+							<printWhenExpression><![CDATA[($F{fsc10} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="437"
+						width="12"
+						height="9"
+						key="image-17">
+							<printWhenExpression><![CDATA[($F{fsc09} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="743"
+						width="12"
+						height="9"
+						key="image-18">
+							<printWhenExpression><![CDATA[($F{fsc22} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="719"
+						width="12"
+						height="9"
+						key="image-19">
+							<printWhenExpression><![CDATA[($F{fsc21} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="771"
+						width="12"
+						height="9"
+						key="image-20">
+							<printWhenExpression><![CDATA[($F{fsc23} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="692"
+						width="12"
+						height="9"
+						key="image-21">
+							<printWhenExpression><![CDATA[($F{fsc20} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="669"
+						width="12"
+						height="9"
+						key="image-22">
+							<printWhenExpression><![CDATA[($F{fsc19} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="643"
+						width="12"
+						height="9"
+						key="image-23">
+							<printWhenExpression><![CDATA[($F{fsc18} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="616"
+						width="12"
+						height="9"
+						key="image-24">
+							<printWhenExpression><![CDATA[($F{fsc17} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="593"
+						width="12"
+						height="9"
+						key="image-25">
+							<printWhenExpression><![CDATA[($F{fsc16} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="883"
+						width="12"
+						height="9"
+						key="image-26">
+							<printWhenExpression><![CDATA[($F{fsc27} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="860"
+						width="12"
+						height="9"
+						key="image-27">
+							<printWhenExpression><![CDATA[($F{fsc26} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="831"
+						width="12"
+						height="9"
+						key="image-28">
+							<printWhenExpression><![CDATA[($F{fsc25} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="804"
+						width="12"
+						height="9"
+						key="image-29">
+							<printWhenExpression><![CDATA[($F{fsc24} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="902"
+						width="12"
+						height="9"
+						key="image-30">
+							<printWhenExpression><![CDATA[($F{fsc28} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="254"
+						width="12"
+						height="9"
+						key="image-31">
+							<printWhenExpression><![CDATA[($F{fsc29} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="393"
+						width="12"
+						height="9"
+						key="image-32">
+							<printWhenExpression><![CDATA[($F{fsc34} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="285"
+						width="12"
+						height="9"
+						key="image-33">
+							<printWhenExpression><![CDATA[($F{fsc30} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="322"
+						width="12"
+						height="9"
+						key="image-34">
+							<printWhenExpression><![CDATA[($F{fsc31} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="369"
+						width="12"
+						height="9"
+						key="image-35">
+							<printWhenExpression><![CDATA[($F{fsc33} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="349"
+						width="12"
+						height="9"
+						key="image-36">
+							<printWhenExpression><![CDATA[($F{fsc32} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="417"
+						width="12"
+						height="9"
+						key="image-37">
+							<printWhenExpression><![CDATA[($F{fsc35} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="567"
+						width="12"
+						height="9"
+						key="image-38">
+							<printWhenExpression><![CDATA[($F{fsc40} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="543"
+						width="12"
+						height="9"
+						key="image-39">
+							<printWhenExpression><![CDATA[($F{fsc39} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="499"
+						width="12"
+						height="9"
+						key="image-40">
+							<printWhenExpression><![CDATA[($F{fsc38} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="477"
+						width="12"
+						height="9"
+						key="image-41">
+							<printWhenExpression><![CDATA[($F{fsc37} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="445"
+						width="12"
+						height="9"
+						key="image-42">
+							<printWhenExpression><![CDATA[($F{fsc36} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="804"
+						width="12"
+						height="9"
+						key="image-43">
+							<printWhenExpression><![CDATA[($F{fsc48} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="773"
+						width="12"
+						height="9"
+						key="image-44">
+							<printWhenExpression><![CDATA[($F{fsc47} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="721"
+						width="12"
+						height="9"
+						key="image-45">
+							<printWhenExpression><![CDATA[($F{fsc45} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="745"
+						width="12"
+						height="9"
+						key="image-46">
+							<printWhenExpression><![CDATA[($F{fsc46} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="669"
+						width="12"
+						height="9"
+						key="image-47">
+							<printWhenExpression><![CDATA[($F{fsc44} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="643"
+						width="12"
+						height="9"
+						key="image-48">
+							<printWhenExpression><![CDATA[($F{fsc43} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="616"
+						width="12"
+						height="9"
+						key="image-49">
+							<printWhenExpression><![CDATA[($F{fsc42} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="594"
+						width="12"
+						height="9"
+						key="image-50">
+							<printWhenExpression><![CDATA[($F{fsc41} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="862"
+						width="12"
+						height="9"
+						key="image-51">
+							<printWhenExpression><![CDATA[($F{fsc49} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="884"
+						width="12"
+						height="9"
+						key="image-52">
+							<printWhenExpression><![CDATA[($F{fsc50} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="903"
+						width="12"
+						height="9"
+						key="image-53">
+							<printWhenExpression><![CDATA[($F{fsc51} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
 			</band>
 		</title>
 		<pageHeader>
@@ -7754,11 +7756,13 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
+						mode="Opaque"
 						x="104"
 						y="683"
 						width="76"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
 						key="textField-7"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
@@ -7768,11 +7772,13 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
+						mode="Opaque"
 						x="105"
 						y="698"
 						width="77"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
 						key="textField-8"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
@@ -7782,11 +7788,13 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd-MMM-yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
+						mode="Opaque"
 						x="83"
 						y="711"
 						width="112"
 						height="12"
-						forecolor="#3333FF"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
 						key="textField-9"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
@@ -7846,516 +7854,6 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{dtcheck}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement
-						x="19"
-						y="79"
-						width="13"
-						height="17"
-						key="staticText-442">
-							<printWhenExpression><![CDATA[($F{fsc52} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="115"
-						width="13"
-						height="17"
-						key="staticText-443">
-							<printWhenExpression><![CDATA[($F{fsc53} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="143"
-						width="13"
-						height="17"
-						key="staticText-444">
-							<printWhenExpression><![CDATA[($F{fsc54} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="165"
-						width="13"
-						height="17"
-						key="staticText-445">
-							<printWhenExpression><![CDATA[($F{fsc55} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="187"
-						width="13"
-						height="17"
-						key="staticText-446">
-							<printWhenExpression><![CDATA[($F{fsc56} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="210"
-						width="13"
-						height="17"
-						key="staticText-447">
-							<printWhenExpression><![CDATA[($F{fsc57} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="266"
-						width="13"
-						height="17"
-						key="staticText-448">
-							<printWhenExpression><![CDATA[($F{fsc58} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="296"
-						width="13"
-						height="17"
-						key="staticText-449">
-							<printWhenExpression><![CDATA[($F{fsc59} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="317"
-						width="13"
-						height="17"
-						key="staticText-450">
-							<printWhenExpression><![CDATA[($F{fsc60} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="334"
-						width="13"
-						height="17"
-						key="staticText-451">
-							<printWhenExpression><![CDATA[($F{fsc61} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="350"
-						width="13"
-						height="15"
-						key="staticText-452">
-							<printWhenExpression><![CDATA[($F{fsc62} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="365"
-						width="13"
-						height="15"
-						key="staticText-453">
-							<printWhenExpression><![CDATA[($F{fsc63} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="383"
-						width="13"
-						height="15"
-						key="staticText-454">
-							<printWhenExpression><![CDATA[($F{fsc64} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="397"
-						width="13"
-						height="15"
-						key="staticText-455">
-							<printWhenExpression><![CDATA[($F{fsc65} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="412"
-						width="13"
-						height="15"
-						key="staticText-456">
-							<printWhenExpression><![CDATA[($F{fsc66} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="433"
-						width="13"
-						height="15"
-						key="staticText-457">
-							<printWhenExpression><![CDATA[($F{fsc67} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="19"
-						y="455"
-						width="13"
-						height="15"
-						key="staticText-458">
-							<printWhenExpression><![CDATA[($F{fsc68} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="48"
-						width="13"
-						height="17"
-						key="staticText-459">
-							<printWhenExpression><![CDATA[($F{fsc69} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="68"
-						width="13"
-						height="17"
-						key="staticText-460">
-							<printWhenExpression><![CDATA[($F{fsc70} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="87"
-						width="13"
-						height="17"
-						key="staticText-461">
-							<printWhenExpression><![CDATA[($F{fsc71} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="286"
-						y="114"
-						width="13"
-						height="17"
-						key="staticText-462">
-							<printWhenExpression><![CDATA[($F{fsc72} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="143"
-						width="13"
-						height="17"
-						key="staticText-463">
-							<printWhenExpression><![CDATA[($F{fsc73} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="165"
-						width="13"
-						height="17"
-						key="staticText-464">
-							<printWhenExpression><![CDATA[($F{fsc74} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="187"
-						width="13"
-						height="17"
-						key="staticText-465">
-							<printWhenExpression><![CDATA[($F{fsc75} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="211"
-						width="13"
-						height="17"
-						key="staticText-466">
-							<printWhenExpression><![CDATA[($F{fsc76} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="235"
-						width="13"
-						height="17"
-						key="staticText-467">
-							<printWhenExpression><![CDATA[($F{fsc77} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="287"
-						width="13"
-						height="17"
-						key="staticText-468">
-							<printWhenExpression><![CDATA[($F{fsc78} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="340"
-						width="13"
-						height="17"
-						key="staticText-469">
-							<printWhenExpression><![CDATA[($F{fsc79} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="364"
-						width="13"
-						height="17"
-						key="staticText-470">
-							<printWhenExpression><![CDATA[($F{fsc80} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="382"
-						width="13"
-						height="17"
-						key="staticText-471">
-							<printWhenExpression><![CDATA[($F{fsc81} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="396"
-						width="13"
-						height="17"
-						key="staticText-472">
-							<printWhenExpression><![CDATA[($F{fsc82} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="411"
-						width="13"
-						height="17"
-						key="staticText-473">
-							<printWhenExpression><![CDATA[($F{fsc83} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="433"
-						width="13"
-						height="17"
-						key="staticText-474">
-							<printWhenExpression><![CDATA[($F{fsc84} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="287"
-						y="454"
-						width="13"
-						height="17"
-						key="staticText-475">
-							<printWhenExpression><![CDATA[($F{fsc85} == 1) ? true : false]]></printWhenExpression>
-						</reportElement>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12"/>
-					</textElement>
-				<text><![CDATA[✓]]></text>
-				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="61"
@@ -8411,16 +7909,526 @@ Other Spaces;  Class ________________ ]]></text>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="69"
-						y="510"
+						y="509"
 						width="497"
 						height="33"
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Top">
-						<font fontName="Arial" size="8"/>
+						<font fontName="Arial" size="9"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{remarks}]]></textFieldExpression>
 				</textField>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="190"
+						width="12"
+						height="9"
+						key="image-54">
+							<printWhenExpression><![CDATA[($F{fsc56} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="169"
+						width="12"
+						height="9"
+						key="image-55">
+							<printWhenExpression><![CDATA[($F{fsc55} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="147"
+						width="12"
+						height="9"
+						key="image-56">
+							<printWhenExpression><![CDATA[($F{fsc54} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="119"
+						width="12"
+						height="9"
+						key="image-57">
+							<printWhenExpression><![CDATA[($F{fsc53} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="82"
+						width="12"
+						height="9"
+						key="image-58">
+							<printWhenExpression><![CDATA[($F{fsc52} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="147"
+						width="12"
+						height="9"
+						key="image-59">
+							<printWhenExpression><![CDATA[($F{fsc73} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="118"
+						width="12"
+						height="9"
+						key="image-60">
+							<printWhenExpression><![CDATA[($F{fsc72} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="91"
+						width="12"
+						height="9"
+						key="image-61">
+							<printWhenExpression><![CDATA[($F{fsc71} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="73"
+						width="12"
+						height="9"
+						key="image-62">
+							<printWhenExpression><![CDATA[($F{fsc70} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="51"
+						width="12"
+						height="9"
+						key="image-63">
+							<printWhenExpression><![CDATA[($F{fsc69} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="214"
+						width="12"
+						height="9"
+						key="image-64">
+							<printWhenExpression><![CDATA[($F{fsc76} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="191"
+						width="12"
+						height="9"
+						key="image-65">
+							<printWhenExpression><![CDATA[($F{fsc75} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="170"
+						width="12"
+						height="9"
+						key="image-66">
+							<printWhenExpression><![CDATA[($F{fsc74} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="214"
+						width="12"
+						height="9"
+						key="image-67">
+							<printWhenExpression><![CDATA[($F{fsc57} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="369"
+						width="12"
+						height="9"
+						key="image-68">
+							<printWhenExpression><![CDATA[($F{fsc63} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="354"
+						width="12"
+						height="9"
+						key="image-69">
+							<printWhenExpression><![CDATA[($F{fsc62} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="338"
+						width="12"
+						height="9"
+						key="image-70">
+							<printWhenExpression><![CDATA[($F{fsc61} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="321"
+						width="12"
+						height="9"
+						key="image-71">
+							<printWhenExpression><![CDATA[($F{fsc60} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="300"
+						width="12"
+						height="9"
+						key="image-72">
+							<printWhenExpression><![CDATA[($F{fsc59} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="269"
+						width="12"
+						height="9"
+						key="image-73">
+							<printWhenExpression><![CDATA[($F{fsc58} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="436"
+						width="12"
+						height="9"
+						key="image-74">
+							<printWhenExpression><![CDATA[($F{fsc67} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="415"
+						width="12"
+						height="9"
+						key="image-75">
+							<printWhenExpression><![CDATA[($F{fsc66} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="400"
+						width="12"
+						height="9"
+						key="image-76">
+							<printWhenExpression><![CDATA[($F{fsc65} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="386"
+						width="12"
+						height="9"
+						key="image-77">
+							<printWhenExpression><![CDATA[($F{fsc64} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="19"
+						y="458"
+						width="12"
+						height="9"
+						key="image-78">
+							<printWhenExpression><![CDATA[($F{fsc68} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="290"
+						width="12"
+						height="9"
+						key="image-79">
+							<printWhenExpression><![CDATA[($F{fsc78} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="345"
+						width="12"
+						height="9"
+						key="image-81">
+							<printWhenExpression><![CDATA[($F{fsc79} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="368"
+						width="12"
+						height="9"
+						key="image-82">
+							<printWhenExpression><![CDATA[($F{fsc80} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="386"
+						width="12"
+						height="9"
+						key="image-83">
+							<printWhenExpression><![CDATA[($F{fsc81} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="415"
+						width="12"
+						height="9"
+						key="image-84">
+							<printWhenExpression><![CDATA[($F{fsc83} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="438"
+						width="12"
+						height="9"
+						key="image-85">
+							<printWhenExpression><![CDATA[($F{fsc84} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="457"
+						width="12"
+						height="9"
+						key="image-86">
+							<printWhenExpression><![CDATA[($F{fsc85} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="239"
+						width="12"
+						height="9"
+						key="image-87">
+							<printWhenExpression><![CDATA[($F{fsc77} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="400"
+						width="12"
+						height="9"
+						key="image-88">
+							<printWhenExpression><![CDATA[($F{fsc82} == 1) ? true : false]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["img/check.png"]]></imageExpression>
+				</image>
 			</band>
 		</summary>
 </jasperReport>
