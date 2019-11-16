@@ -16,8 +16,18 @@
 
       var svc = Service.lookup("OnlineBuildingPermitService", "obo");
       var app = \$get("app").code;
+      this.worktypes = {}
 
       this.updateProject = function() {
+        this.project.worktypes = []; 
+        for( v in self.worktypes ) {
+          if( self.worktypes[v] == true ) {
+            this.project.worktypes.push( v );            
+          }
+        }
+        if(this.project.worktypes.length == 0) {
+          throw new Error("Please select at least one scope of work")
+        }  
         this.project.appid = app.appid;
         svc.updateProjectInfo( this.project );
         app.moveNextStep();
@@ -27,7 +37,7 @@
         this.project = svc.getProjectInfo( {appid: app.appid });
         for(var i = 0; i < this.project.worktypes.length; i++) {
           var p = this.project.worktypes[ i ];
-          this.worktypes[ p.toLowerCase() ].checked = true;
+          this.worktypes[ p ] = true;
         };        
         app.updateStepNavbar();
       }
@@ -64,7 +74,6 @@
   .w100 { width:100px }
 </style>
 
-
 <div r:context="project" r:visibleWhen="#{error != null }">
    <label r:context="project" style="color:red;">#{error}</label>
 </div>
@@ -75,7 +84,16 @@
     @wx:text(caption:'Project Title', context:'project', name:'project.title', required: true, hint:'Enter Project Title', inputClass: '+w700')
     @wx:text(caption:'Project Description', context:'project', name:'project.description', required: true, hint:'Enter Project Description', inputClass: '+w700')
 
-    <div  r:context="project">
+    <div  r:context="project" style="padding-top:10px;">
+      <label class="caption-class">Scope of Work</label>
+      <div class="output-class w700" style="display:inline-block;">
+          <%workTypes.each { o->%>
+          <input type="checkbox" r:context="project" r:name="worktypes.${o.name}">&nbsp;${o.description}<br>   
+          <%}%>
+      </div>
+    </div>
+
+    <div  r:context="project"  style="padding-top:10px;padding-bottom:10px;">
       <label class="caption-class">Occupancy Type</label>
       <div class="output-class w700" style="display:inline-block;">
         <label r:context="project" r:visibleWhen="#{project.occupancytype.objid != null }" class="output-class">
@@ -92,6 +110,8 @@
     @wx:integer(caption:'No of Units', context:'project', name:'project.numunits', required: true, inputClass:'+w100')
     @wx:decimal(caption:'Total Floor Area [sq.meter]', context:'project', name:'project.totalfloorarea', required: true, inputClass:'+w100')
     @wx:decimal(caption:'Building Height [meter]', context:'project', name:'project.height', required: true, inputClass:'+w100')
+    @wx:integer(caption:'No of Storeys', context:'project', name:'project.numfloors', required: true, inputClass:'+w100')
+
     <div style="padding-top:20px;"></div>
     @wx:decimal(caption:'Estimated Cost [Php]', context:'project', name:'project.projectcost', required: true, inputClass:'+w200')
 
@@ -100,7 +120,7 @@
     @wx:date(caption:'Expected Completion Date', context:'project', name:'project.dtexpectedcompletion', required: true, attrs:[hint:'yyyy-MM-dd'])
 
     <div style="padding-top:20px;">
-      <label class="caption-class">Contractor</label>
+      <label class="caption-class">Fulltime Inspector/Supervisor of Construction:</label>
       <label r:context="project" style="width:210px">#{ project.contractor.name }</label>
       <button r:context="project" r:name="lookupContractor">Lookup</button>
     </div>

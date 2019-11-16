@@ -61,6 +61,8 @@
 		<field name="amount" />
 		<field name="contractorid" />
 		<field name="txnmode" />
+		<field name="permitno" />
+
 
 		<complex name="contractor" ref="vw_building_permit_professional" jointype="many-to-one" required="false" includefields="name,prc.*">
 			<key field="contractorid" target="objid" />

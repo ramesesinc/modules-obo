@@ -72,7 +72,13 @@ public class OboMiscListService  {
 
 	@ProxyMethod
 	public def getWorkTypes() {
-		return workTypeEm.where("1=1").orderBy("idx").list();
+		return workTypeEm.select("name,description").where("typeid IS NULL").orderBy("idx").list();
+	}
+
+	@ProxyMethod
+	public def getWorkTypes(def o) {
+		if(!o.typeid ) throw new Exception("Please specify typeid in getWorkTypes");
+		return workTypeEm.select("name,description").where("typeid = :typeid", o ).orderBy("idx").list();
 	}
 
 	@ProxyMethod
