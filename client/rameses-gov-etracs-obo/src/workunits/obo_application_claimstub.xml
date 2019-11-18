@@ -1,0 +1,18 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+         <invoker type="vw_building_permit:form:appActions" 
+                caption="Print Claim Stub"
+                reportId="building_permit_claimstub"
+                reportName="com/rameses/gov/etracs/obo/reports/building_permit_claimstub.jasper"
+                action="preview" target="popup"
+                visibleWhen="#{ task.state == 'receiving' &amp;&amp; entity.appno != null }"/>
+                    
+        
+         <invoker type="vw_occupancy_permit:form:appActions" 
+                caption="Print Claim Stub"
+                reportId="occupancy_permit_claimstub"
+                reportName="com/rameses/gov/etracs/obo/reports/building_permit_claimstub.jasper"
+                action="preview" target="popup"
+                visibleWhen="#{ task.state == 'receiving' &amp;&amp; entity.appno != null }"/>
+    </invokers>
+</workunit>

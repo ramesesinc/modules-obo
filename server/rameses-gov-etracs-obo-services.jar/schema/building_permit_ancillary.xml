@@ -18,6 +18,8 @@
 			<key field="supervisorid" target="objid" />
 		</complex>  
 
+		<complex name="worktypes" type="list" serializer="default" required="false"/>
+
 	</element>
 </schema>
 

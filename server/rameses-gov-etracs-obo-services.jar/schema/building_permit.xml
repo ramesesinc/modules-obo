@@ -14,6 +14,8 @@
 		<field name="description" />
 		<field name="occupancytypeid" />
 		<field name="numunits" type="integer"/>
+		<field name="numfloors" type="integer"/>
+
 		<field name="totalfloorarea" type="decimal"/>
 		<field name="height" type="decimal"/>
 
@@ -25,7 +27,7 @@
 		<field name="dtexpectedcompletion" type="date"/>
 
 		<field name="applicantid"/>
-		<field name="trackingno" searchable="true"/>
+		<field name="trackingno" searchable="true" indexed="true"/>
 		<field name="taskid" />
 		<field name="zoneclassid" />
 		<field name="zone" />
@@ -36,7 +38,7 @@
 		<field name="location_barangay_name" />
 		<field name="location_barangay_objid" />
 
-		<complex name="worktypes" type="list" serializer="default" />
+		<complex name="worktypes" type="list" serializer="default" required="false"/>
 
 		<field name="amount" type="decimal"/>
 		<field name="txnmode" />
@@ -45,7 +47,7 @@
 		<field name="accessoryid" />
 		<field name="contractorid" />
 
-		<field name="permitno" />
+		<field name="permitno" searchable="true" indexed="true"/>
 		<field name="dtissued" />
 		<field name="remarks" />
 

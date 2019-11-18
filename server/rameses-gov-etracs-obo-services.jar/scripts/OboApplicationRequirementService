@@ -1,0 +1,90 @@
+import com.rameses.annotations.*; 
+import java.rmi.server.*;
+
+class OboApplicationRequirementService {
+
+	@Service("DateService")
+	def dateSvc;
+
+	@Service("ControlnoGeneratorService")
+	def controlNoSvc;
+
+	@DataContext("building_permit_transmittal")
+	def transmittalEm;
+
+	@DataContext(dynamic=true)
+	def em;
+
+	@Service("Var")
+	def sysvar;
+
+	@Env
+	def env;
+
+	@ProxyMethod
+	public def update( def o ) {
+		if( !o.schemaname ) throw new Exception("schemaname is required in OboApplicationRequirementService.update ");
+		def reqEm = em.lookup( o.schemaname + "_requirement" );
+		o.reviewer = [objid: env.USERID, name: env.FULLNAME ];
+		o.dtreviewed = dateSvc.getServerDate();
+		if(o.previd ) {
+			def z = reqEm.create(o);
+			reqEm.find( [objid: o.previd] ).update( [supersederid: z.objid ] );
+		}	
+		else {
+			reqEm.find( [objid: o.objid ] ).update( [state: o.state, remarks: o.remarks, reviewer: o.reviewer, dtreviewed: o.dtreviewed ] );
+		}
+		return o;
+	}
+
+	@ProxyMethod
+	public def buildCheckList( def o ) {
+		if(!o.taskid) throw new Exception("taskid is required in OboApplicationRequirementService.buildCheckList");
+		if(!o.appid) throw new Exception("appid is required in OboApplicationRequirementService.buildCheckList");
+		if(!o.schemaname) throw new Exception("schemaname is required in OboApplicationRequirementService.buildCheckList");
+
+		def reqEm = em.lookup( o.schemaname + "_requirement" );
+
+		//validate first if there are existing open items that need to be transmitted
+		def c = reqEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("state = 0").val();
+		if( c>0) throw new Exception("All requirements must be checked first");
+		c = reqEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("supersederid IS NULL AND state = 2 AND NOT(transmittalid IS NULL)").val();
+		if( c > 0 ) throw new Exception("Please either close or resend previous open items")
+		c = reqEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("supersederid IS NULL AND state = 2 AND transmittalid IS NULL").val();
+		if( c<=0) throw new Exception("Please ensure that there is at least one requirement that needs revision");	
+
+		def t = [:];
+		def varname = o.schemaname + "_req_transmittal";
+		def pattern = sysvar.get(  varname );
+		if(!pattern) throw new Exception("Please define " + varname + " entry in sys_var. Ex. BP-RT-[yyyyMM]-[%05d]");
+
+		def transmittalEm = em.lookup(  o.schemaname  + "_transmittal" );
+
+		t.objid = controlNoSvc.getNextNo( pattern );
+		t.appid = o.appid;
+		t.type = "requirement";
+		t.createdby = [objid: env.USERID, name: env.FULLNAME ];
+		t.dtcreated = dateSvc.getServerDate();
+		t.taskid = o.taskid;
+		t.state = 0;
+		transmittalEm.create( t );
+
+		//update all open  
+		reqEm.find([appid: o.appid]).where("transmittalid IS NULL").update( [transmittalid: t.objid] );
+		return t;	
+	}
+
+	//just include this but it will be called from the admin side.
+	@ProxyMethod
+	public def removeCheckList( def o ) {
+		if(!o.transmittalid) throw new Exception("Please include transmittalid");
+		if(!o.schemaname) throw new Exception("schemaname is required in OboApplicationRequirementService.removeCheckList");
+
+		def reqEm = em.lookup( o.schemaname + "_requirement" );
+		reqEm.find([transmittalid: o.transmittalid ]).update( [transmittalid: "{NULL}"] );
+		def transmittalEm = em.lookup(  o.schemaname  + "_transmittal" );
+		transmittalEm.find( [objid: o.transmittalid ]).delete();
+	}
+	
+
+}

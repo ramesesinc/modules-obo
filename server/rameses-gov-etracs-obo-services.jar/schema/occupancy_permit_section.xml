@@ -1,6 +1,6 @@
 <schema>
 	<element tablename="occupancy_permit_section">
-		<field name="objid" primary="true" prefix="OBOOPSEC"/>
+		<field name="objid" primary="true" prefix="OCCPMTSEC"/>
 		<field name="appid" />
 		<field name="typeid" />
 		<field name="taskid" />

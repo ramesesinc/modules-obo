@@ -28,8 +28,7 @@ class BuildingPermitFeeModel extends CrudFormModel {
         return Inv.lookupOpener( "obo_itemaccount:type:lookup", m );
     }
     
-    void afterSave(o) {
-        MsgBox.alert("after save");
-        if(handler) handler(o);
+    void afterSave() {
+        if(handler) handler(entity);
     }
 }

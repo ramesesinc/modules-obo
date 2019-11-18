@@ -14,7 +14,6 @@ SELECT
    zc.objid AS zoneclass_objid,
    zc.title AS zoneclass_title,
 
-
    LTRIM(CONCAT(
       (CASE WHEN a.location_lotno IS NULL THEN '' ELSE CONCAT( ' ', a.location_lotno) END),
       (CASE WHEN a.location_blockno IS NULL THEN '' ELSE CONCAT(' ', a.location_blockno) END),

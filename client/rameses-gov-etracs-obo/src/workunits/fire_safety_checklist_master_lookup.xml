@@ -4,6 +4,6 @@
                 action="init" index="15"
                 multiSelect="true"
                 target="popup"
-                cols="title,category"/>
+                cols="indexno,title,category"/>
     </invokers>
 </workunit>

@@ -47,6 +47,9 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit_transmittal")
 	def transmittalEm;
 
+	@DataContext("obo_output_permit")
+	def outputPermitEm;
+
 	/* *********************************************************************
 	//Specific before action tasks
 	************************************************************************ */
@@ -151,24 +154,19 @@ class BuildingPermitWorkflowInterceptor {
 		//find first sections where state is obo-processing. If type.issuepermit = 1 then move task to for releasing 
 		def openList = vwSectionEm.find( [appid: appid ] ).where("task.state = 'obo-processing' ").list();
 		openList.each {
+
+			//check first if typeid has output permits defined
+			def hasOutput = outputPermitEm.find( [ permittype:"building_permit", sectionid: it.typeid ]).exists()
+
 			def f = [:];
 			f.processname = 'building_permit_section';
 			f.refid = it.objid;
 			f.startdate = dt;
 			f.info = it;
 			f.taskid = it.taskid;
-			f.action = (it.type.issuepermit == 1 ) ? "send-for-releasing" : "end";
+			f.action = (hasOutput) ? "send-for-releasing" : "end";
 			wfSvc.signal(f);	
 		}
-	}
-
-	//release process. Make sure there is at least one building_permit_issuance
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'release' }" ) 
-	public void doActionBeforeRelease( def evt ) {
-		def p = evt.args[0];
-		def appid = p.refid;
-		//def app = 
-		throw new Exception("Fire before release");	
 	}
 
 	//This is newly added. Do not send to zoning if there is no tax clearance and tax declaration true copy
@@ -179,6 +177,15 @@ class BuildingPermitWorkflowInterceptor {
 		if( c ) throw new Exception("Please generate the tax declaration documents ");
 		c = rpuEm.find( [appid: p.refid ]).where("truecopycertid IS NULL").exists();
 		if( c ) throw new Exception("Please generate the tax declaration documents ");
+	}
+
+	//release process. Make sure there is at least one building_permit_issuance
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].taskstate == 'releasing' && args[0].action == 'release' }" ) 
+	public void doActionBeforeRelease( def evt ) {
+		def p = evt.args[0];
+		def appid = p.refid;
+		def permitno = appEm.find( [objid: appid ] ).select("permitno").val();
+		if(!permitno) throw new Exception("Permit no is required. ");
 	}
 
 

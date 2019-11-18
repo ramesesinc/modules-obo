@@ -55,15 +55,16 @@ public class BuildingPermitOnlineService  {
     	//check first if the application already exists
     	def app = appEm.find( [trackingno: o.appid ]).first();
     	if(app) throw new Exception("Application already exists. It is currently at " + app.task );
-
 		return cloudBldgSvc.getDownloadInfo( [appid: o.appid, orgcode: env.ORGID ] );
     }
 
 	@ProxyMethod
 	public def upload( def app ) {
-		def applicantid = app.remove("applicantid");
-		def accessoryid = app.remove("accessoryid");
-		def contractor = app.remove("contractor");
+		def u = [:]
+		u.applicantid = app.remove("applicantid");
+		u.accessoryid = app.remove("accessoryid");
+		u.contractorid = app.remove("contractorid");
+
 		def newapp = appEm.create( app );
 		app.entities.each {
 			it.appid = newapp.objid;
@@ -94,22 +95,13 @@ public class BuildingPermitOnlineService  {
 			it.type = [name: it.name ];
 			appInfoEm.create( it );
 		}
-		def u = [:];
-		u.applicantid = applicantid;
-		if( accessoryid ) u.accessoryid = accessoryid;
-		if( contractor ) u.contractorid = contractor.objid;
 		appEm.find( [objid: newapp.objid ] ).update( u );
 
-		//immediatly accept
-		accept( newapp );
-		return newapp;
-	}
-
-	@ProxyMethod
-	public def accept( def app ) {
-		def dt = dateSvc.getServerDate();
+		//immediatly accept and fire the workflow
+		app = newapp;
 
 		//calculate the cost first before receiving
+		def dt = dateSvc.getServerDate();
 		def param = [:];
 		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
 		param.occupancytype = [
@@ -118,13 +110,12 @@ public class BuildingPermitOnlineService  {
 			type: app.occupancytype.objid
 		] 
 		def cost = costSvc.calc( param );
-		def u = [:];
+		u = [:];
 		u.fixedcost = cost;
-
 		appEm.find( [objid: app.objid ] ).update( u );
 
 		//update the requirements
-		def reqTypes = reqTypeEm.where("1=1").list();
+		def reqTypes = reqTypeEm.where("permittype = 'building_permit' ").list();
 		reqTypes.each {
 			def r = [:];
 			r.appid = app.objid;
@@ -141,8 +132,7 @@ public class BuildingPermitOnlineService  {
 		p.startdate = dt;
 		p.info = app;
 		wfSvc.start(p);	
-		return u;
+		return newapp;
 	}
-	
 
 }

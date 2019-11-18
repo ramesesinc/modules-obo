@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="building_permit_locational_clearance"
+		 name="locational_clearance"
 		 columnCount="1"
 		 printOrder="Vertical"
 		 orientation="Portrait"
@@ -775,7 +775,7 @@
 				<staticText>
 					<reportElement
 						x="59"
-						y="725"
+						y="786"
 						width="166"
 						height="17"
 						key="staticText-53"/>
@@ -788,7 +788,7 @@
 				<staticText>
 					<reportElement
 						x="83"
-						y="739"
+						y="800"
 						width="118"
 						height="13"
 						key="staticText-54"/>
@@ -801,7 +801,7 @@
 				<staticText>
 					<reportElement
 						x="388"
-						y="725"
+						y="786"
 						width="166"
 						height="17"
 						key="staticText-55"/>
@@ -814,7 +814,7 @@
 				<staticText>
 					<reportElement
 						x="412"
-						y="739"
+						y="800"
 						width="118"
 						height="13"
 						key="staticText-56"/>
@@ -1388,6 +1388,28 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtvalidity}]]></textFieldExpression>
 				</textField>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="113"
+						y="714"
+						width="128"
+						height="73"
+						key="image-5"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA["zoning-images/priscilla_galicia.png"]]></imageExpression>
+				</image>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="390"
+						y="697"
+						width="166"
+						height="89"
+						key="image-6"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA["zoning-images/joseph_esplana.png"]]></imageExpression>
+				</image>
 			</band>
 		</title>
 		<pageHeader>

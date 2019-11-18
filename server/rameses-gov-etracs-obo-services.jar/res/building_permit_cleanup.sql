@@ -2,13 +2,12 @@
 UPDATE building_permit SET applicantid = null, taskid = NULL, accessoryid = NULL;
 UPDATE building_permit_section SET taskid = NULL;
 UPDATE building_permit_requirement SET supersederid = NULL;
-UPDATE building_permit_issuance SET taskid = NULL;
 UPDATE building_permit_finding SET supersederid = NULL;
 
 DELETE FROM locational_clearance;
 DELETE FROM fire_safety_checklist_item;
 DELETE FROM fire_safety_checklist;
-DELETE FROM fire_safety_evaluation_certificate;
+DELETE FROM fire_safety_evaluation_clearance;
 
 DELETE FROM building_permit_section_task;
 DELETE FROM building_permit_task;

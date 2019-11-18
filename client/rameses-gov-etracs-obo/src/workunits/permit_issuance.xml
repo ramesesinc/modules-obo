@@ -2,6 +2,16 @@
     <invokers>
         <invoker type="obo:permit_issuance" target="popup"
             caption="Issue Permit/Clearance" action="init" />
+        
+        <!-- hook to releasing state -->
+        <invoker type="vw_building_permit:form:appActions" 
+            caption="Issue Building Permit"
+            action="initBldgPermit"
+            target="popup"
+            visibleWhen="#{task.state == 'releasing' 
+                    &amp;&amp; entity.permitno == null 
+                    &amp;&amp; task.assignee.objid == userid }"/> 
+        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.PermitIssuanceModel" />
     <pages>

@@ -41,11 +41,6 @@ public class OboSectionPage extends javax.swing.JPanel {
         xRadio1 = new com.rameses.rcp.control.XRadio();
         xRadio2 = new com.rameses.rcp.control.XRadio();
         xCheckBox2 = new com.rameses.rcp.control.XCheckBox();
-        xCheckBox3 = new com.rameses.rcp.control.XCheckBox();
-        xTextField3 = new com.rameses.rcp.control.XTextField();
-        xTextField4 = new com.rameses.rcp.control.XTextField();
-        xTextField5 = new com.rameses.rcp.control.XTextField();
-        xTextField6 = new com.rameses.rcp.control.XTextField();
 
         xFormPanel1.setCaption("General Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -116,76 +111,36 @@ public class OboSectionPage extends javax.swing.JPanel {
         xCheckBox2.setUncheckValue(0);
         xCheckBox2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xCheckBox2.setShowCaption(false);
-        xCheckBox2.setText("Require Fees");
+        xCheckBox2.setText("Require Fees ");
+        xCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xCheckBox2ActionPerformed(evt);
+            }
+        });
         xFormPanel1.add(xCheckBox2);
-
-        xCheckBox3.setCheckValue(1);
-        xCheckBox3.setName("entity.issuepermit"); // NOI18N
-        xCheckBox3.setUncheckValue(0);
-        xCheckBox3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xCheckBox3.setShowCaption(false);
-        xCheckBox3.setText("Issue Output Permit");
-        xFormPanel1.add(xCheckBox3);
-
-        xTextField3.setCaption("Permit Title");
-        xTextField3.setDepends(new String[] {"entity.issuepermit"});
-        xTextField3.setName("entity.permit.title"); // NOI18N
-        xTextField3.setVisibleWhen("#{ entity.issuepermit == 1 }");
-        xTextField3.setCaptionWidth(200);
-        xTextField3.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField3.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        xFormPanel1.add(xTextField3);
-
-        xTextField4.setCaption("Permit Control no pattern");
-        xTextField4.setDepends(new String[] {"entity.issuepermit"});
-        xTextField4.setName("entity.permit.controlnopattern"); // NOI18N
-        xTextField4.setVisibleWhen("#{ entity.issuepermit == 1 }");
-        xTextField4.setCaptionWidth(200);
-        xTextField4.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xTextField4.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        xFormPanel1.add(xTextField4);
-
-        xTextField5.setCaption("Report Template");
-        xTextField5.setDepends(new String[] {"entity.issuepermit"});
-        xTextField5.setName("entity.permit.template"); // NOI18N
-        xTextField5.setVisibleWhen("#{ entity.issuepermit == 1 }");
-        xTextField5.setCaptionWidth(200);
-        xTextField5.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xTextField5.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField5.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        xFormPanel1.add(xTextField5);
-
-        xTextField6.setCaption("Permit Name");
-        xTextField6.setDepends(new String[] {"entity.issuepermit"});
-        xTextField6.setName("entity.permit.name"); // NOI18N
-        xTextField6.setVisibleWhen("#{ entity.issuepermit == 1 }");
-        xTextField6.setCaptionWidth(200);
-        xTextField6.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xTextField6.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField6.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        xFormPanel1.add(xTextField6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(xFormPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+            .addComponent(xFormPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void xCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xCheckBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xCheckBox2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.rcp.control.XCheckBox xCheckBox2;
-    private com.rameses.rcp.control.XCheckBox xCheckBox3;
     private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
@@ -195,9 +150,5 @@ public class OboSectionPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
-    private com.rameses.rcp.control.XTextField xTextField3;
-    private com.rameses.rcp.control.XTextField xTextField4;
-    private com.rameses.rcp.control.XTextField xTextField5;
-    private com.rameses.rcp.control.XTextField xTextField6;
     // End of variables declaration//GEN-END:variables
 }
