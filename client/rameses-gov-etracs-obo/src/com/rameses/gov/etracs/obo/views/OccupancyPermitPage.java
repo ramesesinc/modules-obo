@@ -74,6 +74,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xLabel23 = new com.rameses.rcp.control.XLabel();
         xLabel24 = new com.rameses.rcp.control.XLabel();
         xLabel25 = new com.rameses.rcp.control.XLabel();
+        xLabel33 = new com.rameses.rcp.control.XLabel();
         jPanel4 = new javax.swing.JPanel();
         schemaList8 = new com.rameses.seti2.components.SchemaList();
         xPanel2 = new com.rameses.rcp.control.XPanel();
@@ -318,6 +319,12 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xLabel25.setExpression("#{entity.contractor.prc.dtvalid}");
         xLabel25.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel25);
+
+        xLabel33.setCaption("Inspection Date");
+        xLabel33.setExpression("#{entity.inspectionschedule}");
+        xLabel33.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel33.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel3.add(xLabel33);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1020,6 +1027,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel30;
     private com.rameses.rcp.control.XLabel xLabel31;
     private com.rameses.rcp.control.XLabel xLabel32;
+    private com.rameses.rcp.control.XLabel xLabel33;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel6;

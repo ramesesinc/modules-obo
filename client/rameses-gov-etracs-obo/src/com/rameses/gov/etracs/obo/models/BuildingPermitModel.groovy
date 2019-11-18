@@ -20,6 +20,10 @@ class BuildingPermitModel extends AbstractOboApplicationModel {
     
     def ancillaryListModel;
     
+    public String getPermitName() {
+        return "building_permit";   
+    }
+    
     public String getTitle() {
         return "Building Permit " + (entity.appno==null? 'Tracking No '+ entity.trackingno: 'App No ' + entity.appno) + " [" +  task?.title + "]" ;
     }
@@ -30,10 +34,6 @@ class BuildingPermitModel extends AbstractOboApplicationModel {
     
     public boolean getShowAssessAction() {
         return true;
-    }
-    
-    public boolean getShowUpdateZoneclass() {
-        return (task.state == "zoning-evaluation");
     }
     
     def lookupAncillary() {

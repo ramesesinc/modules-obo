@@ -27,7 +27,7 @@ abstract class AbstractOboApplicationModel extends WorkflowTaskModel {
     @Service("OboApplicationFindingService")
     def findingSvc;
     
-    def reqViewType = "all";
+    def reqViewType = "open";
     def reqQuery = [:];
     def reqListHandler;
     
@@ -75,13 +75,13 @@ abstract class AbstractOboApplicationModel extends WorkflowTaskModel {
     ];
     
     void buildQuery()  {
+        reqQuery.appid =  entity.objid;
+        reqQuery._filter = "appid = :appid AND supersederid IS NULL";
+        reqQuery.where = reqQuery._filter + " AND state IN (0,2) "; 
+        
         sectionQry.appid = entity.objid;
         sectionQry._filter = "appid = :appid";
         sectionQry.where = sectionQry._filter;
-        
-        reqQuery.appid =  entity.objid;
-        reqQuery._filter = "appid = :appid AND supersederid IS NULL";
-        reqQuery.where = reqQuery._filter; 
         
         findingQry.appid = entity.objid;
         findingQry._filter = "appid = :appid AND supersederid IS NULL AND transmittalid IS NULL";
@@ -107,62 +107,8 @@ abstract class AbstractOboApplicationModel extends WorkflowTaskModel {
         return entity.objid;
     }
     
-    /**************************************************************************
-    * requirement-verification actions
-    ***************************************************************************/
-    void acceptApplication() {
-        if(!MsgBox.confirm("You are about to receive this application. Proceed?")) return;
-        def o = appSvc.accept( [appid: entity.objid ] );
-        entity.putAll( o );
-        MsgBox.alert("App no " + o.appno + " is successfully generated");
-    }
+    public abstract String getPermitName();
     
-    
-    def sendClaimstub() {
-        return Inv.lookupOpener("obo_mailer:claimstub", [entity:entity]);
-    }
-        
-    void buildRequirementChecklist() {
-        if( !MsgBox.confirm("You are about to finalize the requirement checklist. You cannot undo this transaction. Proceed?") ) return;
-        def t = reqSvc.buildCheckList( [appid: entity.objid, taskid: task.taskid ]);
-        entity.reqtransmittalid = t.objid;
-    }
-    
-    void removeChecklist() {
-        if( !MsgBox.confirm("You are about to remove this checklist. Proceed?") ) return;
-        def t = reqSvc.removeCheckList( [transmittalid: entity.reqtransmittalid ]);
-        entity.reqtransmittalid = null;        
-    }
-    
-    def printReqChecklist() {
-        def p = [:];
-        p.put("query.transmittalid", entity.reqtransmittalid );
-        return Inv.lookupOpener("building_permit_requirement_checklist", p );
-    }
-    
-    def sendReqChecklist() {
-        return Inv.lookupOpener("obo_mailer:reqchecklist", [entity:entity]);
-    }
-    
-    /**************************************************************************
-    * coordinator actions
-    ***************************************************************************/
-    void buildFindingChecklist() {
-        if( !MsgBox.confirm("You are about to finalize the findings checklist. You cannot undo this transaction. Proceed?") ) return;
-        def t = findingSvc.buildCheckList( [appid: entity.objid, taskid: task.taskid ]);
-        entity.transmittalid = t.objid;
-    }
-    
-    def printFindingChecklist() {
-        def p = [:];
-        p.put("query.transmittalid", entity.transmittalid );
-        return Inv.lookupOpener("building_permit_finding_checklist", p );
-    }
-    
-    def sendFindingChecklist() {
-        return Inv.lookupOpener("obo_mailer:findingchecklist", [entity:entity]);
-    }
-
     /**************************************************************************
     * assessment actions
     ***************************************************************************/

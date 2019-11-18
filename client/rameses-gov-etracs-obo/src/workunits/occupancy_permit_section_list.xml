@@ -1,10 +1,10 @@
 <workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
-          processName="occupancy_permit_section" schemaName="vw_occupancy_permit_evaluation"
+          processName="occupancy_permit_section" schemaName="vw_occupancy_permit_section"
           allowDelete="false" allowNotify="false">
     <invokers>
-        <invoker type="occupancy_permit_section:list" caption="View Evaluation List"
+        <invoker type="occupancy_permit_section:list" caption="View Section List"
              cols="app.appno,app.applicant.name,app.title,app.occupancytype.title,task.assignee"
                 action="init" index="-1" srole="SHARED"/>
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OccupancyPermitEvaluationListModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationSectionListModel" />
 </workunit>

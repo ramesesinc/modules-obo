@@ -52,6 +52,7 @@ public class OboMenuNotificationService {
 	@ProxyMethod
 	public def fetchNotifications( def p ) {
 		def result = p.items;
+		p.domain = "OBO";
 		result.each { 
 			if( it.id == 'building_permit' ) {
 				it.count = building_permit( p );
@@ -60,11 +61,11 @@ public class OboMenuNotificationService {
 				it.count = occupancy_permit( p );
 			}			
 			else if( p.event == 'building_permit_section') {
-				p.typeid = it.id;
+				p.typeid = it.id?.split(":")[1];
 				it.count = building_permit_section( p );
 			}
 			else if( p.event == 'occupancy_permit_section') {
-				p.typeid = it.id;
+				p.typeid = it.id?.split(":")[1];
 				it.count = occupancy_permit_section( p );
 			}			
 		}	

@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="building_permit_claimstub"
+		 name="application_claimstub"
 		 columnCount="1"
 		 printOrder="Vertical"
 		 orientation="Landscape"
@@ -31,6 +31,7 @@
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="title" class="java.lang.String"/>
 	<field name="location.address.text" class="java.lang.String"/>
+	<field name="permittype" class="java.lang.String"/>
 
 		<background>
 			<band height="374"  isSplitAllowed="true" >
@@ -68,7 +69,7 @@
 					<reportElement
 						x="115"
 						y="20"
-						width="107"
+						width="225"
 						height="12"
 						key="staticText-1"/>
 					<box></box>
@@ -113,7 +114,7 @@
 						key="staticText-4"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="20" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="19" isBold="true"/>
 					</textElement>
 				<text><![CDATA[ONE - STOP SHOP FOR CONSTRUCTION PERMITS]]></text>
 				</staticText>
@@ -151,19 +152,6 @@
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="16" isBold="true"/>
 					</textElement>
 				<text><![CDATA[CLAIM STUB]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="175"
-						y="122"
-						width="263"
-						height="17"
-						key="staticText-7"/>
-					<box></box>
-					<textElement textAlignment="Center">
-						<font fontName="Arial" pdfFontName="Helvetica" size="11" isBold="false"/>
-					</textElement>
-				<text><![CDATA[BUILDING PERMIT]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -321,8 +309,8 @@
 				</line>
 				<staticText>
 					<reportElement
-						x="36"
-						y="305"
+						x="38"
+						y="348"
 						width="540"
 						height="12"
 						key="staticText-15"/>
@@ -334,12 +322,12 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
-				<text><![CDATA[For updates and inquiries, please call 0948 359 1219 or 0965 601 8727]]></text>
+				<text><![CDATA[For inquiries, please call 0950 538 9739 or e-mail us at obolegazpicity@gmail.com.]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="35"
-						y="318"
+						x="38"
+						y="296"
 						width="540"
 						height="24"
 						key="staticText-16"/>
@@ -531,6 +519,34 @@ Bring this claim stub upon claiming the Application Evaluation Sheet, Order of P
 						<font fontName="Arial" pdfFontName="Helvetica" size="9" isBold="false"/>
 					</textElement>
 				<text><![CDATA[:                       ]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="175"
+						y="125"
+						width="263"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="15"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permittype}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="38"
+						y="320"
+						width="540"
+						height="17"
+						key="staticText-25"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle" isStyledText="true">
+						<font fontName="Arial" pdfFontName="Helvetica" size="9" isBold="false"/>
+					</textElement>
+				<text><![CDATA[Bring this claim stub upon claiming the Application Evaluation Sheet, Order of Payment, Building Permit and other documents.
+
+documents.]]></text>
 				</staticText>
 			</band>
 		</title>

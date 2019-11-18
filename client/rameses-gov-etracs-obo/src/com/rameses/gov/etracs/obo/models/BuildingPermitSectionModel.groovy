@@ -10,39 +10,23 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingPermitSectionModel extends WorkflowTaskModel {
+class BuildingPermitSectionModel extends AbstractOboApplicationSectionModel {
 
     @Service("BuildingPermitSectionService")
     def appSvc;
     
-    def infos;
-    def receipt;
-    def findingListHandler;
-    def feeListHandler;
-    
-    String getFormName() {
-        return getSchemaName() + ":form";
+    public String getPermitName() {
+        return "building_permit";
     }
     
-    @FormTitle
-    public String getTitle() {
-        return entity.app.appno + " " + entity.type.title + " (" + entity.task?.title + ")";
+    public String getCaption() {
+        return "Building Permit";
     }
     
-    public String getWindowTitle() {
-        return entity.app.appno;
+    public String getPrefix() {
+        return "BP";
     }
-    
-    public String getFormId() {
-        return entity.objid;
-    }
-    
-    def viewApplication() {
-        def op = Inv.lookupOpener("vw_building_permit:open", [entity: [objid: entity.appid ] ] );
-        op.target = "popup";
-        return op;
-    }
-    
+
     def viewAncillaryPermit() {
         if(!entity.ancillaryid ) 
             throw new Exception("There is no associated ancillary permit ");
@@ -54,22 +38,7 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
     def assess() {
         if(! entity.app.zoneclass?.objid )
             throw new Exception("Please specify a zone class first");
-        def f = [:];
-        f.appid = entity.app.objid;
-        f.sectionid = entity.typeid;
-        f.ancillaryid = entity.ancillaryid;
-        def h  = { u->
-            feeListHandler.reload();
-        }
-        return Inv.lookupOpener("building_permit_assessment", [params: f, handler: h] );
-    }
-    
-    def addFee() {
-        def m = [appid: entity.appid, typeid: entity.typeid ];
-        m.handler = { o->
-            feeListHandler.reload();
-        }
-        return Inv.lookupOpener("building_permit_fee:create", m );
+        return super.assess();    
     }
     
     def updateZoneclass() {
@@ -82,29 +51,8 @@ class BuildingPermitSectionModel extends WorkflowTaskModel {
         return Inv.lookupOpener("building_permit_zoneclass:view", [app: app, handler: h ] );
     }
     
-    def addFinding() {
-        def m = [:];
-        m.sectionid = entity.objid;
-        m.appid = entity.appid;
-        m.section = [typeid: entity.typeid ];
-        m.handler = { o->
-            findingListHandler.reload();
-        }
-        return Inv.lookupOpener("building_permit_finding:create", m );
-    }
-    
-    def issuePermit() {
-        def m = [ appid:entity.appid, sectionid: entity.typeid ];
-        m.handler = { o->
-            reload();
-        }
-        return Inv.lookupOpener(entity.type.permitname, m );
-    }
-    
     public boolean isActionable() {
         return (task.assignee.objid == userInfo.userid);
     }
-    
-    
     
 }

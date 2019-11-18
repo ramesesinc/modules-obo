@@ -3,7 +3,7 @@
 		<field name="objid" primary="true" />
 		<field name="appid" />
 
-		<complex name="app" ref="vw_building_permit" jointype="many-to-one">
+		<complex name="app" ref="vw_occupancy_permit" jointype="many-to-one">
 			<key field="appid" target="objid" />
 		</complex>	
 		<field name="typeid" />

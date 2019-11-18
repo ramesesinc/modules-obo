@@ -1,10 +1,10 @@
 <workunit>
     <invokers>
         <!-- CALLED INVOKERS -->
-        <invoker type="building_permit_requirement:open" caption="Building Permti Requirement Finding" 
+        <invoker type="building_permit_requirement:open" caption="Building Permit Requirement Verification" 
                  action="openBldgPermit" index="1" target="popup"/>    
         
-        <invoker type="occupancy_permit_requirement:open" caption="Occupancy Permit Requirement Finding" 
+        <invoker type="occupancy_permit_requirement:open" caption="Occupancy Permit Requirement Verification" 
                  action="openOccupancyPermit" index="1" target="popup"/>    
         
         <!-- buttons -->

@@ -10,17 +10,16 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingPermitSectionListModel extends WorkflowTaskListModel {
+class OboApplicationSectionListModel extends WorkflowTaskListModel {
     
     def typeid;
     String title;
     
     @FormId
     public String getFormId() {
-        return "building_permit_section:" + typeid + ":list";
+        return getProcessName() + ":" + typeid + ":list";
     }
 
-    
     def getCustomFilter() {
         return [ "typeid = :typeid", [typeid: typeid] ];
     }

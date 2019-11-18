@@ -25,7 +25,7 @@ public class OboApplicationService  {
 
 	@ProxyMethod
 	public def accept(def o ) {
-		if(!o.schemaname) throw new Ecxception("Please specify a schemaname in OboApplicationService.accept");
+		if(!o.schemaname) throw new Exception("Please specify a schemaname in OboApplicationService.accept");
 		if(!o.appid) throw new Exception("Please specify a appid in OboApplicationService.accept");
 
 		def appid = o.appid;
@@ -33,7 +33,7 @@ public class OboApplicationService  {
 		//check first if there are open requirements
 		def reqEm = em.lookup( o.schemaname + "_requirement"); 
 		def c = reqEm.select("c:{COUNT(*)}").find([appid:appid]).where("state = 0").val();
-		if( c>0) throw new Exception("All requirements must be checked first");
+		if( c>0) throw new Exception("All requirements must pass");
 		c = reqEm.select("c:{COUNT(*)}").find([appid:appid]).where("supersederid IS NULL AND state = 2").val();
 		if( c>0) throw new Exception("There are still requirements that need to be revised");
 
@@ -52,7 +52,7 @@ public class OboApplicationService  {
 
 	@ProxyMethod
 	public def updatePermitNo( def o ) {
-		if(!o.schemaname) throw new Ecxception("Please specify a schemaname in OboApplicationService.updatePermitNo");
+		if(!o.schemaname) throw new Exception("Please specify a schemaname in OboApplicationService.updatePermitNo");
 		if(!o.appid) throw new Exception("Please specify a appid in OboApplicationService.updatePermitNo");
 
 		def appid = o.appid;

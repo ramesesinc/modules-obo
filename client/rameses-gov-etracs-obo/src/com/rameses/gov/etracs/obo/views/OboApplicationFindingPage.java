@@ -15,12 +15,12 @@ import com.rameses.rcp.ui.annotations.Template;
  */
 @StyleSheet
 @Template(FormPage.class)
-public class BuildingPermitFindingPage extends javax.swing.JPanel {
+public class OboApplicationFindingPage extends javax.swing.JPanel {
 
     /**
      * Creates new form BuildingApplicationFindingPage
      */
-    public BuildingPermitFindingPage() {
+    public OboApplicationFindingPage() {
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
         xTextArea2 = new com.rameses.rcp.control.XTextArea();
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xPanel2 = new com.rameses.rcp.control.XPanel();
-        schemaList7 = new com.rameses.seti2.components.SchemaList();
+        xDataTable1 = new com.rameses.rcp.control.XDataTable();
 
         setLayout(new java.awt.CardLayout());
 
@@ -81,8 +81,8 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
         xPanel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         xPanel2.setLayout(new java.awt.BorderLayout());
 
-        schemaList7.setAllowOpen(false);
-        schemaList7.setColumns(new com.rameses.rcp.common.Column[]{
+        xDataTable1.setHandler("listModel");
+        xDataTable1.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "particulars"}
                 , new Object[]{"caption", "Particulars"}
@@ -103,7 +103,7 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
                 , new Object[]{"caption", "Raised By"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 150}
-                , new Object[]{"maxWidth", 200}
+                , new Object[]{"maxWidth", 250}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}
@@ -117,8 +117,8 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
                 new Object[]{"name", "dtcreated"}
                 , new Object[]{"caption", "Date"}
                 , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}
@@ -129,12 +129,8 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.DateColumnHandler(null, null, null)}
             })
         });
-        schemaList7.setCustomFilter("rootid = :rootid ");
-        schemaList7.setOrderBy("dtcreated");
-        schemaList7.setQueryName("entity");
-        schemaList7.setRowHeight(40);
-        schemaList7.setSchemaName("building_permit_finding");
-        xPanel2.add(schemaList7, java.awt.BorderLayout.CENTER);
+        xDataTable1.setRowHeight(40);
+        xPanel2.add(xDataTable1, java.awt.BorderLayout.CENTER);
 
         add(xPanel2, "card5");
     }// </editor-fold>//GEN-END:initComponents
@@ -142,7 +138,7 @@ public class BuildingPermitFindingPage extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane2;
-    private com.rameses.seti2.components.SchemaList schemaList7;
+    private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel3;

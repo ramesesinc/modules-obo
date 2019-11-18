@@ -18,9 +18,12 @@ import com.rameses.enterprise.models.*;
 
 class BuildingPermitFindingModel {
 
-    @Service("BuildingPermitFindingService")
+    @Service("OboApplicationFindingService")
     def findingSvc;
 
+    @Service("QueryService")
+    def querySvc;
+    
     @Caller
     def caller;
 
@@ -36,7 +39,9 @@ class BuildingPermitFindingModel {
     boolean editable = false;
     boolean closeable = false;
     
-    void create() {
+    String schemaname;
+    
+    void create(inv) {
         entity = [:];
         if( !sectionid ) {
             entity.appid = appid;
@@ -46,9 +51,11 @@ class BuildingPermitFindingModel {
             entity.parentid = sectionid;
         }
         entity.state = 0;
+        entity.schemaname = inv.properties.schemaname;
     }
     
-    void open() {
+    void open(inv) {
+        entity.schemaname = inv.properties.schemaname;
     }
 
     boolean getEditable() {
@@ -115,5 +122,14 @@ class BuildingPermitFindingModel {
     void viewBack() {
         pagename = "view";
     }
+    
+    def listModel = [
+        fetchList: { o->
+            def m = [_schemaname: entity.schemaname + "_finding"];
+            m.findBy = [rootid: entity.rootid];
+            m.orderBy ="dtcreated";
+            return querySvc.getList(m)
+        }
+    ] as BasicListModel;
 
 }

@@ -26,57 +26,6 @@ class BuildingPermitFormReportInterceptor {
 	@DataContext("vw_building_permit_fee_payment")
 	def payEm;
 
-
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_claimstub'}")
-	public void getBuildingPermitClaimStubReport( def evt ) {
-		def p = evt.args[0];
-		def result = evt.result;
-		def id = p.parameters.objid;
-		def ea = vwAppEm.find( [objid: id ] ).first();
-		def r = taskEm.find( [refid: id, state: 'receiving'] ).orderBy("startdate DESC").first();
-		if( r ) {
-			ea.startdate = r.startdate;
-			ea.enddate = r.enddate;
-			ea.receiver = r.assignee;		
-		}
-		result.data = ea;
-	}	
-
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_requirement_checklist'}")
-	public void getBuildingPermitVerificationChecklistReport( def evt ) {
-		def p = evt.args[0];
-		def result = evt.result;
-		def transmittalid = p.parameters.transmittalid;
-		if(!transmittalid) throw new Exception("transmittalid is required in requirement checklist report")
-
-		def t = transmittalEm.find([objid: transmittalid]).first();
-		if(!t) throw new Exception("Transmittal " + transmittalid + " not found ");
-
-		def ea = vwAppEm.find( [objid: t.appid ] ).first();
-		ea.receiver = t.createdby;
-		ea.transmittalno = t.objid;
-		ea.items = reqEm.find( [transmittalid : t.objid ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
-		result.data = ea;
-	}	
-
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_finding_checklist'}")
-	public void getBuildingPermitFindingChecklistReport( def evt ) {
-		def p = evt.args[0];
-		def result = evt.result;
-		def transmittalid = p.parameters.transmittalid;
-		if(!transmittalid) throw new Exception("transmittalid is required in requirement checklist report")
-
-		def t = transmittalEm.find([objid: transmittalid]).first();
-		if(!t) throw new Exception("Transmittal " + transmittalid + " not found ");
-
-		def ea = vwAppEm.find( [objid: t.appid ] ).first();
-		ea.receiver = t.createdby;
-		ea.transmittalno = t.objid;
-		ea.items = findingEm.find( [transmittalid : t.objid ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
-
-		result.data = ea;
-	}	
-
 	@After(pattern="FormReportService.getData", eval="#{args[0].reportid.matches('building_permit|building_permit_signboard')}")
 	public void getBuildingPermitReport( def evt ) {
 		def p = evt.args[0];

@@ -15,12 +15,28 @@ import com.rameses.io.*;
 
 class OccupancyPermitModel extends AbstractOboApplicationModel {
 
+    public String getPermitName() {
+        return "occupancy_permit";   
+    }
+    
     public String getTitle() {
         return "Occupancy Permit " + (entity.appno==null? 'Tracking No '+ entity.trackingno: 'App No ' + entity.appno) + " [" +  task?.title + "]" ;
     }
     
     public String getWindowTitle() {
         return "OP " + (entity.appno==null? entity.trackingno : entity.appno);
+    }
+    
+    def specifySchedule() {
+        def h = { o->
+            def m = [_schemaname: "occupancy_permit"];
+            m.debug = true;
+            m.findBy = [objid: entity.objid ];
+            m.inspectionschedule = o.date + " " + o.hour + ":" + o.minute;
+            persistenceService.update( m );
+            reload();
+        };
+        return Inv.lookupOpener("date:prompt", [handler: h, title:"Enter Inspection Schedule", includeTime:true]);
     }
     
     

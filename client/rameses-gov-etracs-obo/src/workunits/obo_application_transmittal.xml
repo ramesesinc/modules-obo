@@ -1,0 +1,60 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+        <!-- building permit requirement transmittal -->
+        <invoker type="vw_building_permit:form:appActions" 
+                caption="Build Requirement Verification"
+                role="REQUIREMENT_REVIEWER"
+                reportId="building_permit_transmittal"
+                reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"
+                action="create" 
+                index="0"
+                visibleWhen="#{ 
+                    task.state =='requirement-verification'
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.transmittalid == null 
+                    &amp;&amp; entity.appno == null }"/>
+                
+        <invoker type="vw_building_permit:form:appActions" 
+                 caption="Print Transmittal"
+                 reportId="building_permit_transmittal"
+                 reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"
+                 action="preview"
+                 visibleWhen="#{ 
+                    task.state.matches('requirement.*')
+                    &amp;&amp; entity.transmittalid != null  }"/>
+
+        <!-- occupancy permit transmittal -->            
+        <invoker type="vw_occupancy_permit:form:appActions" 
+                caption="Build Requirement Verification"
+                role="REQUIREMENT_REVIEWER"
+                reportId="occupancy_permit_transmittal"                
+                reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"
+                action="create" 
+                index="0"
+                visibleWhen="#{ 
+                    task.state =='requirement-verification'
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.transmittalid == null 
+                    &amp;&amp; entity.appno == null }"/>
+
+        <invoker type="vw_occupancy_permit:form:appActions" 
+                 caption="Print Transmittal"
+                 reportId="occupancy_permit_transmittal"
+                 reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"
+                 action="preview"
+                 visibleWhen="#{ 
+                    task.state.matches('requirement.*')
+                    &amp;&amp; entity.transmittalid != null  }"/>
+
+        <!--        
+        <invoker type="building_permit_finding_checklist" 
+                 caption="Findings Checklist"
+                 reportId="building_permit_finding_checklist"
+                 reportName="com/rameses/gov/etracs/obo/reports/building_permit_finding_checklist.jasper"
+                 action="preview" target="popup"/>
+        -->
+       
+       <invoker type="formActions" caption="Send Email" action="sendEmail"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationTransmittalModel" />
+</workunit>

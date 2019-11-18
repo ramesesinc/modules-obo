@@ -33,7 +33,7 @@ public class BuildingPermitSectionService  {
 
 	@ProxyMethod
 	public def getInfos( def o ) {
-		if(!o.subappid ) throw new Exception("subappid is required in OboBuildingSubapplicationService.getInfos");
+		if(!o.subappid ) throw new Exception("subappid is required in BuildingPermitSectionService.getInfos");
 		def list = vwInfoEm.find( [subappid: o.subappid] ).orderBy("sortorder").list();
 		list.each {
 			if( it.datatype == 'date') it.value = it.datevalue;

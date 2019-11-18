@@ -1,10 +1,18 @@
 <workunit>
     <invokers>
-        <invoker type="building_permit_finding:create" caption="Finding"
-                action="create" index="1" target="popup"/>
+        <!-- INVOKERS -->
+        <invoker type="building_permit_finding:create" caption="Building Permit Finding"
+                action="create" index="1" target="popup" schemaname="building_permit" />
         
-        <invoker type="building_permit_finding:open" caption="Finding"
-                action="open" index="1" target="popup"/>
+        <invoker type="building_permit_finding:open" caption="Building Permit Finding"
+                action="open" index="1" target="popup" schemaname="building_permit"/>
+        
+        <invoker type="occupancy_permit_finding:create" caption="Occupancy Permit Finding"
+                action="create" index="1" target="popup" schemaname="occupancy_permit"/>
+        
+        <invoker type="occupancy_permit_finding:open" caption="Occupancy Permit Finding"
+                action="open" index="1" target="popup" schemaname="occupancy_permit"/>
+        
         
         <!-- finding actions -->
         <invoker type="formActions" caption="Cancel"
@@ -33,8 +41,8 @@
             action="viewBack" index="3" visibleWhen="#{pagename == 'hist'}" />
         
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitFindingModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationFindingModel" />
     <pages> 
-        <page template="com.rameses.gov.etracs.obo.views.BuildingPermitFindingPage" />
+        <page template="com.rameses.gov.etracs.obo.views.OboApplicationFindingPage" />
     </pages>
 </workunit>

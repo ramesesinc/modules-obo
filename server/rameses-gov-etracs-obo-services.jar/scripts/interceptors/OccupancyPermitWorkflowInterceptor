@@ -16,15 +16,11 @@ class OccupancyPermitWorkflowInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-
 	@DataContext("occupancy_permit_section")
 	def inspectionEm;
 
 	@DataContext("vw_occupancy_permit_section")
 	def vwSectionEm;
-
-	@DataContext("vw_occupancy_permit_ancillary")
-	def vwAncillaryEm;
 
 	@DataContext("obo_section")
 	def sectionEm;
@@ -37,9 +33,6 @@ class OccupancyPermitWorkflowInterceptor {
 
 	@DataContext("occupancy_permit_finding")
 	def findingEm;
-
-	@DataContext("occupancy_permit_rpu")
-	def rpuEm;
 
 	@DataContext("occupancy_permit_fee")
 	def feeEm;
@@ -54,17 +47,52 @@ class OccupancyPermitWorkflowInterceptor {
 	//Specific before action tasks
 	************************************************************************ */
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-revision' }") 
-	public void doActionBeforeScheduling( def evt ) {
+	public void doActionBeforeRevision( def evt ) {
 		def p = evt.args[0];
 		def t = transmittalEm.find( [taskid: p.taskid] ).first();
 		if(!t) throw new Exception("Please create a verification checklist first");
 	}
 
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-schedule-inspection' }") 
+	public void doActionBeforeScheduleInspection( def evt ) {
+		def p = evt.args[0];
+		def t = appEm.find( [objid: p.refid] ).select("appno").val();
+		if(!t) throw new Exception("Please Accept Application first to generate application number");
+	}
+
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-inspection' }") 
 	public void doActionBeforeInspection( def evt ) {
 		def p = evt.args[0];
-		def t = appEm.find( [taskid: p.refid] ).select("inspectionschedule").val();
-		if(!t) throw new Exception("Please specify an inspection schedule");
+		def t = appEm.find( [objid: p.refid] ).select("inspectionschedule").val();
+		if(!t) throw new Exception("Please specify first inspection schedule");
+	}
+
+	//approve. check if there are evaluations where the task state is for-revision and reactivate each
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-inspection' }" ) 
+	public void fireInspectionTasks( def evt ) {
+		def p = evt.args[0];
+		def result = evt.result;
+		def appid = p.refid;
+
+		//start the next evaluation tasks. fire evaluations for required sections as well as optional that has existing ancillary 
+		def mlist = sectionEm.where(" occupancypermitstate = :state  AND optional=0 ", [state: result.state] ).list()*.objid;
+		if( mlist ) {
+			def dt = dateSvc.getServerDate();
+			mlist.each {
+				//create each evaluation but check first if task exists
+				def m = [appid: appid, typeid: it ]
+				boolean b = inspectionEm.find( m ).exists();
+				if(!b) {
+					m = inspectionEm.create( m );
+					def f = [:];
+					f.processname = 'occupancy_permit_section';
+					f.refid = m.objid;
+					f.startdate = dt;
+					f.info = [ type: it ];
+					wfSvc.start(f);				
+				}
+			}
+		}		
 	}
 
 	//This is the part where you need to check for application specific routines
@@ -82,7 +110,6 @@ class OccupancyPermitWorkflowInterceptor {
 			if( t > 0) throw new Exception("All findings must be resolved first.");
 		}
 	}
-
 
 	/* *********************************************************************
 	//Evaluation-related triggers
@@ -102,35 +129,6 @@ class OccupancyPermitWorkflowInterceptor {
 				wfSvc.signal(f);	
 			}		
 		}
-	}
-
-	//approve. check if there are evaluations where the task state is for-revision and reactivate each
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'approve' }" ) 
-	public void approveEvaluationTasks( def evt ) {
-		def p = evt.args[0];
-		def result = evt.result;
-		def appid = p.refid;
-
-		//start the next evaluation tasks. fire evaluations for required sections as well as optional that has existing ancillary 
-		def mlist = sectionEm.where(" occupancypermitstate = :state  AND optional=0 ", [state: result.state] ).list()*.objid;
-
-		if( mlist ) {
-			def dt = dateSvc.getServerDate();
-			mlist.each {
-				//create each evaluation but check first if task exists
-				def m = [appid: appid, typeid: it ]
-				boolean b = inspectionEm.find( m ).exists();
-				if(!b) {
-					m = inspectionEm.create( m );
-					def f = [:];
-					f.processname = 'occupancy_permit_section';
-					f.refid = m.objid;
-					f.startdate = dt;
-					f.info = [ type: it ];
-					wfSvc.start(f);				
-				}
-			}
-		}		
 	}
 
 	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each

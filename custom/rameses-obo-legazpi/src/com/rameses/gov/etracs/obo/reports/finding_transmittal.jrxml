@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="building_permit_finding_checklist"
+		 name="finding_transmittal"
 
 		 language="groovy"		 columnCount="1"
 		 printOrder="Vertical"
@@ -33,6 +33,7 @@
 	<field name="items" class="java.lang.Object"/>
 	<field name="trackingno" class="java.lang.String"/>
 	<field name="receiver.name" class="java.lang.String"/>
+	<field name="permittype" class="java.lang.String"/>
 
 		<background>
 			<band height="936"  isSplitAllowed="true" >
@@ -153,19 +154,6 @@
 						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="17" isBold="true"/>
 					</textElement>
 				<text><![CDATA[APPLICATION EVALUATION SHEET]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="175"
-						y="129"
-						width="263"
-						height="22"
-						key="staticText-7"/>
-					<box></box>
-					<textElement textAlignment="Center">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="12" isBold="false"/>
-					</textElement>
-				<text><![CDATA[BUILDING PERMIT]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -465,6 +453,19 @@
 					</textElement>
 				<text><![CDATA[:]]></text>
 				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="157"
+						y="132"
+						width="299"
+						height="18"
+						key="textField-1"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="15"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permittype}]]></textFieldExpression>
+				</textField>
 			</band>
 		</title>
 		<pageHeader>

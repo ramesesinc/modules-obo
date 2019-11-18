@@ -9,9 +9,6 @@ class OboApplicationRequirementService {
 	@Service("ControlnoGeneratorService")
 	def controlNoSvc;
 
-	@DataContext("building_permit_transmittal")
-	def transmittalEm;
-
 	@DataContext(dynamic=true)
 	def em;
 

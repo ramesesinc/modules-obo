@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="building_permit_req_checklist"
+		 name="requirement_transmittal"
 
 		 language="groovy"		 columnCount="1"
 		 printOrder="Vertical"
@@ -33,6 +33,7 @@
 	<field name="items" class="java.lang.Object"/>
 	<field name="trackingno" class="java.lang.String"/>
 	<field name="receiver.name" class="java.lang.String"/>
+	<field name="permittype" class="java.lang.String"/>
 
 		<background>
 			<band height="936"  isSplitAllowed="true" >
@@ -70,12 +71,12 @@
 					<reportElement
 						x="115"
 						y="21"
-						width="107"
+						width="213"
 						height="12"
 						key="staticText-1"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 				<text><![CDATA[Republic of the Philippines]]></text>
 				</staticText>
@@ -115,7 +116,7 @@
 						key="staticText-4"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="20" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="19" isBold="true"/>
 					</textElement>
 				<text><![CDATA[ONE - STOP SHOP FOR CONSTRUCTION PERMITS]]></text>
 				</staticText>
@@ -150,22 +151,9 @@
 						key="staticText-6"/>
 					<box></box>
 					<textElement textAlignment="Center">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="17" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="17" isBold="true"/>
 					</textElement>
 				<text><![CDATA[DOCUMENT VERIFICATION CHECKLIST]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="175"
-						y="129"
-						width="263"
-						height="22"
-						key="staticText-7"/>
-					<box></box>
-					<textElement textAlignment="Center">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="12" isBold="false"/>
-					</textElement>
-				<text><![CDATA[BUILDING PERMIT]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -385,7 +373,7 @@
 						height="55"
 						key="subreport-1"/>
 					<dataSourceExpression><![CDATA[$F{items}]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["building_permit_req_checklist_item.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["requirement_transmittal_item.jasper"]]></subreportExpression>
 				</subreport>
 				<staticText>
 					<reportElement
@@ -465,6 +453,19 @@
 					</textElement>
 				<text><![CDATA[:]]></text>
 				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="157"
+						y="132"
+						width="299"
+						height="18"
+						key="textField"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" size="15"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permittype}]]></textFieldExpression>
+				</textField>
 			</band>
 		</title>
 		<pageHeader>
