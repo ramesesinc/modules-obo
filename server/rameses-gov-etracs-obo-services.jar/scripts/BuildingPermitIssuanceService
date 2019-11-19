@@ -8,12 +8,6 @@ class BuildingPermitIssuanceService {
 	@DataContext("building_permit_section")
 	def sectionEm;
 
-	@DataContext("building_permit_issuance")
-	def issuanceEm;
-
-	@DataContext("obo_issuance_type")
-	def typeEm;
-
 	@Service("DateService")
 	def dateSvc;
 
@@ -35,15 +29,6 @@ class BuildingPermitIssuanceService {
 		if(!o.dtissued) o.dtissued = dateSvc.getServerDate();
 		env.issuedby = [objid: env.USERID, name: env.FULLNAME ];
 		o = issuanceEm.create( o );
-
-		/*
-		if( o.evaluationid == null ) {
-			bpEm.find( [objid: o.appid ] ).update( [issuanceid: o.objid ] );
-		}
-		else {
-			evalEm.find( [objid: o.evaluationid ]
-		}
-		*/	
 		return o;
  	}	
 

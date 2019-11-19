@@ -1,0 +1,59 @@
+import com.rameses.annotations.*; 
+
+
+/***********************************************************************************
+* This is a general interceptor for all persistence related data in building permit
+***********************************************************************************/
+class BuildingPermitPersistenceInterceptor {
+
+	@DataContext("building_permit_issuance")
+	def issuanceEm;
+
+	@DataContext("building_permit_transmittal")
+	def transmittalEm;
+
+	@DataContext("building_permit_task")
+	def taskEm;
+
+	@Env
+	def env;
+
+	@After(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'building_permit' && args[0].txnmode == 'CAPTURE' }")
+	public void afterCreate(def evt) {
+		def a = evt.args[0];
+		def result = evt.result;
+		def p = [:];
+		p.appid = result.objid;
+		p.controlno = a.permitno;
+		p.dtissued = a.appdate;
+		p.typeid = 'building_permit';
+		p.txnmode = 'CAPTURE';
+		issuanceEm.create( p );
+	}
+
+	@After(pattern="PersistenceService.read", eval="#{args[0]._schemaname == 'vw_building_permit' }")
+	public void afterOpenBuildingPermit(def evt) {
+		def a = evt.result;
+		if( a.task.state.matches(".*verification") ) {
+			def t = transmittalEm.find( [taskid: a.taskid ]).first();
+			if( a.task.state.matches(".*requirement.*") ) {
+				a.reqtransmittalid = t?.objid;
+			}
+			else {
+				a.transmittalid = t?.objid;
+			}
+		}
+		else if( a.task.state.matches(".*revision") ) {
+			def prevtaskid = taskEm.find( [taskid: a.taskid] ).select("prevtaskid").val();
+			def t = transmittalEm.find( [taskid: prevtaskid ]).first();
+			if( a.task.state.matches(".*requirement.*") ) {
+				a.reqtransmittalid = t?.objid;
+			}
+			else {
+				a.transmittalid = t?.objid;
+			}
+		}
+	}
+
+
+}

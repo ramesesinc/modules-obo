@@ -28,6 +28,7 @@ class BuildingPermitPaymentService {
 		receipt.refdate = rct.receiptdate;
 		receipt.amount = rct.amount;
 		receipt.voided = 0;
+
 		pmtEm.create( receipt );
 
 		//post to the ledger

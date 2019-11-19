@@ -38,12 +38,14 @@ public class OboSectionPage extends javax.swing.JPanel {
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xComboBox2 = new com.rameses.rcp.control.XComboBox();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
-        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
+        xRadio1 = new com.rameses.rcp.control.XRadio();
+        xRadio2 = new com.rameses.rcp.control.XRadio();
         xCheckBox2 = new com.rameses.rcp.control.XCheckBox();
         xCheckBox3 = new com.rameses.rcp.control.XCheckBox();
         xTextField3 = new com.rameses.rcp.control.XTextField();
         xTextField4 = new com.rameses.rcp.control.XTextField();
         xTextField5 = new com.rameses.rcp.control.XTextField();
+        xTextField6 = new com.rameses.rcp.control.XTextField();
 
         xFormPanel1.setCaption("General Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -56,6 +58,7 @@ public class OboSectionPage extends javax.swing.JPanel {
         xTextField1.setCaption("Code");
         xTextField1.setDisableWhen("#{ mode != 'create' }");
         xTextField1.setName("entity.objid"); // NOI18N
+        xTextField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xTextField1.setRequired(true);
         xTextField1.setSpaceChar('_');
         xFormPanel1.add(xTextField1);
@@ -95,13 +98,18 @@ public class OboSectionPage extends javax.swing.JPanel {
         xComboBox1.setPreferredSize(new java.awt.Dimension(200, 22));
         xFormPanel1.add(xComboBox1);
 
-        xCheckBox1.setCheckValue(1);
-        xCheckBox1.setName("entity.optional"); // NOI18N
-        xCheckBox1.setUncheckValue(0);
-        xCheckBox1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xCheckBox1.setShowCaption(false);
-        xCheckBox1.setText("Optional. Activate only if there is associated ancillary permit applied");
-        xFormPanel1.add(xCheckBox1);
+        xRadio1.setName("entity.optional"); // NOI18N
+        xRadio1.setOptionValue(0);
+        xRadio1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xRadio1.setShowCaption(false);
+        xRadio1.setText("Always Require ");
+        xFormPanel1.add(xRadio1);
+
+        xRadio2.setName("entity.optional"); // NOI18N
+        xRadio2.setOptionValue(1);
+        xRadio2.setShowCaption(false);
+        xRadio2.setText("Optional. Activate only if there is associated ancillary permit applied");
+        xFormPanel1.add(xRadio2);
 
         xCheckBox2.setCheckValue(1);
         xCheckBox2.setName("entity.requirefee"); // NOI18N
@@ -149,6 +157,16 @@ public class OboSectionPage extends javax.swing.JPanel {
         xTextField5.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         xFormPanel1.add(xTextField5);
 
+        xTextField6.setCaption("Permit Name");
+        xTextField6.setDepends(new String[] {"entity.issuepermit"});
+        xTextField6.setName("entity.permit.name"); // NOI18N
+        xTextField6.setVisibleWhen("#{ entity.issuepermit == 1 }");
+        xTextField6.setCaptionWidth(200);
+        xTextField6.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xTextField6.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField6.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        xFormPanel1.add(xTextField6);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,14 +177,13 @@ public class OboSectionPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XCheckBox xCheckBox2;
     private com.rameses.rcp.control.XCheckBox xCheckBox3;
     private com.rameses.rcp.control.XComboBox xComboBox1;
@@ -174,10 +191,13 @@ public class OboSectionPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
     private com.rameses.rcp.control.XLookupField xLookupField1;
+    private com.rameses.rcp.control.XRadio xRadio1;
+    private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
     private com.rameses.rcp.control.XTextField xTextField3;
     private com.rameses.rcp.control.XTextField xTextField4;
     private com.rameses.rcp.control.XTextField xTextField5;
+    private com.rameses.rcp.control.XTextField xTextField6;
     // End of variables declaration//GEN-END:variables
 }
