@@ -1,0 +1,121 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import java.rmi.server.*;
+import obo.facts.*;
+import java.text.*;
+import treasury.utils.*;
+import treasury.facts.*;
+
+public class BuildingPermitService  {
+	
+	@DataContext("vw_building_permit")
+	def vwAppEm;
+
+	@DataContext("building_permit_rpu")
+	def permitRpu;
+
+	@DataContext("building_permit_entity")
+	def permitEntity;
+
+	@DataContext("building_permit_professional")
+	def professionalEm;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("building_permit")
+	def appEm;
+
+	@DataContext("building_permit_ancillary")
+	def ancillaryEm;
+
+	@Service("OboConstructionCostService")
+	def costSvc;
+
+	@Service("SequenceService")
+	def seqSvc;
+
+	@Service("AppnoGeneratorService")
+	def appNoSvc;
+
+	@DataContext("building_permit_requirement")
+	def reqEm;
+
+	@Env
+	def env;
+
+	@ProxyMethod
+	public def accept(def o ) {
+		def appid = o.appid;
+		if(!appid) throw new Exception("Appid must not be null in generate application no.");
+
+		def c = reqEm.select("c:{COUNT(*)}").find([appid:appid]).where("state = 0").val();
+		if( c>0) throw new Exception("All requirements must be checked first");
+
+		c = reqEm.select("c:{COUNT(*)}").find([appid:appid]).where("supersederid IS NULL AND state = 2").val();
+		if( c>0) throw new Exception("There are still requirements that need to be revised");
+
+		//update the appno first
+		int nextNo = seqSvc.getNextSeries( "OBO_BUILDING_APP");
+		def appno = appNoSvc.generate( "BP-[yyyyMM]-[%05d]", nextNo  );
+		def u = [:];
+		u.appdate = dateSvc.getServerDate();
+		u.appno = appno;
+		appEm.find( [objid: appid ] ).update( u );
+		return u;
+	}
+
+	@ProxyMethod
+	public void transmitApplication( def o ) {
+		if(!o.appid ) throw new Exception("appid is required in transmit application");
+		def appid = o.appid;
+		def app = appEm.find([objid: appid ]).first();
+		throw new Exception("app" + app.contact.email + " " + app.contact.mobileno );
+	}
+
+	@ProxyMethod
+	public def findByPermitNo( def p ) {
+		def perm = vwAppEm.where( "issuance.controlno = :permitno", [permitno: p.permitno ] ).first();
+		if(!perm)
+			throw new Exception("Permit "+p.permitno + " does not exist");
+
+		perm.rpus = permitRpu.find( [appid: perm.objid ] ).list();
+		perm.entities = permitEntity.find( [appid: perm.objid ] ).list();
+		perm.professionals = professionalEm.find( [appid: perm.objid ]).list();
+		return perm;
+	}	
+
+	@ProxyMethod
+	public void addAncillary( def o ) {
+		o.items.each {
+			def v = ancillaryEm.find( [objid: it ] ).exists();
+			if( !v ) {
+				ancillaryEm.create( [appid: o.appid, state:'PENDING', type: [objid:it], permittypeid: it ] );
+			}
+		}
+	}
+
+	@ProxyMethod
+	public def saveCapture( def app ) {
+		def dt = dateSvc.getServerDate();
+		//calculate the cost first before receiving
+		def param = [:];
+		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
+		param.occupancytype = [
+			group: app.occupancytype.group.objid,
+			division: app.occupancytype.division.objid,
+			type: app.occupancytype.objid
+		] 
+		app.worktypes = [ app.worktype.objid ];
+		app.fixedcost = costSvc.calc( param );
+		app.txnmode = "CAPTURE";
+		app.appno = app.permitno;
+		app.permittype = "BUILDING PERMIT";
+		app.orgcode = env.ORGCODE;
+		appEm.create( app );
+	}
+
+	
+
+
+}

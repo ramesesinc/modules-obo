@@ -63,6 +63,7 @@ public class BuildingPermitOnlineService  {
 	public def upload( def app ) {
 		def applicantid = app.remove("applicantid");
 		def accessoryid = app.remove("accessoryid");
+		def contractor = app.remove("contractor");
 		def newapp = appEm.create( app );
 		app.entities.each {
 			it.appid = newapp.objid;
@@ -96,6 +97,7 @@ public class BuildingPermitOnlineService  {
 		def u = [:];
 		u.applicantid = applicantid;
 		if( accessoryid ) u.accessoryid = accessoryid;
+		if( contractor ) u.contractorid = contractor.objid;
 		appEm.find( [objid: newapp.objid ] ).update( u );
 
 		//immediatly accept

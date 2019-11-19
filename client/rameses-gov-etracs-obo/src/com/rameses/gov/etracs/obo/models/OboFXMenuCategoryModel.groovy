@@ -75,22 +75,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             def list = querySvc.getList( m );
             buildInvokers( list, 'occupancy_permit_section' );
         }        
-        else if( _id == "permit_issuance") {
-            def m = [_schemaname: "obo_issuance_type" ];
-            m._limit = 100;
-            
-            def sorgFilter = [:]
-            if(isRoot) {
-                sorgFilter = ["section.org.objid IS NULL"];
-            }
-            else {
-                sorgFilter = ["section.org.objid = :orgid", [orgid: OsirisContext.env.ORGID] ];
-            }
-            m.where =  sorgFilter;
-            m.orderBy = "sortindex";
-            def list = querySvc.getList( m );
-            buildInvokers( list, 'building_permit_issuance' );
-        }
+       
     }
     
 }

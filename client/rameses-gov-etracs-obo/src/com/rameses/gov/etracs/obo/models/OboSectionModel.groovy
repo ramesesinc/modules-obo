@@ -18,6 +18,11 @@ public class OboSectionModel extends CrudFormModel {
     def buildingPermitStates;
     def occupancyPermitStates;
 
+    void afterCreate() {
+        entity.permit = [:];
+        entity.optional = 1;
+    }
+    
     void afterInit() {
         buildingPermitStates = svc.getBuildingPermitStates()*.name;
         occupancyPermitStates = svc.getOccupancyPermitStates()*.name;       

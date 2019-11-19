@@ -1,0 +1,13 @@
+<workunit schemaName="building_permit_fee">
+    <invokers>
+        <invoker type="building_permit_fee:create" caption="Add Building Permit Fee"
+                action="create" target="popup"/>
+        
+        <invoker type="building_permit_fee:open" caption="Building Permit Fee"
+                action="open" target="popup"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitFeeModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboFeePage" />
+    </pages>
+</workunit>

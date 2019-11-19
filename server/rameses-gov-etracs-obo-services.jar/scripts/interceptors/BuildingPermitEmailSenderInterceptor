@@ -41,34 +41,6 @@ class BuildingPermitEmailSenderInterceptor {
 		//}
 	}	
 
-	//Check prior to send-for-revision. There must be at least one finding
-	@Async
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-revision' }", index=1000) 
-	public void doActionAfterRevision( def evt ) {
-		def p = evt.args[0];
-		def appid = p.refid;
-
-		def data = vwAppEm.find( [objid: appid ] ).first();
-		if(p.taskstate == "receiving") {
-			def reqs = reqEm.find([appid: appid]).where("checked = 0").list();
-			if( reqs ) {
-				data.requirements = reqs.groupBy({it.parent});
-			}			
-		};
-
-		def findings = findingEm.find( [appid: appid ] ).where("checked=0").list();		
-		if(findings) {
-			data.findings = findings.groupBy({it.parent});
-		}
-		def msg1 = templateService.get( "building_permit_revision", [data:data] ).toString();
-
-		smtpSvc.send( [to: data.contact.email, subject:"Building Permit for Revision", message: msg1] );
-
-		if(data.contact.mobileno) {
-			smsSvc.send( [phoneno: data.contact.mobileno, message:'Please check email for revision for your application. From Legazpi OBO' ]);
-		}		
-	}
-
 	@Async
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].to == 'payment' }", index=2000) 
 	public void sendEmailForPayment( def evt ) {

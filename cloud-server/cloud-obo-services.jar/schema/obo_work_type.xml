@@ -3,6 +3,8 @@
 		<field name="objid" primary="true" />
 		<field name="description" />
 		<field name="idx" />
+		<field name="name" />
+		<field name="typeid" />
 	</element>
 </schema>
 		

@@ -1,0 +1,9 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+         <invoker type="fire_safety_checklist_report" 
+                caption="Fire Safety Checklist"
+                reportId="fire_safety_checklist"
+                reportName="com/rameses/gov/etracs/obo/reports/fire_safety_checklist.jasper"
+                action="preview" target="self"/>
+    </invokers>
+</workunit>

@@ -10,17 +10,34 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingPermitCaptureModel extends CrudFormModel {
+class BuildingPermitCaptureModel  {
     
     @Service("BuildingPermitService")
     def appService;
     
     def appTypes = ["NEW", "RENEW","ADDITIONAL"];
+    def entity;
     
-    void afterCreate() {
+    boolean saveAllowed = true;
+    
+    String title = "Capture Building Permit";
+    
+    def create() {
         entity = [numunits: 1, professionals: [], worktypes: [] ];
         entity.txnmode = "CAPTURE";
+        return null;
     }
+    
+    def save() {
+        appService.saveCapture( entity );
+        if(!MsgBox.confirm("Saved successfully. Add another record?")) {
+            return "_close";
+        }
+        else {
+            create();
+        }
+    }
+    
     
     /*
     public def onComplete() {

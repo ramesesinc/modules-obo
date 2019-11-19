@@ -1,0 +1,11 @@
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="obo_permit_type">
+    <invokers>
+        <invoker type="obo_ancillary:lookup" caption="Lookup Ancillary" 
+                 action="init" index="15"
+                 customFilter="type = 'ANCILLARY' "
+                 multiSelect="true"
+                 target="popup"
+                 cols="objid,title"/>
+        
+    </invokers>
+</workunit>

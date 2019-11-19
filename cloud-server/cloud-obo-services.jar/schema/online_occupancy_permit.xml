@@ -29,6 +29,27 @@
 		<field name="bldgpermit_objid" />
 		<field name="bldgpermit_controlno" />
 		<field name="bldgpermit_dtissued" />
+		<field name="bldgpermit_dtstarted" />
+		<field name="bldgpermit_dtcompleted" />
+		<field name="bldgpermit_floorarea" type="decinal" />
+		<field name="bldgpermit_numfloors" type="integer" />
+		<field name="bldgpermit_numunits" type="integer" />
+
+		<!-- professionals -->
+		<field name="profarchitectid" />
+		<field name="profcivilid" />
+		<field name="profelectricalid" />
+		<field name="profmechanicalid" />
+		<field name="profsanitaryid" />
+		<field name="profplumbingid" />
+		<field name="profelectronicid" />
+		<field name="profinteriorid" />
+		<field name="electricalworkid" />
+		<field name="mechanicalworkid" />
+		<field name="sanitaryworkid" />
+		<field name="plumbingworkid" />
+		<field name="electronicworkid" />
+		<field name="interiorworkid" />
 
 		<!-- shows where the current step is at -->
 		<field name="step" type="integer"/>

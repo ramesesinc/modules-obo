@@ -15,10 +15,14 @@ class BuildingPermitSectionWorkflowInterceptor {
 	def sectionEm;
 
 	@DataContext("building_permit_fee")
-	def buildingEm;
+	def feeEm;
 
 	@DataContext("building_permit")
 	def appEm;
+
+	@DataContext("obo_section")
+	def oboSectionEm;
+
 
 	/**********************************************************************************************
 	* REMEMBER: This is the building_permit_section process flow
@@ -42,10 +46,18 @@ class BuildingPermitSectionWorkflowInterceptor {
 	} 
 
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section'  && args[0].action == 'approve' }") 
-	public void beforeSendForOboProcessing( def evt ) {
+	public void beforeApproval( def evt ) {
 		def p = evt.args[0];
 		def list = findingEm.find( [parentid: p.refid ] ).where("supersederid IS NULL AND state = 2 AND NOT(transmittalid IS NULL)").list();
 		if(list) throw new Exception("There must be no finding. If there are findings select Send for Revision instead");
+
+		//check if fees are required before approval
+		def s1 = sectionEm.find([objid: p.refid]).select("appid,typeid").first();
+		def reqFee = oboSectionEm.find( [objid: s1.typeid ]  ).select("requirefee").val();
+		if( reqFee == 1) {
+			def c = feeEm.find( [appid: s1.appid, sectionid: s1.typeid ] ).select("c:{COUNT(*)}").val();
+			if( !c) throw new Exception("There must be at least one fee for this section");
+		}
 	} 
 
 	//signal the parent 
@@ -54,7 +66,7 @@ class BuildingPermitSectionWorkflowInterceptor {
 		def p = evt.args[0];
 		def r = evt.result;
 		def appid = sectionEm.find( [objid: p.refid] ).select("appid").val();
-		def cnt = sectionEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('end', 'for-revision' ) ").val();
+		def cnt = sectionEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('obo-processing', 'end', 'for-revision' ) ").val();
 		if(cnt <=0) {
 			def app = appEm.find([objid:appid]).select("task.*").first();
 			def f = [:];
@@ -62,10 +74,13 @@ class BuildingPermitSectionWorkflowInterceptor {
 			f.refid = appid;
 			f.startdate = dateSvc.getServerDate();
 			f.info = [ app: p.info ];
-			f.action = 'send-for-verification';
+			f.action = (r.state == 'end') ? 'send-for-release' : 'send-for-verification';
 			f.taskid = app.taskid;
 			wfSvc.signal(f);	
 		}
 	} 
+
+
+
 
 } 

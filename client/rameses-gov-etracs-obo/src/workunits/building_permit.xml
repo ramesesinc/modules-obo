@@ -7,7 +7,8 @@
                 caption="Generate Tax Dec Documents"
                 action="issueTDDocs" target="popup"
                 visibleWhen="#{ task.state =='requirement-verification'
-                &amp;&amp; task.assignee?.objid==userInfo.userid }"    />
+                &amp;&amp; task.assignee?.objid==userInfo.userid 
+                &amp;&amp; entity.appno != null }"    />
                 
         <!-- requirement verification buttons -->
         <invoker type="appActions" 
@@ -122,8 +123,6 @@
                 index="1"
                 visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
 
-        
-
         <invoker type="rpuActions" 
                 caption="View Tax Clearance"
                 action="viewTaxClearance" target="popup"   />
@@ -135,7 +134,7 @@
         <invoker type="appActions" 
                 caption="Issue Bldg Permit"
                 action="issuePermit" target="popup"   
-                visibleWhen="#{task.state == 'release' &amp;&amp; task.assignee.objid == userid }"/>
+                visibleWhen="#{task.state == 'releasing' &amp;&amp; task.assignee.objid == userid }"/>
 
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />

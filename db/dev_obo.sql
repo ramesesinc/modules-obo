@@ -11,7 +11,7 @@
  Target Server Version : 50640
  File Encoding         : 65001
 
- Date: 13/11/2019 12:00:33
+ Date: 15/11/2019 15:11:20
 */
 
 SET NAMES utf8mb4;
@@ -58,8 +58,13 @@ CREATE TABLE `building_permit` (
   `location_barangay_name` varchar(255) DEFAULT NULL,
   `location_barangay_objid` varchar(50) DEFAULT NULL,
   `accessoryid` varchar(50) DEFAULT NULL,
+  `contractorid` varchar(50) DEFAULT NULL,
+  `permitno` varchar(50) DEFAULT NULL,
+  `dtissued` date DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`objid`) USING BTREE,
   UNIQUE KEY `uix_building_permit_appno` (`appno`),
+  UNIQUE KEY `uix_building_permit_permitno` (`permitno`) USING BTREE,
   KEY `fk_app_occupancyuseid` (`occupancytypeid`) USING BTREE,
   KEY `ix_units` (`numunits`) USING BTREE,
   KEY `ix_estimatedcost` (`fixedcost`) USING BTREE,
@@ -71,17 +76,9 @@ CREATE TABLE `building_permit` (
   KEY `building_permit_accessoryid` (`accessoryid`),
   CONSTRAINT `building_permit_accessoryid` FOREIGN KEY (`accessoryid`) REFERENCES `building_permit_accessory` (`objid`),
   CONSTRAINT `building_permit_applicantid` FOREIGN KEY (`applicantid`) REFERENCES `building_permit_entity` (`objid`),
-  CONSTRAINT `building_permit_issuanceid` FOREIGN KEY (`issuanceid`) REFERENCES `building_permit_issuance` (`objid`),
   CONSTRAINT `building_permit_occupancytypeid` FOREIGN KEY (`occupancytypeid`) REFERENCES `obo_occupancy_type` (`objid`),
   CONSTRAINT `building_permit_taskid` FOREIGN KEY (`taskid`) REFERENCES `building_permit_task` (`taskid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of building_permit
--- ----------------------------
-BEGIN;
-INSERT INTO `building_permit` VALUES ('OBOBP7215dfd6:16e62a18c2f:-8000', 'BP-201911-00027', '137', '137-E7TYAJD3', 'NEW', NULL, 'CLEMENTE, KEN MARTIN', 'OWNER', 'oh_see_15@yahoo.com.ph', '09083341823', '2019-11-08 03:10:19', 'OBBPENT-425d2c0b:16e26d7f47e:-7f63', 'TWO-STOREY RESIDENTIAL BUILDING WITH GARAGE', 'TWO-STOREY RESIDENTIAL BUILDING WITH GARAGE', 'A102', 1, 2400000.00, 2974527.80, '2019-10-01', '2020-02-01', 240.00, 9.80, NULL, '[]', 'OBOTSK-11f79e1e:16e62b3d34e:-8000', NULL, NULL, NULL, NULL, NULL, '1', '3', 'ST. VINCENT VILLAGE', 'CABANGAN EAST', '13702020', NULL);
-COMMIT;
 
 -- ----------------------------
 -- Table structure for building_permit_accessory
@@ -121,16 +118,6 @@ CREATE TABLE `building_permit_ancillary` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of building_permit_ancillary
--- ----------------------------
-BEGIN;
-INSERT INTO `building_permit_ancillary` VALUES ('OBOBPANC75e87344:16e49de6e06:-7ef6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'COMPLETED', 'electrical', 'OBOBPPROF75e87344:16e49de6e06:-7fc0', 'OBOBPPROF75e87344:16e49de6e06:-7fbd');
-INSERT INTO `building_permit_ancillary` VALUES ('OBOBPANC75e87344:16e49de6e06:-7ef8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'COMPLETED', 'plumbing', 'OBOBPPROF75e87344:16e49de6e06:-7fc6', 'OBOBPPROF75e87344:16e49de6e06:-7fc3');
-INSERT INTO `building_permit_ancillary` VALUES ('OBOBPANC75e87344:16e49de6e06:-7efa', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'COMPLETED', 'civil_structural', 'OBOBPPROF75e87344:16e49de6e06:-7fcc', 'OBOBPPROF75e87344:16e49de6e06:-7fc9');
-INSERT INTO `building_permit_ancillary` VALUES ('OBOBPANC75e87344:16e49de6e06:-7efc', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'COMPLETED', 'architectural', 'OBOBPPROF75e87344:16e49de6e06:-7fcf', 'OBOBPPROF75e87344:16e49de6e06:-7fd9');
-COMMIT;
-
--- ----------------------------
 -- Table structure for building_permit_entity
 -- ----------------------------
 DROP TABLE IF EXISTS `building_permit_entity`;
@@ -165,26 +152,6 @@ CREATE TABLE `building_permit_entity` (
   KEY `fx_building_application_entity_appid_role` (`appid`) USING BTREE,
   CONSTRAINT `fk_building_permit_entity_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of building_permit_entity
--- ----------------------------
-BEGIN;
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT-425d2c0b:16e26d7f47e:-7f5e', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'JUR-7cfe9735:1696f4785d2:-5a22', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'KEN MARTIN', 'P', 'CLEMENTE', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'ST. VINCENT VILLAGE,CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT-425d2c0b:16e26d7f47e:-7f63', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'CLEMENTE, KEN MARTIN P.', 'KEN MARTIN', 'P', 'CLEMENTE', 1, NULL, 'ST. VINCENT VILLAGE,CABANGAN EAST,LEGAZPI CITY,ALBAY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'LEGAZPI CITY', 'ALBAY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT-45fb6a27:16e49d8fe6d:-7ff9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'JUR-7cfe9735:1696f4785d2:-5a22', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'TEST', 'TEST', 'TEST', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, NULL, '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'test', 'test', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"TEST\",dtissued:\"2019-11-08\",placeissued:\"LEGAZPI CITY\"]');
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT1643e3d8:16e490ac747:-7ff4', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'JUR-7cfe9735:1696f4785d2:-5a22', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'KEN MARTIN', 'P', 'CLEMENTE', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'ST. VINCENT VILLAGE,CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT1643e3d8:16e490ac747:-7ffe', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'JUR-7cfe9735:1696f4785d2:-5a22', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'KEN MARTIN', 'P', 'CLEMENTE', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'ST. VINCENT VILLAGE,CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fbe', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'CASIA, ROMEO C.', 'ROMEO', 'C', 'CASIA', 1, NULL, 'TAYSAN', NULL, NULL, NULL, NULL, NULL, '13701056', 'TAYSAN', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fc1', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'LIRIO, GILDO J.', 'GILDO', 'J', 'LIRIO', 0, NULL, '48,VENUS COMPOUND,ANGONO,ANGONO,RIZAL', NULL, '48', NULL, NULL, 'VENUS COMPOUND', NULL, 'ANGONO', 'ANGONO', 'RIZAL', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fc4', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'AREVALO, ALBERT N.', 'ALBERT', 'N', 'AREVALO', 1, NULL, 'TAYSAN', NULL, NULL, NULL, NULL, NULL, '13701056', 'TAYSAN', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fc7', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'DOMINGO, RUEL D.', 'RUEL', 'D', 'DOMINGO', 0, NULL, 'MALOLOS,MALOLOS CITY,BULACAN', NULL, NULL, NULL, NULL, NULL, NULL, 'MALOLOS', 'MALOLOS CITY', 'BULACAN', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fca', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'VILLALUZ, RUBY ANN B.', 'RUBY ANN', 'B', 'VILLALUZ', 0, NULL, 'BAAO,BAAO,CAMARINES SUR', NULL, NULL, NULL, NULL, NULL, NULL, 'BAAO', 'BAAO', 'CAMARINES SUR', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fcd', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'REGIDOR, DANIEL C.', 'DANIEL', 'C', 'REGIDOR', 0, NULL, '49,ROAD 13,PAG-ASA,QUEZON CITY,METRO MANILA', NULL, '49', NULL, 'ROAD 13', NULL, NULL, 'PAG-ASA', 'QUEZON CITY', 'METRO MANILA', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fd0', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'EVANGELISTA, ALEX F.', 'ALEX', 'F', 'EVANGELISTA', 0, NULL, '2F 154,MAGINHAWA STREET,DILIMAN,QUEZON CITY,METRO MANILA', '2F', '154', NULL, 'MAGINHAWA STREET', NULL, NULL, 'DILIMAN', 'QUEZON CITY', 'METRO MANILA', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fda', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'INDIVIDUAL', NULL, 'AREVALO, ALBERT N.', 'ALBERT', 'N', 'AREVALO', 1, NULL, 'TAYSAN', NULL, NULL, NULL, NULL, NULL, '13701056', 'TAYSAN', NULL, NULL, NULL, 'oh_see_15@yahoo.com.ph', '0908341823', NULL, NULL);
-INSERT INTO `building_permit_entity` VALUES ('OBBPENT75e87344:16e49de6e06:-7fe0', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'MULENT15e49c91:1511d183410:-5183', 'JURIDICAL', '137-001216J', 'KLDC REALTY CORPORATION', 'KEN MARTIN', 'P', 'CLEMENTE', 1, 'ADDR-11f1f1e2:1696b826801:ffc', 'ST. VINCENT VILLAGE,CABANGAN EAST,PEÑARANDA ST.,LEGAZPI CITY', NULL, NULL, NULL, NULL, 'ST. VINCENT VILLAGE', '13702020', 'CABANGAN EAST', 'PEÑARANDA ST.', 'LEGAZPI CITY', NULL, 'oh_see_15@yahoo.com.ph', '09083341823', NULL, '[type:[name:\"ctc\",title:\"Community Tax Certficate\",caption:\"CTC No\"],idno:\"19359172\",dtissued:\"2019-01-09\",placeissued:\"LEGAZPI CITY\"]');
-COMMIT;
 
 -- ----------------------------
 -- Table structure for building_permit_fee
@@ -253,97 +220,6 @@ CREATE TABLE `building_permit_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of building_permit_info
--- ----------------------------
-BEGIN;
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eb6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'SEPTIC_TANK', NULL, 7.73, NULL, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eb7', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'WATER_METER', NULL, NULL, 1, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eb8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'GREASE_TRAP', NULL, NULL, 2, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eb9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'KITCHEN_SINK', NULL, NULL, 2, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eba', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'SHOWER_HEAD', NULL, NULL, 4, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ebb', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'FAUCET', NULL, NULL, 10, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ebc', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'LAVATORY', NULL, NULL, 5, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ebd', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'FLOOR_DRAIN', NULL, NULL, 6, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ebe', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef8', 'WATER_CLOSET', NULL, NULL, 5, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ec8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef6', 'ELECTRIC_METER', NULL, NULL, 1, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ec9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7ef6', 'TOTAL_CONNECTED_LOAD', NULL, 45.66, NULL, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed5', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'TANKS', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'WALLS', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed7', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'SLABS', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'CONCRETE_FRAMING', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ed9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'FOUNDATION', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eda', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'EXCAVATION', NULL, 60.00, NULL, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7edb', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efa', 'STAKING', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee5', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'FLOOR_FINISHES', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'HANDRAILS', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee7', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'SWITCH_CONTROL_BUZZERS', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee8', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'PARKING_AREAS', NULL, NULL, 2, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7ee9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'RAMPS', NULL, NULL, 1, NULL, NULL);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eea', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'WASHROOM_AND_TOILETS', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eeb', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'DOORS_ENTRANCE_THRESHOLDS', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eec', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'CORRIDORS', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eed', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'WALKWAYS', NULL, NULL, NULL, NULL, 1);
-INSERT INTO `building_permit_info` VALUES ('OBOBPINFO75e87344:16e49de6e06:-7eee', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBOBPANC75e87344:16e49de6e06:-7efc', 'STAIRS', NULL, NULL, NULL, NULL, 1);
-COMMIT;
-
--- ----------------------------
--- Table structure for building_permit_issuance
--- ----------------------------
-DROP TABLE IF EXISTS `building_permit_issuance`;
-CREATE TABLE `building_permit_issuance` (
-  `objid` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `appid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `typeid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `controlno` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `dtissued` date DEFAULT NULL,
-  `issuedby_objid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `issuedby_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `txnmode` varchar(50) DEFAULT NULL,
-  `txnref` varchar(50) DEFAULT NULL,
-  `txnreftype` varchar(50) DEFAULT NULL,
-  `taskid` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
-  `remarks` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`objid`),
-  UNIQUE KEY `uix_building_permit_issuance_controlno` (`controlno`),
-  KEY `fk_building_permit_issuance_taskid` (`taskid`),
-  KEY `fk_building_permit_issuance_typeid` (`typeid`),
-  KEY `fk_building_permit_issuance_appid` (`appid`),
-  CONSTRAINT `fk_building_permit_issuance_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
-  CONSTRAINT `fk_building_permit_issuance_taskid` FOREIGN KEY (`taskid`) REFERENCES `building_permit_issuance_task` (`taskid`),
-  CONSTRAINT `fk_building_permit_issuance_typeid` FOREIGN KEY (`typeid`) REFERENCES `obo_issuance_type` (`objid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Table structure for building_permit_issuance_task
--- ----------------------------
-DROP TABLE IF EXISTS `building_permit_issuance_task`;
-CREATE TABLE `building_permit_issuance_task` (
-  `taskid` varchar(50) NOT NULL,
-  `refid` varchar(50) DEFAULT NULL,
-  `parentprocessid` varchar(50) DEFAULT NULL,
-  `state` varchar(50) DEFAULT NULL,
-  `startdate` datetime DEFAULT NULL,
-  `enddate` datetime DEFAULT NULL,
-  `assignee_objid` varchar(50) DEFAULT NULL,
-  `assignee_name` varchar(100) DEFAULT NULL,
-  `actor_objid` varchar(50) DEFAULT NULL,
-  `actor_name` varchar(100) DEFAULT NULL,
-  `message` varchar(255) DEFAULT NULL,
-  `dtcreated` datetime DEFAULT NULL,
-  `prevtaskid` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`taskid`),
-  KEY `ix_refid` (`refid`),
-  KEY `ix_parentprocessid` (`parentprocessid`),
-  KEY `ix_startdate` (`startdate`),
-  KEY `ix_enddate` (`enddate`),
-  KEY `ix_assignee_objid` (`assignee_objid`),
-  KEY `ix_actor_objid` (`actor_objid`),
-  KEY `ix_dtcreated` (`dtcreated`),
-  KEY `ix_prevtaskid` (`prevtaskid`),
-  CONSTRAINT `fk_building_permit_issuance_refid` FOREIGN KEY (`refid`) REFERENCES `building_permit_issuance` (`objid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
 -- Table structure for building_permit_payment
 -- ----------------------------
 DROP TABLE IF EXISTS `building_permit_payment`;
@@ -379,20 +255,6 @@ CREATE TABLE `building_permit_professional` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of building_permit_professional
--- ----------------------------
-BEGIN;
-INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fbd', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fbe', 'PROFESSIONAL ELECTRICAL ENGINEER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"4599650\",dtissued:\"2019-01-03\",placeissued:\"LEGAZPI CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"1716\",dtissued:\"2019-01-16\",placeissued:\"LEGAZPI CITY\",dtvalid:\"2022-01-10\"]');
-INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fc0', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fc1', 'PROFESSIONAL ELECTRICAL ENGINEER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"10222196\",dtissued:\"2019-01-03\",placeissued:\"ANGONO, RIZAL\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"1855\",dtissued:\"2018-05-07\",placeissued:\"ANGONO\",dtvalid:\"2021-04-13\"]');
-INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fc3', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fc4', 'MASTER PLUMBER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"4614773\",dtissued:\"2019-01-18\",placeissued:\"LEGAZPI CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"5897\",dtissued:\"2018-06-25\",placeissued:\"LEGAZPI CITY\",dtvalid:\"2021-10-29\"]');
-INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fc6', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fc7', 'MASTER PLUMBER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"1456357\",dtissued:\"2019-01-08\",placeissued:\"MALOLOS CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"3288\",dtissued:\"2017-09-28\",placeissued:\"MANILA\",dtvalid:\"2020-09-30\"]');
-INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fc9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fca', 'CIVIL/STRUCTURAL ENGINEER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"4605995\",dtissued:\"2019-01-03\",placeissued:\"LEGAZPI CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"112485\",dtissued:\"2018-04-11\",placeissued:\"LEGAZPI CITY\",dtvalid:\"2021-04-30\"]');
-INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fcc', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fcd', 'CIVIL/STRUCTURAL ENGINEER', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"7324797\",dtissued:\"2019-01-04\",placeissued:\"QUEZON CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"74338\",dtissued:\"2019-03-21\",placeissued:\"MANILA\",dtvalid:\"2022-03-25\"]');
-INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fcf', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fd0', 'ARCHITECT', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"7573864\",dtissued:\"2019-01-24\",placeissued:\"QUEZON CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"12185\",dtissued:\"2017-07-11\",placeissued:\"MANILA\",dtvalid:\"2020-07-12\"]');
-INSERT INTO `building_permit_professional` VALUES ('OBOBPPROF75e87344:16e49de6e06:-7fd9', 'OBOBP7215dfd6:16e62a18c2f:-8000', 'OBBPENT75e87344:16e49de6e06:-7fda', 'ARCHITECT', '[type:[name:\"ptr\",title:\"Professional Tax Receipt\",caption:\"PTR No\"],idno:\"4614773\",dtissued:\"2019-01-18\",placeissued:\"LEGAZPI CITY\"]', '[type:[name:\"prc\",title:\"Professional Regulation Commission\",caption:\"PRC No\"],idno:\"21769\",dtissued:\"2018-06-25\",placeissued:\"LEGAZPI CITY\",dtvalid:\"2021-10-29\"]');
-COMMIT;
-
--- ----------------------------
 -- Table structure for building_permit_requirement
 -- ----------------------------
 DROP TABLE IF EXISTS `building_permit_requirement`;
@@ -418,48 +280,6 @@ CREATE TABLE `building_permit_requirement` (
   CONSTRAINT `fk_building_permit_requirement_supersederid` FOREIGN KEY (`supersederid`) REFERENCES `building_permit_requirement` (`objid`),
   CONSTRAINT `fk_building_permit_requirement_typeid` FOREIGN KEY (`typeid`) REFERENCES `obo_requirement_type` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of building_permit_requirement
--- ----------------------------
-BEGIN;
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fdc', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R36', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:26', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fdd', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R35', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:25', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fde', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R34', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:25', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fdf', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R33', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:24', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe0', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R32', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:17', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe1', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R31', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:17', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe2', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R30', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:17', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe3', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R29', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:17', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe4', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R28', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe5', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R27', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe6', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R26', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe7', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R25', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe8', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R24', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:16', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fe9', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R23', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fea', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R22', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7feb', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R21', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fec', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R20', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fed', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R19', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fee', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R18', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:15', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fef', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R17', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff0', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R16', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff1', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R15', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff2', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R14', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff3', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R13', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff4', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R12', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:14', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff5', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R11', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff6', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R10', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff7', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R09', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff8', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R08', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ff9', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R07', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffa', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R06', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:13', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffb', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R05', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:12', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffc', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R04', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:12', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffd', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R03', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:12', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7ffe', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R02', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:12', NULL, NULL);
-INSERT INTO `building_permit_requirement` VALUES ('BLDPMTREQ7215dfd6:16e62a18c2f:-7fff', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'R01', 1, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', '2019-11-13 11:00:11', NULL, NULL);
-COMMIT;
 
 -- ----------------------------
 -- Table structure for building_permit_rpu
@@ -490,13 +310,6 @@ CREATE TABLE `building_permit_rpu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of building_permit_rpu
--- ----------------------------
-BEGIN;
-INSERT INTO `building_permit_rpu` VALUES ('OBOBPRPU75e87344:16e49de6e06:-7fde', 'OBOBP7215dfd6:16e62a18c2f:-8000', '0080941', NULL, '137-02-0020-001-13', NULL, '085-2019000328', '1 BLOCK 3', NULL, 264.0000, 'R', 'OBBPENT75e87344:16e49de6e06:-7fe0', NULL, 'F-10099d76:1511ce27c31:-5bd1', NULL, 1, 'RC1511e735:16e62d0d8c8:-7aca', 'RC1511e735:16e62d0d8c8:-7aca');
-COMMIT;
-
--- ----------------------------
 -- Table structure for building_permit_section
 -- ----------------------------
 DROP TABLE IF EXISTS `building_permit_section`;
@@ -512,7 +325,6 @@ CREATE TABLE `building_permit_section` (
   KEY `fk_building_permit_section_taskid` (`taskid`),
   KEY `fk_building_permit_section_typeid` (`typeid`),
   CONSTRAINT `fk_building_permit_section_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`),
-  CONSTRAINT `fk_building_permit_section_issuanceid` FOREIGN KEY (`issuanceid`) REFERENCES `building_permit_issuance` (`objid`),
   CONSTRAINT `fk_building_permit_section_taskid` FOREIGN KEY (`taskid`) REFERENCES `building_permit_section_task` (`taskid`),
   CONSTRAINT `fk_building_permit_section_typeid` FOREIGN KEY (`typeid`) REFERENCES `obo_section` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -579,15 +391,6 @@ CREATE TABLE `building_permit_task` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of building_permit_task
--- ----------------------------
-BEGIN;
-INSERT INTO `building_permit_task` VALUES ('OBOTSK-11f79e1e:16e62b3d34e:-8000', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'requirement-verification', '2019-11-13 10:59:49', NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', NULL, NULL, NULL, '2019-11-13 10:59:42', 'OBOTSK7215dfd6:16e62a18c2f:-7fda');
-INSERT INTO `building_permit_task` VALUES ('OBOTSK7215dfd6:16e62a18c2f:-7fda', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'receiving', '2019-11-13 10:41:04', '2019-11-13 10:59:42', 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', NULL, '2019-11-13 10:39:45', 'OBOTSK7215dfd6:16e62a18c2f:-7fdb');
-INSERT INTO `building_permit_task` VALUES ('OBOTSK7215dfd6:16e62a18c2f:-7fdb', 'OBOBP7215dfd6:16e62a18c2f:-8000', NULL, 'start', '2019-11-13 10:39:45', '2019-11-13 10:39:45', NULL, NULL, 'USR-6bf98eba:1254696a2c9:-7ff6', 'ADMIN . ADMIN', NULL, '2019-11-13 10:39:45', NULL);
-COMMIT;
-
--- ----------------------------
 -- Table structure for building_permit_transmittal
 -- ----------------------------
 DROP TABLE IF EXISTS `building_permit_transmittal`;
@@ -606,110 +409,184 @@ CREATE TABLE `building_permit_transmittal` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Table structure for obo_checklist
+-- Table structure for fire_safety_checklist
 -- ----------------------------
-DROP TABLE IF EXISTS `obo_checklist`;
-CREATE TABLE `obo_checklist` (
+DROP TABLE IF EXISTS `fire_safety_checklist`;
+CREATE TABLE `fire_safety_checklist` (
   `objid` varchar(50) NOT NULL,
-  `title` varchar(500) DEFAULT NULL,
-  `category` varchar(50) DEFAULT NULL,
-  `params` varchar(255) DEFAULT NULL,
+  `appid` varchar(50) DEFAULT NULL,
   `sectionid` varchar(50) DEFAULT NULL,
+  `controlno` varchar(50) DEFAULT NULL,
+  `dtcreated` datetime DEFAULT NULL,
+  `createdby_objid` varchar(50) DEFAULT NULL,
+  `createdby_name` varchar(255) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `remarks` mediumtext,
   PRIMARY KEY (`objid`),
-  KEY `fk_obo_evaluation_checklist_sectionid` (`sectionid`),
-  CONSTRAINT `fk_obo_evaluation_checklist_sectionid` FOREIGN KEY (`sectionid`) REFERENCES `obo_section` (`objid`)
+  UNIQUE KEY `uix_fire_safety_checklist_controlno` (`controlno`),
+  UNIQUE KEY `fk_fire_safety_checklist_appid` (`appid`) USING BTREE,
+  CONSTRAINT `fk_fire_safety_checklist_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of obo_checklist
+-- Table structure for fire_safety_checklist_item
+-- ----------------------------
+DROP TABLE IF EXISTS `fire_safety_checklist_item`;
+CREATE TABLE `fire_safety_checklist_item` (
+  `objid` varchar(50) NOT NULL,
+  `parentid` varchar(50) DEFAULT NULL,
+  `typeid` varchar(50) DEFAULT NULL,
+  `values` mediumtext,
+  PRIMARY KEY (`objid`),
+  KEY `fk_fire_safety_checklist_item_parentid` (`parentid`),
+  KEY `fk_fire_safety_checklist_item_typeid` (`typeid`),
+  CONSTRAINT `fk_fire_safety_checklist_item_parentid` FOREIGN KEY (`parentid`) REFERENCES `fire_safety_checklist` (`objid`),
+  CONSTRAINT `fk_fire_safety_checklist_item_typeid` FOREIGN KEY (`typeid`) REFERENCES `fire_safety_checklist_master` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for fire_safety_checklist_master
+-- ----------------------------
+DROP TABLE IF EXISTS `fire_safety_checklist_master`;
+CREATE TABLE `fire_safety_checklist_master` (
+  `objid` varchar(50) NOT NULL,
+  `title` varchar(500) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `params` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of fire_safety_checklist_master
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_checklist` VALUES ('FSC01', 'Building exits must abut a public street or approved alley. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC02', 'Provide at least two (2) means of egress for each floor, room. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC03', 'Provide secondary stair/exit as far/remote from main stair/entrance/exit, to serve _the whole area__. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC04', 'Enclose all stairways and fire escapes with walls having ____ hours of fire resistance with access thru self-closing fire doors. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC05', 'Provide two (2) doors as exit ways from all rooms. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC06', 'Interconnect stairs and fire escapes with fire resistive passageways on corridors at least ______ meters wide. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC07', 'Enclose walls, doors, stairs ramps, escalators and other components of exits systems. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC08', 'Provide protected/enclosed horizontal exits with self-closing fire doors. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC09', 'Travel distance to an exit shall not be more than ________  meters. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC10', 'Exit doors shall swing in the direction of exit travel. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC11', 'Revolving doors shall not be used as means of egress except __________________________ ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC12', 'Exit door/s should be openable from the inside without the use of keys, special knowledge or effort flush bolts or surface bolts are prohibited. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC13', 'Exit door should have a minimum width of 71 cm and a maximum width 122 cm and shall not restrict the opening. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC14', 'A floor or landing is required not less than the width of exit door. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC15', 'Door should be not project into the required corridor width when fully opened so as not to reduced the corridor width to less than 76.17 cm. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC16', 'Exit doors should provide immediate access to an approved means of egress. Exiting through a bathroom, bedroom or other room subject to locking does not comply. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC17', 'Corridors should have a minimum width of _____ meters. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC18', 'Required corridors in ___________________ occupancies shall have 2.43 meters (8 ft) minimum width. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC19', 'Dead-end corridors and exit balconies is limited to 6.08 m (20 ft). ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC20', 'Aisles in auditorium shall be minimum of ____ meters in width. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC21', 'Walls and ceilings of corridors should be fire resistive construction materials. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC22', 'Interior openings into corridor should be protected as set forth in ___________________________. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC23', 'Main stairways should have a minimum width of 112 cm. Trims and handrails should not project more than 8.90 cm (3 1/2 in) into the required width. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC24', 'Landings on stairways should have a minimum dimension of 112 cm (44 in) in the direction of travel. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC25', 'Risers on stairways should not exceed 19 cm and tread exclusive of nosing or projections should not be less than 25 cm. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC26', 'Doors between guests rooms and corridors shall be self-closing and shall have a fire protection rating at least twenty (20) minutes. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC27', 'Openings in corridor partitions other than door openings shall be prohibited. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC28', 'Basement portion of stairways should be provided with an approved barrier where continuous to upper floor in an exit enclosure. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC29', 'Vertical distance between stairway landings are limited to 3.69 m (12 ft) in assembly occupancies, distance is 2.43 m (8 ft) ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC30', 'Handrails should be placed not less than 81.28 cm (32 in) above the tread. Two (2) handrails are required when stairways exceed 111.7 cm in width. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC31', 'Guardrails for stairs, balconies, stair landings, ramps & aisles located along the edge of openside floors and mezzanines shall be provided. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC32', 'There shall be no enclosed usable space under the stairs in an exit enclosure nor shall the open space under such stairs be used for any purpose. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC33', 'Non-combustible outside stairs are required to have 2.03 m (6 ft, 8 in) minimum headroom clearance for stairways which should be indicated on plans. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC34', 'Ramp slopes should have be roughened or with nonslip surface. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC35', 'Ramp slopes should not exceed 30.3 cm. (1 ft) in 3.03 m (10 ft.). ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC36', 'No openings other than the required exits are permitted and exit passageways should be one (1) hr fire resistive construction for a three (3) storey building or less and two (2) hrs for four (4) storey building or more. Any opening therein shall be protected with an approved self-closing fire doors. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC37', 'Exit illumination and directional EXIT signs shall be provided. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC38', 'Panic hardware is required on exit doors. In lieu of this, doors shall have no locks or latches. ', 'MEANS OF EGRESS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC39', 'Provide fire break up to the roof for ceiling areas. ', 'COMPARTMENTATION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC40', 'Provide monitored and curtained roof of sheetmetal or non-combustible material of a minimum of 1.82m (6 ft) high spaced not more than 76 m (250 ft) & curtained area limited to a minimum of 4, 630 m2 (50,000 ft2). ', 'COMPARTMENTATION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC41', 'Provide smoke partition at enclosed areas of 2, 083 m2 (22, 500 ft2) or less with the length of 45.7m (150 ft) or less, with self-closing fire doors. ', 'COMPARTMENTATION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC42', 'Provide partition walls of two (2) hour fire resistance from floor to underside of floor above. ', 'COMPARTMENTATION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC43', 'Provide interior finish as follows; Exit; Class________    \r\n\r\nAccess to Exit; Class ___________                            \r\n\r\nOther Spaces;  Class __________ ', 'COMPARTMENTATION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC44', 'Provide fire stopping for all concealed spaces.  ', 'COMPARTMENTATION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC45', 'Provide standard fire wall with at least 100 cm (39.38 in) high parapets on all portion of the building on the property line. ', 'WALLS', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC46', 'Extend exterior masonry walls to form parapets or wings.', 'WALLS', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC47', 'Provide protection of all exterior walls. All exterior walls facing approved alleys which are dead-ended must have a fire resistance of _____ hours. ', 'WALLS', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC48', 'Provide automatic fire dampers on wall openings. ', 'WALLS', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC49', 'Provide approved emergency alarm bell system on each floor with adequate number of sending stations. ', 'WARNING SYSTEMS', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC50', 'Provide approved type heat and smoke detection system. ', 'WARNING SYSTEMS', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC51', 'Provide efficient communication system for warning occupants and calling fire department. ', 'WARNING SYSTEMS', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC52', 'Provide approved type portable fire extinguisher (dry chemical) ABC type, ____ lbs. capacity for every 200 sq.m of floor area(low hazard), 100 sq. m floor area(moderate hazard) and 75 sq. m floor area(high hazard) areas or 22.8 m (75 ft) travel distance on every floor level. ', 'FIRE PROTECTION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC53', 'Provide ______________ with ____ mm riser and coupling of fire department standards with pumps of reliable pressure & connected to an adequate water supply tank. Hose and hose cabinet shall be provided at every hose gate valve on all floors. ', 'FIRE PROTECTION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC54', 'Provide Fire Service connection with a standard outlet of 64 mm, and 102 mm dry standpipe, and shall located on a street front. ', 'FIRE PROTECTION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC55', 'Provide automatic fire extinguishing system where kitchen equipment is located (Kitchenhood). ', 'FIRE PROTECTION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC56', 'Provide automatic chemical extinguishing system on all areas where electronic/electrical equipment are located. ', 'FIRE PROTECTION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC57', 'Provide approved-type automatic fire extinguishing system in accordance with NFPA 13.  Approval of system plan is required prior to installation ', 'FIRE PROTECTION ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC58', 'Provide outside window opening on bedrooms with a clear opening of not less than fifty six (56) cm in least dimension and forty five-hundredths (0.45) m2 in area. The bottom of the window shall be not more than one hundred twenty two (122) cm above the floor. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC59', 'All liquefied petroleum gas equipment including such equipment installed at utility gas plants shall be installed in accordance with the provisions of NFPA 59. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC60', 'No grills or any obstruction shall be installed on window openings and/or fire exits. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC61', 'Provide emergency lighting facilities with automatic transfer switch to AC/DC power source. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC62', 'Air conditioning ducts must be provided with approved fire dampers. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC63', 'Roof covering must be of non-combustible materials. Combustible roof covering must have fire retardant treatment. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC64', 'Provide fire escape ladder/s on every dwelling unit. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC65', 'Provide fire escape stair/s. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC66', 'All unit partition wall shall be extended up to upper floor slab and/or one (1) meter above the roofline. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC67', 'Provide effective means of smoke ventilation such as access panels, movable windows. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC68', 'Project activity shall not affect the effectivity of the existing fire protection facilities. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC69', 'Provide/post allowable occupant load sign/s. Such signs shall be conspicuously and suitably located. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC70', 'Provide fire protection/suppression during construction. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC71', 'Provide fire exit plan for each floor of the building showing the routes from each room to appropriate exits, displayed prominently on the door of each room. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC72', 'No heating or lighting apparatus or equipment capable of igniting flammable materials shall be used in any storage or work area where rags, excelsior, hair or other highly flammable or combustible materials are stored or used. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC73', 'Provide/post \"NO SMOKING\" sign/s where combustible materials are stored or handled. Such signs shall be conspicuously and suitable located. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC74', 'If high hazard commodities will be stored/handled, automatic fire suppression system shall be provided ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC75', 'Provide/post \"DO NOT USE ELEVATOR IN CASE OF FIRE\" sign/s. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC76', 'LPG tank/s must be installed outside the building and should be provided with safety devices that automatically stop the flow of gas should a leak develop. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC77', 'Provide fire resistive walls between stair & kitchen area. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC78', 'Provide outside window/s for rescue and ventilation with a minimum clear opening of 55 cm and approximately one half (0.5) m2 in area; the bottom of window opening is not more than eighty two (82) cm above the floor; it can readily be opened from the inside without the use of tools; where storm windows, screens, or antiburglar devices are used, these be provided with quick mechanism so that they may be so arranged that when opened they will not drop to the ground. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC79', 'Rooms used for kindergarten, first or second grade pupils shall not be located above or below the floor of exit discharge. Rooms used for second grade pupils shall not be located more than one (1) storey above the floor of exit discharge. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC80', 'Provide firefighters’ elevator. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC81', 'All correction indicated on the original approved plan from this office on ____________shall be followed. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC82', 'Any changes in occupancy other than stated shall be in accordance with Rule 10.  ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC83', 'Subject to inspection during construction.  ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC84', 'Fire Safety Inspection Certificate must be secured before/prior to issuance of Certificate of Occupancy. ', 'MISCELLANEOUS ', NULL, 'FIRE');
-INSERT INTO `obo_checklist` VALUES ('FSC85', 'Subject to additional requirements upon recommendation of the Fire Safety Inspector during construction phase and final inspection. ', 'MISCELLANEOUS ', NULL, 'FIRE');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC01', 'Building exits must abut a public street or approved alley. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC02', 'Provide at least two (2) means of egress for each floor, room. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC03', 'Provide secondary stair/exit as far/remote from main stair/entrance/exit, to serve _the whole area__. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC04', 'Enclose all stairways and fire escapes with walls having {0} hours of fire resistance with access thru self-closing fire doors. ', 'MEANS OF EGRESS ', 'd');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC05', 'Provide two (2) doors as exit ways from all rooms. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC06', 'Interconnect stairs and fire escapes with fire resistive passageways on corridors at least {0} meters wide. ', 'MEANS OF EGRESS ', 'd');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC07', 'Enclose walls, doors, stairs ramps, escalators and other components of exits systems. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC08', 'Provide protected/enclosed horizontal exits with self-closing fire doors. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC09', 'Travel distance to an exit shall not be more than {0}  meters. ', 'MEANS OF EGRESS ', 'd');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC10', 'Exit doors shall swing in the direction of exit travel. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC11', 'Revolving doors shall not be used as means of egress except {0}', 'MEANS OF EGRESS ', 's');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC12', 'Exit door/s should be openable from the inside without the use of keys, special knowledge or effort flush bolts or surface bolts are prohibited. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC13', 'Exit door should have a minimum width of 71 cm and a maximum width 122 cm and shall not restrict the opening. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC14', 'A floor or landing is required not less than the width of exit door. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC15', 'Door should be not project into the required corridor width when fully opened so as not to reduced the corridor width to less than 76.17 cm. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC16', 'Exit doors should provide immediate access to an approved means of egress. Exiting through a bathroom, bedroom or other room subject to locking does not comply. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC17', 'Corridors should have a minimum width of {0} meters. ', 'MEANS OF EGRESS ', 'd');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC18', 'Required corridors in {0} occupancies shall have 2.43 meters (8 ft) minimum width. ', 'MEANS OF EGRESS ', 's');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC19', 'Dead-end corridors and exit balconies is limited to 6.08 m (20 ft). ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC20', 'Aisles in auditorium shall be minimum of {0} meters in width. ', 'MEANS OF EGRESS ', 'd');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC21', 'Walls and ceilings of corridors should be fire resistive construction materials. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC22', 'Interior openings into corridor should be protected as set forth in {0}. ', 'MEANS OF EGRESS ', 's');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC23', 'Main stairways should have a minimum width of 112 cm. Trims and handrails should not project more than 8.90 cm (3 1/2 in) into the required width. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC24', 'Landings on stairways should have a minimum dimension of 112 cm (44 in) in the direction of travel. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC25', 'Risers on stairways should not exceed 19 cm and tread exclusive of nosing or projections should not be less than 25 cm. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC26', 'Doors between guests rooms and corridors shall be self-closing and shall have a fire protection rating at least twenty (20) minutes. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC27', 'Openings in corridor partitions other than door openings shall be prohibited. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC28', 'Basement portion of stairways should be provided with an approved barrier where continuous to upper floor in an exit enclosure. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC29', 'Vertical distance between stairway landings are limited to 3.69 m (12 ft) in assembly occupancies, distance is 2.43 m (8 ft) ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC30', 'Handrails should be placed not less than 81.28 cm (32 in) above the tread. Two (2) handrails are required when stairways exceed 111.7 cm in width. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC31', 'Guardrails for stairs, balconies, stair landings, ramps & aisles located along the edge of openside floors and mezzanines shall be provided. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC32', 'There shall be no enclosed usable space under the stairs in an exit enclosure nor shall the open space under such stairs be used for any purpose. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC33', 'Non-combustible outside stairs are required to have 2.03 m (6 ft, 8 in) minimum headroom clearance for stairways which should be indicated on plans. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC34', 'Ramp slopes should have be roughened or with nonslip surface. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC35', 'Ramp slopes should not exceed 30.3 cm. (1 ft) in 3.03 m (10 ft.). ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC36', 'No openings other than the required exits are permitted and exit passageways should be one (1) hr fire resistive construction for a three (3) storey building or less and two (2) hrs for four (4) storey building or more. Any opening therein shall be protected with an approved self-closing fire doors. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC37', 'Exit illumination and directional EXIT signs shall be provided. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC38', 'Panic hardware is required on exit doors. In lieu of this, doors shall have no locks or latches. ', 'MEANS OF EGRESS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC39', 'Provide fire break up to the roof for ceiling areas. ', 'COMPARTMENTATION ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC40', 'Provide monitored and curtained roof of sheetmetal or non-combustible material of a minimum of 1.82m (6 ft) high spaced not more than 76 m (250 ft) & curtained area limited to a minimum of 4, 630 m2 (50,000 ft2). ', 'COMPARTMENTATION ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC41', 'Provide smoke partition at enclosed areas of 2, 083 m2 (22, 500 ft2) or less with the length of 45.7m (150 ft) or less, with self-closing fire doors. ', 'COMPARTMENTATION ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC42', 'Provide partition walls of two (2) hour fire resistance from floor to underside of floor above. ', 'COMPARTMENTATION ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC43', 'Provide interior finish as follows; Exit; Class {0}   \r\nAccess to Exit; Class {1}                            \r\nOther Spaces;  Class {2}', 'COMPARTMENTATION ', 's,s,s');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC44', 'Provide fire stopping for all concealed spaces.  ', 'COMPARTMENTATION ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC45', 'Provide standard fire wall with at least 100 cm (39.38 in) high parapets on all portion of the building on the property line. ', 'WALLS', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC46', 'Extend exterior masonry walls to form parapets or wings.', 'WALLS', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC47', 'Provide protection of all exterior walls. All exterior walls facing approved alleys which are dead-ended must have a fire resistance of {0} hours. ', 'WALLS', 'd');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC48', 'Provide automatic fire dampers on wall openings. ', 'WALLS', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC49', 'Provide protection of all walls. All exterior walls facing approved alleys which are dead-ended must have a fire dampers of {0} hours.', 'WARNING SYSTEMS', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC50', 'Provide approved type heat and smoke detection system. ', 'WARNING SYSTEMS', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC51', 'Provide efficient communication system for warning occupants and calling fire department. ', 'WARNING SYSTEMS', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC52', 'Provide approved type portable fire extinguisher (dry chemical) ABC type, {0} lbs. capacity for every 200 sq.m of floor area(low hazard), 100 sq. m floor area(moderate hazard) and 75 sq. m floor area(high hazard) areas or 22.8 m (75 ft) travel distance on every floor level. ', 'FIRE PROTECTION ', 'd');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC53', 'Provide {0} with {1} mm riser and coupling of fire department standards with pumps of reliable pressure & connected to an adequate water supply tank. Hose and hose cabinet shall be provided at every hose gate valve on all floors. ', 'FIRE PROTECTION ', 's,d');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC54', 'Provide Fire Service connection with a standard outlet of 64 mm, and 102 mm dry standpipe, and shall located on a street front. ', 'FIRE PROTECTION ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC55', 'Provide automatic fire extinguishing system where kitchen equipment is located (Kitchenhood). ', 'FIRE PROTECTION ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC56', 'Provide automatic chemical extinguishing system on all areas where electronic/electrical equipment are located. ', 'FIRE PROTECTION ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC57', 'Provide approved-type automatic fire extinguishing system in accordance with NFPA 13.  Approval of system plan is required prior to installation ', 'FIRE PROTECTION ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC58', 'Provide outside window opening on bedrooms with a clear opening of not less than fifty six (56) cm in least dimension and forty five-hundredths (0.45) m2 in area. The bottom of the window shall be not more than one hundred twenty two (122) cm above the floor. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC59', 'All liquefied petroleum gas equipment including such equipment installed at utility gas plants shall be installed in accordance with the provisions of NFPA 59. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC60', 'No grills or any obstruction shall be installed on window openings and/or fire exits. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC61', 'Provide emergency lighting facilities with automatic transfer switch to AC/DC power source. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC62', 'Air conditioning ducts must be provided with approved fire dampers. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC63', 'Roof covering must be of non-combustible materials. Combustible roof covering must have fire retardant treatment. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC64', 'Provide fire escape ladder/s on every dwelling unit. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC65', 'Provide fire escape stair/s. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC66', 'All unit partition wall shall be extended up to upper floor slab and/or one (1) meter above the roofline. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC67', 'Provide effective means of smoke ventilation such as access panels, movable windows. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC68', 'Project activity shall not affect the effectivity of the existing fire protection facilities. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC69', 'Provide/post allowable occupant load sign/s. Such signs shall be conspicuously and suitably located. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC70', 'Provide fire protection/suppression during construction. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC71', 'Provide fire exit plan for each floor of the building showing the routes from each room to appropriate exits, displayed prominently on the door of each room. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC72', 'No heating or lighting apparatus or equipment capable of igniting flammable materials shall be used in any storage or work area where rags, excelsior, hair or other highly flammable or combustible materials are stored or used. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC73', 'Provide/post \"NO SMOKING\" sign/s where combustible materials are stored or handled. Such signs shall be conspicuously and suitable located. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC74', 'If high hazard commodities will be stored/handled, automatic fire suppression system shall be provided.', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC75', 'Provide/post \"DO NOT USE ELEVATOR IN CASE OF FIRE\" sign/s. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC76', 'LPG tank/s must be installed outside the building and should be provided with safety devices that automatically stop the flow of gas should a leak develop. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC77', 'Provide fire resistive walls between stair & kitchen area. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC78', 'Provide outside window/s for rescue and ventilation with a minimum clear opening of 55 cm and approximately one half (0.5) m2 in area; the bottom of window opening is not more than eighty two (82) cm above the floor; it can readily be opened from the inside without the use of tools; where storm windows, screens, or antiburglar devices are used, these be provided with quick mechanism so that they may be so arranged that when opened they will not drop to the ground. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC79', 'Rooms used for kindergarten, first or second grade pupils shall not be located above or below the floor of exit discharge. Rooms used for second grade pupils shall not be located more than one (1) storey above the floor of exit discharge. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC80', 'Provide firefighters’ elevator. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC81', 'All correction indicated on the original approved plan from this office on {0} shall be followed. ', 'MISCELLANEOUS ', 's');
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC82', 'Any changes in occupancy other than stated shall be in accordance with Rule 10.  ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC83', 'Subject to inspection during construction.  ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC84', 'Fire Safety Inspection Certificate must be secured before/prior to issuance of Certificate of Occupancy. ', 'MISCELLANEOUS ', NULL);
+INSERT INTO `fire_safety_checklist_master` VALUES ('FSC85', 'Subject to additional requirements upon recommendation of the Fire Safety Inspector during construction phase and final inspection. ', 'MISCELLANEOUS ', NULL);
 COMMIT;
+
+-- ----------------------------
+-- Table structure for fire_safety_evaluation_clearance
+-- ----------------------------
+DROP TABLE IF EXISTS `fire_safety_evaluation_clearance`;
+CREATE TABLE `fire_safety_evaluation_clearance` (
+  `objid` varchar(50) NOT NULL,
+  `appid` varchar(50) DEFAULT NULL,
+  `sectionid` varchar(50) DEFAULT NULL,
+  `controlno` varchar(50) DEFAULT NULL,
+  `dtcreated` datetime DEFAULT NULL,
+  `createdby_objid` varchar(50) DEFAULT NULL,
+  `createdby_name` varchar(255) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `remarks` mediumtext,
+  PRIMARY KEY (`objid`),
+  UNIQUE KEY `uix_fire_safety_checklist_controlno` (`controlno`),
+  UNIQUE KEY `fk_fire_safety_checklist_appid` (`appid`) USING BTREE,
+  CONSTRAINT `fk_fire_safety_evaluation_clearance_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for locational_clearance
+-- ----------------------------
+DROP TABLE IF EXISTS `locational_clearance`;
+CREATE TABLE `locational_clearance` (
+  `objid` varchar(50) NOT NULL,
+  `appid` varchar(50) DEFAULT NULL,
+  `sectionid` varchar(50) DEFAULT NULL,
+  `controlno` varchar(50) DEFAULT NULL,
+  `dtcreated` datetime DEFAULT NULL,
+  `createdby_objid` varchar(50) DEFAULT NULL,
+  `createdby_name` varchar(255) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `dtvalidity` date DEFAULT NULL,
+  `remarks` mediumtext,
+  PRIMARY KEY (`objid`),
+  UNIQUE KEY `uix_fire_safety_checklist_controlno` (`controlno`),
+  UNIQUE KEY `fk_fire_safety_checklist_appid` (`appid`) USING BTREE,
+  CONSTRAINT `fk_locational_clearance_appid` FOREIGN KEY (`appid`) REFERENCES `building_permit` (`objid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for obo_issuance_type
@@ -732,11 +609,11 @@ CREATE TABLE `obo_issuance_type` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `obo_issuance_type` VALUES ('BFP_CHECKLIST', 'BFP Checklist', NULL, NULL, 'buildingpermit', 'FIRE', NULL, 11);
-INSERT INTO `obo_issuance_type` VALUES ('BLDG_PERMIT', 'Building Permit', NULL, 'BP[org][yyyy]-[%06d]', 'buildingpermit', NULL, NULL, 0);
-INSERT INTO `obo_issuance_type` VALUES ('FSEC', 'Fire Safety Evaluation Clearance (FSEC)', NULL, NULL, 'buildingpermit', 'FIRE', NULL, 10);
+INSERT INTO `obo_issuance_type` VALUES ('BLDG_PERMIT', 'Building Permit', NULL, 'BP[org][yyyy]-[%06d]', 'buildingpermit', NULL, 'building_permit', 0);
+INSERT INTO `obo_issuance_type` VALUES ('FSEC', 'Fire Safety Evaluation Clearance (FSEC)', NULL, NULL, 'buildingpermit', 'FIRE', 'building_permit_fsec', 10);
 INSERT INTO `obo_issuance_type` VALUES ('FSIC', 'Fire Safety Inspection Clearance (FSIC)', NULL, NULL, 'occupancypermit', 'FIRE', NULL, 12);
-INSERT INTO `obo_issuance_type` VALUES ('HOT_WORKS_PERMIT', 'Hot Works Permit', NULL, NULL, 'buildingpermit', 'HOT_WORKS', NULL, 13);
-INSERT INTO `obo_issuance_type` VALUES ('LOCATIONAL_CLEARANCE', 'Locational Clearance', NULL, NULL, 'buildingpermit', 'ZONING', NULL, 1);
+INSERT INTO `obo_issuance_type` VALUES ('HOT_WORKS', 'Hot Works Clearance', NULL, NULL, 'buildingpermit', 'HOT_WORKS', 'building_permit_fire_hotworks_clearance', 13);
+INSERT INTO `obo_issuance_type` VALUES ('LOCATIONAL_CLEARANCE', 'Locational Clearance', NULL, NULL, 'buildingpermit', 'ZONING', 'building_permit_locational_clearance', 1);
 COMMIT;
 
 -- ----------------------------
@@ -765,13 +642,14 @@ CREATE TABLE `obo_itemaccount` (
 BEGIN;
 INSERT INTO `obo_itemaccount` VALUES ('ACCESSORY_FEE', 'ACCESSORY FEE', 'FTFA00000769', '4-01-03-030-04', 'RET GASUL ACCESSORIES', 'GENERAL', 'GENERAL', 5, NULL);
 INSERT INTO `obo_itemaccount` VALUES ('ACCESSORY_STRUCTURE_FEE', 'ACCESSORY STRUCTURE FEE', 'FTFA00000556', '4-02-01-010-02-1', 'BUILDING INSPECTION FEES', 'GENERAL', 'GENERAL', 1, NULL);
-INSERT INTO `obo_itemaccount` VALUES ('BFP_V1', 'VIOLATION 1', 'ITMACCT-1c97b5d1:15b1d1f6c89:-7e41', '4-02-01-070-2', 'VIOLATION OF CITY ORDINANCE', 'GENERAL', 'GENERAL', 1, 'FIRE');
+INSERT INTO `obo_itemaccount` VALUES ('BFP_V1', 'VIOLATION 1', 'ITMACCT-1c97b5d1:15b1d1f6c89:-7e41', '4-02-01-070-2', 'VIOLATION OF CITY ORDINANCE', 'GENERAL', 'GENERAL', 1, 'FSEC');
 INSERT INTO `obo_itemaccount` VALUES ('BUILDING_PERMIT_FEE', 'BUILDING PERMIT FEE', 'FTFA00000409', '4-02-01-010-02-1', 'BUILDING PERMIT FEE', 'GENERAL', 'GENERAL', -1, NULL);
 INSERT INTO `obo_itemaccount` VALUES ('ELECTRICAL_FEE', 'ELECTRICAL FEE', 'FTFA00001016', '4-02-01-010-02-1', 'ELECTRICAL PERMIT', 'GENERAL', 'GENERAL', 0, 'ELECTRICAL');
 INSERT INTO `obo_itemaccount` VALUES ('ELECTRONIC_FEE', 'ELECTRONIC FEE', 'FTFA00000563', '4-02-01-010-02-1', 'ELECTRONICS FEE', 'GENERAL', 'GENERAL', 0, 'ELECTRONIC');
-INSERT INTO `obo_itemaccount` VALUES ('FIRE_CONS_TAX', 'FIRE CODE CONTRUCTION TAX', 'TFA10000148', '430-A', 'BASIC FIRE CODE', 'GENERAL', 'GENERAL', 0, 'FIRE');
-INSERT INTO `obo_itemaccount` VALUES ('FIRE_INSPECTION_FEE', 'FIRE CODE CONSTRUCTION TAX', 'FTFA00000574', '2-02-01-050-2', 'FIRE INSPECTION FEE', 'GENERAL', 'GENERAL', 50, 'FIRE');
+INSERT INTO `obo_itemaccount` VALUES ('FIRE_CONS_TAX', 'FIRE CODE CONTRUCTION TAX', 'TFA10000148', '430-A', 'BASIC FIRE CODE', 'GENERAL', 'GENERAL', 0, 'FSEC');
+INSERT INTO `obo_itemaccount` VALUES ('FIRE_INSPECTION_FEE', 'FIRE CODE CONSTRUCTION TAX', 'FTFA00000574', '2-02-01-050-2', 'FIRE INSPECTION FEE', 'GENERAL', 'GENERAL', 50, 'FSEC');
 INSERT INTO `obo_itemaccount` VALUES ('HOTWORKS', 'HOT WORKS', 'FTFA00000631', '4-02-01-040-02', 'CLEARANCE(FIRE)', 'GENERAL', 'GENERAL', 1, 'HOT_WORKS');
+INSERT INTO `obo_itemaccount` VALUES ('LINE_AND_GRADE', 'LINE AND GRADE', 'FTFA00000554', '4-02-01-010-02-1', 'LINE AND GRADE FEE', 'GENERAL', 'GENERAL', 1, 'LINE_AND_GRADE');
 INSERT INTO `obo_itemaccount` VALUES ('LOCATIONAL_CLEARANCE_FEE', 'LOCATIONAL CLEARANCE FEE', 'FTFA00000425', '4-02-01-010-03', 'LOCATIONAL CLEARANCES - ZONING FEES', 'GENERAL', 'GENERAL', 1, 'ZONING');
 INSERT INTO `obo_itemaccount` VALUES ('MECHANICAL_FEE', 'MECHANICAL FEE', 'FTFA00000614', '4-02-01-010-02-1', 'MECHANICAL INSPECTION FEE', 'GENERAL', 'GENERAL', 0, 'MECHANICAL');
 INSERT INTO `obo_itemaccount` VALUES ('PLUMBING_FEE', 'PLUMBING FEE', 'FTFA00000411', '4-02-01-010-02-1', 'PLUMBING PERMIT FEE', 'GENERAL', 'GENERAL', 0, 'PLUMBING');
@@ -1194,6 +1072,13 @@ CREATE TABLE `obo_section` (
   `buildingpermitstate` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
   `occupancypermitstate` varchar(50) DEFAULT NULL,
   `optional` int(255) DEFAULT NULL,
+  `requirefee` int(11) DEFAULT '0',
+  `issuepermit` int(11) DEFAULT '0',
+  `permit_title` varchar(150) DEFAULT NULL,
+  `permit_template` varchar(150) DEFAULT NULL,
+  `ancillarytypeid` varchar(50) DEFAULT NULL,
+  `permit_controlnopattern` varchar(100) DEFAULT NULL,
+  `permit_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -1201,19 +1086,19 @@ CREATE TABLE `obo_section` (
 -- Records of obo_section
 -- ----------------------------
 BEGIN;
-INSERT INTO `obo_section` VALUES ('ARCHITECTURAL', 'Architectural', 'PERMIT', NULL, NULL, 3, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
-INSERT INTO `obo_section` VALUES ('CIVIL_STRUCTURAL', 'Civil/Structural', NULL, NULL, NULL, 4, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
-INSERT INTO `obo_section` VALUES ('ELECTRICAL', 'Electrical', NULL, NULL, NULL, 5, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
-INSERT INTO `obo_section` VALUES ('ELECTRONIC', 'Electronic', NULL, NULL, NULL, 9, 0, NULL, 'trade-evaluation', 'joint-inspection', 1);
-INSERT INTO `obo_section` VALUES ('FIRE', 'Fire Safety', 'PROC', 'BFP', 'BUREAU OF FIRE', 10, 1, NULL, 'trade-evaluation', 'joint-inspection', 0);
-INSERT INTO `obo_section` VALUES ('GEODETIC', 'Geodetic', NULL, NULL, NULL, 2, NULL, NULL, 'trade-evaluation', 'joint-inspection', 0);
-INSERT INTO `obo_section` VALUES ('HOT_WORKS', 'Hot Works', NULL, 'BFP', 'BFP - BUREAU OF FIRE', 20, NULL, NULL, 'trade-evaluation', NULL, 1);
-INSERT INTO `obo_section` VALUES ('MECHANICAL', 'Mechanical', NULL, NULL, NULL, 6, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
-INSERT INTO `obo_section` VALUES ('PLUMBING', 'Plumbing', NULL, NULL, NULL, 8, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
-INSERT INTO `obo_section` VALUES ('RPT', 'ASSESSORS OFFICE', NULL, NULL, NULL, 0, NULL, NULL, NULL, 'joint-inspection', 0);
-INSERT INTO `obo_section` VALUES ('SANITARY', 'Sanitary', NULL, NULL, NULL, 7, 0, NULL, 'trade-evaluation', 'joint-inspection', 0);
-INSERT INTO `obo_section` VALUES ('SITE_VERIFICATION', 'Site Verification', NULL, NULL, NULL, 1, 1, NULL, 'trade-evaluation', NULL, 0);
-INSERT INTO `obo_section` VALUES ('ZONING', 'Zoning', 'PROC', 'CPDO', 'CPDO', 0, 1, NULL, 'zoning-evaluation', 'joint-inspection', 0);
+INSERT INTO `obo_section` VALUES ('ARCHITECTURAL', 'Architectural', 'PERMIT', NULL, NULL, 3, 0, NULL, 'trade-evaluation', 'joint-inspection', 0, 0, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('CIVIL_STRUCTURAL', 'Civil/Structural', NULL, NULL, NULL, 4, 0, NULL, 'trade-evaluation', 'joint-inspection', 0, 0, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('ELECTRICAL', 'Electrical', NULL, NULL, NULL, 5, 0, NULL, 'trade-evaluation', 'joint-inspection', 0, 1, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('ELECTRONIC', 'Electronic', NULL, NULL, NULL, 9, 0, NULL, 'trade-evaluation', 'joint-inspection', 1, 1, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('FSEC', 'Fire Safety Evaluation Clearance', NULL, 'BFP', 'BFP - BUREAU OF FIRE', 1, NULL, NULL, 'trade-evaluation', NULL, 0, 1, 1, 'Fire Safety Evaluation Clearance', NULL, NULL, NULL, 'fire_safety_evaluation_clearance');
+INSERT INTO `obo_section` VALUES ('HOT_WORKS', 'Hot Works Clearance', NULL, 'BFP', 'BFP - BUREAU OF FIRE', 20, NULL, NULL, 'trade-evaluation', NULL, 1, 1, 1, 'Hot Works Clearance', 'building_permit_fire_hotworks_clearance', NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('LINE_AND_GRADE', 'Line and Grade', NULL, NULL, NULL, 2, NULL, NULL, 'trade-evaluation', 'joint-inspection', 0, 1, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('MECHANICAL', 'Mechanical', NULL, NULL, NULL, 6, 0, NULL, 'trade-evaluation', 'joint-inspection', 0, 1, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('PLUMBING', 'Plumbing', NULL, NULL, NULL, 8, 0, NULL, 'trade-evaluation', 'joint-inspection', 0, 1, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('RPT', 'ASSESSORS OFFICE', NULL, NULL, NULL, 100, NULL, NULL, NULL, 'joint-inspection', 0, 0, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('SANITARY', 'Sanitary', NULL, NULL, NULL, 7, 0, NULL, 'trade-evaluation', 'joint-inspection', 1, 0, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('SITE_VERIFICATION', 'Site Verification', NULL, NULL, NULL, 1, 1, NULL, 'trade-evaluation', NULL, 0, 0, 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `obo_section` VALUES ('ZONING', 'Zoning', 'PROC', 'CPDO', 'CPDO', 0, 1, NULL, 'zoning-evaluation', 'joint-inspection', 0, 1, 1, 'Locational Clearance', NULL, NULL, NULL, 'locational_clearance');
 COMMIT;
 
 -- ----------------------------
@@ -3805,7 +3690,7 @@ INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-74a7', 'RCOND78d81fce:16e0d2ac78d:-74b7', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7594', 'RCOND78d81fce:16e0d2ac78d:-75a4', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7681', 'RCOND78d81fce:16e0d2ac78d:-7691', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ZONING\",value:\"Zoning\"]]', NULL, 0);
-INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-788b', 'RCOND78d81fce:16e0d2ac78d:-789b', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FIRE\",value:\"Fire Safety\"]]', NULL, 0);
+INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-788b', 'RCOND78d81fce:16e0d2ac78d:-789b', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"FSEC\",value:\"Fire Safety Evaluation Clearance\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7982', 'RCOND78d81fce:16e0d2ac78d:-7992', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRICAL\",value:\"Electrical\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7a75', 'RCOND78d81fce:16e0d2ac78d:-7a85', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"ELECTRONIC\",value:\"Electronic\"]]', NULL, 0);
 INSERT INTO `sys_rule_condition_constraint` VALUES ('RCONST78d81fce:16e0d2ac78d:-7b62', 'RCOND78d81fce:16e0d2ac78d:-7b72', 'obo.facts.BuildingPermitSection.name', 'name', NULL, 'is any of the ff.', 'matches', NULL, NULL, NULL, NULL, NULL, NULL, '[[key:\"MECHANICAL\",value:\"Mechanical\"]]', NULL, 0);
@@ -4332,7 +4217,7 @@ INSERT INTO `sys_rule_deployed` VALUES ('RUL544e84a6:15b372b5faf:-782f', '\npack
 INSERT INTO `sys_rule_deployed` VALUES ('RUL544e84a6:15b372b5faf:-7959', '\npackage oboassessment.MECHANICAL_FEE_WINDOW_TYPE_AC;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_WINDOW_TYPE_AC\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboIntegerInfo (  name matches \"WINDOW_TYPE_AIRCON\",UNITS:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"UNITS\", UNITS );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"UNITS * 60\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL544e84a6:15b372b5faf:-7c53', '\npackage oboassessment.MECHANICAL_FEE_PC_AC;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_PC_AC\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"PACKAGED_SPLIT_TYPE_AIRCON|CENTRAILIZED_AIRCON\",TONS:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"TONS\", TONS );\n		\n	RangeEntry re0 = new RangeEntry(\"MECHANICAL_FEE_PC_AC\");\nre0.setBindings(bindings);\nre0.setDecimalvalue(TONS);\nre0.getParams().put( \"billitem\", BILLITEM );\nre0.getParams().put( \"type\", \"ADD\" );\nre0.getParams().put( \"amount\", 0.0 );\ninsert(re0);\n\nend\n\n\n	\nrule \"update-billitem-amount_0_0\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		\n		rv: RangeEntry( id==\"MECHANICAL_FEE_PC_AC\", decimalvalue < 100.00 )\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"90 * Math.ceil(TONS )\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	\nrule \"update-billitem-amount_0_1\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		rv: RangeEntry( id==\"MECHANICAL_FEE_PC_AC\", decimalvalue >= 100.00 )\n		\n		\n	then\n		Map bindings = rv.getBindings();\n		Map params = rv.getParams();\n		params.put( \"amount\", (new ActionExpression(\"9000 + (  Math.ceil(TONS - 100) * 40 )\", bindings)) );	\n		 \n		action.execute( \"update-billitem-amount\",params, drools);\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL544e84a6:15b372b5faf:-7d4b', '\npackage oboassessment.MECHANICAL_FEE_ICE_PLANT;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"MECHANICAL_FEE_ICE_PLANT\"\n	agenda-group \"compute-mechanical-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"MECHANICAL_FEE\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"ICE_PLANT\",TONS:value ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n		bindings.put(\"TONS\", TONS );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"Math.ceil( TONS )  * 60\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
-INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-71db', '\npackage oboassessment.ADD_FIRE_INSPECTION_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_FIRE_INSPECTION_FEE\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:highercost ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"FIRE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"COST * 0.01\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"FIRE_CONS_TAX\", \"FIRE CODE CONTRUCTION TAX\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
+INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-71db', '\npackage oboassessment.ADD_FIRE_INSPECTION_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_FIRE_INSPECTION_FEE\"\n	agenda-group \"compute-zoning-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingApplication (  COST:highercost ) \n		\n		 obo.facts.BuildingPermitSection (  name matches \"FSEC\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"COST\", COST );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"COST * 0.01\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"FIRE_CONS_TAX\", \"FIRE CODE CONTRUCTION TAX\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-7417', '\npackage oboassessment.COMPUTE_FIRE_INSPECTION_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"COMPUTE_FIRE_INSPECTION_FEE\"\n	agenda-group \"compute-permit-fee\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		FIREFEE: treasury.facts.BillItem (  billcode matches \"FIRE_CONS_TAX\" ) \n		\n		 obo.facts.BuildingApplication (  PROJCOST:projectcost,FIXEDCOST:fixedcost ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"PROJCOST\", PROJCOST );\n		\n		bindings.put(\"FIREFEE\", FIREFEE );\n		\n		bindings.put(\"FIXEDCOST\", FIXEDCOST );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", FIREFEE );\n_p0.put( \"type\", \"ADD\" );\n_p0.put( \"amount\", (new ActionExpression(\"def d = @IIF(  FIXEDCOST > PROJCOST ,  FIXEDCOST * 0.01,  PROJCOST * 0.01 )\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL55d9e7c7:16a3522d159:-7c8e', '\npackage oboassessment.ADD_ELECTRONIC_FEE;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"ADD_ELECTRONIC_FEE\"\n	agenda-group \"initial\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.BuildingPermitSection (  name matches \"ELECTRONIC\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n	Map _p0 = new HashMap();\n_p0.put( \"amount\", (new ActionExpression(\"0\", bindings)) );\n_p0.put( \"billcode\", new KeyValue(\"ELECTRONIC_FEE\", \"ELECTRONIC FEE\") );\naction.execute( \"add-billitem\",_p0,drools);\n\nend\n\n\n	');
 INSERT INTO `sys_rule_deployed` VALUES ('RUL59515aa4:16a3a32fa5e:-3fb8', '\npackage oboassessment.SWIMMING_POOL_INDIGENOUS_FEE_GROUP_C_D_H_I;\nimport oboassessment.*;\nimport java.util.*;\nimport com.rameses.rules.common.*;\n\nglobal RuleAction action;\n\nrule \"SWIMMING_POOL_INDIGENOUS_FEE_GROUP_C_D_H_I\"\n	agenda-group \"compute-accessory-structure\"\n	salience 50000\n	no-loop\n	when\n		\n		\n		 obo.facts.OccupancyType (  group matches \"C|D|H|I\" ) \n		\n		 obo.facts.OboDecimalInfo (  name matches \"SWIMMING_POOL_USING_INDIGENOUS_MATERIALS\",CUM:value ) \n		\n		BILLITEM: treasury.facts.BillItem (  billcode matches \"ACCESSORY_STRUCTURE_FEE\" ) \n		\n	then\n		Map bindings = new HashMap();\n		\n		bindings.put(\"CUM\", CUM );\n		\n		bindings.put(\"BILLITEM\", BILLITEM );\n		\n	Map _p0 = new HashMap();\n_p0.put( \"billitem\", BILLITEM );\n_p0.put( \"amount\", (new ActionExpression(\"(CUM * 24) * 0.5\", bindings)) );\naction.execute( \"update-billitem-amount\",_p0,drools);\n\nend\n\n\n	');
@@ -4599,17 +4484,6 @@ CREATE TABLE `sys_sequence` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of sys_sequence
--- ----------------------------
-BEGIN;
-INSERT INTO `sys_sequence` VALUES ('BP1372019-000000', 12);
-INSERT INTO `sys_sequence` VALUES ('BPCPDO2019-000000', 3);
-INSERT INTO `sys_sequence` VALUES ('OBO_BUILDING_APP', 28);
-INSERT INTO `sys_sequence` VALUES ('OBO_FINDING_TRANSMITTAL', 6);
-INSERT INTO `sys_sequence` VALUES ('OBO_REQUIREMENT_TRANSMITTAL', 12);
-COMMIT;
-
--- ----------------------------
 -- Table structure for sys_usergroup
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_usergroup`;
@@ -4639,7 +4513,6 @@ CREATE TABLE `sys_wf` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_wf` VALUES ('building_permit', 'Building Permit Workflow', 'OBO');
-INSERT INTO `sys_wf` VALUES ('building_permit_issuance', 'Building Permit Issuance', 'OBO');
 INSERT INTO `sys_wf` VALUES ('building_permit_section', 'Building Permit Section', 'OBO');
 INSERT INTO `sys_wf` VALUES ('occupancy_permit', 'Occupancy Application', 'OBO');
 COMMIT;
@@ -4668,30 +4541,29 @@ CREATE TABLE `sys_wf_node` (
 -- ----------------------------
 BEGIN;
 INSERT INTO `sys_wf_node` VALUES ('approval', 'building_permit', 'Assessment Approval', 'state', 12, 0, 'OBO', 'APPROVER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[1117,162],size:[174,61]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('approval', 'building_permit_issuance', 'Approval', 'state', 2, 0, 'OBO', 'ISSUANCE_APPROVER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[512,164],size:[103,62]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('assessment', 'building_permit', 'Assessment', 'state', 11, 0, 'OBO', 'ASSESSOR', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[1119,48],size:[118,59]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('assessment', 'building_permit', 'Assessment', 'state', 11, 0, 'OBO', 'ASSESSOR', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[1135,18],size:[118,59]]', '[:]', 1);
 INSERT INTO `sys_wf_node` VALUES ('end', 'building_permit', 'Completed', 'end', 16, 0, NULL, NULL, '[type:\"end\",fillColor:\"#ff0000\",pos:[1248,290],size:[32,32]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('end', 'building_permit_issuance', 'Completed', 'end', 3, NULL, NULL, NULL, '[type:\"end\",fillColor:\"#ff0000\",pos:[803,164],size:[32,32]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('end', 'building_permit_section', 'Completed', 'end', 9, 0, NULL, NULL, '[type:\"end\",fillColor:\"#ff0000\",pos:[787,84],size:[32,32]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('end', 'building_permit_section', 'Completed', 'end', 9, 0, 'OBO', 'SYSTEM', '[type:\"end\",fillColor:\"#ff0000\",pos:[1014,143],size:[32,32]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('end', 'occupancy_permit', 'Completed', 'end', 9, 0, NULL, NULL, '[type:\"end\",fillColor:\"#ff0000\",pos:[904,161],size:[32,32]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('evaluation', 'building_permit_section', 'For Evaluation', 'state', 2, 0, 'OBO', 'SECTION_EVALUATOR', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[130,209],size:[125,58]]', '[:]', 1);
 INSERT INTO `sys_wf_node` VALUES ('evaluation', 'occupancy_permit', 'Trade Evaluation', 'state', 5, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[356,52],size:[137,57]]', '[:]', 1);
 INSERT INTO `sys_wf_node` VALUES ('evaluation-approval', 'building_permit_section', 'For Approval', 'state', 4, 0, 'OBO', 'SECTION_APPROVER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[509,59],size:[128,55]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('for-revision', 'building_permit_section', 'For Revision', 'state', 5, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[391,237],size:[108,56]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('issuance', 'building_permit_issuance', 'Issuance', 'state', 1, 0, 'OBO', 'ISSUANCE_ISSUER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[262,84],size:[122,57]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('final-approval', 'building_permit_section', 'Final Approval', 'state', 8, 0, 'OBO', 'SECTION_APPROVER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[1061,280],size:[122,64]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('for-revision', 'building_permit_section', 'For Revision', 'state', 5, 0, 'OBO', 'SYSTEM', '[type:\"state\",fillColor:\"#ff0000\",pos:[391,237],size:[108,56]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('issuance-process', 'building_permit', 'Issuance Process', 'state', 14, 1, NULL, NULL, '[type:\"state\",fillColor:\"#ffc800\",pos:[983,294],size:[145,65]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('joint-inspection', 'occupancy_permit', 'Joint Inspection', 'state', 1, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[208,152],size:[118,65]]', '[:]', 1);
-INSERT INTO `sys_wf_node` VALUES ('payment', 'building_permit', 'Payment', 'state', 13, 0, NULL, NULL, '[type:\"state\",fillColor:\"#ff0000\",pos:[879,177],size:[129,56]]', '[:]', NULL);
+INSERT INTO `sys_wf_node` VALUES ('obo-processing', 'building_permit_section', 'OBO Processing', 'state', 6, 0, 'OBO', 'SYSTEM', '[type:\"state\",fillColor:\"#ffc800\",pos:[721,169],size:[134,65]]', '[:]', 0);
+INSERT INTO `sys_wf_node` VALUES ('payment', 'building_permit', 'Payment', 'state', 13, 0, 'OBO', 'SYSTEM', '[type:\"state\",fillColor:\"#ff0000\",pos:[879,177],size:[129,56]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('payment', 'occupancy_permit', 'Payment', 'state', 7, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[591,161],size:[129,56]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('receiving', 'building_permit', 'Receiving', 'state', 2, 0, 'OBO', 'RECEIVER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[202,20],size:[116,53]]', '[:]', 1);
 INSERT INTO `sys_wf_node` VALUES ('receiving', 'occupancy_permit', 'Receiving', 'state', 2, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[156,28],size:[116,53]]', '[:]', 1);
 INSERT INTO `sys_wf_node` VALUES ('release', 'occupancy_permit', 'Releasing', 'state', 8, 0, NULL, NULL, '[type:\"state\",fillColor:\"#c0c0c0\",pos:[757,229],size:[119,55]]', '[:]', 1);
 INSERT INTO `sys_wf_node` VALUES ('releasing', 'building_permit', 'Releasing', 'state', 15, 1, 'OBO', 'RELEASER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[1058,405],size:[134,63]]', '[:]', 1);
+INSERT INTO `sys_wf_node` VALUES ('releasing', 'building_permit_section', 'Releasing', 'state', 7, 0, 'OBO', 'SECTION_ISSUER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[800,299],size:[121,66]]', '[:]', 1);
 INSERT INTO `sys_wf_node` VALUES ('requirement-revision', 'building_permit', 'Requirements - For Revision', 'state', 4, 0, NULL, NULL, '[type:\"state\",fillColor:\"#ff0000\",pos:[0,211],size:[211,54]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('requirement-verification', 'building_permit', 'Verification of Requirements', 'state', 3, 1, 'OBO', 'REQUIREMENT_REVIEWER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[256,123],size:[198,59]]', '[:]', 1);
 INSERT INTO `sys_wf_node` VALUES ('review', 'building_permit_section', 'For Review', 'state', 3, 0, 'OBO', 'SECTION_REVIEWER', '[type:\"state\",fillColor:\"#c0c0c0\",pos:[204,83],size:[106,46]]', '[:]', 1);
 INSERT INTO `sys_wf_node` VALUES ('start', 'building_permit', 'Start', 'start', 1, 0, NULL, NULL, '[type:\"start\",fillColor:\"#00ff00\",pos:[81,21],size:[32,32]]', '[:]', NULL);
-INSERT INTO `sys_wf_node` VALUES ('start', 'building_permit_issuance', 'start', 'start', 0, NULL, NULL, NULL, '[type:\"start\",fillColor:\"#00ff00\",pos:[157,42],size:[32,32]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('start', 'building_permit_section', 'Start', 'start', 1, 0, NULL, NULL, '[type:\"start\",fillColor:\"#00ff00\",pos:[71,33],size:[32,32]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('start', 'occupancy_permit', 'Start', 'start', 1, 0, NULL, NULL, '[type:\"start\",fillColor:\"#00ff00\",pos:[81,21],size:[32,32]]', '[:]', NULL);
 INSERT INTO `sys_wf_node` VALUES ('trade-evaluation', 'building_permit', 'Trade Evaluation', 'state', 8, 0, 'OBO', 'SYSTEM', '[type:\"state\",fillColor:\"#ffc800\",pos:[528,25],size:[138,55]]', '[:]', 1);
@@ -4725,18 +4597,22 @@ CREATE TABLE `sys_wf_transition` (
 -- Records of sys_wf_transition
 -- ----------------------------
 BEGIN;
+INSERT INTO `sys_wf_transition` VALUES ('approval', 'building_permit', 'return-to-assessment', 'assessment', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to return for reassessment. Proceed?\"]', NULL, 'Return for Reassessment', '[points:[1231,162,1243,130,1238,77],type:\"arrow\",pos:[1231,77],size:[12,85]]');
 INSERT INTO `sys_wf_transition` VALUES ('approval', 'building_permit', 'approve-for-payment', 'payment', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to approve this for payment. Proceed?\"]', NULL, 'Approve', '[points:[1117,193,1008,195],type:\"arrow\",pos:[1008,193],size:[109,2]]');
 INSERT INTO `sys_wf_transition` VALUES ('approval', 'building_permit_issuance', 'approve', 'end', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to approve this evaluation. Continue?\"]', NULL, 'Approve', '[points:[615,191,803,181],type:\"arrow\",pos:[615,181],size:[188,10]]');
-INSERT INTO `sys_wf_transition` VALUES ('assessment', 'building_permit', 'send-for-approval', 'approval', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to submit this for final approval. Proceed?\"]', NULL, 'Send for Approval', '[points:[1179,107,1195,162],type:\"arrow\",pos:[1179,107],size:[16,55]]');
+INSERT INTO `sys_wf_transition` VALUES ('assessment', 'building_permit', 'send-for-approval', 'approval', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to submit this for final approval. Proceed?\"]', NULL, 'Send for Approval', '[points:[1157,76,1124,165],type:\"arrow\",pos:[1124,76],size:[33,89]]');
 INSERT INTO `sys_wf_transition` VALUES ('evaluation', 'building_permit_section', 'send-for-review', 'review', 0, NULL, '[:]', NULL, 'Submit for Review', '[points:[205,209,244,129],type:\"arrow\",pos:[205,129],size:[39,80]]');
 INSERT INTO `sys_wf_transition` VALUES ('evaluation', 'obo_occupancy_application', 'submit', 'verification', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Final Verification', '[points:[493,79,576,79],type:\"arrow\",pos:[493,79],size:[83,0]]');
 INSERT INTO `sys_wf_transition` VALUES ('evaluation', 'occupancy_permit', 'submit', 'verification', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Final Verification', '[points:[493,79,576,79],type:\"arrow\",pos:[493,79],size:[83,0]]');
-INSERT INTO `sys_wf_transition` VALUES ('evaluation-approval', 'building_permit_section', 'approve', 'end', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to approve this evaluation. Continue?\"]', NULL, 'Approve', '[points:[637,99,787,96],type:\"arrow\",pos:[637,96],size:[150,3]]');
 INSERT INTO `sys_wf_transition` VALUES ('evaluation-approval', 'building_permit_section', 'send-for-revision', 'for-revision', 0, NULL, '[:]', NULL, 'Send for Revision', '[points:[552,114,463,237],type:\"arrow\",pos:[463,114],size:[89,123]]');
+INSERT INTO `sys_wf_transition` VALUES ('evaluation-approval', 'building_permit_section', 'approve', 'obo-processing', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to approve this transaction. Proceed?\"]', NULL, 'Approve', '[points:[626,114,731,169],type:\"arrow\",pos:[626,114],size:[105,55]]');
+INSERT INTO `sys_wf_transition` VALUES ('final-approval', 'building_permit_section', 'approve', 'end', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to complete this transaction. Proceed?\"]', NULL, 'Approve', '[points:[1102,280,1039,175],type:\"arrow\",pos:[1039,175],size:[63,105]]');
 INSERT INTO `sys_wf_transition` VALUES ('for-revision', 'building_permit_section', 'reactivate', 'evaluation', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Reactivate', '[points:[391,258,255,244],type:\"arrow\",pos:[255,244],size:[136,14]]');
 INSERT INTO `sys_wf_transition` VALUES ('issuance', 'building_permit_issuance', 'send-for-approval', 'approval', 0, NULL, '[:]', NULL, 'Send for Approval', '[points:[384,132,512,176],type:\"arrow\",pos:[384,132],size:[128,44]]');
 INSERT INTO `sys_wf_transition` VALUES ('issuance-process', 'building_permit', 'send-for-release', 'releasing', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Send for Releasing', '[points:[1075,359,1105,405],type:\"arrow\",pos:[1075,359],size:[30,46]]');
-INSERT INTO `sys_wf_transition` VALUES ('payment', 'building_permit', 'post-payment', 'issuance-process', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Post Payment', '[points:[970,233,1030,294],type:\"arrow\",pos:[970,233],size:[60,61]]');
+INSERT INTO `sys_wf_transition` VALUES ('obo-processing', 'building_permit_section', 'end', 'end', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'End Process', '[points:[855,189,1014,161],type:\"arrow\",pos:[855,161],size:[159,28]]');
+INSERT INTO `sys_wf_transition` VALUES ('obo-processing', 'building_permit_section', 'send-for-releasing', 'releasing', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Send for Release', '[points:[807,234,841,299],type:\"arrow\",pos:[807,234],size:[34,65]]');
+INSERT INTO `sys_wf_transition` VALUES ('payment', 'building_permit', 'post-payment', 'issuance-process', 0, NULL, '[:]', NULL, 'Post Payment', '[points:[970,233,1030,294],type:\"arrow\",pos:[970,233],size:[60,61]]');
 INSERT INTO `sys_wf_transition` VALUES ('payment', 'obo_occupancy_application', 'submit', 'release', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Release', '[points:[720,216,757,232],type:\"arrow\",pos:[720,216],size:[37,16]]');
 INSERT INTO `sys_wf_transition` VALUES ('payment', 'occupancy_permit', 'submit', 'release', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Release', '[points:[720,216,757,232],type:\"arrow\",pos:[720,216],size:[37,16]]');
 INSERT INTO `sys_wf_transition` VALUES ('receiving', 'building_permit', 'send-for-requirement-verification', 'requirement-verification', 0, NULL, '[:]', NULL, 'Submit for Requirement Verification', '[points:[282,75,313,123],type:\"arrow\",pos:[282,75],size:[31,48]]');
@@ -4745,6 +4621,7 @@ INSERT INTO `sys_wf_transition` VALUES ('receiving', 'occupancy_permit', 'submit
 INSERT INTO `sys_wf_transition` VALUES ('release', 'obo_occupancy_application', 'release', 'end', 0, NULL, '[:]', NULL, 'Release', '[points:[850,229,904,187],type:\"arrow\",pos:[850,187],size:[54,42]]');
 INSERT INTO `sys_wf_transition` VALUES ('release', 'occupancy_permit', 'release', 'end', 0, NULL, '[:]', NULL, 'Release', '[points:[850,229,904,187],type:\"arrow\",pos:[850,187],size:[54,42]]');
 INSERT INTO `sys_wf_transition` VALUES ('releasing', 'building_permit', 'release', 'end', 0, NULL, '[:]', NULL, 'Approve', '[points:[1158,405,1250,322],type:\"arrow\",pos:[1158,322],size:[92,83]]');
+INSERT INTO `sys_wf_transition` VALUES ('releasing', 'building_permit_section', 'send-for-final-approval', 'final-approval', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to submit this for final approval. Proceed?\"]', NULL, 'Submit for Final Approval', '[points:[921,327,1061,319],type:\"arrow\",pos:[921,319],size:[140,8]]');
 INSERT INTO `sys_wf_transition` VALUES ('requirement-revision', 'building_permit', 'reactivate', 'requirement-verification', 0, NULL, '[:]', NULL, 'Reactivate', '[points:[129,210,256,167],type:\"arrow\",pos:[129,167],size:[127,43]]');
 INSERT INTO `sys_wf_transition` VALUES ('requirement-verification', 'building_permit', 'send-for-revision', 'requirement-revision', 0, NULL, '[:]', NULL, 'Send for Revision', '[points:[268,182,184,211],type:\"arrow\",pos:[184,182],size:[84,29]]');
 INSERT INTO `sys_wf_transition` VALUES ('requirement-verification', 'building_permit', 'approve', 'zoning-evaluation', 0, NULL, '[showConfirm:true,confirmMessage:\"You are about to submit this for zoning evaluation. Continue?\"]', NULL, 'Submit to Zoning', '[points:[342,182,282,326],type:\"arrow\",pos:[282,182],size:[60,144]]');
@@ -4757,14 +4634,14 @@ INSERT INTO `sys_wf_transition` VALUES ('start', 'obo_occupancy_application', 's
 INSERT INTO `sys_wf_transition` VALUES ('start', 'occupancy_permit', 'start', 'receiving', 0, NULL, '[:]', NULL, 'Start', '[points:[113,39,126,41,156,47],type:\"arrow\",pos:[113,39],size:[43,8]]');
 INSERT INTO `sys_wf_transition` VALUES ('trade-evaluation', 'building_permit', 'send-for-verification', 'verification', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Send for Verification', '[points:[666,47,825,39],type:\"arrow\",pos:[666,39],size:[159,8]]');
 INSERT INTO `sys_wf_transition` VALUES ('trade-evaluation-revision', 'building_permit', 'reactivate', 'trade-evaluation', 0, NULL, '[:]', NULL, 'Resubmit for Trade Evaluation', '[points:[771,238,674,141,594,80],type:\"arrow\",pos:[594,80],size:[177,158]]');
-INSERT INTO `sys_wf_transition` VALUES ('verification', 'building_permit', 'send-for-assessment', 'assessment', 0, NULL, '[:]', NULL, 'Submit for Assessment', '[points:[955,52,1119,61],type:\"arrow\",pos:[955,52],size:[164,9]]');
+INSERT INTO `sys_wf_transition` VALUES ('verification', 'building_permit', 'send-for-assessment', 'assessment', 0, NULL, '[:]', NULL, 'Submit for Assessment', '[points:[955,52,1135,31],type:\"arrow\",pos:[955,31],size:[180,21]]');
 INSERT INTO `sys_wf_transition` VALUES ('verification', 'building_permit', 'send-for-revision', 'trade-evaluation-revision', 0, NULL, '[:]', NULL, 'Send for Revision', '[points:[856,75,817,238],type:\"arrow\",pos:[817,75],size:[39,163]]');
 INSERT INTO `sys_wf_transition` VALUES ('verification', 'obo_occupancy_application', 'submit', 'payment', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Payment', '[points:[645,110,653,161],type:\"arrow\",pos:[645,110],size:[8,51]]');
 INSERT INTO `sys_wf_transition` VALUES ('verification', 'occupancy_permit', 'submit', 'payment', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Submit for Payment', '[points:[645,110,653,161],type:\"arrow\",pos:[645,110],size:[8,51]]');
 INSERT INTO `sys_wf_transition` VALUES ('zoning-evaluation', 'building_permit', 'back', 'requirement-verification', 0, NULL, '[:]', NULL, 'Back Test', '[points:[241,325,300,183],type:\"arrow\",pos:[241,183],size:[59,142]]');
 INSERT INTO `sys_wf_transition` VALUES ('zoning-evaluation', 'building_permit', 'send-for-verification', 'zoning-verification', 0, NULL, '[visibleWhen:\"#{ false }\"]', NULL, 'Send for Verification', '[points:[308,326,377,279,451,255],type:\"arrow\",pos:[308,255],size:[143,71]]');
 INSERT INTO `sys_wf_transition` VALUES ('zoning-evaluation-revision', 'building_permit', 'reactivate', 'zoning-evaluation', 0, NULL, '[:]', NULL, 'Reactivate', '[points:[433,393,346,362],type:\"arrow\",pos:[346,362],size:[87,31]]');
-INSERT INTO `sys_wf_transition` VALUES ('zoning-verification', 'building_permit', 'approve', 'trade-evaluation', 2, NULL, '[:]', NULL, 'Approve', '[points:[535,200,559,78],type:\"arrow\",pos:[535,78],size:[24,122]]');
+INSERT INTO `sys_wf_transition` VALUES ('zoning-verification', 'building_permit', 'approve', 'trade-evaluation', 2, NULL, '[showConfirm:true,confirmMessage:\"You are about to start the Trade Evaluation process. Proceed?\"]', NULL, 'Approve', '[points:[535,200,559,78],type:\"arrow\",pos:[535,78],size:[24,122]]');
 INSERT INTO `sys_wf_transition` VALUES ('zoning-verification', 'building_permit', 'send-for-revision', 'zoning-evaluation-revision', 1, NULL, '[:]', NULL, 'Send for Revision', '[points:[524,260,508,356],type:\"arrow\",pos:[508,260],size:[16,96]]');
 COMMIT;
 
@@ -4772,7 +4649,7 @@ COMMIT;
 -- View structure for vw_building_permit
 -- ----------------------------
 DROP VIEW IF EXISTS `vw_building_permit`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit` AS select `a`.`objid` AS `objid`,`a`.`appno` AS `appno`,`a`.`orgcode` AS `orgcode`,`a`.`trackingno` AS `trackingno`,`a`.`apptype` AS `apptype`,`a`.`permittype` AS `permittype`,`a`.`contact_name` AS `contact_name`,`a`.`contact_detail` AS `contact_detail`,`a`.`contact_email` AS `contact_email`,`a`.`contact_mobileno` AS `contact_mobileno`,`a`.`dtfiled` AS `dtfiled`,`a`.`applicantid` AS `applicantid`,`a`.`description` AS `description`,`a`.`title` AS `title`,`a`.`occupancytypeid` AS `occupancytypeid`,`a`.`numunits` AS `numunits`,`a`.`fixedcost` AS `fixedcost`,`a`.`projectcost` AS `projectcost`,`a`.`dtproposedconstruction` AS `dtproposedconstruction`,`a`.`dtexpectedcompletion` AS `dtexpectedcompletion`,`a`.`totalfloorarea` AS `totalfloorarea`,`a`.`height` AS `height`,`a`.`numfloors` AS `numfloors`,`a`.`worktypes` AS `worktypes`,`a`.`taskid` AS `taskid`,`a`.`zoneclassid` AS `zoneclassid`,`a`.`zone` AS `zone`,`a`.`amount` AS `amount`,`a`.`issuanceid` AS `issuanceid`,`a`.`txnmode` AS `txnmode`,`a`.`location_lotno` AS `location_lotno`,`a`.`location_blockno` AS `location_blockno`,`a`.`location_street` AS `location_street`,`a`.`location_barangay_name` AS `location_barangay_name`,`a`.`location_barangay_objid` AS `location_barangay_objid`,`a`.`accessoryid` AS `accessoryid`,`e`.`name` AS `applicant_name`,`e`.`objid` AS `applicant_objid`,`bt`.`objid` AS `occupancytype_objid`,`bt`.`title` AS `occupancytype_title`,`od`.`objid` AS `occupancytype_division_objid`,`od`.`title` AS `occupancytype_division_title`,`og`.`objid` AS `occupancytype_group_objid`,`og`.`title` AS `occupancytype_group_title`,`zc`.`objid` AS `zoneclass_objid`,`zc`.`title` AS `zoneclass_title`,ltrim(concat((case when isnull(`a`.`location_lotno`) then '' else concat(' ',`a`.`location_lotno`) end),(case when isnull(`a`.`location_blockno`) then '' else concat(' ',`a`.`location_blockno`) end),(case when isnull(`a`.`location_street`) then '' else concat(' ',`a`.`location_street`) end),(case when isnull(`a`.`location_barangay_name`) then '' else concat(' ',`a`.`location_barangay_name`) end))) AS `location_address_text`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `sys_wf_node`.`title` from `sys_wf_node` where ((`sys_wf_node`.`processname` = 'building_permit') and (`sys_wf_node`.`name` = `t`.`state`))) AS `task_title`,`p`.`objid` AS `issuance_objid`,`p`.`controlno` AS `issuance_controlno`,`p`.`dtissued` AS `issuance_dtissued` from (((((((`building_permit` `a` join `building_permit_entity` `e` on((`a`.`applicantid` = `e`.`objid`))) join `building_permit_task` `t` on((`a`.`taskid` = `t`.`taskid`))) join `obo_occupancy_type` `bt` on((`a`.`occupancytypeid` = `bt`.`objid`))) join `obo_occupancy_type_division` `od` on((`bt`.`divisionid` = `od`.`objid`))) join `obo_occupancy_type_group` `og` on((`od`.`groupid` = `og`.`objid`))) left join `obo_zoneclass` `zc` on((`a`.`zoneclassid` = `zc`.`objid`))) left join `building_permit_issuance` `p` on((`a`.`issuanceid` = `p`.`objid`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit` AS select `a`.`objid` AS `objid`,`a`.`appno` AS `appno`,`a`.`orgcode` AS `orgcode`,`a`.`trackingno` AS `trackingno`,`a`.`apptype` AS `apptype`,`a`.`permittype` AS `permittype`,`a`.`contact_name` AS `contact_name`,`a`.`contact_detail` AS `contact_detail`,`a`.`contact_email` AS `contact_email`,`a`.`contact_mobileno` AS `contact_mobileno`,`a`.`dtfiled` AS `dtfiled`,`a`.`applicantid` AS `applicantid`,`a`.`description` AS `description`,`a`.`title` AS `title`,`a`.`occupancytypeid` AS `occupancytypeid`,`a`.`numunits` AS `numunits`,`a`.`fixedcost` AS `fixedcost`,`a`.`projectcost` AS `projectcost`,`a`.`dtproposedconstruction` AS `dtproposedconstruction`,`a`.`dtexpectedcompletion` AS `dtexpectedcompletion`,`a`.`totalfloorarea` AS `totalfloorarea`,`a`.`height` AS `height`,`a`.`numfloors` AS `numfloors`,`a`.`worktypes` AS `worktypes`,`a`.`taskid` AS `taskid`,`a`.`zoneclassid` AS `zoneclassid`,`a`.`zone` AS `zone`,`a`.`amount` AS `amount`,`a`.`issuanceid` AS `issuanceid`,`a`.`txnmode` AS `txnmode`,`a`.`location_lotno` AS `location_lotno`,`a`.`location_blockno` AS `location_blockno`,`a`.`location_street` AS `location_street`,`a`.`location_barangay_name` AS `location_barangay_name`,`a`.`location_barangay_objid` AS `location_barangay_objid`,`a`.`accessoryid` AS `accessoryid`,`a`.`contractorid` AS `contractorid`,`a`.`permitno` AS `permitno`,`a`.`dtissued` AS `dtissued`,`a`.`remarks` AS `remarks`,`e`.`name` AS `applicant_name`,`e`.`objid` AS `applicant_objid`,`bt`.`objid` AS `occupancytype_objid`,`bt`.`title` AS `occupancytype_title`,`od`.`objid` AS `occupancytype_division_objid`,`od`.`title` AS `occupancytype_division_title`,`og`.`objid` AS `occupancytype_group_objid`,`og`.`title` AS `occupancytype_group_title`,`zc`.`objid` AS `zoneclass_objid`,`zc`.`title` AS `zoneclass_title`,ltrim(concat((case when isnull(`a`.`location_lotno`) then '' else concat(' ',`a`.`location_lotno`) end),(case when isnull(`a`.`location_blockno`) then '' else concat(' ',`a`.`location_blockno`) end),(case when isnull(`a`.`location_street`) then '' else concat(' ',`a`.`location_street`) end),(case when isnull(`a`.`location_barangay_name`) then '' else concat(' ',`a`.`location_barangay_name`) end))) AS `location_address_text`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `sys_wf_node`.`title` from `sys_wf_node` where ((`sys_wf_node`.`processname` = 'building_permit') and (`sys_wf_node`.`name` = `t`.`state`))) AS `task_title` from ((((((`building_permit` `a` join `building_permit_entity` `e` on((`a`.`applicantid` = `e`.`objid`))) join `building_permit_task` `t` on((`a`.`taskid` = `t`.`taskid`))) join `obo_occupancy_type` `bt` on((`a`.`occupancytypeid` = `bt`.`objid`))) join `obo_occupancy_type_division` `od` on((`bt`.`divisionid` = `od`.`objid`))) join `obo_occupancy_type_group` `og` on((`od`.`groupid` = `og`.`objid`))) left join `obo_zoneclass` `zc` on((`a`.`zoneclassid` = `zc`.`objid`)));
 
 -- ----------------------------
 -- View structure for vw_building_permit_ancillary
@@ -4796,7 +4673,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for vw_building_permit_issuance
 -- ----------------------------
 DROP VIEW IF EXISTS `vw_building_permit_issuance`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_issuance` AS select `bp`.`appno` AS `appno`,`bp`.`title` AS `title`,`bi`.`objid` AS `objid`,`bi`.`appid` AS `appid`,`bi`.`typeid` AS `typeid`,`bi`.`controlno` AS `controlno`,`bi`.`dtissued` AS `dtissued`,`bi`.`issuedby_objid` AS `issuedby_objid`,`bi`.`issuedby_name` AS `issuedby_name`,`bi`.`txnmode` AS `txnmode`,`bi`.`txnref` AS `txnref`,`bi`.`txnreftype` AS `txnreftype`,`bi`.`taskid` AS `taskid`,`bi`.`remarks` AS `remarks`,`ot`.`title` AS `type_title`,`ot`.`controlnopattern` AS `type_controlnopattern`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `sys_wf_node`.`title` from `sys_wf_node` where ((`sys_wf_node`.`processname` = 'building_permit_issuance') and (`sys_wf_node`.`name` = `t`.`state`))) AS `task_title`,`os`.`org_objid` AS `org_objid`,`os`.`org_name` AS `org_name`,`ot`.`sectionid` AS `sectionid` from ((((`building_permit_issuance` `bi` join `obo_issuance_type` `ot` on((`bi`.`typeid` = `ot`.`objid`))) join `building_permit_issuance_task` `t` on((`bi`.`taskid` = `t`.`taskid`))) join `building_permit` `bp` on((`bi`.`appid` = `bp`.`objid`))) left join `obo_section` `os` on((`ot`.`sectionid` = `os`.`objid`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_issuance` AS select `bp`.`appno` AS `appno`,`bp`.`title` AS `title`,`bi`.`objid` AS `objid`,`bi`.`appid` AS `appid`,`bi`.`sectionid` AS `sectionid`,`bi`.`controlno` AS `controlno`,`bi`.`dtissued` AS `dtissued`,`bi`.`issuedby_objid` AS `issuedby_objid`,`bi`.`issuedby_name` AS `issuedby_name`,`bi`.`txnmode` AS `txnmode`,`bi`.`txnref` AS `txnref`,`bi`.`txnreftype` AS `txnreftype`,`bi`.`taskid` AS `taskid`,`bi`.`remarks` AS `remarks`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `dev_obo`.`sys_wf_node`.`title` from `sys_wf_node` where ((`dev_obo`.`sys_wf_node`.`processname` = 'building_permit_issuance') and (`dev_obo`.`sys_wf_node`.`name` = `t`.`state`))) AS `task_title`,`os`.`org_objid` AS `org_objid`,`os`.`org_name` AS `org_name`,`os`.`permit_title` AS `permit_title`,`os`.`permit_controlnopattern` AS `permit_controlnopattern`,`os`.`permit_template` AS `permit_template` from (((`building_permit_issuance` `bi` join `building_permit_issuance_task` `t` on((`bi`.`taskid` = `t`.`taskid`))) join `obo_section` `os` on((`bi`.`sectionid` = `os`.`objid`))) join `building_permit` `bp` on((`bi`.`appid` = `bp`.`objid`)));
 
 -- ----------------------------
 -- View structure for vw_building_permit_professional
@@ -4808,7 +4685,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- View structure for vw_building_permit_section
 -- ----------------------------
 DROP VIEW IF EXISTS `vw_building_permit_section`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_section` AS select `a`.`objid` AS `objid`,`a`.`appid` AS `appid`,`a`.`typeid` AS `typeid`,`a`.`taskid` AS `taskid`,`a`.`issuanceid` AS `issuanceid`,`et`.`title` AS `type_title`,`et`.`sortindex` AS `type_sortindex`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `sys_wf_node`.`title` from `sys_wf_node` where ((`sys_wf_node`.`processname` = 'building_permit_section') and (`sys_wf_node`.`name` = `t`.`state`))) AS `task_title`,`p`.`objid` AS `issuance_objid`,`p`.`controlno` AS `issuance_controlno`,`p`.`dtissued` AS `issuance_dtissued`,`p`.`typeid` AS `issuance_typeid` from (((`building_permit_section` `a` join `building_permit_section_task` `t` on((`a`.`taskid` = `t`.`taskid`))) join `obo_section` `et` on((`a`.`typeid` = `et`.`objid`))) left join `building_permit_issuance` `p` on((`a`.`issuanceid` = `p`.`objid`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_building_permit_section` AS select `a`.`objid` AS `objid`,`a`.`appid` AS `appid`,`a`.`typeid` AS `typeid`,`a`.`taskid` AS `taskid`,`a`.`issuanceid` AS `issuanceid`,`et`.`title` AS `type_title`,`et`.`sortindex` AS `type_sortindex`,`et`.`issuepermit` AS `type_issuepermit`,`et`.`requirefee` AS `type_requirefee`,`et`.`permit_name` AS `type_permitname`,`app`.`task_state` AS `app_task_state`,`t`.`state` AS `task_state`,`t`.`startdate` AS `task_startdate`,`t`.`enddate` AS `task_enddate`,`t`.`assignee_objid` AS `task_assignee_objid`,`t`.`assignee_name` AS `task_assignee_name`,`t`.`actor_objid` AS `task_actor_objid`,`t`.`actor_name` AS `task_actor_name`,(select `sys_wf_node`.`title` from `sys_wf_node` where ((`sys_wf_node`.`processname` = 'building_permit_section') and (`sys_wf_node`.`name` = `t`.`state`))) AS `task_title` from (((`building_permit_section` `a` join `building_permit_section_task` `t` on((`a`.`taskid` = `t`.`taskid`))) join `obo_section` `et` on((`a`.`typeid` = `et`.`objid`))) join `vw_building_permit` `app` on((`a`.`appid` = `app`.`objid`)));
 
 -- ----------------------------
 -- View structure for vw_obo_occupancy_type

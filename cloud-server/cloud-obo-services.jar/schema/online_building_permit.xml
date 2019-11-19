@@ -14,6 +14,8 @@
 		<field name="description" />
 		<field name="occupancytypeid" />
 		<field name="numunits" type="integer"/>
+		<field name="numfloors" type="integer"/>
+
 		<field name="totalfloorarea" type="decimal"/>
 		<field name="height" type="decimal"/>
 
@@ -30,6 +32,10 @@
 		<complex name="applicant" ref="online_building_permit_entity" jointype="many-to-one" required="false">
 			<key field="applicantid" target="objid" />
 		</complex>	
+
+		<complex name="contractor" ref="vw_online_building_permit_professional" jointype="many-to-one" required="false">
+			<key field="contractorid" target="objid" />
+		</complex>
 
 		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one" required="false">
 			<key field="occupancytypeid" target="objid" />
