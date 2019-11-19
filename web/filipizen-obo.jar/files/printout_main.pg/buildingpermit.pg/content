@@ -1,128 +1,385 @@
 <%def app = PARAMS.app; %>
 
-<style type="text/css">
-	body{font-size: 14px;}
-	p {display: block !important;}
-	li::before {content:none;display: table-cell;text-align: right;padding-right: 15px;}
-</style>
 
-<table  width="100%">
-	<tr>
-		<td style="width:200px;">logo</td>
-		<td style="text-align:left">
-			<h3 style="text-align:left">Republic of the Philippines</h3>
-			<h3 style="text-align:left">${app.org.formalname}</h3>
-			<h2 style="text-align:left">Office of the Building Official</h2>
-			<h1 style="text-align:left"><b>ONE-STOP SHOP FOR CONSTRUCTION PERMITS</b></h1>
-			<p></p>
-		</td>
-	</tr>
-	<tr>
-		<td  colspan="2" style="text-align:center">
-			<p>Checklist pf requirements</p>
-			<p>Certificate of occupancy</p>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<table>
-				<tr>
-					<td style="width:20px;"><input type="checkbox"></td>
-					<td><p>Three (3) copies of duty accomplished Applicaiton form of Certificate of Occupancy</p></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><p>Three (3) copies of duly accomplished and notarized form for Certificate of Completion</p></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><p>Three (3) sets of As-Built Plans showing the deviations made from the approved building plans, prepared, signed and sealed over the printed names of the duly licensed and registered professionals who signed the approved building plans </p></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><p>Three (3) sets of As-Built Plans showing the deviations made from the approved building plans, prepared, signed and sealed over the printed names of the duly licensed and registered professionals who signed the approved building plans </p></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" style="text-align:center">
+	<div class="header-container">
+		<div class="formno">
+			<p>NBC FORM NO. B-01</p>
+		</div>
+		<div class="header">
+			<h3>Republic of the Philippines</h3>
+			<h3>${app.org.formalname}</h3>
+			<h3>${app.org.province}</h3>
 			<br>
-		<p >I HEREBY CERTIFY as a duly licensed Geodetic Engineer that the newly constructed/renovated/repaired ________________________________ is within the boundaries of Lot ____________________, Psd-¬__________, located at ____________________, Legazpi City and did not encroach any adjoining property.</p>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<div style="width:200px;float:right;margin-right:20px;margin-bottom:30px;">
-				<p style="width:200px;border-bottom:1px solid #000;padding-top:50px;text-align:center">November 23, 2019</p>
-				<p style="text-align:center">Geodetic Engineer</p>
-				<p>PRC No. :</p>
-				<p>PTR No. :</p>
-				<p>Issued on :</p>
-				<p>Issued at :</p>
-				<p>Date :</p>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<table>
-				<tr>
-					<td style="width:20px;"><input type="checkbox"></td>
-					<td><p>Three (3) sets of As-Built Plans showing the deviations made from the approved building plans, prepared, signed and sealed over the printed names of the duly licensed and registered professionals who signed the approved building plans </p></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><p>Three (3) sets of As-Built Plans showing the deviations made from the approved building plans, prepared, signed and sealed over the printed names of the duly licensed and registered professionals who signed the approved building plans </p></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" style="text-align:center">
-			<br>
-		<p>I HEREBY CERTIFY that the newly constructed/renovated/repaired ________________________________ with Building Permit No. ____________________ issued on ____________________, was completed in accordance with the approved plans and specifications, and in conformance with the provisions of the National Building Code of the Philippines, Accessibility Law and other pertinent laws/referral codes.</p><br>
-		<p>FURTHER CERTIFIES that the building was completed to be structurally sound, aesthetically functional and generally safe for occupancy for the purpose it was built.</p>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<div style="width:200px;float:right;margin-right:20px;margin-bottom:30px;">
-				<p style="width:200px;border-bottom:1px solid #000;padding-top:50px;text-align:center">November 23, 2019</p>
-				<p style="text-align:center">Civil Engineer or Architect</p>
-				<p>PRC No. :</p>
-				<p>PTR No. :</p>
-				<p>Issued on :</p>
-				<p>Issued at :</p>
-				<p>Date :</p>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<table>
-				<tr>
-					<td style="width:20px;"><input type="checkbox"></td>
-					<td><p>Photographs of the completed structure showing front, sides and rear areas </p></td>
-				</tr>
-				<tr>
-					<td><input type="checkbox"></td>
-					<td><p>Photographs of the completed structure showing front, sides and rear areas</p></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2">
-			<div style="margin-top:30px;">
-				<p><b>NOTE:</b></p>
-				<ul>
-					<li>The contents of all design plans/drawings, specifications and other documents prepared by the respective design professionals must be based from the requirements as prescribed by the provisions of Rule III, Section 302 (Application for Permits) of the Implementing Rules and Regulations of the National Building Code of the Philippines (PD 1096) and the latest Zoning Ordinance of the City</li>
-					<li>Only COMPLETE and COMPLIANT applications will be accepted</li>
-					<li>“SIMPLE STRUCTURES,” under JMC 2018-01, are defined as structures with a maximum floor area of 1,500 sq. m., which covers the following types of structures: (a) Single dwelling residential of not more than three (3) storeys; (b) Commercial buildings of not more than two (2) storeys; (c) Renovation within a mall with issued Building Permit; and (d) Warehouse storing non-hazardous substance.</li>
-				</ul>
-			</div>
-		</td>
-	</tr>
+			<h2>Office of the Building Official</h2>
+			<h1><b>Application for Building Permit</b></h1>
+		</div>
+		<div class="barcode">
+			<p><b>Tracking No.</b></p>
+			<center><img id='qrcode' src="https://api.qrserver.com/v1/create-qr-code/?data=QWSHYG1234&amp;size=250x250" width="80" height="80" class="img-responsive"/></center>
+			<p>QWSHYG1234</p>
+		</div>
+	</div>	
 
-</table>
+	<br><br>
+	<table align="center" width="100%">
+		<tr>
+			<td>Application No.
+				<table class="smallBox">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</td>
+			<td>Area No 
+				<table class="smallBox">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<table align="center" width="100%">
+		<tr>	
+			<td>
+			<p class="title"><b>Box 1 (To be accomplished in print print by the owner/application)</b></p>
+			<table align="center" class="boxpermit" width="100%">
+				<tbody>
+					<tr>
+						<td width="15%">owner/Applicant</td>
+						<td colspan="2">last name</td>
+						<td colspan="3">firstname</td>
+						<td colspan="1">M.I</td>
+						<td colspan="2" class="tdborder">TIN</td>
+					</tr>
+					<tr class="trborder">
+						<td></td>
+						<td colspan="2"><label class="data">${app.applicant?.lastname}</label></td>
+						<td colspan="3"><label class="data">${app.applicant?.firstname}</label></td>
+						<td colspan="1"><label class="data">${app.applicant?.middleinitial}</label></td>
+						<td colspan="2" class="tdborder"><label class="data">${app.applicant?.tin}</label></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td colspan="2">For construction Owned</td>
+						<td colspan="3" class="tdborder">form of ownership</td>
+						<td colspan="4" class="tdborder"> use or character of occupancy</td>
+					</tr>
+					<tr>
+						<td colspan="2"><label class="data">${app.applicant?.name}</label></td>
+						<td colspan="3" rowspan="2" class="tdborder"><label class="data">${app.applicant?.entitytype}</label></td>
+						<td colspan="4" rowspan="2" class="tdborder"><label class="data">${app.occupancytype?.title} -  ${app.occupancytype?.division?.objid}</label></td>
+					</tr>
+					<tr class="trborder">
+						<td colspan="9">By an enterprise</td>
+					</tr>
+					
+				</tbody>
+				<tbody>
+					<tr>
+						<td>address no.</td>
+						<td> street </td>
+						<td colspan="2">Barangay</td>
+						<td colspan="3">City/Municipality</td>
+						<td>Zip Code</td>
+						<td class="tdborder">Telephone No.</td>
+					</tr>
+					<tr class="trborder">
+						<td colspan="2"><label class="data">${app.applicant.address?.bldgno}, ${app.applicant?.address.street}</label></td>
+						<td colspan="2"><label class="data"><label class="data">${app.applicant.address?.barangay?.name}</label></td>
+						<td colspan="3"><label class="data">${app.applicant?.address?.citymunicipality}</label></td>
+						<td><label class="data">${app.applicant?.address?.zipcode}</label></td>
+						<td class="tdborder"><label class="data">${app.applicant?.phoneno}</label></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<td colspan="2">Location of Construction:</td>
+						<td colspan="2">Lot No. <label class="underline data">${app.location?.lotno}</label></td>
+						<td  colspan="2">Blk No. <label class="underline data">${app.location?.blockno}</label></td>
+						<td colspan="2">TCT No.  <label class="underline data">${app?.location?.tctno}</label></td>
+						<td >Tax Dec No. <label class="underline data">${app?.location?.tdno}</label></td>
+					</tr>
+					<tr class="trborder trlocation">
+						<td colspan="3">Street <label class="underline data">${app.location?.street}</label></td>
+						<td colspan="3">Barangay <label class="underline data">${app.location.barangay?.name}</label></td>
+						<td colspan="3">City/Municipality <label class="underline data">${app.org?.formalname}</label></td>
+					</tr>
+					<tr>
+						<td colspan="9"><b>Scope of work</b></td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="checkbox"> New Construction</td>
+						<td colspan="4"><input type="checkbox"> Renovation</td>
+						<td colspan="2"><input type="checkbox"> Raising</td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="checkbox"> Erection</td>
+						<td colspan="4"><input type="checkbox"> Conversion</td>
+						<td colspan="2"><input type="checkbox"> Accessory Building/Structure</td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="checkbox"> Addition</td>
+						<td colspan="4"><input type="checkbox"> Repair</td>
+						<td colspan="2"><input type="checkbox"> Other (specify) <label class="underline"></td>
+					</tr>
+					<tr class="last-td trborder">
+						<td colspan="3"><input type="checkbox"> Alteration</td>
+						<td colspan="6"><input type="checkbox"> Moving</td>
+					</tr>
+					<tr>
+						<td colspan="9"><b>Use or Character of Occupancy</b></td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="checkbox"> Group A : Residential, Dwellings</td>
+						<td colspan="4"><input type="checkbox"> Group F : Industrial</td>
+						<td colspan="2"><input type="checkbox"> Others (Specify)</td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="checkbox"> Group B : Residential Hotel, Apartment</td>
+						<td colspan="6"><input type="checkbox"> Group G : Industrial Storage and Hazardous</td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="checkbox"> Group C : Educational, Recreational</td>
+						<td colspan="6"><input type="checkbox"> Group H : Recreational, Assembly Occupant Load Less than 1000</td>
+					</tr>
+					<tr>
+						<td colspan="3"><input type="checkbox"> Group D : Institutional</td>
+						<td colspan="6"><input type="checkbox"> Group I : Recreational, Assembly Occupant Load 1000 or More</td>
+					</tr>
+					<tr class="trborder">
+						<td colspan="3"><input type="checkbox"> Group E : Business and Mercantile</td>
+						<td colspan="6"><input type="checkbox"> Group J : Agricultural, Accessory</td>
+					</tr>
+					<tr>
+						<td colspan="5">Occupancy Classified ________________________ </td>
+						<td colspan="4">Total Estimate cost P ________________________ </td>
+					</tr>
+					<tr>
+						<td colspan="5">Number of Units ________________________ </td>
+						<td colspan="4">Proposed Date of Construction ________________________ </td>
+					</tr>
+					<tr class="last-td">
+						<td colspan="5">Total Floor Area ________________________ SQUARE METERS</td>
+						<td colspan="4">Expected date of completion ________________________ </td>
+					</tr>
+				</tbody>
+			</table>
+			</td>
+			<td style="padding:0px">
+				<p>Do not Fill-up (NSO USE ONLY)</p>
+					<table border="1" class="boxpermit sidebox" width="100%" height="95%">
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td class="fill"></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+			</td>
+		</tr>
+	</table>
+		
+	<table align="center" width="100%">
+			<tr>
+				<td colspan="2">
+					<p class="title"><b>Box 2</b></p>
+					<table class="boxpermit"  width="100%">
+						<tr class="trborder">
+							<td colspan="3"><b>Full-time inspector and supervisor of construction works (Representing the owner)</b></td>
+						</tr>
+						<tr  class="trborder">
+							<td align="center" rowspan="4" class="signature"><p class="underline ownerbox data"></p><br><p><b>Architect or Civil Engineer</b></p> <br><p>(Signed and Sealed Over Printed Name)</p><br><p>Date </p></td>
+							<td colspan="2" class="tdborder">Address</td>
+						</tr>
+						<tr  class="trborder">
+							<td class="tdborder">PRC No.</td>
+							<td class="tdborder">Validity</td>
+						</tr>
+						<tr  class="trborder">
+							<td class="tdborder">PTR No.</td>
+							<td class="tdborder">Daye Issued</td>
+						</tr>
+						<tr>
+							<td class="tdborder">Issued at</td>
+							<td class="tdborder">TIN</td>
+						</tr>
+					</table>
+				</td>
+			</tr>	
+			<!-- second row -->
+			<tr>
+				<td>
+					<p class="title">Box 3</p>
+					@obo:print_owner_box( title: '<b>BUILDING OWNER</b>', owner: app.owner )
+				</td>
+				<td>
+					<p class="title">Box 4</p>
+				@obo:print_owner_box( title: 'WITH CONSENT: <b>LOT OWNER</b>', owner: app.lotowner )
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<p class="title"><b>Box 5</b></p>
+					<table class="boxpermit" align="center" width="100%">
+						<tr class="trborder" style="height:40px;">
+							<td>Republic of the Philippines ) S.S.</td>
+							<td colspan="3">City of Legazpi __________)</td>
+						</tr>
+						<tr style="height:60px;">
+							<td colspan="4"><p>BEFORE, at the City/Municipality of ________________________________, on _____________________________ personally appeared the following:</p>
+							</td>
+						</tr>
+						<tr>
+							<td><label class="undeline"></label><p>APPLICANT</p></td>
+							<td><label class="undeline"></label><p>CTC No.</p></td>
+							<td><label class="undeline"></label><p>Date Issued</p></td>
+							<td><label class="undeline"></label><p>Place Issued</p></td>
+						</tr>
+						<tr>
+							<td><label class="undeline"></label><p>LICENSED  ARCHITECT OR CIVIL ENGINEER</p></td>
+							<td><label class="undeline"></label><p>CTC No.</p></td>
+							<td><label class="undeline"></label><p>Date Issued</p></td>
+							<td><label class="undeline"></label><p>Place Issued</p></td>
+						</tr>
+						<tr>
+							<td colspan="4"><p>whose signature appear herein above, known to me to be same persons who executed this standard prescribed form and aknowledge to me that the same is thier free and voluntary and deed.</p><br>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2"><p>Doc No.</p>
+							<p>Page No.</p>
+							<p>Book No.</p>
+							<p>Series No.</p></td>
+							<td colspan="2"><p>NOTARY PUBLIC (Until December_____________)</p></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+	</table>
+
