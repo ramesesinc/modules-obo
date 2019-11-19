@@ -21,91 +21,26 @@ class BuildingPermitFormReportInterceptor {
 	@DataContext("building_permit_finding")
 	def findingEm;
 
-	
-
 	@DataContext("vw_building_permit_fee_payment")
 	def payEm;
 
-
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_claimstub'}")
-	public void getBuildingPermitClaimStubReport( def evt ) {
-		def p = evt.args[0];
-		def result = evt.result;
-		def id = p.parameters.objid;
-		def ea = vwAppEm.find( [objid: id ] ).first();
-		def r = taskEm.find( [refid: id, state: 'receiving'] ).orderBy("startdate DESC").first();
-		ea.startdate = r.startdate;
-		ea.enddate = r.enddate;
-		ea.receiver = r.assignee;
-		result.data = ea;
-	}	
-
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_requirement_checklist'}")
-	public void getBuildingPermitVerificationChecklistReport( def evt ) {
-		def p = evt.args[0];
-		def result = evt.result;
-		def transmittalid = p.parameters.transmittalid;
-		if(!transmittalid) throw new Exception("transmittalid is required in requirement checklist report")
-
-		def t = transmittalEm.find([objid: transmittalid]).first();
-		if(!t) throw new Exception("Transmittal " + transmittalid + " not found ");
-
-		def ea = vwAppEm.find( [objid: t.appid ] ).first();
-		ea.receiver = t.createdby;
-		ea.transmittalno = t.objid;
-		ea.items = reqEm.find( [transmittalid : t.objid ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
-		result.data = ea;
-	}	
-
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_finding_checklist'}")
-	public void getBuildingPermitFindingChecklistReport( def evt ) {
-		def p = evt.args[0];
-		def result = evt.result;
-		def transmittalid = p.parameters.transmittalid;
-		if(!transmittalid) throw new Exception("transmittalid is required in requirement checklist report")
-
-		def t = transmittalEm.find([objid: transmittalid]).first();
-		if(!t) throw new Exception("Transmittal " + transmittalid + " not found ");
-
-		def ea = vwAppEm.find( [objid: t.appid ] ).first();
-		ea.receiver = t.createdby;
-		ea.transmittalno = t.objid;
-		ea.items = findingEm.find( [transmittalid : t.objid ] ).where( "supersederid IS NULL AND state = 2" ).orderBy("type.sortorder").list();
-
-		result.data = ea;
-	}	
-
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_issuance'}")
-	public void getBuildingPermitIssuanceReport( def evt ) {
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid.matches('building_permit|building_permit_signboard')}")
+	public void getBuildingPermitReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def id = p.parameters.objid;
 		
-		def iss = issuanceEm.find( [objid: id ] ).first();
-		def app = vwAppEm.find( [objid: iss.appid ] ).first();	
+		def app = vwAppEm.find( [objid: id ] ).first();	
 		app.name = app.applicant?.lastname + ", " + app.applicant?.firstname;
 
-		app.controlno = iss.controlno;
-		app.dtissued = iss.dtissued;
-		app.issuedby = iss.issuedby;
-		app.remarks = iss.remarks;
-
 		//get the total payment per section
-		def totals = null;
-		def em = payEm.find( [appid: iss.appid ] ).select("payment.refno,payment.refdate,amount:{SUM(amount)}").groupBy( "payment.refno,payment.refdate" );
-
-		if( iss.sectionid ) {
-			totals = em.where( " sectionid = :sectionid", [sectionid: iss.sectionid ] ).first();
-		}
-		else {
-			totals = em.where( " org.objid IS NULL " ).first();
-		}
+		def em = payEm.find( [appid: app.objid ] ).select("payment.refno,payment.refdate,amount:{SUM(amount)}").groupBy( "payment.refno,payment.refdate" );
+		def totals = em.where( " org.objid IS NULL " ).first();
 		if( totals ) {
 			app.receiptno = totals.payment.refno;
 			app.receiptdate = totals.payment.refdate;
 			app.amount = totals.amount;		
 		}
-
 		result.data = app;
 	}	
 

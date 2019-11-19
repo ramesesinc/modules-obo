@@ -7,6 +7,7 @@
 \$put("finish", new function() {
   var self = this;  
   var app = \$get("app").code;
+  
   this.onload = function() {
     app.updateStepNavbar(); 
   }

@@ -1,0 +1,26 @@
+<workunit schemaName="vw_occupancy_permit_section" processName="occupancy_permit_section">
+    <invokers>
+        <invoker type="vw_occupancy_permit_section:open" caption="Occupancy Permit Section" action="open" index="1"/>
+
+        <invoker type="extActions" caption="View Application" action="viewApplication" index="0" />
+       
+        <!-- Fee Related Actions -->
+        <invoker type="feeActions" caption="Auto Assess" action="assess" index="1" 
+                visibleWhen="#{ task.assignee?.objid !=null 
+                    &amp;&amp; task.state.matches( 'review|evaluation|evaluation-approval') }"   />
+                    
+        <invoker type="feeActions" caption="Add Fee Manually" action="addFee" index="2" 
+                visibleWhen="#{ task.assignee?.objid !=null 
+                    &amp;&amp; task.state.matches( 'review|evaluation|evaluation-approval') }" />
+        
+        <!-- finding related actions -->         
+        <invoker type="findingActions" caption="Add New Finding" action="addFinding" index="1" 
+                visibleWhen="#{ task.assignee?.objid !=null 
+                    &amp;&amp; task.state.matches( 'review|evaluation|evaluation-approval') }" />
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OccupancyPermitSectionModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OccupancyPermitSectionPage" />
+    </pages>
+</workunit>

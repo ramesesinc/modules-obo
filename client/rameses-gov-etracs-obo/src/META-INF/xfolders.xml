@@ -22,11 +22,6 @@
             <folder id="building_permit_section" caption="Building Permit (For Evaluation)" index="0" icon="home/icons/folder.png"/>
             <folder id="occupancy" caption="Occupancy Permit" index="1" icon="home/icons/folder.png"/>
             <folder id="occupancy_permit_section" caption="Occupancy Permit (For Inspection)" index="1" icon="home/icons/folder.png"/>
-            <folder id="permit_issuance" caption="Permits/Clearances (For Release)" index="5" icon="home/icons/folder.png"/>
-            <!--
-            <folder id="occupancy" caption="Occupancy Permit" index="0" icon="home/icons/folder.png"/>
-            <folder id="occupancy_other" caption="Occupancy Permit (Others)" index="0" icon="home/icons/folder.png"/>
-            -->
             <folder id="master" caption="Master Files" index="5" icon="home/icons/master.png"/>
             <folder id="tools" caption="Tools" index="7" />
         </folder>

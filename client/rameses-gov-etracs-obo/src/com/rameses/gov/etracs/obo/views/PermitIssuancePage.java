@@ -41,12 +41,14 @@ public class PermitIssuancePage extends javax.swing.JPanel {
 
         xTextField1.setCaption("Control No");
         xTextField1.setName("entity.controlno"); // NOI18N
+        xTextField1.setVisibleWhen("#{ showcontrolno == true }");
         xTextField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xTextField1.setRequired(true);
         xFormPanel1.add(xTextField1);
 
         xDateField1.setCaption("Validity Date");
         xDateField1.setName("entity.dtvalidity"); // NOI18N
+        xDateField1.setVisibleWhen("#{ showcontrolno == true }");
         xFormPanel1.add(xDateField1);
 
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 60));

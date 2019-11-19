@@ -14,6 +14,13 @@ public class BuildingPermitSectionService  {
 	@DataContext("vw_building_permit_info")
 	def vwInfoEm;
 
+	@DataContext("obo_permit_type")
+	def permitTypeEm;
+
+	@DataContext("building_permit_ancillary")
+	def ancillaryEm;
+
+
 	@ProxyMethod
 	public void saveInfos( def items ) {
 		items.each {
@@ -33,7 +40,7 @@ public class BuildingPermitSectionService  {
 
 	@ProxyMethod
 	public def getInfos( def o ) {
-		if(!o.subappid ) throw new Exception("subappid is required in OboBuildingSubapplicationService.getInfos");
+		if(!o.subappid ) throw new Exception("subappid is required in BuildingPermitSectionService.getInfos");
 		def list = vwInfoEm.find( [subappid: o.subappid] ).orderBy("sortorder").list();
 		list.each {
 			if( it.datatype == 'date') it.value = it.datevalue;
@@ -52,5 +59,15 @@ public class BuildingPermitSectionService  {
 		}					
 	}
 
+	@ProxyMethod
+	public def addAncillary( def o ) {
+		def appid = o.appid;
+		def sectionid = o.typeid;
+		def pmtid = permitTypeEm.find( [sectionid: sectionid ] ).first()?.objid;
+		if(!pmtid) throw new Exception("There is no associated ancillary for this section");
+		if(  !ancillaryEm.find( [appid: appid, permittypeid: pmtid ] ).exists() ) {
+			return ancillaryEm.create( [appid: appid, state:'PENDING', type: [objid:pmtid], permittypeid: pmtid ] );
+		}
+	}
 
 }

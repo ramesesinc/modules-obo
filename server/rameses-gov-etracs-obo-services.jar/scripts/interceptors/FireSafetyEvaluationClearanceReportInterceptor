@@ -15,7 +15,7 @@ class FireSafetyEvaluationClearanceReportInterceptor {
 	public void getBuildingPermitIssuanceReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		def id = p.parameters.objid;
+		def id = p.parameters.id;
 	
 
 		def iss = evalEm.find( [objid: id ] ).first();

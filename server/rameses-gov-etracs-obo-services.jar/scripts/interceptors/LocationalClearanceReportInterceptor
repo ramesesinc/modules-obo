@@ -15,9 +15,8 @@ class LocationalClearanceReportInterceptor {
 	public void getBuildingPermitIssuanceReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		def id = p.parameters.objid;
+		def id = p.parameters.id;
 	
-
 		def iss = locationalEm.find( [objid: id ] ).first();
 		def app = vwAppEm.find( [objid: iss.appid ] ).first();	
 		app.name = app.applicant?.lastname + ", " + app.applicant?.firstname;

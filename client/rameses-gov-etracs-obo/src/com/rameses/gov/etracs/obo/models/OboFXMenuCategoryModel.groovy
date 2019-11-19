@@ -46,7 +46,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
                     if(!b) return;
                 };
                 def id = title + "/" + it.objid;
-                def notid = it.objid.toLowerCase();
+                def notid = title + ":" + it.objid.toLowerCase();
                 subitems << [ id: id, caption: it.title, index: (i++), notificationid: notid, event: title ];
                 def sinv = title + ":list"
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);

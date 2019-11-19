@@ -1,0 +1,54 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+         
+        <!--
+        <invoker type="appActions" 
+                caption="Email Claim Stub"
+                xrole="REQUIREMENT_REVIEWER"
+                action="sendClaimstub"
+                index="3"
+                visibleWhen="#{ task.state =='requirement-verification' 
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno != null}"/> 
+        -->            
+        
+        <invoker type="vw_building_permit:form:appActions" 
+                caption="Accept Application"
+                reportId="building_permit_claimstub"
+                reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"
+                role="REQUIREMENT_REVIEWER"
+                action="create" 
+                visibleWhen="#{ task.state =='requirement-verification' 
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno == null  &amp;&amp; entity.transmittalid == null }"/>
+                
+         <invoker type="vw_building_permit:form:appActions" 
+                caption="Print Claim Stub"
+                reportId="building_permit_claimstub"
+                reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"
+                action="preview"
+                visibleWhen="#{ task.state =='requirement-verification'
+                    &amp;&amp; entity.appno != null }"/>
+
+        <invoker type="vw_occupancy_permit:form:appActions" 
+                caption="Accept Application"
+                reportId="occupancy_permit_claimstub"
+                reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"
+                action="create" 
+                role="REQUIREMENT_REVIEWER"
+                visibleWhen="#{ task.state =='requirement-verification' 
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno == null  &amp;&amp; entity.transmittalid == null }"/>
+                    
+         <invoker type="vw_occupancy_permit:form:appActions" 
+                caption="Print Claim Stub"
+                reportId="occupancy_permit_claimstub"
+                reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"
+                action="preview" 
+                visibleWhen="#{ task.state =='requirement-verification'
+                    &amp;&amp; entity.appno != null }"/>
+                    
+        <invoker type="formActions" caption="Send Email" action="sendEmail"/>            
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationAppNoModel" />
+</workunit>

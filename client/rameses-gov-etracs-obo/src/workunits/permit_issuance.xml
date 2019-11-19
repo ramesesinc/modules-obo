@@ -1,7 +1,7 @@
 <workunit>
     <invokers>
         <invoker type="obo:permit_issuance" target="popup"
-            caption="Issue Permit/Clearance" action="init" />
+            caption="Issue Permit/Clearance" />
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.PermitIssuanceModel" />
     <pages>

@@ -1,6 +1,6 @@
 <schema>
 	<element tablename="occupancy_permit_section_task">
-		<field name="taskid" primary="true"  prefix="OBOOPSECTSK" visible="true"/>
+		<field name="taskid" primary="true"  prefix="OCCPMTSECTSK" visible="true"/>
 		<field name="refid" />		
 		<field name="parentprocessid" />
 		<field name="state" required="true"/>

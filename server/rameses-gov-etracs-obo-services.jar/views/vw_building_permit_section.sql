@@ -4,9 +4,10 @@ SELECT
    a.*,
    et.title AS type_title,
    et.sortindex AS type_sortindex,
-   et.issuepermit AS type_issuepermit,
    et.requirefee AS type_requirefee,
-   et.permit_name AS type_permitname,
+   et.issuepermit AS type_issuepermit,
+   et.reportname AS type_reportname,
+
 
    app.task_state AS app_task_state, 
 

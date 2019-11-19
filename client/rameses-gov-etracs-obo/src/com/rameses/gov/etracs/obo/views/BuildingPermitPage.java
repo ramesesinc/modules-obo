@@ -42,6 +42,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xLabel6 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
         xLabel10 = new com.rameses.rcp.control.XLabel();
+        xLabel32 = new com.rameses.rcp.control.XLabel();
         xDecimalField4 = new com.rameses.rcp.control.XDecimalField();
         xDecimalField5 = new com.rameses.rcp.control.XDecimalField();
         xDecimalField2 = new com.rameses.rcp.control.XDecimalField();
@@ -148,6 +149,11 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xLabel10.setExpression("#{entity.numunits}");
         xLabel10.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel10);
+
+        xLabel32.setCaption("No. of Storeys");
+        xLabel32.setExpression("#{entity.numfloors}");
+        xLabel32.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel32);
 
         xDecimalField4.setCaption("Total Floor Area");
         xDecimalField4.setDisableWhen("#{ true }");
@@ -335,7 +341,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         xTabbedPane2.addTab("General", jPanel3);
@@ -1107,6 +1113,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLabel xLabel30;
     private com.rameses.rcp.control.XLabel xLabel31;
+    private com.rameses.rcp.control.XLabel xLabel32;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel6;

@@ -2,32 +2,34 @@ import com.rameses.annotations.*;
 
 class OboEPaymentInterceptor {
 
-	@Service(value="BuildingPermitBillingService", connection="local-obo-server")
-	def oboSvc;
+	@Service(value="OboBillingService", connection="local-obo-server")
+	def billingSvc;
 
-	@After(pattern="OnlinePaymentService.getBilling", eval="#{args[0].txntype=='building_permit'}")
-	public void fetchBilling( def evt ) { 
+	@Service(value="OboPaymentService", connection="local-obo-server")
+	def paymentSvc;
+
+	@After(pattern="OnlinePaymentService.getBilling", eval="#{args[0].txntype.toString().matches('building_permit|occupancy_permit')}")
+	public void fetchBilling( evt ) { 
 		def r = evt.args[0];
 		def result = evt.result;
-		println "GET BILLING HERE .....";
-		def bill = oboSvc.getBilling( r );
+
+		def bill = billingSvc.getBilling( r );
 		result.putAll( bill );
 	}
 
-	@Before(pattern="OnlinePaymentService.createPaymentOrder", eval="#{args[0].txntype=='building_permit'}")
-	public void createPaymentOrder( def evt ) { 
+	@Before(pattern="OnlinePaymentService.createPaymentOrder", eval="#{args[0].txntype.toString().matches('building_permit|occupancy_permit')}")
+	public void createPaymentOrder( evt ) { 
 		def r = evt.args[0];
-		def result = evt.result;
-		def po = oboSvc.getPaymentOrderInfo( r );
+
+		def po = billingSvc.getPaymentOrderInfo( r );
 		r.info = po;
 	}
 
-	@After(pattern="EORService.post", eval="#{args[0].txntype=='building_permit'}")
-	public void afterPostPayment( def evt ) { 
-		def po = evt.args[0];
-		po.receipt = evt.result;
-		po.receipt.type = 'eor';
-		oboSvc.postPayment(po);
+	@After(pattern="EORService.post", eval="#{args[0].txntype.toString().matches('building_permit|occupancy_permit')}")
+	public void afterPostPayment( evt ) { 
+		def po = evt.args[0]; 
+		po.receipt = evt.result; 
+		po.receipt.type = 'eor'; 
+		paymentSvc.postPayment( po ); 
 	}
-
 }
