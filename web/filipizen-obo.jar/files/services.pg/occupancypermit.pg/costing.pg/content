@@ -16,31 +16,31 @@
 		this.labor = [];
 		this.others = [];
 
-		this.onload = function() { 
-			self.permit = app.service.getApplication( {appid: app.appid, include_costitems: true } );
-			for( var i=0; i<self.permit.costitems.length;i++ ) {
-				var v = self.permit.costitems[i];
-				if( v.item.category == 'MATERIALS') {
-					self.materials.push( v );
-				}
-				else if( v.item.category == 'LABOR') {
-					self.labor.push( v );
-				}
-				else {
-					self.others.push(v);
-				}
-			}
-		}
+		// this.onload = function() { 
+		// 	self.permit = app.service.getApplication( {appid: app.appid, include_costitems: true } );
+		// 	for( var i=0; i<self.permit.costitems.length;i++ ) {
+		// 		var v = self.permit.costitems[i];
+		// 		if( v.item.category == 'MATERIALS') {
+		// 			self.materials.push( v );
+		// 		}
+		// 		else if( v.item.category == 'LABOR') {
+		// 			self.labor.push( v );
+		// 		}
+		// 		else {
+		// 			self.others.push(v);
+		// 		}
+		// 	}
+		// }
 
-		this.selectedItem;
-		this.saveItems = function() {
-			var m = {appid: self.permit.objid };
-			m.costitems = self.permit.costitems;
-			var res = app.service.updateCostItems( m );
-			self.permit.costitems = res.items;
-			self.permit.amount = res.amount;
-			self._controller.refresh();
-		}
+		// this.selectedItem;
+		// this.saveItems = function() {
+		// 	var m = {appid: self.permit.objid };
+		// 	m.costitems = self.permit.costitems;
+		// 	var res = app.service.updateCostItems( m );
+		// 	self.permit.costitems = res.items;
+		// 	self.permit.amount = res.amount;
+		// 	self._controller.refresh();
+		// }
 
 	});
 </script>	

@@ -23,7 +23,7 @@ class OboOnlineService  {
     @ProxyMethod
     public def findLocation( def params ) {
         def info = svc.verifyTaxDec(params);
-        info.refid = info.tdno;
+        info.refid = info.objid;
         if(!info.taxpayer?.objid ) 
         	throw new Exception("Error in OboOnlineService. There is no taxpayer.objid returned in TDOnlineService");
         def txp = info.remove("taxpayer");   

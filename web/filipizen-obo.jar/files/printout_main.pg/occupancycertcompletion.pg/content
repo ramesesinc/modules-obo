@@ -1,0 +1,7 @@
+<%
+	def svc = SERVICE.lookup("OnlineOccupancyPermitService", "obo");
+	def occupancy = svc.getApplication( [appid: PARAMS.appid, loadall: true] );
+%>
+
+<h1>Certificate of Completion<h1>
+<h2>Under Construction<h2>
