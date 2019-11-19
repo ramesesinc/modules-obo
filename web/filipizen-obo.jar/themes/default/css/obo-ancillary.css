@@ -34,8 +34,8 @@ canvas{width: 100px;}
 
 /*Header CSS*/
 .btn-print{width: 70px;height: 40px;color: #ffffff;background: #009688;font-size: 14px;outline: none;}
-.header {display: inline-block;margin:0 auto;width:60%;}
-.formno {float:left;width:20%;}
+.header {display: inline-block;margin:0 auto;width:80%;}
+.formno {width:20%;}
 .header-container{width:100%;text-align:center;}
 .page {background: white;padding:100px 20px 0px 20px;width: 100%}
 .barcode{float:right;text-align:center;height: 20px; padding-right:100px;position: relative;width:20%;text-transform: uppercase;font-size: 10px;}

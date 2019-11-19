@@ -1,22 +1,29 @@
 <%def app = PARAMS.app; %>
-
+<style type="text/css">
+	.header div{
+		display: inline-block;
+	}
+</style>
 
 	<div class="header-container">
 		<div class="formno">
 			<p>NBC FORM NO. B-01</p>
 		</div>
 		<div class="header">
-			<h3>Republic of the Philippines</h3>
-			<h3>${app.org.formalname}</h3>
-			<h3>${app.org.province}</h3>
-			<br>
-			<h2>Office of the Building Official</h2>
-			<h1><b>Application for Building Permit</b></h1>
-		</div>
-		<div class="barcode">
-			<p><b>Tracking No.</b></p>
-			<center><img id='qrcode' src="https://api.qrserver.com/v1/create-qr-code/?data=QWSHYG1234&amp;size=250x250" width="80" height="80" class="img-responsive"/></center>
-			<p>QWSHYG1234</p>
+			<div>
+				<img src="/res/obo/lgu/legazpi_logo.png" style="width:100px;">
+			</div>
+			<div>
+				<h3>Republic of the Philippines</h3>
+				<h3>${app.org.formalname}</h3>
+				<h3>${app.org.province}</h3>
+				<br>
+				<h2>Office of the Building Official</h2>
+				<h1><b>${PAGE.title}</b></h1>
+			</div>
+			<div>
+				<img src="/res/obo/lgu/legazpi_oscp_logo.png" style="width:115px;">
+			</div>
 		</div>
 	</div>	
 
@@ -75,7 +82,7 @@
 						<td colspan="2"><label class="data">${app.applicant?.lastname}</label></td>
 						<td colspan="3"><label class="data">${app.applicant?.firstname}</label></td>
 						<td colspan="1"><label class="data">${app.applicant?.middleinitial}</label></td>
-						<td colspan="2" class="tdborder"><label class="data">${app.applicant?.tin}</label></td>
+						<td colspan="2" class="tdborder"><label class="data">${app.applicant?.tin ? app.applicant?.tin : '&nbsp;'}</label></td>
 					</tr>
 				</tbody>
 				<tbody>
@@ -104,71 +111,71 @@
 						<td class="tdborder">Telephone No.</td>
 					</tr>
 					<tr class="trborder">
-						<td colspan="2"><label class="data">${app.applicant.address?.bldgno}, ${app.applicant?.address.street}</label></td>
-						<td colspan="2"><label class="data"><label class="data">${app.applicant.address?.barangay?.name}</label></td>
-						<td colspan="3"><label class="data">${app.applicant?.address?.citymunicipality}</label></td>
-						<td><label class="data">${app.applicant?.address?.zipcode}</label></td>
-						<td class="tdborder"><label class="data">${app.applicant?.phoneno}</label></td>
+						<td colspan="2"><label class="data">${app.applicant?.streetaddress ? app.applicant.streetaddress : ''} </label></td>
+						<td colspan="2"><label class="data"><label class="data">${app.applicant?.address?.barangay?.name ? app.applicant.address.barangay.name : '&nbsp;'}</label></td>
+						<td colspan="3"><label class="data">${app.applicant?.address?.citymunicipality ? app.applicant.address.citymunicipality : '&nbsp;'}</label></td>
+						<td><label class="data">${app.applicant?.address?.zipcode ? app.applicant.address.zipcode : '&nbsp;'}</label></td>
+						<td class="tdborder"><label class="data">${app.applicant?.phoneno ? app.applicant.phoneno : '&nbsp;'}</label></td>
 					</tr>
 				</tbody>
 				<tbody>
 					<tr>
 						<td colspan="2">Location of Construction:</td>
-						<td colspan="2">Lot No. <label class="underline data">${app.location?.lotno}</label></td>
-						<td  colspan="2">Blk No. <label class="underline data">${app.location?.blockno}</label></td>
-						<td colspan="2">TCT No.  <label class="underline data">${app?.location?.tctno}</label></td>
-						<td >Tax Dec No. <label class="underline data">${app?.location?.tdno}</label></td>
+						<td colspan="2">Lot No. <label class="underline data">${app.location?.lotno ? app.location.lotno : '&nbsp;'}</label></td>
+						<td  colspan="2">Blk No. <label class="underline data">${app.location?.blockno ? app.location.blockno : '&nbsp;'}</label></td>
+						<td colspan="2">TCT No.  <label class="underline data">${app.location?.tctno ? app.location.tctno : '&nbsp;'}</label></td>
+						<td >Tax Dec No. <label class="underline data">${app.location?.tdno ? app.location.tdno : '&nbsp;'}</label></td>
 					</tr>
 					<tr class="trborder trlocation">
-						<td colspan="3">Street <label class="underline data">${app.location?.street}</label></td>
-						<td colspan="3">Barangay <label class="underline data">${app.location.barangay?.name}</label></td>
-						<td colspan="3">City/Municipality <label class="underline data">${app.org?.formalname}</label></td>
+						<td colspan="3">Street <label class="underline data">${app.location?.street ? app.location.street : '&nbsp;'}</label></td>
+						<td colspan="3">Barangay <label class="underline data">${app.location?.barangay?.name ? app.location.barangay.name : '&nbsp;'}</label></td>
+						<td colspan="3">City/Municipality <label class="underline data">${app.org?.formalname ? app.org.formalname : '&nbsp;'}</label></td>
 					</tr>
 					<tr>
 						<td colspan="9"><b>Scope of work</b></td>
 					</tr>
 					<tr>
-						<td colspan="3"><input type="checkbox"> New Construction</td>
-						<td colspan="4"><input type="checkbox"> Renovation</td>
-						<td colspan="2"><input type="checkbox"> Raising</td>
+						<td colspan="3"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.new_construction ? 'checked': ''}> New Construction</td>
+						<td colspan="4"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.renovation ? 'checked': ''}> Renovation</td>
+						<td colspan="2"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.raising ? 'checked': ''}> Raising</td>
 					</tr>
 					<tr>
-						<td colspan="3"><input type="checkbox"> Erection</td>
-						<td colspan="4"><input type="checkbox"> Conversion</td>
-						<td colspan="2"><input type="checkbox"> Accessory Building/Structure</td>
+						<td colspan="3"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.erection ? 'checked': ''}> Erection</td>
+						<td colspan="4"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.conversion ? 'checked': ''}> Conversion</td>
+						<td colspan="2"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.accessory ? 'checked': ''}> Accessory Building/Structure</td>
 					</tr>
 					<tr>
-						<td colspan="3"><input type="checkbox"> Addition</td>
-						<td colspan="4"><input type="checkbox"> Repair</td>
-						<td colspan="2"><input type="checkbox"> Other (specify) <label class="underline"></td>
+						<td colspan="3"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.addition ? 'checked': ''}> Addition</td>
+						<td colspan="4"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.repair ? 'checked': ''}> Repair</td>
+						<td colspan="2"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.other ? 'checked': ''}> Other (specify) <label class="underline"></td>
 					</tr>
 					<tr class="last-td trborder">
-						<td colspan="3"><input type="checkbox"> Alteration</td>
-						<td colspan="6"><input type="checkbox"> Moving</td>
+						<td colspan="3"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.alteration ? 'checked': ''}> Alteration</td>
+						<td colspan="6"><input type="checkbox" onclick="return false;" ${app.worktypeinfo.moving ? 'checked': ''}> Moving</td>
 					</tr>
 					<tr>
 						<td colspan="9"><b>Use or Character of Occupancy</b></td>
 					</tr>
 					<tr>
-						<td colspan="3"><input type="checkbox"> Group A : Residential, Dwellings</td>
-						<td colspan="4"><input type="checkbox"> Group F : Industrial</td>
-						<td colspan="2"><input type="checkbox"> Others (Specify)</td>
+						<td colspan="3"><input type="checkbox" onclick="return false;"> Group A : Residential, Dwellings</td>
+						<td colspan="4"><input type="checkbox" onclick="return false;"> Group F : Industrial</td>
+						<td colspan="2"><input type="checkbox" onclick="return false;"> Others (Specify)</td>
 					</tr>
 					<tr>
-						<td colspan="3"><input type="checkbox"> Group B : Residential Hotel, Apartment</td>
-						<td colspan="6"><input type="checkbox"> Group G : Industrial Storage and Hazardous</td>
+						<td colspan="3"><input type="checkbox" onclick="return false;"> Group B : Residential Hotel, Apartment</td>
+						<td colspan="6"><input type="checkbox" onclick="return false;"> Group G : Industrial Storage and Hazardous</td>
 					</tr>
 					<tr>
-						<td colspan="3"><input type="checkbox"> Group C : Educational, Recreational</td>
-						<td colspan="6"><input type="checkbox"> Group H : Recreational, Assembly Occupant Load Less than 1000</td>
+						<td colspan="3"><input type="checkbox" onclick="return false;"> Group C : Educational, Recreational</td>
+						<td colspan="6"><input type="checkbox" onclick="return false;"> Group H : Recreational, Assembly Occupant Load Less than 1000</td>
 					</tr>
 					<tr>
-						<td colspan="3"><input type="checkbox"> Group D : Institutional</td>
-						<td colspan="6"><input type="checkbox"> Group I : Recreational, Assembly Occupant Load 1000 or More</td>
+						<td colspan="3"><input type="checkbox" onclick="return false;"> Group D : Institutional</td>
+						<td colspan="6"><input type="checkbox" onclick="return false;"> Group I : Recreational, Assembly Occupant Load 1000 or More</td>
 					</tr>
 					<tr class="trborder">
-						<td colspan="3"><input type="checkbox"> Group E : Business and Mercantile</td>
-						<td colspan="6"><input type="checkbox"> Group J : Agricultural, Accessory</td>
+						<td colspan="3"><input type="checkbox" onclick="return false;"> Group E : Business and Mercantile</td>
+						<td colspan="6"><input type="checkbox" onclick="return false;"> Group J : Agricultural, Accessory</td>
 					</tr>
 					<tr>
 						<td colspan="5">Occupancy Classified ________________________ </td>

@@ -5,24 +5,24 @@
 		<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.new_construction !=null){%>checked<%}%> > New Construction</p></td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.renovation !=null){%>checked<%}%>> Renovation</p> <p class="underline renovation"></p></td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.raising !=null){%>checked<%}%>> Raising</p> <p class="underline raising"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.new_construction !=null){%>checked<%}%> > New Construction</p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.renovation !=null){%>checked<%}%>> Renovation</p> <p class="underline renovation"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.raising !=null){%>checked<%}%>> Raising</p> <p class="underline raising"></p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.erection !=null){%>checked<%}%>> Erection</p></td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.conversion !=null){%>checked<%}%>> Conversion</p> <p class="underline conversion"></p></td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.demolition !=null){%>checked<%}%>> Demolition</p> <p class="underline demolation"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.erection !=null){%>checked<%}%>> Erection</p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.conversion !=null){%>checked<%}%>> Conversion</p> <p class="underline conversion"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.demolition !=null){%>checked<%}%>> Demolition</p> <p class="underline demolation"></p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.addition !=null){%>checked<%}%>> Addition</p> </td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.repair !=null){%>checked<%}%>> repair</p> <p class="underline repair"></p></td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.accessory_building_structure !=null){%>checked<%}%>> Accessory Building/structure</p> <p class="underline accessory"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.addition !=null){%>checked<%}%>> Addition</p> </td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.repair !=null){%>checked<%}%>> repair</p> <p class="underline repair"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.accessory_building_structure !=null){%>checked<%}%>> Accessory Building/structure</p> <p class="underline accessory"></p></td>
 	</tr>
 	<tr class="last-td">
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.alteration !=null){%>checked<%}%>> Alteration</p> </td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.moving !=null){%>checked<%}%>> Moving</p> <p class="underline moving"></p></td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.others !=null){%>checked<%}%>> others</p> (specify) <p class="underline civilothers"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.alteration !=null){%>checked<%}%>> Alteration</p> </td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.moving !=null){%>checked<%}%>> Moving</p> <p class="underline moving"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.others !=null){%>checked<%}%>> others</p> (specify) <p class="underline civilothers"></p></td>
 	</tr>
 </table>
 
