@@ -3,5 +3,5 @@
 	def occupancy = svc.getApplication( [appid: PARAMS.appid, loadall: true] );
 %>
 
-<h1>Application for Certificate of Occupancy<h1>
+<h1>Certificate of Completion<h1>
 <h2>Under Construction<h2>
