@@ -174,7 +174,7 @@ class BuildingPermitWorkflowInterceptor {
 			f.startdate = dt;
 			f.info = it;
 			f.taskid = it.taskid;
-			f.action = (it.issuepermit == 1 ) ? "send-for-releasing" : "end";
+			f.action = (it.type.issuepermit == 1 ) ? "send-for-releasing" : "end";
 			wfSvc.signal(f);	
 		}
 	}
@@ -187,6 +187,8 @@ class BuildingPermitWorkflowInterceptor {
 		def permitno = appEm.find( [objid: appid ] ).select("permitno").val();
 		if(!permitno) throw new Exception("Permit no is required. ");
 	}
+
+	
 
 
 } 

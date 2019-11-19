@@ -1,19 +1,27 @@
 <workunit>
     <invokers>
         
-         <invoker type="vw_building_permit:form:formActions" 
+         <invoker type="vw_building_permit:form:appActions" 
+                caption="Capture Payment"
+                action="init" 
+                index="1"
+                target="popup"
+                srole="SYSTEM"
+                txntype="building_permit" visibleWhen="#{task.state == 'payment'}"/>
+         
+          <invoker type="vw_occupancy_permit:form:appActions" 
                 caption="Capture Payment"
                 action="init" 
                 index="1"
                 target="popup"
                 role="SYSTEM"
-                svisibleWhen="#{entity.task.state == 'issuance-process'} "    />
+                txntype="occupancy_permit" visibleWhen="#{task.state == 'payment'}" />
          
         <!-- actions -->
         <invoker type="building_permit_capture_payment" caption="Capture Payment" action="init" target="popup" />
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitCapturePaymentModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboCapturePaymentModel" />
     <pages>
-        <page name="initial" template="com.rameses.gov.etracs.obo.views.BuildingPermitCapturePaymentPage" />
+        <page name="initial" template="com.rameses.gov.etracs.obo.views.OboCapturePaymentPage" />
     </pages>
 </workunit>

@@ -25,5 +25,7 @@
 		<field name="task_title" />
 
 		<field name="app_task_state" />
+		<field name="issuanceid" />
+
 	</element>
 </schema>

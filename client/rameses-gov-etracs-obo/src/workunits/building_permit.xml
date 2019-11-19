@@ -43,6 +43,14 @@
                 caption="View Certificate of True Copy"
                 action="viewTrueCopy" target="popup"   />
         
+        <!-- Building Permit -->
+        <invoker type="appActions" 
+                caption="Issue Bldg Permit"
+                action="issuePermit" 
+                visibleWhen="#{task.state=='releasing' 
+                    &amp;&amp; task.assignee.objid == userInfo.userid
+                    &amp;&amp; entity.permitno == null }"   />
+                
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />
     <pages>

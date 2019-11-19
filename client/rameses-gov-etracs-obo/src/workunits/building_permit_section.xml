@@ -30,9 +30,15 @@
                 visibleWhen="#{ task.assignee?.objid !=null 
                     &amp;&amp; task.state.matches( 'review|evaluation|evaluation-approval') }" />
                     
-        <invoker type="extActions" caption="Issue Permit/Clearance" index="20"
-            action="issuePermit" visibleWhen="#{ task.state == 'releasing' }"/>
-       
+        <invoker type="extActions" 
+                caption="Issue Permit/Clearance"
+                action="issuePermit" 
+                visibleWhen="#{task.state=='releasing' &amp;&amp; entity.issuanceid == null }"   />
+                
+        <invoker type="extActions" 
+                caption="View Permit/Clearance"
+                action="viewPermit" 
+                visibleWhen="#{entity.issuanceid != null }"  index="20" />
         
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitSectionModel" />

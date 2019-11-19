@@ -12,6 +12,9 @@ import com.rameses.enterprise.models.*;
 
 abstract class AbstractOboApplicationSectionModel extends WorkflowTaskModel {
 
+    @Service("OboIssuePermitService")
+    def permSvc;
+    
     def findingListHandler;
     def feeListHandler;
     
@@ -74,13 +77,29 @@ abstract class AbstractOboApplicationSectionModel extends WorkflowTaskModel {
     }
     
     def issuePermit() {
-        def m = [ appid:entity.appid, sectionid: entity.typeid ];
-        m.handler = { o->
+        def h = { o->
+            def m = [:];
+            m.schemaname = getPermitName() + "_section";
+            m.permitname = entity.type.reportname;
+            m.appid = entity.appid;
+            m.sectionid = entity.typeid;
+            m.controlno = o.controlno;
+            m.dtvalidity = o.dtvalidity;
+            m.remarks = o.remarks;
+            m.parentid = entity.objid;
+            def p = permSvc.createSectionPermit( m );
+            MsgBox.alert( "Permit no " + p.permitno + " is created");
+            entity.permitno = p.permitno;
             reload();
         }
-        return Inv.lookupOpener(entity.type.permitname, m );
+        return Inv.lookupOpener( "obo:permit_issuance", [ handler: h] );
     }
     
+    def viewPermit() {
+        def e = [objid: entity.issuanceid];
+        return Inv.lookupOpener(entity.type.reportname, [entity:e] );
+    }
+
     public boolean isActionable() {
         return (task.assignee.objid == userInfo.userid);
     }

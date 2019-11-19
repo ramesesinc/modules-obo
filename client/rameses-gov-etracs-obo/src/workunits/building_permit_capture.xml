@@ -2,6 +2,7 @@
     <invokers>
         <invoker folderid="menucategory/obo/building" caption="Capture Application"
                 action="create" index="10" />
+        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitCaptureModel" />
     <pages>

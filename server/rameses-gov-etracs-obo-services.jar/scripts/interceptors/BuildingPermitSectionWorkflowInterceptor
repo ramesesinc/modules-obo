@@ -38,7 +38,7 @@ class BuildingPermitSectionWorkflowInterceptor {
 	} 
 
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section'  && args[0].action == 'send-for-obo-processing' }") 
-	public void beforeApproval( def evt ) {
+	public void beforeSendToObo( def evt ) {
 		def p = evt.args[0];
 
 		def c = findingEm.select("c:{COUNT(*)}").find([parentid:p.refid]).where("supersederid IS NULL AND state = 2 AND NOT(transmittalid IS NULL)").val();
@@ -77,5 +77,31 @@ class BuildingPermitSectionWorkflowInterceptor {
 		}
 	} 
 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section'  && args[0].action == 'send-for-final-approval' }") 
+	public void beforeApproval( def evt ) {
+		def p = evt.args[0];
+		def issId = sectionEm.find( [objid: p.refid ]).select("issuanceid").first()?.issuanceid;
+		if(issId==null) throw new Exception("Please issue the permit or clearance");
+	} 
+
+	//release process. Ensure that all tasks are closed before firing main
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit_section' && args[0].action == 'approve' }" ) 
+	public void doActionBeforeApprove( def evt ) {
+		def p = evt.args[0];
+		def result = evt.result;
+		def appid = sectionEm.find( [objid: p.refid] ).select("appid").val();
+		def cnt = sectionEm.find([appid:appid]).select("c:{COUNT(*)}").where( " NOT(task.state = 'end' ) ").val();
+		if( cnt == 0 ) {
+			def app = appEm.find([objid:appid]).select("task.*").first();
+			def f = [:];
+			f.processname = 'building_permit';
+			f.refid = appid;
+			f.startdate = dateSvc.getServerDate();
+			f.info = [ app: p.info ];
+			f.action = 'send-for-release';
+			f.taskid = app.taskid;
+			wfSvc.signal(f);
+		}
+	}
 
 } 

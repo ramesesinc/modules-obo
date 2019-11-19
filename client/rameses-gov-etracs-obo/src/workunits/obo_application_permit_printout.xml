@@ -6,7 +6,7 @@
                  index="1" 
                  reportId="building_permit"
                     reportName="com/rameses/gov/etracs/obo/reports/building_permit.jasper"
-                 visibleWhen="#{task.state.matches('releasing|end') &amp;&amp; entity.permitno !=null}"/>
+                 visibleWhen="#{ entity.permitno !=null}"/>
  
         <invoker type="vw_building_permit:form:appActions" 
                  caption="Signboard"
@@ -14,16 +14,15 @@
                  index="2" 
                  reportId="building_permit_signboard"
                  reportName="com/rameses/gov/etracs/obo/reports/construction_signboard.jasper"
-                 visibleWhen="#{task.state.matches('releasing|end') &amp;&amp; entity.permitno !=null}"/>
+                 visibleWhen="#{ entity.permitno !=null}"/>
 
- 
         <invoker type="vw_occupancy_permit:form:appActions" 
                  caption="View Building Permit"
                  action="preview" 
                  index="1" 
                  reportId="occupancy_permit"
                  reportName="com/rameses/gov/etracs/obo/reports/occupancy_permit.jasper"
-                 visibleWhen="#{task.state.matches('releasing|end') &amp;&amp; entity.permitno !=null}"/>
+                 visibleWhen="#{ entity.permitno !=null }"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
 </workunit>

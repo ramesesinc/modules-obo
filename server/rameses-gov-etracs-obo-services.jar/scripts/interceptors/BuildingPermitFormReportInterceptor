@@ -21,8 +21,6 @@ class BuildingPermitFormReportInterceptor {
 	@DataContext("building_permit_finding")
 	def findingEm;
 
-	
-
 	@DataContext("vw_building_permit_fee_payment")
 	def payEm;
 
@@ -43,11 +41,8 @@ class BuildingPermitFormReportInterceptor {
 			app.receiptdate = totals.payment.refdate;
 			app.amount = totals.amount;		
 		}
-
 		result.data = app;
 	}	
-
-
 
 
 }

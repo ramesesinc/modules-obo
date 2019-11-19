@@ -13,12 +13,12 @@ import com.rameses.rcp.ui.annotations.Template;
  * @author elmonazareno
  */
 @Template(OKCancelPage.class)
-public class BuildingPermitCapturePaymentPage extends javax.swing.JPanel {
+public class OboCapturePaymentPage extends javax.swing.JPanel {
 
     /**
      * Creates new form BuildingPermitCapturePaymentPage
      */
-    public BuildingPermitCapturePaymentPage() {
+    public OboCapturePaymentPage() {
         initComponents();
     }
 

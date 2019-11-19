@@ -11,6 +11,8 @@ import com.rameses.enterprise.models.*;
 
 public class PermitIssuanceModel {
     
+    def showcontrolno = true;
+    /*
     @Service(value="PersistenceService")
     def persistenceSvc;
     
@@ -50,6 +52,18 @@ public class PermitIssuanceModel {
            if(handler) handler( u );
            return "_close";
         }
+    }
+    
+    def doCancel() {
+        return "_close";
+    }
+    */
+    def entity;
+    def handler;
+    
+    def doOk() {
+        if(handler) handler(entity);
+        return "_close";
     }
     
     def doCancel() {

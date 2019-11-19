@@ -10,7 +10,7 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingPermitCapturePaymentModel  {
+class OboCapturePaymentModel  {
 
     @Binding
     def binding;
@@ -18,16 +18,16 @@ class BuildingPermitCapturePaymentModel  {
     @Caller
     def caller;
     
-    @Service("BuildingPermitPaymentService")
+    @Service("OboPaymentService")
     def postPaymentSvc;
     
     def entity;
     def receipt;
+    def txntype;
     
-    void init() {
+    void init(inv) {
+        txntype = inv.properties.txntype;
         if(!entity) entity = caller.entity;
-        if( caller.task.state != 'payment')
-            throw new Exception("This can only be invoked in payment state");
         receipt = [:];
         receipt.type ="cashreceipt";
         receipt.amount = entity.amount;
@@ -40,7 +40,7 @@ class BuildingPermitCapturePaymentModel  {
         def m = [:];
         m.refid = entity.objid;
         m.receipt = receipt;
-        
+        m.txntype = txntype;
         postPaymentSvc.postPayment( m );
         caller.reload();
         return "_close";

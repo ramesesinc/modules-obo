@@ -27,6 +27,9 @@ abstract class AbstractOboApplicationModel extends WorkflowTaskModel {
     @Service("OboApplicationFindingService")
     def findingSvc;
     
+    @Service("OboIssuePermitService")
+    def permSvc;
+    
     def reqViewType = "open";
     def reqQuery = [:];
     def reqListHandler;
@@ -142,6 +145,18 @@ abstract class AbstractOboApplicationModel extends WorkflowTaskModel {
     ***************/
     def capturePayment() {
         return nInv.lookupOpener("building_permit_capture_payment", [entity: entity] );
+    }
+    
+    def issuePermit() {
+        def h = { o->
+            def m = [:];
+            m.schemaname = getPermitName();
+            m.remarks = o.remarks;
+            m.objid = entity.objid;
+            def p = permSvc.updateControl( m );
+            reload();
+        }
+        return Inv.lookupOpener( "obo:permit_issuance", [ handler: h, showcontrolno: false ] );
     }
     
 }
