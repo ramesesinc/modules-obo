@@ -5,16 +5,18 @@
 
 	def list = [];
 	list << [step:0, name:'initial', caption: "Initial"];
-	list << [step:1, name:'costing', caption:'Costing'];	
-	list << [step:2, name:'confirm', caption:'Confirm'];	
+	list << [step:1, name:'application', caption:'Application'];	
+	list << [step:2, name:'professional', caption:'Professionals'];	
+	list << [step:3, name:'designprof', caption:'Design Professionals'];	
+	list << [step:4, name:'supervisor', caption:'Supervisors'];	
+	list << [step:5, name:'finish', caption:'Finish'];	
 
+	def err = null;
 	def appid = PARAMS.appid;
 	def sappid = (!PARAMS.appid) ? "null" : "\"" + appid + "\""; 
 
-	def err = null;
-
 	def currstep = 0;
-	if( appid !=null ) {
+	if( appid != null ) {
 		def app = svc.findCurrentInfo( [appid: appid] );
 		if(!app) err = "Application no. does not exist";
 		else if( PARAMS.info.id != app.orgcode ) {
@@ -51,7 +53,8 @@
 
 		this.steps = [];
 		<%list.each { %>
-		this.steps.push("${it.name}"); <%}%>
+			this.steps.push("${it.name}"); 
+		<%}%>
 
 		//called from ancillary
 		this.navigate = function( page, params ) {
@@ -93,8 +96,9 @@
 	});
 
 	<%list.each { %>
-   	\$register( {id:'${it.name}',   page:"${PAGE.path}/${it.name}", 	  	context: '${it.name}' } );
+   		\$register( {id:'${it.name}',   page:"${PAGE.path}/${it.name}", 	  	context: '${it.name}' } );
    	<%}%>
+   	\$register( {id:'professional_lookup',	page:"${PAGE.path}/professional_lookup", context: 'professional_lookup' } );
 </script>
 
 
@@ -115,6 +119,14 @@
 <%}%>
 
 </div>
+
+<%if( currstep == 5 ) { %>
+<style>
+.button-class { visibility:hidden; }
+.link-edit-action { visibility:hidden; display:none; }
+input[type=text] { readonly: true }
+</style>
+<%}%>
 
 <style>
 .breadcrumb-link:last-child:not(:first-child) {border-top-left-radius: 0;border-bottom-left-radius: 0;}
