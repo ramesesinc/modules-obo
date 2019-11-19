@@ -27,30 +27,21 @@
 
 		<!-- bldgpermit -->
 		<field name="bldgpermit_objid" />
-		<field name="bldgpermit_controlno" />
 		<field name="bldgpermit_dtissued" />
-		<field name="bldgpermit_dtstarted" />
-		<field name="bldgpermit_dtcompleted" />
-		<field name="bldgpermit_floorarea" type="decinal" />
+		<field name="bldgpermit_permitno" />
+		<field name="bldgpermit_dtproposedconstruction" />
+		<field name="bldgpermit_dtexpectedcompletion" />
+		<field name="bldgpermit_totalfloorarea" type="decimal" />
 		<field name="bldgpermit_numfloors" type="integer" />
 		<field name="bldgpermit_numunits" type="integer" />
 
-		<!-- professionals -->
-		<field name="profarchitectid" />
-		<field name="profcivilid" />
-		<field name="profelectricalid" />
-		<field name="profmechanicalid" />
-		<field name="profsanitaryid" />
-		<field name="profplumbingid" />
-		<field name="profelectronicid" />
-		<field name="profinteriorid" />
-		<field name="electricalworkid" />
-		<field name="mechanicalworkid" />
-		<field name="sanitaryworkid" />
-		<field name="plumbingworkid" />
-		<field name="electronicworkid" />
-		<field name="interiorworkid" />
-
+		<field name="dtactualstarted" />
+		<field name="dtactualcompleted" />
+		<field name="totalmaterialcost" type="decimal" />
+		<field name="totaldirectlaborcost" type="decimal" />
+		<field name="totalequipmentcost" type="decimal" />
+		<field name="totalothercost" type="decimal" />
+		
 		<!-- shows where the current step is at -->
 		<field name="step" type="integer"/>
 		<field name="locationid" />
@@ -68,12 +59,66 @@
 			<key field="occupancytypeid" target="objid" />
 		</complex>	
 
-		<!--
-		<complex name="contractor" ref="vw_online_building_permit_professional" jointype="many-to-one"  required="false">
-			<key field="contractorid" target="objid" />
-		</complex>
-		-->
 
+		<!-- DESIGN PROFESSIONALS -->
+		<complex name="profarchitect" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="profarchitectid" target="objid" />
+		</complex>	
+		<complex name="profcivil" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="profcivilid" target="objid" />
+		</complex>	
+		<complex name="profelectrical" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="profelectricalid" target="objid" />
+		</complex>	
+		<complex name="profmechanical" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="profmechanicalid" target="objid" />
+		</complex>	
+		<complex name="profsanitary" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="profsanitaryid" target="objid" />
+		</complex>	
+		<complex name="profplumbing" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="profplumbingid" target="objid" />
+		</complex>	
+		<complex name="profelectronic" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="profelectronicid" target="objid" />
+		</complex>	
+		<complex name="profinterior" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="profinteriorid" target="objid" />
+		</complex>	
+
+		<!-- SUPERVISORS -->
+		<complex name="supervisorelectrical" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="supervisorelectricalid" target="objid" />
+		</complex>
+		<complex name="supervisormechanical" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="supervisormechanicalid" target="objid" />
+		</complex>
+		<complex name="supervisorsanitary" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="supervisorsanitaryid" target="objid" />
+		</complex>
+		<complex name="supervisorplumbing" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="supervisorplumbingid" target="objid" />
+		</complex>
+		<complex name="supervisorelectronic" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="supervisorelectronicid" target="objid" />
+		</complex>
+		<complex name="supervisorinterior" ref="vw_online_occupancy_permit_professional" 
+			jointype="many-to-one" required="false">
+				<key field="supervisorinteriorid" target="objid" />
+		</complex>
 	</element>
 </schema>
 
