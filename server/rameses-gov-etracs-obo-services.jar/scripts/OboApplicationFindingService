@@ -45,38 +45,4 @@ class OboApplicationFindingService {
 	}
 
 
-	@ProxyMethod
-	public def buildCheckList( def o ) {
-		if( !o.schemaname ) throw new Exception("schemaname is required in OboApplicationFindingService.update ");
-		if(!o.taskid) throw new Exception("taskid is required in build requirement transmittal");
-		if(!o.appid) throw new Exception("appid is required in build requirement transmittal");
-
-		def findingEm = em.lookup( o.schemaname + "_finding");
-		def transmittalEm = em.lookup( o.schemaname + "_transmittal");
-
-		//check there must be at least one finding
-		def c = findingEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("supersederid IS NULL AND state = 2 AND NOT(transmittalid IS NULL)").val();
-		if( c > 0 ) throw new Exception("Please either close or resend previous open items")
-		c = findingEm.select("c:{COUNT(*)}").find([appid:o.appid]).where("supersederid IS NULL AND state = 2 AND transmittalid IS NULL").val();
-		if( c<=0) throw new Exception("Please ensure that there is at least one finding that needs revision");			
-
-		def varname = o.schemaname + "_finding_transmittal";
-		def pattern = sysvar.get(  varname );
-		if(!pattern) throw new Exception("Please define " + varname + " entry in sys_var. Ex. BP-FT-[yyyyMM]-[%05d]");
-
-		def t = [:];
-		t.objid = controlNoSvc.getNextNo( pattern );
-		t.appid = o.appid;
-		t.type = "finding";
-		t.createdby = [objid: env.USERID, name: env.FULLNAME ];
-		t.dtcreated = dateSvc.getServerDate();
-		t.taskid = o.taskid;
-		t.state = 0;
-		transmittalEm.create( t );
-
-		//update all open  
-		findingEm.find([appid: o.appid]).where("transmittalid IS NULL").update( [transmittalid: t.objid] );
-		return t;	
-	}
-
 }

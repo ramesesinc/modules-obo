@@ -15,6 +15,8 @@
 		<field name="ancillarytypeid" />
 
 		<field name="requirefee" />
+		<field name="issuepermit" />
+		<field name="reportname" />
 
 	</element>
 </schema>

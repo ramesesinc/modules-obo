@@ -34,6 +34,13 @@ class BuildingPermitSectionModel extends AbstractOboApplicationSectionModel {
         op.target = "popup";
         return op;
     }
+    
+    //This is a temporary proc.
+    def addAncillary() {
+        def e = appSvc.addAncillary( [appid: entity.appid, typeid: entity.typeid ] );
+        entity.ancillaryid = e.objid;
+        reload();
+    }
 
     def assess() {
         if(! entity.app.zoneclass?.objid )

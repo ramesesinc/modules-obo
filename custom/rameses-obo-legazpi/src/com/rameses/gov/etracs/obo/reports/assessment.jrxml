@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="finding_transmittal"
+		 name="assessment"
 
 		 language="groovy"		 columnCount="1"
 		 printOrder="Vertical"
@@ -32,7 +32,6 @@
 	<field name="dtfiled" class="java.util.Date"/>
 	<field name="items" class="java.lang.Object"/>
 	<field name="trackingno" class="java.lang.String"/>
-	<field name="receiver.name" class="java.lang.String"/>
 	<field name="permittype" class="java.lang.String"/>
 
 		<background>
@@ -53,7 +52,7 @@
 			</band>
 		</background>
 		<title>
-			<band height="348"  isSplitAllowed="true" >
+			<band height="450"  isSplitAllowed="true" >
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="38"
@@ -71,12 +70,12 @@
 					<reportElement
 						x="115"
 						y="21"
-						width="107"
+						width="213"
 						height="12"
 						key="staticText-1"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 				<text><![CDATA[Republic of the Philippines]]></text>
 				</staticText>
@@ -116,7 +115,7 @@
 						key="staticText-4"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="20" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="19" isBold="true"/>
 					</textElement>
 				<text><![CDATA[ONE - STOP SHOP FOR CONSTRUCTION PERMITS]]></text>
 				</staticText>
@@ -151,9 +150,9 @@
 						key="staticText-6"/>
 					<box></box>
 					<textElement textAlignment="Center">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="17" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="17" isBold="true"/>
 					</textElement>
-				<text><![CDATA[APPLICATION EVALUATION SHEET]]></text>
+				<text><![CDATA[ORDER OF PAYMENT]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -179,25 +178,12 @@
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="8"/>
 					</textElement>
-				<text><![CDATA[Application No]]></text>
+				<text><![CDATA[Application No                      ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
 						x="36"
-						y="178"
-						width="132"
-						height="13"
-						key="staticText-10"/>
-					<box></box>
-					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="8"/>
-					</textElement>
-				<text><![CDATA[Evaluation Officer         ]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="36"
-						y="200"
+						y="181"
 						width="132"
 						height="13"
 						key="staticText-11"/>
@@ -210,7 +196,7 @@
 				<staticText>
 					<reportElement
 						x="36"
-						y="213"
+						y="194"
 						width="132"
 						height="13"
 						key="staticText-12"/>
@@ -223,7 +209,7 @@
 				<staticText>
 					<reportElement
 						x="36"
-						y="226"
+						y="207"
 						width="132"
 						height="13"
 						key="staticText-13"/>
@@ -254,16 +240,7 @@
 				<line direction="TopDown">
 					<reportElement
 						x="216"
-						y="191"
-						width="180"
-						height="0"
-						key="line-4"/>
-					<graphicElement stretchType="NoStretch"/>
-				</line>
-				<line direction="TopDown">
-					<reportElement
-						x="216"
-						y="213"
+						y="194"
 						width="360"
 						height="0"
 						key="line-5"/>
@@ -272,7 +249,7 @@
 				<line direction="TopDown">
 					<reportElement
 						x="216"
-						y="226"
+						y="207"
 						width="360"
 						height="0"
 						key="line-6"/>
@@ -281,7 +258,7 @@
 				<line direction="TopDown">
 					<reportElement
 						x="216"
-						y="239"
+						y="220"
 						width="360"
 						height="0"
 						key="line-7"/>
@@ -316,7 +293,7 @@
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="216"
-						y="201"
+						y="182"
 						width="360"
 						height="12"
 						key="textField"/>
@@ -329,7 +306,7 @@
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="216"
-						y="214"
+						y="195"
 						width="360"
 						height="12"
 						key="textField"/>
@@ -342,7 +319,7 @@
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="216"
-						y="227"
+						y="208"
 						width="360"
 						height="12"
 						key="textField"/>
@@ -352,28 +329,15 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="216"
-						y="179"
-						width="360"
-						height="12"
-						key="textField"/>
-					<box></box>
-					<textElement textAlignment="Left" verticalAlignment="Bottom">
-						<font fontName="Arial" size="8"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{receiver.name}]]></textFieldExpression>
-				</textField>
 				<subreport  isUsingCache="true">
 					<reportElement
 						x="38"
-						y="261"
+						y="248"
 						width="538"
-						height="45"
+						height="55"
 						key="subreport-1"/>
 					<dataSourceExpression><![CDATA[$F{items}]]></dataSourceExpression>
-					<subreportExpression  class="java.lang.String"><![CDATA["finding_transmittal_item.jasper"]]></subreportExpression>
+					<subreportExpression  class="java.lang.String"><![CDATA["assessment_item.jasper"]]></subreportExpression>
 				</subreport>
 				<staticText>
 					<reportElement
@@ -404,20 +368,7 @@
 				<staticText>
 					<reportElement
 						x="168"
-						y="178"
-						width="14"
-						height="13"
-						key="staticText-228"/>
-					<box></box>
-					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial Narrow" size="10"/>
-					</textElement>
-				<text><![CDATA[:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="168"
-						y="199"
+						y="180"
 						width="14"
 						height="13"
 						key="staticText-229"/>
@@ -430,7 +381,7 @@
 				<staticText>
 					<reportElement
 						x="168"
-						y="213"
+						y="194"
 						width="14"
 						height="13"
 						key="staticText-230"/>
@@ -443,7 +394,7 @@
 				<staticText>
 					<reportElement
 						x="168"
-						y="225"
+						y="206"
 						width="14"
 						height="13"
 						key="staticText-231"/>
@@ -459,7 +410,7 @@
 						y="132"
 						width="299"
 						height="18"
-						key="textField-1"/>
+						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Center">
 						<font fontName="Arial" size="15"/>
@@ -489,278 +440,7 @@
 			</band>
 		</pageFooter>
 		<summary>
-			<band height="250"  isSplitAllowed="true" >
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="425"
-						y="14"
-						width="103"
-						height="60"
-						key="image-5"/>
-					<box></box>
-					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/anthony_r_enaje.jpg"]]></imageExpression>
-				</image>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="425"
-						y="103"
-						width="103"
-						height="60"
-						key="image-6"/>
-					<box></box>
-					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/rafael_b_encarnacion.jpg"]]></imageExpression>
-				</image>
-				<rectangle>
-					<reportElement
-						mode="Transparent"
-						x="37"
-						y="190"
-						width="539"
-						height="45"
-						key="rectangle-1"/>
-					<graphicElement stretchType="NoStretch"/>
-				</rectangle>
-				<staticText>
-					<reportElement
-						x="38"
-						y="204"
-						width="283"
-						height="31"
-						key="staticText-222"/>
-					<box></box>
-					<textElement verticalAlignment="Top" isStyledText="true">
-						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="false"/>
-					</textElement>
-				<text><![CDATA[I fully understand my deficiencies listed herein, the reason that my application was
-returned to me. Accordingly, I hereby undertake to correct and/or comply such
-deficiencies on my resubmission.]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="61"
-						y="191"
-						width="260"
-						height="13"
-						key="staticText-223"/>
-					<box></box>
-					<textElement verticalAlignment="Middle" isStyledText="true">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="11" isBold="true"/>
-					</textElement>
-				<text><![CDATA[RECEIVED RETURNED DOCUMENTS TO APPLICANT]]></text>
-				</staticText>
-				<line direction="TopDown">
-					<reportElement
-						x="341"
-						y="209"
-						width="200"
-						height="0"
-						key="line-8"/>
-					<graphicElement stretchType="NoStretch"/>
-				</line>
-				<staticText>
-					<reportElement
-						x="334"
-						y="210"
-						width="215"
-						height="12"
-						key="staticText-224"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Top" isStyledText="true">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="7" isBold="false"/>
-					</textElement>
-				<text><![CDATA[Applicant/Authorized Representative Signature over Printed Name]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="378"
-						y="221"
-						width="19"
-						height="12"
-						key="staticText-225"/>
-					<box></box>
-					<textElement textAlignment="Left" verticalAlignment="Top" isStyledText="true">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica" size="7" isBold="false"/>
-					</textElement>
-				<text><![CDATA[Date:]]></text>
-				</staticText>
-				<line direction="TopDown">
-					<reportElement
-						x="390"
-						y="232"
-						width="118"
-						height="0"
-						key="line-9"/>
-					<graphicElement stretchType="NoStretch"/>
-				</line>
-				<staticText>
-					<reportElement
-						x="38"
-						y="52"
-						width="260"
-						height="13"
-						key="staticText-232"/>
-					<box></box>
-					<textElement verticalAlignment="Middle" isStyledText="true">
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="11" isBold="true"/>
-					</textElement>
-				<text><![CDATA[RECOMMENDATION]]></text>
-				</staticText>
-				<rectangle>
-					<reportElement
-						x="38"
-						y="66"
-						width="11"
-						height="10"
-						key="rectangle-2"/>
-					<graphicElement stretchType="NoStretch"/>
-				</rectangle>
-				<staticText>
-					<reportElement
-						x="55"
-						y="64"
-						width="278"
-						height="13"
-						key="staticText-233"/>
-					<box></box>
-					<textElement verticalAlignment="Middle" isStyledText="true">
-						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="false"/>
-					</textElement>
-				<text><![CDATA[<b>EVALUATED AND COMPLIANT</b> (for Order of Payment) ]]></text>
-				</staticText>
-				<rectangle>
-					<reportElement
-						x="38"
-						y="81"
-						width="11"
-						height="10"
-						key="rectangle-3"/>
-					<graphicElement stretchType="NoStretch"/>
-				</rectangle>
-				<staticText>
-					<reportElement
-						x="55"
-						y="79"
-						width="278"
-						height="13"
-						key="staticText-234"/>
-					<box></box>
-					<textElement verticalAlignment="Middle" isStyledText="true">
-						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="false"/>
-					</textElement>
-				<text><![CDATA[<b>DEFICIENCY FOUND</b> (return documents to Applicant) ]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="38"
-						y="90"
-						width="295"
-						height="22"
-						key="staticText-235"
-						isPrintWhenDetailOverflows="true"/>
-					<box></box>
-					<textElement verticalAlignment="Middle" isStyledText="true">
-						<font fontName="Arial" pdfFontName="Helvetica-BoldOblique" size="7" isBold="true" isItalic="true"/>
-					</textElement>
-				<text><![CDATA[<u>NOTE</u> INCLUDE THIS EVALUATION SHEET IN YOUR RESUBMISSION OF DOCUMENTS ]]></text>
-				</staticText>
-				<rectangle>
-					<reportElement
-						x="38"
-						y="116"
-						width="11"
-						height="10"
-						key="rectangle-4"/>
-					<graphicElement stretchType="NoStretch"/>
-				</rectangle>
-				<rectangle>
-					<reportElement
-						x="38"
-						y="131"
-						width="11"
-						height="10"
-						key="rectangle-5"/>
-					<graphicElement stretchType="NoStretch"/>
-				</rectangle>
-				<staticText>
-					<reportElement
-						x="55"
-						y="115"
-						width="260"
-						height="13"
-						key="staticText-236"/>
-					<box></box>
-					<textElement verticalAlignment="Middle" isStyledText="true">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
-					</textElement>
-				<text><![CDATA[FOR COMPLIANCE]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="55"
-						y="128"
-						width="260"
-						height="13"
-						key="staticText-237"/>
-					<box></box>
-					<textElement verticalAlignment="Middle" isStyledText="true">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
-					</textElement>
-				<text><![CDATA[FOR PAYMENT]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="373"
-						y="65"
-						width="202"
-						height="21"
-						key="staticText-238"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true" isItalic="false"/>
-					</textElement>
-				<text><![CDATA[AR./ENP ANTHONY R. ENAJE]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="373"
-						y="149"
-						width="202"
-						height="21"
-						key="staticText-239"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true" isItalic="false"/>
-					</textElement>
-				<text><![CDATA[ENGR. RAFAEL B. ENCARNACION]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="373"
-						y="77"
-						width="202"
-						height="21"
-						key="staticText-240"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false"/>
-					</textElement>
-				<text><![CDATA[Architect II/Chief, Building Permit Division]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="373"
-						y="161"
-						width="202"
-						height="21"
-						key="staticText-241"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false"/>
-					</textElement>
-				<text><![CDATA[OIC-City Engineer/Local Building Official]]></text>
-				</staticText>
+			<band height="0"  isSplitAllowed="true" >
 			</band>
 		</summary>
 </jasperReport>

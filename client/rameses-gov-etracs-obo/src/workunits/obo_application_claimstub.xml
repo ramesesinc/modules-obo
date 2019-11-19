@@ -27,7 +27,8 @@
                 reportId="building_permit_claimstub"
                 reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"
                 action="preview"
-                visibleWhen="#{ entity.appno != null }"/>
+                visibleWhen="#{ task.state =='requirement-verification'
+                    &amp;&amp; entity.appno != null }"/>
 
         <invoker type="vw_occupancy_permit:form:appActions" 
                 caption="Accept Application"
@@ -44,7 +45,8 @@
                 reportId="occupancy_permit_claimstub"
                 reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"
                 action="preview" 
-                visibleWhen="#{ entity.appno != null }"/>
+                visibleWhen="#{ task.state =='requirement-verification'
+                    &amp;&amp; entity.appno != null }"/>
                     
         <invoker type="formActions" caption="Send Email" action="sendEmail"/>            
     </invokers>

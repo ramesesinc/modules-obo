@@ -10,13 +10,23 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingPermitFeeModel extends CrudFormModel {
+class OboApplicationFeeModel extends CrudFormModel {
     
     def appid;
     def parentid;
     def typeid;
     def handler;
     
+    def open( inv ) {
+        schemaName = inv.properties.schemaName;
+        return super.open();
+    }
+    
+    def create( inv ) {
+        schemaName = inv.properties.schemaName;
+        return super.create();
+    }
+
     void afterCreate() {
         entity.appid = appid;
         entity.sectionid = typeid;

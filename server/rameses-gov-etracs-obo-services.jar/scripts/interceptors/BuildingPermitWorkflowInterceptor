@@ -47,8 +47,6 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("building_permit_transmittal")
 	def transmittalEm;
 
-	@DataContext("obo_output_permit")
-	def outputPermitEm;
 
 	/* *********************************************************************
 	//Specific before action tasks
@@ -64,27 +62,35 @@ class BuildingPermitWorkflowInterceptor {
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }") 
 	public void doActionBeforeApproval( def evt ) {
 		def p = evt.args[0];
-		if( p.to == 'zoning-evaluation' ) {
+		if(p.taskstate.matches("requirement-verification") ) {
+			//check if there are pending findings
+			def t = reqEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("supersederid IS NULL AND state=2").val();
+			if( t > 0) throw new Exception("There are unresolved findings. You need to send this for revision");
+
 			def appno = appEm.find( [objid: p.refid ] ).select("appno").val();
 			if(!appno ) throw new Exception("Please generate the application number first");
-		} 
-		else if( p.to == "payment") {
+
+			def c = rpuEm.find( [appid: p.refid ]).where("taxdeclarationid IS NULL").exists();
+			if( c ) throw new Exception("Please generate the tax declaration documents ");
+			c = rpuEm.find( [appid: p.refid ]).where("truecopycertid IS NULL").exists();
+			if( c ) throw new Exception("Please generate the tax declaration documents ");
+		}
+		else if( p.taskstate.matches("zoning-verification|verification") ) {
+			//check if there are no open findings
+			def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("supersederid IS NULL AND state=2").val();
+			if( t > 0) throw new Exception("There are unresolved findings. Send this for revision");
+		}
+		else if( p.taskstate == "assessment") {
 			def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").val();
 			if( c == 0 )
 				throw new Exception("There must be at least one fee");		
 		}
-		else {
-			//check if there are open findings
-			def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("supersederid IS NULL AND state=2").val();
-			if( t > 0) throw new Exception("All findings must be resolved first.");
-		}
 	}
-
 
 	/* *********************************************************************
 	//Evaluation-related triggers
 	************************************************************************ */
-	private void fireEvaluationWorkflow( refid, filter, action ) {
+	private void fireSectionWorkflow( refid, filter, action ) {
 		def list = vwSectionEm.select("objid,taskid").find( [appid: refid ] ).where( filter ).list();
 		if( list ) {
 			def dt = dateSvc.getServerDate();
@@ -101,13 +107,14 @@ class BuildingPermitWorkflowInterceptor {
 		}
 	}
 
-	//approve. check if there are evaluations where the task state is for-revision and reactivate each
+	//approve. fire section evaluations for zoning and trade evaluation
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve' }" ) 
 	public void approveEvaluationTasks( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		def appid = p.refid;
+		if(!result.state.matches('zoning-evaluation|trade-evaluation')) return;
 
+		def appid = p.refid;
 		//start the next evaluation tasks. fire evaluations for required sections as well as optional that has existing ancillary 
 		def mlist = sectionEm.where(" buildingpermitstate = :state  AND optional=0 ", [state: result.state] ).list()*.objid;
 		//throw new Exception("state is " + mlist );
@@ -143,7 +150,14 @@ class BuildingPermitWorkflowInterceptor {
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'reactivate' }" ) 
 	public void reactivateEvaluationTasks( def evt ) {
 		def p = evt.args[0];
-		fireEvaluationWorkflow( p.refid, " task.state = 'for-revision' ", "reactivate" );
+		if( p.taskstate == "requirement-revision") {
+			//do nothing special
+		}
+		else if(p.taskstate.matches( "zoning-evaluation-revision|trade-evaluation-revision") ) {
+			def ids = findingEm.find( [appid: p.refid ] ).where("supersederid IS NULL AND state=2").groupBy("parentid").list()?.parentid;
+			def strids = "('" + ids.join("','") + "')";			
+			fireSectionWorkflow( p.refid, " objid IN " + strids, "reactivate" );	
+		}
 	}
 
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'post-payment' }" ) 
@@ -154,29 +168,15 @@ class BuildingPermitWorkflowInterceptor {
 		//find first sections where state is obo-processing. If type.issuepermit = 1 then move task to for releasing 
 		def openList = vwSectionEm.find( [appid: appid ] ).where("task.state = 'obo-processing' ").list();
 		openList.each {
-
-			//check first if typeid has output permits defined
-			def hasOutput = outputPermitEm.find( [ permittype:"building_permit", sectionid: it.typeid ]).exists()
-
 			def f = [:];
 			f.processname = 'building_permit_section';
 			f.refid = it.objid;
 			f.startdate = dt;
 			f.info = it;
 			f.taskid = it.taskid;
-			f.action = (hasOutput) ? "send-for-releasing" : "end";
+			f.action = (it.issuepermit == 1 ) ? "send-for-releasing" : "end";
 			wfSvc.signal(f);	
 		}
-	}
-
-	//This is newly added. Do not send to zoning if there is no tax clearance and tax declaration true copy
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].taskstate == 'requirement-verification' && args[0].action == 'approve' }" ) 
-	public void doActionBeforeZoningEvaluation( def evt ) {
-		def p = evt.args[0];
-		def c = rpuEm.find( [appid: p.refid ]).where("taxdeclarationid IS NULL").exists();
-		if( c ) throw new Exception("Please generate the tax declaration documents ");
-		c = rpuEm.find( [appid: p.refid ]).where("truecopycertid IS NULL").exists();
-		if( c ) throw new Exception("Please generate the tax declaration documents ");
 	}
 
 	//release process. Make sure there is at least one building_permit_issuance

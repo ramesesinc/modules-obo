@@ -14,9 +14,9 @@ public class OboMenuNotificationService {
 
 	def getTaskCount( def r ) {
 		//use self so that it will fire the interceptors
-		r.debug = true;
     	def nodes = taskSvc.getNodeList( r );
-    	return nodes.findAll{it.count!=null}.sum{ it.count };
+    	def d = nodes.findAll{it.name!='mytask'}.findAll{it.count!=null}.sum{ it.count };
+    	return d;
 	}
 
 	def building_permit = { o->

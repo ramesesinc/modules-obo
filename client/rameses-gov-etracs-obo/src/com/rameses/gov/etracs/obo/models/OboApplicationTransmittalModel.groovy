@@ -19,10 +19,11 @@ import com.rameses.io.*;
 *******/
 class OboApplicationTransmittalModel extends FormReportModel {
 
-    @Service("OboApplicationRequirementService")
-    def reqSvc;
+    @Service("OboApplicationTransmittalService")
+    def transmittalSvc;
     
     def entity;
+    def type;
 
     //entity is the application. It should have a transmittalid field. 
     def getQuery() {
@@ -30,14 +31,15 @@ class OboApplicationTransmittalModel extends FormReportModel {
         return [transmittalid: entity.transmittalid ];
     }
     
-    public def create() {
+    public def create(inv) {
+        type = inv.properties.txntype;
         if( !MsgBox.confirm("You are about to finalize the requirement checklist. You cannot undo this transaction. Proceed?") ) {
             throw new BreakException();
         }
         entity = caller.entity;
         def task = caller.task;
         String id = (reportId == "building_permit_transmittal")?"building_permit":"occupancy_permit";
-        def t = reqSvc.buildCheckList( [appid: entity.objid, taskid: task.taskid, schemaname: id ]);
+        def t = transmittalSvc.create( [appid: entity.objid, taskid: task.taskid, schemaname: id, type: type ]);
         entity.transmittalid = t.objid;
         caller.reload();        
         return super.preview();

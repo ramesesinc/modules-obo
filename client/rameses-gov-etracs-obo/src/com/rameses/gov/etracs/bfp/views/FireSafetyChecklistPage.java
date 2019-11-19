@@ -77,7 +77,7 @@ public class FireSafetyChecklistPage extends javax.swing.JPanel {
 
         add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(911, 80));
+        jPanel1.setPreferredSize(new java.awt.Dimension(911, 20));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,7 +87,7 @@ public class FireSafetyChecklistPage extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 20, Short.MAX_VALUE)
         );
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);

@@ -120,7 +120,7 @@ abstract class AbstractOboApplicationModel extends WorkflowTaskModel {
             entity.amount = u.amount;
             binding.refresh("entity.amount")
         }
-        return Inv.lookupOpener("building_permit_assessment", [params: f, handler: h] );
+        return Inv.lookupOpener(getPermitName() + ":assessment", [params: f, handler: h] );
     }
     
     def addFee() {
@@ -128,7 +128,7 @@ abstract class AbstractOboApplicationModel extends WorkflowTaskModel {
         m.handler = { o->
             feeListHandler.reload();
         }
-        return Inv.lookupOpener("building_permit_fee:create", m );
+        return Inv.lookupOpener(getPermitName() + "_fee:create", m );
     }
     
     def clearFees() {

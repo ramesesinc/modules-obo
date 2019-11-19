@@ -41,6 +41,8 @@ public class OboSectionPage extends javax.swing.JPanel {
         xRadio1 = new com.rameses.rcp.control.XRadio();
         xRadio2 = new com.rameses.rcp.control.XRadio();
         xCheckBox2 = new com.rameses.rcp.control.XCheckBox();
+        xCheckBox3 = new com.rameses.rcp.control.XCheckBox();
+        xTextField3 = new com.rameses.rcp.control.XTextField();
 
         xFormPanel1.setCaption("General Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -119,6 +121,29 @@ public class OboSectionPage extends javax.swing.JPanel {
         });
         xFormPanel1.add(xCheckBox2);
 
+        xCheckBox3.setCheckValue(1);
+        xCheckBox3.setName("entity.issuepermit"); // NOI18N
+        xCheckBox3.setUncheckValue(0);
+        xCheckBox3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xCheckBox3.setShowCaption(false);
+        xCheckBox3.setText("Issue Permit/clearance");
+        xCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xCheckBox3ActionPerformed(evt);
+            }
+        });
+        xFormPanel1.add(xCheckBox3);
+
+        xTextField3.setCaption("Report Name");
+        xTextField3.setDepends(new String[] {"entity.issuepermit"});
+        xTextField3.setName("entity.reportname"); // NOI18N
+        xTextField3.setVisibleWhen("#{ entity.issuepermit == 1}");
+        xTextField3.setCaptionWidth(100);
+        xTextField3.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField3.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        xFormPanel1.add(xTextField3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,9 +163,14 @@ public class OboSectionPage extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_xCheckBox2ActionPerformed
 
+    private void xCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xCheckBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xCheckBox3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.rcp.control.XCheckBox xCheckBox2;
+    private com.rameses.rcp.control.XCheckBox xCheckBox3;
     private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
@@ -150,5 +180,6 @@ public class OboSectionPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
+    private com.rameses.rcp.control.XTextField xTextField3;
     // End of variables declaration//GEN-END:variables
 }

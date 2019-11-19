@@ -27,6 +27,23 @@ DELETE FROM building_permit;
 DELETE FROM sys_sequence;
 
 
+[cleanup-occupancy-permit]
+UPDATE occupancy_permit SET taskid = NULL;
+UPDATE occupancy_permit_section SET taskid = NULL;
+UPDATE occupancy_permit_requirement SET supersederid = NULL;
+UPDATE occupancy_permit_finding SET supersederid = NULL;
+DELETE FROM occupancy_permit_section_task;
+DELETE FROM occupancy_permit_task;
+DELETE FROM occupancy_permit_fee;
+DELETE FROM occupancy_permit_finding;
+DELETE FROM occupancy_permit_section;
+DELETE FROM occupancy_permit_requirement;
+DELETE FROM occupancy_permit_professional;
+DELETE FROM occupancy_permit_entity;
+DELETE FROM occupancy_permit_payment;
+DELETE FROm occupancy_permit_transmittal;
+DELETE FROM occupancy_permit;
+
 
 [cleanup-for-online]
 UPDATE building_permit SET taskid = NULL,appno=NULL;

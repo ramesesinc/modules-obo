@@ -1,0 +1,21 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+        
+         <invoker type="vw_building_permit:form:appActions" 
+                caption="Print Order of Payment"
+                reportId="building_permit_assessment"
+                reportName="com/rameses/gov/etracs/obo/reports/assessment.jasper"
+                action="preview"
+                visibleWhen="#{ task.state.matches('assessment|payment') }"/>
+
+         <invoker type="vw_occupancy_permit:form:appActions" 
+                caption="Print Order of Payment"
+                reportId="occupancy_permit_assessment"
+                reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"
+                action="preview" 
+                visibleWhen="#{  task.state.matches('assessment|payment') }"/>
+                    
+        <invoker type="formActions" caption="Send Email" action="sendEmail"/>            
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationPrintoutModel" />
+</workunit>

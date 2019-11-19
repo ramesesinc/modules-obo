@@ -6,20 +6,17 @@
        
         <!-- Fee Related Actions -->
         <invoker type="feeActions" caption="Auto Assess" action="assess" index="1" 
-                xvisibleWhen="#{ task.assignee?.objid !=null 
-                    &amp;&amp; !task.state.matches( 'end|for-revision') }"   />
+                visibleWhen="#{ task.assignee?.objid !=null 
+                    &amp;&amp; task.state.matches( 'review|evaluation|evaluation-approval') }"   />
                     
         <invoker type="feeActions" caption="Add Fee Manually" action="addFee" index="2" 
                 visibleWhen="#{ task.assignee?.objid !=null 
-                    &amp;&amp; !task.state.matches( 'end|for-revision') }" />
-        
-        <invoker type="feeActions" caption="View Ancillary Info" action="viewAncillaryPermit" index="3" 
-                visibleWhen="#{entity.ancillaryid != null  &amp;&amp; !task.state.matches( 'end|for-revision') }"/>
+                    &amp;&amp; task.state.matches( 'review|evaluation|evaluation-approval') }" />
         
         <!-- finding related actions -->         
         <invoker type="findingActions" caption="Add New Finding" action="addFinding" index="1" 
                 visibleWhen="#{ task.assignee?.objid !=null 
-                    &amp;&amp; !task.state.matches( 'end|for-revision') }" />
+                    &amp;&amp; task.state.matches( 'review|evaluation|evaluation-approval') }" />
         
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OccupancyPermitSectionModel" />

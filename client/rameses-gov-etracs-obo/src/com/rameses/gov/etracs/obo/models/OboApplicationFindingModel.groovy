@@ -108,6 +108,7 @@ class BuildingPermitFindingModel {
         entity.rootid = preventity.rootid;        
         entity.particulars = preventity.particulars;
         entity.state = 0;
+        entity.schemaname = preventity.schemaname;
     }
     
     def closeIssue() {
