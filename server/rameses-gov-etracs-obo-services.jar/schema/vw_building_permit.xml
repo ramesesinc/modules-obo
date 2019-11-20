@@ -10,6 +10,8 @@
 		</complex>
 
 		<field name="permitno" searchable="true" indexed="true"/>
+		<field name="dtissued" />
+
 		<field name="orgcode" />
 		<field name="trackingno" searchable="true" indexed="true"/>
 		<field name="apptype" />
@@ -32,7 +34,7 @@
 		<field name="totalfloorarea" />
 		<field name="height" />
 		<field name="numfloors" />
-		<field name="worktypes" />
+		<complex name="worktypes" serializer="default"/>
 
 		<field name="zoneclass_objid" />
 		<field name="zoneclass_title" />

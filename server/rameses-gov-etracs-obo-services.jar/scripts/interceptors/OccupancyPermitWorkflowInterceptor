@@ -56,7 +56,12 @@ class OccupancyPermitWorkflowInterceptor {
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-schedule-inspection' }") 
 	public void doActionBeforeScheduleInspection( def evt ) {
 		def p = evt.args[0];
-		def t = appEm.find( [objid: p.refid] ).select("appno").val();
+
+		//check if there are pending findings
+		def t = reqEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("supersederid IS NULL AND state=2").val();
+		if( t > 0) throw new Exception("There are unresolved findings. You need to send this for revision");
+
+		t = appEm.find( [objid: p.refid] ).select("appno").val();
 		if(!t) throw new Exception("Please Accept Application first to generate application number");
 	}
 

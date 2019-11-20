@@ -48,7 +48,7 @@ public class OccupancyPermitOnlineService  {
     	/*******************************************************
     	//just dummy test - remove after
     	********************************************************/
-    	def bldg_permit = bldgPermitSvc.findByPermitNo( [permitno: '123TEST'] );
+    	def bldg_permit = bldgPermitSvc.findByPermitNo( [permitno: o.appid ] );
     	app = [trackingno: '137-OCC123', dtfiled: dt ];
     	app.bldgpermit = bldg_permit;
     	app.bldgpermitid = bldg_permit.objid;

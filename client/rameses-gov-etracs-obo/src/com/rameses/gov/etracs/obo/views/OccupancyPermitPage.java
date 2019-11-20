@@ -38,6 +38,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xTabbedPane2 = new com.rameses.rcp.control.XTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
+        xLabel34 = new com.rameses.rcp.control.XLabel();
         xLabel8 = new com.rameses.rcp.control.XLabel();
         xLabel7 = new com.rameses.rcp.control.XLabel();
         xLabel6 = new com.rameses.rcp.control.XLabel();
@@ -121,6 +122,11 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xTitledBorder1.setTitle("Project Information");
         xFormPanel1.setBorder(xTitledBorder1);
         xFormPanel1.setCaptionWidth(190);
+
+        xLabel34.setCaption("Bldg Permit No");
+        xLabel34.setExpression("#{entity.bldgpermit.permitno}");
+        xLabel34.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel34);
 
         xLabel8.setCaption("Project Title");
         xLabel8.setExpression("#{entity.title}");
@@ -876,7 +882,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 416, Short.MAX_VALUE)
+            .addGap(0, 438, Short.MAX_VALUE)
         );
 
         xPanel7.add(jPanel10, java.awt.BorderLayout.LINE_END);
@@ -1028,6 +1034,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel31;
     private com.rameses.rcp.control.XLabel xLabel32;
     private com.rameses.rcp.control.XLabel xLabel33;
+    private com.rameses.rcp.control.XLabel xLabel34;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel6;

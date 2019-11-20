@@ -492,25 +492,25 @@
 			<band height="250"  isSplitAllowed="true" >
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="425"
-						y="14"
-						width="103"
+						x="396"
+						y="29"
+						width="132"
 						height="60"
 						key="image-5"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/anthony_r_enaje.jpg"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["building-images/anthony_r_enaje.png"]]></imageExpression>
 				</image>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="425"
-						y="103"
-						width="103"
+						x="406"
+						y="107"
+						width="135"
 						height="60"
 						key="image-6"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/rafael_b_encarnacion.jpg"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["building-images/rafael_b_encarnacion.png"]]></imageExpression>
 				</image>
 				<rectangle>
 					<reportElement
