@@ -45,19 +45,23 @@
 			function initOccupancyInfo(occupancy, permit) {
 				occupancy.contact = {};
 				occupancy.orgcode = app.orgcode;
-				occupancy.permitid = permit.objid;
+				occupancy.bldgpermitid = permit.objid;
 				occupancy.contact = permit.contact;
 				occupancy.dtactualstarted = permit.dtproposedconstruction
 				occupancy.dtactualcompleted = permit.dtexpectedcompletion
 				occupancy.bldgpermit = permit
+				occupancy.permittype = "OCCUPANCY_PERMIT";
 				occupancy.totalmaterialcost = 0.0;
 				occupancy.totaldirectlaborcost = 0.0;
 				occupancy.totalequipmentcost = 0.0;
 				occupancy.totalothercost = 0.0;
+				occupancy.firealarmcost = 0.0;
+				occupancy.sprinklercost = 0.0;
+				occupancy.lpgpipingcost = 0.0;
+				occupancy.firesuppcost = 0.0;
 
 				//set actual values from permit as default
 				var fields = [
-					'permittype',
 					'dtproposedconstruction',
 					'dtexpectedcompletion',
 					'totalfloorarea',

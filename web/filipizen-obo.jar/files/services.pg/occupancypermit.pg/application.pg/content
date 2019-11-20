@@ -94,13 +94,22 @@
 	  	</tbody>
 	  </table>
 
-	  <br />
-	  <h3>SUMMARY OF ACTUAL COSTS</h3>
+	<br />
+	<h3>SUMMARY OF ACTUAL COSTS</h3>
   	<div>
   		@wx:label(caption:'Total Cost of Material', context:'application', expr: '#{occupancy.totalmaterialcost}')
   		@wx:label(caption:'Total Cost of Direct Labor', context:'application', expr: '#{occupancy.totaldirectlaborcost}')
   		@wx:label(caption:'Total Cost of Equipment Utilization', context:'application', expr: '#{occupancy.totalequipmentcost}')
   		@wx:label(caption:'Total Other Cost', context:'application', expr: '#{occupancy.totalothercost}')
+	</div>
+
+	<br />
+	<h3>INSTALLATION COSTS</h3>
+  	<div>
+  		@wx:label(caption:'Fire Alarm System', context:'application', expr: '#{occupancy.firealarmcost}')
+  		@wx:label(caption:'Automatic Sprinkler System', context:'application', expr: '#{occupancy.sprinklercost}')
+  		@wx:label(caption:'LPG Piping System', context:'application', expr: '#{occupancy.lpgpipingcost}')
+  		@wx:label(caption:'Fire Suppression Cost', context:'application', expr: '#{occupancy.firesuppcost}')
 	</div>
   </div>  
   <br />
@@ -172,7 +181,17 @@
   		@wx:decimal(caption:'Total Cost of Direct Labor', context:'application', name: 'occupancy.totaldirectlaborcost', required: true)
   		@wx:decimal(caption:'Total Cost of Equipment Utilization', context:'application', name: 'occupancy.totalequipmentcost', required: true)
   		@wx:decimal(caption:'Total Other Cost', context:'application', name: 'occupancy.totalothercost', required: true)
-		</div>
+	</div>
+
+	  <br />
+	  <h3>INSTALLATION COSTS</h3>
+  	<div>
+  		@wx:decimal(caption:'Fire Alarm System', context:'application', name: 'occupancy.firealarmcost', required: true)
+  		@wx:decimal(caption:'Automatic Sprinkler System', context:'application', name: 'occupancy.sprinklercost', required: true)
+  		@wx:decimal(caption:'LPG Piping System', context:'application', name: 'occupancy.lpgpipingcost', required: true)
+  		@wx:decimal(caption:'Fire Suppression System', context:'application', name: 'occupancy.firesuppcost', required: true)
+	</div>
+
   </div>  
   <br />
   @wx:button( context:'application', name:'update', caption: 'Update' )

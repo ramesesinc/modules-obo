@@ -4,23 +4,23 @@
 			<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 		</tr>
 		<tr>
-			<td colspan="3"><input type="checkbox"> NEW CONSTRUCTION </td>
-			<td colspan="4"><input type="checkbox"> RENOVATION <p class="underline renovation"></p></td>
-			<td colspan="2"><input type="checkbox"> RAISING <p class="underline raising"></p></td>
+			<td colspan="3"><input type="checkbox" onclick="return false;"> NEW CONSTRUCTION </td>
+			<td colspan="4"><input type="checkbox" onclick="return false;"> RENOVATION <p class="underline renovation"></p></td>
+			<td colspan="2"><input type="checkbox" onclick="return false;"> RAISING <p class="underline raising"></p></td>
 		</tr>
 		<tr>
-			<td colspan="3"><input type="checkbox"> ERECTION</td>
-			<td colspan="4"><input type="checkbox"> CONVERSION <p class="underline conversion"></p></td>
-			<td colspan="2"><input type="checkbox"> ACCESSORY BUILDING/STRUCTURE<p class="underline accessory"></p></td>
+			<td colspan="3"><input type="checkbox" onclick="return false;"> ERECTION</td>
+			<td colspan="4"><input type="checkbox" onclick="return false;"> CONVERSION <p class="underline conversion"></p></td>
+			<td colspan="2"><input type="checkbox" onclick="return false;"> ACCESSORY BUILDING/STRUCTURE<p class="underline accessory"></p></td>
 		</tr>
 		<tr>
-			<td colspan="3"><input type="checkbox"> ADDITION</td>
-			<td colspan="4"><input type="checkbox"> REPAIR <p class="underline repair"></p></td>
-			<td colspan="2" rowspan="2" valign="top"><input type="checkbox"> OTHERS (specify) <p class="underline"></p></td>
+			<td colspan="3"><input type="checkbox" onclick="return false;"> ADDITION</td>
+			<td colspan="4"><input type="checkbox" onclick="return false;"> REPAIR <p class="underline repair"></p></td>
+			<td colspan="2" rowspan="2" valign="top"><input type="checkbox" onclick="return false;"> OTHERS (specify) <p class="underline"></p></td>
 		</tr>
 		<tr class="last-td">
-			<td colspan="3"><input type="checkbox"> ALTERATION</td>
-			<td colspan="4"><input type="checkbox"> MOVING <p class="underline moving"></p></td>
+			<td colspan="3"><input type="checkbox" onclick="return false;"> ALTERATION</td>
+			<td colspan="4"><input type="checkbox" onclick="return false;"> MOVING <p class="underline moving"></p></td>
 		</tr>
 	</table>
 
@@ -66,27 +66,27 @@
 							</tr>
 							<tr>
 								<td colspan="2" >PERCENTAGE OF BUILDING FOOTPRINT <label class="underline data">${app.percentage_building_footprint}%</label></td>
-								<td class="tdborder"><input type="checkbox" disabled <%if(app.number_and_width_of_exit_doors !=null){%>checked<%}%>>  NUMBER AND WIDTH OF EXIT DOORS</td>
-								<td><input type="checkbox" disabled <%if(app.fire_walls !=null){%>checked<%}%>> FIRE WALLS</td>
+								<td class="tdborder"><input type="checkbox" onclick="return false;" <%if(app.number_and_width_of_exit_doors !=null){%>checked<%}%>>  NUMBER AND WIDTH OF EXIT DOORS</td>
+								<td><input type="checkbox" onclick="return false;" <%if(app.fire_walls !=null){%>checked<%}%>> FIRE WALLS</td>
 							</tr>
 							<tr>
 								<td colspan="2">PERCENTAGE OF IMPERVIOUS SURFACE AREA <label class="underline data">${app.percentage_impervious_surface_area}%</label> </td>
-								<td class="tdborder"><input type="checkbox" disabled <%if(app.width_of_corridors !=null){%>checked<%}%>> WIDTH OF CORRIDORS</td>
-								<td><input type="checkbox" disabled <%if(app.fire_fighting_and_safety_facilities !=null){%>checked<%}%>> FIRE FIGHTING AND SAFETY FACILITIES</td>
+								<td class="tdborder"><input type="checkbox" onclick="return false;" <%if(app.width_of_corridors !=null){%>checked<%}%>> WIDTH OF CORRIDORS</td>
+								<td><input type="checkbox" onclick="return false;" <%if(app.fire_fighting_and_safety_facilities !=null){%>checked<%}%>> FIRE FIGHTING AND SAFETY FACILITIES</td>
 							</tr>
 							<tr>
 								<td colspan="2">DETECTORS PERCENTAGE OF UNPAVED SURFACE AREA <label class="underline data">${app.percentage_unpaved_surface_area}%</label>  </td>
-								<td class="tdborder"><input type="checkbox" disabled <%if(app.distance_to_fire_exits !=null){%>checked<%}%>> DISTANCE TO FIRE EXITS</td>
-								<td><input type="checkbox" disabled <%if(app.emergency_lights !=null){%>checked<%}%>> EMERGENCY LIGHTS</td>
+								<td class="tdborder"><input type="checkbox" onclick="return false;" <%if(app.distance_to_fire_exits !=null){%>checked<%}%>> DISTANCE TO FIRE EXITS</td>
+								<td><input type="checkbox" onclick="return false;" <%if(app.emergency_lights !=null){%>checked<%}%>> EMERGENCY LIGHTS</td>
 							</tr>
 							<tr>
 								<td colspan="2">OTHERS (Specify) __________</td>
-								<td class="tdborder"><input type="checkbox" disabled <%if(app.smoke_detectors !=null){%>checked<%}%>> SMOKE DETECTORS</td>
-								<td><input type="checkbox" disabled > OTHERS (Specify)</td>
+								<td class="tdborder"><input type="checkbox" onclick="return false;" <%if(app.smoke_detectors !=null){%>checked<%}%>> SMOKE DETECTORS</td>
+								<td><input type="checkbox" onclick="return false;" > OTHERS (Specify)</td>
 							</tr>
 							<tr class="last-td">
 								<td colspan="2"></td>
-								<td class="tdborder"><input type="checkbox" disabled <%if(app.access_to_public_street !=null){%>checked<%}%>> ACCESS TO PUBLIC STREET</td>
+								<td class="tdborder"><input type="checkbox" onclick="return false;" <%if(app.access_to_public_street !=null){%>checked<%}%>> ACCESS TO PUBLIC STREET</td>
 								<td></td>
 							</tr>
 						</tbody>

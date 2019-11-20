@@ -36,6 +36,12 @@
 	</head>
 	<body>
 
+<style type="text/css">
+.header div{
+	display: inline-block;
+}
+</style>
+
 	<div class="dl">
 	    <div class="container">
 	        <button onclick="window.print();return false;" class="btn btn-print"><i class="fa fa-print"></i>Print</button>
@@ -48,18 +54,21 @@
 					<p>${PAGE.formno}</p>
 				</div>
 				<div class="header">
-					<h3>Republic of the Philippines</h3>
-					<h3>${app.org.formalname}</h3>
-					<h3>${app.org.province}</h3>
-					<br>
-					<h2>Office of the Building Official</h2>
-					<h1><b>${PAGE.title}</b></h1>
+					<div>
+						<img src="/res/obo/lgu/legazpi_logo.png" style="width:100px;">
+					</div>
+					<div>
+						<h3>Republic of the Philippines</h3>
+						<h3>${app.org.formalname}</h3>
+						<h3>${app.org.province}</h3>
+						<br>
+						<h2>Office of the Building Official</h2>
+					</div>
+					<div>
+						<img src="/res/obo/lgu/legazpi_oscp_logo.png" style="width:115px;">
+					</div>
 				</div>
-				<div class="barcode">
-					<p><b>Tracking No. :</b></p>
-					<center><img id='qrcode' src="https://api.qrserver.com/v1/create-qr-code/?data=${app?.objid}&amp;size=250x250" width="80" height="80" class="img-responsive"/></center>
-					<p>${app?.objid}</p>
-				</div>
+				<center><h1><b>${PAGE.title}</b></h1></center>
 			</div>	
 
 			<br>
