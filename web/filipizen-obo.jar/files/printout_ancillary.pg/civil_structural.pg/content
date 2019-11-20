@@ -5,24 +5,24 @@
 		<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><input type="checkbox"> NEW CONSTRUCTION </td>
-		<td colspan="4"><input type="checkbox"> RENOVATION <p class="underline renovation"></p></td>
-		<td colspan="2"><input type="checkbox"> RAISING <p class="underline raising"></p></td>
+		<td colspan="3"><input type="checkbox" onclick="return false;"> NEW CONSTRUCTION </td>
+		<td colspan="4"><input type="checkbox" onclick="return false;"> RENOVATION <p class="underline renovation"></p></td>
+		<td colspan="2"><input type="checkbox" onclick="return false;"> RAISING <p class="underline raising"></p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><input type="checkbox"> ERECTION</td>
-		<td colspan="4"><input type="checkbox"> CONVERSION <p class="underline conversion"></p></td>
-		<td colspan="2"><input type="checkbox"> DEMOLITION<p class="underline demolition"></p></td>
+		<td colspan="3"><input type="checkbox" onclick="return false;"> ERECTION</td>
+		<td colspan="4"><input type="checkbox" onclick="return false;"> CONVERSION <p class="underline conversion"></p></td>
+		<td colspan="2"><input type="checkbox" onclick="return false;"> DEMOLITION<p class="underline demolition"></p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><input type="checkbox"> ADDITION</td>
-		<td colspan="4"><input type="checkbox"> REPAIR <p class="underline repair"></p></td>
-		<td colspan="2"><input type="checkbox"> ACCESSORY BUILDING/STRUCTURE <p class="underline accessory"></p></td>
+		<td colspan="3"><input type="checkbox" onclick="return false;"> ADDITION</td>
+		<td colspan="4"><input type="checkbox" onclick="return false;"> REPAIR <p class="underline repair"></p></td>
+		<td colspan="2"><input type="checkbox" onclick="return false;"> ACCESSORY BUILDING/STRUCTURE <p class="underline accessory"></p></td>
 	</tr>
 	<tr class="last-td">
-		<td colspan="3"><input type="checkbox"> ALTERATION</td>
-		<td colspan="4"><input type="checkbox"> MOVING <p class="underline moving"></p></td>
-		<td colspan="2"><input type="checkbox"> OTHERS (Specify) <p class="underline accessory"></p></td>
+		<td colspan="3"><input type="checkbox" onclick="return false;"> ALTERATION</td>
+		<td colspan="4"><input type="checkbox" onclick="return false;"> MOVING <p class="underline moving"></p></td>
+		<td colspan="2"><input type="checkbox" onclick="return false;"> OTHERS (Specify) <p class="underline accessory"></p></td>
 	</tr>
 </table>
 
@@ -37,29 +37,29 @@
 							<td colspan="3"><p class="allcaps-bold">Nature of Civil / Structural Works:</p></td>
 						</tr>
 						<tr>
-							<td><input type="checkbox" <%if(app.staking !=null){%>checked<%}%>> STAKING</td>
-							<td><input type="checkbox" <%if(app.erection !=null){%>checked<%}%>> ERECTION/LIFTING</td>
-							<td><input type="checkbox" <%if(app.prestress_works !=null){%>checked<%}%>> PRESTRESS WORKS</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.staking !=null){%>checked<%}%>> STAKING</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.erection !=null){%>checked<%}%>> ERECTION/LIFTING</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.prestress_works !=null){%>checked<%}%>> PRESTRESS WORKS</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox" <%if(app.excavation !=null){%>checked<%}%>> EXCAVATION</td>
-							<td><input type="checkbox" <%if(app.concrete_framing !=null){%>checked<%}%>> CONCRETE FRAMING</td>
-							<td><input type="checkbox" <%if(app.material_testing !=null){%>checked<%}%>> MATERIAL TESTING</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.excavation !=null){%>checked<%}%>> EXCAVATION</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.concrete_framing !=null){%>checked<%}%>> CONCRETE FRAMING</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.material_testing !=null){%>checked<%}%>> MATERIAL TESTING</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox" <%if(app.soil_stabilization !=null){%>checked<%}%>> SOIL STABILIZATION</td>
-							<td><input type="checkbox" <%if(app.structural_steel_framing !=null){%>checked<%}%>> STRUCTURAL STEEL FRAMING</td>
-							<td><input type="checkbox" <%if(app.steel_tower !=null){%>checked<%}%>> STEEL TOWERS</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.soil_stabilization !=null){%>checked<%}%>> SOIL STABILIZATION</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.structural_steel_framing !=null){%>checked<%}%>> STRUCTURAL STEEL FRAMING</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.steel_tower !=null){%>checked<%}%>> STEEL TOWERS</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox" <%if(app.piling_works !=null){%>checked<%}%>> PILING WORKS</td>
-							<td><input type="checkbox" <%if(app.slabs !=null){%>checked<%}%>> SLABS</td>
-							<td><input type="checkbox" <%if(app.tanks !=null){%>checked<%}%>> TANKS</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.piling_works !=null){%>checked<%}%>> PILING WORKS</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.slabs !=null){%>checked<%}%>> SLABS</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.tanks !=null){%>checked<%}%>> TANKS</td>
 						</tr>
 						<tr>
-							<td><input type="checkbox" <%if(app.foundation !=null){%>checked<%}%>> FOUNDATION</td>
-							<td><input type="checkbox" <%if(app.walls !=null){%>checked<%}%>> WALLS</td>
-							<td><input type="checkbox" <%if(app.others !=null){%>checked<%}%>> OTHERS (Specify) <p class="underline"></p></td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.foundation !=null){%>checked<%}%>> FOUNDATION</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.walls !=null){%>checked<%}%>> WALLS</td>
+							<td><input type="checkbox" onclick="return false;" <%if(app.others !=null){%>checked<%}%>> OTHERS (Specify) <p class="underline"></p></td>
 						</tr> 
 					</tbody>
 					<tbody>
