@@ -1,10 +1,10 @@
 <workunit extends="wtemplates/RuleMgmtController.xml" serviceName="RuleMgmtService">
     <invokers>
         <invoker folderid="/explorer/rulemgmt/obo" caption="OBO Construction Cost Rules"
-                 action="init" index="1" srole="RULE_AUTHOR" tag="oboconstructioncost" />
+                 action="init" index="1" role="RULE_AUTHOR" tag="oboconstructioncost" />
         
         <invoker folderid="/explorer/rulemgmt/obo" caption="OBO Assessment Rules"
-                 action="init" index="2" srole="RULE_AUTHOR"  tag="oboassessment"/>
+                 action="init" index="2" role="RULE_AUTHOR"  tag="oboassessment"/>
         
         <!--
         <invoker folderid="/explorer/rulemgmt/obo" caption="OBO Billing Rules"

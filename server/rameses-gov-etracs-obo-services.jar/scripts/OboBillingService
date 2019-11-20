@@ -32,16 +32,16 @@ class OboBillingService {
 		if ( p.txntype == 'building_permit') p.permittype = 'Building Permit'; 
 		else if ( p.txntype == 'occupancy_permit') p.permittype = 'Occupancy Permit'; 
 
+		p.items = fees; 
 		p.amount = p.items.sum{( it.amount ? it.amount : 0.0 )} 
 		if ( p.amount == null ) p.amount = 0.0; 
 
 		p.objid = app.objid;
 		p.appno = app.appno;
-		p.apptype = app.apptype;		
+		p.apptype = app.apptype;
 		p.title = app.title;
 		p.address = app.location?.lotno + ' ' + app.location?.barangay;
 		p.applicant = app.applicant;
-		p.items = fees; 
  		p.mobileno = app.contact?.mobileno;
 		p.email = app.contact?.email;
 		return p; 
