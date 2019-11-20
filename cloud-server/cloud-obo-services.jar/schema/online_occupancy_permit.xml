@@ -26,6 +26,7 @@
 		<field name="height" type="decimal"/>
 
 		<!-- bldgpermit -->
+		<field name="bldgpermitid" />
 		<field name="bldgpermit_objid" />
 		<field name="bldgpermit_dtissued" />
 		<field name="bldgpermit_permitno" />
@@ -41,6 +42,11 @@
 		<field name="totaldirectlaborcost" type="decimal" />
 		<field name="totalequipmentcost" type="decimal" />
 		<field name="totalothercost" type="decimal" />
+		
+		<field name="firealarmcost" type="decimal" />
+		<field name="sprinklercost" type="decimal" />
+		<field name="lpgpipingcost" type="decimal" />
+		<field name="firesuppcost" type="decimal" />
 		
 		<!-- shows where the current step is at -->
 		<field name="step" type="integer"/>
