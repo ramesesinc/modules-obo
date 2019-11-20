@@ -4,17 +4,17 @@
 		<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 	</tr>
 	<tr>
-		<td colspan="3"><p class="allcaps"><input type="checkbox"> New Construction</p></td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox"> REPAIR</p> <p class="underline repair"></p></td>
-		<td colspan="3"><p class="allcaps"><input type="checkbox"> OTHERS (Specify)</p>  <p class="underline civilothers"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> New Construction</p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> REPAIR</p> <p class="underline repair"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> OTHERS (Specify)</p>  <p class="underline civilothers"></p></td>
 	</tr>
 	<tr >
-		<td colspan="3"><p class="allcaps"><input type="checkbox"> Erection</p></td>
-		<td colspan="3" rowspan="2" valign="top"><p class="allcaps"><input type="checkbox"> Demolition</p> <p class="underline demolition"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> Erection</p></td>
+		<td colspan="3" rowspan="2" valign="top"><p class="allcaps"><input type="checkbox" onclick="return false;"> Demolition</p> <p class="underline demolition"></p></td>
 		<td colspan="3" rowspan="2" valign="top"><p class="underline others">&nbsp;</p></td>
 	</tr>
 	<tr class="last-td">
-		<td colspan="3"><p class="allcaps"><input type="checkbox"> Addition</p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> Addition</p></td>
 	</tr>
 	
 </table>

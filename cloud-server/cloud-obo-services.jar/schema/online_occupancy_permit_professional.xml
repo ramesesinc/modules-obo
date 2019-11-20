@@ -6,7 +6,7 @@
 		<field name="entityid" required="true" />
 
 		<!-- link to actual reference -->
-		<complex name="entity" ref="online_building_permit_entity" jointype="many-to-one">
+		<complex name="entity" ref="online_occupancy_permit_entity" jointype="many-to-one" required="true">
 			<key field="entityid" target="objid" />
 		</complex>	
 

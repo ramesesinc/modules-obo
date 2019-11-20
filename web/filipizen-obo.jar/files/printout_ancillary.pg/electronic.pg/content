@@ -5,9 +5,9 @@
 		<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 	</tr>
 	<tr class="last-td">
-		<td colspan="3"><p class="allcaps"><input type="checkbox"> New Installation</p></td>
-		<td colspan="4"><p class="allcaps"><input type="checkbox"> Annual Inspection</p></td>
-		<td colspan="2"><p class="allcaps"><input type="checkbox"> Other</p> (specify) <p class="underline civilothers"></p></td>
+		<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> New Installation</p></td>
+		<td colspan="4"><p class="allcaps"><input type="checkbox" onclick="return false;"> Annual Inspection</p></td>
+		<td colspan="2"><p class="allcaps"><input type="checkbox" onclick="return false;"> Other</p> (specify) <p class="underline civilothers"></p></td>
 	</tr>
 </table>
 <table cellpadding="0" cellspacing="0" width="100%">
@@ -21,31 +21,31 @@
 							<td colspan="3"><p class="allcaps-bold">Nature of installation works/Equipment system:</p></td>
 						</tr>
 						<tr>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.telecom_system !=null){%>checked<%}%>> Telecommunication system</p></td>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.electronic_fire_alarm_system !=null){%>checked<%}%>> Electronics fire alarm system</p></td>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.telecom_system !=null){%>checked<%}%>> Telecommunication system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.electronic_fire_alarm_system !=null){%>checked<%}%>> Electronics fire alarm system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.
 electronic_process_control_system !=null){%>checked<%}%>> Electronics computerized process control automation system</p></td>
 						</tr>
 						<tr>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.broadcasting_system !=null){%>checked<%}%>> Broadcasting system</p></td>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.sound_communication_system !=null){%>checked<%}%>> Sound communication system</p></td>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.building_automation_management_system !=null){%>checked<%}%>> building automation management and control system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.broadcasting_system !=null){%>checked<%}%>> Broadcasting system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.sound_communication_system !=null){%>checked<%}%>> Sound communication system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.building_automation_management_system !=null){%>checked<%}%>> building automation management and control system</p></td>
 						</tr>
 						<tr>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.telecom_system !=null){%>checked<%}%>> televesion system</p></td>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.centralized_clock_system !=null){%>checked<%}%>> centralized clock system</p></td>
-							<td rowspan="2"><p class="allcaps"><input type="checkbox" <%if(app.medical_electronic_equipment !=null){%>checked<%}%>> Building wiring utilizing copper cable, fiber optical cable or other medal electronics system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.telecom_system !=null){%>checked<%}%>> televesion system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.centralized_clock_system !=null){%>checked<%}%>> centralized clock system</p></td>
+							<td rowspan="2"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.medical_electronic_equipment !=null){%>checked<%}%>> Building wiring utilizing copper cable, fiber optical cable or other medal electronics system</p></td>
 						</tr>
 						<tr>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.information_technology_system !=null){%>checked<%}%>> information technology system</p></td>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.water_treatment_plant !=null){%>checked<%}%>> sound system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.information_technology_system !=null){%>checked<%}%>> information technology system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.water_treatment_plant !=null){%>checked<%}%>> sound system</p></td>
 						</tr>
 						<tr>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.security_alarm_system !=null){%>checked<%}%>> security and alarm system</p></td>
-							<td colspan="2"><p class="allcaps"><input type="checkbox" <%if(app.electronic_conveyance_system !=null){%>checked<%}%>> Electronics control and conveyors system</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.security_alarm_system !=null){%>checked<%}%>> security and alarm system</p></td>
+							<td colspan="2"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.electronic_conveyance_system !=null){%>checked<%}%>> Electronics control and conveyors system</p></td>
 						</tr> 
 						<tr class="trborder">
-							<td colspan="3"><p class="allcaps"><input type="checkbox" <%if(app.other_electronic_equipment !=null){%>checked<%}%>> any other electronic and I.T systems, equipment, apparatus, device and/or component (Specify)</p></td>
+							<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.other_electronic_equipment !=null){%>checked<%}%>> any other electronic and I.T systems, equipment, apparatus, device and/or component (Specify)</p></td>
 						</tr> 
 					</tbody>
 					<tbody>

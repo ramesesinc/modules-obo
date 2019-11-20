@@ -5,18 +5,18 @@
 			<td colspan="9"><p class="allcaps-bold">Scope of work</p></td>
 		</tr>
 		<tr>
-			<td colspan="3"><p class="allcaps"><input type="checkbox"> New Installation</p></td>
-			<td colspan="3"><p class="allcaps"><input type="checkbox"> Reconnection of service entrance</p></td>
-			<td colspan="3"><p class="allcaps"><input type="checkbox"> relocation service etrance</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> New Installation</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> Reconnection of service entrance</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> relocation service etrance</p></td>
 		</tr>
 		<tr>
-			<td colspan="3"><p class="allcaps"><input type="checkbox"> Annual inspection</p></td>
-			<td colspan="3"><p class="allcaps"><input type="checkbox"> separation of service entrance</p></td>
-			<td colspan="3" rowspan="2" valign="top"><input type="checkbox"> Others</p> (specify) <p class="underline others"></p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> Annual inspection</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> separation of service entrance</p></td>
+			<td colspan="3" rowspan="2" valign="top"><input type="checkbox" onclick="return false;"> Others</p> (specify) <p class="underline others"></p></td>
 		</tr>
 		<tr class="trborder last-td" >
-			<td colspan="3"><p class="allcaps"><input type="checkbox"> Temporary</p></td>
-			<td colspan="5"><p class="allcaps"><input type="checkbox"> Upgrade of service entrace</p></td>
+			<td colspan="3"><p class="allcaps"><input type="checkbox" onclick="return false;"> Temporary</p></td>
+			<td colspan="5"><p class="allcaps"><input type="checkbox" onclick="return false;"> Upgrade of service entrace</p></td>
 		</tr>
 	</tbody>
 	<tbody>
@@ -55,9 +55,9 @@
 							<td colspan="3"><b>Supervisor / In-charge of electrical works</b></td>
 						</tr>
 						<tr>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.staking !=null){%>checked<%}%>> Professional Electrical Engineer</p></td>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.staking !=null){%>checked<%}%>>  Registered Electrical Engineer</p></td>
-							<td><p class="allcaps"><input type="checkbox" <%if(app.staking !=null){%>checked<%}%>>  Registered Master Electrician</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.staking !=null){%>checked<%}%>> Professional Electrical Engineer</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.staking !=null){%>checked<%}%>>  Registered Electrical Engineer</p></td>
+							<td><p class="allcaps"><input type="checkbox" onclick="return false;" <%if(app.staking !=null){%>checked<%}%>>  Registered Master Electrician</p></td>
 						</tr>
 						<tr class="trborder last-td">
 							<td colspan="3" align="center">

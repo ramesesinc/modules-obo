@@ -27,9 +27,6 @@ alter table online_occupancy_permit add totalothercost decimal(16,2) default 0;
 
 alter table online_occupancy_permit change column bldgpermit_controlno bldgpermit_permitno varchar(25);
 
-alter table online_occupancy_permit_professional add idx int;
-
-
 
 CREATE VIEW `vw_online_occupancy_permit_professional` 
 AS 
@@ -50,7 +47,5 @@ select
 from (`online_occupancy_permit_professional` `a` 
 	join `online_occupancy_permit_entity` `e` on((`a`.`entityid` = `e`.`objid`)))
 ;
-
-
 
 
