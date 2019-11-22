@@ -35,6 +35,7 @@ public class OccupancyPermitSectionPage extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
+        xTextField1 = new com.rameses.rcp.control.XTextField();
         xLabel8 = new com.rameses.rcp.control.XLabel();
         xLabel7 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
@@ -74,6 +75,12 @@ public class OccupancyPermitSectionPage extends javax.swing.JPanel {
         xTitledBorder1.setTitle("Project Information");
         xFormPanel1.setBorder(xTitledBorder1);
         xFormPanel1.setCaptionWidth(180);
+
+        xTextField1.setCaption("Bldg Permit No");
+        xTextField1.setDisableWhen("#{ false }");
+        xTextField1.setName("entity.app.bldgpermit.permitno"); // NOI18N
+        xTextField1.setPreferredSize(new java.awt.Dimension(200, 30));
+        xFormPanel1.add(xTextField1);
 
         xLabel8.setCaption("Project Title");
         xLabel8.setExpression("#{entity.app.title}");
@@ -386,5 +393,6 @@ public class OccupancyPermitSectionPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel2;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
+    private com.rameses.rcp.control.XTextField xTextField1;
     // End of variables declaration//GEN-END:variables
 }

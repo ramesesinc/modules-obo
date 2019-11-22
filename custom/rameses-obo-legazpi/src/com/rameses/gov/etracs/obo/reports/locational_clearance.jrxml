@@ -1390,8 +1390,8 @@
 				</textField>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="113"
-						y="714"
+						x="78"
+						y="730"
 						width="128"
 						height="73"
 						key="image-5"/>
@@ -1401,8 +1401,8 @@
 				</image>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="390"
-						y="697"
+						x="380"
+						y="703"
 						width="166"
 						height="89"
 						key="image-6"/>

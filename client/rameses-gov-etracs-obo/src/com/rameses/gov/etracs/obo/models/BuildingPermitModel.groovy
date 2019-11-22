@@ -18,6 +18,9 @@ class BuildingPermitModel extends AbstractOboApplicationModel {
     @Service("BuildingPermitRptService")
     def rptSvc;
     
+    @Service("BuildingPermitAssessmentService")
+    def feeSvc;
+    
     def ancillaryListModel;
     
     public String getPermitName() {
@@ -82,6 +85,11 @@ class BuildingPermitModel extends AbstractOboApplicationModel {
         */
     }
     
+    def clearFees() {
+        def u = feeSvc.clearFees( [appid: entity.objid ] );
+        entity.amount = u.amount;
+        feeListHandler.reload();
+    }
 }
 
 

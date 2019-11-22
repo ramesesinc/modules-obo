@@ -35,7 +35,7 @@
 	<field name="dtissued" class="java.util.Date"/>
 	<field name="contractor.name" class="java.lang.String"/>
 	<field name="profarchitect.name" class="java.lang.String"/>
-	<field name="procivil.name" class="java.lang.String"/>
+	<field name="profcivil.name" class="java.lang.String"/>
 	<field name="profelectrical.name" class="java.lang.String"/>
 	<field name="profmechanical.name" class="java.lang.String"/>
 	<field name="profsanitary.name" class="java.lang.String"/>
@@ -46,8 +46,8 @@
 			<band height="424"  isSplitAllowed="true" >
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="-1"
-						y="1"
+						x="0"
+						y="-5"
 						width="612"
 						height="423"
 						key="image-1"/>
@@ -68,8 +68,8 @@
 				</image>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="417"
-						y="49"
+						x="420"
+						y="47"
 						width="155"
 						height="14"
 						key="textField"/>
@@ -79,10 +79,10 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permitno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="375"
-						y="63"
+						x="385"
+						y="62"
 						width="197"
 						height="12"
 						key="textField"/>
@@ -92,10 +92,10 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="401"
-						y="114"
+						x="406"
+						y="112"
 						width="171"
 						height="11"
 						key="textField"/>
@@ -105,9 +105,9 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="360"
+						x="372"
 						y="126"
 						width="212"
 						height="12"
@@ -118,10 +118,10 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="346"
-						y="142"
+						x="366"
+						y="138"
 						width="226"
 						height="11"
 						key="textField"/>
@@ -131,10 +131,10 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="415"
-						y="153"
+						x="418"
+						y="148"
 						width="157"
 						height="14"
 						key="textField"/>
@@ -144,10 +144,10 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="364"
-						y="207"
+						x="380"
+						y="201"
 						width="208"
 						height="13"
 						key="textField"/>
@@ -157,10 +157,10 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profarchitect.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="388"
-						y="221"
+						x="390"
+						y="216"
 						width="184"
 						height="12"
 						key="textField"/>
@@ -168,12 +168,12 @@
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{procivil.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profcivil.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="493"
-						y="235"
+						y="232"
 						width="79"
 						height="12"
 						key="textField"/>
@@ -183,12 +183,12 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profelectrical.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="495"
-						y="249"
-						width="77"
-						height="12"
+						y="247"
+						width="97"
+						height="14"
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
@@ -196,7 +196,7 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profmechanical.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="410"
 						y="263"
@@ -211,8 +211,8 @@
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="416"
-						y="355"
+						x="421"
+						y="352"
 						width="156"
 						height="12"
 						key="textField"/>
@@ -222,10 +222,10 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{supervisor.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="408"
-						y="277"
+						x="414"
+						y="276"
 						width="164"
 						height="11"
 						key="textField"/>
