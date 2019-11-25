@@ -8,7 +8,7 @@
 		 printOrder="Vertical"
 		 orientation="Portrait"
 		 pageWidth="612"
-		 pageHeight="936"
+		 pageHeight="1008"
 		 columnWidth="612"
 		 columnSpacing="0"
 		 leftMargin="0"
@@ -1657,8 +1657,8 @@
 				<staticText>
 					<reportElement
 						x="58"
-						y="495"
-						width="227"
+						y="519"
+						width="224"
 						height="19"
 						key="staticText-99"/>
 					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
@@ -3530,29 +3530,29 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="567"
+						x="194"
 						y="918"
 						width="29"
-						height="16"
+						height="13"
 						key="textField"/>
 					<box></box>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="8"/>
+					<textElement textAlignment="Left" verticalAlignment="Bottom">
+						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
-						x="544"
+						x="171"
 						y="918"
 						width="20"
-						height="16"
+						height="13"
 						key="staticText-218"/>
 					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial" size="8"/>
 					</textElement>
-				<text><![CDATA[page]]></text>
+				<text><![CDATA[Page]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -3846,7 +3846,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="58"
-						y="519"
+						y="496"
 						width="227"
 						height="17"
 						key="staticText-97"/>
@@ -4028,7 +4028,7 @@ Other Spaces;  Class ________________ ]]></text>
 						key="textField"/>
 					<box>					<bottomPen lineWidth="1.0"/>
 </box>
-					<textElement verticalAlignment="Middle">
+					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="7"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{numfloors}]]></textFieldExpression>
@@ -4814,6 +4814,19 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtreleased}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement
+						x="16"
+						y="918"
+						width="148"
+						height="13"
+						key="staticText-444"/>
+					<box></box>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[BFP-QSF-FSED-006 Rev. 01(07.05.19)]]></text>
+				</staticText>
 			</band>
 		</title>
 		<pageHeader>
@@ -4837,7 +4850,7 @@ Other Spaces;  Class ________________ ]]></text>
 			</band>
 		</pageFooter>
 		<summary>
-			<band height="936"  isSplitAllowed="true" >
+			<band height="996"  isSplitAllowed="true" >
 				<staticText>
 					<reportElement
 						x="17"
@@ -6788,10 +6801,10 @@ Other Spaces;  Class ________________ ]]></text>
 					<bottomPen lineWidth="0.8" lineStyle="Solid"/>
 					<rightPen lineWidth="0.8" lineStyle="Solid"/>
 </box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
+					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font fontName="Arial" pdfFontName="Helvetica" size="6" isBold="false"/>
 					</textElement>
-				<text><![CDATA[Any changes in occupancy other than stated shall be in accordance with Rule 10.  ]]></text>
+				<text><![CDATA[   Any changes in occupancy other than stated shall be in accordance with Rule 10.  ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -7050,18 +7063,18 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="68"
+						x="142"
 						y="520"
-						width="504"
+						width="430"
 						height="0"
 						key="line-15"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
 				<line direction="TopDown">
 					<reportElement
-						x="68"
+						x="142"
 						y="534"
-						width="504"
+						width="430"
 						height="0"
 						key="line-16"/>
 					<graphicElement stretchType="NoStretch"/>
@@ -7085,8 +7098,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="31"
-						y="570"
+						x="36"
+						y="610"
 						width="125"
 						height="16"
 						key="staticText-360"/>
@@ -7102,8 +7115,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="31"
-						y="612"
+						x="36"
+						y="652"
 						width="189"
 						height="0"
 						key="line-17"/>
@@ -7111,8 +7124,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</line>
 				<line direction="TopDown">
 					<reportElement
-						x="31"
-						y="642"
+						x="36"
+						y="682"
 						width="189"
 						height="0"
 						key="line-18"/>
@@ -7120,8 +7133,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</line>
 				<staticText>
 					<reportElement
-						x="24"
-						y="611"
+						x="29"
+						y="651"
 						width="211"
 						height="14"
 						key="staticText-361"/>
@@ -7137,8 +7150,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="55"
-						y="643"
+						x="60"
+						y="683"
 						width="139"
 						height="16"
 						key="staticText-362"/>
@@ -7155,8 +7168,8 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="31"
-						y="666"
-						width="97"
+						y="792"
+						width="72"
 						height="15"
 						key="staticText-363"/>
 					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
@@ -7172,7 +7185,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="31"
-						y="681"
+						y="807"
 						width="70"
 						height="15"
 						key="staticText-364"/>
@@ -7189,7 +7202,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="31"
-						y="695"
+						y="821"
 						width="70"
 						height="15"
 						key="staticText-365"/>
@@ -7206,7 +7219,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="31"
-						y="709"
+						y="835"
 						width="49"
 						height="15"
 						key="staticText-366"/>
@@ -7223,7 +7236,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<line direction="TopDown">
 					<reportElement
 						x="104"
-						y="696"
+						y="822"
 						width="87"
 						height="0"
 						key="line-19"/>
@@ -7232,7 +7245,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<line direction="TopDown">
 					<reportElement
 						x="104"
-						y="710"
+						y="836"
 						width="81"
 						height="0"
 						key="line-20"/>
@@ -7241,7 +7254,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<line direction="TopDown">
 					<reportElement
 						x="81"
-						y="724"
+						y="850"
 						width="95"
 						height="0"
 						key="line-21"/>
@@ -7249,9 +7262,9 @@ Other Spaces;  Class ________________ ]]></text>
 				</line>
 				<staticText>
 					<reportElement
-						x="317"
-						y="573"
-						width="124"
+						x="311"
+						y="609"
+						width="102"
 						height="16"
 						key="staticText-367"/>
 					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
@@ -7267,7 +7280,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="397"
-						y="618"
+						y="623"
 						width="162"
 						height="16"
 						key="staticText-369"/>
@@ -7283,8 +7296,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="378"
-						y="636"
+						x="311"
+						y="639"
 						width="84"
 						height="16"
 						key="staticText-370"/>
@@ -7293,41 +7306,24 @@ Other Spaces;  Class ________________ ]]></text>
 					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
 					<rightPen lineWidth="0.0" lineStyle="Solid"/>
 </box>
-					<textElement textAlignment="Right" verticalAlignment="Bottom" isStyledText="true">
+					<textElement textAlignment="Left" verticalAlignment="Bottom" isStyledText="true">
 						<font fontName="Arial" pdfFontName="Helvetica" size="11" isBold="false"/>
 					</textElement>
 				<text><![CDATA[Date Checked:]]></text>
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="468"
-						y="651"
-						width="80"
+						x="403"
+						y="654"
+						width="128"
 						height="0"
 						key="line-22"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
 				<staticText>
 					<reportElement
-						x="317"
-						y="663"
-						width="150"
-						height="16"
-						key="staticText-371"/>
-					<box>					<topPen lineWidth="0.0" lineStyle="Solid"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid"/>
-</box>
-					<textElement textAlignment="Left" verticalAlignment="Middle" isStyledText="true">
-						<font fontName="Arial" pdfFontName="Helvetica" size="11" isBold="false"/>
-					</textElement>
-				<text><![CDATA[RECOMMEND APPROVAL :]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="402"
-						y="714"
+						x="310"
+						y="746"
 						width="163"
 						height="16"
 						key="staticText-372"/>
@@ -7343,8 +7339,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="402"
-						y="729"
+						x="310"
+						y="761"
 						width="163"
 						height="16"
 						key="staticText-373"/>
@@ -7360,8 +7356,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="402"
-						y="758"
+						x="310"
+						y="790"
 						width="163"
 						height="0"
 						key="line-23"/>
@@ -7369,8 +7365,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</line>
 				<staticText>
 					<reportElement
-						x="402"
-						y="757"
+						x="310"
+						y="789"
 						width="163"
 						height="16"
 						key="staticText-374"/>
@@ -7386,8 +7382,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="317"
-						y="786"
+						x="311"
+						y="819"
 						width="151"
 						height="16"
 						key="staticText-375"/>
@@ -7403,8 +7399,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="402"
-						y="828"
+						x="310"
+						y="862"
 						width="163"
 						height="16"
 						key="staticText-376"/>
@@ -7420,8 +7416,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="402"
-						y="842"
+						x="310"
+						y="876"
 						width="162"
 						height="16"
 						key="staticText-377"/>
@@ -7435,23 +7431,10 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<text><![CDATA[City Fire Marshal]]></text>
 				</staticText>
-				<rectangle>
-					<reportElement
-						mode="Transparent"
-						x="26"
-						y="834"
-						width="189"
-						height="44"
-						forecolor="#A4A4A4"
-						key="rectangle-1"/>
-					<graphicElement stretchType="NoStretch">
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-</graphicElement>
-				</rectangle>
 				<staticText>
 					<reportElement
 						x="33"
-						y="839"
+						y="940"
 						width="31"
 						height="10"
 						forecolor="#FF0000"
@@ -7465,7 +7448,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="33"
-						y="850"
+						y="951"
 						width="37"
 						height="10"
 						forecolor="#FF0000"
@@ -7479,7 +7462,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="33"
-						y="862"
+						y="963"
 						width="37"
 						height="10"
 						forecolor="#FF0000"
@@ -7493,7 +7476,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="65"
-						y="839"
+						y="940"
 						width="99"
 						height="10"
 						forecolor="#000000"
@@ -7507,7 +7490,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="71"
-						y="850"
+						y="951"
 						width="132"
 						height="10"
 						forecolor="#000000"
@@ -7521,7 +7504,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<staticText>
 					<reportElement
 						x="69"
-						y="862"
+						y="963"
 						width="95"
 						height="10"
 						forecolor="#000000"
@@ -7536,7 +7519,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<reportElement
 						mode="Opaque"
 						x="104"
-						y="683"
+						y="809"
 						width="76"
 						height="12"
 						forecolor="#000000"
@@ -7552,7 +7535,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<reportElement
 						mode="Opaque"
 						x="105"
-						y="698"
+						y="824"
 						width="77"
 						height="12"
 						forecolor="#000000"
@@ -7568,7 +7551,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<reportElement
 						mode="Opaque"
 						x="83"
-						y="711"
+						y="837"
 						width="112"
 						height="12"
 						forecolor="#000000"
@@ -7582,8 +7565,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="33"
-						y="592"
+						x="38"
+						y="632"
 						width="186"
 						height="18"
 						key="textField"/>
@@ -7595,8 +7578,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="yyyy-MM-dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="31"
-						y="626"
+						x="36"
+						y="666"
 						width="189"
 						height="15"
 						key="textField"/>
@@ -7608,8 +7591,8 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="yyyy-MM-dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="402"
-						y="744"
+						x="310"
+						y="776"
 						width="163"
 						height="14"
 						key="textField"/>
@@ -7621,9 +7604,9 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="468"
-						y="639"
-						width="80"
+						x="405"
+						y="641"
+						width="108"
 						height="12"
 						key="textField"/>
 					<box></box>
@@ -7686,9 +7669,9 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="69"
+						x="142"
 						y="509"
-						width="497"
+						width="424"
 						height="33"
 						key="textField"/>
 					<box></box>
@@ -8209,56 +8192,62 @@ Other Spaces;  Class ________________ ]]></text>
 				</image>
 				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="427"
-						y="659"
+						x="335"
+						y="691"
 						width="112"
 						height="74"
 						key="image-89"/>
 					<box></box>
-					<graphicElement stretchType="NoStretch"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
 					<imageExpression class="java.lang.String"><![CDATA["signatures/bernick_n_batas.png"]]></imageExpression>
 				</image>
 				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="427"
-						y="780"
+						x="335"
+						y="814"
 						width="112"
 						height="74"
 						key="image-90"/>
 					<box></box>
-					<graphicElement stretchType="NoStretch"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
 					<imageExpression class="java.lang.String"><![CDATA["signatures/jan_garry_lunas.png"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="397"
-						y="604"
+						y="610"
 						width="163"
 						height="14"
 						key="textField-10"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
-						<font fontName="Arial"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" isBold="true"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{evaluator.name}]]></textFieldExpression>
 				</textField>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="427"
-						y="550"
+						y="553"
 						width="112"
 						height="68"
 						key="image-91"/>
 					<box></box>
-					<graphicElement stretchType="NoStretch"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
 					<imageExpression class="java.io.InputStream"><![CDATA[new java.io.ByteArrayInputStream( (byte[]) $F{evaluator.signature} )]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement
 						x="22"
-						y="901"
+						y="978"
 						width="307"
-						height="19"
+						height="17"
 						key="staticText-442"/>
 					<box></box>
 					<textElement>
@@ -8268,17 +8257,30 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="34"
-						y="804"
+						x="38"
+						y="910"
 						width="548"
-						height="38"
+						height="29"
 						key="staticText-443"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" isBold="true"/>
 					</textElement>
 				<text><![CDATA[PAALALA: “MAHIGPIT NA IPINAGBABAWAL NG PAMUNUAN NG BUREAU OF FIRE PROTECTION SA MGA
 KAWANI NITO ANG MAGBENTA O MAGREKOMENDA NG ANUMANG BRAND NG FIRE EXTINGUISHER.”]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="311"
+						y="672"
+						width="255"
+						height="25"
+						key="staticText-445"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false"/>
+					</textElement>
+				<text><![CDATA[RECOMMEND ISSUANCE PF FSEC/NOTICE OF DISAPPROVAL:]]></text>
 				</staticText>
 			</band>
 		</summary>
