@@ -1,0 +1,7 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml"
+    schemaName="obo_signature" >
+    <invokers>
+        <invoker folderid="explorer/master/obo" caption="Signature List" action="init" 
+                 cols="displayname,position" role="MASTER"/>
+    </invokers>
+</workunit>
