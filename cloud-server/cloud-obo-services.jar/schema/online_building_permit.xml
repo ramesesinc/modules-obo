@@ -25,9 +25,11 @@
 
 		<field name="location_lotno" />
 		<field name="location_blockno" />
+		<field name="location_unitno" />				
+		<field name="location_bldgno" />
+		<field name="location_bldgname" />		
 		<field name="location_street" />
-		<field name="location_address1" />
-		<field name="location_address2" />		
+		<field name="location_subdivision" />
 		<field name="location_barangay_name" />
 		<field name="location_barangay_objid" />
 
