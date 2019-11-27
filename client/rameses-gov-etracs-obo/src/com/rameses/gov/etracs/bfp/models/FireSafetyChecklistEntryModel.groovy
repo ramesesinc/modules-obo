@@ -27,6 +27,7 @@ public class FireSafetyChecklistEntryModel {
     ] as FormPanelModel;
     
     void init() {
+        if(!entity.params) return;
         formControls = [];
         def arr = entity.params.split(",");
         def values = entity.values;
@@ -39,6 +40,7 @@ public class FireSafetyChecklistEntryModel {
             //form control
             def fc = [caption: "[" + i +"]" ];
             fc.type = (arr[i] == "d")? "decimal" : "text";
+            if( arr[i] == "s") fc.textCase = "NONE";
             fc.name = "bean."+ fldname;
             formControls << fc;
         }    

@@ -71,10 +71,10 @@
 </script>
 
 
-<legend>Ancillary Permits</legend>
+<legend>Ancillary and Other Permits</legend>
 
 <div r:context="ancillarylist" r:visibleWhen="#{mode=='select'}">
-	<p>Select applicable ancillary permits for the project</p>
+	<p>Select ancillary and other permits to apply for the project</p>
 	<br>
 	<%list.each {o-> %>
 		<input type="checkbox" r:context="ancillarylist" r:name="permits.${o.objid}" r:checkedValue="1" r:uncheckedValue="0"/>&nbsp;&nbsp;${o.title}<br>

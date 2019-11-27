@@ -49,10 +49,10 @@ class FireSafetyChecklistReportInterceptor {
 		};
 
 		app.evaluator = [name: chklist.createdby.name ];
-		app.evaluator.signature = signatureEm.where("1=1").first().signature;
-
-		println "class is " + app.evaluator.signature.class;
-
+		def info = signatureEm.find( [objid: chklist.createdby.objid] ).first();
+		if( info ) {
+			app.evaluator.signature = info.signature;
+		}
 		r.data = app;
 	}	
 

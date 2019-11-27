@@ -90,6 +90,19 @@ class BuildingPermitModel extends AbstractOboApplicationModel {
         entity.amount = u.amount;
         feeListHandler.reload();
     }
+    
+    def changeOccupancyType() {
+        def h = { o->
+            def u = [_schemaname: "building_permit"];
+            u.findBy = [objid: entity.objid];
+            u.occupancytype = o;
+            u.occupancytypeid = o.objid;
+            persistenceService.update(u);
+            entity.occupancytype = o;
+            binding.refresh("entity.occupancytype");
+        }
+        return Inv.lookupOpener("vw_obo_occupancy_type:lookup", [onselect: h] );
+    }
 }
 
 

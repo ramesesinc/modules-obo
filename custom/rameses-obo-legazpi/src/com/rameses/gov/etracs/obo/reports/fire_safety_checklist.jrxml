@@ -3793,7 +3793,7 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="213"
+						x="195"
 						y="329"
 						width="47"
 						height="9"
@@ -3806,7 +3806,7 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="84"
+						x="65"
 						y="373"
 						width="49"
 						height="9"
@@ -3819,7 +3819,7 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="196"
+						x="187"
 						y="436"
 						width="42"
 						height="9"
@@ -3862,7 +3862,7 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="179"
+						x="169"
 						y="616"
 						width="61"
 						height="9"
@@ -3890,7 +3890,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<reportElement
 						x="61"
 						y="748"
-						width="105"
+						width="49"
 						height="9"
 						key="textField"/>
 					<box></box>
@@ -3901,7 +3901,7 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="456"
+						x="447"
 						y="634"
 						width="70"
 						height="9"
@@ -3940,7 +3940,7 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="435"
+						x="413"
 						y="776"
 						width="60"
 						height="9"
@@ -3953,7 +3953,7 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="432"
+						x="406"
 						y="864"
 						width="50"
 						height="9"
@@ -3966,7 +3966,7 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="172"
+						x="165"
 						y="693"
 						width="50"
 						height="9"
@@ -7615,9 +7615,9 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{dtcheck}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="61"
+						x="77"
 						y="80"
 						width="27"
 						height="9"
@@ -7628,7 +7628,7 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc52_0}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="86"
 						y="108"
@@ -7641,7 +7641,7 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsc53_0}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="157"
 						y="108"
@@ -7654,9 +7654,9 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc53_1}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="526"
+						x="515"
 						y="384"
 						width="50"
 						height="9"
@@ -8205,9 +8205,9 @@ Other Spaces;  Class ________________ ]]></text>
 				</image>
 				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="335"
+						x="323"
 						y="814"
-						width="112"
+						width="133"
 						height="74"
 						key="image-90"/>
 					<box></box>

@@ -510,7 +510,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         schemaList8.setSchemaName("building_permit_rpu");
         jPanel4.add(schemaList8, java.awt.BorderLayout.CENTER);
 
-        xTabbedPane2.addTab("Lot Info", jPanel4);
+        xTabbedPane2.addTab("Real Property", jPanel4);
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         jPanel5.setLayout(new java.awt.BorderLayout());

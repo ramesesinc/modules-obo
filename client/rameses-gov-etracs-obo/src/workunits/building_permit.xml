@@ -7,8 +7,7 @@
                 caption="Generate Tax Dec Documents"
                 action="issueTDDocs" target="popup"
                 visibleWhen="#{ task.state =='requirement-verification'
-                &amp;&amp; task.assignee?.objid==userInfo.userid 
-                &amp;&amp; entity.appno != null }"    />
+                &amp;&amp; task.assignee?.objid==userInfo.userid }"    />
                 
         <invoker type="ancillaryActions" 
                 caption="Add Ancillary"
@@ -50,7 +49,12 @@
                 visibleWhen="#{task.state=='releasing' 
                     &amp;&amp; task.assignee.objid == userInfo.userid
                     &amp;&amp; entity.permitno == null }"   />
-                
+                    
+        <invoker type="appActions" 
+                caption="Change Occupancy Type"
+                action="changeOccupancyType" 
+                xvisibleWhen="#{task.state=='releasing' 
+                    &amp;&amp; task.assignee.objid == userInfo.userid }"   />
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />
     <pages>

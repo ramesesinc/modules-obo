@@ -92,7 +92,6 @@ public class FireSafetyChecklistModel  {
     }
     
     public def updateChecklistItem(def o) {
-        if( !o.params  ) return null;
         def h = {
             checklistHandler.reload();
         }

@@ -1,21 +1,29 @@
 <%
+	//if there is accessories list. display the accessories. Do not display the occupancy types
+	//if the accessory is the same as occupancy type of the building, do not display the redo button
+	//if there are no accessories, display the occupancy types for selection
+
 	def oboSvc = SERVICE.lookup("OnlineBuildingPermitService", "obo");
 	def accessoryList = oboSvc.getAccessories( [appid: PARAMS.appid ] );
 
-	def svc = SERVICE.lookup("OboMiscListService", "obo");	
-	def occupancyTypes = svc.getAccessoryOccupancyTypes();	
-
+	boolean buildingIsAccessory = false;
+	boolean hasItems = false;
 	def infoList;
-	boolean hasItems;	
+	def occupancyTypes = [];	
+
 	if( accessoryList ) {
 		infoList = [];
 		accessoryList.each { ac ->
-			occupancyTypes.find{ vv -> vv.objid == ac.type.objid }?.checked = 1;
+			if( ac.app.occupancytypeid == ac.occupancytypeid ) {
+				buildingIsAccessory = true;
+			} 
 			infoList.addAll( ac.infos );
 		}
 		hasItems = true;
 	}	
 	else {
+		def svc = SERVICE.lookup("OboMiscListService", "obo");		
+		occupancyTypes = svc.getAccessoryOccupancyTypes();
 		hasItems = false;
 	}
 %>
@@ -25,26 +33,13 @@
 \$put("accessories", new function() {
 	var self = this;
 	//load accessories
-	var app = \$get("app").code;	
-	this.mode;
-	this.infoMap = {};
+	var app = \$get("app").code;
 
+	<%if( hasItems == false ) {%>
 	this.accessoryTypes = {};
 	<%occupancyTypes.each { ot ->%>
-	this.accessoryTypes.${ot.objid.toLowerCase()} = ${ ot.checked == 1 ? 1: 0 };	
+	this.accessoryTypes.${ot.objid.toLowerCase()} = 0;
 	<%}%>
-
-	<%if( hasItems ) { infoList.each { o-> %>
-	this.infoMap.${o.name.toLowerCase()} = ${o.value == null ? null : o.value}; 
-	<%}}%>
-
-	this.onload = function() {
-		this.mode = "${ hasItems == false ? 'select-accessory' : 'view-list' }";
-		app.updateStepNavbar();	
-	}
-
-	
-
 	this.saveAndContinue = function() {
 		var items = [];
 		var deleted = [];
@@ -75,7 +70,13 @@
 			app.moveNextStep();
 		}
 	}
+	<%}%>
 
+	<%if( hasItems == true ) {%>
+	this.infoMap = {};
+	<%infoList.each { o-> %>
+	this.infoMap.${o.name.toLowerCase()} = ${o.value == null ? null : o.value}; 
+	<%}%>
 	this.saveAccesoryInfos = function() {
 		var p = {appid: app.appid };
 		p.infos = [];
@@ -83,47 +84,59 @@
 			p.infos.push( {name: prop, value: self.infoMap[prop ] } );	
 		}
 		app.service.saveAccessoryInfos( p );
+		app.moveNextStep();
 	}
-
 	this.redoSelection = function() {
 		var b = confirm("Unchecking will remove the accessory information already encoded. Continue anyway?");
-		if(!b) return;
-		self.mode = "select-accessory";
+		var deleted = [];
+		<%accessoryList.each { o->%>
+		deleted.push("${o.occupancytypeid}");
+		<%}%>
+		app.service.saveAccessories( {appid: app.appid, deleted: deleted } );
+		window.location.reload();
 	}
+	<%}%>
 
+	this.onload = function() {
+		app.updateStepNavbar();	
+	}
+	
 });	
 </script>
 
 <legend>Accessories</legend>
-<div r:context="accessories" r:visibleWhen="#{ mode == 'select-accessory' }" style="display:none;">
-	<div style="padding-bottom:10px;">Select accessory to add if applicable</div>
-	<%occupancyTypes.each { o-> %>
-		<div>
-			<input type="checkbox" r:context="accessories" r:name="accessoryTypes.${o.objid.toLowerCase()}" r:checkedValue="1" r:uncheckedValue="0"/>
-			<span style="text-transform:capitalize;">${o.title}</span>
-		</div>
-	<%}%>
-	<div style="padding-top:20px"></div>
-	@wx:button( caption:'Next', context:'accessories', name:'saveAndContinue' )	
-</div>	
-
+<%if(hasItems == false ) {%>
+	<div>
+		<div style="padding-bottom:10px;">Select accessory to add if applicable</div>
+		<%occupancyTypes.each { o-> %>
+			<div>
+				<input type="checkbox" r:context="accessories" r:name="accessoryTypes.${o.objid.toLowerCase()}" r:checkedValue="1" r:uncheckedValue="0"/>
+				<span style="text-transform:capitalize;">${o.title}</span>
+			</div>
+		<%}%>
+		<div style="padding-top:20px"></div>
+		@wx:button( caption:'Next', context:'accessories', name:'saveAndContinue' )	
+	</div>	
+<%}%>
 
 <%if(hasItems == true ) {%>
-<div r:context="accessories" r:visibleWhen="#{mode == 'view-list'}" style="display:none;">
-	<% accessoryList.each { o-> %>
-		<div style="padding-top:20px; text-transform:capitalize;">
-			<b>${o.type.title}</b>
-		</div>
-		<% o.infos.each { x-> %>
-			<div style="padding-left:20px">
-				<label style="width:300px;font-weight:normal;text-transform:capitalize;">${x.caption.toLowerCase()} (${x.unit})</label>
-				<input type="text" r:context="accessories" r:name="infoMap.${x.name.toLowerCase()}" r:datatype="${x.datatype}" style="width:100px"/>
-			</div>	
+	<div>
+		<% accessoryList.each { o-> %>
+			<div style="padding-top:20px; text-transform:capitalize;">
+				<b>${o.type.title}</b>
+			</div>
+			<% o.infos.each { x-> %>
+				<div style="padding-left:20px">
+					<label style="width:300px;font-weight:normal;text-transform:capitalize;">${x.caption.toLowerCase()} (${x.unit})</label>
+					<input type="text" r:context="accessories" r:name="infoMap.${x.name.toLowerCase()}" r:datatype="${x.datatype}" style="width:100px"/>
+				</div>	
+			<%}%>
 		<%}%>
-	<%}%>
-	<div style="padding-top:20px"></div>
-	@wx:button( caption:'Redo', context:'accessories', name:'redoSelection' )
-	@wx:button( caption:'Next', context:'accessories', name:'saveAccesoryInfos' )
-
-</div>
+		<div style="padding-top:20px"></div>
+		<%if( buildingIsAccessory == false ) {%>
+			@wx:button( caption:'Redo', context:'accessories', name:'redoSelection' )
+		<%}%>
+		@wx:button( caption:'Next', context:'accessories', name:'saveAccesoryInfos' )
+	</div>
 <%}%>
+
