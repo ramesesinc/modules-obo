@@ -1388,23 +1388,23 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtvalidity}]]></textFieldExpression>
 				</textField>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="78"
-						y="730"
-						width="128"
-						height="73"
+						x="64"
+						y="721"
+						width="155"
+						height="82"
 						key="image-5"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
 					<imageExpression class="java.lang.String"><![CDATA["zoning-images/priscilla_galicia.png"]]></imageExpression>
 				</image>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="380"
-						y="703"
-						width="166"
-						height="89"
+						x="388"
+						y="697"
+						width="174"
+						height="97"
 						key="image-6"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>

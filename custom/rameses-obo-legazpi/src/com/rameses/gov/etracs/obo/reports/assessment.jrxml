@@ -47,7 +47,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/background.jpg"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/background.jpg"]]></imageExpression>
 				</image>
 			</band>
 		</background>
@@ -64,7 +64,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["img/LegazpiLogo.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["lgulogo.png"]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement

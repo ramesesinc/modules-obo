@@ -1,0 +1,42 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+        <!-- findings for building permit -->            
+        <invoker type="vw_building_permit:form:appActions" 
+                caption="Build Finding Checklist"
+                role="COORDINATOR"
+                reportId="building_permit_transmittal"
+                reportName="com/rameses/gov/etracs/obo/reports/finding_transmittal.jasper"
+                txntype="finding"
+                action="create" 
+                index="0"
+                visibleWhen="#{ 
+                    task.state.matches('zoning-verification|verification')
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.transmittalid == null }"/>
+                
+        <invoker type="vw_building_permit:form:appActions" 
+                 caption="Print Transmittal"
+                 reportId="building_permit_transmittal"
+                 reportName="com/rameses/gov/etracs/obo/reports/finding_transmittal.jasper"
+                 action="preview"
+                 txntype="finding"
+                 visibleWhen="#{ 
+                    task.state.matches('zoning-verification|zoning-evaluation-revision|verification|trade-evaluation-revision')}"/>   
+
+        <invoker type="vw_building_permit:form:appActions" 
+                 caption="Email Transmittal"
+                 reportId="building_permit_finding_transmittal"
+                 action="sendEmail"
+                 target="process"
+                 index="20"
+                 visibleWhen="#{ 
+                    task.state.matches('zoning-verification|zoning-evaluation-revision|verification|trade-evaluation-revision')}"/>
+       
+        <invoker type="building_permit_finding_transmittal" 
+                 reportId="building_permit_transmittal"
+                 reportName="com/rameses/gov/etracs/obo/reports/finding_transmittal.jasper"
+                 action="preview" />            
+            
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationTransmittalModel" />
+</workunit>

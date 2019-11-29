@@ -45,8 +45,21 @@ class OboApplicationTransmittalModel extends FormReportModel {
         return super.preview();
     }
     
-    void sendEmail() {
-        MsgBox.alert("send email " + entity );
+    def sendEmail(inv) {
+        def type = inv.properties.txntype;        
+        if( !type) throw new Exception("transmittaltype must not be null");
+        def tname = inv.properties.reportId;
+        def fname = inv.properties.fileName;
+        def m = [
+            name: tname,
+            mailto: entity.contact.email,
+            entity: entity,
+            attachments: [
+                [filename: fname , handler:tname]
+            ],
+            caller: this
+        ]
+        return Inv.lookupOpener("mail_sender", m );
     }
     
     /*

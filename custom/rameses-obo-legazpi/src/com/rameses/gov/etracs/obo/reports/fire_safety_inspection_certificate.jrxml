@@ -95,12 +95,12 @@
 					</textElement>
 				<text><![CDATA[]]></text>
 				</staticText>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="379"
-						y="472"
-						width="108"
-						height="55"
+						x="345"
+						y="462"
+						width="157"
+						height="65"
 						key="image-6"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
@@ -210,7 +210,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["bfp-images/bfp-logo.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["bfp-images/dilg-logo.png"]]></imageExpression>
 				</image>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -223,7 +223,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["bfp-images/dilg-logo.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["bfp-images/bfp-logo.png"]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement
@@ -276,7 +276,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="16" isBold="true" isItalic="false"/>
 					</textElement>
-				<text><![CDATA[FSEC NO. ]]></text>
+				<text><![CDATA[FSIC NO. ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -879,7 +879,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["bfp-images/fire_safety_inspection_cert.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["bfp-images/fsic_title.png"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -907,12 +907,12 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="364"
-						y="536"
-						width="118"
-						height="55"
+						x="345"
+						y="527"
+						width="157"
+						height="76"
 						key="image-7"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>

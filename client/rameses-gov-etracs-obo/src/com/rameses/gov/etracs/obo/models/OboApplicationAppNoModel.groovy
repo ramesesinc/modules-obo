@@ -43,8 +43,19 @@ class OboApplicationAppNoModel extends FormReportModel {
         return super.preview();
     }
     
-    void sendEmail() {
-        MsgBox.alert("send email " );
+    def sendEmail(inv) {
+        def fileid = inv.properties.reportId;
+        def fileName = inv.properties.fileName;
+        def m = [
+            name: fileid,
+            mailto: entity.contact.email,
+            entity: entity,
+            attachments: [
+                [filename: fileName , handler:fileid]
+            ],
+            caller: this
+        ]
+        return Inv.lookupOpener("mail_sender", m );
     }
     
 }

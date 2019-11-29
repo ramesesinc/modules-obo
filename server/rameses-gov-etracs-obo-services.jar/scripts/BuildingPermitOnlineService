@@ -131,6 +131,7 @@ public class BuildingPermitOnlineService  {
 		p.refid = app.objid;
 		p.startdate = dt;
 		p.info = app;
+		p.assignee = [objid:env.USERID, name:env.FULLNAME];		
 		wfSvc.start(p);	
 		return newapp;
 	}

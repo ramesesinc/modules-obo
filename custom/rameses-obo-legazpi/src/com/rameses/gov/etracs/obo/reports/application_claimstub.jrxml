@@ -46,7 +46,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/background.jpg"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/background.jpg"]]></imageExpression>
 				</image>
 			</band>
 		</background>
@@ -349,7 +349,7 @@ Bring this claim stub upon claiming the Application Evaluation Sheet, Order of P
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/tagline.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/tagline.png"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

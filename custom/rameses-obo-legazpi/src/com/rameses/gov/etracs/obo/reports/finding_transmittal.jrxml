@@ -48,7 +48,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/background.jpg"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/background.jpg"]]></imageExpression>
 				</image>
 			</band>
 		</background>
@@ -65,7 +65,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["img/LegazpiLogo.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["lgulogo.png"]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement
@@ -490,27 +490,27 @@
 		</pageFooter>
 		<summary>
 			<band height="250"  isSplitAllowed="true" >
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="396"
-						y="29"
-						width="132"
-						height="60"
+						x="385"
+						y="0"
+						width="179"
+						height="89"
 						key="image-5"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/anthony_r_enaje.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/anthony_r_enaje.png"]]></imageExpression>
 				</image>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="406"
-						y="107"
-						width="135"
-						height="60"
+						x="385"
+						y="91"
+						width="179"
+						height="76"
 						key="image-6"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/rafael_b_encarnacion.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/rafael_b_encarnacion.png"]]></imageExpression>
 				</image>
 				<rectangle>
 					<reportElement

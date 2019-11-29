@@ -53,7 +53,7 @@
 						key="image-1"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/signboard.jpg"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/construction_signboard.jpg"]]></imageExpression>
 				</image>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

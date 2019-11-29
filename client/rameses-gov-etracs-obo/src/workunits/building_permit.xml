@@ -53,7 +53,7 @@
         <invoker type="appActions" 
                 caption="Change Occupancy Type"
                 action="changeOccupancyType" 
-                xvisibleWhen="#{task.state=='releasing' 
+                visibleWhen="#{task.state.matches('verification|assessment') 
                     &amp;&amp; task.assignee.objid == userInfo.userid }"   />
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />

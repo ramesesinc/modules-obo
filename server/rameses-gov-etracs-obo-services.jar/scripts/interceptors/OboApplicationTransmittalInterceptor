@@ -50,6 +50,7 @@ class OboApplicationTransmittalInterceptor {
 		def ea = appEm.find( [objid: t.appid ] ).first();
 		ea.receiver = t.createdby;
 		ea.transmittalno = t.objid;
+		ea.transmittaltype = t.type;
 		ea.permittype =  ( nkey == "building_permit" ) ? "BUILDING PERMIT" : "CERTIFICATE OF OCCUPANCY";
 
 		if(t.type == "requirement") {

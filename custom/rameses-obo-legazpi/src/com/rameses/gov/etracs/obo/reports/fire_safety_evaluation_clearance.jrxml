@@ -928,7 +928,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["bfp-images/title.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["bfp-images/fsec_title.png"]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement
@@ -943,23 +943,23 @@
 					</textElement>
 				<text><![CDATA[the application for]]></text>
 				</staticText>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="376"
-						y="521"
-						width="106"
-						height="65"
+						x="359"
+						y="518"
+						width="153"
+						height="68"
 						key="image-6"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
 					<imageExpression class="java.lang.String"><![CDATA["bfp-images/jan_garry_lunas.png"]]></imageExpression>
 				</image>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="376"
-						y="473"
-						width="111"
-						height="55"
+						x="359"
+						y="462"
+						width="143"
+						height="66"
 						key="image-7"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>

@@ -109,7 +109,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/background.jpg"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/background.jpg"]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement
@@ -4213,7 +4213,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/obologo.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/obologo.png"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4423,16 +4423,16 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{receiptno}]]></textFieldExpression>
 				</textField>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="95"
+						x="70"
 						y="829"
-						width="144"
+						width="202"
 						height="95"
 						key="image-5"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/anthony_r_enaje.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/anthony_r_enaje.png"]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement
@@ -4449,14 +4449,14 @@
 				</staticText>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="370"
-						y="835"
-						width="146"
-						height="75"
+						x="349"
+						y="829"
+						width="182"
+						height="95"
 						key="image-6"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["building-images/rafael_b_encarnacion.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/rafael_b_encarnacion.png"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
