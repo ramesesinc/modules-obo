@@ -40,6 +40,7 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xDateField4 = new com.rameses.rcp.control.XDateField();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
         xTextField1 = new com.rameses.rcp.control.XTextField();
+        addressEditor1 = new com.rameses.enterprise.components.AddressEditor();
         jScrollPane1 = new javax.swing.JScrollPane();
         xTextArea1 = new com.rameses.rcp.control.XTextArea();
         entityLookup1 = new com.rameses.entity.components.EntityLookup();
@@ -48,9 +49,11 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xLabel21 = new com.rameses.rcp.control.XLabel();
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xLookupField2 = new com.rameses.rcp.control.XLookupField();
+        xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xDecimalField4 = new com.rameses.rcp.control.XDecimalField();
         xDecimalField3 = new com.rameses.rcp.control.XDecimalField();
+        xIntegerField2 = new com.rameses.rcp.control.XIntegerField();
         xDecimalField1 = new com.rameses.rcp.control.XDecimalField();
         xDecimalField2 = new com.rameses.rcp.control.XDecimalField();
         xDateField2 = new com.rameses.rcp.control.XDateField();
@@ -58,6 +61,12 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xPanel1 = new com.rameses.rcp.control.XPanel();
         schemaList8 = new com.rameses.seti2.components.SchemaList();
 
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
+        xTitledBorder1.setPadding(new java.awt.Insets(30, 10, 10, 10));
+        xTitledBorder1.setTitle("General Info");
+        xFormPanel3.setBorder(xTitledBorder1);
         xFormPanel3.setCaptionWidth(200);
 
         xTextField3.setCaption("Bldg Permit No");
@@ -89,6 +98,11 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xTextField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xTextField1.setRequired(true);
         xFormPanel3.add(xTextField1);
+
+        addressEditor1.setCaption("Project Location");
+        addressEditor1.setName("entity.location"); // NOI18N
+        addressEditor1.setPreferredSize(new java.awt.Dimension(0, 53));
+        xFormPanel3.add(addressEditor1);
 
         jScrollPane1.setName("entity.particulars"); // NOI18N
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 65));
@@ -141,37 +155,47 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xLookupField2.setRequired(true);
         xFormPanel3.add(xLookupField2);
 
+        com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
+        xTitledBorder2.setPadding(new java.awt.Insets(30, 10, 10, 10));
+        xTitledBorder2.setTitle("Building Info");
+        xFormPanel1.setBorder(xTitledBorder2);
+        xFormPanel1.setCaptionWidth(200);
+
         xIntegerField1.setCaption("No of Units");
         xIntegerField1.setName("entity.numunits"); // NOI18N
-        xFormPanel3.add(xIntegerField1);
+        xFormPanel1.add(xIntegerField1);
 
         xDecimalField4.setCaption("Height (m)");
         xDecimalField4.setName("entity.height"); // NOI18N
-        xFormPanel3.add(xDecimalField4);
+        xFormPanel1.add(xDecimalField4);
 
         xDecimalField3.setCaption("Total Floor Area (sqm)");
         xDecimalField3.setName("entity.totalfloorarea"); // NOI18N
-        xFormPanel3.add(xDecimalField3);
+        xFormPanel1.add(xDecimalField3);
+
+        xIntegerField2.setCaption("No of Floors");
+        xIntegerField2.setName("entity.numfloors"); // NOI18N
+        xFormPanel1.add(xIntegerField2);
 
         xDecimalField1.setCaption("Project Cost");
         xDecimalField1.setName("entity.projectcost"); // NOI18N
         xDecimalField1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xDecimalField1.setPreferredSize(new java.awt.Dimension(200, 20));
-        xFormPanel3.add(xDecimalField1);
+        xFormPanel1.add(xDecimalField1);
 
         xDecimalField2.setCaption("Fixed Cost (Computed)");
         xDecimalField2.setDisableWhen("#{ true }");
         xDecimalField2.setName("entity.fixedcost"); // NOI18N
         xDecimalField2.setPreferredSize(new java.awt.Dimension(200, 20));
-        xFormPanel3.add(xDecimalField2);
+        xFormPanel1.add(xDecimalField2);
 
         xDateField2.setCaption("Proposed Const. Date");
         xDateField2.setName("entity.dtproposedconstruction"); // NOI18N
-        xFormPanel3.add(xDateField2);
+        xFormPanel1.add(xDateField2);
 
-        xDateField3.setCaption("Completion Date");
+        xDateField3.setCaption("Expected Completion Date");
         xDateField3.setName("entity.dtexpectedcompletion"); // NOI18N
-        xFormPanel3.add(xDateField3);
+        xFormPanel1.add(xDateField3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,35 +204,25 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 24, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(413, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel2.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("General Info", jPanel2);
 
+        schemaList8.setAllowOpen(false);
         schemaList8.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "prc.refno"}
@@ -303,9 +317,8 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         });
         schemaList8.setCustomFilter("appid = :objid ");
         schemaList8.setQueryName("entity");
-        schemaList8.setSchemaName("building_permit_rpu");
-        schemaList8.setAllowOpen(false);
         schemaList8.setRowHeight(20);
+        schemaList8.setSchemaName("building_permit_rpu");
 
         javax.swing.GroupLayout xPanel1Layout = new javax.swing.GroupLayout(xPanel1);
         xPanel1.setLayout(xPanel1Layout);
@@ -313,7 +326,7 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
             xPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(xPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(schemaList8, javax.swing.GroupLayout.DEFAULT_SIZE, 1076, Short.MAX_VALUE)
+                .addComponent(schemaList8, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
                 .addContainerGap())
         );
         xPanel1Layout.setVerticalGroup(
@@ -332,7 +345,7 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1109, Short.MAX_VALUE)
+                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1111, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -346,6 +359,7 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.rameses.enterprise.components.AddressEditor addressEditor1;
     private com.rameses.entity.components.EntityAddressLookup entityAddressLookup1;
     private com.rameses.entity.components.EntityLookup entityLookup1;
     private javax.swing.JPanel jPanel1;
@@ -360,8 +374,10 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XDecimalField xDecimalField2;
     private com.rameses.rcp.control.XDecimalField xDecimalField3;
     private com.rameses.rcp.control.XDecimalField xDecimalField4;
+    private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
+    private com.rameses.rcp.control.XIntegerField xIntegerField2;
     private com.rameses.rcp.control.XLabel xLabel21;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLookupField xLookupField2;

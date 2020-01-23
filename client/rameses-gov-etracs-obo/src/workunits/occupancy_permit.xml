@@ -3,6 +3,11 @@
         <invoker type="vw_occupancy_permit:open" caption="Occupancy Permit Application" action="open" index="1"/>
 
         <invoker type="appActions" 
+                caption="View Building Permit"
+                action="viewBldgPermit" 
+                index="0" />
+        
+        <invoker type="appActions" 
                 caption="Specify Inspection Schedule"
                 action="specifySchedule" 
                 index="1"

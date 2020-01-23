@@ -1,47 +1,23 @@
-<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml" 
+    reportId="building_permit_transmittal"
+    reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"> 
+    
     <invokers>
-        <!-- building permit requirement transmittal -->
         <invoker type="vw_building_permit:form:appActions" 
-                caption="Build Requirement Verification"
-                role="REQUIREMENT_REVIEWER"
-                reportId="building_permit_transmittal"
-                reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"
-                txntype="requirement"
-                action="create" 
-                index="0"
-                visibleWhen="#{ 
-                    task.state =='requirement-verification'
-                    &amp;&amp; task.assignee?.objid==userInfo.userid 
-                    &amp;&amp; entity.transmittalid == null 
-                    &amp;&amp; entity.appno == null }"/>
-                
-        <invoker type="vw_building_permit:form:appActions" 
-                 caption="Print Transmittal"
-                 reportId="building_permit_transmittal"
-                 reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"
+                 caption="View Requirement Transmittal "
                  action="preview"
-                 txntype="requirement"
                  visibleWhen="#{ 
                     task.state.matches('requirement.*')
                     &amp;&amp; entity.transmittalid != null  }"/>
 
-        <!-- for attachments -->
-        <invoker type="vw_building_permit:form:appActions" 
-                 caption="Email Transmittal"
-                 reportId="building_permit_requirement_transmittal"
-                 fileName="DocVerificationCheckList.pdf"
-                 action="sendEmail"
-                 txntype="requirement"
-                 target="process"
-                 index="20"
-                 visibleWhen="#{ 
-                    task.state.matches('requirement.*')
-                    &amp;&amp; entity.transmittalid != null  }"/>
+        <!-- open from the transmittal list -->
+        <invoker type="building_permit_requirement_transmittal:open" 
+                 caption="View Requirement Transmittal"
+                 action="openPreview" />
         
-        <invoker type="building_permit_requirement_transmittal" 
-                 reportId="building_permit_transmittal"
-                 reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"
-                 action="preview" />
+        <!-- inside the report -->
+        <invoker type="formActions" caption="Send Email" action="sendEmail" 
+                 fileid="building_permit_requirement_transmittal"/>
         
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboApplicationTransmittalModel" />

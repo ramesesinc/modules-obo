@@ -2,13 +2,6 @@
     <invokers>
         <invoker type="vw_building_permit:open" caption="Building Permit Application" action="open" index="1"/>
 
-        <!-- RPT ACTIONS -->        
-        <invoker type="appActions" 
-                caption="Generate Tax Dec Documents"
-                action="issueTDDocs" target="popup"
-                visibleWhen="#{ task.state =='requirement-verification'
-                &amp;&amp; task.assignee?.objid==userInfo.userid }"    />
-                
         <invoker type="ancillaryActions" 
                 caption="Add Ancillary"
                 role="COORDINATOR"
@@ -34,12 +27,20 @@
                 index="1"
                 visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
 
+        <!-- RPT ACTIONS -->   
+        <invoker type="rpuActions" 
+                caption="Generate Tax Dec Documents"
+                index="0"
+                action="issueTDDocs" target="popup"/>
+        
         <invoker type="rpuActions" 
                 caption="View Tax Clearance"
+                index="1"
                 action="viewTaxClearance" target="popup"   />
 
         <invoker type="rpuActions" 
                 caption="View Certificate of True Copy"
+                index="2"
                 action="viewTrueCopy" target="popup"   />
         
         <!-- Building Permit -->

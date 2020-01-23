@@ -12,6 +12,13 @@ import com.rameses.enterprise.models.*;
 
 class OboApplicationRequirementModel {
 
+    //states:
+    //0 - untouched
+    //1 - closed
+    //2 - for revision
+    //3 - not applicable
+    //4 - overridden
+    
     @Service("OboApplicationRequirementService")
     def reqSvc;
 
@@ -59,7 +66,7 @@ class OboApplicationRequirementModel {
         }; 
     }
         
-    //can display the editable button
+    //can display the editable button. Only the task assignee can edit it 
     public boolean isEditable() {
         def task = caller.task;
         if( caller.entity.appno != null ) return false;

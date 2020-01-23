@@ -23,7 +23,7 @@ class BuildingPermitCaptureModel  {
     String title = "Capture Building Permit";
     
     def create() {
-        entity = [numunits: 1, professionals: [], worktypes: [] ];
+        entity = [numunits: 1, professionals: [], worktypes: [], location: [:] ];
         entity.txnmode = "CAPTURE";
         return null;
     }

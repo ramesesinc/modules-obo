@@ -1,37 +1,15 @@
-<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml" 
+        reportId="building_permit_claimstub"
+        reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"> 
     <invokers>
         
-        <invoker type="vw_building_permit:form:appActions" 
-                caption="Accept Application"
-                reportId="building_permit_claimstub"
-                reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"
-                role="REQUIREMENT_REVIEWER"
-                action="create" 
-                visibleWhen="#{ task.state =='requirement-verification' 
-                    &amp;&amp; task.assignee?.objid==userInfo.userid 
-                    &amp;&amp; entity.appno == null  &amp;&amp; entity.transmittalid == null }"/>
-                
          <invoker type="vw_building_permit:form:appActions" 
-                caption="Print Claim Stub"
-                reportId="building_permit_claimstub"
-                reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"
+                caption="View Claim Stub"
                 action="preview"
-                visibleWhen="#{ task.state =='requirement-verification'
-                    &amp;&amp; entity.appno != null }"/>
+                visibleWhen="#{ entity.appno != null }"/>
                     
-        <invoker type="vw_building_permit:form:appActions" 
-                caption="Email Claim Stub"
-                reportId="building_permit_claimstub"
-                fileName="BuildingPermitClaimStub.pdf"
-                action="sendEmail"
-                visibleWhen="#{ task.state =='requirement-verification'
-                    &amp;&amp; entity.appno != null }"/>
-        
-        <invoker type="building_permit_claimstub" 
-               reportId="building_permit_claimstub"
-               reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"    
-               action="preview" />
+            <invoker type="formActions" caption="Send Email" action="sendEmail" />
                     
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboApplicationAppNoModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationClaimStubModel" />
 </workunit>

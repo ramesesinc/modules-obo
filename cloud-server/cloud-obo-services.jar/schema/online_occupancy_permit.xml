@@ -11,31 +11,43 @@
 		<field name="contact_email" required="true"/>
 		<field name="contact_mobileno"/>
 		<field name="dtfiled" type="timestamp"/>
-		<field name="title" />
-		<field name="description" />
-		<field name="occupancytypeid" />
-		<field name="numunits" type="integer"/>
-		<field name="floorarea" type="decimal"/>
-		<field name="totalfloorarea" type="decimal"/>
-		<field name="numfloors" type="integer"/>
-
-		<field name="projectcost" type="decimal"/>
-		<field name="dtproposedconstruction" type="date" />
-		<field name="dtexpectedcompletion" type="date"/>
-		<field name="totalfloorarea" type="decimal"/>
-		<field name="height" type="decimal"/>
 
 		<!-- bldgpermit -->
-		<field name="bldgpermitid" />
 		<field name="bldgpermit_objid" />
 		<field name="bldgpermit_dtissued" />
-		<field name="bldgpermit_permitno" />
+		<field name="bldgpermit_permitno" />		
+		<field name="bldgpermit_title" />
+		<field name="bldgpermit_description" />
+		<field name="bldgpermit_occupancytypeid" />
+		<field name="bldgpermit_locationid" />
+		<field name="bldgpermit_projectcost" type="decimal"/>
+		<field name="bldgpermit_height" type="decimal"/>
+		<field name="bldgpermit_numunits" type="integer"/>
+		<field name="bldgpermit_numfloors" type="integer"/>
+		<field name="bldgpermit_totalfloorarea" type="decimal"/>
 		<field name="bldgpermit_dtproposedconstruction" />
 		<field name="bldgpermit_dtexpectedcompletion" />
 		<field name="bldgpermit_totalfloorarea" type="decimal" />
 		<field name="bldgpermit_numfloors" type="integer" />
 		<field name="bldgpermit_numunits" type="integer" />
+		<field name="bldgpermit_location_lotno" />
+		<field name="bldgpermit_location_blockno" />
+		<field name="bldgpermit_location_street" />
+		<field name="bldgpermit_location_barangay_name" />
+		<field name="bldgpermit_location_barangay_objid" />
+		<field name="bldgpermit_location_unitno" />
+		<field name="bldgpermit_location_bldgno" />
+		<field name="bldgpermit_location_bldgname" />
+		<field name="bldgpermit_location_subdivision" />
 
+
+		<!-- actual values -->
+		<field name="actualheight" type="decimal"/>
+		<field name="actualnumunits" type="integer"/>
+		<field name="actualnumfloors" type="integer"/>
+		<field name="actualtotalfloorarea" type="decimal"/>
+
+		<!-- occupancy permit info -->
 		<field name="dtactualstarted" />
 		<field name="dtactualcompleted" />
 		<field name="totalmaterialcost" type="decimal" />
@@ -50,21 +62,14 @@
 		
 		<!-- shows where the current step is at -->
 		<field name="step" type="integer"/>
-		<field name="locationid" />
-		<field name="applicantid" />
 
-		<complex name="applicant" ref="online_building_permit_entity" jointype="many-to-one" required="false">
+		<complex name="applicant" ref="online_occupancy_permit_entity" jointype="many-to-one" required="false">
 			<key field="applicantid" target="objid" />
 		</complex>	
 
-		<complex name="location" ref="online_occupancy_permit_rpu" jointype="many-to-one" required="false">
-			<key field="locationid" target="objid" />
-		</complex>	
-
 		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one" required="false">
-			<key field="occupancytypeid" target="objid" />
+			<key field="bldgpermit_occupancytypeid" target="objid" />
 		</complex>	
-
 
 		<!-- DESIGN PROFESSIONALS -->
 		<complex name="profarchitect" ref="vw_online_occupancy_permit_professional" 

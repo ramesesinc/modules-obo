@@ -9,23 +9,14 @@ public class OnlineOccupancyPermitService  {
 	@DataContext("online_occupancy_permit")
 	def appEm;
 
-	@DataContext("online_occupancy_permit_rpu")
-	def rpuEm;
-
 	@DataContext("online_occupancy_permit_entity")
 	def entityEm;
 
 	@DataContext("online_occupancy_permit_professional")
 	def professionalEm;
 
-	@DataContext("online_occupancy_permit_costitem")
-	def permitCostItemEm;
-
 	@DataContext("vw_online_occupancy_permit_professional")
 	def vwProfessionalEm;
-
-	@DataContext("obo_costitem")
-	def costItemEm;
 
 	@Service("DateService")
 	def dateSvc;
@@ -66,32 +57,13 @@ public class OnlineOccupancyPermitService  {
 		o.objid = "OP"+ kg.generateAlphanumKey(o.orgcode+"-",8);
 		o.dtfiled = dateSvc.getServerDate();
 		o.step = 1;
-		def locationid = o.remove("locationid");
-		def applicantid = o.remove("applicantid");
 
+		def applicant = o.remove("applicant");
 		def app = appEm.create( o );
-		o.rpus.each {
-			it.appid = app.objid;
-			rpuEm.create( it ); 
-		}
-		o.entities.each {
-			it.appid = app.objid;
-			entityEm.create( it );
-		}
-		o.professionals.each{
-			it.appid = app.objid;
-			professionalEm.create(it);
-		}
+		applicant.appid = app.objid;
+		applicant =  entityEm.create( applicant );
 
-		//include also all cost items so it is already prepared
-		costItemEm.where("1=1").list().each {
-			def z = [appid: app.objid];
-			z.item = [objid: it.objid];
-			z.amount = 0;
-			permitCostItemEm.create(z);
-		}
-
-		appEm.find([objid: app.objid]).update([applicantid: applicantid, locationid: locationid ]);
+		appEm.find([objid: app.objid]).update([applicantid: applicant.objid ]);
 
 		/*
 		def emailSvc = dynamicSvc.lookup(o.orgcode+":EmailService");
@@ -103,40 +75,18 @@ public class OnlineOccupancyPermitService  {
 
 	@ProxyMethod
 	public def update( def o ) {
-		def app = appEm.update( o );
-		return app;
+		return appEm.find([objid: o.objid ]).update( o );
 	}
 
 	@ProxyMethod
 	public def findCurrentInfo( def o ) {
-		appEm.find( [objid: o.appid ] ).select("orgcode,step").first();
+		return appEm.find( [objid: o.appid ] ).select("orgcode,step").first();
 	}
 
 	@ProxyMethod
 	public def getApplication(def o ) {
-		def app = appEm.find([objid: o.appid ] ).first();
-		if(o.loadall == true ) {
-			app.rpus = rpuEm.find( [appid: o.appid] ).list();	
-		}
-
-		if(o.include_costitems == true ) {
-			app.costitems = permitCostItemEm.find( [appid: app.objid ] ).list();
-			app.amount = app.costitems.sum{ it.amount };
-		}
-		return app;
+		return appEm.find([objid: o.appid ] ).first();
 	}
-
-	@ProxyMethod
-	public def updateCostItems( def o ) {
-		o.costitems.each {
-			permitCostItemEm.find( [objid: it.objid] ).update( [amount: it.amount ] );
-		}
-		def res= [:];
-		res.items = permitCostItemEm.find( [appid: o.appid ] ).list();
-		res.amount = res.items.sum{it.amount};
-		return res;
-	}
-
 
 
 	/*==============================================================================
@@ -176,9 +126,6 @@ public class OnlineOccupancyPermitService  {
 		//check first the main app if entity is neither a lot owner or applicant before deleting
 		def entityid = o.entity.objid;
 		boolean b = appEm.find( [applicantid: entityid] ).exists();
-		if(b) return;
-		b = rpuEm.find( [ownerid: entityid] ).exists();
-		if(b) return;
 		entityEm.find( [objid: entityid ]).delete();
 	}
 

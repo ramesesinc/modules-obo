@@ -5,20 +5,20 @@ import com.rameses.services.extended.*
 
 class RemoteOccupancyPermitService  {
 
-    @Service(value="BuildingPermitService", connection="local-obo")
+    @Service(value="BuildingPermitService", connection="local-obo-server")
     def permitSvc;
 
-    @Service(value="OnlineBuildingPermitService", connection="cloud-obo")
-    def cloudOboSvc;
+    //@Service(value="OnlineBuildingPermitService", connection="cloud-server")
+    //def cloudOboSvc;
 
     @ProxyMethod
     public def findPermitNo( def params ) {
         def res = permitSvc.findByPermitNo( [permitno: params.permitno ] );
-        println "result is " + res;
-        /*
+        res.each { k,v->
+            println k+"="+v;
+        }
         if(res==null)
             throw new Exception("Permit no " + params.permitno + " not found");
-        */    
         return res;
     }
      

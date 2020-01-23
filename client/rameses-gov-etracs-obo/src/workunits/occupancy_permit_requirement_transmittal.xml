@@ -1,32 +1,23 @@
-<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"
+        reportId="occupancy_permit_transmittal"
+        reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"> 
     <invokers>
        
-        <!-- occupancy permit transmittal -->            
-        <invoker type="vw_occupancy_permit:form:appActions" 
-                caption="Build Requirement Verification"
-                role="REQUIREMENT_REVIEWER"
-                reportId="occupancy_permit_transmittal"                
-                reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"
-                action="create" 
-                txntype="requirement"
-                index="0"
-                visibleWhen="#{ 
-                    task.state =='requirement-verification'
-                    &amp;&amp; task.assignee?.objid==userInfo.userid 
-                    &amp;&amp; entity.transmittalid == null 
-                    &amp;&amp; entity.appno == null }"/>
-
         <invoker type="vw_occupancy_permit:form:appActions" 
                  caption="Print Transmittal"
-                 reportId="occupancy_permit_transmittal"
-                 reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"
                  action="preview"
-                 txntype="requirement"
                  visibleWhen="#{ 
                     task.state.matches('requirement.*')
                     &amp;&amp; entity.transmittalid != null  }"/>
 
-       <invoker type="formActions" caption="Send Email" action="sendEmail"/>
+        <!-- open from the transmittal list -->
+        <invoker type="occupancy_permit_requirement_transmittal:open" 
+                 caption="View Requirement Transmittal"
+                 action="openPreview" />
+        
+        <!-- inside the report -->
+        <invoker type="formActions" caption="Send Email" action="sendEmail" 
+                 fileid="occupancy_permit_requirement_transmittal"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboApplicationTransmittalModel" />
 </workunit>

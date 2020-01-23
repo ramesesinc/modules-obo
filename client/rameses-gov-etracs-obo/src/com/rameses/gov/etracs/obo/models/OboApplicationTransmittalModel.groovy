@@ -19,84 +19,48 @@ import com.rameses.io.*;
 *******/
 class OboApplicationTransmittalModel extends FormReportModel {
 
-    @Service("OboApplicationTransmittalService")
-    def transmittalSvc;
-    
     def entity;
     def type;
+    def transmittalid;
 
     //entity is the application. It should have a transmittalid field. 
     def getQuery() {
-        if(!entity) entity = caller.entity;
-        return [transmittalid: entity.transmittalid ];
+        return [transmittalid: transmittalid ];
     }
     
-    public def create(inv) {
-        type = inv.properties.txntype;
-        if( !MsgBox.confirm("You are about to finalize the requirement checklist. You cannot undo this transaction. Proceed?") ) {
-            throw new BreakException();
-        }
+    def preview() {
         entity = caller.entity;
-        def task = caller.task;
-        String id = (reportId == "building_permit_transmittal")?"building_permit":"occupancy_permit";
-        def t = transmittalSvc.create( [appid: entity.objid, taskid: task.taskid, schemaname: id, type: type ]);
-        entity.transmittalid = t.objid;
-        caller.reload();        
+        if(!entity.transmittalid ) throw new Exception("Error transmittal. There must be transmittalid");
+        transmittalid = entity.transmittalid;
         return super.preview();
     }
     
-    def sendEmail(inv) {
-        def type = inv.properties.txntype;        
-        if( !type) throw new Exception("transmittaltype must not be null");
-        def tname = inv.properties.reportId;
-        def fname = inv.properties.fileName;
+    //This is called when opening the file and from the transmittal list
+    def openPreview() {
+        transmittalid = entity.objid;
+        entity = caller.entity;
+        return super.preview();
+    }
+    
+    //called inside the print preview.
+    def sendEmail(def inv) {
+        String tname = inv.properties.fileid;        
+        if( !tname) throw new Exception("fileid must not be null");
+        def fname = tname + "-" + transmittalid + ".pdf";
+        def fileExporter = { ofile ->
+            this.exportToPDF( ofile );
+        }
         def m = [
             name: tname,
             mailto: entity.contact.email,
             entity: entity,
             attachments: [
-                [filename: fname , handler:tname]
+                [filename: fname , exportToFile: fileExporter ] 
             ],
-            caller: this
-        ]
+            caller: caller
+        ];
         return Inv.lookupOpener("mail_sender", m );
     }
-    
-    /*
-        void buildRequirementChecklist() {
-        if( !MsgBox.confirm("You are about to finalize the requirement checklist. You cannot undo this transaction. Proceed?") ) return;
-        def t = reqSvc.buildCheckList( [appid: entity.objid, taskid: task.taskid, schemaname: getPermitName() ]);
-        entity.reqtransmittalid = t.objid;
-    }
-    
-    void removeChecklist() {
-        if( !MsgBox.confirm("You are about to remove this checklist. Proceed?") ) return;
-        def t = reqSvc.removeCheckList( [transmittalid: entity.reqtransmittalid, schemaname: getPermitName() ]);
-        entity.reqtransmittalid = null;        
-    }
-    
-    
-    def sendReqChecklist() {
-        return Inv.lookupOpener("obo_mailer:reqchecklist", [entity:entity]);
-    }
-    
-    void buildFindingChecklist() {
-        if( !MsgBox.confirm("You are about to finalize the findings checklist. You cannot undo this transaction. Proceed?") ) return;
-        def t = findingSvc.buildCheckList( [appid: entity.objid, taskid: task.taskid, schemaname: getPermitName() ]);
-        entity.transmittalid = t.objid;
-    }
-    
-    def printFindingChecklist() {
-        def p = [:];
-        p.put("query.transmittalid", entity.transmittalid );
-        return Inv.lookupOpener("building_permit_finding_checklist", p );
-    }
-    
-    def sendFindingChecklist() {
-        return Inv.lookupOpener("obo_mailer:findingchecklist", [entity:entity]);
-    }
-    */
-
     
     
 }

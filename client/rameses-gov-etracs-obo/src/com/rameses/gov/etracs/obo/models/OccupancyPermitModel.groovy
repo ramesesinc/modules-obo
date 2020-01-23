@@ -39,6 +39,11 @@ class OccupancyPermitModel extends AbstractOboApplicationModel {
         return Inv.lookupOpener("date:prompt", [handler: h, title:"Enter Inspection Schedule", includeTime:true]);
     }
     
+    def viewBldgPermit() {
+        def op = Inv.lookupOpener("vw_building_permit:open", [ entity: [objid: entity.bldgpermitid ] ]);
+        op.target = "popup";
+        return op;
+    }
     
 }
 
