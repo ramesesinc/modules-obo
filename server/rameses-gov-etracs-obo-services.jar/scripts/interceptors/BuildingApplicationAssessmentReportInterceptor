@@ -1,9 +1,16 @@
 import com.rameses.annotations.*; 
 
-class OboApplicationAssessmentReportInterceptor {
+class BuildingApplicationAssessmentReportInterceptor {
 	
-	@DataContext(dynamic=true)
-	def em;
+	@DataContext("building_application")
+	def appEm;
+
+
+	@DataContext("building_application")
+	def appEm;
+
+	@DataContext("building_application_fee")
+	def feeEm;
 
 	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid == 'building_application_assessment' }")
 	public void getOboApplicationAssessmentReport( def evt ) {
@@ -12,15 +19,10 @@ class OboApplicationAssessmentReportInterceptor {
 		def objid = p.parameters.id;
 		if(!objid) throw new Exception("id is required in requirement checklist report")
 
-		String nkey = (p.reportid == 'building_application_assessment' ) ? "building_application" : "occupancy_application";
-
-		def appEm = em.lookup("vw_" + nkey);		
 		def data = appEm.find( [objid: objid ]).first();
+		data.permittype =  "BUILDING PERMIT" ;
 
-		data.permittype =  ( nkey == "building_application" ) ? "BUILDING PERMIT" : "CERTIFICATE OF OCCUPANCY";
-
-		def payEm = em.lookup( nkey + "_fee" );
-		def list = payEm.find( [appid: objid ] ).list();
+		def list = feeEm.find( [appid: objid ] ).list();
 
 		def grps = [:];
 		grps.zoning = [name:'Locational Clearance/Zoning Fees', items: []];

@@ -2,14 +2,14 @@ import com.rameses.annotations.*;
 
 class OboBillingService {
 
-	@Service("DateService")
-	def dateSvc;
-
 	@DataContext(dynamic=true)
 	def dynaDb;
 
 	@ProxyMethod
 	public def getBilling( o ) { 
+		if(!o.txntype ) throw new Exception("txntype is required is OboBillingService.getBilling");
+		if(!o.refno ) throw new Exception("txntype is required is OboBillingService.getBilling");
+
 		def appdb = dynaDb.lookup('vw_'+ o.txntype.toString()); 
 		def app = appdb.find([ appno: o.refno ]).first(); 
 		if ( !app ) 
@@ -26,11 +26,8 @@ class OboBillingService {
 		if ( !fees ) throw new Exception("There are no items for payment");
 
 		def p = [:];
-		p.expirydate = dateSvc.getServerDate();
-
 		p.txntype = o.txntype;
-		if ( p.txntype == 'building_application') p.permittype = 'Building Permit'; 
-		else if ( p.txntype == 'occupancy_application') p.permittype = 'Occupancy Permit'; 
+		p.permittype = ( p.txntype == 'building_application') ? 'Building Permit' : 'Occupancy Permit';
 
 		p.items = fees; 
 		p.amount = p.items.sum{( it.amount ? it.amount : 0.0 )} 
@@ -47,27 +44,4 @@ class OboBillingService {
 		return p; 
 	} 
  
-	@ProxyMethod
-	public def getPaymentOrderInfo( o ) {
-		//build the info beforehand for payment order purpose. This is the one saved to payment order.
-		def p = getBilling( o );
-		def m = [:];
-		if ( p.applicant?.objid ) { 
-			m.payer = p.applicant; 
-		} 
-		m.paidby = p.applicant?.name;
-		m.paidbyaddress = p.applicant?.address?.text;
-		m.refid = p.objid;
-		m.refno = o.refno;
-		m.info = [appid: p.objid];
-		m.amount = p.amount;
-		m.txntype = p.txntype;
-		m.txntypename = p.permittype;
-		m.particulars = p.permittype;
-		m.expirydate = p.expirydate;
-		m.mobileno = p.mobileno;
-		m.email = p.email;
-		m.items = p.items;
-		return m;
-	}
 }
