@@ -1,0 +1,20 @@
+<workunit>
+    <invokers>
+        <invoker type="building_application_fee:create" caption="Add Building Permit Fee"
+                action="create" target="popup" schemaName="building_application_fee"/>
+        
+        <invoker type="building_application_fee:open" caption="Building Permit Fee"
+                action="open" target="popup" schemaName="building_application_fee"/>
+        
+        
+        <invoker type="occupancy_application_fee:create" caption="Add Occupancy Permit Fee"
+                action="create" target="popup" schemaName="occupancy_application_fee"/>
+        
+        <invoker type="occupancy_application_fee:open" caption="Occupancy Permit Fee"
+                action="open" target="popup" schemaName="occupancy_application_fee"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationFeeModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboFeePage" />
+    </pages>
+</workunit>

@@ -1,0 +1,48 @@
+<workunit schemaName="vw_building_application" processName="building_application" allowCreate="false">
+    <invokers>
+        <invoker type="vw_building_application:open" caption="Building Permit Application" action="open" index="1"/>
+
+        <invoker type="ancillaryActions" 
+                caption="Add Ancillary"
+                role="COORDINATOR"
+                action="lookupAncillary" 
+                index="2"/>
+        
+        <!-- assessment actions -->        
+        <invoker type="feeActions" 
+                caption="Assess"
+                action="assess" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
+                
+        <invoker type="feeActions" 
+                caption="Add Fee"
+                action="addFee" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />        
+
+        <invoker type="feeActions" 
+                caption="Clear Fees"
+                action="clearFees" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
+
+        <!-- Building Permit -->
+        <invoker type="appActions" 
+                caption="Issue Bldg Permit"
+                action="issuePermit" 
+                visibleWhen="#{task.state=='releasing' 
+                    &amp;&amp; task.assignee.objid == userInfo.userid
+                    &amp;&amp; entity.permitno == null }"   />
+                    
+        <invoker type="appActions" 
+                caption="Change Occupancy Type"
+                action="changeOccupancyType" 
+                visibleWhen="#{task.state.matches('verification|assessment') 
+                    &amp;&amp; task.assignee.objid == userInfo.userid }"   />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationPage" />
+    </pages>
+</workunit>

@@ -1,0 +1,16 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml" 
+        reportId="building_application_claimstub"
+        reportName="com/rameses/gov/etracs/obo/reports/application_claimstub.jasper"> 
+    <invokers>
+        
+         <invoker type="vw_building_application:form:appActions" 
+                caption="View Claim Stub"
+                action="preview"
+                index="10"
+                visibleWhen="#{ entity.appno != null }"/>
+                    
+            <invoker type="formActions" caption="Send Email" action="sendEmail" />
+                    
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationClaimStubModel" />
+</workunit>

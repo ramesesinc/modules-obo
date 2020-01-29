@@ -8,21 +8,26 @@ class OboOnlineService  {
     @Service(value="TDOnlineService", connection="local-etracs")
     def svc;
 
-    @Service(value="EntityService", connection="local-etracs")
+    @Service(value="EntityService", connection="local-entity")
     def entitySvc;
 
     @Service(value="BuildingPermitOnlineService", connection="local-obo")
     def localOboSvc;
 
-    @Service(value="OnlineBuildingPermitService", connection="cloud-obo")
+    @Service(value="obo/OnlineBuildingPermitService", connection="cloud-server")
     def cloudOboSvc;
 
-    @Service(value="OnlineBuildingPermitDownloadService", connection="cloud-obo")
+    @Service(value="obo/OnlineBuildingPermitDownloadService", connection="cloud-server")
     def downloadSvc;
 
     @ProxyMethod
     public def findLocation( def params ) {
         def info = svc.verifyTaxDec(params);
+
+        if(info.state != "CURRENT" ) {
+            throw new Exception("The tax declaration must be in current state. Please verify with the assessors office");
+        }    
+
         info.refid = info.objid;
         if(!info.taxpayer?.objid ) 
         	throw new Exception("Error in OboOnlineService. There is no taxpayer.objid returned in TDOnlineService");

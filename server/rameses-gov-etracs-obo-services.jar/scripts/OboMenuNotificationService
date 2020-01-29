@@ -3,10 +3,10 @@ import java.rmi.server.*;
 
 public class OboMenuNotificationService {
 	
-	@DataContext("vw_building_permit_section")
+	@DataContext("vw_building_application_section")
 	def appTask;
 
-	@DataContext("building_permit")
+	@DataContext("building_application")
 	def vwApp;
 
 	@Service("WorkflowTaskListService")
@@ -19,31 +19,31 @@ public class OboMenuNotificationService {
     	return d;
 	}
 
-	def building_permit = { o->
-		def r = [processname: 'building_permit'];
-		r._schemaname = "vw_building_permit";
+	def building_application = { o->
+		def r = [processname: 'building_application'];
+		r._schemaname = "vw_building_application";
 		r.domain = o.domain;
 		return getTaskCount(r);		
 	}
 	
-	def building_permit_section = { o->
-		def r = [processname: 'building_permit_section'];
-		r._schemaname = "vw_building_permit_section";
+	def building_application_section = { o->
+		def r = [processname: 'building_application_section'];
+		r._schemaname = "vw_building_application_section";
 		r.domain = o.domain;
 		r.where = [ " typeid = :typeid", [typeid: o.typeid.toUpperCase() ] ];
 		return getTaskCount(r);		
 	}
 
-	def occupancy_permit = { o->
-		def r = [processname: 'occupancy_permit'];
-		r._schemaname = "vw_occupancy_permit";
+	def occupancy_application = { o->
+		def r = [processname: 'occupancy_application'];
+		r._schemaname = "vw_occupancy_application";
 		r.domain = o.domain;
 		return getTaskCount(r);		
 	}
 	
-	def occupancy_permit_section = { o->
-		def r = [processname: 'occupancy_permit_section'];
-		r._schemaname = "vw_occupancy_permit_section";
+	def occupancy_application_section = { o->
+		def r = [processname: 'occupancy_application_section'];
+		r._schemaname = "vw_occupancy_application_section";
 		r.domain = o.domain;
 		r.where = [ " typeid = :typeid", [typeid: o.typeid.toUpperCase() ] ];
 		return getTaskCount(r);		
@@ -54,19 +54,19 @@ public class OboMenuNotificationService {
 		def result = p.items;
 		p.domain = "OBO";
 		result.each { 
-			if( it.id == 'building_permit' ) {
-				it.count = building_permit( p );
+			if( it.id == 'building_application' ) {
+				it.count = building_application( p );
 			}
-			else if( it.id == 'occupancy_permit') {
-				it.count = occupancy_permit( p );
+			else if( it.id == 'occupancy_application') {
+				it.count = occupancy_application( p );
 			}			
-			else if( p.event == 'building_permit_section') {
+			else if( p.event == 'building_application_section') {
 				p.typeid = it.id?.split(":")[1];
-				it.count = building_permit_section( p );
+				it.count = building_application_section( p );
 			}
-			else if( p.event == 'occupancy_permit_section') {
+			else if( p.event == 'occupancy_application_section') {
 				p.typeid = it.id?.split(":")[1];
-				it.count = occupancy_permit_section( p );
+				it.count = occupancy_application_section( p );
 			}			
 		}	
 		return result;

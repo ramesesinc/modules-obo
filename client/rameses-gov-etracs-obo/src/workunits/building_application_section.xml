@@ -1,0 +1,32 @@
+<workunit extends="com/rameses/gov/etracs/obo/templates/OboApplicationSection.xml"
+    schemaName="vw_building_application_section" processName="building_application_section">
+    <invokers>
+        <invoker type="vw_building_application_section:open" caption="Building Application Section" action="open" index="1"/>
+
+        <!-- context related actions -->
+        <invoker type="extActions" caption="Update Zone Class"
+            action="updateZoneclass" visibleWhen="#{ 
+                entity.typeid.toLowerCase() == 'zoning' &amp;&amp;
+                editable == true }" index="1" />
+        
+        <invoker type="feeActions" caption="View Ancillary Info" action="viewAncillaryPermit" index="3" 
+                visibleWhen="#{entity.ancillaryid != null  }"/>
+        
+        <!--                        
+        <invoker type="extActions" 
+                caption="Issue Permit/Clearance"
+                action="issuePermit" 
+                visibleWhen="#{task.state=='releasing' &amp;&amp; entity.issuanceid == null }"   />
+                
+        <invoker type="extActions" 
+                caption="View Permit/Clearance"
+                action="viewPermit" 
+                visibleWhen="#{entity.issuanceid != null }"  index="20" />
+        -->
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationSectionModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationSectionPage" />
+    </pages>
+</workunit>

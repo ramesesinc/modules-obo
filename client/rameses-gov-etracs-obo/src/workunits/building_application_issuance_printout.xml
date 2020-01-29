@@ -1,0 +1,8 @@
+<workunit extends="com/rameses/seti2/templates/FormReport.xml">
+    <invokers>
+        <invoker type="building_application_issuance:printout" 
+            reportId="building_application_issuance"
+            caption="Printout" action="preview" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitIssuanceReportFormModel" />
+</workunit>

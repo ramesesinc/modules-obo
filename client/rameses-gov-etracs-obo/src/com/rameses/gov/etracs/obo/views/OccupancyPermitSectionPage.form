@@ -328,7 +328,7 @@
                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                 <Property name="queryName" type="java.lang.String" value="entity"/>
                 <Property name="rowHeight" type="int" value="20"/>
-                <Property name="schemaName" type="java.lang.String" value="occupancy_permit_fee"/>
+                <Property name="schemaName" type="java.lang.String" value="occupancy_application_fee"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -371,7 +371,7 @@
                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                 <Property name="queryName" type="java.lang.String" value="entity"/>
                 <Property name="rowHeight" type="int" value="20"/>
-                <Property name="schemaName" type="java.lang.String" value="occupancy_permit_finding"/>
+                <Property name="schemaName" type="java.lang.String" value="occupancy_application_finding"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

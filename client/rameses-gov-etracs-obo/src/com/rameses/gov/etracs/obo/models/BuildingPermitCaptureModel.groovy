@@ -41,7 +41,7 @@ class BuildingPermitCaptureModel  {
     
     /*
     public def onComplete() {
-        def op =  Inv.lookupOpener("vw_building_permit:open", [entity: entity ] );
+        def op =  Inv.lookupOpener("vw_building_application:open", [entity: entity ] );
         op.target = "topwindow";
         return op;
     }

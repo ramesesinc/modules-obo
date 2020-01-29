@@ -111,6 +111,17 @@
 </graphicElement>
 					<imageExpression class="java.lang.String"><![CDATA["obo-images/background.jpg"]]></imageExpression>
 				</image>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="349"
+						y="829"
+						width="182"
+						height="95"
+						key="image-6"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/clemente_a_ibo.png"]]></imageExpression>
+				</image>
 				<staticText>
 					<reportElement
 						mode="Opaque"
@@ -1751,7 +1762,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="12" isBold="true" isItalic="false"/>
 					</textElement>
-				<text><![CDATA[ENGR. RAFAEL B. ENCARNACION]]></text>
+				<text><![CDATA[ENGR. CLEMENTE A. IBO]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -1764,7 +1775,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false"/>
 					</textElement>
-				<text><![CDATA[OIC-City Engineer/Local Building Official]]></text>
+				<text><![CDATA[CGDH I - City Engineer/Local Building Official]]></text>
 				</staticText>
 				<rectangle>
 					<reportElement
@@ -4447,17 +4458,6 @@
 					</textElement>
 				<text><![CDATA[Recommended for Issuance:]]></text>
 				</staticText>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="349"
-						y="829"
-						width="182"
-						height="95"
-						key="image-6"/>
-					<box></box>
-					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["obo-images/rafael_b_encarnacion.png"]]></imageExpression>
-				</image>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="144"

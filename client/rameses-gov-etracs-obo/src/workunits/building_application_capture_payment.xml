@@ -1,0 +1,27 @@
+<workunit>
+    <invokers>
+        
+         <invoker type="vw_building_application:form:appActions" 
+                caption="Capture Payment"
+                action="init" 
+                index="1"
+                target="popup"
+                srole="SYSTEM"
+                txntype="building_application" visibleWhen="#{task.state == 'payment'}"/>
+         
+          <invoker type="vw_occupancy_application:form:appActions" 
+                caption="Capture Payment"
+                action="init" 
+                index="1"
+                target="popup"
+                role="SYSTEM"
+                txntype="occupancy_application" visibleWhen="#{task.state == 'payment'}" />
+         
+        <!-- actions -->
+        <invoker type="building_application_capture_payment" caption="Capture Payment" action="init" target="popup" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboCapturePaymentModel" />
+    <pages>
+        <page name="initial" template="com.rameses.gov.etracs.obo.views.OboCapturePaymentPage" />
+    </pages>
+</workunit>

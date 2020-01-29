@@ -14,16 +14,16 @@ class OboApplicationRequirementModel {
 
     //states:
     //0 - untouched
-    //1 - closed
+    //1 - passed
     //2 - for revision
     //3 - not applicable
     //4 - overridden
     
-    @Service("OboApplicationRequirementService")
-    def reqSvc;
-
     @Service("QueryService")
     def qrySvc;
+
+    @Service("PersistenceService")
+    def persistenceSvc;
     
     @Binding
     def binding;
@@ -34,78 +34,62 @@ class OboApplicationRequirementModel {
     @Caller
     def caller;
 
+    @Controller
+    def workunit;
+
     def entity;
     String pagename = "view"
     String title = "Review Requirement";
-    def schemaName;
-    
+
+    def info = [:];
+    boolean editable;
+    boolean overridable;
+
+    public String getSchemaName() {
+        return workunit?.info?.workunit_properties?.schemaName;
+    }
+
     boolean getShowNavigation() {
         return true;
     }
-    
-    void openBldgPermit() {
-        schemaName  = "building_permit";
-    }
-    
-    void openOccupancyPermit() {
-        schemaName  = "occupancy_permit";
-    }
 
-    //can display the pass, fail or NA buttons
-    public boolean isActionable() {
-        def task = caller.task;
-        if( caller.entity.appno != null ) return false;
-        if( task.state != 'requirement-verification' ) return false;
-        if(pagename!="view") return false;
-        if( entity.state == 0 ) {
-            if( task.assignee?.objid == user.userid ) return true;
-            return false;
-        }    
-        else {
-            return false;
-        }; 
-    }
+    void init() {
+        editable = false;
+        overridable = false;
         
-    //can display the editable button. Only the task assignee can edit it 
-    public boolean isEditable() {
         def task = caller.task;
-        if( caller.entity.appno != null ) return false;
-        if( task.state != 'requirement-verification' ) return false;
-        if(pagename!="view") return false;
-        if( entity.state == 0 ) return false;
-        if( entity.transmittalid != null ) return false;
-        if(task.assignee.objid != user.userid ) return false;
-        return ( entity.reviewer.objid == user.userid );
-    }
-    
-    public boolean isOverridable() {
-        def task = caller.task;
-        if( caller.entity.appno != null ) return false;        
-        if( task.state != 'requirement-verification' ) return false;        
-        if(pagename!="view") return false;
-        if( caller.entity.reqtransmittalid ) return false; 
-        if( entity.state == 0 ) return false;
-        if( entity.transmittalid !=null ) {
-            return ( task.assignee.objid == user.userid );
+        if( task.state == 'requirement-verification' ) {
+            //if current task assignee
+            if( task.assignee.objid == user.userid ) {
+                if( entity.reviewer?.objid == null  ) {
+                    editable = true;
+                }
+                else if( entity.reviewer.objid == user.userid ) {
+                    editable = true;
+                }
+                else if( entity.transmittalid !=null ) {
+                    overridable = true;
+                }
+                else if( entity.reviewer.objid != user.userid ) {
+                    overridable = true;
+                }
+            }
         }
-        return false;
+        if( entity.state == null ) {
+            info.state = 0;
+        }
+        else {
+            info.state = entity.state;            
+        }    
+        info.remarks = entity.remarks;
     }
     
-    public boolean getForRevision() {
-        return true;
-    }
-
     def moveUp() {
         def handler = caller.reqListHandler;
         handler.moveBackRecord();
         entity = handler.getSelectedItem()?.item;
-        int idx  = handler.getSelectedItem().index;
-        int maxRow = handler.getMaxRows();
-        if( idx == 0 && handler.pageIndex != 1 ) {
-            handler.moveBackPage();
-            handler.setSelectedItem( maxRow - 1 );
-            entity = handler.getSelectedItem()?.item;
-        }
+        init();
+        binding.refresh();
         return null;
     }
     
@@ -113,56 +97,43 @@ class OboApplicationRequirementModel {
         def handler = caller.reqListHandler;
         handler.moveNextRecord();
         entity = handler.getSelectedItem()?.item;
-        int idx = handler.getSelectedItem().index;
-        int maxRow = handler.getMaxRows();
-        if( idx == (maxRow-1) ) {
-            handler.moveNextPage();
-            handler.setSelectedItem( 0 );
-            entity = handler.getSelectedItem()?.item;
-        }
+        init();
+        binding.refresh();
         return null;
     }
     
-    void updateState( int state ) {
-        entity.state = state;
-        entity.schemaname = schemaName; 
-        def e = reqSvc.update( entity );    
+    void save() {
+        if(!info.state) throw new Exception("Please specify state ");
+        if(info.state == 2 && !info.remarks ) throw new Exception("Please specifyremarks ");
+        def m = [_schemaname:schemaName];
+        m.objid = entity.objid;    
+        m.state = info.state;
+        m.remarks = info.remarks;
+        def e  = persistenceSvc.update( m );
         caller.reqListHandler.getSelectedItem().item.putAll( e );
         moveDown();
-        binding.refresh();
     }
-    
-    void accept() {
-        updateState(1); 
+
+    void createEntry(def state, def remarks) {
+        def prev = info;
+        def m = [_schemaname:schemaName];
+        m.state = state;
+        m.remarks = remarks; 
+        m.previd = entity.objid;
+        m.appid = entity.appid;
+        m.parentid = entity.parentid;
+        m.type = entity.type;  //type of requirement
+        entity = persistenceSvc.create( m );
+        init();
+        caller.reqListHandler.reload();        
     }
-    void revise() {
-        if(!entity.remarks) throw new Exception("Please specify remarks")
-        updateState(2);         
-    }
-    void na() {
-        updateState(3); 
-    }
-    
-    void edit() {
-        entity.state = 0;
-    }
-    
     
     void supersede() {
-        def prev = entity;
-        entity = [:];
-        entity.remarks = prev.remarks
-        entity.appid = prev.appid;
-        entity.parentid = prev.parentid;
-        entity.type = prev.type;
-        entity.previd = prev.objid;
-        entity.state = 0;
+        createEntry(2, info.remarks);
     }
     
     void closeIssue() {
-        if(!MsgBox.confirm("You are about to close this issue. Continue?")) return;
-        supersede();
-        updateState( 1 );
+        createEntry(1, null);
     }
     
     void back() {
@@ -174,7 +145,7 @@ class OboApplicationRequirementModel {
     
     def histHandler = [
         fetchList : { o->
-            def m = [_schemaname: schemaName + "_requirement"];
+            def m = [_schemaname: schemaName];
             m.findBy = [appid: entity.appid ];
             m.where = ["typeid = :typeid", [typeid : entity.typeid ]];
             qrySvc.getList( m );

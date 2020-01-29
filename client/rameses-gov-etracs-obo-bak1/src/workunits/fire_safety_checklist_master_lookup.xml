@@ -1,0 +1,9 @@
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="fire_safety_checklist_master">
+    <invokers>
+        <invoker type="fire_safety_checklist_master:lookup" caption="Lookup Checklist" 
+                action="init" index="15"
+                multiSelect="true"
+                target="popup"
+                cols="indexno,title,category"/>
+    </invokers>
+</workunit>

@@ -35,12 +35,12 @@ public class PermitIssuanceModel {
    
     void initBldgPermit() {
         entity = [:];
-        txntype = "building_permit";
+        txntype = "building_application";
         showcontrolno = false;
     }
     
     def doOk() {
-        if(txntype == "building_permit") {
+        if(txntype == "building_application") {
             entity.objid = caller.entity.objid;
             def u = bldgPermitSvc.updatePermitNo( entity );
             caller.entity.putAll(u);

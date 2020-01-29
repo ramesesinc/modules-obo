@@ -1,0 +1,31 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+      
+       <!-- findings for occupancy permit -->             
+       <invoker type="vw_occupancy_application:form:appActions" 
+                caption="Build Finding Checklist"
+                role="COORDINATOR"
+                reportId="occupancy_application_transmittal"
+                reportName="com/rameses/gov/etracs/obo/reports/finding_transmittal.jasper"
+                txntype="finding"
+                action="create" 
+                index="0"
+                visibleWhen="#{ 
+                    task.state == 'verification'
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.transmittalid == null }"/>
+                
+        <invoker type="vw_occupancy_application:form:appActions" 
+                 caption="Print Transmittal"
+                 reportId="occupancy_application_transmittal"
+                 reportName="com/rameses/gov/etracs/obo/reports/finding_transmittal.jasper"
+                 action="preview"
+                 txntype="finding"
+                 visibleWhen="#{ 
+                    task.state.matches('verification|inspection-revision')
+                    &amp;&amp; entity.transmittalid != null  }"/>
+                    
+       <invoker type="formActions" caption="Send Email" action="sendEmail"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationTransmittalModel" />
+</workunit>

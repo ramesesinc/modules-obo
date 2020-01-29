@@ -4,6 +4,6 @@
     <invokers>
         <invoker folderid="menucategory/obo/occupancy" caption="View Occupancy Permit Application List"
              cols="appno,appdate,trackingno,applicant.name,title,task.state,task.assignee.name"
-                action="init" index="-1" role="INFO" notificationid="occupancy_permit" event="occupancy_permit"/>
+                action="init" index="-1" srole="INFO" notificationid="occupancy_permit" event="occupancy_permit"/>
     </invokers>
 </workunit>

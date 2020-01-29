@@ -1,0 +1,10 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml"
+    schemaName="vw_obo_occupancy_type" allowCreate="false" allowUpdate="false" 
+          allowOpen="false" allowDelete="false">
+    <invokers>
+        <invoker folderid="explorer/master/obo" caption="Occupancy Type"
+                cols="objid,title,division.objid,group.objid"
+                role="MASTER"
+                action="init" />
+    </invokers>
+</workunit>

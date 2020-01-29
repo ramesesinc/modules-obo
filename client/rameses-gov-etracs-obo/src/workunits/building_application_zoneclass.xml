@@ -1,0 +1,10 @@
+<workunit>
+    <invokers>
+        <invoker type="building_application_zoneclass:view" target="popup"
+                 caption="Building Permit Zone classification" action="init"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitZoneClassificationModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitZoneClassificationPage" />
+    </pages>
+</workunit>

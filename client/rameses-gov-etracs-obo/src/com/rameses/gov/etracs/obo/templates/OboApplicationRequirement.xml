@@ -1,0 +1,24 @@
+<workunit>
+    <invokers>
+        <!-- buttons -->
+        <!--
+        <invoker type="formActions" caption="Accept"  action="accept" index="0" visibleWhen="#{ actionable == true }" />    
+        <invoker type="formActions" caption="For Revision"  action="revise" index="1" visibleWhen="#{ actionable == true }"/>    
+        <invoker type="formActions" caption="Not Applicable"  action="na" index="2" visibleWhen="#{ actionable == true }"/>    
+        
+        <invoker type="formActions" caption="Edit"  action="edit" 
+                 visibleWhen="#{ editable == true  }"/>    
+
+        <invoker type="formActions" caption="Supersede"  action="supersede" index="0" visibleWhen="#{ overridable == true }"/>    
+        <invoker type="formActions" caption="Close Issue"  action="closeIssue" index="1" visibleWhen="#{ overridable == true }"/>    
+        
+        <invoker type="formActions" caption="View History"  action="viewHist" index="2" visibleWhen="#{pagename == 'view' }"/>
+        <invoker type="formActions" caption="Back"  action="back" index="2" visibleWhen="#{pagename == 'hist' }"/>
+        -->
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationRequirementModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboApplicationRequirementPage" />
+    </pages>
+</workunit>

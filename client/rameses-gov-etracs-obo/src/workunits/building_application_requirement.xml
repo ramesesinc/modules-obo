@@ -1,0 +1,6 @@
+<workunit extends="com/rameses/gov/etracs/obo/templates/OboApplicationRequirement.xml" schemaName="building_application_requirement">
+    <invokers>
+        <invoker type="building_application_requirement:open" action="init"
+                 caption="Building Permit Requirement Verification" target="popup"/>        
+    </invokers>             
+</workunit>

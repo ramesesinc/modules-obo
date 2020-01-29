@@ -510,7 +510,7 @@
 						key="image-6"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["obo-images/rafael_b_encarnacion.png"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["obo-images/clemente_a_ibo.png"]]></imageExpression>
 				</image>
 				<rectangle>
 					<reportElement
@@ -733,7 +733,7 @@ deficiencies on my resubmission.]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true" isItalic="false"/>
 					</textElement>
-				<text><![CDATA[ENGR. RAFAEL B. ENCARNACION]]></text>
+				<text><![CDATA[ENGR. CLEMENTE A. IBO]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -752,14 +752,14 @@ deficiencies on my resubmission.]]></text>
 					<reportElement
 						x="373"
 						y="161"
-						width="202"
+						width="197"
 						height="21"
 						key="staticText-241"/>
 					<box></box>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false"/>
+						<font fontName="Arial" pdfFontName="Helvetica" size="9" isBold="false" isItalic="false"/>
 					</textElement>
-				<text><![CDATA[OIC-City Engineer/Local Building Official]]></text>
+				<text><![CDATA[CGDH I - City Engineer/Local Building Official]]></text>
 				</staticText>
 			</band>
 		</summary>

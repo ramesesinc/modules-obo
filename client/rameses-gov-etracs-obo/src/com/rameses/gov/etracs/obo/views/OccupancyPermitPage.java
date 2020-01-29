@@ -708,7 +708,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         schemaList7.setQueryName("reqQuery");
         schemaList7.setRowHeight(20);
         schemaList7.setRows(50);
-        schemaList7.setSchemaName("occupancy_permit_requirement");
+        schemaList7.setSchemaName("occupancy_application_requirement");
         jPanel7.add(schemaList7, java.awt.BorderLayout.CENTER);
 
         xTabbedPane3.addTab("Items", jPanel7);
@@ -778,12 +778,12 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
             })
         });
         schemaList9.setCustomFilter("appid = :objid AND type = 'requirement' ");
-        schemaList9.setEntityName("occupancy_permit_requirement_transmittal");
+        schemaList9.setEntityName("occupancy_application_requirement_transmittal");
         schemaList9.setOrderBy("dtcreated DESC");
         schemaList9.setQueryName("entity");
         schemaList9.setRowHeight(20);
         schemaList9.setRows(50);
-        schemaList9.setSchemaName("occupancy_permit_transmittal");
+        schemaList9.setSchemaName("occupancy_application_transmittal");
         jPanel12.add(schemaList9, java.awt.BorderLayout.CENTER);
 
         xTabbedPane3.addTab("Transmittals", jPanel12);
@@ -858,7 +858,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         schemaList10.setQueryName("sectionQry");
         schemaList10.setRowHeight(20);
         schemaList10.setRows(50);
-        schemaList10.setSchemaName("vw_occupancy_permit_section");
+        schemaList10.setSchemaName("vw_occupancy_application_section");
         xPanel3.add(schemaList10, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Sections", xPanel3);
@@ -947,7 +947,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         schemaList3.setHandlerName("findingListHandler");
         schemaList3.setQueryName("findingQry");
         schemaList3.setRowHeight(20);
-        schemaList3.setSchemaName("occupancy_permit_finding");
+        schemaList3.setSchemaName("occupancy_application_finding");
         xPanel6.add(schemaList3, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Findings", xPanel6);
@@ -1091,7 +1091,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         schemaList11.setQueryName("feeQry");
         schemaList11.setRowHeight(20);
         schemaList11.setRows(50);
-        schemaList11.setSchemaName("occupancy_permit_fee");
+        schemaList11.setSchemaName("occupancy_application_fee");
         xPanel7.add(schemaList11, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Assessment", xPanel7);
@@ -1226,7 +1226,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         schemaList8.setName("selectedRpu"); // NOI18N
         schemaList8.setQueryName("entity");
         schemaList8.setRowHeight(20);
-        schemaList8.setSchemaName("building_permit_rpu");
+        schemaList8.setSchemaName("building_application_rpu");
 
         javax.swing.GroupLayout xPanel1Layout = new javax.swing.GroupLayout(xPanel1);
         xPanel1.setLayout(xPanel1Layout);

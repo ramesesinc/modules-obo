@@ -269,7 +269,7 @@ public class OccupancyPermitSectionPage extends javax.swing.JPanel {
         schemaList2.setName(""); // NOI18N
         schemaList2.setQueryName("entity");
         schemaList2.setRowHeight(20);
-        schemaList2.setSchemaName("occupancy_permit_fee");
+        schemaList2.setSchemaName("occupancy_application_fee");
         xPanel1.add(schemaList2, java.awt.BorderLayout.CENTER);
 
         xActionBar2.setFormName("formName");
@@ -349,7 +349,7 @@ public class OccupancyPermitSectionPage extends javax.swing.JPanel {
         schemaList1.setName(""); // NOI18N
         schemaList1.setQueryName("entity");
         schemaList1.setRowHeight(20);
-        schemaList1.setSchemaName("occupancy_permit_finding");
+        schemaList1.setSchemaName("occupancy_application_finding");
         xPanel2.add(schemaList1, java.awt.BorderLayout.CENTER);
 
         xActionBar3.setFormName("formName");

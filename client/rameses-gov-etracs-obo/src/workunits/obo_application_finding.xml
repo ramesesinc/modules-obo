@@ -1,17 +1,17 @@
 <workunit>
     <invokers>
         <!-- INVOKERS -->
-        <invoker type="building_permit_finding:create" caption="Building Permit Finding"
-                action="create" index="1" target="popup" schemaname="building_permit" />
+        <invoker type="building_application_finding:create" caption="Building Permit Finding"
+                action="create" index="1" target="popup" schemaname="building_application" />
         
-        <invoker type="building_permit_finding:open" caption="Building Permit Finding"
-                action="open" index="1" target="popup" schemaname="building_permit"/>
+        <invoker type="building_application_finding:open" caption="Building Permit Finding"
+                action="open" index="1" target="popup" schemaname="building_application"/>
         
-        <invoker type="occupancy_permit_finding:create" caption="Occupancy Permit Finding"
-                action="create" index="1" target="popup" schemaname="occupancy_permit"/>
+        <invoker type="occupancy_application_finding:create" caption="Occupancy Permit Finding"
+                action="create" index="1" target="popup" schemaname="occupancy_application"/>
         
-        <invoker type="occupancy_permit_finding:open" caption="Occupancy Permit Finding"
-                action="open" index="1" target="popup" schemaname="occupancy_permit"/>
+        <invoker type="occupancy_application_finding:open" caption="Occupancy Permit Finding"
+                action="open" index="1" target="popup" schemaname="occupancy_application"/>
         
         
         <!-- finding actions -->

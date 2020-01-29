@@ -20,7 +20,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
     def oboMenuSvc;
     
     public String getMenuContextName() {
-        return "building_permit";
+        return "building_application";
     }
     
     public def getMenuNotificationService() {
@@ -57,23 +57,22 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             }
         }
         
-        if(_id == 'building_permit_section' ) {
-            def m = [_schemaname: "obo_section" ];
+        if(_id == 'building_application_section' ) {
+            def m = [_schemaname: "building_permit_section_type" ];
             m._limit = 100;
-            orgFilter[0]+= " AND NOT(buildingpermitstate IS NULL)"
             m.where =  orgFilter;
             m.orderBy = "sortindex";
             def list = querySvc.getList( m );
-            buildInvokers( list, 'building_permit_section' );
+            buildInvokers( list, 'building_application_section' );
         }
-        else if(_id == 'occupancy_permit_section' ) {
+        else if(_id == 'occupancy_application_section' ) {
             def m = [_schemaname: "obo_section" ];
             m._limit = 100;
             orgFilter[0] += " AND NOT(occupancypermitstate IS NULL)"
             m.where =  orgFilter;
             m.orderBy = "sortindex";
             def list = querySvc.getList( m );
-            buildInvokers( list, 'occupancy_permit_section' );
+            buildInvokers( list, 'occupancy_application_section' );
         }        
        
     }

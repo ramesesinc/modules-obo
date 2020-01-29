@@ -1,0 +1,5 @@
+<workunit extends="com/rameses/gov/etracs/obo/templates/OboApplicationRequirement.xml" schemaName="occupancy_application_requirement">
+    <invokers>
+        <invoker type="occupancy_application_requirement:open" caption="Occupancy Permit Requirement Verification" target="popup"/>    
+    </invokers>             
+</workunit>

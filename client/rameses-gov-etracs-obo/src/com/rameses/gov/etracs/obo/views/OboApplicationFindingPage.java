@@ -36,9 +36,16 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
         xPanel1 = new com.rameses.rcp.control.XPanel();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xLabel2 = new com.rameses.rcp.control.XLabel();
+        xLabel3 = new com.rameses.rcp.control.XLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         xTextArea2 = new com.rameses.rcp.control.XTextArea();
-        xLabel3 = new com.rameses.rcp.control.XLabel();
+        xRadio1 = new com.rameses.rcp.control.XRadio();
+        xRadio2 = new com.rameses.rcp.control.XRadio();
+        jPanel1 = new javax.swing.JPanel();
+        xButton2 = new com.rameses.rcp.control.XButton();
+        xButton3 = new com.rameses.rcp.control.XButton();
+        xButton4 = new com.rameses.rcp.control.XButton();
+        xButton1 = new com.rameses.rcp.control.XButton();
         xPanel2 = new com.rameses.rcp.control.XPanel();
         xDataTable1 = new com.rameses.rcp.control.XDataTable();
 
@@ -53,9 +60,14 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
 
         xLabel2.setCaption("Section");
         xLabel2.setExpression("#{ entity.section.type.title }");
-        xLabel2.setVisibleWhen("#{ entity.objid != null }");
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel2);
+
+        xLabel3.setCaption("Created By");
+        xLabel3.setExpression("#{ entity.createdby.name }");
+        xLabel3.setVisibleWhen("#{ entity.objid != null }");
+        xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel3);
 
         jScrollPane2.setPreferredSize(new java.awt.Dimension(0, 150));
 
@@ -67,13 +79,47 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
 
         xFormPanel2.add(jScrollPane2);
 
-        xLabel3.setCaption("Raised By");
-        xLabel3.setExpression("#{ entity.createdby.name }");
-        xLabel3.setVisibleWhen("#{ entity.objid != null }");
-        xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel3);
+        xRadio1.setCaption("Status");
+        xRadio1.setName("entity.state"); // NOI18N
+        xRadio1.setOptionValue(1);
+        xRadio1.setText("Resolved");
+        xRadio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xRadio1ActionPerformed(evt);
+            }
+        });
+        xFormPanel2.add(xRadio1);
+
+        xRadio2.setCaption("");
+        xRadio2.setName("entity.state"); // NOI18N
+        xRadio2.setOptionValue(2);
+        xRadio2.setText("Send for Revision");
+        xFormPanel2.add(xRadio2);
 
         xPanel1.add(xFormPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 30));
+
+        xButton2.setName("save"); // NOI18N
+        xButton2.setVisibleWhen("#{ editable == true }");
+        xButton2.setText("OK");
+        jPanel1.add(xButton2);
+
+        xButton3.setName("supersede"); // NOI18N
+        xButton3.setVisibleWhen("#{ overridable == true }");
+        xButton3.setText("Supersede");
+        jPanel1.add(xButton3);
+
+        xButton4.setName("closeIssue"); // NOI18N
+        xButton4.setVisibleWhen("#{ overridable == true }");
+        xButton4.setText("Close Issue");
+        jPanel1.add(xButton4);
+
+        xButton1.setName("_close"); // NOI18N
+        xButton1.setText("Cancel");
+        jPanel1.add(xButton1);
+
+        xPanel1.add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         add(xPanel1, "card4");
 
@@ -135,15 +181,26 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
         add(xPanel2, "card5");
     }// </editor-fold>//GEN-END:initComponents
 
+    private void xRadio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xRadio1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xRadio1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private com.rameses.rcp.control.XButton xButton1;
+    private com.rameses.rcp.control.XButton xButton2;
+    private com.rameses.rcp.control.XButton xButton3;
+    private com.rameses.rcp.control.XButton xButton4;
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel2;
+    private com.rameses.rcp.control.XRadio xRadio1;
+    private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XTextArea xTextArea2;
     // End of variables declaration//GEN-END:variables
 }

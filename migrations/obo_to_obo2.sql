@@ -1,0 +1,40 @@
+RENAME TABLE building_permit	TO building_application;
+RENAME TABLE building_permit_accessory	TO building_application_accessory;
+RENAME TABLE building_permit_ancillary	TO building_application_ancillary;
+RENAME TABLE building_permit_entity	TO building_application_entity;
+RENAME TABLE building_permit_fee	TO building_application_fee;
+RENAME TABLE building_permit_finding	TO building_application_finding;
+RENAME TABLE building_permit_info	TO building_application_info;
+RENAME TABLE building_permit_payment	TO building_application_payment;
+RENAME TABLE building_permit_professional	TO building_application_professional;
+RENAME TABLE building_permit_requirement	TO building_application_requirement;
+RENAME TABLE building_permit_rpu	TO building_application_rpu;
+RENAME TABLE building_permit_section	TO building_application_section;
+RENAME TABLE building_permit_section_task	TO building_application_section_task;
+RENAME TABLE building_permit_task	TO building_application_task;
+RENAME TABLE building_permit_transmittal	TO building_application_transmittal;
+
+RENAME TABLE occupancy_permit TO occupancy_application;
+RENAME TABLE occupancy_permit_entity TO occupancy_application_entity;
+RENAME TABLE occupancy_permit_fee TO occupancy_application_fee;
+RENAME TABLE occupancy_permit_finding TO occupancy_application_finding;
+RENAME TABLE occupancy_permit_payment TO occupancy_application_payment;
+RENAME TABLE occupancy_permit_professional TO occupancy_application_professional;
+RENAME TABLE occupancy_permit_requirement TO occupancy_application_requirement;
+RENAME TABLE occupancy_permit_rpu TO occupancy_application_rpu;
+RENAME TABLE occupancy_permit_section TO occupancy_application_section;
+RENAME TABLE occupancy_permit_section_task TO occupancy_application_section_task;
+RENAME TABLE occupancy_permit_task TO occupancy_application_task;
+RENAME TABLE occupancy_permit_transmittal TO occupancy_application_transmittal;
+
+DROP VIEW vw_building_permit;
+DROP VIEW vw_building_permit_ancillary;
+DROP VIEW vw_building_permit_fee_payment;
+DROP VIEW vw_building_permit_info;
+DROP VIEW vw_building_permit_professional;
+DROP VIEW vw_building_permit_section;
+DROP VIEW vw_obo_occupancy_type;
+DROP VIEW vw_obo_permit_type;
+DROP VIEW vw_occupancy_permit;
+DROP VIEW vw_occupancy_permit_section;
+

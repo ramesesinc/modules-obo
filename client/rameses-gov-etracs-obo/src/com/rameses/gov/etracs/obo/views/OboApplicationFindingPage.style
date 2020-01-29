@@ -1,9 +1,9 @@
-"entity.particulars" [ entity.state != 0 ] {
-    enabled: false;
-    editable: false;
-}
-
-"entity.particulars" [ entity.state == 0 ] {
+"entity.*" [ editable == true ] {
     enabled: true;
     editable : true;
+}
+
+"entity.*" [ editable == false ] {
+    enabled: false;
+    editable: false;
 }

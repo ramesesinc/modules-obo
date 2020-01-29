@@ -1,6 +1,6 @@
 <workunit>
     <invokers>
-        <invoker type="vw_building_permit_section:form:extActions" 
+        <invoker type="vw_building_application_section:form:extActions" 
                  caption="Fire Safety Checklist" action="load" index="1"
                  visibleWhen="#{ entity.typeid.equalsIgnoreCase('FSEC') }" target="popup" />
         

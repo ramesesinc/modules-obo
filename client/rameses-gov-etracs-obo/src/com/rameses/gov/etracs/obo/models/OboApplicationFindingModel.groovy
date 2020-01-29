@@ -12,110 +12,126 @@ import com.rameses.enterprise.models.*;
 
 /******
 * state is similar to the requirements
-* 0 = editing state
-* 1 =  
+* 1 = pass or closed
+* 2 = for revision  
 ******/
 
-class BuildingPermitFindingModel {
+class OboApplicationFindingModel {
 
-    @Service("OboApplicationFindingService")
-    def findingSvc;
-
+    @Service("PersistenceService")
+    def persistenceSvc;
+    
     @Service("QueryService")
     def querySvc;
     
     @Caller
     def caller;
+    
+    @Controller
+    def workunit;
 
     @Script("User")
-    def userInfo;
+    def user;
     
     def appid;
     def sectionid;
     def entity;
+    def section;
     
     def pagename = "view";
+    def editmode;
     
-    boolean editable = false;
-    boolean closeable = false;
+    boolean editable;
+    boolean overridable;
     
-    String schemaname;
-    
-    void create(inv) {
-        entity = [:];
-        if( !sectionid ) {
-            entity.appid = appid;
-        }
-        else {
-            entity.appid = appid;
-            entity.parentid = sectionid;
-        }
-        entity.state = 0;
-        entity.schemaname = inv.properties.schemaname;
+    public String getSchemaName() {
+        return workunit?.info?.workunit_properties?.schemaName;
     }
     
-    void open(inv) {
-        entity.schemaname = inv.properties.schemaname;
+    void init() {
+        editable = false;
+        overridable = false;
+        def task = caller.task;
+        //if current task assignee
+        if( task.assignee.objid == user.userid ) {
+            if( entity.transmittalid !=null ) {
+                overridable = true;
+            }
+            else if( entity.createdby.objid != user.userid ) {
+                overridable = true;
+            }
+            else if( entity.createdby?.objid == null  ) {
+                editable = true;
+            }
+            else if( entity.createdby.objid == user.userid ) {
+                editable = true;
+            }
+        }
     }
 
-    boolean getEditable() {
-        def task = caller.task;
-        if( task.assignee.objid != userInfo.userid ) return false;
-        if( pagename != "view") return false;
-        if( entity.state == 0 ) return false;
-        if( entity.transmittalid != null ) return false;
-        if( entity.createdby.objid == userInfo.userid ) return true;
-        return false;
+    void create() {
+        init();
+        entity = [:];
+        entity.section = section;
+        entity.appid = appid;
+        entity.parentid = sectionid;
+        entity.state = 2;
+        editmode = "create";
     }
     
-    boolean getCloseable() {
-        def task = caller.task;
-        if( task.assignee.objid != userInfo.userid ) return false;
-        if( pagename != "view") return false;
-        if(!entity.objid) return false;
-        if( entity.transmittalid !=null ) return true;
-        if( entity.createdby.objid != userInfo.userid ) return true;
-        return false;
+    void open() {
+        init();
+        editmode = (editable==true? "edit" : "read");
     }
     
-    void edit() {
-        entity.state = 0;
-    }
-    
-    def revert() {
-        return save( 1 );
-        entity.state = 1;
-    }
     
     def save() {
-        return save(2);
+        entity._schemaname = schemaName;
+        if(editmode=="create") {
+            persistenceSvc.create( entity );
+        }
+        else {
+            persistenceSvc.update( entity );            
+        }
+        caller.findingListHandler.reload();
+        return "_close";
     }
     
-    def save( int state ) {
-        entity.state = state;
-        findingSvc.create( entity );
-        caller.findingListHandler.reload();
-        return "_close";        
-    }
-
     void supersede() {
         def preventity = entity;
         entity = [:];
+        entity.section = preventity.section;
         entity.objid = null;
         entity.previd = preventity.objid;
         entity.appid = preventity.appid;
         entity.parentid = preventity.parentid;
         entity.rootid = preventity.rootid;        
         entity.particulars = preventity.particulars;
-        entity.state = 0;
-        entity.schemaname = preventity.schemaname;
+        entity.state = 2;
+        editmode = "create";
+        init();
     }
     
     def closeIssue() {
         if(!MsgBox.confirm("This will close this finding. Proceed?")) return;
-        return save(1);
+        
+        def preventity = entity;
+        entity = [:];
+        entity.section = preventity.section;
+        entity.objid = null;
+        entity.previd = preventity.objid;
+        entity.appid = preventity.appid;
+        entity.parentid = preventity.parentid;
+        entity.rootid = preventity.rootid;        
+        entity.particulars = preventity.particulars;
+        entity.state = 1;
+        entity._schemaname = schemaName;
+        persistenceSvc.create( entity );
+        caller.findingListHandler.reload();
+        return "_close";
     }
     
+    /*
     void viewHistory() {
         pagename = "hist";
     }
@@ -132,5 +148,5 @@ class BuildingPermitFindingModel {
             return querySvc.getList(m)
         }
     ] as BasicListModel;
-
+    */
 }
