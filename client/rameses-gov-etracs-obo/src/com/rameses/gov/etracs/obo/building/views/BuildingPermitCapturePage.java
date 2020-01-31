@@ -78,7 +78,6 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xTextField4.setCaption("App No");
         xTextField4.setName("entity.appno"); // NOI18N
         xTextField4.setPreferredSize(new java.awt.Dimension(200, 20));
-        xTextField4.setRequired(true);
         xFormPanel3.add(xTextField4);
 
         xDateField4.setCaption("App Date");
@@ -221,6 +220,8 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         jPanel2.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("General Info", jPanel2);
+
+        xPanel1.setVisibleWhen("#{ false }");
 
         schemaList8.setAllowOpen(false);
         schemaList8.setColumns(new com.rameses.rcp.common.Column[]{

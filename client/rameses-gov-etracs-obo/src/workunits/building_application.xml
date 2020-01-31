@@ -27,13 +27,12 @@
                 index="1"
                 visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
 
-        <!-- Building Permit -->
-        <invoker type="appActions" 
-                caption="Issue Bldg Permit"
-                action="issuePermit" 
-                visibleWhen="#{task.state=='releasing' 
-                    &amp;&amp; task.assignee.objid == userInfo.userid
-                    &amp;&amp; entity.permitno == null }"   />
+        <invoker type="feeActions" 
+                caption="Preview"
+                action="previewFees" 
+                index="2"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
+       
                     
         <invoker type="appActions" 
                 caption="Change Occupancy Type"

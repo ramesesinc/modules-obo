@@ -1,4 +1,5 @@
 import com.rameses.annotations.*;
+import java.rmi.server.*;
 
 /* ******************************************************************************************************
 Notes:
@@ -42,6 +43,10 @@ class BuildingApplicationWorkflowInterceptor {
 
 	@DataContext("building_application_fee")
 	def feeEm;
+
+	@DataContext("building_permit")
+	def permitEm;
+
 
 	@Service("BuildingApplicationTransmittalService")
 	def transmittalSvc;
@@ -99,13 +104,6 @@ class BuildingApplicationWorkflowInterceptor {
 		if( t > 0) throw new Exception("There are unresolved findings. You need to send this for revision");
 	}
 
-	/* this is for testing
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='building_application'  }")      	
-	public void doTest( def evt ) { 
-		def p = evt.args[0];
-		throw new Exception("action is " + p.action);
-	}
-	*/
 
 	//trigger when entering evaluation state
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && result.state.matches('.*evaluation') && args[0].action != 'reactivate' }") 
@@ -171,15 +169,27 @@ class BuildingApplicationWorkflowInterceptor {
 		def p = evt.args[0];
 		def appid = p.refid;
 		def dt = dateSvc.getServerDate();
-		throw new Exception("fire permits here");
+
+		//search first before creating
+		def perm = permitEm.find( [appid: appid]).first();
+		if(!perm) {
+			//trigger the permit
+			def m = [:];
+			m.permitno = "TMP" + new UID();
+			m.appid = appid;
+			m.state = 0;
+			permitEm.create( m );			
+		}
 	}
 
 	//release process. Make sure there is at least one building_application_issuance
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }" ) 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }", index=0 ) 
 	public void doActionBeforeRelease( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;
-		throw new Exception("check all permits here are released");
+		def pmt = permitEm.find( [appid: appid]).first();
+		if( !pmt) throw new Exception("Permit not found");
+		if(pmt.state == 0) throw new Exception("Permit is not yet issued. Please issue the permit first");
 	}
 
 

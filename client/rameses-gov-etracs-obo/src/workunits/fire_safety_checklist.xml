@@ -2,7 +2,7 @@
     <invokers>
         <invoker type="vw_building_application_section:form:extActions" 
                  caption="Fire Safety Checklist" action="load" index="1"
-                 visibleWhen="#{ entity.typeid.equalsIgnoreCase('FSEC') }" target="popup" />
+                 visibleWhen="#{ entity.firesafetychecklist?.objid!=null }" target="popup" />
         
         <!-- form actions -->
         <invoker type="formActions" caption="Add Items" action="addChecklistItems" index="1" 

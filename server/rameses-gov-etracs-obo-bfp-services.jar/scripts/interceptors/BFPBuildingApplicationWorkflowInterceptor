@@ -1,0 +1,63 @@
+import com.rameses.annotations.*;
+import java.rmi.server.*;
+
+/* ******************************************************************************************************
+Notes:
+* This triggers the fsec to be fired after building permit post payment
+******************************************************************************************************* */
+class BFPBuildingApplicationWorkflowInterceptor { 
+
+	@DataContext("fire_safety_evaluation_clearance")
+	def fsecEm;
+
+	@DataContext("fire_safety_checklist")
+	def checklistEm;
+
+	@Service( "FireSafetyChecklistService" )
+	def checkListSvc;
+
+	//trigger fire safety checklist when entering evaluation state
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && result.state == 'trade-evaluation' && args[0].action != 'reactivate' }", index=100) 
+	public void fireBFPCheckList( def evt ) {
+		def p = evt.args[0];
+		def r = evt.result;
+		def appid = p.refid;
+		checkListSvc.fetch( [appid: appid ]);
+	}
+
+	//create fsec after post payment
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'post-payment' }", index=-20 ) 
+	public void createFSECAfterPayment( def evt ) {
+		def p = evt.args[0];
+		def appid = p.refid;
+		def f = fsecEm.find( [appid: appid] ).first();
+		if(!f) {
+			f = [:];
+			f.appid = appid;
+			f.controlno = "TMP" + new UID();
+			f.state = 0;
+			fsecEm.create( f );
+		}
+
+		//trigger also checklist if it does not yet exist
+		checkListSvc.fetch( [appid: appid ]);
+	}
+
+	//release process. Make sure the clearances are formally issued 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }", index=100 ) 
+	public void checkFSECBeforeRelease( def evt ) {
+		def p = evt.args[0];
+		def appid = p.refid;
+
+		def f = fsecEm.find( [appid: appid] ).first();
+		if(!f) throw new Exception("FSEC not found");
+		if(f.state == 0) throw new Exception("The FSEC is not yet issued. Please issue the FSEC first");
+
+		def chk = checklistEm.find( [appid: appid] ).first();
+		if(!chk) throw new Exception("Fire safety checklist not found");
+		if(chk.state == 0) throw new Exception("The Fire safety checklist is not yet issued. Please issue the fire safety checklist first");
+
+	}
+
+
+} 

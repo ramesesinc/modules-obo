@@ -5,8 +5,6 @@
 		<field name="apptype" />
 		<field name="orgcode" />
 		<field name="trackingno" />
-		<field name="permitno" />
-		<field name="dtissued" />
 		<field name="contact_name" />
 		<field name="contact_detail" />
 		<field name="contact_email" />
@@ -34,16 +32,13 @@
 		<field name="dtactualstarted" />
 		<field name="dtactualcompleted" />
 
-		<complex name="bldgpermit" ref="building_application" jointype="many-to-one" required="true">
+		<complex name="bldgpermit" ref="vw_building_permit" jointype="many-to-one" required="true">
 			<key field="bldgpermitid" target="objid" />
 		</complex>
 
 		<complex name="applicant" ref="occupancy_application_entity" jointype="many-to-one" required="true">
 			<key field="applicantid" target="objid" />
 		</complex>	
-
-		<field name="title" />
-		<field name="location_text" />
 
 		<field name="task_state" />
 		<field name="task_startdate" />

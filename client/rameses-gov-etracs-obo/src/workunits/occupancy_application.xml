@@ -1,19 +1,11 @@
-<workunit schemaName="vw_occupancy_application" processName="occupancy_application">
+<workunit schemaName="vw_occupancy_application" processName="occupancy_application" allowCreate="false">
     <invokers>
         <invoker type="vw_occupancy_application:open" caption="Occupancy Permit Application" action="open" index="1"/>
 
         <invoker type="appActions" 
                 caption="View Building Permit"
                 action="viewBldgPermit" 
-                index="0" />
-        
-        <invoker type="appActions" 
-                caption="Specify Inspection Schedule"
-                action="specifySchedule" 
-                index="1"
-                visibleWhen="#{
-                    task.state == 'schedule-inspection' 
-                    &amp;&amp; task.assignee.objid == userInfo.userid }" />
+                index="0"/>
 
         <!-- assessment actions -->        
         <invoker type="feeActions" 
@@ -34,9 +26,25 @@
                 index="1"
                 visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
 
+        <invoker type="feeActions" 
+                caption="Preview"
+                action="previewFees" 
+                index="2"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
+       
+                    
+         <invoker type="appActions" 
+                caption="Specify Inspection Schedule"
+                action="specifySchedule" 
+                index="1"
+                visibleWhen="#{
+                    task.state == 'schedule-inspection' 
+                    &amp;&amp; task.assignee.objid == userInfo.userid }" />
+                    
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OccupancyPermitModel" />
+    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyApplicationModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.views.OccupancyPermitPage" />
+        <page template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyApplicationPage" />
     </pages>
 </workunit>
+

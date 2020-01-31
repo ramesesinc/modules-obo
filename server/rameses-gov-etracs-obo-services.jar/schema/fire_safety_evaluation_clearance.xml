@@ -1,16 +1,13 @@
 <schema>
 	<element tablename="fire_safety_evaluation_clearance">
-		<field name="objid" primary="true" prefix="LOCCLR"/>
+		<field name="objid" primary="true" prefix="FSEC"/>
 		<field name="appid"	required="true"/>
-
-		<!-- this is so we can remember where the fees are located -->
-		<field name="sectionid"	required="true"/>
 		<field name="controlno"	/>
-		<field name="dtcreated"	/>
-		<field name="createdby_objid" />
-		<field name="createdby_name" />
-		<field name="state"	/>
+		<field name="dtissued"	/>
+		<field name="issuedby_objid" />
+		<field name="issuedby_name" />
+		<field name="state"	type="integer"/>
 		<field name="remarks"/>
-
+		<field name="expirydate" />
 	</element>
 </schema>

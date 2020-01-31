@@ -66,9 +66,8 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             buildInvokers( list, 'building_application_section' );
         }
         else if(_id == 'occupancy_application_section' ) {
-            def m = [_schemaname: "obo_section" ];
+            def m = [_schemaname: "occupancy_permit_section_type" ];
             m._limit = 100;
-            orgFilter[0] += " AND NOT(occupancypermitstate IS NULL)"
             m.where =  orgFilter;
             m.orderBy = "sortindex";
             def list = querySvc.getList( m );

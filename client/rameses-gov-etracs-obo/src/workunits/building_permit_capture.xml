@@ -1,0 +1,10 @@
+<workunit>
+    <invokers>
+        <invoker type="vw_building_permit:create" caption="Capture Building Permit"
+                action="create" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitCaptureModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitCapturePage" />
+    </pages>
+</workunit>

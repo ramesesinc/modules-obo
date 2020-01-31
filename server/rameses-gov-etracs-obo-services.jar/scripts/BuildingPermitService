@@ -2,6 +2,78 @@ import com.rameses.annotations.*;
 
 class BuildingPermitService {
 	
+	@DataContext("vw_building_permit")
+	def vwPermitEm;
 
+	@DataContext("building_application_entity")
+	def permitEntity;
+
+	@DataContext("building_application_professional")
+	def professionalEm;
+
+	@DataContext("vw_building_application_ancillary")
+	def vwAncillaryEm;
+
+	@DataContext("building_permit_rpu")
+	def rptEm;
+
+
+	//used for occupancy permit
+	@ProxyMethod
+	public def findByPermitNo( def p ) {
+		def perm = vwPermitEm.find( [permitno: p.permitno ] ).first();
+		if(!perm)
+			throw new Exception("Permit "+p.permitno + " does not exist");
+
+		if( p._show_minimal == true ) return perm;	
+
+		perm.entities = permitEntity.find( [appid: perm.appid ] ).list();
+		perm.professionals = professionalEm.find( [appid: perm.appid ]).list();
+
+		//find the professionals 
+		perm.profarchitectid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'ARCHITECTURAL' ] ).first()?.designprofessionalid;
+		perm.profcivilid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'CIVIL_STRUCTURAL' ] ).first()?.designprofessionalid;
+		perm.profelectricalid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'ELECTRICAL' ] ).first()?.designprofessionalid;
+		perm.profmechanicalid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'MECHANICAL' ] ).first()?.designprofessionalid;
+		perm.profsanitaryid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'SANITARY' ] ).first()?.designprofessionalid;
+		perm.profplumbingid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'PLUMBING' ] ).first()?.designprofessionalid;
+		perm.profelectronicid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'ELECTRONIC' ] ).first()?.designprofessionalid;
+
+		return perm;
+	}	
 	
+	
+	@ProxyMethod
+	public void addRPTEntry( def o  ) {
+		def errs = []
+		if(!o.objid && !o.permitno ) errs <<"objid or permitno required";
+		if(!o.tdno ) errs << "tdno required ";
+		if(!o.refid ) errs << "refid required ";
+		if(!o.rputype ) errs << "rputype required ";
+		if(!o.particulars ) errs << "particulars required";
+
+		if( errs ) {
+			throw new Exception( "The ff. parameters are required : \n" + errs.join(",") );
+		}
+
+		def permitid = o.objid;
+		if( !permitid )  {
+			permitid = vwPermitEm.find([permitno: o.permitno]).select("objid").val();
+			if(!permitid) throw new Exception("Permit no not found");
+		}
+
+		//test first if already exists
+		if(!rptEm.find( [permid: permitid, refid: o.refid ]).exists()) {
+			def m = [:];
+			m.permitid = permitid;
+			m.tdno = o.tdno;
+			m.refid = o.refid;
+			m.rputype = o.rputype;
+			m.particulars = o.particulars;
+			rptEm.find( m );
+		}
+	}
+
+
+
 }

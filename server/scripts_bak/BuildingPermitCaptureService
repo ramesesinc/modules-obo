@@ -1,0 +1,64 @@
+import com.rameses.annotations.*;
+
+class BuildingPermitCaptureService {
+	
+
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("building_application_entity")
+	def appEntity;
+
+	@DataContext("building_application")
+	def appEm;
+
+	@DataContext("building_application")
+	def permitEm;
+
+	@ProxyMethod
+	public def create( def app ) {
+		def param = app;
+
+		def dt = dateSvc.getServerDate();
+		//calculate the cost first before receiving
+		def param = [:];
+		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
+		param.occupancytype = [
+			group: app.occupancytype.group.objid,
+			division: app.occupancytype.division.objid,
+			type: app.occupancytype.objid
+		] 
+		app.worktypes = [ app.worktype.objid ];
+		app.fixedcost = costSvc.calc( param );
+		app.txnmode = "CAPTURE";
+		app.appno = app.permitno;
+		app.permittype = "BUILDING PERMIT";
+		app.orgcode = env.ORGCODE;
+		app.occupancytypeid = app.occupancytype.objid;
+		def applicant = app.remove("applicant");
+
+		//save the application
+		app = appEm.create( app );
+
+		//save the applicant entity
+		applicant.profileid = applicant.remove("objid");
+		applicant.appid = app.objid;
+		applicant.resident = ( applicant.address.type == 'local') ? 1 : 0;
+		def vent = appEntity.create( applicant );
+
+		def u = [:];
+		u.applicantid = vent.objid;
+		appEm.find( [objid: app.objid ] ).update( u );
+
+		//save the permit
+		def permit = [:];
+		permit.appid = app.objid;
+		permit.state = 2;
+		permit.permitno = param.permitno;
+		permit.dtissued = param.dtissued;
+
+		return app;
+	}
+
+	
+}

@@ -15,12 +15,14 @@
 <workunit extends="com/rameses/treasury/common/templates/CommonCashReceipt.xml"> 
     <invokers>
         <invoker type="collectiontype:handler" caption="Obo Collection" 
-                 name="building_application" formtype="serial" formno="51"  index="110" />
+                 name="obo" formtype="serial" formno="51"  index="110" />
         
         <!-- collection type --> 
-        <invoker type="cashreceipt:building_application" action="start" caption="Building Permit Collection"/>
-        <invoker type="cashreceipt:barcode:510XX" action="loadBarcode" caption="Building Permit Collection"/>
+        <invoker type="cashreceipt:obo" action="start" caption="OBO Collection"/>
+        <invoker type="cashreceipt:barcode:510XX" action="loadBarcode" caption="OBO Collection"/>
     </invokers>
-    
-    <code class="com.rameses.gov.etracs.obo.models.OboCashReceiptModel"/> 
+    <code class="com.rameses.gov.etracs.obo.models.OboCashReceiptModel"/>
+    <pages>
+        <page name="initial" template="com.rameses.gov.etracs.obo.views.OboCashReceiptInitialPage" />
+    </pages> 
 </workunit>

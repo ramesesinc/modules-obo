@@ -2,24 +2,21 @@ import com.rameses.annotations.*;
 
 class BuildingApplicationAssessmentReportInterceptor {
 	
-	@DataContext("building_application")
-	def appEm;
-
-
-	@DataContext("building_application")
+	@DataContext("vw_building_application")
 	def appEm;
 
 	@DataContext("building_application_fee")
 	def feeEm;
 
 	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid == 'building_application_assessment' }")
-	public void getOboApplicationAssessmentReport( def evt ) {
+	public void getBuildingApplicationAssessmentReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def objid = p.parameters.id;
 		if(!objid) throw new Exception("id is required in requirement checklist report")
 
 		def data = appEm.find( [objid: objid ]).first();
+
 		data.permittype =  "BUILDING PERMIT" ;
 
 		def list = feeEm.find( [appid: objid ] ).list();
@@ -28,7 +25,7 @@ class BuildingApplicationAssessmentReportInterceptor {
 		grps.zoning = [name:'Locational Clearance/Zoning Fees', items: []];
 		grps.bldg = [name:'Building Permit Fees', items: []];
 		grps.fire = [name:'Fire Safety Evaluation Fees', items: [] ];
-		grps.rpt = [name:'', items: [] ];
+		grps.rpt = [name:'Other Fees', items: [] ];
 
 		list.each {
 			def m = [:];

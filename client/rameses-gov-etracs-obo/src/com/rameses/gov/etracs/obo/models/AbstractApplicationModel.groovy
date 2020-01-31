@@ -51,10 +51,10 @@ abstract class AbstractApplicationModel extends WorkflowTaskModel {
         },
         "sectionView" : { o->
             if(o == "open") {
-                sectionQry.where = sectionQry._filter +  " AND task.state NOT IN ('obo-processing', 'end') ";
+                sectionQry.where = sectionQry._filter +  " AND task.state NOT IN ('end') ";
             }
             else if(o == "closed") {
-                sectionQry.where = sectionQry._filter +  " AND task.state IN ('obo-processing', 'end') ";
+                sectionQry.where = sectionQry._filter +  " AND task.state IN ('end') ";
             }            
             else {
                 sectionQry.where = sectionQry._filter;                
@@ -126,6 +126,11 @@ abstract class AbstractApplicationModel extends WorkflowTaskModel {
         def u = feeService.clearFees( [appid: entity.objid ] );
         entity.amount = u.amount;
         feeListHandler.reload();
+    }
+    
+    def previewFees() {
+        def m = [entity:[objid: entity.objid ]];
+        return Inv.lookupOpener(getPermitName() + "_assessment:preview", m );        
     }
     
     /***************

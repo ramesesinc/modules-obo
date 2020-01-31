@@ -2,8 +2,6 @@ DROP VIEW IF EXISTS vw_building_application;
 CREATE VIEW vw_building_application AS 
 SELECT 
    a.*,
-   e.name AS applicant_name,
-   e.objid AS applicant_objid,
    bt.objid AS occupancytype_objid,
    bt.title AS occupancytype_title,   
    od.objid AS occupancytype_division_objid,
@@ -39,7 +37,6 @@ SELECT
    pmt.dtissued AS permit_dtissued
 
 FROM building_application a 
-INNER JOIN building_application_entity e ON a.applicantid = e.objid
 INNER JOIN building_application_task t ON a.taskid = t.taskid
 INNER JOIN obo_occupancy_type bt ON a.occupancytypeid = bt.objid
 INNER JOIN obo_occupancy_type_division od ON bt.divisionid = od.objid

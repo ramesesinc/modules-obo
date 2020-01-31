@@ -108,10 +108,12 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         jPanel8 = new javax.swing.JPanel();
         xFormPanel6 = new com.rameses.rcp.control.XFormPanel();
         xDecimalField6 = new com.rameses.rcp.control.XDecimalField();
-        jPanel10 = new javax.swing.JPanel();
         schemaList11 = new com.rameses.seti2.components.SchemaList();
+        xPanel1 = new com.rameses.rcp.control.XPanel();
+        xDataTable1 = new com.rameses.rcp.control.XDataTable();
+        xPanel4 = new com.rameses.rcp.control.XPanel();
 
-        setPreferredSize(new java.awt.Dimension(1200, 620));
+        setPreferredSize(new java.awt.Dimension(800, 620));
         setLayout(new java.awt.BorderLayout());
 
         xActionBar2.setFormName("formName");
@@ -127,6 +129,8 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 10, 10, 10));
         jPanel1.setName("sections"); // NOI18N
         jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setPreferredSize(new java.awt.Dimension(800, 494));
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder1.setPadding(new java.awt.Insets(20, 10, 10, 10));
@@ -341,8 +345,8 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
                 .addGap(16, 16, 16)
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(385, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -642,7 +646,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
                 .addComponent(xRadio5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xRadio6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 1101, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1125,21 +1129,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         xPanel7.add(jPanel8, java.awt.BorderLayout.SOUTH);
 
-        jPanel10.setPreferredSize(new java.awt.Dimension(200, 0));
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 200, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        xPanel7.add(jPanel10, java.awt.BorderLayout.LINE_END);
-
         schemaList11.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "item.title"}
@@ -1229,6 +1218,63 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         xTabbedPane1.addTab("Assessment", xPanel7);
 
+        xPanel1.setVisibleWhen("#{ task?.state.matches('end|releasing') }");
+        xPanel1.setLayout(new java.awt.BorderLayout());
+
+        xDataTable1.setItems("entity.references");
+        xDataTable1.setColumns(new com.rameses.rcp.common.Column[]{
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "title"}
+                , new Object[]{"caption", "Title"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", null}
+                , new Object[]{"caption", "Ref No"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 100}
+                , new Object[]{"maxWidth", 100}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"expression", "#{ item.state != 1 ? item.refno : '' }"}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.LabelColumnHandler()}
+            })
+        });
+        xDataTable1.setPreferredSize(new java.awt.Dimension(0, 80));
+        xPanel1.add(xDataTable1, java.awt.BorderLayout.CENTER);
+
+        xPanel4.setPreferredSize(new java.awt.Dimension(80, 40));
+
+        javax.swing.GroupLayout xPanel4Layout = new javax.swing.GroupLayout(xPanel4);
+        xPanel4.setLayout(xPanel4Layout);
+        xPanel4Layout.setHorizontalGroup(
+            xPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1644, Short.MAX_VALUE)
+        );
+        xPanel4Layout.setVerticalGroup(
+            xPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        xPanel1.add(xPanel4, java.awt.BorderLayout.PAGE_START);
+
+        xTabbedPane1.addTab("References", xPanel1);
+
         add(xTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1238,7 +1284,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
@@ -1262,6 +1307,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.seti2.components.SchemaList schemaList9;
     private com.rameses.rcp.control.XActionBar xActionBar2;
     private com.rameses.rcp.control.XActionBar xActionBar3;
+    private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XDecimalField xDecimalField1;
     private com.rameses.rcp.control.XDecimalField xDecimalField2;
     private com.rameses.rcp.control.XDecimalField xDecimalField4;
@@ -1302,8 +1348,10 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XLabel xLabel9;
+    private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel2;
     private com.rameses.rcp.control.XPanel xPanel3;
+    private com.rameses.rcp.control.XPanel xPanel4;
     private com.rameses.rcp.control.XPanel xPanel6;
     private com.rameses.rcp.control.XPanel xPanel7;
     private com.rameses.rcp.control.XRadio xRadio1;

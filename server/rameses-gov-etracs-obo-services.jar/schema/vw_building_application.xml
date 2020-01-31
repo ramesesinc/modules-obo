@@ -3,9 +3,7 @@
 		<field name="objid" primary="true"/>
 		<field name="appno" searchable="true" indexed="true"/>
 
-		<field name="applicant_name" searchable="true"/>
-
-		<complex name="applicant" ref="building_application_entity" jointype="many-to-one" required="false">
+		<complex name="applicant" ref="building_application_entity" jointype="many-to-one">
 			<key field="applicantid" target="objid" />
 		</complex>
 
@@ -63,10 +61,6 @@
 		<field name="contractorid" />
 		<field name="txnmode" />
 		
-		<field name="permit_permitno" searchable="true" indexed="true"/>
-		<field name="permit_dtissued" />
-		<field name="permit_expirydate" />
-
 		<complex name="contractor" ref="vw_building_application_professional" jointype="many-to-one" required="false" includefields="name,prc.*">
 			<key field="contractorid" target="objid" />
 		</complex> 

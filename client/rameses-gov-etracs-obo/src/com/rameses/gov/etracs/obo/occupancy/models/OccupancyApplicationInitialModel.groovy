@@ -14,7 +14,7 @@ import com.rameses.io.*;
 
 class OccupancyApplicationInitialModel  {
 
-    @Service("OccupancyPermitOnlineService")
+    @Service("OccupancyApplicationInitialService")
     def svc;
     
     def trackingno;
@@ -24,7 +24,7 @@ class OccupancyApplicationInitialModel  {
     String title = "New Occupancy Permit (Initial)";
     
     def create() {
-        return "initial";        
+        return "initial";
     }
     
     def next() {
@@ -40,10 +40,15 @@ class OccupancyApplicationInitialModel  {
         if(!MsgBox.confirm("You are about to upload this application. Proceed?")) {
             return null;
         };
-        v = svc.upload( v );
+        
+        v = svc.create( v );
         def entity = [objid: v.objid ];
-        return Inv.lookupOpener("vw_occupancy_application:open", [entity:entity] );       
+        def op = Inv.lookupOpener("vw_occupancy_application:open", [entity:entity] );  
+        op.target = "topwindow";
+        return op;
     }
+    
+    
     
     
     
