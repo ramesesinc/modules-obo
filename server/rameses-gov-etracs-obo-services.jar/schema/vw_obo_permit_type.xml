@@ -8,7 +8,5 @@
 		<field name="org_objid" />
 		<field name="org_name" />
 		<field name="type" />	
-		<field name="buildingpermitstate" />
-		<field name="occupancypermitstate" />
 	</element>
 </schema>

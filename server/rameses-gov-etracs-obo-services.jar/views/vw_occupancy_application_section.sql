@@ -19,5 +19,5 @@ SELECT
 
 FROM occupancy_application_section a 
 INNER JOIN occupancy_application_section_task t ON a.taskid = t.taskid
-INNER JOIN obo_section et ON a.typeid = et.objid
+INNER JOIN occupancy_permit_section_type et ON a.typeid = et.objid
 INNER JOIN vw_occupancy_application app ON a.appid = app.objid

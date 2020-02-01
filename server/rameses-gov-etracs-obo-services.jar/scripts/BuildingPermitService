@@ -46,7 +46,7 @@ class BuildingPermitService {
 	@ProxyMethod
 	public void addRPTEntry( def o  ) {
 		def errs = []
-		if(!o.objid && !o.permitno ) errs <<"objid or permitno required";
+		if(!o.permitno ) errs << "permitno required";
 		if(!o.tdno ) errs << "tdno required ";
 		if(!o.refid ) errs << "refid required ";
 		if(!o.rputype ) errs << "rputype required ";
@@ -56,11 +56,10 @@ class BuildingPermitService {
 			throw new Exception( "The ff. parameters are required : \n" + errs.join(",") );
 		}
 
-		def permitid = o.objid;
-		if( !permitid )  {
-			permitid = vwPermitEm.find([permitno: o.permitno]).select("objid").val();
-			if(!permitid) throw new Exception("Permit no not found");
-		}
+		def pmt = vwPermitEm.find([permitno: o.permitno]).select("objid").first();
+		if(!pmt) throw new Exception("permit not found ");
+
+		def permitid = pmt.objid;
 
 		//test first if already exists
 		if(!rptEm.find( [permid: permitid, refid: o.refid ]).exists()) {
@@ -70,7 +69,8 @@ class BuildingPermitService {
 			m.refid = o.refid;
 			m.rputype = o.rputype;
 			m.particulars = o.particulars;
-			rptEm.find( m );
+			m.pin = o.pin;
+			rptEm.create( m );
 		}
 	}
 

@@ -15,6 +15,9 @@ class OccupancyApplicationClaimStubReportInterceptor {
 		def id = p.parameters.objid;
 
 		def ea = appEm.find( [objid: id ] ).first();
+		ea.location = ea.bldgpermit.location;
+		ea.title = ea.bldgpermit.title;
+
 
 		def r = taskEm.find( [refid: id, state: 'receiving'] ).orderBy("startdate DESC").first();
 		if( r ) {
