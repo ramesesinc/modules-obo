@@ -61,17 +61,17 @@ class OboApplicationRequirementModel {
         if( task.state == 'requirement-verification' ) {
             //if current task assignee
             if( task.assignee.objid == user.userid ) {
-                if( entity.transmittalid !=null ) {
-                    overridable = true;
-                }
-                else if( entity.reviewer.objid != user.userid ) {
-                    overridable = true;
-                }
-                else if( entity.reviewer?.objid == null  ) {
+                if( !entity.reviewer?.objid  ) {
                     editable = true;
+                }
+                else if( entity.transmittalid ) {
+                    overridable = true;
                 }
                 else if( entity.reviewer.objid == user.userid ) {
-                    editable = true;
+                     editable = true;
+                }
+                else {
+                    overridable = true;
                 }
             }
         }

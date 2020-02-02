@@ -1,0 +1,10 @@
+<workunit extends="com/rameses/gov/etracs/obo/templates/OboApplicationFinding.xml" schemaName="building_evaluation_finding">
+    <invokers>
+        <invoker type="building_evaluation_finding:create" action="create"
+                 caption="Building Finding" target="popup"/>        
+
+        <invoker type="building_evaluation_finding:open" action="open"
+                 caption="Building Finding" target="popup"/>        
+        
+    </invokers>             
+</workunit>

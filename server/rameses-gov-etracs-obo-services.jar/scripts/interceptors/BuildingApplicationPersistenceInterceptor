@@ -8,7 +8,7 @@ class BuildingApplicationPersistenceInterceptor {
 	@DataContext("building_application_requirement")
 	def reqEm;
 
-	@DataContext("building_application_finding")
+	@DataContext("building_evaluation_finding")
 	def findingEm;
 
 	@DataContext("building_application_transmittal")
@@ -41,14 +41,14 @@ class BuildingApplicationPersistenceInterceptor {
 	} 
 
 	//FINDINGS
-	@Before(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'building_application_finding' }") 
+	@Before(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'building_evaluation_finding' }") 
 	public void beforeSaveFinding( def evt ) {
 		def o = evt.args[0];
 		o.createdby = [objid: env.USERID, name: env.FULLNAME ];
 		o.dtcreated = dateSvc.getServerDate();
 	} 
 
-	@After(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'building_application_finding' }") 
+	@After(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'building_evaluation_finding' }") 
 	public void afterUpdateFinding( def evt ) {
 		def o = evt.args[0];
 		def z = evt.result;
@@ -77,7 +77,7 @@ class BuildingApplicationPersistenceInterceptor {
 		}
 	}
 
-	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_building_application_section' }")
+	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_building_evaluation' }")
 	public void afterOpenApplicationSection(def evt) {
 		def p = evt.args[0];
 		def a = evt.result;

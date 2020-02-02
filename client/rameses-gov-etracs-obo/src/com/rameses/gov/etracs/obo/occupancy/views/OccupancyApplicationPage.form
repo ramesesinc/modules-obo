@@ -1192,7 +1192,7 @@
                 <Property name="queryName" type="java.lang.String" value="sectionQry"/>
                 <Property name="rowHeight" type="int" value="20"/>
                 <Property name="rows" type="int" value="50"/>
-                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_application_section"/>
+                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_inspection"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

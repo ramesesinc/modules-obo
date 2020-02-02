@@ -39,7 +39,7 @@ class BFPBuildingApplicationPersistenceInterceptor {
 		}
 	}
 
-	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_building_application_section' && result.typeid == 'FSEC' }")
+	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_building_evaluation' && result.typeid == 'FSEC' }")
 	public void afterOpenApplicationSection(def evt) {
 		def p = evt.args[0];
 		def result = evt.result;

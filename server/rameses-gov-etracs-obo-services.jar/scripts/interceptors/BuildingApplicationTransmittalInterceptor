@@ -11,7 +11,7 @@ class BuildingApplicationTransmittalInterceptor {
 	@DataContext("building_application_requirement")
 	def reqEm;
 
-	@DataContext("building_application_finding")
+	@DataContext("building_evaluation_finding")
 	def findingEm;
 
 	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid == 'building_application_transmittal' }")

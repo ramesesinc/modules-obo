@@ -1,0 +1,10 @@
+<workunit>
+    <invokers>
+        <invoker type="occupancy_application:assessment" caption="View Assessment"  target="popup" action="execute"/>
+        <invoker type="occupancy_evaluation:assessment" caption="View Assessment"  target="popup" action="execute"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyAssessmentModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.ViewAssessmentPage" />
+    </pages>
+</workunit>

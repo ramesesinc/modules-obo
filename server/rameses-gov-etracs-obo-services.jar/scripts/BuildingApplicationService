@@ -22,6 +22,7 @@ class BuildingApplicationService {
 		if(!o.appid) throw new Exception("Please specify an appid in OboApplicationService.accept");
 		def appid = o.appid;
 
+
 		def pattern = sysvar.get( "building_application_appno" );
 		if(!pattern) throw new Exception("Please define building_application_appno entry in sys_var. Ex. BP-[yyyyMM]-[%05d]");
 

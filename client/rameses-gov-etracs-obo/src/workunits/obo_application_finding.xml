@@ -1,10 +1,10 @@
 <workunit>
     <invokers>
         <!-- INVOKERS -->
-        <invoker type="building_application_finding:create" caption="Building Permit Finding"
+        <invoker type="building_evaluation_finding:create" caption="Building Permit Finding"
                 action="create" index="1" target="popup" schemaname="building_application" />
         
-        <invoker type="building_application_finding:open" caption="Building Permit Finding"
+        <invoker type="building_evaluation_finding:open" caption="Building Permit Finding"
                 action="open" index="1" target="popup" schemaname="building_application"/>
         
         <invoker type="occupancy_application_finding:create" caption="Occupancy Permit Finding"

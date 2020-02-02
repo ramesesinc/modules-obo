@@ -3,7 +3,7 @@
           allowDelete="false" allowNotify="false">
     <invokers>
         <invoker folderid="menucategory/obo/building" caption="View Building Application List"
-             cols="appno,appdate,applicant.name,title,projectcost,task.state,task.assignee.name,permitno"
+             cols="appno,appdate,trackingno,applicant.name,title,projectcost,task.state,task.assignee.name,permitno"
                 action="init" index="10"  notificationid="building_application" event="building_application"/>
     </invokers>
 </workunit>

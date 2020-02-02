@@ -12,7 +12,7 @@ class BuildingApplicationTransmittalService {
 	@DataContext("building_application_requirement")
 	def reqEm;
 
-	@DataContext("building_application_finding")
+	@DataContext("building_evaluation_finding")
 	def findingEm;
 
 	@DataContext("building_application_transmittal")

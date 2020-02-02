@@ -1,0 +1,22 @@
+<schema>
+	<element tablename="building_evaluation_type">
+		<field name="objid" primary="true"/>
+		<field name="title" />
+		<field name="type" />
+		<field name="org_objid" />
+		<field name="org_name" />
+		<field name="sortindex" />
+		<field name="required" />
+		<field name="role" />
+		<field name="activationstate" />
+		<field name="optional" />
+		<field name="requirefee" />
+		<field name="permitid" />
+
+		<complex name="permit" ref="obo_permit_type" jointype="many-to-one" required="false">
+			<key field="permitid" target="objid" />
+		</complex>	
+
+	</element>
+</schema>	
+

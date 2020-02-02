@@ -1,0 +1,8 @@
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="vw_building_evaluation_itemaccount">
+    <invokers>
+        <invoker type="building_evaluation_itemaccount:lookup" caption="Lookup Evaluation Fees" 
+                 action="init" index="15"
+                 customFilter="typeid = :typeid"
+            cols="objid,title"/>
+    </invokers>
+</workunit>

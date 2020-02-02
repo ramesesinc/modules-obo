@@ -11,7 +11,7 @@ class OccupancyApplicationTransmittalInterceptor {
 	@DataContext("occupancy_application_requirement")
 	def reqEm;
 
-	@DataContext("occupancy_application_finding")
+	@DataContext("occupancy_inspection_finding")
 	def findingEm;
 
 	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid == 'occupancy_application_transmittal' }")

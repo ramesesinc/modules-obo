@@ -17,16 +17,16 @@ class BuildingApplicationWorkflowInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-	@DataContext("building_application_section")
+	@DataContext("building_evaluation")
 	def sectionEm;
 
-	@DataContext("vw_building_application_section")
+	@DataContext("vw_building_evaluation")
 	def vwSectionEm;
 
 	@DataContext("vw_building_application_ancillary")
 	def vwAncillaryEm;
 
-	@DataContext("building_permit_section_type")
+	@DataContext("building_evaluation_type")
 	def sectionTypeEm;
 
 	@DataContext("building_application")
@@ -38,7 +38,7 @@ class BuildingApplicationWorkflowInterceptor {
 	@DataContext("building_application_requirement")
 	def reqEm;
 
-	@DataContext("building_application_finding")
+	@DataContext("building_evaluation_finding")
 	def findingEm;
 
 	@DataContext("building_application_fee")
@@ -124,7 +124,7 @@ class BuildingApplicationWorkflowInterceptor {
 				if(!b) {
 					m = sectionEm.create( m );
 					def f = [:];
-					f.processname = 'building_application_section';
+					f.processname = 'building_evaluation';
 					f.refid = m.objid;
 					f.startdate = dt;
 					f.info = [ type: it ];
@@ -143,7 +143,7 @@ class BuildingApplicationWorkflowInterceptor {
 			def dt = dateSvc.getServerDate();
 			list.each {
 				def f = [:];
-				f.processname = 'building_application_section';
+				f.processname = 'building_evaluation';
 				f.refid = it.objid;
 				f.taskid = it.taskid;
 				f.startdate = dt;

@@ -911,10 +911,10 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         schemaList10.setQueryName("sectionQry");
         schemaList10.setRowHeight(20);
         schemaList10.setRows(50);
-        schemaList10.setSchemaName("vw_building_application_section");
+        schemaList10.setSchemaName("vw_building_evaluation");
         xPanel3.add(schemaList10, java.awt.BorderLayout.CENTER);
 
-        xTabbedPane1.addTab("Sections", xPanel3);
+        xTabbedPane1.addTab("Evaluations", xPanel3);
 
         xPanel6.setVisibleWhen("#{ task.idx >= 5 }");
         xPanel6.setLayout(new java.awt.BorderLayout());
@@ -1002,7 +1002,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         schemaList3.setHandlerName("findingListHandler");
         schemaList3.setQueryName("findingQry");
         schemaList3.setRowHeight(20);
-        schemaList3.setSchemaName("building_application_finding");
+        schemaList3.setSchemaName("building_evaluation_finding");
         jPanel13.add(schemaList3, java.awt.BorderLayout.CENTER);
 
         xTabbedPane4.addTab("Items", jPanel13);
@@ -1055,7 +1055,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
             })
         });
         schemaList12.setCustomFilter("appid = :objid AND type = 'finding' ");
-        schemaList12.setEntityName("building_application_finding_transmittal");
+        schemaList12.setEntityName("building_evaluation_finding_transmittal");
         schemaList12.setOrderBy("dtcreated DESC");
         schemaList12.setQueryName("entity");
         schemaList12.setRowHeight(20);

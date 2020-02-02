@@ -5,8 +5,6 @@
 		<field name="sortorder" />
 		<field name="handler" />		
 		<field name="sectionid" />
-		<field name="org_objid" />
-		<field name="org_name" />
 		<field name="type" />	
 	</element>
 </schema>

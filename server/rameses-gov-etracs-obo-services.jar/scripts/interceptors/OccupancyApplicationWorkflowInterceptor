@@ -10,13 +10,13 @@ class OccupancyApplicationWorkflowInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-	@DataContext("occupancy_application_section")
+	@DataContext("occupancy_inspection")
 	def sectionEm;
 
-	@DataContext("vw_occupancy_application_section")
+	@DataContext("vw_occupancy_inspection")
 	def vwSectionEm;
 
-	@DataContext("occupancy_permit_section_type")
+	@DataContext("occupancy_inspection_type")
 	def sectionTypeEm;
 
 	@DataContext("occupancy_application")
@@ -28,7 +28,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	@DataContext("occupancy_application_requirement")
 	def reqEm;
 
-	@DataContext("occupancy_application_finding")
+	@DataContext("occupancy_inspection_finding")
 	def findingEm;
 
 	@DataContext("occupancy_application_fee")
@@ -103,7 +103,7 @@ class OccupancyApplicationWorkflowInterceptor {
 				if(!b) {
 					m = sectionEm.create( m );
 					def f = [:];
-					f.processname = 'occupancy_application_section';
+					f.processname = 'occupancy_inspection';
 					f.refid = m.objid;
 					f.startdate = dt;
 					f.info = [ type: it ];
@@ -122,7 +122,7 @@ class OccupancyApplicationWorkflowInterceptor {
 			def dt = dateSvc.getServerDate();
 			list.each {
 				def f = [:];
-				f.processname = 'occupancy_application_section';
+				f.processname = 'occupancy_inspection';
 				f.refid = it.objid;
 				f.taskid = it.taskid;
 				f.startdate = dt;

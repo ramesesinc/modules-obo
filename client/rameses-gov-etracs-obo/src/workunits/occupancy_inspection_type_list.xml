@@ -1,0 +1,7 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="occupancy_inspection_type">
+    <invokers>
+        <invoker folderid="/explorer/master/obo" caption="Occupancy Inspection Types" action="init"
+                 cols="objid,title"
+                 role="MASTER" />
+    </invokers>
+</workunit>

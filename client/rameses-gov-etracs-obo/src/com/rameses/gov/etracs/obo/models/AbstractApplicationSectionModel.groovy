@@ -15,9 +15,9 @@ abstract class AbstractApplicationSectionModel extends WorkflowTaskModel {
     def findingListHandler;
     def feeListHandler;
     
-    public abstract String getPermitName();
     public abstract String getCaption();
     public abstract String getPrefix();
+    public abstract def viewApplication();
     
     String getFormName() {
         return getSchemaName() + ":form";
@@ -36,14 +36,9 @@ abstract class AbstractApplicationSectionModel extends WorkflowTaskModel {
         return entity.objid;
     }
     
-    def viewApplication() {
-        String s = "vw_" + getPermitName() + ":open"; 
-        def op = Inv.lookupOpener(s, [entity: [objid: entity.appid ] ] );
-        op.target = "popup";
-        return op;
-    }
+   
     
-    def assess() {
+    def assess(String openerName) {
         def f = [:];
         f.appid = entity.app.objid;
         f.sectionid = entity.typeid;
@@ -51,18 +46,18 @@ abstract class AbstractApplicationSectionModel extends WorkflowTaskModel {
         def h  = { u->
             feeListHandler.reload();
         }
-        return Inv.lookupOpener(getPermitName() + ":assessment", [params: f, handler: h] );
+        return Inv.lookupOpener(openerName, [params: f, handler: h] );
     }
     
-    def addFee() {
+    def addFee(String openerName) {
         def m = [appid: entity.appid, typeid: entity.typeid ];
         m.handler = { o->
             feeListHandler.reload();
         }
-        return Inv.lookupOpener(getPermitName() + "_fee:create", m );
+        return Inv.lookupOpener(openerName + ":create", m );
     }
     
-    def addFinding() {
+    def addFinding(String openerName) {
         def m = [:];
         m.sectionid = entity.objid;
         m.appid = entity.appid;
@@ -70,7 +65,7 @@ abstract class AbstractApplicationSectionModel extends WorkflowTaskModel {
         m.handler = { o->
             findingListHandler.reload();
         }
-        return Inv.lookupOpener(getPermitName() + "_finding:create", m );
+        return Inv.lookupOpener(openerName + ":create", m );
     }
     
     /*

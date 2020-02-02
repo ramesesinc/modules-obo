@@ -2,10 +2,10 @@ import com.rameses.annotations.*;
 
 class BuildingApplicationSectionWorkflowInterceptor {
 	
-	@DataContext("building_application_finding")
+	@DataContext("building_evaluation_finding")
 	def findingEm;
 
-	@DataContext("vw_building_application_section")
+	@DataContext("vw_building_evaluation")
 	def sectionEm;
 
 	@DataContext("building_application_fee")
@@ -20,7 +20,7 @@ class BuildingApplicationSectionWorkflowInterceptor {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application_section' && args[0].action == 'send-for-revision' }" ) 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action == 'send-for-revision' }" ) 
 	public void doActionBeforeRevision( def evt ) {
 		def p = evt.args[0];
 		def c = findingEm.find([parentid: p.refid]).where("state = 2 AND supersederid IS NULL").select("c:{COUNT(*)}").val();
@@ -28,7 +28,7 @@ class BuildingApplicationSectionWorkflowInterceptor {
 	}
 
 
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application_section' && args[0].action == 'approve' }" ) 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action == 'approve' }" ) 
 	public void doActionBeforeApprove( def evt ) {
 		def p = evt.args[0];
 		def c = findingEm.find([parentid: p.refid]).where("state = 2 AND supersederid IS NULL").select("c:{COUNT(*)}").val();
@@ -46,7 +46,7 @@ class BuildingApplicationSectionWorkflowInterceptor {
 
 
 	//release process. Ensure that all tasks are closed before firing main
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application_section' && args[0].action.matches('send-for-revision|approve') }" ) 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action.matches('send-for-revision|approve') }" ) 
 	public void doActioAfterApproveOrRevise( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;

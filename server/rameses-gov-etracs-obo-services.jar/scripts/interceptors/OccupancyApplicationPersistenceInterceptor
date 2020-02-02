@@ -8,7 +8,7 @@ class OccupancyApplicationPersistenceInterceptor {
 	@DataContext("occupancy_application_requirement")
 	def reqEm;
 
-	@DataContext("occupancy_application_finding")
+	@DataContext("occupancy_inspection_finding")
 	def findingEm;
 
 	@DataContext("occupancy_application_transmittal")
@@ -35,14 +35,14 @@ class OccupancyApplicationPersistenceInterceptor {
 	} 
 
 	//FINDINGS
-	@Before(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'occupancy_application_finding' }") 
+	@Before(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'occupancy_inspection_finding' }") 
 	public void beforeSaveFinding( def evt ) {
 		def o = evt.args[0];
 		o.createdby = [objid: env.USERID, name: env.FULLNAME ];
 		o.dtcreated = dateSvc.getServerDate();
 	} 
 
-	@After(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'occupancy_application_finding' }") 
+	@After(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'occupancy_inspection_finding' }") 
 	public void afterUpdateFinding( def evt ) {
 		def o = evt.args[0];
 		def z = evt.result;

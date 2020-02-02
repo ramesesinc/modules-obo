@@ -856,7 +856,7 @@ public class OccupancyApplicationPage extends javax.swing.JPanel {
         schemaList10.setQueryName("sectionQry");
         schemaList10.setRowHeight(20);
         schemaList10.setRows(50);
-        schemaList10.setSchemaName("vw_occupancy_application_section");
+        schemaList10.setSchemaName("vw_occupancy_inspection");
         xPanel3.add(schemaList10, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Sections", xPanel3);

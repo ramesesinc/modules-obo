@@ -1,0 +1,10 @@
+<workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
+          processName="occupancy_inspection" schemaName="vw_occupancy_inspection"
+          allowDelete="false" allowNotify="false">
+    <invokers>
+        <invoker type="occupancy_inspection:list" caption="View Section List"
+             cols="app.appno,app.applicant.name,app.title,app.occupancytype.title,task.assignee"
+                action="init" index="-1" srole="SHARED"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationSectionListModel" />
+</workunit>

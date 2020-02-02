@@ -19,9 +19,9 @@
         <folder id="obo" caption="OBO">
             <folder id="application" caption="Application" index="0" icon="home/icons/folder.png"/>
             <folder id="building" caption="Building Permit" index="0" icon="home/icons/folder.png"/>
-            <folder id="building_application_section" caption="Building Permit (For Evaluation)" index="0" icon="home/icons/folder.png"/>
+            <folder id="building_evaluation" caption="Building Permit (For Evaluation)" index="0" icon="home/icons/folder.png"/>
             <folder id="occupancy" caption="Occupancy Permit" index="1" icon="home/icons/folder.png"/>
-            <folder id="occupancy_application_section" caption="Occupancy Permit (For Inspection)" index="1" icon="home/icons/folder.png"/>
+            <folder id="occupancy_inspection" caption="Occupancy Permit (For Inspection)" index="1" icon="home/icons/folder.png"/>
             <folder id="master" caption="Master Files" index="5" icon="home/icons/master.png"/>
             <folder id="tools" caption="Tools" index="7" />
         </folder>

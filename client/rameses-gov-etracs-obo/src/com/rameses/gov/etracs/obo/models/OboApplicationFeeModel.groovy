@@ -16,14 +16,17 @@ class OboApplicationFeeModel extends CrudFormModel {
     def parentid;
     def typeid;
     def handler;
+    def source;
     
     def open( inv ) {
         schemaName = inv.properties.schemaName;
+        source = inv.properties.source;
         return super.open();
     }
     
     def create( inv ) {
         schemaName = inv.properties.schemaName;
+        source = inv.properties.source;
         return super.create();
     }
 
@@ -34,8 +37,8 @@ class OboApplicationFeeModel extends CrudFormModel {
     }
     
     def getLookupAccount() {
-        def m = ["query.sectionid": typeid ];
-        return Inv.lookupOpener( "obo_itemaccount:type:lookup", m );
+        def m = ["query.typeid": typeid ];
+        return Inv.lookupOpener(source + ":lookup", m );
     }
     
     void afterSave() {

@@ -57,11 +57,11 @@ class OboApplicationFindingModel {
             if( entity.transmittalid !=null ) {
                 overridable = true;
             }
-            else if( entity.createdby.objid != user.userid ) {
-                overridable = true;
-            }
             else if( entity.createdby?.objid == null  ) {
                 editable = true;
+            }            
+            else if( entity.createdby.objid != user.userid ) {
+                overridable = true;
             }
             else if( entity.createdby.objid == user.userid ) {
                 editable = true;

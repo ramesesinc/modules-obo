@@ -57,21 +57,21 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             }
         }
         
-        if(_id == 'building_application_section' ) {
-            def m = [_schemaname: "building_permit_section_type" ];
+        if(_id == 'building_evaluation' ) {
+            def m = [_schemaname: "building_evaluation_type" ];
             m._limit = 100;
             m.where =  orgFilter;
             m.orderBy = "sortindex";
             def list = querySvc.getList( m );
-            buildInvokers( list, 'building_application_section' );
+            buildInvokers( list, 'building_evaluation' );
         }
-        else if(_id == 'occupancy_application_section' ) {
-            def m = [_schemaname: "occupancy_permit_section_type" ];
+        else if(_id == 'occupancy_inspection' ) {
+            def m = [_schemaname: "occupancy_inspection_type" ];
             m._limit = 100;
             m.where =  orgFilter;
             m.orderBy = "sortindex";
             def list = querySvc.getList( m );
-            buildInvokers( list, 'occupancy_application_section' );
+            buildInvokers( list, 'occupancy_inspection' );
         }        
        
     }

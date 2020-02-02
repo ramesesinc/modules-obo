@@ -12,7 +12,7 @@ class OccupancyApplicationTransmittalService {
 	@DataContext("occupancy_application_requirement")
 	def reqEm;
 
-	@DataContext("occupancy_application_finding")
+	@DataContext("occupancy_inspection_finding")
 	def findingEm;
 
 	@DataContext("occupancy_application_transmittal")
