@@ -10,7 +10,6 @@
 		<field name="item_objid"/>
 		<field name="item_title"/>
 		<field name="item_sortorder"/>
-		<field name="org_objid"/>
 		<field name="payment_type"/>
 		<field name="payment_refno"/>
 		<field name="payment_refid"/>

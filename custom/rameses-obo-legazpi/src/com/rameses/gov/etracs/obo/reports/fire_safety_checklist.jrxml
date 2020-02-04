@@ -3704,7 +3704,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<reportElement
 						x="115"
 						y="193"
-						width="58"
+						width="261"
 						height="12"
 						key="textField"/>
 					<box>					<bottomPen lineWidth="1.0"/>
@@ -3712,21 +3712,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="7"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.lotno}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="175"
-						y="193"
-						width="64"
-						height="12"
-						key="textField"/>
-					<box>					<bottomPen lineWidth="1.0"/>
-</box>
-					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="7"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.blkno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
 				</textField>
 				<rectangle>
 					<reportElement
@@ -3976,20 +3962,6 @@ Other Spaces;  Class ________________ ]]></text>
 						<font fontName="Arial" size="6"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc20_0}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="237"
-						y="193"
-						width="100"
-						height="12"
-						key="textField"/>
-					<box>					<bottomPen lineWidth="1.0"/>
-</box>
-					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="7"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.barangay.name}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -8192,9 +8164,9 @@ Other Spaces;  Class ________________ ]]></text>
 				</image>
 				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="311"
-						y="691"
-						width="162"
+						x="305"
+						y="687"
+						width="173"
 						height="74"
 						key="image-89"/>
 					<box></box>
@@ -8205,10 +8177,10 @@ Other Spaces;  Class ________________ ]]></text>
 				</image>
 				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="311"
-						y="807"
-						width="162"
-						height="81"
+						x="292"
+						y="798"
+						width="181"
+						height="90"
 						key="image-90"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch">

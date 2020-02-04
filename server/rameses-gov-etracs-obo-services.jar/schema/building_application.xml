@@ -46,8 +46,7 @@
 
 		<complex name="worktypes" type="list" serializer="default" required="false"/>
 
-		<field name="amount" type="decimal"/>
-		<field name="txnmode" />
+ 		<field name="txnmode" />
 
 		<!-- this is used if the building permit applied is for accessory or type J -->
 		<field name="accessoryid" />

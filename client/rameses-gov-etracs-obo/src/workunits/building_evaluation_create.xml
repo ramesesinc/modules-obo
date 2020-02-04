@@ -1,0 +1,10 @@
+<workunit schemaName="vw_building_application">
+    <invokers>
+        <invoker type="vw_building_evaluation:create" caption="New Building Evaluation" 
+                 action="create" index="1" target="popup"/>
+    </invokers>    
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingEvaluationCreateModel" />    
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.SelectApplicationPage" />
+    </pages>
+</workunit>

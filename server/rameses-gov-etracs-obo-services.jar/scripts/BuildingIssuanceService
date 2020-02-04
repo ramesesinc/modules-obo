@@ -1,0 +1,42 @@
+import com.rameses.annotations.*;
+
+class BuildingIssuanceService {
+	
+	@DataContext("building_issuance")
+	def issEm;
+
+	@Env
+	def env;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@XConnection('socketio')
+    def socketio;
+
+	@ProxyMethod
+	public def issueControlNo( def p ) {
+		if( !p.objid ) throw new Exception("objid is required");
+		if( !p.controlno ) throw new Exception("controlno is required");
+
+		def iss = issEm.find( [objid: p.objid] ).first();
+		if(!iss) throw new Exception("Issuance does not exist");
+		if(iss.state!=0) throw new Exception("This has already been issued");
+
+		def u = [:];
+		u.state = 1;
+		u.issuedby = [ objid: env.USERID, name: env.FULLNAME ];
+		u.dtissued = dateSvc.getServerDate();
+		u.controlno = p.controlno;
+		u.remarks = p.remarks;
+
+		issEm.find( [objid: p.objid] ).update( u );
+
+		socketio.send( "building_issuance_release", [:] );
+		return u;
+	}	
+	
+
+
+
+}

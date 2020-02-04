@@ -1,0 +1,18 @@
+<schema>
+	<element tablename="building_issuance">
+		<field name="objid" primary="true" prefix="BLDGISS"/>
+		<field name="appid"	required="true"/>
+		<field name="issuancetypeid" required="true"/>
+		<field name="controlno"	/>
+		<field name="dtissued"	/>
+		<field name="issuedby_objid" />
+		<field name="issuedby_name" />
+		<field name="state"	/>
+		<field name="expirydate"/>
+		<field name="remarks"/>
+
+		<complex name="issuancetype" ref="obo_permit_type" jointype="many-to-one" required="true">
+			<key field="issuancetypeid" target="objid" />
+		</complex>	
+	</element>
+</schema>

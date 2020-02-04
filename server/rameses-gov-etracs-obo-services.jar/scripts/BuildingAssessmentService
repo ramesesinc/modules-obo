@@ -104,9 +104,7 @@ public class BuildingAssessmentService  {
 					feeEm.create( it );
 				};
 			}
-			def amount = feeEm.find([appid:o.appid ]).select("c:{SUM(amount)}").val();
-			appEm.find( [objid: o.appid] ).update( [amount: amount ]);
-			result.amount = amount;
+			result.amount = feeEm.find([appid:o.appid ]).select("c:{SUM(amount)}").val();
 		}
 		return result;
 	}
@@ -125,9 +123,7 @@ public class BuildingAssessmentService  {
 		}
 		def result = [:];
 		if(o.appid) {
-			def amount = feeEm.find([appid:o.appid ]).select("c:{SUM(amount)}").val();
-			appEm.find( [objid: o.appid] ).update( [amount: amount ]);
-			result.amount = amount;		
+			result.amount =  feeEm.find([appid:o.appid ]).select("c:{SUM(amount)}").val();
 		}
 		return result;
 	}
@@ -136,7 +132,6 @@ public class BuildingAssessmentService  {
 	public def clearFees(def o ) {
 		feeEm.find( [appid: o.appid ]).where("sectionid IS NULL").delete();
 		def val = feeEm.find( [appid: o.appid ]).select("c:{SUM(amount)}").val();
-		appEm.find( [objid: o.appid] ).update( [amount: val ]);
 		return [amount: val];
 	}
 

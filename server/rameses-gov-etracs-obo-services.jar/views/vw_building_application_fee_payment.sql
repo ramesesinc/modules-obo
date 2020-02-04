@@ -4,7 +4,6 @@ SELECT bf.*,
 oi.objid AS item_objid,
 oi.title AS item_title,
 oi.sortorder AS item_sortorder,
-os.org_objid AS org_objid,
 pt.reftype AS payment_type,
 pt.refno AS payment_refno,
 pt.refid AS payment_refid,
@@ -12,5 +11,4 @@ pt.refdate AS payment_refdate
 
 FROM building_application_fee bf 
 INNER JOIN obo_itemaccount oi ON bf.itemid = oi.objid 
-INNER JOIN building_application_payment pt ON bf.appid = pt.appid  
-LEFT JOIN obo_section os ON bf.sectionid = os.objid
+LEFT JOIN building_application_payment pt ON bf.appid = pt.appid  

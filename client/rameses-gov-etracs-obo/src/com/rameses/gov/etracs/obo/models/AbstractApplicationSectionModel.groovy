@@ -36,8 +36,6 @@ abstract class AbstractApplicationSectionModel extends WorkflowTaskModel {
         return entity.objid;
     }
     
-   
-    
     def assess(String openerName) {
         def f = [:];
         f.appid = entity.app.objid;

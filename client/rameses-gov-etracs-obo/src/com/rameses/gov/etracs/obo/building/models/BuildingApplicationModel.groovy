@@ -13,8 +13,11 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class BuildingApplicationModel extends AbstractApplicationModel {
 
-    @Service("BuildingPermitAssessmentService")
+    @Service("BuildingAssessmentService")
     def feeSvc;
+    
+    @Service("BuildingPermitService")
+    def permitSvc;
     
     public String getPermitName() {
         return "building_application";   
@@ -57,6 +60,21 @@ class BuildingApplicationModel extends AbstractApplicationModel {
             binding.refresh("entity.occupancytype");
         }
         return Inv.lookupOpener("vw_obo_occupancy_type:lookup", [onselect: h] );
+    }
+    
+    def clearFees() {
+        entity.amount = feeSvc.clearFees([appid: entity.objid]);
+        binding.refresh("entity.amount");
+    }
+    
+    def issuePermit() {
+          def h = { o->
+            o.objid = entity.permit.objid;
+            def u = permitSvc.issuePermitNo( o );
+            entity.permit.putAll( u );
+            binding.refresh();
+        }
+        return Inv.lookupOpener("building_issue_controlno", [handler: h, showcontrolno: false]);
     }
 }
 

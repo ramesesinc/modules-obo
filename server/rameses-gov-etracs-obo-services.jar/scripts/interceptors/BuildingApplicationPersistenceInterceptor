@@ -20,8 +20,61 @@ class BuildingApplicationPersistenceInterceptor {
 	@DataContext("building_application_ancillary")
 	def ancillaryEm;
 
+	@DataContext("vw_building_application")
+	def vwAppEm;
+
+	@DataContext("building_evaluation_type")
+	def beType;
+
+	@DataContext("building_application_fee")
+	def feeEm;
+
+	@DataContext("building_application_payment")
+	def pmtEm;
+
+	@Service("WorkflowTaskService")
+	def wfSvc;
+
 	@Env
 	def env;
+
+	//this is when creating an evaluation on the fly example hot works for BFP that was missed during application 
+	@Before(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'building_evaluation' }") 
+	public void onCreateEvaluation( def evt ) {
+		def p = evt.args[0];
+		def app = vwAppEm.find( [appno: p.appno ]).first();
+		if(!app) throw new Exception("Application not found");
+		if( app.task.state.toLowerCase() != 'trade-evaluation' ) 
+			throw new Exception("Please ensure that current state must be in trade-evaluation");
+		//check first if current state is trade-evaluation
+		p.appid = app.objid;
+		p.dtfiled = dateSvc.getServerDate();
+	} 
+
+	@After(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'building_evaluation' }") 
+	public void onAfterCreateEvaluation( def evt ) {
+		def p = evt.args[0];
+		def r = evt.result;
+		//fire the workflow...
+		def f = [:];
+		f.processname = 'building_evaluation';
+		f.refid = p.objid;
+		f.startdate = p.dtfiled;
+		f.info = [:];
+		wfSvc.start( f );
+	} 
+
+	@Before(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'building_application_ancillary' }") 
+	public void onCreateAncillary( def evt ) {
+		def p = evt.args[0];
+		def btype = beType.find( [objid: p.typeid ]).first();
+		if(!btype) throw new Exception( p.typeid + " not found");
+		if(!btype.permitid ) throw new Exception("Building evaluation type must have a permitid " + p.typeid );
+
+		p.type = [objid: btype.permitid];
+		p.permittypeid = btype.permitid;
+		p.state = "COMPLETED";
+	} 
 
 	//REQUIREMENTS
 	@Before(pattern="PersistenceService.(create|update)", eval="#{args[0]._schemaname == 'building_application_requirement' }") 
@@ -75,6 +128,11 @@ class BuildingApplicationPersistenceInterceptor {
 		if( !c ) {
 			a.rptvalidated = true;
 		}
+
+		//auto compute fees after opening:
+		a.amount = feeEm.find([appid:a.objid]).select("c:{SUM(amount)}").val();
+
+		a.payment = pmtEm.find([appid: a.objid ]).where("voided=0").first();
 	}
 
 	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_building_evaluation' }")
@@ -87,6 +145,28 @@ class BuildingApplicationPersistenceInterceptor {
 			a.ancillaryid = anc.objid;
 		}
 	}
+
+	//THIS IS APPLICATION
+	@Before(pattern="PersistenceService.removeEntity", eval="#{args[0]._schemaname == 'building_application_fee' }") 
+	public void beforeRemoveFee( def evt ) {
+		def p = evt.args[0];
+		if( p.findBy !=null ) {
+			if(p.amtpaid > 0 ) throw new Exception("Fee cannot be removed at it is already paid");
+		}
+	} 
+
+	//after opening the evaluation
+	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_building_evaluation' }")
+	public void afterOpenEvaluation(def evt) {
+		def p = evt.args[0];
+		def a = evt.result;
+		def pmt = pmtEm.find([appid: a.appid ]).where("voided=0").first();
+		if( pmt ) {
+			pmt.amount = pmtEm.find([appid: a.appid ]).where("sectionid = :sid", [sid: a.typeid ] ).select("c:{SUM(amount)}").val();
+			a.payment = pmt;
+		}
+	}
+
 
 
 }

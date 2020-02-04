@@ -35,7 +35,7 @@ class BuildingApplicationAncillaryModel extends CrudFormModel {
             editable = true;
         }
     }
-   
+    
     /* ************************************************************************
     * INFOS ADDED IN THE ANCILLARY 
     *************************************************************************/

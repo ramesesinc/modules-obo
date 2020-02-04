@@ -71,12 +71,12 @@
 					<reportElement
 						x="115"
 						y="21"
-						width="107"
+						width="270"
 						height="12"
 						key="staticText-1"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" size="10"/>
+						<font fontName="Arial" size="10"/>
 					</textElement>
 				<text><![CDATA[Republic of the Philippines]]></text>
 				</staticText>
@@ -84,7 +84,7 @@
 					<reportElement
 						x="115"
 						y="33"
-						width="218"
+						width="270"
 						height="12"
 						key="staticText-2"/>
 					<box></box>
@@ -97,7 +97,7 @@
 					<reportElement
 						x="115"
 						y="45"
-						width="263"
+						width="270"
 						height="13"
 						key="staticText-3"/>
 					<box></box>
@@ -116,7 +116,7 @@
 						key="staticText-4"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial Narrow" pdfFontName="Helvetica-Bold" size="20" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="16" isBold="true"/>
 					</textElement>
 				<text><![CDATA[ONE - STOP SHOP FOR CONSTRUCTION PERMITS]]></text>
 				</staticText>
@@ -492,10 +492,10 @@
 			<band height="250"  isSplitAllowed="true" >
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="385"
+						x="373"
 						y="0"
-						width="179"
-						height="89"
+						width="202"
+						height="105"
 						key="image-5"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
@@ -503,10 +503,10 @@
 				</image>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="385"
+						x="373"
 						y="91"
-						width="179"
-						height="76"
+						width="203"
+						height="91"
 						key="image-6"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>

@@ -5,6 +5,9 @@ class OboPaymentService {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
+	@Service("DateService")
+	def dateSvc;
+
 	@DataContext(dynamic=true)
 	def dynaDb;
 

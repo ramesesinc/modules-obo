@@ -21,38 +21,29 @@ public class FireSafetyChecklistModel  {
     def caller;
     
     def entity;
+    def parent;
     def selectedChecklistItem;
+    boolean editable;
     
-    void load() {        
-        //this is the section
-        def obj = caller.entity;
-        def appid = obj.appid;
-        def sectionid = obj.typeid;
-        
-        String schemaname = "fire_safety_checklist";
-        def m = [_schemaname: schemaname ];
-        m.findBy = [appid : appid ];
-        m.select = "objid";
-        def p = qrySvc.findFirst( m );
-        
-        if(!p) {
-            entity = [_schemaname:schemaname];
-            entity.appid = appid;
-            entity.sectionid = sectionid;
-            entity.txnmode = "CAPTURE";
-            boolean pass = false;
-            def h = { o->
-                entity = o;
-                pass=  true;
-            }
-            Modal.show( "obo:permit_issuance", [entity: entity] );
-            if(!pass) throw new BreakException();
-        }
-        else {
-            entity = p;
-        }
-        entity = checklistSvc.findByAppid( [appid: obj.appid ]  );
+    
+    def create() {
+        parent = caller.entity;
+        def appid = parent.appid;
+        def sectionid = parent.typeid;
+        entity = checklistSvc.create( [appid: appid ] );
+        entity.firesafetychecklist = [objid: entity.objid];
+        editable = caller.editable;        
+        caller.reload();
     }
+    
+    def open() {
+        parent = caller.entity;
+        def appid = parent.appid;
+        def sectionid = parent.typeid;
+        entity = checklistSvc.open( [objid: parent.firesafetychecklist.objid ] );
+        editable = caller.editable;
+    }
+    
     
     def checklistHandler = [
         isMultiSelect: {

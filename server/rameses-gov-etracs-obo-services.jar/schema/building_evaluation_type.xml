@@ -12,10 +12,16 @@
 		<field name="optional" />
 		<field name="requirefee" />
 		<field name="permitid" />
+		<field name="issuanceid" />
 
 		<complex name="permit" ref="obo_permit_type" jointype="many-to-one" required="false">
 			<key field="permitid" target="objid" />
 		</complex>	
+		
+		<complex name="issuance" ref="obo_permit_type" jointype="many-to-one" required="false">
+			<key field="issuanceid" target="objid" />
+		</complex>	
+
 
 	</element>
 </schema>	

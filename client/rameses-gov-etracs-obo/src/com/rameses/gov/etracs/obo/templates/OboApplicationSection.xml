@@ -4,10 +4,21 @@
 
         <!-- Fee Related Actions -->
         <invoker type="feeActions" caption="Auto Assess" action="assess" index="1" 
-                visibleWhen="#{ editable == true  }"   />
+                visibleWhen="#{ editable == true }"   />
                     
         <invoker type="feeActions" caption="Add Fee Manually" action="addFee" index="2" 
                 visibleWhen="#{ editable == true }" />
+        
+
+        <!-- applicable only for OBO assessors after end -->
+        <invoker type="feeActions" caption="Auto Assess" action="assess" index="1" 
+                role="ASSESSOR"
+                visibleWhen="#{ entity.app.task.state == 'assessment' }"   />
+                    
+        <invoker type="feeActions" caption="Add Fee Manually" action="addFee" index="2" 
+                role="ASSESSOR"
+                visibleWhen="#{ entity.app.task.state == 'assessment' }" />
+
         
         <invoker type="feeActions"  caption="Add Ancillary" index="4"
                 action="addAncillary" visibleWhen="#{entity.ancillaryid == null  }"/>

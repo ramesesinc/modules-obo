@@ -7,7 +7,7 @@
 		<field name="designprofessionalid"/>
 		<field name="supervisorid"/>
 
-		<complex name="type" ref="vw_obo_permit_type" jointype="many-to-one">
+		<complex name="type" ref="obo_permit_type" jointype="many-to-one">
 			<key field="permittypeid" target="objid" />
 		</complex>  
 

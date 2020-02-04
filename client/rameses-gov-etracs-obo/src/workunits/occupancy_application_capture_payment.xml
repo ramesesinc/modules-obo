@@ -1,0 +1,16 @@
+<workunit>
+    <invokers>
+        
+          <invoker type="vw_occupancy_application:form:appActions" 
+                caption="Capture Payment"
+                action="init" 
+                index="1"
+                target="popup"
+                role="SYSTEM"
+                txntype="occupancy_application" visibleWhen="#{task.state == 'payment'}" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboCapturePaymentModel" />
+    <pages>
+        <page name="initial" template="com.rameses.gov.etracs.obo.views.OboCapturePaymentPage" />
+    </pages>
+</workunit>

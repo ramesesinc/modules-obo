@@ -1,7 +1,6 @@
 <workunit schemaName="building_application_ancillary" allowCreate="false" allowEdit="false" allowDelete="false">
     <invokers>
-        <invoker type="building_application_ancillary:open" caption="Building Permit Application"
-                action="open" target="popup"/>
+        <invoker type="building_application_ancillary:open" caption="Ancillary" action="open" target="popup"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationAncillaryModel" />
     <pages>

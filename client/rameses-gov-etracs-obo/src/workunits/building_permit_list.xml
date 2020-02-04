@@ -1,10 +1,5 @@
 <workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="vw_building_permit" allowDelete="false">
     <invokers>
-        <invoker folderid="menucategory/obo/building" caption="Pending Building Permit (For Issuance)"
-             cols="appno,appdate,title,applicant.name,projectcost"
-             customFilter="state = 0"
-             role="RELEASER"
-             action="init" index="20"  notificationid="building_permit" event="building_permit"/>
         
         <invoker folderid="menucategory/obo/building" caption="Building Permit List"
              cols="permitno,title,applicant.name,projectcost,expirydate,appno,appdate"

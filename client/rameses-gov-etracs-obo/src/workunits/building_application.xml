@@ -39,6 +39,14 @@
                 action="changeOccupancyType" 
                 visibleWhen="#{task.state.matches('verification|assessment') 
                     &amp;&amp; task.assignee.objid == userInfo.userid }"   />
+                    
+        <invoker type="appActions" 
+                caption="Issue Permit"
+                action="issuePermit" 
+                visibleWhen="#{task.state == 'releasing'
+                    &amp;&amp; entity.permit?.state == 0                    
+                    &amp;&amp; task.assignee.objid == userInfo.userid }"   />            
+                    
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationModel" />
     <pages>

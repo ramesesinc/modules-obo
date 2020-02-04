@@ -5,6 +5,5 @@
 		<field name="sortorder" />
 		<field name="type" />
 		<field name="handler" />
-		<field name="sectionid" />		
 	</element>
 </schema>	

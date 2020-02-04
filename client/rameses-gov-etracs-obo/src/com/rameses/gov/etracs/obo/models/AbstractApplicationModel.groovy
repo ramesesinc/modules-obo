@@ -103,6 +103,13 @@ abstract class AbstractApplicationModel extends WorkflowTaskModel {
     /**************************************************************************
     * assessment actions
     ***************************************************************************/
+    def calcAmount = { 
+        def m = [_schemaname: getPermitName() + "_fee"];
+        m.findBy = [appid :entity.objid];
+        m.select = "total:{SUM(amount)}";
+        return queryService.findFirst(m).total;
+    }
+    
     def assess() {
         def f = [:];
         f.appid = entity.objid;
@@ -118,15 +125,15 @@ abstract class AbstractApplicationModel extends WorkflowTaskModel {
         def m = [appid: entity.objid ];
         m.handler = { o->
             feeListHandler.reload();
+            entity.amount = calcAmount(); 
         }
         return Inv.lookupOpener(getPermitName() + "_fee:create", m );
     }
     
     def clearFees() {
-        def u = feeService.clearFees( [appid: entity.objid ] );
-        entity.amount = u.amount;
-        feeListHandler.reload();
+        throw new Exception("clearFees method not supported")
     }
+    
     
     def previewFees() {
         def m = [entity:[objid: entity.objid ]];

@@ -26,22 +26,18 @@ class OboCapturePaymentModel  {
     def txntype;
     
     void init(inv) {
-        txntype = inv.properties.txntype;
         if(!entity) entity = caller.entity;
         receipt = [:];
         receipt.type ="cashreceipt";
         receipt.amount = entity.amount;
+        receipt.txntype = inv.properties.txntype;
+        receipt.appid = entity.objid;
     }
     
     public def doOk() {
         if(!MsgBox.confirm("You are about to post this payment")) return;
-        
-        receipt.objid = receipt.receiptno; 
-        def m = [:];
-        m.refid = entity.objid;
-        m.receipt = receipt;
-        m.txntype = txntype;
-        postPaymentSvc.postPayment( m );
+        receipt.refid = receipt.receiptno;        
+        postPaymentSvc.postPayment( receipt );
         caller.reload();
         return "_close";
     }

@@ -12,18 +12,6 @@
         <invoker type="feeActions" caption="View Ancillary Info" action="viewAncillaryPermit" index="3" 
                 visibleWhen="#{entity.ancillaryid != null  }"/>
         
-        <!--                        
-        <invoker type="extActions" 
-                caption="Issue Permit/Clearance"
-                action="issuePermit" 
-                visibleWhen="#{task.state=='releasing' &amp;&amp; entity.issuanceid == null }"   />
-                
-        <invoker type="extActions" 
-                caption="View Permit/Clearance"
-                action="viewPermit" 
-                visibleWhen="#{entity.issuanceid != null }"  index="20" />
-        -->
-        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingEvaluationModel" />
     <pages>

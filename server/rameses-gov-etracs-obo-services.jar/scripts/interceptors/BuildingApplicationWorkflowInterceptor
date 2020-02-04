@@ -27,7 +27,7 @@ class BuildingApplicationWorkflowInterceptor {
 	def vwAncillaryEm;
 
 	@DataContext("building_evaluation_type")
-	def sectionTypeEm;
+	def evalTypeEm;
 
 	@DataContext("building_application")
 	def appEm;
@@ -47,6 +47,8 @@ class BuildingApplicationWorkflowInterceptor {
 	@DataContext("building_permit")
 	def permitEm;
 
+	@DataContext("building_issuance")
+	def issuanceEm;
 
 	@Service("BuildingApplicationTransmittalService")
 	def transmittalSvc;
@@ -95,15 +97,13 @@ class BuildingApplicationWorkflowInterceptor {
 		appSvc.generateAppNo( [appid: p.refid ] );
 	}
 
-	 //approval of evaluation. 
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='building_application' && args[0].action.matches('approve-.*-evaluation') }")      
-	public void doEvaluationValidation( def evt ) { 
+ 	//approval of evaluation. 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='building_application' && args[0].action == 'approve-evaluation' }")public void doEvaluationValidation( def evt ) { 
 		def p = evt.args[0];
 		//check if there are pending findings
 		def t = findingEm.find( [appid: p.refid ] ).select("c:{COUNT(*)}").where("state=2 AND supersederid IS NULL").val();
 		if( t > 0) throw new Exception("There are unresolved findings. You need to send this for revision");
 	}
-
 
 	//trigger when entering evaluation state
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && result.state.matches('.*evaluation') && args[0].action != 'reactivate' }") 
@@ -114,7 +114,7 @@ class BuildingApplicationWorkflowInterceptor {
 		def appid = p.refid;
 		def state = r.state;
 
-		def mlist = sectionTypeEm.getSectionsForActivation( [appid: appid, state: state ] )*.objid;
+		def mlist = evalTypeEm.getSectionsForActivation( [appid: appid, state: state ] )*.objid;
 		if( mlist ) {
 			def dt = dateSvc.getServerDate();
 			mlist.each {
@@ -170,7 +170,7 @@ class BuildingApplicationWorkflowInterceptor {
 		def appid = p.refid;
 		def dt = dateSvc.getServerDate();
 
-		//search first before creating
+		//search first before creating the building permit
 		def perm = permitEm.find( [appid: appid]).first();
 		if(!perm) {
 			//trigger the permit
@@ -180,6 +180,22 @@ class BuildingApplicationWorkflowInterceptor {
 			m.state = 0;
 			permitEm.create( m );			
 		}
+
+		def zlist = evalTypeEm.where( "NOT(issuanceid IS NULL)"  ).list();
+		//find each evaluation type that has issuance permit id and create it
+		zlist.each {
+			def iss = issuanceEm.find( [appid: appid, issuancetypeid: it.issuanceid ] ).first();
+			if(!iss) {
+				def m = [:];
+				m.appid = appid;
+				m.controlno = "TMP" + new UID();
+				m.issuancetypeid = it.issuanceid;
+				m.state = 0;
+				m.issuancetype = [objid: it.issuanceid ];
+				issuanceEm.create( m );
+			}
+		}
+
 	}
 
 	//release process. Make sure there is at least one building_application_issuance
@@ -190,6 +206,13 @@ class BuildingApplicationWorkflowInterceptor {
 		def pmt = permitEm.find( [appid: appid]).first();
 		if( !pmt) throw new Exception("Permit not found");
 		if(pmt.state == 0) throw new Exception("Permit is not yet issued. Please issue the permit first");
+
+		def errs = [];
+		def list = issuanceEm.find( [appid: appid ]).where("state = 0").list();		
+		list.each {
+			errs << it.issuancetype.title;
+		}
+		if(errs) throw new Exception("The ff. are not yet released. \n" +  errs.join("\n"));
 	}
 
 

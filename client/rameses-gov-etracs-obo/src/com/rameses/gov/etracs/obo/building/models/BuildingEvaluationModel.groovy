@@ -40,8 +40,11 @@ class BuildingEvaluationModel extends AbstractApplicationSectionModel {
     
     //This is a temporary proc.
     def addAncillary() {
-        def e = appSvc.addAncillary( [appid: entity.appid, typeid: entity.typeid ] );
-        entity.ancillaryid = e.objid;
+        def m = [_schemaname: "building_application_ancillary"];
+        m.appid = entity.appid;
+        m.typeid = entity.typeid;
+        def z = persistenceService.create( m );
+        entity.ancillaryid = z.objid;
         reload();
     }
     

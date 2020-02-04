@@ -33,7 +33,14 @@ public class FireSafetyChecklistPage extends javax.swing.JPanel {
 
         jPanel2 = new javax.swing.JPanel();
         xDataTable1 = new com.rameses.rcp.control.XDataTable();
+        jPanel3 = new javax.swing.JPanel();
+        xButton1 = new com.rameses.rcp.control.XButton();
+        xButton2 = new com.rameses.rcp.control.XButton();
+        xButton3 = new com.rameses.rcp.control.XButton();
         jPanel1 = new javax.swing.JPanel();
+        xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
+        xLabel3 = new com.rameses.rcp.control.XLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -90,28 +97,84 @@ public class FireSafetyChecklistPage extends javax.swing.JPanel {
         });
         jPanel2.add(xDataTable1, java.awt.BorderLayout.CENTER);
 
+        jPanel3.setPreferredSize(new java.awt.Dimension(536, 30));
+        jPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        xButton1.setName("addChecklistItems"); // NOI18N
+        xButton1.setVisibleWhen("#{ editable == true }");
+        xButton1.setText("Add Item");
+        xButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xButton1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(xButton1);
+
+        xButton2.setName("editItem"); // NOI18N
+        xButton2.setVisibleWhen("#{ editable == true }");
+        xButton2.setText("Update Item");
+        jPanel3.add(xButton2);
+
+        xButton3.setName("removeChecklistItems"); // NOI18N
+        xButton3.setVisibleWhen("#{ editable == true }");
+        xButton3.setText("Remove Item");
+        jPanel3.add(xButton3);
+
+        jPanel2.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+
         add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(911, 20));
+        jPanel1.setPreferredSize(new java.awt.Dimension(911, 80));
+
+        xLabel1.setCaption("Control no");
+        xLabel1.setExpression("#{ entity.controlno }");
+        xLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel1.setCaptionWidth(120);
+        xLabel1.setPreferredSize(new java.awt.Dimension(0, 18));
+        xFormPanel1.add(xLabel1);
+
+        xLabel3.setCaption("Issued by");
+        xLabel3.setExpression("#{ entity.issuedby.name   }");
+        xLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel3.setCaptionWidth(120);
+        xLabel3.setPreferredSize(new java.awt.Dimension(0, 18));
+        xFormPanel1.add(xLabel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 536, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(223, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         add(jPanel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void xButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private com.rameses.rcp.control.XButton xButton1;
+    private com.rameses.rcp.control.XButton xButton2;
+    private com.rameses.rcp.control.XButton xButton3;
     private com.rameses.rcp.control.XDataTable xDataTable1;
+    private com.rameses.rcp.control.XFormPanel xFormPanel1;
+    private com.rameses.rcp.control.XLabel xLabel1;
+    private com.rameses.rcp.control.XLabel xLabel3;
     // End of variables declaration//GEN-END:variables
 }
