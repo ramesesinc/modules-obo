@@ -20,8 +20,8 @@ class BuildingApplicationInitialService {
 	@DataContext("building_application_accessory")
 	def accessoryEm;
 
-	@DataContext("building_application_ancillary")
-	def ancillaryEm;
+	@DataContext("building_application_subdoc")
+	def subdocEm;
 
 	@DataContext("building_application_rpu")
 	def rpuEm;
@@ -90,8 +90,9 @@ class BuildingApplicationInitialService {
 		}
 		app.ancillaries.each {
 			it.appid = newapp.objid;
-			it.type = [ permittypeid: it.permittypeid.toUpperCase() ];
-			ancillaryEm.create( it );
+			it.doctype = [ objid: it.permittypeid.toUpperCase() ];
+			it.amount = 0;
+			subdocEm.create( it );
 		}
 		app.infos.each {
 			it.appid = newapp.objid;

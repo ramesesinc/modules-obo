@@ -36,7 +36,12 @@ public class OboItemAccountPage extends javax.swing.JPanel {
         xTextField2 = new com.rameses.rcp.control.XTextField();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
-        xLookupField3 = new com.rameses.rcp.control.XLookupField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        xList1 = new com.rameses.rcp.control.XList();
+        jPanel1 = new javax.swing.JPanel();
+        xButton1 = new com.rameses.rcp.control.XButton();
+        xButton2 = new com.rameses.rcp.control.XButton();
+        jLabel1 = new javax.swing.JLabel();
 
         xFormPanel1.setCaptionWidth(150);
 
@@ -45,6 +50,7 @@ public class OboItemAccountPage extends javax.swing.JPanel {
         xTextField1.setName("entity.objid"); // NOI18N
         xTextField1.setPreferredSize(new java.awt.Dimension(150, 20));
         xTextField1.setRequired(true);
+        xTextField1.setSpaceChar('_');
         xFormPanel1.add(xTextField1);
 
         xTextField2.setCaption("Title");
@@ -66,13 +72,25 @@ public class OboItemAccountPage extends javax.swing.JPanel {
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLookupField1);
 
-        xLookupField3.setCaption("Section");
-        xLookupField3.setExpression("#{ entity.sectionid }");
-        xLookupField3.setHandler("lookupSection");
-        xLookupField3.setName("entity.sectionid"); // NOI18N
-        xLookupField3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLookupField3.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLookupField3);
+        xList1.setExpression("#{ item.tag }");
+        xList1.setItems("entity.reporttags");
+        xList1.setName("selectedTag"); // NOI18N
+        xList1.setDynamic(true);
+        jScrollPane1.setViewportView(xList1);
+
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        xButton1.setName("addTag"); // NOI18N
+        xButton1.setVisibleWhen("#{ mode == 'edit' }");
+        xButton1.setText("Add Tag");
+        jPanel1.add(xButton1);
+
+        xButton2.setName("removeTag"); // NOI18N
+        xButton2.setVisibleWhen("#{ mode == 'edit' }");
+        xButton2.setText("Remove Tag");
+        jPanel1.add(xButton2);
+
+        jLabel1.setText("Report Tags");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -80,24 +98,40 @@ public class OboItemAccountPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private com.rameses.rcp.control.XButton xButton1;
+    private com.rameses.rcp.control.XButton xButton2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
+    private com.rameses.rcp.control.XList xList1;
     private com.rameses.rcp.control.XLookupField xLookupField1;
-    private com.rameses.rcp.control.XLookupField xLookupField3;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
     // End of variables declaration//GEN-END:variables

@@ -48,33 +48,31 @@
 	<field name="contractor.profession" class="java.lang.String"/>
 	<field name="contractor.prc.dtvalid" class="java.lang.String"/>
 	<field name="contractor.ptr.dtvalid" class="java.lang.String"/>
-	<field name="bill.zoning_fee" class="java.lang.Number"/>
-	<field name="bill.line_and_grade" class="java.lang.Number"/>
-	<field name="bill.building_permit_fee" class="java.lang.Number"/>
-	<field name="plumbing.amountpaid" class="java.lang.String"/>
-	<field name="bill.electrical_fee" class="java.lang.Number"/>
-	<field name="bill.mechanical_fee" class="java.lang.Number"/>
+	<field name="fees.zoning" class="java.lang.Number"/>
+	<field name="fees.line_and_grade" class="java.lang.Number"/>
+	<field name="fees.building_permit" class="java.lang.Number"/>
+	<field name="fees.plumbing" class="java.lang.Number"/>
+	<field name="fees.electrical" class="java.lang.Number"/>
+	<field name="fees.mechanical" class="java.lang.Number"/>
 	<field name="penalties.amountpaid" class="java.lang.String"/>
-	<field name="bill.other_fee" class="java.lang.Number"/>
+	<field name="fees.other" class="java.lang.Number"/>
 	<field name="amount" class="java.lang.Number"/>
 	<field name="receiptdate" class="java.util.Date"/>
 	<field name="receiptno" class="java.lang.String"/>
 	<field name="location.no" class="java.lang.String"/>
 	<field name="location.dateissued" class="java.lang.String"/>
-	<field name="firesafety.no" class="java.lang.String"/>
-	<field name="firesafety.dateissued" class="java.lang.String"/>
-	<field name="architectural.no" class="java.lang.String"/>
-	<field name="architectural.dateissued" class="java.lang.String"/>
-	<field name="civil.no" class="java.lang.String"/>
-	<field name="civil.dateissued" class="java.lang.String"/>
-	<field name="sanitary.no" class="java.lang.String"/>
-	<field name="sanitary.dateissued" class="java.lang.String"/>
-	<field name="electrical.no" class="java.lang.String"/>
-	<field name="electrical.dateissued" class="java.lang.String"/>
-	<field name="mechanical.no" class="java.lang.String"/>
-	<field name="mechanical.dateissued" class="java.lang.String"/>
-	<field name="electronics.no" class="java.lang.String"/>
-	<field name="electronics.dateissued" class="java.lang.String"/>
+	<field name="issuances.architectural.controlno" class="java.lang.String"/>
+	<field name="issuances.architectural.dtissued" class="java.util.Date"/>
+	<field name="issuances.civil_structural.controlno" class="java.lang.String"/>
+	<field name="issuances.civil_structural.dtissued" class="java.util.Date"/>
+	<field name="issuances.plumbing.controlno" class="java.lang.String"/>
+	<field name="issuances.plumbing.dtissued" class="java.util.Date"/>
+	<field name="issuances.electrical.controlno" class="java.lang.String"/>
+	<field name="issuances.electrical.dtissued" class="java.util.Date"/>
+	<field name="issuances.mechanical.controlno" class="java.lang.String"/>
+	<field name="issuances.mechanical.dtissued" class="java.util.Date"/>
+	<field name="issuances.electronic.controlno" class="java.lang.String"/>
+	<field name="issuances.electronic.dtissued" class="java.lang.String"/>
 	<field name="sign.no" class="java.lang.String"/>
 	<field name="sign.dateissued" class="java.lang.String"/>
 	<field name="fencing.no" class="java.lang.String"/>
@@ -87,10 +85,11 @@
 	<field name="profcivil.ptr.idno" class="java.lang.String"/>
 	<field name="contractor.prc.idno" class="java.lang.String"/>
 	<field name="contractor.ptr.idno" class="java.lang.String"/>
-	<field name="zoning.controlno" class="java.lang.String"/>
-	<field name="fsec.controlno" class="java.lang.String"/>
-	<field name="zoning.dtissued" class="java.util.Date"/>
-	<field name="fsec.dtissued" class="java.util.Date"/>
+	<field name="issuances.zoning.controlno" class="java.lang.String"/>
+	<field name="issuances.fsec.controlno" class="java.lang.String"/>
+	<field name="issuances.zoning.dtissued" class="java.util.Date"/>
+	<field name="issuances.fsec.dtissued" class="java.util.Date"/>
+	<field name="fees.penalty" class="java.lang.Number"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -113,10 +112,10 @@
 				</image>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="349"
-						y="829"
-						width="182"
-						height="95"
+						x="333"
+						y="822"
+						width="210"
+						height="102"
 						key="image-6"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
@@ -3693,23 +3692,6 @@
 				<staticText>
 					<reportElement
 						x="144"
-						y="656"
-						width="108"
-						height="12"
-						key="staticText-208"/>
-					<box>					<topPen lineWidth="0.5" lineStyle="Solid"/>
-					<leftPen lineWidth="0.5" lineStyle="Solid"/>
-					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
-					<rightPen lineWidth="0.5" lineStyle="Solid"/>
-</box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial Narrow" size="10"/>
-					</textElement>
-				<text><![CDATA[]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="144"
 						y="668"
 						width="108"
 						height="12"
@@ -4341,7 +4323,7 @@
 					<textElement>
 						<font fontName="Arial"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtfiled}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4393,7 +4375,7 @@
 					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bill.other_fee}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fees.other}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4436,10 +4418,10 @@
 				</textField>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="70"
-						y="829"
-						width="202"
-						height="95"
+						x="56"
+						y="822"
+						width="222"
+						height="102"
 						key="image-5"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
@@ -4616,68 +4598,68 @@
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="116"
+						x="144"
 						y="644"
-						width="135"
+						width="107"
 						height="12"
 						key="textField"/>
 					<box></box>
 					<textElement textAlignment="Right">
-						<font fontName="Arial"/>
+						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bill.building_permit_fee}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fees.building_permit}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="116"
+						x="144"
 						y="666"
-						width="135"
+						width="107"
 						height="12"
 						key="textField-20"/>
 					<box></box>
 					<textElement textAlignment="Right">
-						<font fontName="Arial"/>
+						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bill.electrical_fee}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fees.electrical}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="116"
+						x="144"
 						y="680"
-						width="135"
+						width="107"
 						height="12"
 						key="textField-21"/>
 					<box></box>
 					<textElement textAlignment="Right">
-						<font fontName="Arial"/>
+						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bill.mechanical_fee}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fees.mechanical}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="116"
+						x="144"
 						y="620"
-						width="135"
+						width="107"
 						height="12"
 						key="textField-22"/>
 					<box></box>
 					<textElement textAlignment="Right">
-						<font fontName="Arial"/>
+						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bill.zoning_fee}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fees.zoning}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="116"
+						x="144"
 						y="632"
-						width="135"
+						width="107"
 						height="12"
 						key="textField-23"/>
 					<box></box>
 					<textElement textAlignment="Right">
-						<font fontName="Arial"/>
+						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bill.line_and_grade}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fees.line_and_grade}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4768,7 +4750,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permitno} + 'A']]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuances.architectural.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4781,7 +4763,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permitno}+'C']]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuances.civil_structural.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4794,7 +4776,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permitno}+'S']]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuances.plumbing.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4807,7 +4789,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permitno}+'E']]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuances.electrical.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4820,7 +4802,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permitno}+'M']]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuances.mechanical.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4833,7 +4815,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{zoning.controlno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuances.zoning.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4846,7 +4828,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsec.controlno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuances.fsec.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd-MMM-yy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4859,7 +4841,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{zoning.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuances.zoning.dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd-MMM-yy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4872,7 +4854,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{fsec.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuances.fsec.dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd-MMM-yy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4885,7 +4867,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuances.architectural.dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd-MMM-yy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4898,7 +4880,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuances.civil_structural.dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd-MMM-yy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4911,7 +4893,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuances.plumbing.dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd-MMM-yy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4924,7 +4906,7 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuances.electrical.dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd-MMM-yy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4937,7 +4919,59 @@
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuances.mechanical.dtissued}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="654"
+						width="107"
+						height="12"
+						key="textField-43"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fees.plumbing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="144"
+						y="690"
+						width="107"
+						height="12"
+						key="textField-44"/>
+					<box></box>
+					<textElement textAlignment="Right">
+						<font fontName="Arial" size="9"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fees.penalty}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="370"
+						y="702"
+						width="93"
+						height="12"
+						key="textField-45"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="9"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuances.mechanical.controlno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="dd-MMM-yy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="473"
+						y="702"
+						width="100"
+						height="12"
+						key="textField-46"/>
+					<box></box>
+					<textElement>
+						<font fontName="Arial" size="9"/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{issuances.mechanical.dtissued}]]></textFieldExpression>
 				</textField>
 			</band>
 		</title>

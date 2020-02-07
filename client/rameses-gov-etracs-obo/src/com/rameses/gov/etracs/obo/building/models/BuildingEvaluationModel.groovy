@@ -13,6 +13,7 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class BuildingEvaluationModel extends AbstractApplicationSectionModel {
     
+    def doclistModel;
     
     public String getCaption() {
         return "Building Evaluation";
@@ -22,7 +23,6 @@ class BuildingEvaluationModel extends AbstractApplicationSectionModel {
         return "BE";
     }
     
-    
     def viewApplication() {
         String s = "vw_building_application:open"; 
         def op = Inv.lookupOpener(s, [entity: [objid: entity.appid ] ] );
@@ -30,24 +30,15 @@ class BuildingEvaluationModel extends AbstractApplicationSectionModel {
         return op;
     }
     
-   def viewAncillaryPermit() {
-        if(!entity.ancillaryid ) 
-            throw new Exception("There is no associated ancillary permit ");
-        def op = Inv.lookupOpener("building_application_ancillary:open", [entity: [objid: entity.ancillaryid ] ] );
-        op.target = "popup";
-        return op;
-    }
-    
     //This is a temporary proc.
     def addAncillary() {
-        def m = [_schemaname: "building_application_ancillary"];
+        def m = [_schemaname: "building_application_subdoc"];
         m.appid = entity.appid;
         m.typeid = entity.typeid;
         def z = persistenceService.create( m );
         entity.ancillaryid = z.objid;
         reload();
     }
-    
     
     def updateZoneclass() {
         def app = [objid: entity.appid, zoneclass: entity.app.zoneclass, zone: entity.app.zone ];
@@ -59,15 +50,6 @@ class BuildingEvaluationModel extends AbstractApplicationSectionModel {
         return Inv.lookupOpener("building_application_zoneclass:view", [app: app, handler: h ] );
     }
     
-    def assess() {
-        if(! entity.app.zoneclass?.objid )
-            throw new Exception("Please specify a zone class first");
-        return super.assess("building_evaluation:assessment");    
-    }
-
-    def addFee() {
-        return super.addFee( "building_application_fee");
-    }
     
     def addFinding() {
         return super.addFinding( "building_evaluation_finding");

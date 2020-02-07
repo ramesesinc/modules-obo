@@ -8,8 +8,7 @@
         <invoker type="formActions" caption="Issue Control No" action="issueControlNo" 
                  visibleWhen="#{ entity.state == 0 }" />
 
-        <invoker type="formActions" caption="View Printout" action="viewPrint" 
-                 visibleWhen="#{ entity.state != 0 }" />
+        
          
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingIssuanceModel" />

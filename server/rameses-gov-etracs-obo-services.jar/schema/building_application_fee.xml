@@ -2,7 +2,9 @@
 	<element tablename="building_application_fee">
 		<field name="objid" primary="true" prefix="OBOPF"/>
 		<field name="appid" required="true" />
-		<field name="sectionid" />
+
+		<!-- parent here is the subdoc. it can be null -->
+		<field name="parentid" />
 		<field name="remarks" />
 		<field name="amount" required="true" />
 		<field name="amtpaid" required="true" />

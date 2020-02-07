@@ -13,7 +13,7 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class BuildingApplicationModel extends AbstractApplicationModel {
 
-    @Service("BuildingAssessmentService")
+    @Service("BuildingApplicationFeeService")
     def feeSvc;
     
     @Service("BuildingPermitService")

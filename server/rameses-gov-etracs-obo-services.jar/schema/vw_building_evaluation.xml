@@ -11,9 +11,6 @@
 		<field name="type_title" />
 		<field name="type_sortindex" />
 
-		<field name="type_requirefee" />
-		<field name="type_permitid" />
-
 		<field name="task_state" />
 		<field name="task_startdate" />
 		<field name="task_enddate" />

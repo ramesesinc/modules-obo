@@ -1,0 +1,28 @@
+import com.rameses.annotations.*; 
+
+class BuildingIssuanceFormReportInterceptor {
+	
+	@DataContext("vw_building_issuance")
+	def vwIssEm;
+
+	@DataContext("vw_building_application_fee_payment")
+	def payEm;
+
+
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_issuance' }")
+	public void getBuildingIssuanceReport( def evt ) {
+		def p = evt.args[0];
+		def result = evt.result;
+		def id = p.parameters.objid;
+
+		def iss = vwIssEm.find( [objid: id ]).first();
+
+		def pay = payEm.find( [appid: iss.appid, sectionid: iss.sectionid ] ).select("payment.refno,payment.refdate, amount:{SUM(amtpaid)}").groupBy("payment.refno,payment.refdate").first();
+		iss.receiptno = pay.payment.refno;
+		iss.receiptdate = pay.payment.refdate;
+		iss.amount = pay.amount;
+		result.data = iss;
+	}	
+
+
+}

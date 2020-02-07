@@ -11,4 +11,5 @@ pt.refdate AS payment_refdate
 
 FROM building_application_fee bf 
 INNER JOIN obo_itemaccount oi ON bf.itemid = oi.objid 
-LEFT JOIN building_application_payment pt ON bf.appid = pt.appid  
+INNER JOIN building_application_payment pt ON bf.appid = pt.appid
+WHERE pt.voided = 0;  

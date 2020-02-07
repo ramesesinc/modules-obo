@@ -9,9 +9,6 @@
                 entity.typeid.toLowerCase() == 'zoning' &amp;&amp;
                 editable == true }" index="1" />
         
-        <invoker type="feeActions" caption="View Ancillary Info" action="viewAncillaryPermit" index="3" 
-                visibleWhen="#{entity.ancillaryid != null  }"/>
-        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingEvaluationModel" />
     <pages>

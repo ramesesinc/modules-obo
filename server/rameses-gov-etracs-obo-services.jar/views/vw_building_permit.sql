@@ -29,6 +29,7 @@ SELECT
    a.location_bldgno,
    a.location_bldgname,
    a.location_subdivision,
+   a.contractorid,
 
    bt.objid AS occupancytype_objid,
    bt.title AS occupancytype_title,   

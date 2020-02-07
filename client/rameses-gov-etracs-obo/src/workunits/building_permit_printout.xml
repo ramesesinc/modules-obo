@@ -12,9 +12,20 @@
                  caption="Signboard"
                  action="preview" 
                  index="2" 
-                 reportId="building_application_signboard"
+                 reportId="building_permit_signboard"
                  reportName="com/rameses/gov/etracs/obo/reports/construction_signboard.jasper"
                  visibleWhen="#{ entity.permit?.state &gt; 0}"/>
+
+        <!-- this is for sending in mail sender -->         
+        <invoker type="building_permit:attachment" 
+                 reportId="building_permit"
+                 action="preview"
+                 reportName="com/rameses/gov/etracs/obo/reports/building_permit.jasper"/>
+
+        <invoker type="building_permit_signboard:attachment" 
+                 reportId="building_permit_signboard"
+                 action="preview"
+                 reportName="com/rameses/gov/etracs/obo/reports/construction_signboard.jasper"/>
 
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboPermitReportModel" />

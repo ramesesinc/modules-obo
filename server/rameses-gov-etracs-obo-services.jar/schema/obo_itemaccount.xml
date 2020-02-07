@@ -8,6 +8,10 @@
 		<field name="item_fund_objid" />
 		<field name="item_fund_title" />
 		<field name="sortorder" />	
-		<field name="sectionid" />	
+
+		<complex name="reporttags" ref="obo_itemaccount_report_tag" jointype="one-to-many"> 
+			<key field="objid" target="itemid" />
+		</complex>	
+		
 	</element>
 </schema>	

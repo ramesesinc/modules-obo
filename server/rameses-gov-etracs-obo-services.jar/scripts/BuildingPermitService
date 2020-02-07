@@ -11,8 +11,8 @@ class BuildingPermitService {
 	@DataContext("building_application_professional")
 	def professionalEm;
 
-	@DataContext("vw_building_application_ancillary")
-	def vwAncillaryEm;
+	@DataContext("building_application_subdoc")
+	def subdocEm;
 
 	@DataContext("building_permit_rpu")
 	def rptEm;
@@ -48,6 +48,7 @@ class BuildingPermitService {
 		u.dtissued = dateSvc.getServerDate();
 		u.permitno = controlNoSvc.getNextNo( pattern );
 		u.remarks = p.remarks;
+		u.expirydate = p.expirydate;
 		permitEm.find( [objid: p.objid] ).update( u );
 		return u;
 	}
@@ -66,13 +67,13 @@ class BuildingPermitService {
 		perm.professionals = professionalEm.find( [appid: perm.appid ]).list();
 
 		//find the professionals 
-		perm.profarchitectid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'ARCHITECTURAL' ] ).first()?.designprofessionalid;
-		perm.profcivilid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'CIVIL_STRUCTURAL' ] ).first()?.designprofessionalid;
-		perm.profelectricalid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'ELECTRICAL' ] ).first()?.designprofessionalid;
-		perm.profmechanicalid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'MECHANICAL' ] ).first()?.designprofessionalid;
-		perm.profsanitaryid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'SANITARY' ] ).first()?.designprofessionalid;
-		perm.profplumbingid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'PLUMBING' ] ).first()?.designprofessionalid;
-		perm.profelectronicid = vwAncillaryEm.find( [appid: perm.appid, sectionid: 'ELECTRONIC' ] ).first()?.designprofessionalid;
+		perm.profarchitectid = subdocEm.find( [appid: perm.appid, sectionid: 'ARCHITECTURAL' ] ).first()?.designprofessionalid;
+		perm.profcivilid = subdocEm.find( [appid: perm.appid, sectionid: 'CIVIL_STRUCTURAL' ] ).first()?.designprofessionalid;
+		perm.profelectricalid = subdocEm.find( [appid: perm.appid, sectionid: 'ELECTRICAL' ] ).first()?.designprofessionalid;
+		perm.profmechanicalid = subdocEm.find( [appid: perm.appid, sectionid: 'MECHANICAL' ] ).first()?.designprofessionalid;
+		perm.profsanitaryid = subdocEm.find( [appid: perm.appid, sectionid: 'SANITARY' ] ).first()?.designprofessionalid;
+		perm.profplumbingid = subdocEm.find( [appid: perm.appid, sectionid: 'PLUMBING' ] ).first()?.designprofessionalid;
+		perm.profelectronicid = subdocEm.find( [appid: perm.appid, sectionid: 'ELECTRONIC' ] ).first()?.designprofessionalid;
 
 		return perm;
 	}	

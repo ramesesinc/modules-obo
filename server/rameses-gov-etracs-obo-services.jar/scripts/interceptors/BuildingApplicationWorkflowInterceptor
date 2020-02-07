@@ -18,13 +18,11 @@ class BuildingApplicationWorkflowInterceptor {
 	def dateSvc;
 
 	@DataContext("building_evaluation")
-	def sectionEm;
+	def evalEm;
 
 	@DataContext("vw_building_evaluation")
 	def vwSectionEm;
 
-	@DataContext("vw_building_application_ancillary")
-	def vwAncillaryEm;
 
 	@DataContext("building_evaluation_type")
 	def evalTypeEm;
@@ -55,6 +53,12 @@ class BuildingApplicationWorkflowInterceptor {
 
 	@Service("BuildingApplicationService")
     def appSvc;
+
+	@DataContext("building_doc_type")
+	def doctypeEm;
+
+	@DataContext("building_application_subdoc")
+	def subdocEm;
 
     // --- RECEIVING ---- //
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action=='send-for-requirement-verification' }") 
@@ -114,24 +118,36 @@ class BuildingApplicationWorkflowInterceptor {
 		def appid = p.refid;
 		def state = r.state;
 
-		def mlist = evalTypeEm.getSectionsForActivation( [appid: appid, state: state ] )*.objid;
+		
+		def mlist = appEm.getEvaluationsToActivate( [appid: appid, state: state ] )*.objid;
+		//throw new Exception("list is " + [appid: appid, state: state ] + " " +mlist);
+
 		if( mlist ) {
 			def dt = dateSvc.getServerDate();
 			mlist.each {
-				//create each evaluation but check first if task exists
 				def m = [appid: appid, typeid: it ]
-				boolean b = sectionEm.find( m ).exists();
-				if(!b) {
-					m = sectionEm.create( m );
-					def f = [:];
-					f.processname = 'building_evaluation';
-					f.refid = m.objid;
-					f.startdate = dt;
-					f.info = [ type: it ];
-					wfSvc.start(f);				
-				}
+				m = evalEm.create( m );
+				def f = [:];
+				f.processname = 'building_evaluation';
+				f.refid = m.objid;
+				f.startdate = dt;
+				f.info = [ type: it ];
+				wfSvc.start(f);				
 			}
 		}		
+
+		//auto create documents that need to be activated
+		def dlist = appEm.getSubdocsToActivate( [appid: appid ] )*.objid;
+		//throw new Exception("list is " + appid + " " +dlist);
+		dlist.each {
+			def m = [:];
+			m.appid = appid;
+			m.doctype = [objid: it ];
+			m.state = 0;
+			m.amount = 0;
+			subdocEm.create( m );
+		}
+
 	}
 
 	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each
@@ -173,11 +189,14 @@ class BuildingApplicationWorkflowInterceptor {
 		//search first before creating the building permit
 		def perm = permitEm.find( [appid: appid]).first();
 		if(!perm) {
+			def bp = doctypeEm.find( [objid: "BUILDING_PERMIT"] ).first();
+			if(!bp) throw new Exception("BUILDING_PERMIT must be added in obo_permit_type");
 			//trigger the permit
 			def m = [:];
 			m.permitno = "TMP" + new UID();
 			m.appid = appid;
 			m.state = 0;
+			m.template = bp.template;
 			permitEm.create( m );			
 		}
 
@@ -186,12 +205,16 @@ class BuildingApplicationWorkflowInterceptor {
 		zlist.each {
 			def iss = issuanceEm.find( [appid: appid, issuancetypeid: it.issuanceid ] ).first();
 			if(!iss) {
+				def pt = doctypeEm.find( [objid: it.issuanceid ] ).first();
+				//throw new Exception("permit type found " + iss.issuanceid + " " + pt);
+
 				def m = [:];
 				m.appid = appid;
 				m.controlno = "TMP" + new UID();
 				m.issuancetypeid = it.issuanceid;
 				m.state = 0;
 				m.issuancetype = [objid: it.issuanceid ];
+				m.template = pt.template;
 				issuanceEm.create( m );
 			}
 		}

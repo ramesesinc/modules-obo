@@ -9,8 +9,11 @@ import com.rameses.osiris2.client.*;
 
 class OboPermitReportModel extends FormReportModel {
     
+    def permit;
+    
     def getQuery() {
-        return [objid: caller.entity.permit.objid];
+        if(permit==null) permit = caller.entity.permit;
+        return [objid: permit.objid];
     }
     
 }

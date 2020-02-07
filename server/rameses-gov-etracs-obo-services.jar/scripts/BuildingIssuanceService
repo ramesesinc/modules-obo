@@ -29,6 +29,7 @@ class BuildingIssuanceService {
 		u.dtissued = dateSvc.getServerDate();
 		u.controlno = p.controlno;
 		u.remarks = p.remarks;
+		u.expirydate = p.expirydate;
 
 		issEm.find( [objid: p.objid] ).update( u );
 

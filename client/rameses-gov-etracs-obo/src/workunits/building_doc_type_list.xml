@@ -1,0 +1,7 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="building_doc_type">
+    <invokers>
+        <invoker folderid="/explorer/master/obo" caption="Building Doc Types" action="init"  
+                 cols="objid,title,type,evaltypeid" 
+                 role="MASTER" />
+    </invokers>
+</workunit>

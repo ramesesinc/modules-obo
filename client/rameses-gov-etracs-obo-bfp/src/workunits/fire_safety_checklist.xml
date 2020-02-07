@@ -1,5 +1,16 @@
 <workunit>
     <invokers>
+        
+        <invoker type="building_application_subdoc:form:formActions" 
+                 caption="View Checklist" action="create" index="1"
+                  target="popup" />
+        
+        
+        <invoker type="building_application_subdoc:form:extActions" 
+                 caption="View Checklist 1" action="create" index="1"
+                  target="popup" />
+        
+        <!--
         <invoker type="vw_building_evaluation:form:extActions" 
                  caption="Add Fire Safety Checklist" action="create" index="1"
                  visibleWhen="#{ entity.firesafetychecklist?.objid==null 
@@ -8,9 +19,8 @@
         
         <invoker type="vw_building_evaluation:form:extActions" 
                  caption="View Fire Safety Checklist" action="open" index="1"
-                 visibleWhen="#{ entity.firesafetychecklist?.objid!=null 
-                    &amp;&amp; entity.typeid.toLowerCase() == 'fsec' }" target="popup" />
-                 
+                 visibleWhen="#{ entity.firesafetychecklist?.objid!=null }" target="popup" />
+        -->         
        <invoker type="formActions" caption="Close" action="_close" />
        <invoker type="formActions" caption="Print Report" action="printReport" index="2" />  
     </invokers> 

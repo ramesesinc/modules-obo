@@ -12,7 +12,7 @@ import com.rameses.enterprise.models.*;
 
 class BuildingAssessmentModel extends PageFlowController {
     
-    @Service("BuildingAssessmentService")
+    @Service("BuildingApplicationFeeService")
     def assmtSvc;
 
     def params;
@@ -36,15 +36,7 @@ class BuildingAssessmentModel extends PageFlowController {
 
     def doOk() {
         if(!list) return;
-        //save it here
-        list.each {
-            it.appid = params.appid;
-            it.sectionid = params.sectionid;
-            it.amtpaid = 0;
-        }
-        def pp = [appid: params.appid, items: list ];
-        def u = assmtSvc.saveFees( pp );
-        handler( u );
+        handler( [items: list] );
         return "_close";
     }
 

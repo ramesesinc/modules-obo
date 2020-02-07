@@ -59,10 +59,6 @@ public class OboMenuNotificationService {
 		return bldgPermitEm.select( "c:{COUNT(*)}" ).where("state = 0").val();
 	}
 
-	def building_issuance = { o->
-		def w = " issuancetypeid =:typeid AND state=0";
-		return issuanceEm.select( "c:{COUNT(*)}" ).where(w, o ).val();
-	}
 
 	@ProxyMethod
 	public def fetchNotifications( def p ) {
@@ -85,11 +81,6 @@ public class OboMenuNotificationService {
 			}	
 			else if( p.event == 'building_permit' ) {
 				it.count = building_permit( p )
-			}
-			else if( p.event == 'building_issuance_release' ) {
-				p.typeid = it.id?.split(":")[1];
-				p.state = 0;
-				it.count = building_issuance( p );
 			}
 		}	
 		return result;

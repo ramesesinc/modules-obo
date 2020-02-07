@@ -5,14 +5,14 @@
  */
 package com.rameses.gov.etracs.obo.views;
 
+import com.rameses.osiris2.themes.OKCancelPage;
 import com.rameses.rcp.ui.annotations.Template;
-import com.rameses.seti2.views.CrudFormPage;
 
 /**
  *
  * @author elmonazareno
  */
-@Template(CrudFormPage.class)
+@Template(OKCancelPage.class)
 public class OboFeePage extends javax.swing.JPanel {
 
     /**

@@ -13,8 +13,8 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class BuildingEvaluationCreateModel  {
 
-    @Service("PersistenceService")
-    def persistenceSvc;
+    @Service("BuildingEvaluationService")
+    def evalSvc;
     
     @Caller
     def caller;
@@ -27,10 +27,10 @@ class BuildingEvaluationCreateModel  {
     }
     
     def doOk() {
-        def m = [_schemaname: "building_evaluation"];
+        def m = [:];
         m.appno = appno;
         m.typeid = typeid;
-        persistenceSvc.create( m );
+        evalSvc.create( m );
         return "_close";
     }
     

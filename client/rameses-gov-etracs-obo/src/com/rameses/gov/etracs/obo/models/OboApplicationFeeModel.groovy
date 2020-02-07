@@ -10,38 +10,30 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class OboApplicationFeeModel extends CrudFormModel {
+class OboApplicationFeeModel  {
     
-    def appid;
-    def parentid;
+    def lookupName;
     def typeid;
-    def handler;
-    def source;
-    
-    def open( inv ) {
-        schemaName = inv.properties.schemaName;
-        source = inv.properties.source;
-        return super.open();
-    }
-    
-    def create( inv ) {
-        schemaName = inv.properties.schemaName;
-        source = inv.properties.source;
-        return super.create();
-    }
+    def entity;
+    def saveHandler;
 
-    void afterCreate() {
-        entity.appid = appid;
-        entity.sectionid = typeid;
-        entity.amtpaid = 0;
+    void init() {
+        if(!entity) entity = [:];
+        if(!entity.amtpaid) entity.amtpaid = 0;
     }
     
     def getLookupAccount() {
         def m = ["query.typeid": typeid ];
-        return Inv.lookupOpener(source + ":lookup", m );
+        return Inv.lookupOpener(lookupName + ":lookup", m );
     }
     
-    void afterSave() {
-        if(handler) handler(entity);
+    def doOk() {
+        saveHandler( entity );
+        return "_close";
     }
+    
+    def doCancel() {
+        return "_close";
+    }
+    
 }

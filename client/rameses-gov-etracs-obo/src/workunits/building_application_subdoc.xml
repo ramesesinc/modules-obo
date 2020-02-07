@@ -1,0 +1,20 @@
+<workunit schemaName="building_application_subdoc" allowCreate="false" allowEdit="false" allowDelete="false">
+    <invokers>
+        <invoker type="building_application_subdoc:open" caption="Subdocument" action="open" target="popup"/>
+        
+        <invoker type="feeActions" caption="Assess" action="assess"/>
+        <invoker type="feeActions" caption="Add Fee" action="addFee"/>
+        <invoker type="feeActions" caption="Edit Fee" action="editFee"/>        
+        <invoker type="feeActions" caption="Clear Fees" action="clearFees"/>
+
+        <!-- add item -->
+        <invoker type="checklistActions" caption="Add Item" action="addChecklistItems"/>
+        <invoker type="checklistActions" caption="Update Item" action="editItem"/>
+        <invoker type="checklistActions" caption="Remove Item" action="removeChecklistItems"/>
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationSubdocModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationSubdocPage" />
+    </pages>
+</workunit>

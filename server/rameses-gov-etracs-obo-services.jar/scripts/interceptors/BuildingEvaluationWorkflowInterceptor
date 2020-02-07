@@ -6,7 +6,10 @@ class BuildingEvaluationWorkflowInterceptor {
 	def findingEm;
 
 	@DataContext("vw_building_evaluation")
-	def sectionEm;
+	def vwEvalEm;
+
+	@DataContext("building_evaluation")
+	def evalEm;
 
 	@DataContext("building_application_fee")
 	def feeEm;
@@ -23,7 +26,7 @@ class BuildingEvaluationWorkflowInterceptor {
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action == 'send-for-revision' }" ) 
 	public void doActionBeforeRevision( def evt ) {
 		def p = evt.args[0];
-		def c = findingEm.find([parentid: p.refid]).where("state = 2 AND supersederid IS NULL").select("c:{COUNT(*)}").val();
+		def c = findingEm.find([parentid: p.refid]).where("state = 2 AND supersederid IS NULL AND transmittalid IS NULL").select("c:{COUNT(*)}").val();
 		if( c == 0 ) throw new Exception("There must be at least one open finding");
 	}
 
@@ -35,12 +38,9 @@ class BuildingEvaluationWorkflowInterceptor {
 
 		if( c > 0 ) throw new Exception("There must be no unresolved findings");
 		//check here if there are fees
-		def vs = sectionEm.find( [objid: p.refid] ).first();
-		if(vs.type.requirefee == 1 ) {
-			def pp = [appid: vs.appid, sectionid: vs.typeid ];
-
-			c = feeEm.find( pp ).select("c:{COUNT(*)}").val();
-			if( c == 0 ) throw new Exception("There must be at least one fee for this section");
+		def list = evalEm.getDocsThatRequireFees( [evaluationid: p.refid ] );
+		if(list) {
+			throw new Exception("The ff. must have fees: \n" + list*.title.join("\n") );
 		}
 	}
 
@@ -50,8 +50,8 @@ class BuildingEvaluationWorkflowInterceptor {
 	public void doActioAfterApproveOrRevise( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		def appid = sectionEm.find( [objid: p.refid] ).select("appid").val();
-		def cnt = sectionEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('for-revision', 'end') ").val();
+		def appid = vwEvalEm.find( [objid: p.refid] ).select("appid").val();
+		def cnt = vwEvalEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('for-revision', 'obo-processing') ").val();
 		if( cnt == 0 ) {
 			def app = appEm.find([objid:appid]).select("task.*").first();
 			def f = [:];
@@ -70,11 +70,11 @@ class BuildingEvaluationWorkflowInterceptor {
 		def p = evt.args[0];
 		def result = evt.result;
 
-		def sec = sectionEm.find( [objid: p.refid] ).first();
+		def sec = vwEvalEm.find( [objid: p.refid] ).first();
 		def appid = sec.appid;
 
-		//check that all are ended before moving this application to the next step. There should be no for-revision in this phase because it is already checked in before
-		def cnt = sectionEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('end') ").val();
+		//check that all are in obo-processing before moving this application to the next step. There should be no for-revision in this phase because it is already checked in before
+		def cnt = vwEvalEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('obo-processing') ").val();
 		if( cnt == 0 ) {
 			def app = appEm.find([objid:appid]).select("task.*").first();
 			def f = [:];

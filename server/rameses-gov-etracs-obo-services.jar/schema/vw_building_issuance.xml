@@ -48,6 +48,7 @@
 		<field name="zoneclass_title" />
 		<field name="location_address_text" />
 		<field name="sectionid" />
+		<field name="template" />
 	</element>
 </schema>	
 

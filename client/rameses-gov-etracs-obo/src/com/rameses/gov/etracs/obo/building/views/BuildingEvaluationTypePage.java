@@ -41,12 +41,10 @@ public class BuildingEvaluationTypePage extends javax.swing.JPanel {
         xComboBox2 = new com.rameses.rcp.control.XComboBox();
         xRadio1 = new com.rameses.rcp.control.XRadio();
         xRadio2 = new com.rameses.rcp.control.XRadio();
-        xCheckBox2 = new com.rameses.rcp.control.XCheckBox();
-        xCheckBox3 = new com.rameses.rcp.control.XCheckBox();
-        xLookupField2 = new com.rameses.rcp.control.XLookupField();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
+        xRadio3 = new com.rameses.rcp.control.XRadio();
+        xRadio4 = new com.rameses.rcp.control.XRadio();
         xPanel1 = new com.rameses.rcp.control.XPanel();
-        jPanel2 = new javax.swing.JPanel();
-        xButton1 = new com.rameses.rcp.control.XButton();
         schemaList3 = new com.rameses.seti2.components.SchemaList();
 
         setLayout(new java.awt.BorderLayout());
@@ -62,7 +60,7 @@ public class BuildingEvaluationTypePage extends javax.swing.JPanel {
         xTitledBorder1.setTitle("General Info");
         xFormPanel1.setBorder(xTitledBorder1);
         xFormPanel1.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
-        xFormPanel1.setCaptionWidth(180);
+        xFormPanel1.setCaptionWidth(120);
 
         xTextField1.setCaption("Code");
         xTextField1.setDisableWhen("#{ mode != 'create' }");
@@ -99,86 +97,45 @@ public class BuildingEvaluationTypePage extends javax.swing.JPanel {
         xComboBox2.setPreferredSize(new java.awt.Dimension(200, 22));
         xFormPanel1.add(xComboBox2);
 
-        xRadio1.setName("entity.optional"); // NOI18N
-        xRadio1.setOptionValue(0);
-        xRadio1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xRadio1.setShowCaption(false);
-        xRadio1.setText("Always Require ");
+        xRadio1.setCaption("");
+        xRadio1.setName("entity.required"); // NOI18N
+        xRadio1.setOptionValue(1);
+        xRadio1.setText("Activate always");
         xFormPanel1.add(xRadio1);
 
-        xRadio2.setName("entity.optional"); // NOI18N
-        xRadio2.setOptionValue(1);
-        xRadio2.setShowCaption(false);
-        xRadio2.setText("Optional. Activate only if there is associated ancillary permit applied");
+        xRadio2.setCaption("");
+        xRadio2.setName("entity.required"); // NOI18N
+        xRadio2.setOptionValue(0);
+        xRadio2.setText("Optional. Activate only if an associated subdocument exists");
         xFormPanel1.add(xRadio2);
 
-        xCheckBox2.setCheckValue(1);
-        xCheckBox2.setName("entity.requirefee"); // NOI18N
-        xCheckBox2.setUncheckValue(0);
-        xCheckBox2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xCheckBox2.setShowCaption(false);
-        xCheckBox2.setText("Require Fees ");
-        xCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xCheckBox2ActionPerformed(evt);
-            }
-        });
-        xFormPanel1.add(xCheckBox2);
+        xLabel1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel1.setShowCaption(false);
+        xLabel1.setText("Release Options (action after post payment)");
+        xFormPanel1.add(xLabel1);
 
-        xCheckBox3.setCheckValue(1);
-        xCheckBox3.setName("entity.issuepermit"); // NOI18N
-        xCheckBox3.setUncheckValue(0);
-        xCheckBox3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xCheckBox3.setShowCaption(false);
-        xCheckBox3.setText("Issue Permit/clearance");
-        xCheckBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xCheckBox3ActionPerformed(evt);
-            }
-        });
-        xFormPanel1.add(xCheckBox3);
+        xRadio3.setCaption("");
+        xRadio3.setName("entity.postpaymentaction"); // NOI18N
+        xRadio3.setOptionValue("end");
+        xRadio3.setText("End process after post payment");
+        xFormPanel1.add(xRadio3);
 
-        xLookupField2.setCaption("Permit Type");
-        xLookupField2.setExpression("#{ entity.permit.title }");
-        xLookupField2.setHandler("obo_permit_type:lookup");
-        xLookupField2.setName("entity.permit"); // NOI18N
-        xLookupField2.setCaptionWidth(120);
-        xLookupField2.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xLookupField2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLookupField2);
+        xRadio4.setCaption("");
+        xRadio4.setName("entity.postpaymentaction"); // NOI18N
+        xRadio4.setOptionValue("send-for-release");
+        xRadio4.setText("Send for release after post payment");
+        xFormPanel1.add(xRadio4);
 
         jPanel1.add(xFormPanel1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("General", jPanel1);
 
+        xPanel1.setCaption("Sub docs");
         xPanel1.setLayout(new java.awt.BorderLayout());
-
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-
-        xButton1.setName("addFeeItem"); // NOI18N
-        xButton1.setText("Add Item");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(485, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(xButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        xPanel1.add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
         schemaList3.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "item.objid"}
+                new Object[]{"name", "objid"}
                 , new Object[]{"caption", "ID"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 150}
@@ -193,8 +150,8 @@ public class BuildingEvaluationTypePage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "item.title"}
-                , new Object[]{"caption", "Account Title"}
+                new Object[]{"name", "title"}
+                , new Object[]{"caption", "Title"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
@@ -208,11 +165,11 @@ public class BuildingEvaluationTypePage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", null}
-                , new Object[]{"caption", " "}
+                new Object[]{"name", "type"}
+                , new Object[]{"caption", "Type"}
                 , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}
@@ -223,41 +180,32 @@ public class BuildingEvaluationTypePage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
+        schemaList3.setCustomFilter("evaltypeid = :objid");
         schemaList3.setHandlerName("itemHandler");
-        schemaList3.setQueryName("findingQry");
+        schemaList3.setQueryName("entity");
         schemaList3.setRowHeight(20);
-        schemaList3.setSchemaName("building_evaluation_type_itemaccount");
+        schemaList3.setSchemaName("building_doc_type");
         xPanel1.add(schemaList3, java.awt.BorderLayout.CENTER);
 
-        xTabbedPane1.addTab("Fee Accounts", xPanel1);
+        xTabbedPane1.addTab("Sub docs", xPanel1);
 
         add(xTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void xCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_xCheckBox2ActionPerformed
-
-    private void xCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xCheckBox3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_xCheckBox3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private com.rameses.seti2.components.SchemaList schemaList3;
-    private com.rameses.rcp.control.XButton xButton1;
-    private com.rameses.rcp.control.XCheckBox xCheckBox2;
-    private com.rameses.rcp.control.XCheckBox xCheckBox3;
     private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
+    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLookupField xLookupField1;
-    private com.rameses.rcp.control.XLookupField xLookupField2;
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XRadio xRadio1;
     private com.rameses.rcp.control.XRadio xRadio2;
+    private com.rameses.rcp.control.XRadio xRadio3;
+    private com.rameses.rcp.control.XRadio xRadio4;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;

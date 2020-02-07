@@ -44,7 +44,7 @@
 	<field name="controlno" class="java.lang.String"/>
 	<field name="dtissued" class="java.util.Date"/>
 	<field name="zone" class="java.lang.String"/>
-	<field name="dtvalidity" class="java.util.Date"/>
+	<field name="expirydate" class="java.util.Date"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -163,7 +163,7 @@
 						key="staticText-10"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Application No.]]></text>
 				</staticText>
@@ -176,7 +176,7 @@
 						key="staticText-11"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
 				<text><![CDATA[Decision No.]]></text>
 				</staticText>
@@ -189,9 +189,9 @@
 						key="staticText-12"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
-				<text><![CDATA[Date of Issuance]]></text>
+				<text><![CDATA[Date Issued Issuance]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -202,9 +202,9 @@
 						key="staticText-13"/>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
-				<text><![CDATA[Validity*]]></text>
+				<text><![CDATA[Date of Validity*]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -1150,7 +1150,7 @@
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{appno}]]></textFieldExpression>
 				</textField>
@@ -1163,7 +1163,7 @@
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{controlno}]]></textFieldExpression>
 				</textField>
@@ -1176,7 +1176,7 @@
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
@@ -1384,9 +1384,9 @@
 						key="textField"/>
 					<box></box>
 					<textElement>
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" isBold="true"/>
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="9" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtvalidity}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{expirydate}]]></textFieldExpression>
 				</textField>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

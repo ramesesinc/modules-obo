@@ -10,14 +10,26 @@ import com.rameses.util.*;
 import com.rameses.osiris2.reports.*;
 import com.rameses.seti2.models.*;
 
-public class OboSectionModel extends CrudFormModel {
+public class OboItemAccountModel extends CrudFormModel {
     
-    public def getLookupSection() {
-        def s = { o->
-            entity.sectionid = o.objid;
-            binding.refresh("entity.sectionid");
-        }
-        return Inv.lookupOpener("obo_section:lookup", [onselect: s])
+    def selectedTag;
+    
+    def addTag() {
+        def h = { o->
+            if( entity.reporttags.find{it.objid == o.objid} ) return;
+            def t = [objid:entity.objid+"-"+o.objid];
+            t.tag = o.objid;
+            t.itemid = entity.objid;
+            addItem( "reporttags", t );
+            //entity.reporttags << t;
+            binding.refresh();
+        }    
+        return Inv.lookupOpener( "sys_report_tag:lookup", [onselect:h ] );
+    }
+    
+    void removeTag() {
+        removeItem("reporttags", selectedTag );
+        entity.reporttags.remove( selectedTag );
     }
     
 }

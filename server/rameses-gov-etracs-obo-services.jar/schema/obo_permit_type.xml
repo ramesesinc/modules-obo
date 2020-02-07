@@ -4,6 +4,6 @@
 		<field name="title" searchable="true"/>
 		<field name="sortorder" />
 		<field name="type" />
-		<field name="handler" />
+		<field name="template" />
 	</element>
 </schema>	

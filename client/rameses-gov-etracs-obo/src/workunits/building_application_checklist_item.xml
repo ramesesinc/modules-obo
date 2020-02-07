@@ -1,0 +1,11 @@
+<workunit>
+    <invokers>
+        <invoker type="building_application_checklist_item" caption="Edit Item"
+                action="init" target="popup"/>
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationChecklistItemModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationChecklistItemPage" />
+    </pages>
+</workunit>

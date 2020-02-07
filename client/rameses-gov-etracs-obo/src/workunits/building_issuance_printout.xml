@@ -1,0 +1,15 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+        <invoker type="vw_building_issuance:form:formActions" 
+                 caption="View Printout"
+                 action="preview" 
+                 index="1" 
+                 reportId="building_issuance"
+                 visibleWhen="#{ entity.state != 0 }"/>
+        
+       <invoker type="building_issuance:attachment" 
+                 action="preview" 
+                 reportId="building_issuance"/> 
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboIssuanceReportModel" />
+</workunit>

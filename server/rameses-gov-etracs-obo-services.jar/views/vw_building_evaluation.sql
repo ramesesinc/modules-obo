@@ -4,9 +4,7 @@ SELECT
    a.*,
    et.title AS type_title,
    et.sortindex AS type_sortindex,
-   et.requirefee AS type_requirefee,
-   et.permitid AS type_permitid,
-
+   
    app.task_state AS app_task_state, 
 
    t.state AS task_state,

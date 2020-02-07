@@ -51,10 +51,10 @@ abstract class AbstractApplicationModel extends WorkflowTaskModel {
         },
         "sectionView" : { o->
             if(o == "open") {
-                sectionQry.where = sectionQry._filter +  " AND task.state NOT IN ('end') ";
+                sectionQry.where = sectionQry._filter +  " AND task.state NOT IN ('end', 'obo-processing') ";
             }
             else if(o == "closed") {
-                sectionQry.where = sectionQry._filter +  " AND task.state IN ('end') ";
+                sectionQry.where = sectionQry._filter +  " AND task.state IN ('end', 'obo-processing') ";
             }            
             else {
                 sectionQry.where = sectionQry._filter;                

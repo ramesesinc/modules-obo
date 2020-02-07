@@ -50,13 +50,10 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         xLabel12 = new com.rameses.rcp.control.XLabel();
         xLabel14 = new com.rameses.rcp.control.XLabel();
         xLabel13 = new com.rameses.rcp.control.XLabel();
-        xLabel17 = new com.rameses.rcp.control.XLabel();
-        xLabel18 = new com.rameses.rcp.control.XLabel();
-        xLabel19 = new com.rameses.rcp.control.XLabel();
         xActionBar4 = new com.rameses.rcp.control.XActionBar();
-        xPanel1 = new com.rameses.rcp.control.XPanel();
-        schemaList2 = new com.rameses.seti2.components.SchemaList();
-        xActionBar2 = new com.rameses.rcp.control.XActionBar();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        schemaList4 = new com.rameses.seti2.components.SchemaList();
         xPanel2 = new com.rameses.rcp.control.XPanel();
         schemaList1 = new com.rameses.seti2.components.SchemaList();
         xActionBar3 = new com.rameses.rcp.control.XActionBar();
@@ -158,25 +155,6 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         xLabel13.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel13);
 
-        xLabel17.setCaption("Payment Info");
-        xLabel17.setExpression("#{receipt.receiptno}");
-        xLabel17.setName("entity.rptinfo.text"); // NOI18N
-        xLabel17.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel17.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel17);
-
-        xLabel18.setCaption("Date Paid");
-        xLabel18.setExpression("#{receipt.receiptdate}");
-        xLabel18.setName("entity.rptinfo.text"); // NOI18N
-        xLabel18.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel18);
-
-        xLabel19.setCaption("Amount");
-        xLabel19.setExpression("#{receipt.amount}");
-        xLabel19.setName("entity.rptinfo.text"); // NOI18N
-        xLabel19.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel19);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -186,7 +164,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(784, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +173,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                     .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -207,16 +185,61 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
 
         xTabbedPane1.addTab("General Info", jPanel1);
 
-        xPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
-        schemaList2.setAllowDelete(true);
-        schemaList2.setColumns(new com.rameses.rcp.common.Column[]{
+        jPanel4.setPreferredSize(new java.awt.Dimension(0, 30));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.NORTH);
+
+        schemaList4.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "item.title"}
-                , new Object[]{"caption", "Title"}
+                new Object[]{"name", null}
+                , new Object[]{"caption", "Control No"}
                 , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 0}
+                , new Object[]{"minWidth", 150}
+                , new Object[]{"maxWidth", 200}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"expression", "#{ item.state == 0 ? '' : item.controlno }"}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.LabelColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "doctype.title"}
+                , new Object[]{"caption", "Title"}
+                , new Object[]{"width", 200}
+                , new Object[]{"minWidth", 200}
                 , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "doctype.type"}
+                , new Object[]{"caption", "Doc Type"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 100}
+                , new Object[]{"maxWidth", 100}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}
@@ -230,37 +253,6 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
                 new Object[]{"name", "amount"}
                 , new Object[]{"caption", "Amount"}
                 , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 150}
-                , new Object[]{"maxWidth", 200}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.DecimalColumnHandler("#,##0.00", -1.0, -1.0, false, 2)}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", null}
-                , new Object[]{"caption", "Status"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 100}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"expression", "#{ item.balance == 0 ? 'Paid' : '' }"}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.LabelColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "remarks"}
-                , new Object[]{"caption", "Remarks"}
-                , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
                 , new Object[]{"required", false}
@@ -270,23 +262,17 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
                 , new Object[]{"visible", true}
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.DecimalColumnHandler("#,##0.00", -1.0, -1.0, false, 2)}
             })
         });
-        schemaList2.setCustomFilter("appid = :appid AND sectionid = :typeid");
-        schemaList2.setHandlerName("feeListHandler");
-        schemaList2.setName(""); // NOI18N
-        schemaList2.setQueryName("entity");
-        schemaList2.setRowHeight(20);
-        schemaList2.setSchemaName("building_application_fee");
-        xPanel1.add(schemaList2, java.awt.BorderLayout.CENTER);
+        schemaList4.setCustomFilter("appid = :appid AND doctype.evaltypeid = :typeid");
+        schemaList4.setFormActions("docActions");
+        schemaList4.setHandlerName("doclistModel");
+        schemaList4.setQueryName("entity");
+        schemaList4.setSchemaName("building_application_subdoc");
+        jPanel3.add(schemaList4, java.awt.BorderLayout.CENTER);
 
-        xActionBar2.setFormName("formName");
-        xActionBar2.setName("feeActions"); // NOI18N
-        xActionBar2.setUseToolBar(false);
-        xPanel1.add(xActionBar2, java.awt.BorderLayout.PAGE_START);
-
-        xTabbedPane1.addTab("Fees", xPanel1);
+        xTabbedPane1.addTab("Documents", jPanel3);
 
         xPanel2.setLayout(new java.awt.BorderLayout());
 
@@ -375,9 +361,10 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private com.rameses.seti2.components.SchemaList schemaList1;
-    private com.rameses.seti2.components.SchemaList schemaList2;
-    private com.rameses.rcp.control.XActionBar xActionBar2;
+    private com.rameses.seti2.components.SchemaList schemaList4;
     private com.rameses.rcp.control.XActionBar xActionBar3;
     private com.rameses.rcp.control.XActionBar xActionBar4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
@@ -388,9 +375,6 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel14;
     private com.rameses.rcp.control.XLabel xLabel15;
     private com.rameses.rcp.control.XLabel xLabel16;
-    private com.rameses.rcp.control.XLabel xLabel17;
-    private com.rameses.rcp.control.XLabel xLabel18;
-    private com.rameses.rcp.control.XLabel xLabel19;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel20;
     private com.rameses.rcp.control.XLabel xLabel21;
@@ -399,7 +383,6 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XLabel xLabel9;
-    private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel2;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     // End of variables declaration//GEN-END:variables

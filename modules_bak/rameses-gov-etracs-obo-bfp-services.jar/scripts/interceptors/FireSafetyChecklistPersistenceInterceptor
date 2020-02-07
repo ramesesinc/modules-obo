@@ -1,0 +1,24 @@
+import com.rameses.annotations.*; 
+
+class FireSafetyChecklistPersistenceInterceptor {
+	
+	@DataContext("fire_safety_checklist")
+	def checkListEm;
+
+	//after opening the evaluation
+	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_building_evaluation' }")
+	public void afterOpenEvaluation(def evt) {
+		def p = evt.args[0];
+		def a = evt.result;
+
+		throw new Exception("fire checklist " + a.typeid );
+
+		def chk = checkListEm.find(n [appid: a.appid ] ).first();
+		if( chk ) {
+			a.firesafetychecklist = chk;
+		}
+	}
+
+	
+
+}
