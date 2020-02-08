@@ -204,7 +204,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
 
         schemaList4.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", null}
+                new Object[]{"name", "controlno"}
                 , new Object[]{"caption", "Control No"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 150}
@@ -216,8 +216,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
                 , new Object[]{"visible", true}
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"expression", "#{ item.state == 0 ? '' : item.controlno }"}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.LabelColumnHandler()}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "doctype.title"}
@@ -269,7 +268,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         schemaList4.setFormActions("docActions");
         schemaList4.setHandlerName("doclistModel");
         schemaList4.setQueryName("entity");
-        schemaList4.setSchemaName("building_application_subdoc");
+        schemaList4.setSchemaName("vw_building_application_subdoc");
         jPanel3.add(schemaList4, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Documents", jPanel3);

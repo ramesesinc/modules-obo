@@ -621,7 +621,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.LabelColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", null}
+                new Object[]{"name", "controlno"}
                 , new Object[]{"caption", "Control No"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
@@ -633,8 +633,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
                 , new Object[]{"visible", true}
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"expression", "#{ item.state == 0 ? '' : item.controlno }"}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.LabelColumnHandler()}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "issuedby.name"}
@@ -671,7 +670,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         schemaList4.setFormActions("ancillaryActions");
         schemaList4.setHandlerName("ancillaryListModel");
         schemaList4.setQueryName("entity");
-        schemaList4.setSchemaName("building_application_subdoc");
+        schemaList4.setSchemaName("vw_building_application_subdoc");
         jPanel6.add(schemaList4, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Documents", jPanel6);
@@ -1205,7 +1204,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "sectionid"}
+                new Object[]{"name", "doctypeid"}
                 , new Object[]{"caption", "Section"}
                 , new Object[]{"width", 80}
                 , new Object[]{"minWidth", 150}
@@ -1272,7 +1271,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         schemaList11.setQueryName("feeQry");
         schemaList11.setRowHeight(20);
         schemaList11.setRows(50);
-        schemaList11.setSchemaName("building_application_fee");
+        schemaList11.setSchemaName("vw_building_application_fee");
         xPanel7.add(schemaList11, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Assessment", xPanel7);

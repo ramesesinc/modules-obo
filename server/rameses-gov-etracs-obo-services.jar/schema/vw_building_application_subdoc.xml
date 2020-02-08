@@ -1,6 +1,6 @@
 <schema>
-	<element tablename="building_application_subdoc">
-		<field name="objid" primary="true" prefix="BASUBDOC"/>
+	<element tablename="vw_building_application_subdoc">
+		<field name="objid" primary="true" />
 		<field name="appid" required="true"/>
 		<field name="state" required="true" type="integer"/>
 		<field name="contractorname"/>
@@ -24,6 +24,15 @@
 		<!-- copied from doctype -->
 		<field name="amount" type="decimal"/>
 		<field name="issuanceid" />
+
+		<!-- issuance -->
+		<field name="controlno" />
+		<field name="dtissued" />
+		<field name="issuedby_name" />
+		<field name="issuedby_objid" />
+		<field name="expirydate" />
+		<field name="template" />
+		<field name="transmittalid" />
 
 	</element>
 </schema>

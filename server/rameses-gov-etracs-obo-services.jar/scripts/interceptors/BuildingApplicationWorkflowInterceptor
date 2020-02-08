@@ -21,11 +21,7 @@ class BuildingApplicationWorkflowInterceptor {
 	def evalEm;
 
 	@DataContext("vw_building_evaluation")
-	def vwSectionEm;
-
-
-	@DataContext("building_evaluation_type")
-	def evalTypeEm;
+	def vwEvalEm;
 
 	@DataContext("building_application")
 	def appEm;
@@ -64,6 +60,10 @@ class BuildingApplicationWorkflowInterceptor {
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action=='send-for-requirement-verification' }") 
 	public void doActionBeforeReceiving( def evt ) {
 		def p = evt.args[0];
+
+		//temporary
+		return;
+
 		def c = rpuEm.find( [appid: p.refid ]).where("taxdeclarationid IS NULL").exists();
 		if( c ) throw new Exception("Please generate the tax declaration documents first");
 		c = rpuEm.find( [appid: p.refid ]).where("truecopycertid IS NULL").exists();
@@ -118,7 +118,6 @@ class BuildingApplicationWorkflowInterceptor {
 		def appid = p.refid;
 		def state = r.state;
 
-		
 		def mlist = appEm.getEvaluationsToActivate( [appid: appid, state: state ] )*.objid;
 		//throw new Exception("list is " + [appid: appid, state: state ] + " " +mlist);
 
@@ -131,22 +130,10 @@ class BuildingApplicationWorkflowInterceptor {
 				f.processname = 'building_evaluation';
 				f.refid = m.objid;
 				f.startdate = dt;
-				f.info = [ type: it ];
+				f.info = [ type: it, appid: appid ];
 				wfSvc.start(f);				
 			}
 		}		
-
-		//auto create documents that need to be activated
-		def dlist = appEm.getSubdocsToActivate( [appid: appid ] )*.objid;
-		//throw new Exception("list is " + appid + " " +dlist);
-		dlist.each {
-			def m = [:];
-			m.appid = appid;
-			m.doctype = [objid: it ];
-			m.state = 0;
-			m.amount = 0;
-			subdocEm.create( m );
-		}
 
 	}
 
@@ -154,7 +141,7 @@ class BuildingApplicationWorkflowInterceptor {
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'reactivate' }" ) 
 	public void reactivateEvaluationTasks( def evt ) {
 		def p = evt.args[0];
-		def list = vwSectionEm.select("objid,taskid").find( [appid: p.refid ] ).where( " task.state = 'for-revision' " ).list();
+		def list = vwEvalEm.select("objid,taskid").find( [appid: p.refid ] ).where( " task.state = 'for-revision' " ).list();
 		if( list ) {
 			def dt = dateSvc.getServerDate();
 			list.each {
@@ -174,8 +161,8 @@ class BuildingApplicationWorkflowInterceptor {
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'send-for-assessment-approval' }") 
 	public void doActionBeforeApproveAssessment( def evt ) {
 		def p = evt.args[0];
-		def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").where("sectionid IS NULL").val();
-		if( c == 0 )
+		def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").where("parentid IS NULL").val();
+		if( c==null || c == 0 )
 			throw new Exception("There must be at least one fee");		
 	}
 
@@ -186,39 +173,18 @@ class BuildingApplicationWorkflowInterceptor {
 		def appid = p.refid;
 		def dt = dateSvc.getServerDate();
 
-		//search first before creating the building permit
-		def perm = permitEm.find( [appid: appid]).first();
-		if(!perm) {
-			def bp = doctypeEm.find( [objid: "BUILDING_PERMIT"] ).first();
-			if(!bp) throw new Exception("BUILDING_PERMIT must be added in obo_permit_type");
-			//trigger the permit
-			def m = [:];
-			m.permitno = "TMP" + new UID();
-			m.appid = appid;
-			m.state = 0;
-			m.template = bp.template;
-			permitEm.create( m );			
+		//trigger the evaluation tasks
+		def wlist = vwEvalEm.find([appid:appid]).list();
+		wlist.each {
+			def f = [:];
+			f.processname = 'building_evaluation';
+			f.refid = it.objid;
+			f.taskid = it.taskid;
+			f.startdate = dt;
+			f.action = it.type.postpaymentaction;
+			f.info = [:];
+			wfSvc.signal(f);
 		}
-
-		def zlist = evalTypeEm.where( "NOT(issuanceid IS NULL)"  ).list();
-		//find each evaluation type that has issuance permit id and create it
-		zlist.each {
-			def iss = issuanceEm.find( [appid: appid, issuancetypeid: it.issuanceid ] ).first();
-			if(!iss) {
-				def pt = doctypeEm.find( [objid: it.issuanceid ] ).first();
-				//throw new Exception("permit type found " + iss.issuanceid + " " + pt);
-
-				def m = [:];
-				m.appid = appid;
-				m.controlno = "TMP" + new UID();
-				m.issuancetypeid = it.issuanceid;
-				m.state = 0;
-				m.issuancetype = [objid: it.issuanceid ];
-				m.template = pt.template;
-				issuanceEm.create( m );
-			}
-		}
-
 	}
 
 	//release process. Make sure there is at least one building_application_issuance
@@ -226,16 +192,12 @@ class BuildingApplicationWorkflowInterceptor {
 	public void doActionBeforeRelease( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;
-		def pmt = permitEm.find( [appid: appid]).first();
-		if( !pmt) throw new Exception("Permit not found");
-		if(pmt.state == 0) throw new Exception("Permit is not yet issued. Please issue the permit first");
 
-		def errs = [];
-		def list = issuanceEm.find( [appid: appid ]).where("state = 0").list();		
-		list.each {
-			errs << it.issuancetype.title;
-		}
-		if(errs) throw new Exception("The ff. are not yet released. \n" +  errs.join("\n"));
+		def c = vwEvalEm.find([appid:appid]).select("c:{COUNT(*)}").where("NOT(task.state = 'end')").val();
+		if(c!=null && c > 0 ) throw new Exception("All evaluation tasks must be closed");
+
+		def app = appEm.find([objid: appid]).first();
+		if( !app.permit?.objid ) throw new Exception("Please issue first the permit");
 	}
 
 

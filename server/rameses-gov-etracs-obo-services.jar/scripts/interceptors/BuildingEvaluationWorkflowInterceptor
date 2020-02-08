@@ -2,6 +2,12 @@ import com.rameses.annotations.*;
 
 class BuildingEvaluationWorkflowInterceptor {
 	
+	@Service("DateService")
+	def dateSvc;
+
+	@Service("WorkflowTaskService")
+	def wfSvc;
+
 	@DataContext("building_evaluation_finding")
 	def findingEm;
 
@@ -17,11 +23,28 @@ class BuildingEvaluationWorkflowInterceptor {
 	@DataContext("vw_building_application")
 	def appEm;
 
-	@Service("DateService")
-	def dateSvc;
+	@DataContext("building_application_subdoc")
+	def subdocEm;
 
-	@Service("WorkflowTaskService")
-	def wfSvc;
+	@DataContext("building_doc_type")
+	def doctypeEm;
+
+	@After(pattern="WorkflowTaskService.start", eval="#{args[0].processname == 'building_evaluation' }" ) 
+	public void afterStart( def evt ) {
+		def p = evt.args[0];
+		def appid = p.info.appid;	//appid
+		def dlist = evalEm.getSubdocsToActivate( [objid: p.refid ] );
+		if( dlist) {
+			dlist*.objid.each {
+				def m = [:];
+				m.appid = appid;
+				m.doctype = [objid: it ];
+				m.state = 0;
+				m.amount = 0;
+				subdocEm.create( m );
+			}
+		}
+	}
 
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action == 'send-for-revision' }" ) 
 	public void doActionBeforeRevision( def evt ) {
@@ -66,7 +89,7 @@ class BuildingEvaluationWorkflowInterceptor {
 	}
 
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action == 'approve' }" ) 
-	public void doActioAfterApprove( def evt ) {
+	public void doActionAfterApprove( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 
@@ -88,6 +111,22 @@ class BuildingEvaluationWorkflowInterceptor {
 		}
 	}
 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action == 'release' }" ) 
+	public void doActionBeforeRelease( def evt ) {
+		def p = evt.args[0];
+
+		def ev = vwEvalEm.find( [objid: p.refid ] ).first();
+
+		//issuetype = 2 means it requires it to be issued
+		def where = "doctype.evaltypeid = :typeid AND doctype.issuetype = 2 AND issuanceid IS NULL";
+		def wlist = subdocEm.find( [appid: ev.appid] ).select("doctype.title").where(where, [typeid: ev.typeid]).list();
+		
+		def errs = [];
+		wlist.each {
+			errs << it.doctype.title;
+		}
+		if(errs) throw new Exception("The ff. documents must be released: \n" + errs.join(","));
+	}
 
 
 	

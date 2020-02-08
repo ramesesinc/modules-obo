@@ -29,6 +29,8 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
     @Service("BuildingApplicationChecklistService")
     def chklistSvc;
 
+    @Service("BuildingIssuanceService")
+    def issuanceSvc;
     
     def selectedInfo;
     def infos;
@@ -228,6 +230,20 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
     public def editItem() {
         if(selectedChecklistItem == null) throw new Exception("Please select an item");
         return updateChecklistItem(selectedChecklistItem);
+    }
+    
+    
+    void print() {
+        MsgBox.alert( "template " + entity.doctype.template )
+    }
+    
+     def issueControl() {
+          def h = { o->
+            o.objid = entity.objid;
+            issuanceSvc.issueControl( o );
+            reloadEntity();
+        }
+        return Inv.lookupOpener("building_issue_controlno", [handler: h, showcontrolno: true]);
     }
     
 }

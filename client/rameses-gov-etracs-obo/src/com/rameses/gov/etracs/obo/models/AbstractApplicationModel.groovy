@@ -100,39 +100,6 @@ abstract class AbstractApplicationModel extends WorkflowTaskModel {
     }
     
     
-    /**************************************************************************
-    * assessment actions
-    ***************************************************************************/
-    def calcAmount = { 
-        def m = [_schemaname: getPermitName() + "_fee"];
-        m.findBy = [appid :entity.objid];
-        m.select = "total:{SUM(amount)}";
-        return queryService.findFirst(m).total;
-    }
-    
-    def assess() {
-        def f = [:];
-        f.appid = entity.objid;
-        def h  = { u->
-            feeListHandler.reload();
-            entity.amount = u.amount;
-            binding.refresh("entity.amount")
-        }
-        return Inv.lookupOpener(getPermitName() + ":assessment", [params: f, handler: h] );
-    }
-    
-    def addFee() {
-        def m = [appid: entity.objid ];
-        m.handler = { o->
-            feeListHandler.reload();
-            entity.amount = calcAmount(); 
-        }
-        return Inv.lookupOpener(getPermitName() + "_fee:create", m );
-    }
-    
-    def clearFees() {
-        throw new Exception("clearFees method not supported")
-    }
     
     
     def previewFees() {

@@ -4,6 +4,7 @@ SELECT
    a.*,
    et.title AS type_title,
    et.sortindex AS type_sortindex,
+   et.postpaymentaction AS type_postpaymentaction,
    
    app.task_state AS app_task_state, 
 

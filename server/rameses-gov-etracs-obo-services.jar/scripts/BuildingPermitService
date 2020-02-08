@@ -20,6 +20,9 @@ class BuildingPermitService {
 	@DataContext("building_permit")
 	def permitEm;
 
+	@DataContext("building_application")
+	def appEm;
+
 	@Service("Var")
 	def sysvar;
 
@@ -33,7 +36,7 @@ class BuildingPermitService {
 	def env;
 
 	@ProxyMethod
-	public def issuePermitNo( def p ) {
+	public void issuePermitNo( def p ) {
 		def permit = permitEm.find( [objid: p.objid] ).first();
 		if(!permit) throw new Exception("Permit does not exist");
 		if(permit.state!=0) throw new Exception("This has already been issued");
@@ -49,8 +52,9 @@ class BuildingPermitService {
 		u.permitno = controlNoSvc.getNextNo( pattern );
 		u.remarks = p.remarks;
 		u.expirydate = p.expirydate;
-		permitEm.find( [objid: p.objid] ).update( u );
-		return u;
+		permitEm.create( u );
+
+		appEm.find( [objid: p.objid] ).update( [permitid: u.objid ] );
 	}
 
 

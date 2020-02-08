@@ -46,7 +46,7 @@
                 caption="Issue Permit"
                 action="issuePermit" 
                 visibleWhen="#{task.state == 'releasing'
-                    &amp;&amp; entity.permit?.state == 0                    
+                    &amp;&amp; entity.permitid == null                   
                     &amp;&amp; task.assignee.objid == userInfo.userid }"   />            
                     
     </invokers>

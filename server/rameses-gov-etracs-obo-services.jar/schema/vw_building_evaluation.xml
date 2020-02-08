@@ -10,6 +10,7 @@
 		<field name="taskid" />
 		<field name="type_title" />
 		<field name="type_sortindex" />
+		<field name="type_postpaymentaction" />
 
 		<field name="task_state" />
 		<field name="task_startdate" />

@@ -62,8 +62,41 @@ class BuildingApplicationModel extends AbstractApplicationModel {
         return Inv.lookupOpener("vw_obo_occupancy_type:lookup", [onselect: h] );
     }
     
-    def clearFees() {
-        entity.amount = feeSvc.clearFees([appid: entity.objid]);
+    /*******
+    * ASSESSMENT
+    *******/
+    /**************************************************************************
+    * assessment actions
+    ***************************************************************************/
+    def assess() {
+        def f = [:];
+        f.appid = entity.objid;
+        def h  = { u->
+            def m1 = [appid: entity.objid, items: u.items];
+            m1 = feeSvc.saveFees( m1 );
+            entity.amount = m1.amount;            
+            feeListHandler.reload();
+            binding.refresh("entity.amount")
+        }
+        return Inv.lookupOpener("building_assessment", [params: f, handler: h] );
+    }
+    
+    def addFee() {
+        def m = [:];
+        m.lookupName = "obo_itemaccount";
+        m.entity = [appid:entity.objid];
+        m.saveHandler = { o->
+            o = feeSvc.saveFee( o );
+            entity.amount = o.amount;
+            feeListHandler.reload();
+            binding.refresh("entity.amount");
+        }
+        return Inv.lookupOpener("building_application_fee", m );
+    }
+    
+    void clearFees() {
+        feeSvc.clearFees( [appid:entity.objid ]);
+        entity.amount = 0;
         binding.refresh("entity.amount");
     }
     

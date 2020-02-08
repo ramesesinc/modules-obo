@@ -34,6 +34,9 @@ public class BuildingApplicationFeeService  {
 	@DataContext("building_application_fee")
 	def feeEm;
 
+	@DataContext("building_application_rpu")
+	def rpuEm;
+
 	public def assess(o) {
 
 		def vapp = vwAppEm.find( [objid: o.appid ] ).first();

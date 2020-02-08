@@ -92,6 +92,7 @@ class BuildingApplicationInitialService {
 			it.appid = newapp.objid;
 			it.doctype = [ objid: it.permittypeid.toUpperCase() ];
 			it.amount = 0;
+			it.state = 0;
 			subdocEm.create( it );
 		}
 		app.infos.each {
