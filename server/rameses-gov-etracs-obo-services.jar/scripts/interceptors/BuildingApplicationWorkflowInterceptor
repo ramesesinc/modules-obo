@@ -197,7 +197,7 @@ class BuildingApplicationWorkflowInterceptor {
 		if(c!=null && c > 0 ) throw new Exception("All evaluation tasks must be closed");
 
 		def app = appEm.find([objid: appid]).first();
-		if( !app.permit?.objid ) throw new Exception("Please issue first the permit");
+		if( !app.permitid ) throw new Exception("Please issue first the permit");
 	}
 
 

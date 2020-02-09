@@ -14,7 +14,8 @@
         
         <!-- print -->
         <invoker type="formActions" caption="Print" action="print"/>
-        <invoker type="formActions" caption="Issue Control" action="issueControl"/>
+        <invoker type="formActions" caption="Issue Control" action="issueControl"
+            visibleWhen="#{entity.issuanceid == null }"/>
         
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationSubdocModel" />

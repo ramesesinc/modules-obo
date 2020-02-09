@@ -9,6 +9,6 @@
 		<field name="state"	/>
 		<field name="expirydate"/>
 		<field name="remarks"/>
-		<field name="template" required="true"/>
+		<field name="template"/>
 	</element>
 </schema>

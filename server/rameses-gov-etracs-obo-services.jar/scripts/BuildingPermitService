@@ -17,46 +17,12 @@ class BuildingPermitService {
 	@DataContext("building_permit_rpu")
 	def rptEm;
 
-	@DataContext("building_permit")
-	def permitEm;
-
-	@DataContext("building_application")
-	def appEm;
-
-	@Service("Var")
-	def sysvar;
 
 	@Service("DateService")
 	def dateSvc;
 
-	@Service("ControlnoGeneratorService")
-	def controlNoSvc;
-
 	@Env
 	def env;
-
-	@ProxyMethod
-	public void issuePermitNo( def p ) {
-		def permit = permitEm.find( [objid: p.objid] ).first();
-		if(!permit) throw new Exception("Permit does not exist");
-		if(permit.state!=0) throw new Exception("This has already been issued");
-		//type = iss.issuancetype.objid;
-		def pattern = sysvar.get( "building_permit_permitno" );
-		if(!pattern) 
-			throw new Exception("Please define building_application_appno entry in sys_var. Ex. BP-[yyyyMM]-[%05d]");
-		
-		def u = [:];
-		u.state = 1;
-		u.issuedby = [ objid: env.USERID, name: env.FULLNAME ];
-		u.dtissued = dateSvc.getServerDate();
-		u.permitno = controlNoSvc.getNextNo( pattern );
-		u.remarks = p.remarks;
-		u.expirydate = p.expirydate;
-		permitEm.create( u );
-
-		appEm.find( [objid: p.objid] ).update( [permitid: u.objid ] );
-	}
-
 
 	//used for occupancy permit
 	@ProxyMethod

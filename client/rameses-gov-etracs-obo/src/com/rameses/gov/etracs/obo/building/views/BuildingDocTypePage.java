@@ -47,6 +47,8 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
         xRadio4 = new com.rameses.rcp.control.XRadio();
         xTextField4 = new com.rameses.rcp.control.XTextField();
         xRadio5 = new com.rameses.rcp.control.XRadio();
+        xRadio6 = new com.rameses.rcp.control.XRadio();
+        xTextField5 = new com.rameses.rcp.control.XTextField();
         xPanel1 = new com.rameses.rcp.control.XPanel();
         jPanel2 = new javax.swing.JPanel();
         xButton1 = new com.rameses.rcp.control.XButton();
@@ -136,7 +138,7 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
         xRadio4.setName("entity.issuetype"); // NOI18N
         xRadio4.setOptionValue(1);
         xRadio4.setShowCaption(false);
-        xRadio4.setText("Auto-issue of control number after building permit issued");
+        xRadio4.setText("Auto-issue of control number");
         xFormPanel1.add(xRadio4);
 
         xTextField4.setCaption("Pattern");
@@ -146,6 +148,7 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
         xTextField4.setCaptionWidth(80);
         xTextField4.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
         xTextField4.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         xFormPanel1.add(xTextField4);
 
         xRadio5.setCaption("");
@@ -154,6 +157,23 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
         xRadio5.setShowCaption(false);
         xRadio5.setText("Manually issue control number");
         xFormPanel1.add(xRadio5);
+
+        xRadio6.setCaption("");
+        xRadio6.setName("entity.issuetype"); // NOI18N
+        xRadio6.setOptionValue(3);
+        xRadio6.setShowCaption(false);
+        xRadio6.setText("Auto-issue of control number after building permit issued");
+        xFormPanel1.add(xRadio6);
+
+        xTextField5.setCaption("Pattern");
+        xTextField5.setDepends(new String[] {"entity.issuetype"});
+        xTextField5.setName("entity.controlnopattern"); // NOI18N
+        xTextField5.setVisibleWhen("#{ entity.issuetype == 3 }");
+        xTextField5.setCaptionWidth(80);
+        xTextField5.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xTextField5.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField5.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        xFormPanel1.add(xTextField5);
 
         jPanel1.add(xFormPanel1, java.awt.BorderLayout.CENTER);
 
@@ -245,21 +265,21 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 613, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(xTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 489, Short.MAX_VALUE)
+            .addGap(0, 530, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(xTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap()
+                    .addComponent(xTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(21, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -280,10 +300,12 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XRadio xRadio3;
     private com.rameses.rcp.control.XRadio xRadio4;
     private com.rameses.rcp.control.XRadio xRadio5;
+    private com.rameses.rcp.control.XRadio xRadio6;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
     private com.rameses.rcp.control.XTextField xTextField3;
     private com.rameses.rcp.control.XTextField xTextField4;
+    private com.rameses.rcp.control.XTextField xTextField5;
     // End of variables declaration//GEN-END:variables
 }

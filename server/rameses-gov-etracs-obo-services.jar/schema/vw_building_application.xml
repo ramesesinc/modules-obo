@@ -60,19 +60,16 @@
 		<field name="contractorid" />
 		<field name="txnmode" />
 		
-		<complex name="contractor" ref="vw_building_application_professional" jointype="many-to-one" required="false" includefields="name,prc.*">
+		<complex name="contractor" ref="vw_building_application_professional" jointype="many-to-one" required="false" includefields="name,profession,prc.*,ptr.*">
 			<key field="contractorid" target="objid" />
 		</complex> 
-
-		<complex name="payment" ref="building_application_payment" jointype="many-to-one" required="false"
-			includefields="refno,refdate,amount">
-			<key field="objid" target="appid" />
-		</complex>
 		
-		<complex name="permit" ref="building_permit" jointype="many-to-one" required="false">
-			<key field="objid" target="appid" />
-		</complex>
-
+		<field name="permitid" />
+		<field name="permitno" />
+		<field name="dtissued" />
+		<field name="expirydate" />
+		<field name="issuedby_name" />
+		<field name="template" />
 	</element>
 </schema>	
 

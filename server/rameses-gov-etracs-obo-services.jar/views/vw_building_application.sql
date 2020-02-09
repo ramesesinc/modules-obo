@@ -32,9 +32,11 @@ SELECT
    t.actor_name AS task_actor_name,
    (SELECT title FROM sys_wf_node WHERE processname = 'building_application' AND name=t.state) AS task_title,
 
-   pmt.permitno AS permit_permitno,
-   pmt.expirydate AS permit_expirydate,
-   pmt.dtissued AS permit_dtissued
+   pmt.permitno,
+   pmt.expirydate,
+   pmt.dtissued,
+   pmt.issuedby_name,
+   pmt.template 
 
 FROM building_application a 
 INNER JOIN building_application_task t ON a.taskid = t.taskid
@@ -42,5 +44,5 @@ INNER JOIN obo_occupancy_type bt ON a.occupancytypeid = bt.objid
 INNER JOIN obo_occupancy_type_division od ON bt.divisionid = od.objid
 INNER JOIN obo_occupancy_type_group og ON od.groupid = og.objid
 LEFT JOIN obo_zoneclass zc ON a.zoneclassid = zc.objid
-LEFT JOIN building_permit pmt ON pmt.appid = a.objid
+LEFT JOIN building_permit pmt ON a.permitid=pmt.objid
 

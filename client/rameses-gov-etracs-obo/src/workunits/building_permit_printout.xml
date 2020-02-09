@@ -6,7 +6,7 @@
                  index="1" 
                  reportId="building_permit"
                  reportName="com/rameses/gov/etracs/obo/reports/building_permit.jasper"
-                 visibleWhen="#{ entity.permit?.state &gt; 0}"/>
+                 visibleWhen="#{ entity.permitid != null}"/>
  
         <invoker type="vw_building_application:form:appActions" 
                  caption="Signboard"
@@ -14,7 +14,7 @@
                  index="2" 
                  reportId="building_permit_signboard"
                  reportName="com/rameses/gov/etracs/obo/reports/construction_signboard.jasper"
-                 visibleWhen="#{ entity.permit?.state &gt; 0}"/>
+                 visibleWhen="#{ entity.permitid!=null &gt; 0}"/>
 
         <!-- this is for sending in mail sender -->         
         <invoker type="building_permit:attachment" 
@@ -28,5 +28,5 @@
                  reportName="com/rameses/gov/etracs/obo/reports/construction_signboard.jasper"/>
 
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboPermitReportModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
 </workunit>

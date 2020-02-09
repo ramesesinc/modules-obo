@@ -73,6 +73,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel25 = new com.rameses.rcp.control.XLabel();
         xLabel29 = new com.rameses.rcp.control.XLabel();
         xLabel30 = new com.rameses.rcp.control.XLabel();
+        xLabel33 = new com.rameses.rcp.control.XLabel();
         jPanel4 = new javax.swing.JPanel();
         schemaList8 = new com.rameses.seti2.components.SchemaList();
         jPanel5 = new javax.swing.JPanel();
@@ -324,15 +325,20 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xFormPanel3.add(xLabel25);
 
         xLabel29.setCaption("Permit No");
-        xLabel29.setExpression("#{entity.permit.permitno}");
+        xLabel29.setExpression("#{entity.permitno}");
         xLabel29.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel29.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel29);
 
         xLabel30.setCaption("Permit Date Issued");
-        xLabel30.setExpression("#{entity.permit.dtissued}");
+        xLabel30.setExpression("#{entity.dtissued}");
         xLabel30.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel30);
+
+        xLabel33.setCaption("Expiry date");
+        xLabel33.setExpression("#{entity.expirydate}");
+        xLabel33.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel3.add(xLabel33);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -1342,6 +1348,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel30;
     private com.rameses.rcp.control.XLabel xLabel31;
     private com.rameses.rcp.control.XLabel xLabel32;
+    private com.rameses.rcp.control.XLabel xLabel33;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel6;

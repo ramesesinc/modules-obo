@@ -16,8 +16,8 @@ class BuildingApplicationModel extends AbstractApplicationModel {
     @Service("BuildingApplicationFeeService")
     def feeSvc;
     
-    @Service("BuildingPermitService")
-    def permitSvc;
+    @Service("BuildingApplicationService")
+    def appSvc;
     
     public String getPermitName() {
         return "building_application";   
@@ -102,10 +102,9 @@ class BuildingApplicationModel extends AbstractApplicationModel {
     
     def issuePermit() {
           def h = { o->
-            o.objid = entity.permit.objid;
-            def u = permitSvc.issuePermitNo( o );
-            entity.permit.putAll( u );
-            binding.refresh();
+            o.objid = entity.objid;
+            appSvc.issuePermitNo( o );
+            reloadEntity();
         }
         return Inv.lookupOpener("building_issue_controlno", [handler: h, showcontrolno: false]);
     }

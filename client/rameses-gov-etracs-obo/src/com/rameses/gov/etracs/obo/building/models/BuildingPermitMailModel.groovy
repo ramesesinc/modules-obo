@@ -22,8 +22,8 @@ class BuildingPermitMailModel extends MailSenderModel {
         name = "building_permit_transmittal";
         mailto = entity.contact.email;
         
-        def permitno = entity.permit.permitno;
-        def parms = [permit: [objid: entity.permit.objid]];
+        def permitno = entity.permitno;
+        def parms = [entity: entity];
         attachments << [
             filename:"building-permit-" + permitno + ".pdf",
             handler: "building_permit:attachment", 
@@ -36,14 +36,15 @@ class BuildingPermitMailModel extends MailSenderModel {
         ];    
         
         //load issuances
-        def p = [_schemaname:"vw_building_issuance"];
+        def p = [_schemaname:"vw_building_application_subdoc"];
         p.findBy = [appid: entity.objid];
+        p.where = ["NOT(template IS NULL)"];
         def list = querySvc.getList(p);
         list.each {
             attachments << [
-                filename : it.sectionid + "-" + it.controlno + ".pdf",
-                handler : "building_issuance:attachment",
-                params: [issuance: [objid: it.objid] ]
+                filename : it.doctypeid + "-" + it.controlno + ".pdf",
+                handler : "vw_building_application_subdoc:attachment",
+                params: [issuance: it ]
             ];
         };
         
@@ -62,7 +63,7 @@ class BuildingPermitMailModel extends MailSenderModel {
                 handler: "tdtruecopy:view",
                 params: [entity: [objid: it.truecopycertid ]]
             ];    
-        }        
+        } 
         
         super.init();
     }
