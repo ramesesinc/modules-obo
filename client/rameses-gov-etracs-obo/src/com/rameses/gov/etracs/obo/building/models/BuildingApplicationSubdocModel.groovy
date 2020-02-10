@@ -38,6 +38,10 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
     boolean showInfos;
     boolean showProfessionals;
     boolean showChecklist;
+    boolean showFees;
+    boolean canIssue;
+    boolean manualIssue;
+    boolean canPrint;
     
     public String getTitle() {
         return entity.doctype.title;
@@ -47,14 +51,45 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         this.infos = infoSvc.getInfos([parentid: entity.objid ] );
         editable = false;
         def task = caller.task;
-        if( task?.assignee?.objid == userid ) {
-            editable = true;
+        
+        boolean currentOrg = false;
+        if(  entity.doctype.org.objid == userInfo.env.ORGID ) currentOrg = true;
+        else if( entity.doctype.org?.objid ==null && userInfo.env.ORGROOT == 1 ) currentOrg = true;
+        
+        editable = false;
+        if( currentOrg == true ) {
+            //editable only during evaluation and assessment
+            if( entity.appstate.matches('.*evaluation.*|assessment') ) {
+                editable = true;
+            }
         }
+        
         if( entity.doctype.type.toLowerCase() == 'ancillary') {
             showProfessionals = true;
         }
-        showInfos = true;
+        if( entity.doctype.issuetype != 0 ) {
+            canIssue = true;
+        }
+        manualIssue = false;
+        if( entity.doctype.issuetype == 2 ) {
+            if( currentOrg == true && entity.issuanceid == null && entity.appstate.matches("releasing|end") ) {
+                manualIssue = true;                
+            }
+        }
+        if( entity.doctype.template !=null ) {
+            canPrint = true;
+        }
         showChecklist = true;
+        showInfos = true;
+        showFees = true;
+        if(  entity.doctype.type.toLowerCase() == 'checklist' ) {
+            showInfos = false;
+            showFees = false;
+        }
+        else {
+            showChecklist = false;
+        }
+        
     }
     
     /* ************************************************************************
@@ -232,11 +267,6 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         return updateChecklistItem(selectedChecklistItem);
     }
     
-    
-    void print() {
-        MsgBox.alert( "template " + entity.doctype.template )
-    }
-    
      def issueControl() {
           def h = { o->
             o.objid = entity.objid;
@@ -245,5 +275,6 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         }
         return Inv.lookupOpener("building_issue_controlno", [handler: h, showcontrolno: true]);
     }
+    
     
 }

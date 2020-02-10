@@ -8,5 +8,5 @@
                  reportName="com/rameses/gov/etracs/obo/reports/occupancy_application.jasper"
                  visibleWhen="#{ entity.permitno !=null }"/>
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboPermitReportModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
 </workunit>

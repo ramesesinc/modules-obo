@@ -57,6 +57,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xLabel11 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
         xLabel13 = new com.rameses.rcp.control.XLabel();
+        xLabel14 = new com.rameses.rcp.control.XLabel();
 
         xPanel2.setVisibleWhen("#{ showInfos == true }");
         xPanel2.setLayout(new java.awt.BorderLayout());
@@ -181,6 +182,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
 
         xTabbedPane1.addTab("Infos", xPanel2);
 
+        xPanel1.setVisibleWhen("#{ showFees }");
         xPanel1.setLayout(new java.awt.BorderLayout());
 
         schemaList2.setAllowOpen(false);
@@ -331,27 +333,31 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
 
         xLabel8.setCaption("Control No");
         xLabel8.setExpression("#{entity.controlno}");
+        xLabel8.setVisibleWhen("#{ canIssue == true }");
         xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel8);
 
         xLabel7.setCaption("Date Issued");
         xLabel7.setExpression("#{entity.dtissued}");
+        xLabel7.setVisibleWhen("#{ canIssue == true }");
         xLabel7.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel7);
 
         xLabel4.setCaption("Issued by");
         xLabel4.setExpression("#{entity.issuedby.name}");
+        xLabel4.setVisibleWhen("#{ canIssue == true }");
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
 
         xLabel5.setCaption("Expiry date");
         xLabel5.setExpression("#{entity.expirydate}");
+        xLabel5.setVisibleWhen("#{ canIssue == true }");
         xLabel5.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel5);
 
         xFormPanel2.setCaptionWidth(180);
 
-        xLabel9.setCaption("Type");
+        xLabel9.setCaption("Doc Type");
         xLabel9.setExpression("#{entity.doctype.title}");
         xLabel9.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel9);
@@ -378,12 +384,18 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xLabel13.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel13);
 
+        xLabel14.setCaption("Occupancy Type");
+        xLabel14.setExpression("#{entity.occupancytypeid}");
+        xLabel14.setVisibleWhen("#{ entity.occupancytypeid != null }");
+        xLabel14.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel14);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(426, Short.MAX_VALUE)
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,14 +407,10 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 31, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(16, Short.MAX_VALUE)
-                    .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap()))
+                .addComponent(xFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -419,9 +427,9 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -445,6 +453,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel11;
     private com.rameses.rcp.control.XLabel xLabel12;
     private com.rameses.rcp.control.XLabel xLabel13;
+    private com.rameses.rcp.control.XLabel xLabel14;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel7;

@@ -50,13 +50,14 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         xLabel12 = new com.rameses.rcp.control.XLabel();
         xLabel14 = new com.rameses.rcp.control.XLabel();
         xLabel13 = new com.rameses.rcp.control.XLabel();
-        xActionBar4 = new com.rameses.rcp.control.XActionBar();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        xActionBar5 = new com.rameses.rcp.control.XActionBar();
         schemaList4 = new com.rameses.seti2.components.SchemaList();
         xPanel2 = new com.rameses.rcp.control.XPanel();
         schemaList1 = new com.rameses.seti2.components.SchemaList();
         xActionBar3 = new com.rameses.rcp.control.XActionBar();
+        xActionBar4 = new com.rameses.rcp.control.XActionBar();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -164,7 +165,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(784, Short.MAX_VALUE))
+                .addContainerGap(805, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,27 +179,17 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
 
-        xActionBar4.setFormName("formName");
-        xActionBar4.setName("extActions"); // NOI18N
-        xActionBar4.setUseToolBar(false);
-        jPanel1.add(xActionBar4, java.awt.BorderLayout.PAGE_START);
-
         xTabbedPane1.addTab("General Info", jPanel1);
 
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         jPanel4.setPreferredSize(new java.awt.Dimension(0, 30));
+        jPanel4.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        xActionBar5.setFormName("formName");
+        xActionBar5.setName("docActions"); // NOI18N
+        xActionBar5.setUseToolBar(false);
+        jPanel4.add(xActionBar5, java.awt.BorderLayout.CENTER);
 
         jPanel3.add(jPanel4, java.awt.BorderLayout.NORTH);
 
@@ -267,6 +258,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         schemaList4.setCustomFilter("appid = :appid AND doctype.evaltypeid = :typeid");
         schemaList4.setFormActions("docActions");
         schemaList4.setHandlerName("doclistModel");
+        schemaList4.setName("selectedDoc"); // NOI18N
         schemaList4.setQueryName("entity");
         schemaList4.setSchemaName("vw_building_application_subdoc");
         jPanel3.add(schemaList4, java.awt.BorderLayout.CENTER);
@@ -354,6 +346,11 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         xTabbedPane1.addTab("Findings", xPanel2);
 
         add(xTabbedPane1, java.awt.BorderLayout.CENTER);
+
+        xActionBar4.setFormName("formName");
+        xActionBar4.setName("extActions"); // NOI18N
+        xActionBar4.setUseToolBar(false);
+        add(xActionBar4, java.awt.BorderLayout.NORTH);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -366,6 +363,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
     private com.rameses.seti2.components.SchemaList schemaList4;
     private com.rameses.rcp.control.XActionBar xActionBar3;
     private com.rameses.rcp.control.XActionBar xActionBar4;
+    private com.rameses.rcp.control.XActionBar xActionBar5;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
     private com.rameses.rcp.control.XLabel xLabel10;

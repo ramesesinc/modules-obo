@@ -3,6 +3,14 @@
     <invokers>
         <invoker type="building_doc_type:lookup" caption="Lookup Type" 
                  action="init" index="15"
+                 target="popup"
+                 cols="objid,title"/>
+
+       <invoker type="building_doc_type_typeid:lookup" caption="Lookup Type" 
+                 action="init" index="15"
+                 customFilter=" evaltypeid = :typeid "
+                 target="popup"
                 cols="objid,title"/>
+        
     </invokers>
 </workunit>

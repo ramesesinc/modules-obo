@@ -44,7 +44,7 @@ class BuildingPermitMailModel extends MailSenderModel {
             attachments << [
                 filename : it.doctypeid + "-" + it.controlno + ".pdf",
                 handler : "vw_building_application_subdoc:attachment",
-                params: [issuance: it ]
+                params: [entity: it ]
             ];
         };
         

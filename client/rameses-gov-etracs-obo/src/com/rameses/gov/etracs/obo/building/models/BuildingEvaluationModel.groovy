@@ -13,8 +13,6 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class BuildingEvaluationModel extends AbstractApplicationSectionModel {
     
-    def doclistModel;
-    
     public String getCaption() {
         return "Building Evaluation";
     }
@@ -28,16 +26,6 @@ class BuildingEvaluationModel extends AbstractApplicationSectionModel {
         def op = Inv.lookupOpener(s, [entity: [objid: entity.appid ] ] );
         op.target = "popup";
         return op;
-    }
-    
-    //This is a temporary proc.
-    def addAncillary() {
-        def m = [_schemaname: "building_application_subdoc"];
-        m.appid = entity.appid;
-        m.typeid = entity.typeid;
-        def z = persistenceService.create( m );
-        entity.ancillaryid = z.objid;
-        reload();
     }
     
     def updateZoneclass() {
@@ -54,4 +42,38 @@ class BuildingEvaluationModel extends AbstractApplicationSectionModel {
     def addFinding() {
         return super.addFinding( "building_evaluation_finding");
     }
+    
+    /**************************************************************************
+    * DOCUMENT ITEMS
+    ***************************************************************************/
+    def selectedDoc;
+     def doclistModel;
+    
+    def addDocument() {
+        def q = [:];
+        q.put("query.typeid", entity.typeid )
+        q.onselect = { o->
+            def pq = [_schemaname: "building_application_subdoc"];
+            pq.appid = entity.appid;
+            pq.doctypeid = o.objid;
+            pq.doctype = [objid: o.objid ];
+            pq.state = 0;
+            pq.amount = 0;
+            pq.debug = true;
+            persistenceService.create( pq );
+            doclistModel.reload();
+        }
+        return Inv.lookupOpener("building_doc_type_typeid:lookup", q );
+    }
+    
+    void removeDocument() {
+        if(selectedDoc?.objid ==null ) throw new Exception("Please select document");
+        if(!MsgBox.confirm("You are about to remove this document. Proceed?")) return;
+        def m = [_schemaname: "building_application_subdoc"];
+        m.objid = selectedDoc.objid;
+        persistenceService.removeEntity(m);
+        doclistModel.reload();
+    }
+
+    
 }

@@ -14,7 +14,7 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class BuildingSubdocTypeModel extends CrudFormModel {
     
-    def docTypes = ["ANCILLARY","CLEARANCE", "CHECKLIST", "MAIN"];
+    def docTypes = ["ANCILLARY","CLEARANCE", "CHECKLIST", "MAIN", "OTHER"];
     def evalTypes;
     
     def itemHandler;
@@ -24,12 +24,6 @@ class BuildingSubdocTypeModel extends CrudFormModel {
         m.where = ["1=1"];
         evalTypes = queryService.getList(m)*.objid;
     }
-    
-    /*
-    public void afterOpen() {
-        itemHandler?.reload();
-    }
-    */
     
     def addFeeItem() {
         def h = { o->

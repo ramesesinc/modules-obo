@@ -9,6 +9,9 @@
                 entity.typeid.toLowerCase() == 'zoning' &amp;&amp;
                 editable == true }" index="1" />
         
+        <invoker type="docActions" caption="Add Document" action="addDocument" visibleWhen="#{editable == true}"/>
+        <invoker type="docActions" caption="Remove Document" action="removeDocument" visibleWhen="#{editable == true}"/>
+        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingEvaluationModel" />
     <pages>

@@ -4,12 +4,13 @@
                  caption="View Printout"
                  action="preview" 
                  index="1" 
-                 reportId="building_issuance"
-                 visibleWhen="#{ entity.issuanceid != null &amp;&amp; entity.template !=null }"/>
+                 allowPrint="#{ entity.issuanceid !=null }"
+                 visibleWhen="#{ entity.template !=null || entity.doctype.template !=null }"
+                 reportId="building_application_subdoc" />
         
        <invoker type="vw_building_application_subdoc:attachment" 
                  action="preview" 
-                 reportId="building_issuance"/> 
+                 reportId="building_application_subdoc"/> 
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboIssuanceReportModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
 </workunit>

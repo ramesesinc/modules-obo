@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="fire_safety_checklist"
+		 name="fsec_checklist"
 
 		 language="groovy"		 columnCount="1"
 		 printOrder="Vertical"
@@ -60,15 +60,13 @@
 	<field name="location.address.text" class="java.lang.String"/>
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="fsc01" class="java.lang.Integer"/>
-	<field name="evaluator.name" class="java.lang.String"/>
-	<field name="checklistno" class="java.lang.String"/>
+	<field name="issuedby.name" class="java.lang.String"/>
 	<field name="project.title" class="java.lang.String"/>
 	<field name="occupancytype.title" class="java.lang.String"/>
 	<field name="dtacknowledge" class="java.util.Date"/>
 	<field name="dtreceived" class="java.util.Date"/>
 	<field name="storiesno" class="java.lang.String"/>
 	<field name="dtapproval" class="java.util.Date"/>
-	<field name="dtcheck" class="java.lang.String"/>
 	<field name="location.lotno" class="java.lang.String"/>
 	<field name="location.blkno" class="java.lang.String"/>
 	<field name="fsc02" class="java.lang.Integer"/>
@@ -175,8 +173,8 @@
 	<field name="location.barangay.name" class="java.lang.String"/>
 	<field name="numfloors" class="java.lang.Number"/>
 	<field name="remarks" class="java.lang.String"/>
-	<field name="evaluator.signature" class="java.lang.Object"/>
-	<field name="dtreleased" class="java.util.Date"/>
+	<field name="dtissued" class="java.util.Date"/>
+	<field name="issuedby.signature" class="java.lang.Object"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -3684,7 +3682,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="7"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{evaluator.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuedby.name}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="yyyy-MM-dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -4784,7 +4782,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="7"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtreleased}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -7559,7 +7557,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtacknowledge}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtfiled}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="yyyy-MM-dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -7585,7 +7583,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{dtcheck}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -8199,7 +8197,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{evaluator.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuedby.name}]]></textFieldExpression>
 				</textField>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -8212,7 +8210,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.io.InputStream"><![CDATA[new java.io.ByteArrayInputStream( (byte[]) $F{evaluator.signature} )]]></imageExpression>
+					<imageExpression class="java.io.InputStream"><![CDATA[new java.io.ByteArrayInputStream( (byte[]) $F{issuedby.signature} )]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement
