@@ -17,9 +17,6 @@ class BuildingApplicationInitialService {
 	@DataContext("building_application_entity")
 	def entityEm;
 
-	@DataContext("building_application_accessory")
-	def accessoryEm;
-
 	@DataContext("building_application_subdoc")
 	def subdocEm;
 
@@ -65,7 +62,6 @@ class BuildingApplicationInitialService {
 	public def create( def app ) {
 		def u = [:]
 		u.applicantid = app.remove("applicantid");
-		u.accessoryid = app.remove("accessoryid");
 		u.contractorid = app.remove("contractorid");
 
 		def newapp = appEm.create( app );
@@ -83,11 +79,15 @@ class BuildingApplicationInitialService {
 			it.entity = [objid: it.entityid ];
 			professionalEm.create( it );
 		}
+		
 		app.accessories.each {
 			it.appid = newapp.objid;
-			it.occupancytype = [objid: it.occupancytypeid];
-			accessoryEm.create( it );
+			it.state = 0;
+			it.doctype = [ objid: 'ACCESSORIES' ];
+			it.occupancytypeid = it.occupancytypeid;			
+			subdocEm.create( it );
 		}
+
 		app.ancillaries.each {
 			it.appid = newapp.objid;
 			it.doctype = [ objid: it.permittypeid.toUpperCase() ];

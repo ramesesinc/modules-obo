@@ -51,9 +51,9 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
             editable = true;
         }
         if( entity.doctype.type.toLowerCase() == 'ancillary') {
-            showInfos = true;
             showProfessionals = true;
         }
+        showInfos = true;
         showChecklist = true;
     }
     

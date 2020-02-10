@@ -13,6 +13,7 @@
 		<field name="category" hidden="true"/>
 		<field name="typeid" />
 		<field name="unit" width="40"/>
+		<field name="occupancytypeid" />
 	</element>
 
 </schema>

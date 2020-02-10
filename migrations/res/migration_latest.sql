@@ -1,21 +1,20 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
-INSERT INTO obo_legazpi.building_application
+INSERT INTO obo_legazpi_backup_new.building_application
 (objid,appno,orgcode,trackingno,apptype,permittype,contact_name,contact_detail,contact_email,contact_mobileno,dtfiled,applicantid,description,title,occupancytypeid,numunits,fixedcost,projectcost,dtproposedconstruction,dtexpectedcompletion,totalfloorarea,height,numfloors,worktypes,taskid,zoneclassid,zone,amount,txnmode,location_lotno,location_blockno,location_street,location_barangay_name,location_barangay_objid,accessoryid,contractorid,location_unitno,location_bldgno,location_bldgname,location_subdivision)
 SELECT 
 objid,appno,orgcode,trackingno,apptype,permittype,contact_name,contact_detail,contact_email,contact_mobileno,dtfiled,applicantid,description,title,occupancytypeid,numunits,fixedcost,projectcost,dtproposedconstruction,dtexpectedcompletion,totalfloorarea,height,numfloors,worktypes,taskid,zoneclassid,zone,amount,txnmode,location_lotno,location_blockno,location_street,location_barangay_name,location_barangay_objid,accessoryid,contractorid,location_unitno,location_bldgno,location_bldgname,location_subdivision 
 FROM tmp_obo_legazpi.building_permit;
 
-INSERT INTO obo_legazpi.building_application_task SELECT * FROM  tmp_obo_legazpi.building_permit_task;
+INSERT INTO obo_legazpi_backup_new.building_application_task SELECT * FROM  tmp_obo_legazpi.building_permit_task;
 
-INSERT INTO obo_legazpi.building_application_transmittal SELECT * FROM  tmp_obo_legazpi.building_permit_transmittal;
+INSERT INTO obo_legazpi_backup_new.building_application_transmittal SELECT * FROM  tmp_obo_legazpi.building_permit_transmittal;
 
-INSERT INTO obo_legazpi.building_application_entity SELECT * FROM  tmp_obo_legazpi.building_permit_entity;
-INSERT INTO obo_legazpi.building_application_professional SELECT * FROM  tmp_obo_legazpi.building_permit_professional;
-INSERT INTO obo_legazpi.building_application_rpu SELECT * FROM  tmp_obo_legazpi.building_permit_rpu;
-INSERT INTO obo_legazpi.building_application_requirement SELECT * FROM  tmp_obo_legazpi.building_permit_requirement;
+INSERT INTO obo_legazpi_backup_new.building_application_entity SELECT * FROM  tmp_obo_legazpi.building_permit_entity;
+INSERT INTO obo_legazpi_backup_new.building_application_professional SELECT * FROM  tmp_obo_legazpi.building_permit_professional;
+INSERT INTO obo_legazpi_backup_new.building_application_rpu SELECT * FROM  tmp_obo_legazpi.building_permit_rpu;
+INSERT INTO obo_legazpi_backup_new.building_application_requirement SELECT * FROM  tmp_obo_legazpi.building_permit_requirement;
 
-INSERT INTO obo_legazpi.building_application_accessory SELECT * FROM  tmp_obo_legazpi.building_permit_accessory;
 
 [building_application_subdoc]
 INSERT INTO obo_legazpi_backup_new.building_application_subdoc ( objid, appid, doctypeid, 
@@ -34,6 +33,13 @@ FROM tmp_obo_legazpi.building_permit_section WHERE typeid NOT IN
 (SELECT UPPER(permittypeid) FROM tmp_obo_legazpi.building_permit_ancillary)) a 
 LEFT JOIN ( SELECT appid, sectionid, SUM(amount) AS amount 
 FROM tmp_obo_legazpi.building_permit_fee GROUP BY appid, sectionid) b ON a.appid =  b.appid AND a.doctypeid = b.sectionid;
+
+[accessories]
+INSERT INTO obo_legazpi_backup_new.building_application_subdoc 
+( objid, appid, doctypeid, occupancytypeid, state, worktypes, amount )
+SELECT objid, appid, 'ACCESSORIES', occupancytypeid, 0, '[]', 0 
+FROM  tmp_obo_legazpi.building_permit_accessory
+
 
 
 [building_application_fee]

@@ -48,8 +48,6 @@
 
  		<field name="txnmode" />
 
-		<!-- this is used if the building permit applied is for accessory or type J -->
-		<field name="accessoryid" />
 		<field name="contractorid" />
 		<field name="permitid" />
 

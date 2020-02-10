@@ -20,6 +20,7 @@
 
 		
 		<field name="remarks"/>
+		<field name="occupancytypeid" />
 
 		<!-- copied from doctype -->
 		<field name="amount" type="decimal"/>

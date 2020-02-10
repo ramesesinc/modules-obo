@@ -11,10 +11,10 @@
  Target Server Version : 50640
  File Encoding         : 65001
 
- Date: 10/02/2020 03:27:09
+ Date: 10/02/2020 09:28:56
 */
 
-SET NAMES utf8;
+SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
@@ -74,7 +74,6 @@ CREATE TABLE `building_application` (
   KEY `building_permit_taskid` (`taskid`) USING BTREE,
   KEY `building_permit_accessoryid` (`accessoryid`) USING BTREE,
   KEY `fk_building_application_permitid` (`permitid`) USING BTREE,
-  CONSTRAINT `fk_building_application_accessoryid` FOREIGN KEY (`accessoryid`) REFERENCES `building_application_accessory` (`objid`),
   CONSTRAINT `fk_building_application_applicantid` FOREIGN KEY (`applicantid`) REFERENCES `building_application_entity` (`objid`),
   CONSTRAINT `fk_building_application_occupancytypeid` FOREIGN KEY (`occupancytypeid`) REFERENCES `obo_occupancy_type` (`objid`),
   CONSTRAINT `fk_building_application_permitid` FOREIGN KEY (`permitid`) REFERENCES `building_permit` (`objid`),
@@ -112,36 +111,6 @@ INSERT INTO `building_application` VALUES ('OBOBP6d61a113:16e908c5faa:-7f84', 'B
 INSERT INTO `building_application` VALUES ('OBOBP6d61a113:16e908c5faa:-7fb1', 'BPAPP-201911-00004', '137', '137-55JRWMQH', 'NEW', NULL, 'MATA JR, CAESAR L.', NULL, 'elmata49@yahoo.com', '09163313602', '2019-11-19 06:57:25', 'OBBPENT-66e3933d:16e828171d7:-7fef', 'COMMERCIAL', 'CARWASH', 'E244', 1, 662000.00, 271927.00, '2019-10-13', '2019-11-29', 66.20, 3.00, NULL, '[]', 'OBOTSK-6cf797bc:16e9fe6e323:-7df0', 'C2', '14', NULL, '1713-B-4-D-1-A', 'N/A', 'N/A', 'BOGTONG', '13702041', NULL, 'OBOBPPROF-66e3933d:16e828171d7:-7fea', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `building_application` VALUES ('OBOBP6d61a113:16e908c5faa:-7fd8', 'BPAPP-201911-00007', '137', '137-TJW803KR', 'NEW', NULL, 'GO, RENE C.', NULL, 'bicolshirtscity@yahoo.com', '09176890169', '2019-11-19 08:10:31', 'OBBPENT-66e3933d:16e828171d7:-7fd5', 'COMMERCIAL', 'PROPOSED MOSSIMO BOUTIQUE', 'E201', 1, 721700.00, 1450000.00, '2020-01-14', '2020-06-14', 72.17, 3.80, NULL, '[]', 'OBOTSK-2a77f22f:16eaf6f4002:-7fc9', NULL, NULL, NULL, 'N/A', 'N/A', 'COR. I ROCES AVENUE AND TERMINAL ROAD II', 'BITANO', '13702037', NULL, 'OBOBPPROF-66e3933d:16e828171d7:-7fcd', NULL, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `building_application` VALUES ('OBOBP6d61a113:16e908c5faa:-8000', 'BPAPP-201911-00005', '137', '137-Y8RL2W6C', 'NEW', NULL, 'LAVADIA, MICHAEL JOHN', '09778830755', 'marklouielatosa23@gmail.com', '09778830755', '2019-11-21 06:50:17', 'OBBPENT-1c22d3c8:16e8c4e45b4:-7fc3', 'RESIDENTIAL', 'PROPOSED ONE STOREY BOARDING HOUSE', 'B106', 1, 1050000.00, 1728775.00, '2019-11-30', '2020-03-14', 105.00, 3.00, NULL, '[]', 'OBOTSK-2a77f22f:16eaf6f4002:-7f52', 'R3', '19', NULL, '17 BLOCK 16', 'N', 'PUROK 1', 'EMS BARRIO', '13702001', NULL, 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fb5', NULL, NULL, NULL, NULL, NULL, 984.78);
-COMMIT;
-
--- ----------------------------
--- Table structure for building_application_accessory
--- ----------------------------
-DROP TABLE IF EXISTS `building_application_accessory`;
-CREATE TABLE `building_application_accessory` (
-  `objid` varchar(50) NOT NULL,
-  `appid` varchar(50) DEFAULT NULL,
-  `occupancytypeid` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`objid`) USING BTREE,
-  KEY `fk_online_building_permit_accessory_occupancytypeid` (`occupancytypeid`) USING BTREE,
-  KEY `fk_building_permit_accessory_appid` (`appid`) USING BTREE,
-  CONSTRAINT `fk_building_permit_accessory_appid` FOREIGN KEY (`appid`) REFERENCES `building_application` (`objid`),
-  CONSTRAINT `fk_building_permit_accessory_occupancytypeid` FOREIGN KEY (`occupancytypeid`) REFERENCES `obo_occupancy_type` (`objid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of building_application_accessory
--- ----------------------------
-BEGIN;
-INSERT INTO `building_application_accessory` VALUES ('OBOBPACC-1c22d3c8:16e8c4e45b4:-7f92', 'OBOBP6d61a113:16e908c5faa:-8000', 'J201');
-INSERT INTO `building_application_accessory` VALUES ('OBOBPACC-563e0611:16e68793733:-7f94', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 'J201');
-INSERT INTO `building_application_accessory` VALUES ('OBOBPACC-563e0611:16e68793733:-7fce', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 'J201');
-INSERT INTO `building_application_accessory` VALUES ('OBOBPACC-563e0611:16e68793733:-7fd0', 'OBOBP-610e0f0a:16e72458381:-8000', 'J201');
-INSERT INTO `building_application_accessory` VALUES ('OBOBPACC-66e3933d:16e828171d7:-7fab', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 'J101');
-INSERT INTO `building_application_accessory` VALUES ('OBOBPACC2ce5acf2:16eab62c11a:-7f5f', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 'J204');
-INSERT INTO `building_application_accessory` VALUES ('OBOBPACC2ce5acf2:16eab62c11a:-7f61', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 'J201');
-INSERT INTO `building_application_accessory` VALUES ('OBOBPACC2ce5acf2:16eab62c11a:-7fe0', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 'J305');
-INSERT INTO `building_application_accessory` VALUES ('OBOBPACC4121ec9d:16ea5ca5c2c:-7ff0', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 'J204');
 COMMIT;
 
 -- ----------------------------
@@ -496,6 +465,7 @@ CREATE TABLE `building_application_info` (
   KEY `ix_varname` (`name`) USING BTREE,
   KEY `ix_parentid` (`parentid`) USING BTREE,
   KEY `fk_building_permit_info_appid` (`appid`) USING BTREE,
+  CONSTRAINT `fk_building_application_parentid` FOREIGN KEY (`parentid`) REFERENCES `building_application_subdoc` (`objid`),
   CONSTRAINT `fk_building_permit_info_appid` FOREIGN KEY (`appid`) REFERENCES `building_application` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -2173,8 +2143,9 @@ CREATE TABLE `building_application_subdoc` (
   `remarks` varchar(255) DEFAULT NULL,
   `amount` decimal(16,2) DEFAULT NULL,
   `issuanceid` varchar(50) DEFAULT NULL,
+  `occupancytypeid` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`objid`) USING BTREE,
-  UNIQUE KEY `uix_online_building_applicationsubdoc_appid_doctypeid` (`appid`,`doctypeid`) USING BTREE,
+  UNIQUE KEY `uix_online_building_applicationsubdoc_appid_doctypeid` (`appid`,`doctypeid`,`occupancytypeid`) USING BTREE,
   KEY `fk_online_building_application_subdoc_doctypeid` (`doctypeid`) USING BTREE,
   KEY `fk_online_building_application_subdoc_designerid` (`designprofessionalid`) USING BTREE,
   KEY `fk_online_building_application_subdoc_supervisorid` (`supervisorid`) USING BTREE,
@@ -2190,168 +2161,177 @@ CREATE TABLE `building_application_subdoc` (
 -- Records of building_application_subdoc
 -- ----------------------------
 BEGIN;
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-16b6c5b8:16ea580f3c8:-7ffd', 'OBOBP-6cf797bc:16e9fe6e323:-7e1f', 0, 'PLUMBING', 'OBOBPPROF5c915a95:16ea57503a3:-7fff', 'OBOBPPROF5c915a95:16ea57503a3:-7fff', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-16b6c5b8:16ea580f3c8:-7ffe', 'OBOBP-6cf797bc:16e9fe6e323:-7e1f', 0, 'ELECTRICAL', 'OBOBPPROF5c915a95:16ea57503a3:-7ffd', 'OBOBPPROF5c915a95:16ea57503a3:-7ffd', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-16b6c5b8:16ea580f3c8:-7fff', 'OBOBP-6cf797bc:16e9fe6e323:-7e1f', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f3e', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f3e', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-16b6c5b8:16ea580f3c8:-8000', 'OBOBP-6cf797bc:16e9fe6e323:-7e1f', 0, 'ARCHITECTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f41', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f41', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f2f', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'PLUMBING', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f34', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f34', '[]', NULL, NULL, 635.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f31', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'ELECTRICAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f36', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f36', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f32', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f38', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f38', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f33', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'ARCHITECTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f3a', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f3a', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f3f', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'PLUMBING', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f44', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f44', '[]', NULL, NULL, 260.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f40', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'ELECTRICAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f48', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f48', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f41', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f4a', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f4a', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f54', 'OBOBP-6cf797bc:16e9fe6e323:-7da9', 0, 'PLUMBING', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f55', 'OBOBP-6cf797bc:16e9fe6e323:-7da9', 0, 'MECHANICAL', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f5d', 'OBOBP-6cf797bc:16e9fe6e323:-7da9', 0, 'ELECTRICAL', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f60', 'OBOBP-6cf797bc:16e9fe6e323:-7da9', 0, 'ARCHITECTURAL', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f73', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'PLUMBING', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7a', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7a', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f74', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'ELECTRICAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7d', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7d', '[]', NULL, NULL, 272.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f75', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7f', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7f', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fb1', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'PLUMBING', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fa9', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fa9', '[]', NULL, NULL, 303.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fb2', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'ELECTRICAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fab', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fab', '[]', NULL, NULL, 532.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fb3', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fb5', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fb5', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fd3', 'OBOBP6d61a113:16e908c5faa:-7fb1', 0, 'PLUMBING', 'OBOBPPROF-66e3933d:16e828171d7:-7fe6', 'OBOBPPROF-66e3933d:16e828171d7:-7fe6', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fd4', 'OBOBP6d61a113:16e908c5faa:-7fb1', 0, 'ELECTRICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fe8', 'OBOBPPROF-66e3933d:16e828171d7:-7fe8', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fd5', 'OBOBP6d61a113:16e908c5faa:-7fb1', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fea', 'OBOBPPROF-66e3933d:16e828171d7:-7fea', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7ffa', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'PLUMBING', 'OBOBPPROF-66e3933d:16e828171d7:-7f72', 'OBOBPPROF-66e3933d:16e828171d7:-7f72', '[]', NULL, NULL, 183.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7ffb', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'ELECTRICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7f74', 'OBOBPPROF-66e3933d:16e828171d7:-7f74', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7ffc', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7f76', 'OBOBPPROF-66e3933d:16e828171d7:-7f76', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7ffd', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'ARCHITECTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7f78', 'OBOBPPROF-66e3933d:16e828171d7:-7f78', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fa6', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'PLUMBING', 'OBOBPPROF-563e0611:16e68793733:-7fd7', 'OBOBPPROF-563e0611:16e68793733:-7fd7', '[]', NULL, NULL, 187.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fa7', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'ELECTRICAL', 'OBOBPPROF-563e0611:16e68793733:-7fd9', 'OBOBPPROF-563e0611:16e68793733:-7fd9', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fa8', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-563e0611:16e68793733:-7fdb', 'OBOBPPROF-563e0611:16e68793733:-7fdb', '[]', NULL, NULL, 150.84, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe1', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'PLUMBING', 'OBOBPPROF-563e0611:16e68793733:-7fe8', 'OBOBPPROF-563e0611:16e68793733:-7fe8', '[]', NULL, NULL, 399.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe2', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'MECHANICAL', 'OBOBPPROF-563e0611:16e68793733:-7fe6', 'OBOBPPROF-563e0611:16e68793733:-7fe6', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe3', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'ELECTRICAL', 'OBOBPPROF-563e0611:16e68793733:-7fea', 'OBOBPPROF-563e0611:16e68793733:-7fea', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe4', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-563e0611:16e68793733:-7fec', 'OBOBPPROF-563e0611:16e68793733:-7fec', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe5', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'ARCHITECTURAL', 'OBOBPPROF-563e0611:16e68793733:-7fee', 'OBOBPPROF-563e0611:16e68793733:-7fee', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-599eb6f7:16eaaaac994:-7ff0', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'PLUMBING', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff4', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff4', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-599eb6f7:16eaaaac994:-7ff1', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'ELECTRICAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff6', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff6', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-599eb6f7:16eaaaac994:-7ff2', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff8', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff8', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-599eb6f7:16eaaaac994:-7ff3', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'ARCHITECTURAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ffa', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ffa', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fac', 'OBOBP6d61a113:16e908c5faa:-7fd8', 0, 'MECHANICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fbd', 'OBOBPPROF-66e3933d:16e828171d7:-7fbd', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fad', 'OBOBP6d61a113:16e908c5faa:-7fd8', 0, 'ELECTRICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fcb', 'OBOBPPROF-66e3933d:16e828171d7:-7fcb', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fae', 'OBOBP6d61a113:16e908c5faa:-7fd8', 0, 'ARCHITECTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fcd', 'OBOBPPROF-66e3933d:16e828171d7:-7fcd', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fb9', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'PLUMBING', 'OBOBPPROF-66e3933d:16e828171d7:-7fbf', 'OBOBPPROF-66e3933d:16e828171d7:-7fbf', NULL, NULL, NULL, 132.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fba', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'ELECTRICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fc6', 'OBOBPPROF-66e3933d:16e828171d7:-7fc6', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fbb', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fc2', 'OBOBPPROF-66e3933d:16e828171d7:-7fc9', NULL, NULL, NULL, 32.88, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-6cf797bc:16e9fe6e323:-7eb0', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'MECHANICAL', NULL, NULL, NULL, NULL, NULL, 0.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7fc5', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'PLUMBING', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f8e', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f8e', '[]', NULL, NULL, 204.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7fc6', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'ELECTRICAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f90', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f90', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7fc7', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f92', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f92', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7fc8', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'ARCHITECTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7fc9', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7fc9', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7ff0', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'PLUMBING', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ff4', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ff4', '[]', NULL, NULL, 231.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7ff1', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'ELECTRICAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ff6', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ff6', '[]', NULL, NULL, 530.60, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7ff2', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ffa', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ffa', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7ff3', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'ARCHITECTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ffc', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ffc', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f00', 'OBOBP-2a77f22f:16eaf6f4002:-7e8e', 0, 'MECHANICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f03', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f03', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f01', 'OBOBP-2a77f22f:16eaf6f4002:-7e8e', 0, 'ELECTRICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f05', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f05', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f02', 'OBOBP-2a77f22f:16eaf6f4002:-7e8e', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f09', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f09', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f2a', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'PLUMBING', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f2e', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f2e', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f2b', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'ELECTRICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f30', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f30', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f2c', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f34', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f34', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f2d', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'ARCHITECTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f32', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f32', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f5b', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'PLUMBING', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f68', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f68', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f5c', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'ELECTRICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f62', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f62', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f5d', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f66', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f66', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f5e', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'ARCHITECTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f68', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f68', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f7d', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'FENCING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7ffa', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7ffa', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fd7', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 0, 'PLUMBING', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fd8', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 0, 'MECHANICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fd9', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 0, 'ELECTRICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fda', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 0, 'ARCHITECTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7ffd', 'OBOBP-1c2021a1:16eab36bae1:-7fa4', 0, 'PLUMBING', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fa8', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fa8', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7ffe', 'OBOBP-1c2021a1:16eab36bae1:-7fa4', 0, 'MECHANICAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7faa', 'OBOBPPROF-599eb6f7:16eaaaac994:-7faa', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fff', 'OBOBP-1c2021a1:16eab36bae1:-7fa4', 0, 'ELECTRICAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fac', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fac', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-8000', 'OBOBP-1c2021a1:16eab36bae1:-7fa4', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fae', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fae', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f47', 'OBOBP-db0fda8:16eaa73e2c0:-8000', 0, 'PLUMBING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f4b', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f4b', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f48', 'OBOBP-db0fda8:16eaa73e2c0:-8000', 0, 'ELECTRICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f4f', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f4f', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f49', 'OBOBP-db0fda8:16eaa73e2c0:-8000', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f51', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f51', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f4a', 'OBOBP-db0fda8:16eaa73e2c0:-8000', 0, 'ARCHITECTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f53', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f53', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f87', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'PLUMBING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f8e', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f8e', '[]', NULL, NULL, 332.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f88', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'MECHANICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f8c', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f8c', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f89', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'ELECTRICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f90', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f67', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f8a', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f92', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f92', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f8b', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'ARCHITECTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f94', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f94', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fad', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'PLUMBING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb1', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb1', '[]', NULL, NULL, 332.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fae', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'ELECTRICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb3', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb3', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7faf', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb5', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb5', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fb0', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'ARCHITECTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb7', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb7', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fd7', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'PLUMBING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fdc', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fdc', '[]', NULL, NULL, 214.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fd8', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'ELECTRICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fde', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fde', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fd9', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'ARCHITECTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fe8', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fe8', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fda', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fe2', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fe2', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC75e87344:16e49de6e06:-7ef6', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'ELECTRICAL', 'OBOBPPROF75e87344:16e49de6e06:-7fc0', 'OBOBPPROF75e87344:16e49de6e06:-7fbd', '[]', NULL, NULL, 1043.20, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC75e87344:16e49de6e06:-7ef8', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'PLUMBING', 'OBOBPPROF75e87344:16e49de6e06:-7fc6', 'OBOBPPROF75e87344:16e49de6e06:-7fc3', '[]', NULL, NULL, 279.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC75e87344:16e49de6e06:-7efa', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF75e87344:16e49de6e06:-7fcc', 'OBOBPPROF75e87344:16e49de6e06:-7fc9', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC75e87344:16e49de6e06:-7efc', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'ARCHITECTURAL', 'OBOBPPROF75e87344:16e49de6e06:-7fcf', 'OBOBPPROF75e87344:16e49de6e06:-7fd9', '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-1c2021a1:16eab36bae1:-7f65', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 3909.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-1c2021a1:16eab36bae1:-7fb6', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 5164.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e2f', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e38', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e3b', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e4f', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e58', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e5b', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7ea4', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7f48', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 2909.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7f92', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7f9b', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7f9e', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7faf', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7fb8', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 212.62, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7fbb', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 2567.94, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f65', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f6e', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 290.74, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f71', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 1521.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f80', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f89', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f8c', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 5386.85, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7fa0', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7fd6', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 10693.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7f9a', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fa3', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 94.94, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fa6', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 1858.41, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fc8', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fd1', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 212.20, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fd4', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 1050.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fe6', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fef', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 234.24, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7ff2', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 2200.26, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fff', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-610e0f0a:16e72458381:-7fb5', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-610e0f0a:16e72458381:-7fbe', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 200.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-610e0f0a:16e72458381:-7fc1', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 2974.53, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-610e0f0a:16e72458381:-7fd6', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 3530.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7c90', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7c99', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 186.22, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7c9c', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 3177.28, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ca9', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7cb2', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7cb5', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 390.41, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ccf', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 2747.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7cd3', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7cd7', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ee1', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7eea', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7eed', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7efb', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f01', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f0a', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f0d', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 21670.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f1b', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f23', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f2c', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f2f', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 1433.98, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f3d', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f46', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 113.78, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f49', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f8b', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 9792.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f90', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 2515.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7feb', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ff1', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL);
-INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ff5', 'OBOBP6d61a113:16e908c5faa:-7fb1', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPACC-1c22d3c8:16e8c4e45b4:-7f92', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'ACCESSORIES', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, 'J201');
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPACC-563e0611:16e68793733:-7f94', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'ACCESSORIES', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, 'J201');
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPACC-563e0611:16e68793733:-7fce', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'ACCESSORIES', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, 'J201');
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPACC-563e0611:16e68793733:-7fd0', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'ACCESSORIES', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, 'J201');
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPACC-66e3933d:16e828171d7:-7fab', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'ACCESSORIES', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, 'J101');
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPACC2ce5acf2:16eab62c11a:-7f5f', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'ACCESSORIES', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, 'J204');
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPACC2ce5acf2:16eab62c11a:-7f61', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'ACCESSORIES', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, 'J201');
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPACC2ce5acf2:16eab62c11a:-7fe0', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 0, 'ACCESSORIES', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, 'J305');
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPACC4121ec9d:16ea5ca5c2c:-7ff0', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'ACCESSORIES', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, 'J204');
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-16b6c5b8:16ea580f3c8:-7ffd', 'OBOBP-6cf797bc:16e9fe6e323:-7e1f', 0, 'PLUMBING', 'OBOBPPROF5c915a95:16ea57503a3:-7fff', 'OBOBPPROF5c915a95:16ea57503a3:-7fff', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-16b6c5b8:16ea580f3c8:-7ffe', 'OBOBP-6cf797bc:16e9fe6e323:-7e1f', 0, 'ELECTRICAL', 'OBOBPPROF5c915a95:16ea57503a3:-7ffd', 'OBOBPPROF5c915a95:16ea57503a3:-7ffd', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-16b6c5b8:16ea580f3c8:-7fff', 'OBOBP-6cf797bc:16e9fe6e323:-7e1f', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f3e', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f3e', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-16b6c5b8:16ea580f3c8:-8000', 'OBOBP-6cf797bc:16e9fe6e323:-7e1f', 0, 'ARCHITECTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f41', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f41', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f2f', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'PLUMBING', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f34', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f34', '[]', NULL, NULL, 635.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f31', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'ELECTRICAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f36', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f36', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f32', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f38', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f38', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f33', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'ARCHITECTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f3a', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f3a', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f3f', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'PLUMBING', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f44', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f44', '[]', NULL, NULL, 260.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f40', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'ELECTRICAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f48', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f48', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f41', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f4a', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f4a', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f54', 'OBOBP-6cf797bc:16e9fe6e323:-7da9', 0, 'PLUMBING', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f55', 'OBOBP-6cf797bc:16e9fe6e323:-7da9', 0, 'MECHANICAL', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f5d', 'OBOBP-6cf797bc:16e9fe6e323:-7da9', 0, 'ELECTRICAL', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f60', 'OBOBP-6cf797bc:16e9fe6e323:-7da9', 0, 'ARCHITECTURAL', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f73', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'PLUMBING', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7a', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7a', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f74', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'ELECTRICAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7d', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7d', '[]', NULL, NULL, 272.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7f75', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7f', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7f7f', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fb1', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'PLUMBING', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fa9', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fa9', '[]', NULL, NULL, 303.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fb2', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'ELECTRICAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fab', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fab', '[]', NULL, NULL, 532.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fb3', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fb5', 'OBOBPPROF-1c22d3c8:16e8c4e45b4:-7fb5', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fd3', 'OBOBP6d61a113:16e908c5faa:-7fb1', 0, 'PLUMBING', 'OBOBPPROF-66e3933d:16e828171d7:-7fe6', 'OBOBPPROF-66e3933d:16e828171d7:-7fe6', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fd4', 'OBOBP6d61a113:16e908c5faa:-7fb1', 0, 'ELECTRICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fe8', 'OBOBPPROF-66e3933d:16e828171d7:-7fe8', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7fd5', 'OBOBP6d61a113:16e908c5faa:-7fb1', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fea', 'OBOBPPROF-66e3933d:16e828171d7:-7fea', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7ffa', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'PLUMBING', 'OBOBPPROF-66e3933d:16e828171d7:-7f72', 'OBOBPPROF-66e3933d:16e828171d7:-7f72', '[]', NULL, NULL, 183.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7ffb', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'ELECTRICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7f74', 'OBOBPPROF-66e3933d:16e828171d7:-7f74', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7ffc', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7f76', 'OBOBPPROF-66e3933d:16e828171d7:-7f76', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-1c22d3c8:16e8c4e45b4:-7ffd', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'ARCHITECTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7f78', 'OBOBPPROF-66e3933d:16e828171d7:-7f78', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fa6', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'PLUMBING', 'OBOBPPROF-563e0611:16e68793733:-7fd7', 'OBOBPPROF-563e0611:16e68793733:-7fd7', '[]', NULL, NULL, 187.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fa7', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'ELECTRICAL', 'OBOBPPROF-563e0611:16e68793733:-7fd9', 'OBOBPPROF-563e0611:16e68793733:-7fd9', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fa8', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-563e0611:16e68793733:-7fdb', 'OBOBPPROF-563e0611:16e68793733:-7fdb', '[]', NULL, NULL, 150.84, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe1', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'PLUMBING', 'OBOBPPROF-563e0611:16e68793733:-7fe8', 'OBOBPPROF-563e0611:16e68793733:-7fe8', '[]', NULL, NULL, 399.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe2', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'MECHANICAL', 'OBOBPPROF-563e0611:16e68793733:-7fe6', 'OBOBPPROF-563e0611:16e68793733:-7fe6', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe3', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'ELECTRICAL', 'OBOBPPROF-563e0611:16e68793733:-7fea', 'OBOBPPROF-563e0611:16e68793733:-7fea', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe4', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-563e0611:16e68793733:-7fec', 'OBOBPPROF-563e0611:16e68793733:-7fec', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-563e0611:16e68793733:-7fe5', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'ARCHITECTURAL', 'OBOBPPROF-563e0611:16e68793733:-7fee', 'OBOBPPROF-563e0611:16e68793733:-7fee', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-599eb6f7:16eaaaac994:-7ff0', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'PLUMBING', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff4', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff4', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-599eb6f7:16eaaaac994:-7ff1', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'ELECTRICAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff6', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff6', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-599eb6f7:16eaaaac994:-7ff2', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff8', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ff8', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-599eb6f7:16eaaaac994:-7ff3', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'ARCHITECTURAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ffa', 'OBOBPPROF-599eb6f7:16eaaaac994:-7ffa', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fac', 'OBOBP6d61a113:16e908c5faa:-7fd8', 0, 'MECHANICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fbd', 'OBOBPPROF-66e3933d:16e828171d7:-7fbd', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fad', 'OBOBP6d61a113:16e908c5faa:-7fd8', 0, 'ELECTRICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fcb', 'OBOBPPROF-66e3933d:16e828171d7:-7fcb', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fae', 'OBOBP6d61a113:16e908c5faa:-7fd8', 0, 'ARCHITECTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fcd', 'OBOBPPROF-66e3933d:16e828171d7:-7fcd', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fb9', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'PLUMBING', 'OBOBPPROF-66e3933d:16e828171d7:-7fbf', 'OBOBPPROF-66e3933d:16e828171d7:-7fbf', NULL, NULL, NULL, 132.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fba', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'ELECTRICAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fc6', 'OBOBPPROF-66e3933d:16e828171d7:-7fc6', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-66e3933d:16e828171d7:-7fbb', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-66e3933d:16e828171d7:-7fc2', 'OBOBPPROF-66e3933d:16e828171d7:-7fc9', NULL, NULL, NULL, 32.88, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-6cf797bc:16e9fe6e323:-7eb0', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'MECHANICAL', NULL, NULL, NULL, NULL, NULL, 0.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7fc5', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'PLUMBING', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f8e', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f8e', '[]', NULL, NULL, 204.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7fc6', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'ELECTRICAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f90', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f90', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7fc7', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f92', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7f92', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7fc8', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'ARCHITECTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7fc9', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7fc9', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7ff0', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'PLUMBING', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ff4', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ff4', '[]', NULL, NULL, 231.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7ff1', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'ELECTRICAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ff6', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ff6', '[]', NULL, NULL, 530.60, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7ff2', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ffa', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ffa', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC-ee90fc7:16e9ff35a47:-7ff3', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'ARCHITECTURAL', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ffc', 'OBOBPPROF-ee90fc7:16e9ff35a47:-7ffc', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f00', 'OBOBP-2a77f22f:16eaf6f4002:-7e8e', 0, 'MECHANICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f03', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f03', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f01', 'OBOBP-2a77f22f:16eaf6f4002:-7e8e', 0, 'ELECTRICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f05', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f05', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f02', 'OBOBP-2a77f22f:16eaf6f4002:-7e8e', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f09', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f09', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f2a', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'PLUMBING', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f2e', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f2e', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f2b', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'ELECTRICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f30', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f30', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f2c', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f34', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f34', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f2d', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'ARCHITECTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f32', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f32', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f5b', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'PLUMBING', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f68', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f68', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f5c', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'ELECTRICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f62', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f62', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f5d', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f66', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f66', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f5e', 'OBOBP-2a77f22f:16eaf6f4002:-7efe', 0, 'ARCHITECTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f68', 'OBOBPPROF2ce5acf2:16eab62c11a:-7f68', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7f7d', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'FENCING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7ffa', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7ffa', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fd7', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 0, 'PLUMBING', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fd8', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 0, 'MECHANICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fd9', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 0, 'ELECTRICAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fda', 'OBOBP-2a77f22f:16eaf6f4002:-7ff1', 0, 'ARCHITECTURAL', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', 'OBOBPPROF2ce5acf2:16eab62c11a:-7fea', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7ffd', 'OBOBP-1c2021a1:16eab36bae1:-7fa4', 0, 'PLUMBING', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fa8', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fa8', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7ffe', 'OBOBP-1c2021a1:16eab36bae1:-7fa4', 0, 'MECHANICAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7faa', 'OBOBPPROF-599eb6f7:16eaaaac994:-7faa', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-7fff', 'OBOBP-1c2021a1:16eab36bae1:-7fa4', 0, 'ELECTRICAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fac', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fac', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC2ce5acf2:16eab62c11a:-8000', 'OBOBP-1c2021a1:16eab36bae1:-7fa4', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fae', 'OBOBPPROF-599eb6f7:16eaaaac994:-7fae', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f47', 'OBOBP-db0fda8:16eaa73e2c0:-8000', 0, 'PLUMBING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f4b', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f4b', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f48', 'OBOBP-db0fda8:16eaa73e2c0:-8000', 0, 'ELECTRICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f4f', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f4f', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f49', 'OBOBP-db0fda8:16eaa73e2c0:-8000', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f51', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f51', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f4a', 'OBOBP-db0fda8:16eaa73e2c0:-8000', 0, 'ARCHITECTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f53', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f53', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f87', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'PLUMBING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f8e', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f8e', '[]', NULL, NULL, 332.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f88', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'MECHANICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f8c', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f8c', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f89', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'ELECTRICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f90', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f67', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f8a', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f92', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f92', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7f8b', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'ARCHITECTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f94', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7f94', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fad', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'PLUMBING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb1', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb1', '[]', NULL, NULL, 332.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fae', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'ELECTRICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb3', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb3', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7faf', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb5', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb5', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fb0', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'ARCHITECTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb7', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fb7', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fd7', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'PLUMBING', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fdc', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fdc', '[]', NULL, NULL, 214.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fd8', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'ELECTRICAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fde', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fde', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fd9', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'ARCHITECTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fe8', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fe8', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC4121ec9d:16ea5ca5c2c:-7fda', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fe2', 'OBOBPPROF4121ec9d:16ea5ca5c2c:-7fe2', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC75e87344:16e49de6e06:-7ef6', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'ELECTRICAL', 'OBOBPPROF75e87344:16e49de6e06:-7fc0', 'OBOBPPROF75e87344:16e49de6e06:-7fbd', '[]', NULL, NULL, 1043.20, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC75e87344:16e49de6e06:-7ef8', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'PLUMBING', 'OBOBPPROF75e87344:16e49de6e06:-7fc6', 'OBOBPPROF75e87344:16e49de6e06:-7fc3', '[]', NULL, NULL, 279.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC75e87344:16e49de6e06:-7efa', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'CIVIL_STRUCTURAL', 'OBOBPPROF75e87344:16e49de6e06:-7fcc', 'OBOBPPROF75e87344:16e49de6e06:-7fc9', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPANC75e87344:16e49de6e06:-7efc', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'ARCHITECTURAL', 'OBOBPPROF75e87344:16e49de6e06:-7fcf', 'OBOBPPROF75e87344:16e49de6e06:-7fd9', '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-1c2021a1:16eab36bae1:-7f65', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 3909.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-1c2021a1:16eab36bae1:-7fb6', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 5164.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e2f', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e38', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e3b', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e4f', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e58', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7e5b', 'OBOBP-1c2021a1:16eab36bae1:-7fe3', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7ea4', 'OBOBP-2a77f22f:16eaf6f4002:-7ecf', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7f48', 'OBOBP-2a77f22f:16eaf6f4002:-7f80', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 2909.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7f92', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7f9b', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7f9e', 'OBOBP-13d3d56a:16eaa77eb29:-7ffe', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7faf', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7fb8', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 212.62, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2a77f22f:16eaf6f4002:-7fbb', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 2567.94, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f65', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f6e', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 290.74, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f71', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 1521.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f80', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f89', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7f8c', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 5386.85, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7fa0', 'OBOBP-2fdaee48:16e7ce66bb5:-7fd2', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-2fdaee48:16e7ce66bb5:-7fd6', 'OBOBP-2fdaee48:16e7ce66bb5:-8000', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 10693.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7f9a', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fa3', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 94.94, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fa6', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 1858.41, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fc8', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fd1', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 212.20, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fd4', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 1050.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fe6', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fef', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 234.24, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7ff2', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 2200.26, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-5497538:16eaa887bb8:-7fff', 'OBOBP-6cf797bc:16e9fe6e323:-7c8d', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-610e0f0a:16e72458381:-7fb5', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-610e0f0a:16e72458381:-7fbe', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 200.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-610e0f0a:16e72458381:-7fc1', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 2974.53, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-610e0f0a:16e72458381:-7fd6', 'OBOBP-610e0f0a:16e72458381:-8000', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 3530.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7c90', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7c99', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 186.22, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7c9c', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 3177.28, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ca9', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7cb2', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7cb5', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 390.41, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ccf', 'OBOBP-6cf797bc:16e9fe6e323:-7ed9', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 2747.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7cd3', 'OBOBP-6cf797bc:16e9fe6e323:-7d06', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7cd7', 'OBOBP-6cf797bc:16e9fe6e323:-7d30', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ee1', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7eea', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7eed', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7efb', 'OBOBP6d61a113:16e908c5faa:-7f84', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f01', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f0a', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f0d', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 21670.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f1b', 'OBOBP-6cf797bc:16e9fe6e323:-7f7f', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f23', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f2c', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f2f', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, 1433.98, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f3d', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'SITE_VERIFICATION', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f46', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'LINE_AND_GRADE', NULL, NULL, '[]', NULL, NULL, 113.78, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f49', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'FSEC', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f8b', 'OBOBP-6cf797bc:16e9fe6e323:-7fb9', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 9792.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7f90', 'OBOBP-6cf797bc:16e9fe6e323:-7fe2', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 2515.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7feb', 'OBOBP6d61a113:16e908c5faa:-7f5d', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ff1', 'OBOBP6d61a113:16e908c5faa:-8000', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, 0.00, NULL, NULL);
+INSERT INTO `building_application_subdoc` VALUES ('OBOBPEVAL-6cf797bc:16e9fe6e323:-7ff5', 'OBOBP6d61a113:16e908c5faa:-7fb1', 0, 'LOCATIONAL_CLEARANCE', NULL, NULL, '[]', NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -2649,22 +2629,23 @@ CREATE TABLE `building_doc_type` (
 -- Records of building_doc_type
 -- ----------------------------
 BEGIN;
-INSERT INTO `building_doc_type` VALUES ('ARCHITECTURAL', 'ARCHITECTURAL PERMIT', 1, 'ANCILLARY', NULL, 'ARCHITECTURAL', 0, 3, 0, '[BPNO]-A');
-INSERT INTO `building_doc_type` VALUES ('BUILDING_PERMIT', 'Building Permit', 0, 'MAIN', 'building_permit', NULL, NULL, 1, NULL, 'BP-[YYYYMM]-[%05d]');
-INSERT INTO `building_doc_type` VALUES ('CIVIL_STRUCTURAL', 'CIVIL/STRUCTURAL PERMIT', 2, 'ANCILLARY', NULL, 'CIVIL_STRUCTURAL', NULL, 3, NULL, '[BPNO]-C');
-INSERT INTO `building_doc_type` VALUES ('DEMOLITION', 'DEMOLITION PERMIT', 8, 'MAIN', NULL, NULL, NULL, 0, NULL, NULL);
-INSERT INTO `building_doc_type` VALUES ('ELECTRICAL', 'ELECTRICAL PERMIT', 3, 'ANCILLARY', NULL, 'ELECTRICAL', NULL, 3, 1, '[BPNO]-E');
-INSERT INTO `building_doc_type` VALUES ('ELECTRONIC', 'ELECTRONICS PERMIT', 7, 'ANCILLARY', NULL, 'ELECTRONIC', NULL, 3, 1, '[BPNO]-EC');
-INSERT INTO `building_doc_type` VALUES ('EXCAVATION', 'EXCAVATION AND GROUND PERMIT', 8, 'ANCILLARY', NULL, NULL, NULL, 0, NULL, NULL);
+INSERT INTO `building_doc_type` VALUES ('ACCESSORIES', 'ACCESSORIES', 0, 'OTHER', NULL, NULL, 0, 0, 1, NULL);
+INSERT INTO `building_doc_type` VALUES ('ARCHITECTURAL', 'ARCHITECTURAL PERMIT', 2, 'ANCILLARY', NULL, 'ARCHITECTURAL', 0, 3, 0, '[BPNO]-A');
+INSERT INTO `building_doc_type` VALUES ('BUILDING_PERMIT', 'BUILDING PERMIT', 0, 'MAIN', 'building_permit', NULL, NULL, 1, NULL, 'BP-[YYYYMM]-[%05d]');
+INSERT INTO `building_doc_type` VALUES ('CIVIL_STRUCTURAL', 'CIVIL/STRUCTURAL PERMIT', 3, 'ANCILLARY', NULL, 'CIVIL_STRUCTURAL', NULL, 3, NULL, '[BPNO]-C');
+INSERT INTO `building_doc_type` VALUES ('DEMOLITION', 'DEMOLITION PERMIT', 20, 'MAIN', NULL, NULL, NULL, 0, NULL, NULL);
+INSERT INTO `building_doc_type` VALUES ('ELECTRICAL', 'ELECTRICAL PERMIT', 4, 'ANCILLARY', NULL, 'ELECTRICAL', NULL, 3, 1, '[BPNO]-E');
+INSERT INTO `building_doc_type` VALUES ('ELECTRONIC', 'ELECTRONICS PERMIT', 8, 'ANCILLARY', NULL, 'ELECTRONIC', NULL, 3, 1, '[BPNO]-EC');
+INSERT INTO `building_doc_type` VALUES ('EXCAVATION', 'EXCAVATION AND GROUND PERMIT', 21, 'ANCILLARY', NULL, NULL, NULL, 0, NULL, NULL);
 INSERT INTO `building_doc_type` VALUES ('FENCING', 'FENCING PERMIT', 9, 'ANCILLARY', NULL, NULL, NULL, 0, NULL, NULL);
-INSERT INTO `building_doc_type` VALUES ('FSEC', 'Fire Safety Evaluation Clearance', 12, 'CLEARANCE', 'fsec', 'FSEC', 1, 2, 1, NULL);
-INSERT INTO `building_doc_type` VALUES ('FSEC_CHECKLIST', 'Fire Safety Evaluation Checklist', 12, 'CHECKLIST', NULL, 'FSEC', 1, 2, NULL, NULL);
-INSERT INTO `building_doc_type` VALUES ('HOT_WORKS', 'Hot Works Permit', 15, 'ANCILLARY', 'hotworks_clearance', 'FSEC', NULL, 2, 1, NULL);
-INSERT INTO `building_doc_type` VALUES ('LINE_AND_GRADE', 'LINE AND GRADE', NULL, 'ANCILLARY', NULL, 'LINE_AND_GRADE', 1, 0, 1, NULL);
-INSERT INTO `building_doc_type` VALUES ('LOCATIONAL_CLEARANCE', 'Locational Clearance', 12, 'CLEARANCE', 'locational_clearance', 'ZONING', 1, 2, 1, NULL);
-INSERT INTO `building_doc_type` VALUES ('MECHANICAL', 'MECHANICAL PERMIT', 4, 'ANCILLARY', NULL, 'MECHANICAL', NULL, 3, 1, '[BPNO]-M');
-INSERT INTO `building_doc_type` VALUES ('PLUMBING', 'PLUMBING PERMIT', 6, 'ANCILLARY', NULL, 'PLUMBING', NULL, 3, 1, '[BPNO]-P');
-INSERT INTO `building_doc_type` VALUES ('SANITARY', 'SANITARY PERMIT', 5, 'ANCILLARY', NULL, 'PLUMBING', NULL, 3, NULL, '[BPNO]-S');
+INSERT INTO `building_doc_type` VALUES ('FSEC', 'FIRE SAFETY EVALUATION CLEARANCE', 12, 'CLEARANCE', 'fsec', 'FSEC', 1, 2, 1, NULL);
+INSERT INTO `building_doc_type` VALUES ('FSEC_CHECKLIST', 'FIRE SAFETY EVALUATION CHECKLIST', 101, 'CHECKLIST', NULL, 'FSEC', 1, 2, NULL, NULL);
+INSERT INTO `building_doc_type` VALUES ('HOT_WORKS', 'HOT WORKS PERMIT', 15, 'ANCILLARY', 'hotworks_clearance', 'FSEC', NULL, 2, 1, NULL);
+INSERT INTO `building_doc_type` VALUES ('LINE_AND_GRADE', 'LINE AND GRADE', 1, 'OTHER', NULL, 'LINE_AND_GRADE', 1, 0, 1, NULL);
+INSERT INTO `building_doc_type` VALUES ('LOCATIONAL_CLEARANCE', 'LOCATIONAL CLEARANCE', 100, 'CLEARANCE', 'locational_clearance', 'ZONING', 1, 2, 1, NULL);
+INSERT INTO `building_doc_type` VALUES ('MECHANICAL', 'MECHANICAL PERMIT', 5, 'ANCILLARY', NULL, 'MECHANICAL', NULL, 3, 1, '[BPNO]-M');
+INSERT INTO `building_doc_type` VALUES ('PLUMBING', 'PLUMBING PERMIT', 7, 'ANCILLARY', NULL, 'PLUMBING', NULL, 3, 1, '[BPNO]-P');
+INSERT INTO `building_doc_type` VALUES ('SANITARY', 'SANITARY PERMIT', 6, 'ANCILLARY', NULL, 'PLUMBING', NULL, 3, NULL, '[BPNO]-S');
 INSERT INTO `building_doc_type` VALUES ('SCAFFOLDING', 'SCAFFOLDING PERMIT', 12, 'MAIN', NULL, NULL, NULL, 0, NULL, NULL);
 INSERT INTO `building_doc_type` VALUES ('SIDEWALK_CONSTRUCTION', 'SIDEWALK CONSTRUCTION PERMIT', 10, 'ANCILLARY', NULL, NULL, NULL, 0, NULL, NULL);
 INSERT INTO `building_doc_type` VALUES ('SIGN', 'SIGN PERMIT', 13, 'ANCILLARY', NULL, NULL, NULL, 0, NULL, NULL);
@@ -4366,6 +4347,7 @@ INSERT INTO `obo_occupancy_type` VALUES ('J204', 'J2', 'fence over 1.8 meters hi
 INSERT INTO `obo_occupancy_type` VALUES ('J205', 'J2', 'steel and or concrete tanks');
 INSERT INTO `obo_occupancy_type` VALUES ('J301', 'J3', 'stages, platforms and similar structures');
 INSERT INTO `obo_occupancy_type` VALUES ('J302', 'J3', 'pelota, tennis, badminton or basketball courts');
+INSERT INTO `obo_occupancy_type` VALUES ('J303', 'J3', 'tombs and mausoleums');
 INSERT INTO `obo_occupancy_type` VALUES ('J304', 'J3', 'aviaries and aquariums and zoo structures');
 INSERT INTO `obo_occupancy_type` VALUES ('J305', 'J3', 'banks and record vaults');
 COMMIT;
@@ -4568,7 +4550,7 @@ CREATE TABLE `obo_variable` (
   `system` smallint(3) DEFAULT NULL,
   `arrayvalues` text,
   `unit` varchar(100) DEFAULT NULL,
-  `sectionid` varchar(50) DEFAULT NULL,
+  `occupancytypeid` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`objid`) USING BTREE,
   UNIQUE KEY `uix_obo_variable_name` (`name`) USING BTREE,
   KEY `fk_obo_section_variable` (`typeid`) USING BTREE,
@@ -4579,8 +4561,9 @@ CREATE TABLE `obo_variable` (
   KEY `ix_sortorder` (`sortorder`) USING BTREE,
   KEY `ix_system` (`system`) USING BTREE,
   KEY `ix_unit` (`unit`) USING BTREE,
-  KEY `obo_variable_sectionid` (`sectionid`) USING BTREE,
-  CONSTRAINT `obo_variable_ibfk_1` FOREIGN KEY (`typeid`) REFERENCES `obo_variable_type` (`objid`)
+  KEY `fk_obo_variable_occupancytypeid` (`occupancytypeid`),
+  CONSTRAINT `fk_obo_variable_occupancytypeid` FOREIGN KEY (`occupancytypeid`) REFERENCES `obo_occupancy_type` (`objid`),
+  CONSTRAINT `fk_obo_variable_typeid` FOREIGN KEY (`typeid`) REFERENCES `building_doc_type` (`objid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -4591,8 +4574,8 @@ INSERT INTO `obo_variable` VALUES ('ACCESS_TO_PUBLIC_STREET', 'DRAFT', 'ACCESS_T
 INSERT INTO `obo_variable` VALUES ('ANTENNA_TOWER_COMMUNICATION', 'DRAFT', 'ANTENNA_TOWER_COMMUNICATION', 'ANTENNA TOWERS/MASTS OR OTHER STRUCTURES FOR COMMUNICATIONS TRANSMISSION', NULL, 'integer', 'electronic', 'G', 29, 0, NULL, 'STRUCTURE', NULL);
 INSERT INTO `obo_variable` VALUES ('ATM_TICKETING', 'DRAFT', 'ATM_TICKETING', 'AUTOMATED TELLER MACHINES TICKETING', NULL, 'integer', 'electronic', 'C', 3, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('AUDITORIUM', 'DRAFT', 'AUDITORIUM', 'AUDITORIUM', NULL, 'integer', 'electronic', 'F', 27, 0, NULL, 'LOCATION', NULL);
-INSERT INTO `obo_variable` VALUES ('BALCONY_TERRACE', 'DRAFT', 'BALCONY_TERRACE', 'BALCONY, TERRACES, LANAI', NULL, 'decimal', 'J201', 'BALCONY,TERRACES AND LANAI', 0, 0, NULL, 'area in sq.meters', NULL);
-INSERT INTO `obo_variable` VALUES ('BANK_AND_RECORD_VAULT', 'DRAFT', 'BANK_AND_RECORD_VAULT', 'BANK AND RECORD VAULT', NULL, 'decimal', 'J305', 'BANK AND RECORD VAULTS', 2, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('BALCONY_TERRACE', 'DRAFT', 'BALCONY_TERRACE', 'BALCONY, TERRACES, LANAI', NULL, 'decimal', 'ACCESSORIES', 'BALCONY,TERRACES AND LANAI', 0, 0, NULL, 'area in sq.meters', 'J201');
+INSERT INTO `obo_variable` VALUES ('BANK_AND_RECORD_VAULT', 'DRAFT', 'BANK_AND_RECORD_VAULT', 'BANK AND RECORD VAULT', NULL, 'decimal', 'ACCESSORIES', 'BANK AND RECORD VAULTS', 2, 0, NULL, 'volume in cu.meter', 'J305');
 INSERT INTO `obo_variable` VALUES ('BARRIER_CONTROL', 'DRAFT', 'BARRIER_CONTROL', 'BARRIER CONTROLS', NULL, 'integer', 'electronic', 'E', 17, 0, NULL, 'TERMINATION', NULL);
 INSERT INTO `obo_variable` VALUES ('BAR_SINK', 'DRAFT', 'BAR_SINK', 'BAR SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 19, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('BATH_TUB', 'DRAFT', 'BATH_TUB', 'BATH TUB', NULL, 'integer', 'plumbing', 'SPECIAL', 12, 0, NULL, 'unit', NULL);
@@ -4606,13 +4589,13 @@ INSERT INTO `obo_variable` VALUES ('CAR_ELEVATOR', 'DRAFT', 'CAR_ELEVATOR', 'CAR
 INSERT INTO `obo_variable` VALUES ('CCTV', 'DRAFT', 'CCTV', 'CATV/MATV/CCTV AND OFF-AIR TELEVISION', NULL, 'integer', 'electronic', 'E', 21, 0, NULL, 'TERMINATION', NULL);
 INSERT INTO `obo_variable` VALUES ('CENTRAILIZED_AIRCON', 'DRAFT', 'CENTRAILIZED_AIRCON', 'CENTRALIZED AIRCONDITION', NULL, 'decimal', 'mechanical', 'REFRIGERATION,AIR CONDITIONING AND MECHANICAL VENTILATION', 4, 0, NULL, 'TON', NULL);
 INSERT INTO `obo_variable` VALUES ('CENTRALIZED_CLOCK_SYSTEM', 'DRAFT', 'CENTRALIZED_CLOCK_SYSTEM', 'CENTRALIZED_CLOCK_SYSTEM', NULL, 'integer', 'electronic', 'E', 25, 0, NULL, 'TERMINATION', NULL);
-INSERT INTO `obo_variable` VALUES ('CHIMNEY', 'DRAFT', 'CHIMNEY', 'CHIMNEY', NULL, 'decimal', 'J202', NULL, 11, 0, NULL, 'height in meters', NULL);
+INSERT INTO `obo_variable` VALUES ('CHIMNEY', 'DRAFT', 'CHIMNEY', 'CHIMNEY', NULL, 'decimal', 'ACCESSORIES', NULL, 11, 0, NULL, 'height in meters', 'J202');
 INSERT INTO `obo_variable` VALUES ('COIN_CHANGER', 'DRAFT', 'COIN_CHANGER', 'COIN CHANGERS', NULL, 'integer', 'electronic', 'C', 6, 0, NULL, 'unit', NULL);
-INSERT INTO `obo_variable` VALUES ('COLUMBARIUM', 'DRAFT', 'COLUMBARIUM', 'COLUMBARIUM', NULL, 'decimal', 'J303', 'CEMETERIES', 19, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('COLUMBARIUM', 'DRAFT', 'COLUMBARIUM', 'COLUMBARIUM', NULL, 'decimal', 'ACCESSORIES', 'CEMETERIES', 19, 0, NULL, 'area in sq.meters', 'J303');
 INSERT INTO `obo_variable` VALUES ('COMPRESSED_AIR_VACUUM', 'DRAFT', 'COMPRESSED_AIR_VACUUM', 'COMPRESSED AIR VACUUM INST. OR INDUSTRIAL GAS', NULL, 'integer', 'mechanical', 'OTHERS', 45, 0, NULL, 'OUTLET', NULL);
 INSERT INTO `obo_variable` VALUES ('CONCRETE_FRAMING', 'DRAFT', 'CONCRETE_FRAMING', 'CONCRETE FRAMING', NULL, 'boolean', 'civil_structural', NULL, 7, 0, NULL, 'unit', NULL);
-INSERT INTO `obo_variable` VALUES ('CONCRETE_OR_STEEL_TANK', 'DRAFT', 'CONCRETE_OR_STEEL_TANK', 'REINFORCED CONCRETE OR STEEL TANK', NULL, 'decimal', 'J205', NULL, 20, 0, NULL, 'volume in cu.meter', NULL);
-INSERT INTO `obo_variable` VALUES ('CONCRETE_OR_STEEL_TANK_UNDERGROUND', 'DRAFT', 'CONCRETE_OR_STEEL_TANK_UNDERGROUND', 'CONCRETE OR STEEL TANK (UNDERGROUND)', NULL, 'decimal', 'J205', NULL, 21, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('CONCRETE_OR_STEEL_TANK', 'DRAFT', 'CONCRETE_OR_STEEL_TANK', 'REINFORCED CONCRETE OR STEEL TANK', NULL, 'decimal', 'ACCESSORIES', NULL, 20, 0, NULL, 'volume in cu.meter', 'J205');
+INSERT INTO `obo_variable` VALUES ('CONCRETE_OR_STEEL_TANK_UNDERGROUND', 'DRAFT', 'CONCRETE_OR_STEEL_TANK_UNDERGROUND', 'CONCRETE OR STEEL TANK (UNDERGROUND)', NULL, 'decimal', 'ACCESSORIES', NULL, 21, 0, NULL, 'volume in cu.meter', 'J205');
 INSERT INTO `obo_variable` VALUES ('CONSTRUCTION_ELEVATOR', 'DRAFT', 'CONSTRUCTION_ELEVATOR', 'CONSTRUCTION ELEVATOR (FOR MATERIALS)', NULL, 'integer', 'mechanical', 'ELEVATORS', 21, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('CORRIDORS', 'DRAFT', 'CORRIDORS', 'CORRIDORS', NULL, 'boolean', 'architectural', 'A', 3, 0, NULL, 'UNIT', NULL);
 INSERT INTO `obo_variable` VALUES ('DENTAL_CUSPIDOR', 'DRAFT', 'DENTAL_CUSPIDOR', 'DENTAL CUSPIDOR', NULL, 'integer', 'plumbing', 'SPECIAL', 16, 0, NULL, 'unit', NULL);
@@ -4630,7 +4613,7 @@ INSERT INTO `obo_variable` VALUES ('ELECTRONIC_POLE_ATTACHMENT', 'DRAFT', 'ELECT
 INSERT INTO `obo_variable` VALUES ('ELECTRONIC_PROCESS_CONTROL_SYSTEM', 'DRAFT', 'ELECTRONIC_PROCESS_CONTROL_SYSTEM', 'ELECTRONIC PROCESS CONTROL SYSTEM', NULL, 'integer', 'electronic', 'E', 23, 0, NULL, 'TERMINATION', NULL);
 INSERT INTO `obo_variable` VALUES ('ELECTRONIC_SIGNAGE', 'DRAFT', 'ELECTRONIC_SIGNAGE', 'ELECTRONIC INDOOR AND OUTDOOR SIGNAGES AND DISPLAY SYSTEMS', NULL, 'integer', 'electronic', 'H', 30, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('EMERGENCY_LIGHTS', 'DRAFT', 'EMERGENCY_LIGHTS', 'EMERGENCY LIGHTS', NULL, 'integer', 'architectural', 'C', 26, 0, NULL, 'UNIT', NULL);
-INSERT INTO `obo_variable` VALUES ('ENCROACHMENT_FOOTING', 'DRAFT', 'ENCROACHMENT_FOOTING', 'ENCROACHMENT OF FOOTINGS OR FOUNDATIONS OF BLDGS', NULL, 'decimal', 'ground_prep_excavation', NULL, 5, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('ENCROACHMENT_FOOTING', 'DRAFT', 'ENCROACHMENT_FOOTING', 'ENCROACHMENT OF FOOTINGS OR FOUNDATIONS OF BLDGS', NULL, 'decimal', 'CIVIL_STRUCTURAL', NULL, 5, 0, NULL, 'area in sq.meters', NULL);
 INSERT INTO `obo_variable` VALUES ('ENGINE_NON_LTO', 'DRAFT', 'ENGINE_NON_LTO', 'OTHER INTERNAL COMBUSTION ENGINE (CRANE, FORKLIFT,ETC)', NULL, 'decimal', 'mechanical', 'OTHERS', 48, 0, NULL, 'KW', NULL);
 INSERT INTO `obo_variable` VALUES ('ERECTION', 'DRAFT', 'ERECTION', 'ERECTION/LIFTING', NULL, 'boolean', 'civil_structural', NULL, 6, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('ESCALATOR', 'DRAFT', 'ESCALATOR', 'ESCALATOR AND MOVING WALK (KW)', NULL, 'decimal', 'mechanical', 'ESCALATORS AND MOVING WALKS', 10, 0, NULL, 'KW', NULL);
@@ -4646,7 +4629,7 @@ INSERT INTO `obo_variable` VALUES ('FIREWALL', 'DRAFT', 'FIREWALL', 'FIREWALL (S
 INSERT INTO `obo_variable` VALUES ('FIRE_FIGHTING_AND_SAFETY_FACILITIES', 'DRAFT', 'FIRE_FIGHTING_AND_SAFETY_FACILITIES', 'FIRE FIGHTING AND SAFETY FACILITIES', NULL, 'integer', 'architectural', 'C', 24, 0, NULL, 'UNIT', NULL);
 INSERT INTO `obo_variable` VALUES ('FIRE_SPRINKLER', 'DRAFT', 'FIRE_SPRINKLER', 'AUTOMATIC FIRE SPRINKLER', NULL, 'integer', 'mechanical', 'OTHERS', 43, 0, NULL, 'HEAD', NULL);
 INSERT INTO `obo_variable` VALUES ('FIRE_WALLS', 'DRAFT', 'FIRE_WALLS', 'FIRE WALLS', NULL, 'integer', 'architectural', 'C', 23, 0, NULL, 'UNIT', NULL);
-INSERT INTO `obo_variable` VALUES ('FIXED_OVEN', 'DRAFT', 'FIXED_OVEN', 'COMMERCIAL/INDUSTRIAL FIXED OVEN', NULL, 'decimal', 'J202', 'OVEN', 12, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('FIXED_OVEN', 'DRAFT', 'FIXED_OVEN', 'COMMERCIAL/INDUSTRIAL FIXED OVEN', NULL, 'decimal', 'ACCESSORIES', 'OVEN', 12, 0, NULL, 'area in sq.meters', 'J202');
 INSERT INTO `obo_variable` VALUES ('FIXED_TYPE_STERILIZER', 'DRAFT', 'FIXED_TYPE_STERILIZER', 'FIXED TYPE STERILIZER', NULL, 'integer', 'plumbing', 'SPECIAL', 22, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('FLOOR_DRAIN', 'DRAFT', 'FLOOR_DRAIN', 'FLOOR DRAIN', NULL, 'integer', 'plumbing', 'GENERAL', 3, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('FLOOR_FINISHES', 'DRAFT', 'FLOOR_FINISHES', 'FLOOR FINISHES', NULL, 'boolean', 'architectural', 'A', 12, 0, NULL, 'UNIT', NULL);
@@ -4665,7 +4648,7 @@ INSERT INTO `obo_variable` VALUES ('ICE_PLANT', 'DRAFT', 'ICE_PLANT', 'ICE PLANT
 INSERT INTO `obo_variable` VALUES ('ILLUMINATED_ADVERTISING_SIGN', 'DRAFT', 'ILLUMINATED_ADVERTISING_SIGN', 'ILLUMINATED ADVERTISING SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 4, 0, NULL, 'area in sq.meters', NULL);
 INSERT INTO `obo_variable` VALUES ('ILLUMINATED_BUSINESS_SIGN', 'DRAFT', 'ILLUMINATED_BUSINESS_SIGN', 'ILLUMINATED BUSINESS SIGN', NULL, 'decimal', 'sign', 'SIGNAGE', 3, 0, NULL, 'area in sq.meters', NULL);
 INSERT INTO `obo_variable` VALUES ('INFORMATION_TECHNOLOGY_SYSTEM', 'DRAFT', 'INFORMATION_TECHNOLOGY_SYSTEM', 'INFORMATION TECHNOLOGY SYSTEM (WORKSTATION,SERVER,ROUTER)', NULL, 'integer', 'electronic', 'D', 12, 0, NULL, 'OUTLET', NULL);
-INSERT INTO `obo_variable` VALUES ('KILN_FURNACE', 'DRAFT', 'KILN_FURNACE', 'INDUSTRIAL KILN/FURNACE', NULL, 'decimal', 'J202', 'OVEN', 13, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('KILN_FURNACE', 'DRAFT', 'KILN_FURNACE', 'INDUSTRIAL KILN/FURNACE', NULL, 'decimal', 'ACCESSORIES', 'OVEN', 13, 0, NULL, 'volume in cu.meter', 'J202');
 INSERT INTO `obo_variable` VALUES ('KITCHEN_SINK', 'DRAFT', 'KITCHEN_SINK', 'KITCHEN SINK', NULL, 'integer', 'plumbing', 'GENERAL', 10, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('LAB_SINK', 'DRAFT', 'LAB_SINK', 'LABORATORY SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 21, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('LAUNDRY_SINK', 'DRAFT', 'LAUNDRY_SINK', 'LAUNDRY SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 20, 0, NULL, 'unit', NULL);
@@ -4712,7 +4695,7 @@ INSERT INTO `obo_variable` VALUES ('REFRIGERATION', 'DRAFT', 'REFRIGERATION', 'R
 INSERT INTO `obo_variable` VALUES ('SCAFFOLDING', 'DRAFT', 'SCAFFOLDING', 'SCAFFOLDING', NULL, 'decimal', 'scaffolding', 'SCAFFOLDING', 1, 0, NULL, 'LM', NULL);
 INSERT INTO `obo_variable` VALUES ('SEATING_ACCOMODATIONS', 'DRAFT', 'SEATING_ACCOMODATIONS', 'SEATING ACCOMODATIONS', NULL, 'boolean', 'architectural', 'A', 15, 0, NULL, 'UNIT', NULL);
 INSERT INTO `obo_variable` VALUES ('SECURITY_ALARM_SYSTEM', 'DRAFT', 'SECURITY_ALARM_SYSTEM', 'SECURITY AND ALARM SYSTEMS', NULL, 'integer', 'electronic', 'E', 13, 0, NULL, 'TERMINATION', NULL);
-INSERT INTO `obo_variable` VALUES ('SEMI_ENCLOSED_MAUSOLEUM', 'DRAFT', 'SEMI_ENCLOSED_MAUSOLEUM', 'SEMI-ENCLOSED MAUSOLEUM', 'Canopied or not, per sqm of built up area', 'decimal', 'J303', 'CEMETERIES', 17, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('SEMI_ENCLOSED_MAUSOLEUM', 'DRAFT', 'SEMI_ENCLOSED_MAUSOLEUM', 'SEMI-ENCLOSED MAUSOLEUM', 'Canopied or not, per sqm of built up area', 'decimal', 'ACCESSORIES', 'CEMETERIES', 17, 0, NULL, 'area in sq.meters', 'J303');
 INSERT INTO `obo_variable` VALUES ('SEPTIC_TANK', 'DRAFT', 'SEPTIC_TANK', 'SEPTIC TANK', NULL, 'decimal', 'plumbing', 'OTHERS', 40, 0, NULL, 'volume in cu.meter', NULL);
 INSERT INTO `obo_variable` VALUES ('SEWAGE_PUMP', 'DRAFT', 'SEWAGE_PUMP', 'SEWAGE PUMP', NULL, 'decimal', 'mechanical', 'OTHERS', 41, 0, NULL, 'KW', NULL);
 INSERT INTO `obo_variable` VALUES ('SHOWER_HEAD', 'DRAFT', 'SHOWER_HEAD', 'SHOWER HEAD', NULL, 'integer', 'plumbing', 'GENERAL', 7, 0, NULL, 'unit', NULL);
@@ -4721,7 +4704,7 @@ INSERT INTO `obo_variable` VALUES ('SIGNAL_LIGHT', 'DRAFT', 'SIGNAL_LIGHT', 'SIG
 INSERT INTO `obo_variable` VALUES ('SINK', 'DRAFT', 'SINK', 'SINK', NULL, 'integer', 'plumbing', 'GENERAL', 4, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('SLABS', 'DRAFT', 'SLABS', 'SLABS', NULL, 'boolean', 'civil_structural', NULL, 9, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('SLOP_SINK', 'DRAFT', 'SLOP_SINK', 'SLOP SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 10, 0, NULL, 'unit', NULL);
-INSERT INTO `obo_variable` VALUES ('SMOKESTACK', 'DRAFT', 'SMOKESTACK', 'SMOKESTACK', NULL, 'decimal', 'J202', NULL, 10, 0, NULL, 'height in meters', NULL);
+INSERT INTO `obo_variable` VALUES ('SMOKESTACK', 'DRAFT', 'SMOKESTACK', 'SMOKESTACK', NULL, 'decimal', 'ACCESSORIES', NULL, 10, 0, NULL, 'height in meters', 'J202');
 INSERT INTO `obo_variable` VALUES ('SMOKE_DETECTORS', 'DRAFT', 'SMOKE_DETECTORS', 'SMOKE DETECTORS', NULL, 'integer', 'architectural', 'C', 25, 0, NULL, 'UNIT', NULL);
 INSERT INTO `obo_variable` VALUES ('SODA_FOUNTAIN_SINK', 'DRAFT', 'SODA_FOUNTAIN_SINK', 'SODA FOUNTAIN SINK', NULL, 'integer', 'plumbing', 'SPECIAL', 19, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('SOIL_STABILIZATION', 'DRAFT', 'SOIL_STABILIZATION', 'SOIL STABILIZATION', NULL, 'boolean', 'civil_structural', NULL, 3, 0, NULL, 'unit', NULL);
@@ -4730,32 +4713,32 @@ INSERT INTO `obo_variable` VALUES ('STAIRS', 'DRAFT', 'STAIRS', 'STAIRS', NULL, 
 INSERT INTO `obo_variable` VALUES ('STAKING', 'DRAFT', 'STAKING', 'STAKING', NULL, 'boolean', 'civil_structural', NULL, 1, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('STEAM_GAS_TURBINE_ENGINE', 'DRAFT', 'STEAM_GAS_TURBINE_ENGINE', 'STEAM/GAS TURBINE ENGINE', NULL, 'decimal', 'mechanical', 'OTHERS', 44, 0, NULL, 'KW', NULL);
 INSERT INTO `obo_variable` VALUES ('STEEL_TOWER', 'DRAFT', 'STEEL_TOWER', 'STEEL TOWERS', NULL, 'boolean', 'civil_structural', NULL, 13, 0, NULL, 'unit', NULL);
-INSERT INTO `obo_variable` VALUES ('STORAGE_SILO', 'DRAFT', 'STORAGE_SILO', 'STORAGE SILO', NULL, 'decimal', 'J101', NULL, 9, 0, NULL, 'height in meters', NULL);
+INSERT INTO `obo_variable` VALUES ('STORAGE_SILO', 'DRAFT', 'STORAGE_SILO', 'STORAGE SILO', NULL, 'decimal', 'ACCESSORIES', NULL, 9, 0, NULL, 'height in meters', 'J101');
 INSERT INTO `obo_variable` VALUES ('STRUCTURAL_STEEL_FRAMING', 'DRAFT', 'STRUCTURAL_STEEL_FRAMING', 'STRUCTURAL STEEL FRAMING', NULL, 'boolean', 'civil_structural', NULL, 8, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('STUDIO', 'DRAFT', 'STUDIO', 'STUDIOS (AUDIO,VIDEO PRODUCTION)', NULL, 'integer', 'electronic', 'F', 26, 0, NULL, 'LOCATION', NULL);
 INSERT INTO `obo_variable` VALUES ('SURVEILLANCE_SYSTEM', 'DRAFT', 'SURVEILLANCE_SYSTEM', 'MONITORING AND SURVEILLLANCE SYSTEM', NULL, 'integer', 'electronic', 'E', 15, 0, NULL, 'TERMINATION', NULL);
-INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL', 'DRAFT', 'SWIMMING_POOL', 'SWIMMING POOL', NULL, 'decimal', 'J203', NULL, 3, 0, NULL, 'volume in cu.meter', NULL);
-INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL_SHOWER_LOCKER_ROOM', 'DRAFT', 'SWIMMING_POOL_SHOWER_LOCKER_ROOM', 'SWIMMING POOL SHOWER/LOCKER ROOM', NULL, 'integer', 'J203', NULL, 5, 0, NULL, 'unit', NULL);
-INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL_USING_INDIGENOUS_MATERIALS', 'DRAFT', 'SWIMMING_POOL_USING_INDIGENOUS_MATERIALS', 'SWIMMING POOL USING INDIGENOUS MATERIALS', NULL, 'decimal', 'J203', NULL, 4, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL', 'DRAFT', 'SWIMMING_POOL', 'SWIMMING POOL', NULL, 'decimal', 'ACCESSORIES', NULL, 3, 0, NULL, 'volume in cu.meter', 'J203');
+INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL_SHOWER_LOCKER_ROOM', 'DRAFT', 'SWIMMING_POOL_SHOWER_LOCKER_ROOM', 'SWIMMING POOL SHOWER/LOCKER ROOM', NULL, 'integer', 'ACCESSORIES', NULL, 5, 0, NULL, 'unit', 'J203');
+INSERT INTO `obo_variable` VALUES ('SWIMMING_POOL_USING_INDIGENOUS_MATERIALS', 'DRAFT', 'SWIMMING_POOL_USING_INDIGENOUS_MATERIALS', 'SWIMMING POOL USING INDIGENOUS MATERIALS', NULL, 'decimal', 'ACCESSORIES', NULL, 4, 0, NULL, 'volume in cu.meter', 'J203');
 INSERT INTO `obo_variable` VALUES ('SWITCH_CONTROL_BUZZERS', 'DRAFT', 'SWITCH_CONTROL_BUZZERS', 'SWITCHES, CONTROLS, BUZZERS', NULL, 'boolean', 'architectural', 'A', 9, 0, NULL, 'UNIT', NULL);
 INSERT INTO `obo_variable` VALUES ('TANKS', 'DRAFT', 'TANKS', 'TANKS', NULL, 'boolean', 'civil_structural', NULL, 14, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('TELECOM_SYSTEM', 'DRAFT', 'TELECOM_SYSTEM', 'TELECOMMUNICATION SYSTEM', NULL, 'integer', 'electronic', 'A', 1, 0, NULL, 'PORT', NULL);
 INSERT INTO `obo_variable` VALUES ('TELEPHONE_BOOTH', 'DRAFT', 'TELEPHONE_BOOTH', 'TELEPHONE BOOTHS / PAY PHONE', NULL, 'integer', 'electronic', 'C', 5, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('THEATER', 'DRAFT', 'THEATER', 'THEATER', NULL, 'integer', 'electronic', 'F', 28, 0, NULL, 'LOCATION', NULL);
 INSERT INTO `obo_variable` VALUES ('THRESHOLDS', 'DRAFT', 'THRESHOLDS', 'THRESHOLDS', NULL, 'boolean', 'architectural', 'A', 11, 0, NULL, 'UNIT', NULL);
-INSERT INTO `obo_variable` VALUES ('TOMB', 'DRAFT', 'TOMB', 'TOMB', 'Area per covered ground', 'decimal', 'J303', 'CEMETERIES', 16, 0, NULL, 'area in sq.meters', NULL);
-INSERT INTO `obo_variable` VALUES ('TOTALLY_ENCLOSED_MAUSOLEUM', 'DRAFT', 'TOTALLY_ENCLOSED_MAUSOLEUM', 'TOTALLY ENCLOSED MAUSOLEUM', NULL, 'decimal', 'J303', 'CEMETERIES', 18, 0, NULL, 'area in sq.meters', NULL);
+INSERT INTO `obo_variable` VALUES ('TOMB', 'DRAFT', 'TOMB', 'TOMB', 'Area per covered ground', 'decimal', 'ACCESSORIES', 'CEMETERIES', 16, 0, NULL, 'area in sq.meters', 'J303');
+INSERT INTO `obo_variable` VALUES ('TOTALLY_ENCLOSED_MAUSOLEUM', 'DRAFT', 'TOTALLY_ENCLOSED_MAUSOLEUM', 'TOTALLY ENCLOSED MAUSOLEUM', NULL, 'decimal', 'ACCESSORIES', 'CEMETERIES', 18, 0, NULL, 'area in sq.meters', 'J303');
 INSERT INTO `obo_variable` VALUES ('TOTAL_CONNECTED_LOAD', 'DRAFT', 'TOTAL_CONNECTED_LOAD', 'TOTAL CONNECTED LOAD', NULL, 'decimal', 'electrical', 'GENERAL', 1, 0, NULL, 'KVA', NULL);
 INSERT INTO `obo_variable` VALUES ('TOTAL_GENERATOR_UPS_CAPACITY', 'DRAFT', 'TOTAL_GENERATOR_UPS_CAPACITY', 'TOTAL GENERATOR/UPS CAPACITY', 'TGC', 'decimal', 'electrical', 'GENERAL', 3, 0, NULL, 'KVA', NULL);
 INSERT INTO `obo_variable` VALUES ('TOTAL_TRANSFORMER_CAPACITY', 'DRAFT', 'TOTAL_TRANSFORMER_CAPACITY', 'TOTAL TRANSFORMER CAPACITY', NULL, 'decimal', 'electrical', 'GENERAL', 2, 0, NULL, 'KVA', NULL);
-INSERT INTO `obo_variable` VALUES ('TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING', 'DRAFT', 'TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING', 'TOWER AND OTHER STRUCTURES (SELF-SUPPORTING)', 'TV AND RADIO TOWER, WATER TANK SUPPORTING STRUCTURES', 'decimal', 'J202', NULL, 7, 0, NULL, 'height in meters', NULL);
-INSERT INTO `obo_variable` VALUES ('TOWER_AND_OTHER_STRUCTURE_TRILON_GUYED', 'DRAFT', 'TOWER_AND_OTHER_STRUCTURE_TRILON_GUYED', 'TOWER AND OTHER STRUCTURE (TRILON GUYED)', 'TV AND RADIO TOWER, WATER TANK SUPPORTING STRUCTURES', 'decimal', 'J202', NULL, 8, 0, NULL, 'height in meters', NULL);
+INSERT INTO `obo_variable` VALUES ('TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING', 'DRAFT', 'TOWER_AND_OTHER_STRUCTURE_SELF_SUPPORTING', 'TOWER AND OTHER STRUCTURES (SELF-SUPPORTING)', 'TV AND RADIO TOWER, WATER TANK SUPPORTING STRUCTURES', 'decimal', 'ACCESSORIES', NULL, 7, 0, NULL, 'height in meters', 'J202');
+INSERT INTO `obo_variable` VALUES ('TOWER_AND_OTHER_STRUCTURE_TRILON_GUYED', 'DRAFT', 'TOWER_AND_OTHER_STRUCTURE_TRILON_GUYED', 'TOWER AND OTHER STRUCTURE (TRILON GUYED)', 'TV AND RADIO TOWER, WATER TANK SUPPORTING STRUCTURES', 'decimal', 'ACCESSORIES', NULL, 8, 0, NULL, 'height in meters', 'J202');
 INSERT INTO `obo_variable` VALUES ('URINAL', 'DRAFT', 'URINAL', 'URINAL', NULL, 'integer', 'plumbing', 'SPECIAL', 11, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('VENDING_DISPENSING_MACHINE', 'DRAFT', 'VENDING_DISPENSING_MACHINE', 'VENDING AND OTHER TYPES OF ELECTRONIC DISPENSING MACHINES', NULL, 'integer', 'electronic', 'C', 4, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('WALKWAYS', 'DRAFT', 'WALKWAYS', 'WALKWAYS', NULL, 'boolean', 'architectural', 'A', 2, 0, NULL, 'UNIT', NULL);
 INSERT INTO `obo_variable` VALUES ('WALLS', 'DRAFT', 'WALLS', 'WALLS', NULL, 'boolean', 'civil_structural', NULL, 10, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('WASHROOM_AND_TOILETS', 'DRAFT', 'WASHROOM_AND_TOILETS', 'WASH ROOMS AND TOILETS', NULL, 'boolean', 'architectural', 'A', 5, 0, NULL, 'UNIT', NULL);
-INSERT INTO `obo_variable` VALUES ('WATER_AND_WASTE_WATER_TREATMENT_TANK', 'DRAFT', 'WATER_AND_WASTE_WATER_TREATMENT_TANK', 'WATER AND WASTE WATER TREATMENT TANK', 'Incuding Cisterns, Sedimentation, and Chemical Treatment', 'decimal', 'J205', NULL, 15, 0, NULL, 'volume in cu.meter', NULL);
+INSERT INTO `obo_variable` VALUES ('WATER_AND_WASTE_WATER_TREATMENT_TANK', 'DRAFT', 'WATER_AND_WASTE_WATER_TREATMENT_TANK', 'WATER AND WASTE WATER TREATMENT TANK', 'Incuding Cisterns, Sedimentation, and Chemical Treatment', 'decimal', 'ACCESSORIES', NULL, 15, 0, NULL, 'volume in cu.meter', 'J205');
 INSERT INTO `obo_variable` VALUES ('WATER_CLOSET', 'DRAFT', 'WATER_CLOSET', 'WATER CLOSET', NULL, 'integer', 'plumbing', 'GENERAL', 2, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('WATER_METER', 'DRAFT', 'WATER_METER', 'WATER METER', NULL, 'integer', 'plumbing', 'OTHERS', 23, 0, NULL, 'unit', NULL);
 INSERT INTO `obo_variable` VALUES ('WATER_METER_12_25', 'DRAFT', 'WATER_METER_12_25', 'WATER METER (12-25 mm Ø )', NULL, 'integer', 'plumbing', 'OTHERS', 23, 0, NULL, 'unit', NULL);
