@@ -39,6 +39,7 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
         xComboBox2 = new com.rameses.rcp.control.XComboBox();
         xComboBox3 = new com.rameses.rcp.control.XComboBox();
         xTextField3 = new com.rameses.rcp.control.XTextField();
+        xComboBox4 = new com.rameses.rcp.control.XComboBox();
         xLabel1 = new com.rameses.rcp.control.XLabel();
         xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
         xCheckBox3 = new com.rameses.rcp.control.XCheckBox();
@@ -102,6 +103,15 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
         xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
         xTextField3.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         xFormPanel1.add(xTextField3);
+
+        xComboBox4.setCaption("SubType Of");
+        xComboBox4.setDepends(new String[] {"entity.type"});
+        xComboBox4.setItemKey("");
+        xComboBox4.setItems("subTypes");
+        xComboBox4.setName("entity.subtypeof"); // NOI18N
+        xComboBox4.setVisibleWhen("#{ entity.type == 'CHECKLIST' }");
+        xComboBox4.setPreferredSize(new java.awt.Dimension(200, 22));
+        xFormPanel1.add(xComboBox4);
 
         xLabel1.setExpression("Options");
         xLabel1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
@@ -274,12 +284,12 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 530, Short.MAX_VALUE)
+            .addGap(0, 553, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(xTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(21, Short.MAX_VALUE)))
+                    .addComponent(xTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(20, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -293,6 +303,7 @@ public class BuildingDocTypePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XCheckBox xCheckBox3;
     private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XComboBox xComboBox3;
+    private com.rameses.rcp.control.XComboBox xComboBox4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLabel xLabel2;

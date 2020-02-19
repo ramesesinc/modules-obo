@@ -1,0 +1,12 @@
+<schema>
+	<element tablename="fire_safety_checklist">
+		<field name="objid" primary="true" prefix="FIRESFTYCHKLIST"/>
+		<field name="appid"	required="true"/>
+		<field name="controlno"	/>
+		<field name="dtissued"	/>
+		<field name="issuedby_objid" />
+		<field name="issuedby_name" />
+		<field name="state"	/>
+		<field name="remarks"/>
+	</element>
+</schema>

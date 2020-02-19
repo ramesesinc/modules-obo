@@ -16,12 +16,14 @@
 
 		<!-- if not null, this would allow display of the report -->
 		<field name="template" />
+		<field name="subtypeof" />
+		
 
 		<!--  0 - no issuance required, 1= auto issue,  2=manual issue -->
 		<field name="issuetype"  type="integer"/>
 		<field name="controlnopattern"/>
 
-		<field name="org_objid"/>
+		<field name="org_objid" caption="Org"/>
 		<field name="org_name"/>
 
 	</element>

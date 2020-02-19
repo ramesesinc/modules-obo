@@ -1,0 +1,12 @@
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="obo_itemaccount">
+    <invokers>
+        <invoker type="obo_itemaccount:lookup" caption="Obo Item Account Lookup" 
+                 action="init" index="15"
+            cols="objid,title,item.title"/>
+        
+         <invoker type="obo_itemaccount:type:lookup" caption="Obo Item Account Lookup" 
+                 action="init" index="15"
+                 customFilter="sectionid = :sectionid"
+            cols="objid,title,item.title"/>
+    </invokers>
+</workunit>

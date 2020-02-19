@@ -58,6 +58,8 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xLabel12 = new com.rameses.rcp.control.XLabel();
         xLabel13 = new com.rameses.rcp.control.XLabel();
         xLabel14 = new com.rameses.rcp.control.XLabel();
+        xLabel15 = new com.rameses.rcp.control.XLabel();
+        xButton1 = new com.rameses.rcp.control.XButton();
 
         xPanel2.setVisibleWhen("#{ showInfos == true }");
         xPanel2.setLayout(new java.awt.BorderLayout());
@@ -100,7 +102,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
                 , new Object[]{"caption", "Value"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 100}
+                , new Object[]{"maxWidth", 0}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}
@@ -390,12 +392,23 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xLabel14.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel14);
 
+        xLabel15.setCaption("Contractor Name");
+        xLabel15.setExpression("#{entity.contractorname}");
+        xLabel15.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel15);
+
+        xButton1.setCaption("");
+        xButton1.setName("editContractorName"); // NOI18N
+        xButton1.setVisibleWhen("#{ editable == true }");
+        xButton1.setText("Edit Contractor Name");
+        xFormPanel2.add(xButton1);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(426, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -408,9 +421,9 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 31, Short.MAX_VALUE))
+                .addGap(0, 72, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
+                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -429,7 +442,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -441,6 +454,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
     private com.rameses.seti2.components.SchemaList schemaList2;
     private com.rameses.rcp.control.XActionBar xActionBar2;
     private com.rameses.rcp.control.XActionBar xActionBar5;
+    private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XButton xButton11;
     private com.rameses.rcp.control.XButton xButton12;
     private com.rameses.rcp.control.XButton xButton8;
@@ -454,6 +468,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel12;
     private com.rameses.rcp.control.XLabel xLabel13;
     private com.rameses.rcp.control.XLabel xLabel14;
+    private com.rameses.rcp.control.XLabel xLabel15;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel7;

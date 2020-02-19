@@ -99,19 +99,17 @@ abstract class AbstractApplicationModel extends WorkflowTaskModel {
         return entity.objid;
     }
     
-    
-    
-    
-    def previewFees() {
-        def m = [entity:[objid: entity.objid ]];
-        return Inv.lookupOpener(getPermitName() + "_assessment:preview", m );        
-    }
-    
     /***************
     * capture payment
     ***************/
     def capturePayment() {
         return nInv.lookupOpener(getPermitName() + "_capture_payment", [entity: entity] );
+    }
+    
+    def openFromCaller() {
+        def c = caller.entity;
+        entity = [objid: c.appid ];
+        return open();
     }
     
 }

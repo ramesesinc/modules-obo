@@ -1,7 +1,12 @@
 <workunit>
     <invokers>
-        <invoker type="building_application_zoneclass:view" target="popup"
-                 caption="Building Permit Zone classification" action="init"/>
+        <!-- context related actions -->
+        <invoker type="vw_building_evaluation:form:extActions" caption="Update Zone Class"
+            target="popup"
+            action="init" visibleWhen="#{ 
+                entity.typeid.toLowerCase() == 'zoning' &amp;&amp;
+                editable == true }" index="1" parent="building_evaluation"/>
+        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingZoneClassificationModel" />
     <pages>

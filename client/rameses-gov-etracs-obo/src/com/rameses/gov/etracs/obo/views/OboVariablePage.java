@@ -35,8 +35,8 @@ public class OboVariablePage extends javax.swing.JPanel {
         xTextField1 = new com.rameses.rcp.control.XTextField();
         xTextField2 = new com.rameses.rcp.control.XTextField();
         xTextField3 = new com.rameses.rcp.control.XTextField();
-        xTextField4 = new com.rameses.rcp.control.XTextField();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
+        xTextField4 = new com.rameses.rcp.control.XTextField();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xTextField5 = new com.rameses.rcp.control.XTextField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
@@ -70,19 +70,21 @@ public class OboVariablePage extends javax.swing.JPanel {
         xTextField3.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         formPanel1.add(xTextField3);
 
-        xTextField4.setCaption("Unit of Measure");
-        xTextField4.setName("entity.unit"); // NOI18N
-        xTextField4.setPreferredSize(new java.awt.Dimension(80, 20));
-        xTextField4.setRequired(true);
-        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        formPanel1.add(xTextField4);
-
         xComboBox1.setCaption("Data Type");
         xComboBox1.setItems("datatypes");
         xComboBox1.setName("entity.datatype"); // NOI18N
         xComboBox1.setPreferredSize(new java.awt.Dimension(170, 22));
         xComboBox1.setRequired(true);
         formPanel1.add(xComboBox1);
+
+        xTextField4.setCaption("Unit of Measure");
+        xTextField4.setDepends(new String[] {"entity.datatype"});
+        xTextField4.setName("entity.unit"); // NOI18N
+        xTextField4.setVisibleWhen("#{ entity.datatype?.matches('decimal|integer') }");
+        xTextField4.setPreferredSize(new java.awt.Dimension(80, 20));
+        xTextField4.setRequired(true);
+        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        formPanel1.add(xTextField4);
 
         xIntegerField1.setCaption("Sort order");
         xIntegerField1.setName("entity.sortorder"); // NOI18N
@@ -105,7 +107,7 @@ public class OboVariablePage extends javax.swing.JPanel {
         xTextField6.setCaption("Occupancy Type");
         xTextField6.setDisableWhen("");
         xTextField6.setName("entity.occupancytypeid"); // NOI18N
-        xTextField6.setVisibleWhen("#{ entity.type != 'ACCESSORIES' }");
+        xTextField6.setVisibleWhen("#{ entity.typeid == 'ACCESSORIES' }");
         xTextField6.setPreferredSize(new java.awt.Dimension(0, 20));
         xTextField6.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         formPanel1.add(xTextField6);

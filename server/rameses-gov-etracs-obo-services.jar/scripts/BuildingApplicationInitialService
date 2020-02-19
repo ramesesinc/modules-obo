@@ -60,6 +60,7 @@ class BuildingApplicationInitialService {
 
 	@ProxyMethod
 	public def create( def app ) {
+
 		def u = [:]
 		u.applicantid = app.remove("applicantid");
 		u.contractorid = app.remove("contractorid");
@@ -84,7 +85,8 @@ class BuildingApplicationInitialService {
 			it.appid = newapp.objid;
 			it.state = 0;
 			it.doctype = [ objid: 'ACCESSORIES' ];
-			it.occupancytypeid = it.occupancytypeid;			
+			it.occupancytypeid = (it.occupancytypeid!=null)?it.occupancytypeid:'';	
+			it.amount = 0;		
 			subdocEm.create( it );
 		}
 
@@ -93,6 +95,7 @@ class BuildingApplicationInitialService {
 			it.doctype = [ objid: it.permittypeid.toUpperCase() ];
 			it.amount = 0;
 			it.state = 0;
+			it.occupancytypeid = '';
 			subdocEm.create( it );
 		}
 		app.infos.each {

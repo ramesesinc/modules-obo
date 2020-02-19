@@ -6,5 +6,5 @@
              cols="app.appno,app.applicant.name,app.title,app.occupancytype.title,task.assignee"
                 action="init" index="-1" srole="SHARED"/>
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboApplicationSectionListModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationSubworkflowListModel" />
 </workunit>

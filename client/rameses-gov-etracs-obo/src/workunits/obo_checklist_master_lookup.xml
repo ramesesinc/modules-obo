@@ -3,6 +3,8 @@
         <invoker type="obo_checklist_master:lookup" caption="Lookup Checklist Item" 
                  cols="indexno,title"
                   multiSelect="true"
+                  maxRows="50"
+                  rows="50"
                  customFilter="doctypeid = :typeid"
                  action="init" target="popup"/>
     </invokers>

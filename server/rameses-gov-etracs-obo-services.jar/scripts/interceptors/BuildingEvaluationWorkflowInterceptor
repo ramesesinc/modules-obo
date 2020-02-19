@@ -41,6 +41,7 @@ class BuildingEvaluationWorkflowInterceptor {
 				m.doctype = [objid: it ];
 				m.state = 0;
 				m.amount = 0;
+				m.occupancytypeid = '';
 				subdocEm.create( m );
 			}
 		}

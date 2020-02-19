@@ -2,6 +2,8 @@
     <invokers>
         <invoker type="obo_work_type:lookup" caption="Lookup Construction Type" 
                  cols="description"
+                 multiSelect="true"
+                 customFilter="typeid = :typeid"
                  action="init" orderBy="idx" target="popup"/>
     </invokers>
 </workunit>

@@ -35,19 +35,10 @@ class BuildingApplicationModel extends AbstractApplicationModel {
         return "Bldg "+ (entity.appno==null? entity.trackingno : entity.appno);
     }
     
-    public boolean getShowAssessAction() {
-        return true;
-    }
     
-    def ancillaryListModel;
-    def lookupAncillary() {
-        def h = { o->
-            def v = [appid: entity.objid, items: o*.objid ]
-            bldgSvc.addAncillary( v );
-            ancillaryListModel.reload();
-        }
-        return Inv.lookupOpener("obo_ancillary:lookup", [onselect: h]);
-    }
+    
+    //impt for documents
+    def selectedDoc;
     
     def changeOccupancyType() {
         def h = { o->
@@ -62,10 +53,7 @@ class BuildingApplicationModel extends AbstractApplicationModel {
         return Inv.lookupOpener("vw_obo_occupancy_type:lookup", [onselect: h] );
     }
     
-    /*******
-    * ASSESSMENT
-    *******/
-    /**************************************************************************
+     /**************************************************************************
     * assessment actions
     ***************************************************************************/
     def assess() {
@@ -106,8 +94,14 @@ class BuildingApplicationModel extends AbstractApplicationModel {
             appSvc.issuePermitNo( o );
             reloadEntity();
         }
-        return Inv.lookupOpener("building_issue_controlno", [handler: h, showcontrolno: false]);
+        return Inv.lookupOpener("obo_issue_controlno", [handler: h, showcontrolno: false]);
     }
+    
+    public static String formatTime( def o ) {
+        if( o == null ) return "";
+        return o + " eval seconds";
+    }
+    
 }
 
 

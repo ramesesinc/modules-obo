@@ -1,0 +1,9 @@
+<workunit>
+    <invokers>
+        <invoker type="obo_issue_controlno" target="popup" caption="Issue Control No" action="init"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboIssueControlNoModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboIssueControlNoPage" />
+    </pages>
+</workunit>

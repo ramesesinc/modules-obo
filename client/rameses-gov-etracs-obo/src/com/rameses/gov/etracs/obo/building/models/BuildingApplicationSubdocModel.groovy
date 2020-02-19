@@ -14,11 +14,6 @@ import com.rameses.io.*;
 
 class BuildingApplicationSubdocModel extends CrudFormModel {
 
-    /*
-    def getHtmlInfo() {
-        return TemplateProvider.instance.getResult( "com/rameses/gov/etracs/obo/templates/ancillaryinfo.gtpl", [info:[:] ] );
-    }
-    */
     
     @Service("BuildingApplicationInfoService")
     def infoSvc;
@@ -42,9 +37,68 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
     boolean canIssue;
     boolean manualIssue;
     boolean canPrint;
+    boolean currentOrg = false;
+    
+    def worktypetext;
     
     public String getTitle() {
         return entity.doctype.title;
+    }
+    
+    void addNew(def inv) {
+        //parent is either building app or evaluation
+        boolean pass = false;
+        def parent = caller.entity;
+        
+        String lookupName = null;
+        String appid = null;
+        
+        def q = [:];
+        if( inv.properties.parent == "building_application"  ) {
+            appid = parent.objid;
+            lookupName = "building_doc_type";
+        }
+        else {
+            appid = parent.appid;
+            q.put("query.typeid", parent.typeid );            
+            lookupName = "building_doc_type_typeid";
+        }
+        
+        q.onselect = { o->
+            //check current org;
+            checkCurrentOrg(o.org?.objid);
+            if( currentOrg == false ) throw new Exception("You cannot add this document. Only the org associated with it");
+            def pq = [_schemaname: "building_application_subdoc"];
+            pq.appid = appid;
+            pq.doctypeid = o.objid;
+            pq.doctype = [objid: o.objid ];
+            pq.state = 0;
+            pq.amount = 0;
+            pq.occupancytypeid = '';
+            persistenceService.create( pq );
+            caller.reloadEntity();
+        }
+        Modal.show(lookupName + ":lookup", q );
+        if(!pass) throw new BreakException();
+    }
+    
+    void removeSubdocument() {
+        if(!caller.selectedDoc?.objid ) throw new Exception("Please select a sub document");
+        entity = caller.selectedDoc;
+        checkCurrentOrg(caller.selectedDoc.doctype?.org?.objid);
+        if( currentOrg  == false ) throw new Exception("You cannot remove this document. Only the org associated can remove this");
+        
+        if(!MsgBox.confirm("You are about to remove this subdocument. Proceed? ") ) return;
+        def m = [_schemaname: "building_application_subdoc" ];
+        m.objid = caller.selectedDoc.objid;
+        persistenceService.removeEntity(m);
+        caller.reloadEntity();
+    }
+    
+    void checkCurrentOrg( def orgid ) {
+        currentOrg = false;
+        if(  orgid == userInfo.env.ORGID ) currentOrg = true;
+        else if( orgid ==null && userInfo.env.ORGROOT == 1 ) currentOrg = true;
     }
     
     void afterInit() {
@@ -52,10 +106,8 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         editable = false;
         def task = caller.task;
         
-        boolean currentOrg = false;
-        if(  entity.doctype.org.objid == userInfo.env.ORGID ) currentOrg = true;
-        else if( entity.doctype.org?.objid ==null && userInfo.env.ORGROOT == 1 ) currentOrg = true;
-        
+        checkCurrentOrg(entity.doctype.org.objid );
+       
         editable = false;
         if( currentOrg == true ) {
             //editable only during evaluation and assessment
@@ -87,7 +139,7 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
             showFees = false;
         }
         else {
-            showChecklist = false;
+            //showChecklist = false;
         }
         
     }
@@ -273,8 +325,46 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
             issuanceSvc.issueControl( o );
             reloadEntity();
         }
-        return Inv.lookupOpener("building_issue_controlno", [handler: h, showcontrolno: true]);
+        return Inv.lookupOpener("obo_issue_controlno", [handler: h, showcontrolno: true]);
     }
     
+    //additional work types
+    def editWorktypes() {
+        def p = [:];
+        p.onselect = { o->
+            def e = [_schemaname: schemaName];
+            e.objid = entity.objid;
+            e.worktypes = o*.objid;
+            persistenceService.update(e);
+            entity.worktypes = e.worktypes;
+            binding.refresh();
+        };
+        p.put("query.typeid", [typeid: entity.doctypeid ]);
+        return Inv.lookupOpener("obo_work_type:lookup", p );
+    }
+    
+    public String getWorktypesText() {
+        if( entity.worktypes == null ) return "";
+        return entity.worktypes.join(",");
+    }
+    
+    def editContractorName() {
+        def p = [:];
+        p.fields = [
+            [caption:'Contractor name', name:'contractorname' ]
+        ];
+        p.data = [
+            contractorname: entity.contractorname
+        ];
+        p.handler = { o->
+            def e = [_schemaname: schemaName];
+            e.objid = entity.objid;
+            e.contractorname = o.contractorname;
+            persistenceService.update(e);
+            entity.contractorname = o.contractorname;
+            binding.refresh();
+        }
+        return Inv.lookupOpener("dynamic:form", p );
+    }
     
 }

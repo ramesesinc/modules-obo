@@ -32,6 +32,7 @@
 	<field name="title" class="java.lang.String"/>
 	<field name="location.address.text" class="java.lang.String"/>
 	<field name="permittype" class="java.lang.String"/>
+	<field name="dtreceived" class="java.util.Date"/>
 
 		<background>
 			<band height="374"  isSplitAllowed="true" >
@@ -427,7 +428,7 @@ Bring this claim stub upon claiming the Application Evaluation Sheet, Order of P
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{startdate}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtreceived}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement

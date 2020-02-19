@@ -2,13 +2,9 @@
     <invokers>
         <invoker type="vw_building_application:open" caption="Building Permit Application" action="open" index="1"/>
 
-        <!--
-        <invoker type="ancillaryActions" 
-                caption="Add Document"
-                role="COORDINATOR"
-                action="lookupAncillary" 
-                index="2"/>
-        -->
+        <!-- open from evaluation -->
+        <invoker type="vw_building_evaluation:form:extActions" target="popup" 
+                 caption="View Application" action="openFromCaller" index="1"/>
         
         <!-- assessment actions -->        
         <invoker type="feeActions" 

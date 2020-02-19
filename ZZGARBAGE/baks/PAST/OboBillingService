@@ -1,0 +1,67 @@
+import com.rameses.annotations.*; 
+
+class OboBillingService {
+
+	@Service("NumberService")
+	def numSvc;
+
+	@DataContext("vw_building_permit")
+	def vwAppEm;
+
+	@DataContext("building_permit_fee")
+	def appFeeEm;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@Service(value="OnlinePaymentService", connection="local-etracs")
+    def pmtSvc;
+
+	@ProxyMethod
+	public def getBilling( def o ) { 
+
+		def app = vwAppEm.find( [appno: o.refno ]).first();
+		if(!app) throw new Exception("ref no" + o.refno + " not found");
+
+		if(app.task.state != 'payment')
+			throw new Exception("This is not yet for payment");
+
+		def fees = 	appFeeEm.find( [appid: app.objid ] ).orderBy("item.sortorder").where("amount - amtpaid > 0").list().collect{
+			[ itemid: it.item.objid, account: it.item.title, amount: it.amount, refid: it.objid, objid: it.objid ]
+		};
+		if( !fees )
+			throw new Exception("There are no items for payment");
+
+		def p = [:];
+		p.appno = app.appno;
+		p.permittype = "BUILDING PERMIT";
+		p.apptype = app.apptype;		
+		p.title = app.title;
+		p.address = app.location?.lotno + ' ' + app.location?.barangay;
+		p.applicant = app.applicant.name;
+		p.applicantaddress = app.applicant.address?.text;
+		p.items = fees; 
+		p.amount = p.items.sum{it.amount};
+		p.expirydate = dateSvc.getServerDate();
+
+		//build the info beforehand for payment order purpose. This is the one saved to payment order.
+		def m = [:];
+		m.payer = [objid:'X', name: p.applicant];
+		m.paidby = p.applicant;
+		m.paidbyaddress = p.applicantaddress;
+		m.particulars = 'Building Permit';
+		m.refid = app.objid;
+		m.refno = p.appno;
+		m.info = [appid: app.objid];
+		m.amount = p.amount;
+		m.txntype = 'obo';
+		m.txntypename = 'Building Permit';
+		m.expirydate = p.expirydate;
+		m.mobileno = app.contact?.mobileno;
+		m.email = app.contact?.email;
+		p.info = m;
+		return p;
+	}
+
+
+}

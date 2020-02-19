@@ -19,6 +19,24 @@ class BuildingSubdocTypeModel extends CrudFormModel {
     
     def itemHandler;
 
+    @PropertyChangeListener
+    def listener = [
+        "entity.type" : { o->
+            if(!o?.toString().toLowerCase().equals("checklist")) {
+                entity.subtypeof = null;
+            }
+        }
+    ];
+    
+    def _subTypes;
+    public def getSubTypes() {
+        if(_subTypes) return _subTypes;
+        def m = [_schemaname: schemaName];
+        m.where = ["type <> 'CHECKLIST' "];
+        _subTypes = queryService.getList(m)*.objid;
+        return _subTypes;
+    }
+    
     public void afterInit() {
         def m = [_schemaname: "building_evaluation_type"];
         m.where = ["1=1"];

@@ -16,11 +16,12 @@ class BuildingApplicationClaimStubReportInterceptor {
 
 		def ea = appEm.find( [objid: id ] ).first();
 
-		def r = taskEm.find( [refid: id, state: 'receiving'] ).orderBy("startdate DESC").first();
+		def r = taskEm.find( [refid: id, state: 'receiving'] ).orderBy("dtcreated DESC").first();
 		if( r ) {
 			ea.startdate = r.startdate;
 			ea.enddate = r.enddate;
 			ea.receiver = r.assignee;		
+			ea.dtreceived = r.enddate;			
 		};
 		ea.permittype =  "BUILDING PERMIT";
 		result.data = ea;

@@ -172,9 +172,12 @@
 	<field name="fsc81_0" class="java.lang.String"/>
 	<field name="location.barangay.name" class="java.lang.String"/>
 	<field name="numfloors" class="java.lang.Number"/>
-	<field name="remarks" class="java.lang.String"/>
+	<field name="issue.remarks" class="java.lang.String"/>
 	<field name="dtissued" class="java.util.Date"/>
-	<field name="issuedby.signature" class="java.lang.Object"/>
+	<field name="evaluator.signature" class="java.lang.Object"/>
+	<field name="evaluator.name" class="java.lang.String"/>
+	<field name="dtevaluated" class="java.util.Date"/>
+	<field name="dtapproved" class="java.util.Date"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -1665,7 +1668,7 @@
 					<rightPen lineWidth="0.0" lineStyle="Solid"/>
 </box>
 					<textElement textAlignment="Left" verticalAlignment="Middle" isStyledText="true">
-						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="false"/>
+						<font fontName="Arial" pdfFontName="Helvetica" size="6" isBold="false"/>
 					</textElement>
 				<text><![CDATA[Exit door should have a minimum width of 71 cm and a maximum width 122 cm and shall not restrict the opening. ]]></text>
 				</staticText>
@@ -3460,7 +3463,7 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
-						x="324"
+						x="323"
 						y="879"
 						width="274"
 						height="18"
@@ -3682,9 +3685,9 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="7"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuedby.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{evaluator.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy-MM-dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="84"
 						y="158"
@@ -3777,26 +3780,26 @@ Other Spaces;  Class ________________ ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="195"
-						y="329"
+						x="201"
+						y="327"
 						width="47"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6" isUnderline="false"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc04_0}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="65"
+						x="75"
 						y="373"
 						width="49"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6" isUnderline="false"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc06_0}]]></textFieldExpression>
@@ -3809,14 +3812,14 @@ Other Spaces;  Class ________________ ]]></text>
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6" isUnderline="false"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc09_0}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="59"
+						x="63"
 						y="481"
 						width="105"
 						height="9"
@@ -3848,11 +3851,11 @@ Other Spaces;  Class ________________ ]]></text>
 					<reportElement
 						x="169"
 						y="616"
-						width="61"
+						width="54"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc17_0}]]></textFieldExpression>
@@ -3861,11 +3864,11 @@ Other Spaces;  Class ________________ ]]></text>
 					<reportElement
 						x="119"
 						y="640"
-						width="75"
+						width="57"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsc18_0}]]></textFieldExpression>
@@ -3885,13 +3888,13 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="447"
+						x="440"
 						y="634"
 						width="70"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsc43_0}]]></textFieldExpression>
@@ -3924,26 +3927,26 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="413"
+						x="430"
 						y="776"
 						width="60"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Left">
 						<font fontName="Arial" size="7"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc47_0}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="406"
+						x="425"
 						y="864"
 						width="50"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Left">
 						<font fontName="Arial" size="7"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc49_0}]]></textFieldExpression>
@@ -3956,7 +3959,7 @@ Other Spaces;  Class ________________ ]]></text>
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc20_0}]]></textFieldExpression>
@@ -7546,7 +7549,7 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy-MM-dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="36"
 						y="666"
@@ -7559,7 +7562,7 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtfiled}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy-MM-dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="310"
 						y="776"
@@ -7570,9 +7573,9 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtapproval}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtapproved}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="405"
 						y="641"
@@ -7583,56 +7586,56 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtevaluated}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="77"
+						x="74"
 						y="80"
-						width="27"
+						width="33"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc52_0}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="86"
-						y="108"
+						x="83"
+						y="107"
 						width="57"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsc53_0}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="157"
+						x="153"
 						y="108"
-						width="29"
+						width="37"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{fsc53_1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="515"
+						x="520"
 						y="384"
 						width="50"
 						height="9"
 						key="textField"/>
 					<box></box>
-					<textElement>
+					<textElement textAlignment="Center">
 						<font fontName="Arial" size="6"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsc81_0}]]></textFieldExpression>
@@ -7648,7 +7651,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement verticalAlignment="Top">
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{remarks}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issue.remarks}]]></textFieldExpression>
 				</textField>
 				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -8197,20 +8200,20 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issuedby.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{evaluator.name}]]></textFieldExpression>
 				</textField>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="397"
-						y="553"
-						width="162"
-						height="68"
+						y="529"
+						width="170"
+						height="81"
 						key="image-91"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.io.InputStream"><![CDATA[new java.io.ByteArrayInputStream( (byte[]) $F{issuedby.signature} )]]></imageExpression>
+					<imageExpression class="java.io.InputStream"><![CDATA[new java.io.ByteArrayInputStream( (byte[]) $F{evaluator.signature} )]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement

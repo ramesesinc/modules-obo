@@ -1,0 +1,87 @@
+import com.rameses.annotations.*; 
+
+class BuildingPermitFormReportInterceptor {
+	
+	@DataContext("vw_building_application")
+	def vwAppEm;
+
+	@DataContext("building_application_task")
+	def taskEm;
+
+	@DataContext("building_application_transmittal")
+	def transmittalEm;
+
+	@DataContext("building_application_requirement")
+	def reqEm;
+
+	@DataContext("building_evaluation_finding")
+	def findingEm;
+
+	@DataContext("vw_building_application_ancillary")
+	def vwAncillaryEm;
+
+	@DataContext("vw_building_evaluation")
+	def vwEvalEm;
+
+	@DataContext("vw_building_permit")
+	def vwPermitEm;
+
+	@DataContext("vw_building_application_fee_payment")
+	def vwPayEm;
+
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid.matches('building_permit|building_permit_signboard')}")
+	public void getBuildingPermitReport( def evt ) {
+		def p = evt.args[0];
+		def result = evt.result;
+		def id = p.parameters.objid;
+
+		throw new Exception("id passed is " + id);
+
+		def pmt = vwPermitEm.find( [objid: id ] ).first();
+		pmt.applicant.name = app.applicant?.lastname + ", " + app.applicant?.firstname;
+		
+		/*
+		//find the professionals 
+		pmt.profarchitect = vwAncillaryEm.find( [appid: pmt.objid, sectionid: 'ARCHITECTURAL' ] ).first()?.designprofessional;
+		pmt.profcivil = vwAncillaryEm.find( [appid: pmt.objid, sectionid: 'CIVIL_STRUCTURAL' ] ).first()?.designprofessional;
+		pmt.profelectrical = vwAncillaryEm.find( [appid: pmt.objid, sectionid: 'ELECTRICAL' ] ).first()?.designprofessional;
+		pmt.profmechanical = vwAncillaryEm.find( [appid: pmt.objid, sectionid: 'MECHANICAL' ] ).first()?.designprofessional;
+		pmt.profsanitary = vwAncillaryEm.find( [appid: pmt.objid, sectionid: 'SANITARY' ] ).first()?.designprofessional;
+		pmt.profplumbing = vwAncillaryEm.find( [appid: pmt.objid, sectionid: 'PLUMBING' ] ).first()?.designprofessional;
+		pmt.profelectronic = vwAncillaryEm.find( [appid: pmt.objid, sectionid: 'ELECTRONIC' ] ).first()?.designprofessional;
+
+		app.scopeofowrk = app.worktypes?.join(",")
+
+		app.bill = [:];
+		def pmts = vwPayEm.find( [appid: app.objid ] ).list();
+		pmts.each {
+			app.bill.put( it.item.objid.toLowerCase(), it.amount );
+		}
+		
+		//loop all sections with issuanceid
+		def list = vwEvalEm.find( [appid: app.objid ] ).where("NOT(issuanceid IS NULL)").list();
+		list.each {
+			def db = em.lookup(it.type.reportname );
+			def xx = db.find( [objid: it.issuanceid ]).first();
+			if( xx ) {
+				app.put( it.typeid.toLowerCase(), [controlno: xx.controlno, dtissued: xx.dtcreated ] );
+			}
+		};
+
+		
+
+		//get the total payment per section
+		def em = vwPayEm.find( [appid: app.objid ] ).select("payment.refno,payment.refdate,amount:{SUM(amount)}").groupBy( "payment.refno,payment.refdate" );
+		def totals = em.where( " org.objid IS NULL " ).first();
+		if( totals ) {
+			app.receiptno = totals.payment.refno;
+			app.receiptdate = totals.payment.refdate;
+			app.amount = totals.amount;		
+		}
+		*/
+		throw new Exception("fire permit "+pmt);
+		result.data = pmt;
+	}	
+
+
+}

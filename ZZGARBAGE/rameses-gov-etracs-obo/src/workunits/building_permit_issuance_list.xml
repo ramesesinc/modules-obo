@@ -1,0 +1,11 @@
+
+<workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
+          processName="building_permit_issuance" schemaName="vw_building_permit_issuance"
+          allowDelete="false" allowNotify="false" allowCreate="false">
+    <invokers>
+        <invoker type="building_permit_issuance:list" caption="Permit Issuance List"
+             cols="appno,title,controlno,dtissued,issuedby.name,task.assignee.name"
+                action="init" index="-1" srole="SHARED"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitIssuanceListModel" />
+]</workunit>

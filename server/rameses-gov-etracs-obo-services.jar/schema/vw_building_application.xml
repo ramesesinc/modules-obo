@@ -22,8 +22,8 @@
 		<field name="title" searchable="true" indexed="true"/>
 		<field name="occupancytypeid" />
 		<field name="numunits" />
-		<field name="fixedcost" />
-		<field name="projectcost" />
+		<field name="fixedcost" type="decimal"/>
+		<field name="projectcost"  type="decimal"/>
 
 		<field name="dtproposedconstruction" />
 		<field name="dtexpectedcompletion" />

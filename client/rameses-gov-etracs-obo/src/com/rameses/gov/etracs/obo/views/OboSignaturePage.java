@@ -47,7 +47,6 @@ public class OboSignaturePage extends javax.swing.JPanel {
         xLookupField1.setExpression("#{ entity.user.name }");
         xLookupField1.setHandler("user:lookup");
         xLookupField1.setName("entity.user"); // NOI18N
-        xLookupField1.setVisibleWhen("#{ entity.displayname != null }");
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLookupField1);
 

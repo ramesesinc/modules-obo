@@ -15,11 +15,17 @@ class BuildingZoneClassificationModel  {
     @Service("PersistenceService")
     def persistenceService;
     
+    @Caller
+    def caller;
+    
     def app;
     def entity;
-    def handler;
     
-    void init() {
+    void init(def inv) {
+        if(inv.properties.parent == "building_evaluation") {
+            def p = caller.entity;
+            app = [objid: p.appid, zoneclass: p.app.zoneclass, zone: p.app.zone ];
+        }
         entity = [:];
         entity.zoneclass = app.zoneclass;
         entity.zone = app.zone;
@@ -39,11 +45,8 @@ class BuildingZoneClassificationModel  {
         m.zoneclassid = entity.zoneclass.objid;
         m.zone = entity.zone;
         m = persistenceService.update(m);
-        if( handler ) {
-            handler( m );
-        }
+        caller.reloadEntity();
         return "_close";
-        
     }
     
     public def doCancel() {

@@ -22,7 +22,7 @@ class OboInfoModel  {
         items.each {x->
             def i = [
                 type:x.datatype, 
-                caption:x.caption+' ('+x.unit+')', 
+                caption:x.caption+ ( (x.unit==null) ?'' : ' ('+x.unit+')'), 
                 categoryid: x.category,
                 name:x.name, 
                 bean: x,

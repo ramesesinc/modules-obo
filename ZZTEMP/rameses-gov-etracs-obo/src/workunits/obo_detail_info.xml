@@ -1,9 +1,0 @@
-<workunit>
-    <invokers>
-        <invoker type="obo_detail_info" caption="Enter Info"  action="init"/>
-    </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboInfoModel" />
-    <pages>
-        <page name="initial" template="com.rameses.gov.etracs.obo.views.OboInfoPage" />
-    </pages>
-</workunit>

@@ -1,0 +1,145 @@
+<workunit schemaName="vw_building_permit" processName="building_permit">
+    <invokers>
+        <invoker type="vw_building_permit:open" caption="Building Permit Application" action="open" index="1"/>
+
+        <!-- RPT ACTIONS -->        
+        <invoker type="appActions" 
+                caption="Generate Tax Dec Documents"
+                action="issueTDDocs" target="popup"
+                visibleWhen="#{ task.state =='requirement-verification'
+                &amp;&amp; task.assignee?.objid==userInfo.userid }"    />
+                
+        <!-- requirement verification buttons -->
+        <invoker type="appActions" 
+                caption="Build Doc. Verification Checklist"
+                role="REQUIREMENT_REVIEWER"
+                action="buildRequirementChecklist" 
+                index="0"
+                visibleWhen="#{ task.state =='requirement-verification'
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.reqtransmittalid == null 
+                    &amp;&amp; entity.appno == null }"/>
+        
+        
+        
+        <invoker type="appActions" 
+                caption="Print Verification Checklist"
+                role="REQUIREMENT_REVIEWER"
+                action="printReqChecklist"
+                index ="1"
+                visibleWhen="#{entity.reqtransmittalid !=null}"/>
+        
+        <invoker type="appActions" 
+                caption="Send Email"
+                role="REQUIREMENT_REVIEWER"
+                action="sendReqChecklist" 
+                index="2"
+                visibleWhen="#{ entity.reqtransmittalid != null }"/>
+        
+        <!--        
+        <invoker type="appActions" 
+                caption="Remove Checklist"
+                role="ADMIN"
+                action="removeChecklist" 
+                index="2"
+                visibleWhen="#{ entity.reqtransmittalid != null }"/>    
+        -->
+                
+        <invoker type="appActions" 
+                caption="Accept Application"
+                role="REQUIREMENT_REVIEWER"
+                action="acceptApplication" 
+                index="3"
+                visibleWhen="#{ task.state =='requirement-verification' 
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno == null  &amp;&amp; entity.reqtransmittalid == null }"/>
+        
+        <invoker type="appActions" 
+                caption="Print Claim Stub"
+                role="REQUIREMENT_REVIEWER"
+                action="printClaimstub"
+                index="3"
+                visibleWhen="#{ task.state =='requirement-verification' 
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno != null}"/> 
+         
+        <invoker type="appActions" 
+                caption="Email Claim Stub"
+                xrole="REQUIREMENT_REVIEWER"
+                action="sendClaimstub"
+                index="3"
+                visibleWhen="#{ task.state =='requirement-verification' 
+                    &amp;&amp; task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.appno != null}"/> 
+
+              
+        <!-- COORDINATOR ACTIONS -->      
+        <invoker type="appActions" 
+                caption="Build Finding Checklist"
+                role="COORDINATOR"
+                action="buildFindingChecklist" 
+                index="0"
+                visibleWhen="#{ task.state.matches('zoning-verification|verification')
+                    &amp;&amp;task.assignee?.objid==userInfo.userid 
+                    &amp;&amp; entity.transmittalid == null }"/>
+        
+        <invoker type="appActions" 
+                caption="Print Verification Checklist"
+                role="COORDINATOR"
+                action="printFindingChecklist"
+                index ="1"
+                visibleWhen="#{entity.transmittalid !=null}"/>
+        
+        <invoker type="appActions" 
+                caption="Transmit Checklist"
+                role="COORDINATOR"
+                action="sendFindingChecklist" 
+                index="2"
+                visibleWhen="#{ entity.transmittalid != null }"/>
+            
+        <invoker type="ancillaryActions" 
+                caption="Add Ancillary"
+                role="COORDINATOR"
+                action="lookupAncillary" 
+                index="2"/>
+        
+        <!-- assessment actions -->        
+        <invoker type="feeActions" 
+                caption="Assess"
+                action="assess" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
+                
+        <invoker type="feeActions" 
+                caption="Add Fee"
+                action="addFee" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />        
+
+        <invoker type="feeActions" 
+                caption="Clear Fees"
+                action="clearFees" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
+
+        
+
+        <invoker type="rpuActions" 
+                caption="View Tax Clearance"
+                action="viewTaxClearance" target="popup"   />
+
+        <invoker type="rpuActions" 
+                caption="View Certificate of True Copy"
+                action="viewTrueCopy" target="popup"   />
+        
+        <invoker type="appActions" 
+                caption="Issue Bldg Permit"
+                action="issuePermit" target="popup"   
+                visibleWhen="#{task.state == 'release' &amp;&amp; task.assignee.objid == userid }"/>
+
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.BuildingPermitPage" />
+    </pages>
+</workunit>

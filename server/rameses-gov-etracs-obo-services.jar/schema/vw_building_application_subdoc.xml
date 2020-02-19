@@ -33,6 +33,7 @@
 		<field name="expirydate" />
 		<field name="template" />
 		<field name="transmittalid" />
+		<field name="issue_remarks"/>
 
 		<field name="appstate" />
 	</element>
