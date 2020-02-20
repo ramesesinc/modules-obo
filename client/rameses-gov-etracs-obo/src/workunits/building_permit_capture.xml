@@ -1,4 +1,4 @@
-<workunit>
+<workunit schemaName="building_permit">
     <invokers>
         <invoker type="vw_building_permit:create" caption="Capture Building Permit"
                 action="create" />

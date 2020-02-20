@@ -31,7 +31,7 @@ class BuildingPermitPersistenceInterceptor {
 		app.fixedcost = costSvc.calc( param );
 
 		//complete the work
-		app.worktypes = [ app.worktype.objid ];
+		//app.worktypes = [ app.worktype.objid ];
 		app.txnmode = "CAPTURE";
 		if(!app.appno) app.appno = app.permitno;
 		app.permittype = "BUILDING PERMIT";

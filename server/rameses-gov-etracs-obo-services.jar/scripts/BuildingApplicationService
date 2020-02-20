@@ -60,7 +60,7 @@ class BuildingApplicationService {
 		String permitno = controlNoSvc.getNextNo( pattern );
 		
 		def u = [:];
-		u.state = 1;
+		u.state = 0;
 		u.issuedby = [ objid: env.USERID, name: env.FULLNAME ];
 		u.dtissued = dateSvc.getServerDate();
 		u.permitno = permitno;

@@ -9,7 +9,7 @@
 		<field name="issuedby_name" />
 		<field name="remarks" />
 		<field name="expirydate" />
-		<field name="template"  required="true"/>
+		<field name="template" />
 	</element>
 </schema>
 

@@ -11,6 +11,10 @@
 		<field name="appid" />
 		<field name="permitno"  searchable="true" indexed="true"/>
 		<field name="dtissued" />
+		<field name="dtfiled" />
+		<field name="expirydate" />
+
+		<field name="txnmode" />
 		<field name="issuedby_objid" />
 		<field name="issuedby_name" />
 		<field name="expirydate" />

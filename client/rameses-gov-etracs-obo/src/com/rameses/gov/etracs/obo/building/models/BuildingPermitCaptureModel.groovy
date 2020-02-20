@@ -12,7 +12,7 @@ import com.rameses.enterprise.models.*;
 
 class BuildingPermitCaptureModel extends CrudFormModel {
     
-    def appTypes = ["NEW", "RENEW","ADDITIONAL"];
+    def appTypes = ["NEW", "RENOVATION"];
     
     String title = "Capture Building Permit";
     
@@ -28,7 +28,16 @@ class BuildingPermitCaptureModel extends CrudFormModel {
         entity.txnmode = "CAPTURE";
     }
     
-    public def onComplete() {
+    public def lookupLocation() {
+        def h = { o->
+            entity.location = o;
+            binding.refresh("entity.location.text");
+        }
+        return Inv.lookupOpener( "building_location:entry", [entity: entity.location, handler: h ] )
+    }
+    
+    public def save() {
+        super.save();
         MsgBox.alert("Saved success")
         def op =  Inv.lookupOpener("vw_building_permit:open", [entity: entity ] );
         op.target = "topwindow";

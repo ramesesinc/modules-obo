@@ -40,7 +40,8 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xDateField4 = new com.rameses.rcp.control.XDateField();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
         xTextField1 = new com.rameses.rcp.control.XTextField();
-        addressEditor1 = new com.rameses.enterprise.components.AddressEditor();
+        xLabel22 = new com.rameses.rcp.control.XLabel();
+        xButton1 = new com.rameses.rcp.control.XButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         xTextArea1 = new com.rameses.rcp.control.XTextArea();
         entityLookup1 = new com.rameses.entity.components.EntityLookup();
@@ -48,7 +49,6 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xLookupField3 = new com.rameses.rcp.control.XLookupField();
         xLabel21 = new com.rameses.rcp.control.XLabel();
         xLabel3 = new com.rameses.rcp.control.XLabel();
-        xLookupField2 = new com.rameses.rcp.control.XLookupField();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xDecimalField4 = new com.rameses.rcp.control.XDecimalField();
@@ -98,10 +98,16 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xTextField1.setRequired(true);
         xFormPanel3.add(xTextField1);
 
-        addressEditor1.setCaption("Project Location");
-        addressEditor1.setName("entity.location"); // NOI18N
-        addressEditor1.setPreferredSize(new java.awt.Dimension(0, 53));
-        xFormPanel3.add(addressEditor1);
+        xLabel22.setCaption("Project Location");
+        xLabel22.setExpression("#{entity.location.text}");
+        xLabel22.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel3.add(xLabel22);
+
+        xButton1.setCaption("");
+        xButton1.setName("lookupLocation"); // NOI18N
+        xButton1.setImmediate(true);
+        xButton1.setText("Lookup Location");
+        xFormPanel3.add(xButton1);
 
         jScrollPane1.setName("entity.particulars"); // NOI18N
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 65));
@@ -113,7 +119,7 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xFormPanel3.add(jScrollPane1);
 
         entityLookup1.setCaption("Applicant");
-        entityLookup1.setEntityType("entityindividual");
+        entityLookup1.setEntityType("entity");
         entityLookup1.setName("entity.applicant"); // NOI18N
         entityLookup1.setPreferredSize(new java.awt.Dimension(0, 21));
         entityLookup1.setRequired(true);
@@ -145,14 +151,6 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
         xLabel3.setExpression("#{entity.occupancytype.division.objid}");
         xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel3.add(xLabel3);
-
-        xLookupField2.setCaption("Type of Work");
-        xLookupField2.setExpression("#{entity.worktype.objid}");
-        xLookupField2.setHandler("obo_work_type:lookup");
-        xLookupField2.setName("entity.worktype"); // NOI18N
-        xLookupField2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xLookupField2.setRequired(true);
-        xFormPanel3.add(xLookupField2);
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder2.setPadding(new java.awt.Insets(30, 10, 10, 10));
@@ -360,13 +358,13 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.enterprise.components.AddressEditor addressEditor1;
     private com.rameses.entity.components.EntityAddressLookup entityAddressLookup1;
     private com.rameses.entity.components.EntityLookup entityLookup1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private com.rameses.seti2.components.SchemaList schemaList8;
+    private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XDateField xDateField2;
     private com.rameses.rcp.control.XDateField xDateField3;
@@ -380,8 +378,8 @@ public class BuildingPermitCapturePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
     private com.rameses.rcp.control.XIntegerField xIntegerField2;
     private com.rameses.rcp.control.XLabel xLabel21;
+    private com.rameses.rcp.control.XLabel xLabel22;
     private com.rameses.rcp.control.XLabel xLabel3;
-    private com.rameses.rcp.control.XLookupField xLookupField2;
     private com.rameses.rcp.control.XLookupField xLookupField3;
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;

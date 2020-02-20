@@ -195,7 +195,14 @@ class BuildingApplicationWorkflowInterceptor {
 
 		def app = appEm.find([objid: appid]).first();
 		if( !app.permitid ) throw new Exception("Please issue first the permit");
+		p.permitid = app.permitid;
 	}
 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }", index=0 ) 
+	public void doActionAfterRelease( def evt ) {
+		def p = evt.args[0];
+		if(!p.permitid) throw new Exception("Error after release workflow. Please pass the permitid");
+		permitEm.find( [objid: p.permitid ] ).update( [state: 1 ] );
+	}
 
 } 

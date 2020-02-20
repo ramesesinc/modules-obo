@@ -1,11 +1,11 @@
 <workunit schemaName="building_application">
     <invokers>
-        <invoker folderid="menucategory/obo/building" caption="Capture Application"
+        <invoker folderid="menucategory/obo/building" caption="Capture Building Permit"
                 action="create" index="10" />
         
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitCaptureModel" />
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitCaptureModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.views.BuildingPermitCapturePage" />
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitCapturePage" />
     </pages>
 </workunit>

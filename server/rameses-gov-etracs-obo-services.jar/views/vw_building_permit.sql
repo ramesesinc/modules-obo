@@ -4,7 +4,9 @@ SELECT
    pmt.*,
 
    a.appno,
+   a.txnmode,
    a.apptype,
+   a.dtfiled,   
    a.applicantid,
    a.description,
    a.title,
