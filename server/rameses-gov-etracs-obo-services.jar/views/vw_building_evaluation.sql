@@ -18,10 +18,10 @@ SELECT
    t.actor_name AS task_actor_name,
    (SELECT title FROM sys_wf_node WHERE processname = 'building_evaluation' AND name=t.state) AS task_title,
 
-   TIME_TO_SEC( TIMEDIFF( CASE WHEN t.enddate IS NULL THEN NOW() ELSE t.enddate END, t.dtcreated )) AS task_timediff
+   TIME_TO_SEC( TIMEDIFF( CASE WHEN t.enddate IS NULL THEN NOW() ELSE t.enddate END, t.dtcreated )) AS task_timediff 
 
    
 FROM building_evaluation a 
-INNER JOIN building_evaluation_task t ON a.taskid = t.taskid
-INNER JOIN building_evaluation_type et ON a.typeid = et.objid
-INNER JOIN vw_building_application app ON a.appid = app.objid
+INNER JOIN building_evaluation_task t ON a.taskid = t.taskid 
+INNER JOIN building_evaluation_type et ON a.typeid = et.objid 
+INNER JOIN vw_building_application app ON a.appid = app.objid 

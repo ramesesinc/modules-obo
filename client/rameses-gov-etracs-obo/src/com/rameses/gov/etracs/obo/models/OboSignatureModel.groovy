@@ -24,7 +24,7 @@ class OboSignatureModel extends CrudFormModel {
     def listener = [
         "entity.user" : { o->
             entity.objid = o.objid;
-            entity.user = [name: entity.lastname + ", " + entity.firstname];
+            entity.user = [name: o.lastname + ", " + o.firstname];
             entity.displayname = o.firstname;
             if( o.middlename ) entity.displayname + " "+ o.middlename.substring(0,1) + ".";
             entity.displayname += " " + o.lastname;

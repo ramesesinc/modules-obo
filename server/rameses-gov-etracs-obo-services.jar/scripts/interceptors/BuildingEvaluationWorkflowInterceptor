@@ -75,8 +75,9 @@ class BuildingEvaluationWorkflowInterceptor {
 		def p = evt.args[0];
 		def result = evt.result;
 		def appid = vwEvalEm.find( [objid: p.refid] ).select("appid").val();
-		def cnt = vwEvalEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('for-revision', 'obo-processing') ").val();
-		if( cnt == 0 ) {
+		def tlist = vwEvalEm.find([appid:appid]).select("task.state").list();
+		def hasOpen = tlist.findAll{ !it.task.state.matches( 'for-revision|obo-processing' ) };
+		if( !hasOpen ) {
 			def app = appEm.find([objid:appid]).select("task.*").first();
 			def f = [:];
 			f.processname = 'building_application';
@@ -98,8 +99,9 @@ class BuildingEvaluationWorkflowInterceptor {
 		def appid = sec.appid;
 
 		//check that all are in obo-processing before moving this application to the next step. There should be no for-revision in this phase because it is already checked in before
-		def cnt = vwEvalEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('obo-processing') ").val();
-		if( cnt == 0 ) {
+		def tlist = vwEvalEm.find([appid:appid]).select("task.state").list();
+		def hasOpen = tlist.findAll{ !it.task.state.matches( 'obo-processing' ) };
+		if( !hasOpen ) {
 			def app = appEm.find([objid:appid]).select("task.*").first();
 			def f = [:];
 			f.processname = 'building_application';

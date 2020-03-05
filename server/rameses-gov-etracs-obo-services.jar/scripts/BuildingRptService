@@ -29,7 +29,10 @@ public class BuildingRptService  {
 		list.each {
 			def u = [:];
 			def params = [:];
-			params.entityid = entityEm.find( [objid: it.ownerid] ).first().profileid ;
+			params.entityid = entityEm.find( [objid: it.ownerid] ).first()?.profileid;
+			if(!params.entityid ) 
+				throw new Exception("entityid is required in BuildingRptService.generateDocs");
+
 			params.faas = [objid:  it.refid, tdno: it.tdno];
 			params.refid = app.objid;
 
@@ -40,13 +43,23 @@ public class BuildingRptService  {
 			params.purpose = "For Building Permit Application"
 
 			if( !it.truecopycertid ) {
-				def cert = rptSvc.issueTrueCopy(params);
-				u.truecopycertid = cert.objid;
+				try {
+					def cert = rptSvc.issueTrueCopy(params);
+					u.truecopycertid = cert.objid;				
+				}
+				catch(e) {
+					throw new Exception( "Error in issuing true copy. " + e?.message );
+				}
 			}
 			if( !it.taxclearanceid ) {
-				params.faases = [params.faas];
-				def cert = rptSvc.issueTaxClearance(params);
-				u.taxclearanceid = cert.objid;
+				try {
+					params.faases = [params.faas];
+					def cert = rptSvc.issueTaxClearance(params);
+					u.taxclearanceid = cert.objid;				
+				}
+				catch(e) {
+					throw new Exception( "Error in issuing tax clearance. " + e?.message );					
+				}
 			}
 			if(u) {
 				rpuEm.find( [objid: it.objid ]).update( u );

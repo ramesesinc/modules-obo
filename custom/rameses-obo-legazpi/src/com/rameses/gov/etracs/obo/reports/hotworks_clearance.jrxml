@@ -131,19 +131,6 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
-				<staticText>
-					<reportElement
-						x="19"
-						y="238"
-						width="546"
-						height="15"
-						key="staticText-10"/>
-					<box></box>
-					<textElement textAlignment="Justified" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica" size="9" isBold="false"/>
-					</textElement>
-				<text><![CDATA[        By virtue of the provisions of RA 9514 otherwise known as the Fire Code of the Philippines of 2008 and its Implementing Rules ]]></text>
-				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="130"
@@ -1656,7 +1643,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 				<staticText>
 					<reportElement
 						x="348"
-						y="905"
+						y="887"
 						width="200"
 						height="13"
 						key="staticText-88"/>
@@ -1669,7 +1656,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="355"
-						y="884"
+						y="886"
 						width="157"
 						height="65"
 						key="image-4"/>
@@ -1699,8 +1686,8 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 				</textField>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="352"
-						y="933"
+						x="344"
+						y="947"
 						width="173"
 						height="92"
 						key="image-5"/>
@@ -1713,7 +1700,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 				<staticText>
 					<reportElement
 						x="348"
-						y="975"
+						y="963"
 						width="200"
 						height="15"
 						key="staticText-89"/>
@@ -2084,7 +2071,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 </graphicElement>
 					<imageExpression class="java.lang.String"><![CDATA["bfp-images/check.png"]]></imageExpression>
 				</image>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="30"
 						y="433"
@@ -2097,7 +2084,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{jobno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="30"
 						y="725"
@@ -2110,7 +2097,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{clearance_duration}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="46"
 						y="591"
@@ -2123,7 +2110,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{hw_worker1}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="46"
 						y="604"
@@ -2136,7 +2123,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{hw_worker2}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="46"
 						y="619"
@@ -2149,7 +2136,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{hw_worker3}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="43"
 						y="783"
@@ -2162,7 +2149,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{hw_watchman1}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="43"
 						y="793"
@@ -2175,7 +2162,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{hw_watchman2}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="43"
 						y="805"
@@ -2240,7 +2227,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="120"
 						y="303"
@@ -2251,7 +2238,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					<textElement>
 						<font fontName="Arial"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractorname}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -2279,18 +2266,18 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="372"
+						x="292"
 						y="253"
-						width="206"
-						height="18"
+						width="286"
+						height="27"
 						key="textField-14"/>
 					<box></box>
 					<textElement>
 						<font fontName="Arial"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["                         " + $F{title}]]></textFieldExpression>
 				</textField>
 			</band>
 		</title>

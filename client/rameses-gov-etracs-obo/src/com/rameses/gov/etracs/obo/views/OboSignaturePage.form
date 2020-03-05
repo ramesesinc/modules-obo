@@ -43,7 +43,7 @@
           <Properties>
             <Property name="caption" type="java.lang.String" value="Lookup Name"/>
             <Property name="expression" type="java.lang.String" value="#{ entity.user.name }"/>
-            <Property name="handler" type="java.lang.String" value="user:lookup"/>
+            <Property name="handler" type="java.lang.String" value="sys_user:lookup"/>
             <Property name="name" type="java.lang.String" value="entity.user" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[0, 20]"/>

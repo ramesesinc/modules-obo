@@ -109,7 +109,10 @@ class BuildingIssuanceFormReportInterceptor {
 		docsub.dtevaluated = tsk.enddate;
 		if( docsub?.evaluator?.objid ) {
 			def info = signatureEm.find( [objid: docsub.evaluator.objid] ).first();
-			if(info) docsub.evaluator.signature = info.signature;
+			if(info) {
+				docsub.evaluator.signature = info.signature;
+				docsub.evaluator.name = info.displayname;
+			}	
 		}
 
 		//load approver
@@ -120,7 +123,10 @@ class BuildingIssuanceFormReportInterceptor {
 		//load issuer
 		if( docsub.issuedby?.objid ) {
 			def info = signatureEm.find( [objid: docsub.issuedby.objid] ).first();
-			if( info ) docsub.issuedby.signature = info.signature;
+			if( info ) {
+				docsub.issuedby.signature = info.signature;
+				docsub.issuedby.name = info.displayname;
+			}	
 		}
 
 		//extra settings

@@ -36,7 +36,7 @@
 	<field name="title" class="java.lang.String"/>
 	<field name="zoneclass.title" class="java.lang.String"/>
 	<field name="totalfloorarea" class="java.lang.Number"/>
-	<field name="issue.remarks" class="java.lang.String"/>
+	<field name="remarks" class="java.lang.String"/>
 	<field name="receiptno" class="java.lang.String"/>
 	<field name="receiptdate" class="java.util.Date"/>
 	<field name="amount" class="java.lang.Number"/>
@@ -1100,7 +1100,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issue.remarks}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{remarks}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

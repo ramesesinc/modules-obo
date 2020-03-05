@@ -55,11 +55,13 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xLabel9 = new com.rameses.rcp.control.XLabel();
         xLabel10 = new com.rameses.rcp.control.XLabel();
         xLabel11 = new com.rameses.rcp.control.XLabel();
+        xLabel14 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
         xLabel13 = new com.rameses.rcp.control.XLabel();
-        xLabel14 = new com.rameses.rcp.control.XLabel();
-        xLabel15 = new com.rameses.rcp.control.XLabel();
         xButton1 = new com.rameses.rcp.control.XButton();
+
+        setPreferredSize(new java.awt.Dimension(809, 488));
+        setLayout(new java.awt.BorderLayout());
 
         xPanel2.setVisibleWhen("#{ showInfos == true }");
         xPanel2.setLayout(new java.awt.BorderLayout());
@@ -165,7 +167,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
                 .addComponent(xButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(xButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 409, Short.MAX_VALUE))
+                .addGap(0, 473, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,6 +329,8 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
 
         xTabbedPane1.addTab("Checklist Items", xPanel3);
 
+        add(xTabbedPane1, java.awt.BorderLayout.CENTER);
+
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder1.setTitle("General Information");
         jPanel1.setBorder(xTitledBorder1);
@@ -376,9 +380,17 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xLabel11.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel11);
 
+        xLabel14.setCaption("Occupancy Type");
+        xLabel14.setExpression("#{entity.occupancytypeid}");
+        xLabel14.setVisibleWhen("#{ entity.occupancytypeid != null }");
+        xLabel14.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel14);
+
         xLabel12.setCaption("Asessed Amount");
         xLabel12.setExpression("#{entity.amount}");
-        xLabel12.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        xLabel12.setNumberFormat("#,##0.00");
+        xLabel12.setPreferredSize(new java.awt.Dimension(150, 20));
         xFormPanel2.add(xLabel12);
 
         xLabel13.setCaption("Remarks");
@@ -386,21 +398,10 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xLabel13.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel13);
 
-        xLabel14.setCaption("Occupancy Type");
-        xLabel14.setExpression("#{entity.occupancytypeid}");
-        xLabel14.setVisibleWhen("#{ entity.occupancytypeid != null }");
-        xLabel14.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel14);
-
-        xLabel15.setCaption("Contractor Name");
-        xLabel15.setExpression("#{entity.contractorname}");
-        xLabel15.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel15);
-
         xButton1.setCaption("");
-        xButton1.setName("editContractorName"); // NOI18N
+        xButton1.setName("editRemarks"); // NOI18N
         xButton1.setVisibleWhen("#{ editable == true }");
-        xButton1.setText("Edit Contractor Name");
+        xButton1.setText("Edit Remarks");
         xFormPanel2.add(xButton1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -408,43 +409,25 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(490, Short.MAX_VALUE)
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(304, Short.MAX_VALUE)))
+                    .addContainerGap(368, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 72, Short.MAX_VALUE))
+                .addGap(0, 54, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, Short.MAX_VALUE))
+                .addComponent(xFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        add(jPanel1, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -468,7 +451,6 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel12;
     private com.rameses.rcp.control.XLabel xLabel13;
     private com.rameses.rcp.control.XLabel xLabel14;
-    private com.rameses.rcp.control.XLabel xLabel15;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel7;

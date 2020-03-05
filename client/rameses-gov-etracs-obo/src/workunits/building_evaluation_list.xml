@@ -1,6 +1,6 @@
 <workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
           processName="building_evaluation" schemaName="vw_building_evaluation"
-          allowDelete="false" allowNotify="false">
+          allowDelete="false" allowNotify="false" allowCreate="false">
     <invokers>
         <invoker type="building_evaluation:list" caption="View Evaluation List"
              cols="app.appno,app.applicant.name,app.title,app.occupancytype.title,task.assignee"

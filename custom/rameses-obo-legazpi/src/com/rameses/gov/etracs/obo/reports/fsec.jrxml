@@ -122,19 +122,19 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA["THE PURPOSE OF SECURING BUILDING PERMIT OF THE PROPOSED"]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="337"
+						x="283"
 						y="265"
-						width="188"
-						height="12"
+						width="242"
+						height="25"
 						forecolor="#000000"
 						key="textField"/>
 					<box></box>
-					<textElement verticalAlignment="Bottom">
+					<textElement verticalAlignment="Top">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["                      " + $F{title}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -486,7 +486,7 @@
 				<staticText>
 					<reportElement
 						x="338"
-						y="483"
+						y="467"
 						width="200"
 						height="13"
 						key="staticText-21"/>
@@ -499,7 +499,7 @@
 				<staticText>
 					<reportElement
 						x="338"
-						y="543"
+						y="544"
 						width="200"
 						height="15"
 						key="staticText-24"/>
@@ -512,7 +512,7 @@
 				<staticText>
 					<reportElement
 						x="41"
-						y="603"
+						y="617"
 						width="485"
 						height="36"
 						key="staticText-27"/>
@@ -525,7 +525,7 @@
 				<staticText>
 					<reportElement
 						x="41"
-						y="647"
+						y="656"
 						width="485"
 						height="26"
 						forecolor="#FF0033"
@@ -812,7 +812,7 @@
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="338"
-						y="576"
+						y="596"
 						width="199"
 						height="15"
 						key="textField-5"/>
@@ -826,7 +826,7 @@
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="338"
-						y="561"
+						y="581"
 						width="199"
 						height="15"
 						key="textField-6"/>
@@ -945,8 +945,8 @@
 				</staticText>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="359"
-						y="518"
+						x="352"
+						y="538"
 						width="153"
 						height="68"
 						key="image-6"/>
@@ -956,8 +956,8 @@
 				</image>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="359"
-						y="462"
+						x="358"
+						y="463"
 						width="143"
 						height="66"
 						key="image-7"/>

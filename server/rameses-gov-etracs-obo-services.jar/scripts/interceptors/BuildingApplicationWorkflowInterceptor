@@ -190,8 +190,9 @@ class BuildingApplicationWorkflowInterceptor {
 		def p = evt.args[0];
 		def appid = p.refid;
 
-		def c = vwEvalEm.find([appid:appid]).select("c:{COUNT(*)}").where("NOT(task.state = 'end')").val();
-		if(c!=null && c > 0 ) throw new Exception("All evaluation tasks must be closed");
+		def tlist = vwEvalEm.find([appid:appid]).select("task.state").list();
+		def hasOpen = tlist.findAll{ it.task.state != 'end' }
+		if( hasOpen ) throw new Exception("All evaluation tasks must be closed");
 
 		def app = appEm.find([objid: appid]).first();
 		if( !app.permitid ) throw new Exception("Please issue first the permit");

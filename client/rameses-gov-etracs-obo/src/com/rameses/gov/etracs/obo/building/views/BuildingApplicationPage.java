@@ -915,6 +915,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         pnlEval.add(xFormPanel2, java.awt.BorderLayout.NORTH);
 
+        schemaList10.setAllowCreate(true);
         schemaList10.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "type.title"}

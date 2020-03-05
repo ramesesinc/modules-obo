@@ -367,4 +367,22 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         return Inv.lookupOpener("dynamic:form", p );
     }
     
+    def editRemarks() {
+        def p = [:];
+        p.fields = [
+            [caption:'Remarks', name:'remarks' ]
+        ];
+        p.data = [
+            remarks: entity.remarks
+        ];
+        p.handler = { o->
+            def e = [_schemaname: schemaName];
+            e.objid = entity.objid;
+            e.remarks = o.remarks;
+            persistenceService.update(e);
+            entity.remarks = o.remarks;
+            binding.refresh();
+        }
+        return Inv.lookupOpener("dynamic:form", p );
+    }
 }

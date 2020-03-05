@@ -172,7 +172,7 @@
 	<field name="fsc81_0" class="java.lang.String"/>
 	<field name="location.barangay.name" class="java.lang.String"/>
 	<field name="numfloors" class="java.lang.Number"/>
-	<field name="issue.remarks" class="java.lang.String"/>
+	<field name="remarks" class="java.lang.String"/>
 	<field name="dtissued" class="java.util.Date"/>
 	<field name="evaluator.signature" class="java.lang.Object"/>
 	<field name="evaluator.name" class="java.lang.String"/>
@@ -7551,19 +7551,6 @@ Other Spaces;  Class ________________ ]]></text>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="36"
-						y="666"
-						width="189"
-						height="15"
-						key="textField"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Bottom">
-						<font fontName="Arial" size="10"/>
-					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtfiled}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
 						x="310"
 						y="776"
 						width="163"
@@ -7640,7 +7627,7 @@ Other Spaces;  Class ________________ ]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsc81_0}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="142"
 						y="509"
@@ -7651,7 +7638,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement verticalAlignment="Top">
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{issue.remarks}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{remarks}]]></textFieldExpression>
 				</textField>
 				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -8179,7 +8166,7 @@ Other Spaces;  Class ________________ ]]></text>
 				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="292"
-						y="798"
+						y="812"
 						width="181"
 						height="90"
 						key="image-90"/>
@@ -8253,7 +8240,7 @@ KAWANI NITO ANG MAGBENTA O MAGREKOMENDA NG ANUMANG BRAND NG FIRE EXTINGUISHER.â€
 					<textElement>
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false"/>
 					</textElement>
-				<text><![CDATA[RECOMMEND ISSUANCE PF FSEC/NOTICE OF DISAPPROVAL:]]></text>
+				<text><![CDATA[RECOMMEND ISSUANCE OF FSEC/NOTICE OF DISAPPROVAL:]]></text>
 				</staticText>
 			</band>
 		</summary>
