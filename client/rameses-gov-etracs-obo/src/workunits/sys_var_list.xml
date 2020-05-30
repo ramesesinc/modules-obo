@@ -1,0 +1,26 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml" 
+         allowDelete="false" schemaName="sys_var" >
+    <invokers>
+        <invoker folderid="/explorer/setting" caption="OBO" 
+                 cols="name,value,description"
+                 action="init" index="50" role="MASTER"/>
+    </invokers>
+    <code>
+        <![CDATA[
+        import com.rameses.rcp.annotations.*;
+        import com.rameses.rcp.common.*;
+        import com.rameses.seti2.models.*;
+        import com.rameses.osiris2.common.*;
+        import com.rameses.util.*;
+        
+        class VarModel extends CrudListModel {
+        
+            public def open() {
+                MsgBox.alert("open " + selectedItem );
+            }
+        
+        }
+        
+        ]]>
+    </code>    
+</workunit>

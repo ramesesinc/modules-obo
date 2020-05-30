@@ -39,6 +39,11 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
         xLabel3 = new com.rameses.rcp.control.XLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         xTextArea2 = new com.rameses.rcp.control.XTextArea();
+        xPanel3 = new com.rameses.rcp.control.XPanel();
+        xButton5 = new com.rameses.rcp.control.XButton();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
+        xButton6 = new com.rameses.rcp.control.XButton();
+        xButton7 = new com.rameses.rcp.control.XButton();
         xRadio1 = new com.rameses.rcp.control.XRadio();
         xRadio2 = new com.rameses.rcp.control.XRadio();
         jPanel1 = new javax.swing.JPanel();
@@ -79,9 +84,37 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
 
         xFormPanel2.add(jScrollPane2);
 
+        xPanel3.setCaption("Attachment");
+        xPanel3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
+
+        xButton5.setDisableWhen("");
+        xButton5.setName("addAttachment"); // NOI18N
+        xButton5.setVisibleWhen("#{ editable == true  && entity.attachment?.fileid == null }");
+        xButton5.setContentAreaFilled(false);
+        xButton5.setText("Add");
+        xPanel3.add(xButton5);
+
+        xLabel1.setDepends(new String[] {"entity.attachment"});
+        xLabel1.setExpression("#{ entity.attachment.title }");
+        xPanel3.add(xLabel1);
+
+        xButton6.setName("removeAttachment"); // NOI18N
+        xButton6.setVisibleWhen("#{ editable == true && entity.attachment?.fileid != null }");
+        xButton6.setText("Remove");
+        xPanel3.add(xButton6);
+
+        xButton7.setName("viewAttachment"); // NOI18N
+        xButton7.setVisibleWhen("#{ entity.attachment?.fileid != null }");
+        xButton7.setText("View");
+        xPanel3.add(xButton7);
+
+        xFormPanel2.add(xPanel3);
+
         xRadio1.setCaption("Status");
         xRadio1.setName("entity.state"); // NOI18N
         xRadio1.setOptionValue(1);
+        xRadio1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xRadio1.setText("Resolved");
         xRadio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,12 +226,17 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XButton xButton2;
     private com.rameses.rcp.control.XButton xButton3;
     private com.rameses.rcp.control.XButton xButton4;
+    private com.rameses.rcp.control.XButton xButton5;
+    private com.rameses.rcp.control.XButton xButton6;
+    private com.rameses.rcp.control.XButton xButton7;
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
+    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel2;
+    private com.rameses.rcp.control.XPanel xPanel3;
     private com.rameses.rcp.control.XRadio xRadio1;
     private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XTextArea xTextArea2;

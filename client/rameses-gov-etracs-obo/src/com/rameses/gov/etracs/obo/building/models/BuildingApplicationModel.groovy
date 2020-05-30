@@ -99,8 +99,9 @@ class BuildingApplicationModel extends AbstractApplicationModel {
     
     public static String formatTime( def o ) {
         if( o == null ) return "";
-        return o + " eval seconds";
+        return o + " seconds";
     }
+    
     
 }
 

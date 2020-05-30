@@ -5,6 +5,10 @@ class BuildingApplicationPersistenceInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
+	@Service("OboConstructionCostRuleService")
+	def costSvc;
+
+
 	@DataContext("building_application_requirement")
 	def reqEm;
 
@@ -31,7 +35,6 @@ class BuildingApplicationPersistenceInterceptor {
 
 	@DataContext("building_application_payment")
 	def pmtEm;
-
 
 	@Env
 	def env;
@@ -70,6 +73,21 @@ class BuildingApplicationPersistenceInterceptor {
 		}	
 	} 
 
+	//BUILDING PERMIT APPLICATION
+	@Before(pattern="PersistenceService.update", eval="#{ args[0]._schemaname == 'building_application' }")
+	public void beforeUpdateApplication(def evt) {
+		def app = evt.args[0];
+		app.occupancytypeid = app.occupancytype?.objid;
+
+		//update the fixed cost
+		def param = [:];
+		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
+		param.occupancytype = app.occupancytype;
+
+		def cost = costSvc.calc( param );
+		app.fixedcost = cost;		
+	}
+
 	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_building_application' }")
 	public void afterOpenApplication(def evt) {
 		def p = evt.args[0];
@@ -93,6 +111,7 @@ class BuildingApplicationPersistenceInterceptor {
 		a.amount = feeEm.find([appid:a.objid]).select("c:{SUM(amount)}").val();
 
 		a.payment = pmtEm.find([appid: a.objid ]).where("voided=0").first();
+		a.location.text = a.location?.address?.text;
 	}
 
 

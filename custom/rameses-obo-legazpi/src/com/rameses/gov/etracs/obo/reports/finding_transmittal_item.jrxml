@@ -105,7 +105,7 @@
 						stretchType="RelativeToTallestObject"
 						isPrintWhenDetailOverflows="true"/>
 					<box></box>
-					<textElement>
+					<textElement markup="html">
 						<font fontName="Arial" size="8"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{particulars}]]></textFieldExpression>

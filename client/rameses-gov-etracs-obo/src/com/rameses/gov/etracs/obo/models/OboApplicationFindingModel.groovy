@@ -24,8 +24,14 @@ class OboApplicationFindingModel {
     @Service("QueryService")
     def querySvc;
     
+    @Service("Var")
+    def varSvc;
+    
     @Caller
     def caller;
+    
+    @Binding
+    def binding;
     
     @Controller
     def workunit;
@@ -149,4 +155,42 @@ class OboApplicationFindingModel {
         }
     ] as BasicListModel;
     */
+   
+    void addAttachment() {
+        def rp = varSvc.get("file_attachment_filepath");
+        if(!rp) 
+            throw new Exception("Please specify the attachments location-> file_attachment_filepath in sysvar");
+        
+        boolean pass = false;
+        def s  = { o->
+           def a = [:];
+           a.fileid = o.fileid.replace(rp+"/", "");
+           a.title = a.fileid;
+           entity.attachment = a;
+           pass = true;
+        }
+        Modal.show( "webfile_chooser", [onselect:s, filePath: rp] );
+        /*
+        if(!pass ) return;
+        def t = MsgBox.prompt("Enter tag name" );
+        if( t ) {
+            def ext = entity.attachment.fileid.substring( entity.attachment.fileid.indexOf(".") );
+            entity.attachment.title = t + ext;
+        }
+        */
+    }
+    
+    def removeAttachment() {
+        entity.attachment = null;
+        binding.refresh();
+    }
+
+    def viewAttachment() {
+        def rp = varSvc.get("file_attachment_filepath");
+        if(!rp) 
+            throw new Exception("Please specify the attachments location-> file_attachment_filepath in sysvar");
+        rp += "/" + entity.attachment.fileid;    
+        Modal.show( "webfile_chooser", [filePath:rp] );   
+    }
+
 }
