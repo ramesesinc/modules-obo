@@ -35,7 +35,18 @@ class BuildingApplicationModel extends AbstractApplicationModel {
         return "Bldg "+ (entity.appno==null? entity.trackingno : entity.appno);
     }
     
+    public boolean isActionable() {
+        return (task.assignee.objid == userInfo.userid);
+    }
     
+    def listPermissionModel = [
+        isAllowCreate: {
+            return isActionable();
+        },
+        isAllowDelete: {
+            return isActionable();
+        }
+    ];
     
     //impt for documents
     def selectedDoc;

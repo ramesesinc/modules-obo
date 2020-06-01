@@ -47,11 +47,6 @@ public class BuildingApplicationEditPage extends javax.swing.JPanel {
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xLabel21 = new com.rameses.rcp.control.XLabel();
-        xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
-        xLabel22 = new com.rameses.rcp.control.XLabel();
-        xLabel23 = new com.rameses.rcp.control.XLabel();
-        xLabel24 = new com.rameses.rcp.control.XLabel();
-        xLabel25 = new com.rameses.rcp.control.XLabel();
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder1.setPadding(new java.awt.Insets(20, 10, 10, 10));
@@ -141,53 +136,20 @@ public class BuildingApplicationEditPage extends javax.swing.JPanel {
         xLabel21.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel21);
 
-        xFormPanel3.setCaption("");
-        com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
-        xTitledBorder2.setPadding(new java.awt.Insets(20, 10, 10, 10));
-        xTitledBorder2.setTitle("Application Info");
-        xFormPanel3.setBorder(xTitledBorder2);
-        xFormPanel3.setCaptionWidth(180);
-        xFormPanel3.setPreferredSize(new java.awt.Dimension(0, 100));
-
-        xLabel22.setCaption("Contractor Name");
-        xLabel22.setExpression("#{entity.contractor.name}");
-        xLabel22.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel22.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel22);
-
-        xLabel23.setCaption("PRC No");
-        xLabel23.setExpression("#{entity.contractor.prc.idno}");
-        xLabel23.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel23);
-
-        xLabel24.setCaption("PRC Date / Place Issued");
-        xLabel24.setExpression("#{entity.contractor.prc.dtissued} #{entity.contractor.prc.placeissued}");
-        xLabel24.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel24);
-
-        xLabel25.setCaption("Validity Date");
-        xLabel25.setExpression("#{entity.contractor.prc.dtvalid}");
-        xLabel25.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel25);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(56, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -203,14 +165,9 @@ public class BuildingApplicationEditPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XDecimalField xDecimalField3;
     private com.rameses.rcp.control.XDecimalField xDecimalField4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
-    private com.rameses.rcp.control.XFormPanel xFormPanel3;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
     private com.rameses.rcp.control.XIntegerField xIntegerField2;
     private com.rameses.rcp.control.XLabel xLabel21;
-    private com.rameses.rcp.control.XLabel xLabel22;
-    private com.rameses.rcp.control.XLabel xLabel23;
-    private com.rameses.rcp.control.XLabel xLabel24;
-    private com.rameses.rcp.control.XLabel xLabel25;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLookupField xLookupField1;
     private com.rameses.rcp.control.XTextField xTextField1;

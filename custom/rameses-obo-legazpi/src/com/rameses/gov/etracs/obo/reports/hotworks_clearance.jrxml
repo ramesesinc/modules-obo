@@ -59,7 +59,7 @@
 	<field name="receiptno" class="java.lang.String"/>
 	<field name="receiptdate" class="java.util.Date"/>
 	<field name="amount" class="java.lang.Number"/>
-	<field name="location.address.text" class="java.lang.String"/>
+	<field name="location.text" class="java.lang.String"/>
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="hw01" class="java.lang.Integer"/>
 	<field name="hw02" class="java.lang.Integer"/>
@@ -2225,7 +2225,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					<textElement>
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.text}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -2251,7 +2251,7 @@ contractor liable to the penalties provided for by the said Fire Code.]]></text>
 					<textElement>
 						<font fontName="Arial"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.text}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

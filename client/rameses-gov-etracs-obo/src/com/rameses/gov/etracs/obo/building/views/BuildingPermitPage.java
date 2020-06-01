@@ -80,7 +80,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xFormPanel2.add(xLabel7);
 
         xLabel6.setCaption("Location");
-        xLabel6.setExpression("#{entity.location.address.text}");
+        xLabel6.setExpression("#{entity.location.text}");
         xLabel6.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel6);
 

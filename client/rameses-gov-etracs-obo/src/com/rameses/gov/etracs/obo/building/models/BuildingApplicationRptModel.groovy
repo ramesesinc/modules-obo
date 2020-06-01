@@ -11,93 +11,53 @@ import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 import com.rameses.gov.etracs.obo.models.*;
 
-class BuildingApplicationRptModel  {
+class BuildingApplicationRptModel extends CrudFormModel {
     
-    @Caller 
-    def caller;
-
-    @Service("QueryService")
-    def qryService;
-    
-    @Service("BuildingRptService")
+    @Service("BuildingApplicationRptService")
     def rptService;
     
-    def list;
     
-    public def getEntityid() {
-        return caller.entity.objid;
+    def tdno;
+    
+    void lookupTD() {
+        entity = rptService.findRpu( [refno: tdno ] );
+        entity.appid = caller.entity.objid;
+        entity.remove("objid");
+        if( caller.entity.applicant.objid == entity.ownerid ) {
+            entity.lotowned = 1;
+        }
+        else {
+            entity.lotowned = 0;
+        }
     }
     
-    public void generateDocs() {
-        def m = [appid: entityid]; 
+    def doOk() {
+        if(mode=="create") {
+            save();
+        }
+        return "_close";
+    } 
+    
+    def doCancel() {
+        return "_close";
+    }
+    
+    def viewTaxClearance() {
+        if(!entity.taxclearanceid ) throw new Exception("Tax clearance not yet generated");
+        return Inv.lookupOpener( 'rpttaxclearance:view', [entity: [objid: entity.taxclearanceid ]] );
+    }
+    
+    def viewTrueCopy() {
+        if(!entity.truecopycertid ) throw new Exception("Clearnace not yet generated");
+        return Inv.lookupOpener( 'tdtruecopy:view', [entity: [objid: entity.truecopycertid ]] );
+    }
+    
+    //Generate Docs
+    void generateDocs() {
+        def m = [appid: caller.entity.objid]; 
         rptService.generateDocs( m );
         caller.reload();
         MsgBox.alert("RPT Docs generated successfully");
     }
- 
-    
-    public def viewList() {
-        def m = [_schemaname: "building_application_rpu"];
-        m.findBy = [appid: entityid ];
-        def vlist = qryService.getList( m );
-        list = [];
-        vlist.each {
-            list << [ id: it.taxclearanceid, handler:'rpttaxclearance', tdno:it.tdno, description:'Lot No' + it.lotno, type:'Tax Clearance' ];
-            list << [ id: it.truecopycertid, handler:'tdtruecopy', tdno:it.tdno, description:'Lot No '+ it.lotno, type:'Cert of True Copy' ];            
-        }
-        return "list";
-    }
-    
-    def listHandler = [
-        getColumns: {
-            return [
-                [name:'tdno', caption: 'TD No'],
-                [name:'description', caption: 'Description'],
-                [name:'type', caption: 'RPU Type'],
-            ]
-        },
-        openItem: { itm, colName ->
-            return openItem( itm );
-        },
-        fetchList: { o->
-            return list;
-        }
-    ] as BasicListModel;
-    
-    def viewItem() {
-        def itm = listHandler.getSelectedItem().item;
-        if(itm==null) return null;
-        return openItem( itm );
-    }
-    
-    def openItem(def itm) {
-        def op = Inv.lookupOpener(itm.handler + ":view", [entity: [objid: itm.id ]] );
-        op.target = "popup";
-        return op; 
-    }
-    
-    /*
-    def viewTaxClearance(def id) {
-        if(!selectedRpu) throw new Exception("Please select an RPU Entry");
-        if(!selectedRpu.taxclearanceid) throw new Exception("Please generate Tax Dec documents first");
-        
-        File f = new File("tdprint.pdf")
-        op.handle.exportToPDF( f );
-        op.target = "popup";
-        return op;
-    }
-    
-    def viewTrueCopy() {
-        if(!selectedRpu) throw new Exception("Please select an RPU Entry");
-        if(!selectedRpu.truecopycertid) throw new Exception("Please generate Tax Dec documents first");
-        def op = Inv.lookupOpener(":view", [entity: [objid: selectedRpu. ]] );
-        op.target = "popup";
-        return op;
-        File f = new File("tdprint.pdf")
-        op.handle.report.exportToPDF( f );
-        op.target = "popup";
-        return op;
-    }
-    */
     
 }

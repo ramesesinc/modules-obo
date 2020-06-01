@@ -34,13 +34,6 @@
                 index="2"
                 visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
        
-                    
-        <invoker type="appActions" 
-                caption="Change Occupancy Type"
-                action="changeOccupancyType" 
-                visibleWhen="#{task.state.matches('verification|assessment') 
-                    &amp;&amp; task.assignee.objid == userInfo.userid }"   />
-                    
         <invoker type="appActions" 
                 caption="Issue Permit"
                 action="issuePermit" 
@@ -48,16 +41,9 @@
                     &amp;&amp; entity.permitid == null                   
                     &amp;&amp; task.assignee.objid == userInfo.userid }"   />            
                     
-                    
-        <invoker type="appActions" 
-                caption="Edit"
-                action="edit" 
-                index="-2" />   
-        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationModel" />
     <pages>
         <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationPage" />
-        <page name="edit" template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationEditPage" />        
     </pages>
 </workunit>

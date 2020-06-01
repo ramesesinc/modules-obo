@@ -57,7 +57,7 @@
 	<field name="receiptno" class="java.lang.String"/>
 	<field name="receiptdate" class="java.util.Date"/>
 	<field name="amount" class="java.lang.Number"/>
-	<field name="location.address.text" class="java.lang.String"/>
+	<field name="location.text" class="java.lang.String"/>
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="fsc01" class="java.lang.Integer"/>
 	<field name="issuedby.name" class="java.lang.String"/>
@@ -3713,7 +3713,7 @@ Other Spaces;  Class ________________ ]]></text>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="7"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.text}]]></textFieldExpression>
 				</textField>
 				<rectangle>
 					<reportElement

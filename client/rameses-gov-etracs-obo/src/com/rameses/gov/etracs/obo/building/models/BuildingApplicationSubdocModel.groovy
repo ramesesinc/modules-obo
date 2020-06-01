@@ -82,19 +82,6 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         if(!pass) throw new BreakException();
     }
     
-    void removeSubdocument() {
-        if(!caller.selectedDoc?.objid ) throw new Exception("Please select a sub document");
-        entity = caller.selectedDoc;
-        checkCurrentOrg(caller.selectedDoc.doctype?.org?.objid);
-        if( currentOrg  == false ) throw new Exception("You cannot remove this document. Only the org associated can remove this");
-        
-        if(!MsgBox.confirm("You are about to remove this subdocument. Proceed? ") ) return;
-        def m = [_schemaname: "building_application_subdoc" ];
-        m.objid = caller.selectedDoc.objid;
-        persistenceService.removeEntity(m);
-        caller.reloadEntity();
-    }
-    
     void checkCurrentOrg( def orgid ) {
         currentOrg = false;
         if(  orgid == userInfo.env.ORGID ) currentOrg = true;

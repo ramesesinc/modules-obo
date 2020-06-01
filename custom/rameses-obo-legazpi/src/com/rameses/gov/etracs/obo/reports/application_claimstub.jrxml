@@ -30,7 +30,7 @@
 	<field name="receiver.name" class="java.lang.String"/>
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="title" class="java.lang.String"/>
-	<field name="location.address.text" class="java.lang.String"/>
+	<field name="location.text" class="java.lang.String"/>
 	<field name="permittype" class="java.lang.String"/>
 	<field name="dtreceived" class="java.util.Date"/>
 
@@ -415,7 +415,7 @@ Bring this claim stub upon claiming the Application Evaluation Sheet, Order of P
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.text}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy hh:mm aaa" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

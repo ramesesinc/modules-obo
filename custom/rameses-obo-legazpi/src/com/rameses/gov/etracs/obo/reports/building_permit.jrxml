@@ -27,7 +27,7 @@
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="applicant.address.text" class="java.lang.String"/>
 	<field name="title" class="java.lang.String"/>
-	<field name="location.address.text" class="java.lang.String"/>
+	<field name="location.text" class="java.lang.String"/>
 	<field name="occupancytype.title" class="java.lang.String"/>
 	<field name="projectcost" class="java.lang.Number"/>
 	<field name="totalfloorarea" class="java.lang.Number"/>
@@ -3262,7 +3262,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.text}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

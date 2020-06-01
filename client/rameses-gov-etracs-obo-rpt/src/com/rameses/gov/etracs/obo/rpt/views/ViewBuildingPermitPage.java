@@ -90,7 +90,7 @@ public class ViewBuildingPermitPage extends javax.swing.JPanel {
         xFormPanel1.add(xLabel6);
 
         xLabel7.setCaption("Address");
-        xLabel7.setExpression("#{ entity.location.address.text }");
+        xLabel7.setExpression("#{ entity.location.text }");
         xLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel7.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel7);

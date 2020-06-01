@@ -25,7 +25,7 @@
 	<import value="net.sf.jasperreports.engine.data.*" />
 
 
-	<field name="location.address.text" class="java.lang.String"/>
+	<field name="location.text" class="java.lang.String"/>
 	<field name="title" class="java.lang.String"/>
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="appno" class="java.lang.String"/>
@@ -327,7 +327,7 @@
 					<textElement textAlignment="Left" verticalAlignment="Bottom">
 						<font fontName="Arial" size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.text}]]></textFieldExpression>
 				</textField>
 				<subreport  isUsingCache="true">
 					<reportElement

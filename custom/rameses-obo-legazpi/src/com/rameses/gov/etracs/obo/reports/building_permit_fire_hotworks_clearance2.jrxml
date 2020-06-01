@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="building_permit_Fire_Safety_Clearance"
+		 name="building_permit_fire_hotworks_clearance2"
 
 		 language="groovy"		 columnCount="1"
 		 printOrder="Vertical"
@@ -59,7 +59,7 @@
 	<field name="receiptno" class="java.lang.String"/>
 	<field name="receiptdate" class="java.util.Date"/>
 	<field name="amount" class="java.lang.Number"/>
-	<field name="location.address.text" class="java.lang.String"/>
+	<field name="location.text" class="java.lang.String"/>
 	<field name="applicant.name" class="java.lang.String"/>
 
 		<background>
@@ -589,7 +589,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.address.text}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.text}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="#,##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

@@ -34,6 +34,10 @@ abstract class AbstractApplicationModel extends WorkflowTaskModel {
     def feeQry = [:];
     def feeListHandler;
     
+    public def getEntityQry() {
+        return [objid: entity.objid];
+    }
+    
     @PropertyChangeListener
     def listener = [
         "reqViewType": { o->
