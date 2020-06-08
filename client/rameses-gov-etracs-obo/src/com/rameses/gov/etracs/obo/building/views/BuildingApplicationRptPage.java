@@ -58,7 +58,7 @@ public class BuildingApplicationRptPage extends javax.swing.JPanel {
 
         xFormPanel1.setCaptionWidth(120);
 
-        xPanel1.setCaption("TCT No");
+        xPanel1.setCaption("Enter TD No");
         xPanel1.setVisibleWhen("#{ mode == 'create' }");
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0);
         flowLayout1.setAlignOnBaseline(true);
@@ -78,6 +78,7 @@ public class BuildingApplicationRptPage extends javax.swing.JPanel {
 
         xLabel10.setCaption("TD No");
         xLabel10.setExpression("#{ entity.tdno }");
+        xLabel10.setVisibleWhen("#{ mode != 'create' }");
         xLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel10.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel10.setPreferredSize(new java.awt.Dimension(0, 20));

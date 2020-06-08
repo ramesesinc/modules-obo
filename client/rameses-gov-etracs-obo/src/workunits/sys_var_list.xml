@@ -12,11 +12,16 @@
         import com.rameses.seti2.models.*;
         import com.rameses.osiris2.common.*;
         import com.rameses.util.*;
+        import com.rameses.osiris2.client.*;
         
         class VarModel extends CrudListModel {
         
             public def open() {
-                MsgBox.alert("open " + selectedItem );
+                return Inv.lookupOpener("obo_sys_var:open", [entity: selectedItem] );
+            }
+            
+            public def create() {
+                return Inv.lookupOpener("obo_sys_var:create", [entity: [:]] );
             }
         
         }
