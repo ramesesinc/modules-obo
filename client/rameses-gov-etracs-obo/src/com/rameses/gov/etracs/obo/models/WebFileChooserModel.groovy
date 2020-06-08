@@ -32,7 +32,7 @@ class WebFileChooserModel  {
              return filePath;
          }, 
          onClick: {e->
-             if(!e.location?.endsWith("/")) {
+             if(e.location?.toLowerCase().matches(".*\\.(jpg|jpeg|png|gif|pdf)")) {
                 attachment.fileid = e.location;
                 if(onselect) onselect(attachment);
                 binding.fireNavigation("_close");

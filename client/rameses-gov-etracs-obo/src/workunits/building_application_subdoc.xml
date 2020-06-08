@@ -19,7 +19,7 @@
                  parent="building_application"/>    
         
         <invoker type="building_application_subdoc:open" caption="Subdocument" action="open" target="popup"/>
-
+        <invoker type="vw_building_application_subdoc:open" caption="Subdocument" action="open" target="popup"/>
                 
         <!-- subdocument form actions -->
         <invoker type="feeActions" caption="Assess" action="assess" visibleWhen="#{editable == true}"/>
