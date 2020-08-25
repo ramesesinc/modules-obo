@@ -37,6 +37,7 @@ class BuildingEvaluationService {
 		//fire the workflow...
 		def f = [:];
 		f.processname = 'building_evaluation';
+		f.notificationid = 'building_evaluation:' + o.typeid.toLowerCase();
 		f.refid = o.objid;
 		f.startdate = o.dtfiled;
 		f.info = [:];

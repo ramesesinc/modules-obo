@@ -1,0 +1,52 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import java.rmi.server.*;
+
+public class OboProfessionalService  {
+
+	@DataContext("obo_professional")	
+	def profEm;
+
+	@DataContext("obo_professional_info")	
+	def profInfoEm;
+
+	@DataContext("vw_obo_professional")	
+	def vwProfEm;
+
+	@DataContext("obo_profession")	
+	def professionEm;
+
+	@ProxyMethod
+	public def verifyInfo( def o ) {
+		def p = profEm.find( [prcno: o.prcno, profession: o.profession ]).first();
+		if( p ) 
+			throw new Exception("The PRC No for this profession is already registered to " + p.lastname + ", " +p.firstname );
+		Random rand = new Random();
+		def otp = rand.nextInt(100000000);
+		return [key: String.format("%06d", otp).substring(0,6)];	
+	}
+
+	@ProxyMethod
+	public def create( def o ) {
+		println "entering info " + o;
+		o.objid = o.profession+"_"+o.prcno;
+		def m = profInfoEm.create( o );
+		def p = [:];
+		p.infoid = m.objid;
+		p.profession = o.profession;
+		p.prcno = o.prcno;
+		profEm.create( p );
+	}
+
+	@ProxyMethod
+	public def findProfessionals( def o ) {
+		return vwProfEm.find( o ).list();
+	}
+
+	@ProxyMethod
+	public def getProfessionList(def p ) {
+		return professionEm.limit(100).list();
+	}
+
+
+}

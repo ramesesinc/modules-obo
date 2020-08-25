@@ -1,0 +1,17 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+
+public class EmailVerificationService  {
+
+	@ProxyMethod
+	public def verifyInfo( def o ) {
+		println o.email;
+		Random rand = new Random();
+		def otp = rand.nextInt(100000000);
+		def keys = [key: String.format("%06d", otp).substring(0,6)];	
+		//send email now 
+		return keys;
+	}
+
+
+}

@@ -1,6 +1,6 @@
 <workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
     <invokers>
-        <invoker type="vw_occupancy_application:form:appActions" 
+        <invoker type="vw_occupancy_application:form:formActions" 
                  caption="View Building Permit"
                  action="preview" 
                  index="1" 

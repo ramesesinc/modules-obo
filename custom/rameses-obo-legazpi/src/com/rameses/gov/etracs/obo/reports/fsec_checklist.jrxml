@@ -8195,12 +8195,14 @@ Other Spaces;  Class ________________ ]]></text>
 						y="529"
 						width="170"
 						height="81"
-						key="image-91"/>
+						key="image-91">
+							<printWhenExpression><![CDATA[$F{evaluator.signature} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.io.InputStream"><![CDATA[new java.io.ByteArrayInputStream( (byte[]) $F{evaluator.signature} )]]></imageExpression>
+					<imageExpression class="java.io.InputStream"><![CDATA[$F{evaluator.signature} ]]></imageExpression>
 				</image>
 				<staticText>
 					<reportElement

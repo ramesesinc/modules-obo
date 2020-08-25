@@ -48,6 +48,8 @@
 		<field name="task_actor_objid" />
 		<field name="task_actor_name" />
 		<field name="task_title" />
+
+		<field name="inspectionschedule" type="timestamp" />
 	</element>
 </schema>	
 

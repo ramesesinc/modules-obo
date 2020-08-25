@@ -125,6 +125,7 @@ class BuildingApplicationWorkflowInterceptor {
 				m = evalEm.create( m );
 				def f = [:];
 				f.processname = 'building_evaluation';
+				f.notificationid = 'building_evaluation:' + it.toLowerCase();
 				f.refid = m.objid;
 				f.startdate = dt;
 				f.info = [ type: it, appid: appid ];
@@ -138,12 +139,13 @@ class BuildingApplicationWorkflowInterceptor {
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'reactivate' }" ) 
 	public void reactivateEvaluationTasks( def evt ) {
 		def p = evt.args[0];
-		def list = vwEvalEm.select("objid,taskid").find( [appid: p.refid ] ).where( " task.state = 'for-revision' " ).list();
+		def list = vwEvalEm.select("objid,taskid,typeid").find( [appid: p.refid ] ).where( " task.state = 'for-revision' " ).list();
 		if( list ) {
 			def dt = dateSvc.getServerDate();
 			list.each {
 				def f = [:];
 				f.processname = 'building_evaluation';
+				f.notificationid = 'building_evaluation:' + it.typeid.toLowerCase();
 				f.refid = it.objid;
 				f.taskid = it.taskid;
 				f.startdate = dt;
@@ -205,5 +207,6 @@ class BuildingApplicationWorkflowInterceptor {
 		if(!p.permitid) throw new Exception("Error after release workflow. Please pass the permitid");
 		permitEm.find( [objid: p.permitid ] ).update( [state: 1 ] );
 	}
+
 
 } 

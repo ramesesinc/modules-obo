@@ -15,7 +15,37 @@ import com.rameses.gov.etracs.obo.models.*;
 class BuildingEvaluationTypeModel extends CrudFormModel {
 
     def activationStates = ["zoning-evaluation", "trade-evaluation"];
-    def itemHandler;
+    def selectedItem;
     
+    def stateList;
+    
+    void afterInit() {
+        def m = [_schemaname:"sys_wf_node"];
+        m.where = ["processname='building_evaluation' AND nodetype='state' AND tracktime=1 "]
+        m.select = "name";
+        m.orderBy = "idx";
+        stateList = queryService.getList(m)*.name;
+    }
+    
+    
+    def roleListModel = [
+        fetchList: { o->
+            return entity.customroles;
+        },
+        isColumnEditable: { item, colname ->
+            return ( mode != "read");
+        },
+        createItem: {
+            return [typeid: entity.objid];
+        },
+        addItem: { o->
+            addItem("customroles", o);
+        }
+    ] as EditorListModel;
+    
+    void removeRole() {
+        if( !selectedItem ) throw new Exception("Please select an item to remove");
+        removeItem("customroles", selectedItem );
+    }
     
 }

@@ -2,11 +2,17 @@ import com.rameses.annotations.*;
 
 class OccupancyInspectionWorkflowInterceptor {
 	
+	@DataContext("occupancy_application")
+	def aEm;
+
 	@DataContext("occupancy_inspection_finding")
 	def findingEm;
 
 	@DataContext("vw_occupancy_inspection")
-	def sectionEm;
+	def vwInspEm;
+
+	@DataContext("occupancy_inspection")
+	def inspEm;
 
 	@DataContext("occupancy_application_fee")
 	def feeEm;
@@ -19,6 +25,31 @@ class OccupancyInspectionWorkflowInterceptor {
 
 	@Service("WorkflowTaskService")
 	def wfSvc;
+
+	@DataContext("occupancy_inspection_type_role")
+	def inspTypeRoleEm;
+
+	@DataContext("occupancy_application_subdoc")
+	def subdocEm;
+
+	@After(pattern="WorkflowTaskService.start", eval="#{args[0].processname == 'occupancy_inspection' }" ) 
+	public void afterStart( def evt ) {
+		def p = evt.args[0];
+		def appid = p.info.appid;	//appid
+
+		def dlist = inspEm.getSubdocsToActivate( [appid: p.refid, typeid: p.info.type ] );
+		if( dlist) {
+			dlist*.objid.each {
+				def m = [:];
+				m.appid = appid;
+				m.doctype = [objid: it ];
+				m.state = 0;
+				m.amount = 0;
+				subdocEm.create( m );
+			}
+		}
+	}
+
 
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_inspection' && args[0].action == 'send-for-revision' }" ) 
 	public void doActionBeforeRevision( def evt ) {
@@ -35,7 +66,7 @@ class OccupancyInspectionWorkflowInterceptor {
 
 		if( c > 0 ) throw new Exception("There must be no unresolved findings");
 		//check here if there are fees
-		def vs = sectionEm.find( [objid: p.refid] ).first();
+		def vs = vwInspEm.find( [objid: p.refid] ).first();
 		if(vs.type.requirefee == 1 ) {
 			def pp = [appid: vs.appid, sectionid: vs.typeid ];
 
@@ -50,8 +81,8 @@ class OccupancyInspectionWorkflowInterceptor {
 	public void doActioAfterApproveOrRevise( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		def appid = sectionEm.find( [objid: p.refid] ).select("appid").val();
-		def cnt = sectionEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('for-revision', 'end') ").val();
+		def appid = vwInspEm.find( [objid: p.refid] ).select("appid").val();
+		def cnt = vwInspEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('for-revision', 'end') ").val();
 		if( cnt == 0 ) {
 			def app = appEm.find([objid:appid]).select("task.*").first();
 			def f = [:];
@@ -65,5 +96,23 @@ class OccupancyInspectionWorkflowInterceptor {
 		}
 	}
 
+
+	/************************************************************
+	* Substitute roles
+	*************************************************************/
+	@After( pattern="WorkflowTaskService.(signal|start|findTask)", eval="#{ args[0].processname == 'occupancy_inspection' }" )
+	public void customizeRole(  def evt ) {
+		def r = evt.result;
+		//get the corrected roles for this
+		def typeid = vwInspEm.find( [objid: r.refid ] ).select("typeid").val();
+		def replaceRole = {state, itm->
+			def rol = inspTypeRoleEm.find( [typeid: typeid, state: state ] ).first();
+			if(rol) itm.role = rol.role;	
+		}
+		replaceRole( r.state, r );
+		r.transitions.each { tran ->
+			replaceRole( tran.to,  tran );
+		}
+	}
 	
 }

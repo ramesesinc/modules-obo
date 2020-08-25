@@ -16,6 +16,10 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class OccupancyApplicationModel extends AbstractApplicationModel {
   
+    public String getNotificationid() {
+        return "occupancy_application";
+    }
+    
     public def getFeeService() {
         return null;
     }
@@ -41,7 +45,9 @@ class OccupancyApplicationModel extends AbstractApplicationModel {
             persistenceService.update( m );
             reload();
         };
-        return Inv.lookupOpener("date:prompt", [handler: h, title:"Enter Inspection Schedule", includeTime:true]);
+        
+        def d = entity.inspectionschedule;
+        return Inv.lookupOpener("date:prompt", [handler: h, title:"Enter Inspection Schedule", date:d, includeTime:true]);
     }
     
     def viewBldgPermit() {
@@ -49,6 +55,9 @@ class OccupancyApplicationModel extends AbstractApplicationModel {
         op.target = "popup";
         return op;
     }
+    
+    def selectedDoc;
+    def doclistModel;
     
     
 }

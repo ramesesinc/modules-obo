@@ -74,13 +74,15 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         xFormPanel1.setCaptionWidth(180);
 
         xLabel8.setCaption("Project Title");
-        xLabel8.setExpression("#{entity.app.title}");
-        xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel8.setExpression("<html>#{entity.app.title}</html>");
+        xLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel8.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel8);
 
         xLabel7.setCaption("Project Description");
-        xLabel7.setExpression("#{entity.app.description}");
-        xLabel7.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel7.setExpression("#{entity.app.description}</html>");
+        xLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel7.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel7);
 
         xLabel4.setCaption("Applicant");
@@ -89,8 +91,9 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         xFormPanel1.add(xLabel4);
 
         xLabel2.setCaption("Occupancy Type");
-        xLabel2.setExpression("#{entity.app.occupancytype.title}");
-        xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel2.setExpression("<html>#{entity.app.occupancytype.title}</html>");
+        xLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel2.setPreferredSize(new java.awt.Dimension(0, 60));
         xFormPanel1.add(xLabel2);
 
         xLabel9.setCaption("Project Cost");

@@ -36,6 +36,8 @@
 		<field name="issue_remarks"/>
 
 		<field name="appstate" />
+		<field name="appuserid" />
+
 	</element>
 </schema>
 

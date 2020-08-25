@@ -2,6 +2,7 @@ DROP VIEW IF EXISTS vw_building_application_subdoc;
 CREATE VIEW vw_building_application_subdoc AS 
 SELECT 
    bt.state AS appstate,
+   bt.assignee_objid AS appuserid,
    a.*,
    iss.controlno,
    iss.dtissued,

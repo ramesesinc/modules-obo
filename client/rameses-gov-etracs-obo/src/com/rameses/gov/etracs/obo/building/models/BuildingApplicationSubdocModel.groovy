@@ -99,9 +99,18 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         if( currentOrg == true ) {
             //editable only during evaluation and assessment
             if( entity.appstate.matches('.*evaluation.*|assessment') ) {
-                editable = true;
+                if( entity.appuserid == userid ) {
+                    editable = true;
+                }
             }
         }
+        /*
+        else {
+            if( entity.appstate.matches('assessment') ) {
+                editable = true;
+            }    
+        }
+        */
         
         if( entity.doctype.type.toLowerCase() == 'ancillary') {
             showProfessionals = true;

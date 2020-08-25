@@ -13,15 +13,6 @@ SELECT a.objid FROM
 WHERE a.objid NOT IN ( SELECT typeid FROM building_evaluation WHERE appid = $P{appid})	
 
 
-[getSubdocsToActivate]
-SELECT objid FROM building_doc_type bd WHERE bd.autocreate = 1 
-AND evaltypeid IN (
-	SELECT typeid FROM building_evaluation WHERE appid = $P{appid}
-)
-AND objid NOT IN ( 
-	SELECT doctypeid FROM building_application_subdoc WHERE appid = $P{appid}
-)
-
 
 [getCategorizedFees]
 SELECT a.tag, SUM( a.amount ) AS amount   

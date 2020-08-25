@@ -11,7 +11,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	def dateSvc;
 
 	@DataContext("occupancy_inspection")
-	def sectionEm;
+	def inspEm;
 
 	@DataContext("vw_occupancy_inspection")
 	def vwSectionEm;
@@ -43,6 +43,14 @@ class OccupancyApplicationWorkflowInterceptor {
 
 	@Service("OccupancyApplicationService")
     def appSvc;
+
+    /*
+    @Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' }") 
+	public void testAction( def evt ) {
+		def e = evt.args[0];
+		throw new Exception("params is "+ e);
+	}
+	*/
 
     // --- Requirement and Findings for  revision --- //
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'send-for-revision' }") 
@@ -94,35 +102,37 @@ class OccupancyApplicationWorkflowInterceptor {
 		def appid = p.refid;
 		def state = r.state;
 
-		def mlist = sectionTypeEm.getSectionsForActivation( [appid: appid, state: state ] )*.objid;
+		def mlist = appEm.getInspectionsToActivate( [appid: appid ] );
 		if( mlist ) {
 			def dt = dateSvc.getServerDate();
 			mlist.each {
-				def m = [appid: appid, typeid: it ]
-				boolean b = sectionEm.find( m ).exists();
+				def m = [appid: appid, typeid: it.objid ]
+				boolean b = inspEm.find( m ).exists();
 				if(!b) {
-					m = sectionEm.create( m );
+					m = inspEm.create( m );
 					def f = [:];
 					f.processname = 'occupancy_inspection';
+					f.notificationid = 'occupancy_inspection:'+it.objid.toLowerCase();
 					f.refid = m.objid;
 					f.startdate = dt;
-					f.info = [ type: it ];
+					f.info = [ type: it.objid, appid: appid ];
 					wfSvc.start(f);				
 				}
 			}
-		}		
+		}	
 	}
 
 	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'reactivate' }" ) 
 	public void reactivateInspectionTasks( def evt ) {
 		def p = evt.args[0];
-		def list = vwSectionEm.select("objid,taskid").find( [appid: p.refid ] ).where( " task.state = 'for-revision' " ).list();
+		def list = vwSectionEm.select("objid,taskid,typeid").find( [appid: p.refid ] ).where( " task.state = 'for-revision' " ).list();
 		if( list ) {
 			def dt = dateSvc.getServerDate();
 			list.each {
 				def f = [:];
 				f.processname = 'occupancy_inspection';
+				f.notificationid = 'occupancy_inspection:'+it.typeid.toLowerCase();
 				f.refid = it.objid;
 				f.taskid = it.taskid;
 				f.startdate = dt;

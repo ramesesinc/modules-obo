@@ -3,7 +3,8 @@
         <invoker type="home.action" 
                 icon="home/icons/obo.png"
                  role=".*"
-                 caption="Construction (OBO)" 
+                 caption="OBO" 
+                 notificationid="obo"
                  index="1" action="init"/>
     </invokers> 
     <code class="com.rameses.gov.etracs.obo.models.OboFXMenuCategoryModel" />

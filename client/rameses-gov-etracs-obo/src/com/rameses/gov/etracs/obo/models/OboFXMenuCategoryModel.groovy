@@ -16,19 +16,18 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
     @Service("QueryService")
     def querySvc;
     
-    @Service("OboMenuNotificationService")
-    def oboMenuSvc;
+    @Service("BuildingEvaluationTypeService")
+    def evalTypeSvc;
     
+    @Service("OccupancyInspectionTypeService")
+    def inspectionTypeSvc;
+    
+    /*
     public String getMenuContextName() {
         return "building_application";
     }
     
-    public def getMenuNotificationService() {
-        return oboMenuSvc;
-    }
-    
-    void loadDynamicItems( String _id, def subitems, def invokers ) {
-        def secProvider = clientContext.getSecurityProvider();
+    def secProvider = clientContext.getSecurityProvider();
         def orgFilter = [:];
         boolean isRoot = (OsirisContext.env.ORGROOT == 1);
         if(isRoot) {
@@ -38,39 +37,34 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             orgFilter = ["org.objid = :orgid", [orgid: OsirisContext.env.ORGID] ];
         }
         
+    */
+    
+    void loadDynamicItems( String _id, def subitems, def invokers ) {
         def buildInvokers = { list, title ->
             int i = 100;
             list.each {
-                if(it.role) {
-                    boolean b = secProvider.checkPermission( workunit.workunit.module.domain, it.role, ".*" );
-                    if(!b) return;
-                };
                 def id = title + "/" + it.objid;
                 def notid = title + ":" + it.objid.toLowerCase();
-                subitems << [ id: id, caption: it.title, index: (i++), notificationid: notid, event: title ];
+                def subitem = [ id: id, caption: it.title, index: (i++), notificationid: notid, event: title ];
+                subitems << subitem;
                 def sinv = title + ":list"
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
                 op.domain = "OBO";
                 op.target = 'window';
                 op.id = sinv;
                 invokers.put( id, op );
+                subitem.modulename = "obo";
+                subitem.domain = op.domain;
+                subitem.connection = "obo";                
             }
         }
         
         if(_id == 'building_evaluation' ) {
-            def m = [_schemaname: "building_evaluation_type" ];
-            m._limit = 100;
-            m.where =  orgFilter;
-            m.orderBy = "sortindex";
-            def list = querySvc.getList( m );
+            def list = evalTypeSvc.getAllowedEvaluationTypes( [:] );
             buildInvokers( list, 'building_evaluation' );
         }
         else if(_id == 'occupancy_inspection' ) {
-            def m = [_schemaname: "occupancy_inspection_type" ];
-            m._limit = 100;
-            m.where =  orgFilter;
-            m.orderBy = "sortindex";
-            def list = querySvc.getList( m );
+            def list = inspectionTypeSvc.getAllowedEvaluationTypes( [:] );
             buildInvokers( list, 'occupancy_inspection' );
         }        
        

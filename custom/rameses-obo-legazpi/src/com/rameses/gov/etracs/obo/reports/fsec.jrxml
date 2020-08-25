@@ -717,7 +717,7 @@
 					<reportElement
 						x="135"
 						y="121"
-						width="128"
+						width="311"
 						height="21"
 						forecolor="#000000"
 						key="textField"/>

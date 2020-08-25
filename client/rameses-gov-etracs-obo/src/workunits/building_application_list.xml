@@ -4,6 +4,6 @@
     <invokers>
         <invoker folderid="menucategory/obo/building" caption="View Building Application List"
              cols="appno,appdate,trackingno,applicant.name,title,projectcost,task.state,task.assignee.name,permitno"
-                action="init" index="10"  notificationid="building_application" event="building_application"/>
+                action="init" index="10"  notificationid="building_application" />
     </invokers>
 </workunit>

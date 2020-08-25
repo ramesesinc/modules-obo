@@ -92,18 +92,20 @@
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel8">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Project Title"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.app.title}"/>
+                        <Property name="expression" type="java.lang.String" value="&lt;html&gt;#{entity.app.title}&lt;/html&gt;"/>
+                        <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 20]"/>
+                          <Dimension value="[0, 40]"/>
                         </Property>
                       </Properties>
                     </Component>
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel7">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Project Description"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.app.description}"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.app.description}&lt;/html&gt;"/>
+                        <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 20]"/>
+                          <Dimension value="[0, 40]"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -119,9 +121,10 @@
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel2">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Occupancy Type"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.app.occupancytype.title}"/>
+                        <Property name="expression" type="java.lang.String" value="&lt;html&gt;#{entity.app.occupancytype.title}&lt;/html&gt;"/>
+                        <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 20]"/>
+                          <Dimension value="[0, 60]"/>
                         </Property>
                       </Properties>
                     </Component>

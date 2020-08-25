@@ -7,10 +7,10 @@
         <invoker type="building_evaluation_finding:open" caption="Building Permit Finding"
                 action="open" index="1" target="popup" schemaname="building_application"/>
         
-        <invoker type="occupancy_application_finding:create" caption="Occupancy Permit Finding"
+        <invoker type="occupancy_inspection_finding:create" caption="Occupancy Permit Finding"
                 action="create" index="1" target="popup" schemaname="occupancy_application"/>
         
-        <invoker type="occupancy_application_finding:open" caption="Occupancy Permit Finding"
+        <invoker type="occupancy_inspection_finding:open" caption="Occupancy Permit Finding"
                 action="open" index="1" target="popup" schemaname="occupancy_application"/>
         
         

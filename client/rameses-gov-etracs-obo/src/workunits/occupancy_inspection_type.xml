@@ -1,10 +1,12 @@
 <workunit schemaName="occupancy_inspection_type">
     <invokers>       
-        <invoker type="occupancy_inspection_type:open" action="open" caption="Building Evaluation Type" role="MASTER" target="popup"/>
-        <invoker type="occupancy_inspection_type:create" action="create" caption="Building Evaluation Type" role="MASTER"  target="popup"/>
+        <invoker type="occupancy_inspection_type:open" action="open" 
+                 caption="Occupancy Inspection Type" role="MASTER" target="popup"/>
+        <invoker type="occupancy_inspection_type:create" action="create" 
+                 caption="Occupancy Inspection Type" role="MASTER"  target="popup"/>
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyInspectionModel" />
+    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyInspectionTypeModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyInspectionPage"/>
+        <page template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyInspectionTypePage"/>
     </pages>
 </workunit>

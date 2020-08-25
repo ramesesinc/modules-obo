@@ -11,9 +11,12 @@ import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 import com.rameses.gov.etracs.obo.models.*;
 
-class OccupancyInspectionModel extends AbstractApplicationSectionModel {
+class OccupancyInspectionModel extends AbstractApplicationSubTaskModel {
     
-    
+    public String getNotificationid() {
+        return "occupancy_application:" + entity.typeid.toLowerCase();
+    }
+
     public String getCaption() {
         return "Occupancy Inspection";
     }
@@ -22,19 +25,12 @@ class OccupancyInspectionModel extends AbstractApplicationSectionModel {
         return "OI";
     }
     
+    
     def viewApplication() {
         String s = "vw_occupancy_application:open"; 
         def op = Inv.lookupOpener(s, [entity: [objid: entity.appid ] ] );
         op.target = "popup";
         return op;
-    }
-    
-    def assess() {
-        return super.assess("occupancy_inspection:assessment");    
-    }
-
-    def addFee() {
-        return super.addFee( "occupancy_application_fee");
     }
     
     def addFinding() {

@@ -332,6 +332,7 @@ public class OnlineBuildingPermitService  {
 	@ProxyMethod
 	public def getAccessories( def o ) {
 		def app = appEm.find( [objid: o.appid ] ).first();
+		if(!app) throw new Exception("getAccessories error. Application " + o.appid + " not found ");
 		def list = accessoryEm.find( [appid: o.appid ] ).list();
 		list.each {
 			it.app = [occupancytypeid: app.occupancytypeid, accessoryid: app.accessoryid ];

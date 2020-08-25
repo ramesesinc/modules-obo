@@ -70,8 +70,9 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xFormPanel2.setCaptionWidth(190);
 
         xLabel8.setCaption("Project Title");
-        xLabel8.setExpression("#{entity.title}");
-        xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel8.setExpression("<html>#{entity.title}</html>");
+        xLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel8.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel2.add(xLabel8);
 
         xLabel7.setCaption("Project Description");
@@ -80,8 +81,9 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xFormPanel2.add(xLabel7);
 
         xLabel6.setCaption("Location");
-        xLabel6.setExpression("#{entity.location.text}");
-        xLabel6.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel6.setExpression("<html>#{entity.location.text}</html>");
+        xLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel6.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel2.add(xLabel6);
 
         xLabel4.setCaption("Applicant");
@@ -230,7 +232,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(xFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
+            .addComponent(xFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -251,7 +253,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

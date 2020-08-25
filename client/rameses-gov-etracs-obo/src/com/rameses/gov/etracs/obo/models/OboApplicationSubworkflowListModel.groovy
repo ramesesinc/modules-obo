@@ -24,6 +24,10 @@ class OboApplicationSubworkflowListModel extends WorkflowTaskListModel {
         return [ "typeid = :typeid", [typeid: typeid] ];
     }
     
+    public String getNotificationid() {
+        return getProcessName() + ":" + typeid.toLowerCase();
+    }
+    
     /*
     def beforeFetchNodes( param ) {
         super.beforeFetchNodes(param);

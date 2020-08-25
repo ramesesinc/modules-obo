@@ -35,6 +35,11 @@ class BuildingApplicationModel extends AbstractApplicationModel {
         return "Bldg "+ (entity.appno==null? entity.trackingno : entity.appno);
     }
     
+    
+    public String getNotificationid() {
+        return "building_application";
+    }
+    
     public boolean isActionable() {
         return (task.assignee.objid == userInfo.userid);
     }
@@ -113,6 +118,10 @@ class BuildingApplicationModel extends AbstractApplicationModel {
         return o + " seconds";
     }
     
+    public boolean beforeSignal( def params ) {
+        params.notificationid = "building_application";
+        return true;
+    }
     
 }
 

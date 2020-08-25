@@ -29,6 +29,13 @@ class BuildingEvaluationWorkflowInterceptor {
 	@DataContext("building_doc_type")
 	def doctypeEm;
 
+	@DataContext("building_evaluation_type")
+	def evalTypeEm;
+
+	@DataContext("building_evaluation_type_role")
+	def evalTypeRoleEm;
+	
+
 	@After(pattern="WorkflowTaskService.start", eval="#{args[0].processname == 'building_evaluation' }" ) 
 	public void afterStart( def evt ) {
 		def p = evt.args[0];
@@ -115,5 +122,26 @@ class BuildingEvaluationWorkflowInterceptor {
 	}
 
 
+	/************************************************************
+	* Attach roles when opening or after signalling and starting
+	*************************************************************/
+	@After( pattern="WorkflowTaskService.(signal|start|findTask)", eval="#{ args[0].processname == 'building_evaluation' }" )
+	public void customizeRole(  def evt ) {
+		def r = evt.result;
+		//get the corrected roles for this
+		def typeid = vwEvalEm.find( [objid: r.refid ] ).select("typeid").val();
+		def replaceRole = {state, itm->
+			def rol = evalTypeRoleEm.find( [typeid: typeid, state: state ] ).first();
+			if(rol) itm.role = rol.role;	
+		}
+		replaceRole( r.state, r );
+		r.transitions.each { tran ->
+			replaceRole( tran.to,  tran );
+		}
+
+	}
+
+
 	
+
 }

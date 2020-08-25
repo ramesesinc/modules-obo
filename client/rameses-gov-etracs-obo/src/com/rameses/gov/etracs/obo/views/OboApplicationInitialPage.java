@@ -41,6 +41,7 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
         xRadio3 = new com.rameses.rcp.control.XRadio();
         xPanel1 = new com.rameses.rcp.control.XPanel();
         xFileBrowser1 = new com.rameses.rcp.control.XFileBrowser();
+        xRadio4 = new com.rameses.rcp.control.XRadio();
         jLabel1 = new javax.swing.JLabel();
 
         xFormPanel1.setCaptionWidth(160);
@@ -111,6 +112,14 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
 
         xFormPanel1.add(xPanel1);
 
+        xRadio4.setCaption("");
+        xRadio4.setName("source"); // NOI18N
+        xRadio4.setOptionValue("capture");
+        xRadio4.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xRadio4.setShowCaption(false);
+        xRadio4.setText("Capture");
+        xFormPanel1.add(xRadio4);
+
         jLabel1.setText("Please enter the tracking number or select a file.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -151,6 +160,7 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XRadio xRadio1;
     private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XRadio xRadio3;
+    private com.rameses.rcp.control.XRadio xRadio4;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
     // End of variables declaration//GEN-END:variables

@@ -44,12 +44,16 @@ public class BuildingEvaluationTypePage extends javax.swing.JPanel {
         xLabel1 = new com.rameses.rcp.control.XLabel();
         xRadio3 = new com.rameses.rcp.control.XRadio();
         xRadio4 = new com.rameses.rcp.control.XRadio();
+        xLabel2 = new com.rameses.rcp.control.XLabel();
+        xDataTable1 = new com.rameses.rcp.control.XDataTable();
+        xPanel2 = new com.rameses.rcp.control.XPanel();
+        xButton1 = new com.rameses.rcp.control.XButton();
         xPanel1 = new com.rameses.rcp.control.XPanel();
         schemaList3 = new com.rameses.seti2.components.SchemaList();
 
         setLayout(new java.awt.BorderLayout());
 
-        xTabbedPane1.setPreferredSize(new java.awt.Dimension(613, 489));
+        xTabbedPane1.setPreferredSize(new java.awt.Dimension(655, 606));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -126,6 +130,62 @@ public class BuildingEvaluationTypePage extends javax.swing.JPanel {
         xRadio4.setText("Send for release after post payment");
         xFormPanel1.add(xRadio4);
 
+        xLabel2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel2.setShowCaption(false);
+        xLabel2.setText("Custom Roles");
+        xFormPanel1.add(xLabel2);
+
+        xDataTable1.setHandler("roleListModel");
+        xDataTable1.setName("selectedItem"); // NOI18N
+        xDataTable1.setColumns(new com.rameses.rcp.common.Column[]{
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "state"}
+                , new Object[]{"caption", "State"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", true}
+                , new Object[]{"editableWhen", null}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.ComboBoxColumnHandler("stateList", null, null)}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "role"}
+                , new Object[]{"caption", "Role"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", true}
+                , new Object[]{"editableWhen", null}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"alignment", "LEFT"}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.UPPER}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            })
+        });
+        xDataTable1.setPreferredSize(new java.awt.Dimension(0, 120));
+        xDataTable1.setShowCaption(false);
+        xFormPanel1.add(xDataTable1);
+
+        xPanel2.setOpaque(false);
+        xPanel2.setShowCaption(false);
+
+        xButton1.setName("removeRole"); // NOI18N
+        xButton1.setVisibleWhen("#{ mode != 'read' }");
+        xButton1.setText("Remove");
+        xPanel2.add(xButton1);
+
+        xFormPanel1.add(xPanel2);
+
         jPanel1.add(xFormPanel1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("General", jPanel1);
@@ -196,12 +256,16 @@ public class BuildingEvaluationTypePage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private com.rameses.seti2.components.SchemaList schemaList3;
+    private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XComboBox xComboBox2;
+    private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
     private com.rameses.rcp.control.XLabel xLabel1;
+    private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLookupField xLookupField1;
     private com.rameses.rcp.control.XPanel xPanel1;
+    private com.rameses.rcp.control.XPanel xPanel2;
     private com.rameses.rcp.control.XRadio xRadio1;
     private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XRadio xRadio3;

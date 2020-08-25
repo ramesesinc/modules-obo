@@ -2,7 +2,7 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="fire_safety_inspection_certificate"
+		 name="fsic"
 
 		 language="groovy"		 columnCount="1"
 		 printOrder="Vertical"

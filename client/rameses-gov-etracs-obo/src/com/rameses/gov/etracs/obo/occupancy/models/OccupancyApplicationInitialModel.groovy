@@ -17,13 +17,20 @@ class OccupancyApplicationInitialModel  {
     @Service("OccupancyApplicationInitialService")
     def svc;
     
+    @Service("BuildingPermitService")
+    def bldgPermitSvc;
+    
+    
     def trackingno;
     def source = "web";
     
     @FormTitle
     String title = "New Occupancy Permit (Initial)";
     
+    def entity;
+    
     def create() {
+        entity = [:];
         return "initial";
     }
     
@@ -32,9 +39,13 @@ class OccupancyApplicationInitialModel  {
         if(source.matches("web|local")) {
             v = svc.getApplication( [appid: trackingno ] );
         }
+        else if( source == "capture" ) {
+            return "capture";
+        }
         else {
             throw new Exception("File option not yet accepted!");
         }
+        
         if(!v) throw new Exception("File not found");
         
         if(!MsgBox.confirm("You are about to upload this application. Proceed?")) {
@@ -49,9 +60,32 @@ class OccupancyApplicationInitialModel  {
     }
     
     
+    /******************
+    * CAPTURE ROUTINES
+    ******************/
+    int capturestep = 1
+    def bldgpermitno;
+    boolean blocksearch = false;
     
+    void doSearch() {
+        entity.bldgpermit = bldgPermitSvc.findByPermitNo( [permitno:bldgpermitno]);
+        blocksearch = true;
+    }
     
+    void resetSearch() {
+        entity.bldgpermit = null;
+        blocksearch = true;
+        bldgpermitno = null;
+    }
     
+    void doCaptureNext() {
+        capturestep++;
+    }
+    
+    void doCaptureBack() {
+        if(capturestep-1 <=0) return;
+        capturestep--;
+    }
     
     
 }

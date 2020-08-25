@@ -13,8 +13,6 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class BuildingEvaluationModel extends AbstractApplicationSubTaskModel {
     
-
-    
     public String getCaption() {
         return "Building Evaluation";
     }
@@ -27,5 +25,8 @@ class BuildingEvaluationModel extends AbstractApplicationSubTaskModel {
         return super.addFinding( "building_evaluation_finding");
     }
 
+    public String getNotificationid() {
+        return "building_evaluation:" + entity.typeid.toLowerCase();
+    }
     
 }

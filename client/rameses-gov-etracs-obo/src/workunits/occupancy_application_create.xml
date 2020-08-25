@@ -3,11 +3,20 @@
         <invoker folderid="menucategory/obo/occupancy" caption="New Application"
              action="create" index="-2" role="RECEIVER"/>
         <!-- actions -->
-        <invoker type="formActions" caption="Next" action="next" />
+        <invoker type="formActions" caption="Next" action="next"  visibleWhen="#{ source!='capture' }"/>
+        
+        
+        <invoker type="formActions" caption="Back" action="doCaptureBack" 
+                 visibleWhen="#{ capturestep &gt; 1 &amp;&amp; source=='capture'}"/>
+        <invoker type="formActions" caption="Next" action="doCaptureNext" 
+                 visibleWhen="#{ capturestep == 1 &amp;&amp; source=='capture'}"/>
+        <invoker type="formActions" caption="Save" action="saveCapture" 
+                 visibleWhen="#{ capturestep &gt; 1 &amp;&amp; source=='capture'}"/>
     </invokers>
     
     <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyApplicationInitialModel" />
     <pages>
         <page name="initial" template="com.rameses.gov.etracs.obo.views.OboApplicationInitialPage" />
+        <page name="capture" template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyApplicationCapturePage" />
     </pages>
 </workunit>

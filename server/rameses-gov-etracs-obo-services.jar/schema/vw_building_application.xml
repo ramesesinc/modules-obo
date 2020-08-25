@@ -7,7 +7,7 @@
 			<key field="applicantid" target="objid" />
 		</complex>
 
-
+		<field name="applicant_name" caption="Applicant" searchable="true"  />
 		<field name="orgcode" />
 		<field name="trackingno" searchable="true" indexed="true"/>
 		<field name="apptype" />

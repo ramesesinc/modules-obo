@@ -1,5 +1,6 @@
 [getSubdocsToActivate]
 SELECT objid FROM building_doc_type bd WHERE bd.autocreate = 1 
+AND bd.apptype = 'building'
 AND evaltypeid IN (
 	SELECT typeid FROM building_evaluation WHERE objid = $P{objid}
 )
