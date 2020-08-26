@@ -26,7 +26,7 @@
 		<field name="id_type_name" required="true"/>
 		<field name="id_dtissued" required="true"/>
 		<field name="id_placeissued" required="true"/>
-		<field name="profession" required="true"/>				
+		<field name="professional" required="true"/>				
 		<field name="prc_idno" required="true"/>		
 		<field name="prc_dtissued" required="true"/>
 		<field name="prc_dtvalid" required="true"/>
@@ -35,4 +35,7 @@
 		<field name="ptr_dtissued" required="true"/>
 		<field name="ptr_placeissued" required="true"/>
 	</element>
-</schema>
+</schema>		
+
+
+

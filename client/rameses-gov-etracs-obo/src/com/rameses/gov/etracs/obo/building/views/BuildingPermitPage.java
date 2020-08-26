@@ -35,43 +35,62 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
+        xLabel29 = new com.rameses.rcp.control.XLabel();
+        xLabel30 = new com.rameses.rcp.control.XLabel();
+        xLabel33 = new com.rameses.rcp.control.XLabel();
         xLabel8 = new com.rameses.rcp.control.XLabel();
         xLabel7 = new com.rameses.rcp.control.XLabel();
         xLabel6 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
-        xLabel10 = new com.rameses.rcp.control.XLabel();
-        xLabel32 = new com.rameses.rcp.control.XLabel();
-        xLabel36 = new com.rameses.rcp.control.XLabel();
-        xLabel37 = new com.rameses.rcp.control.XLabel();
         xLabel34 = new com.rameses.rcp.control.XLabel();
         xLabel35 = new com.rameses.rcp.control.XLabel();
         xLabel15 = new com.rameses.rcp.control.XLabel();
         xLabel16 = new com.rameses.rcp.control.XLabel();
-        xLabel2 = new com.rameses.rcp.control.XLabel();
-        xLabel3 = new com.rameses.rcp.control.XLabel();
-        xLabel21 = new com.rameses.rcp.control.XLabel();
-        xLabel11 = new com.rameses.rcp.control.XLabel();
-        xLabel31 = new com.rameses.rcp.control.XLabel();
-        xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
-        xLabel29 = new com.rameses.rcp.control.XLabel();
-        xLabel30 = new com.rameses.rcp.control.XLabel();
-        xLabel33 = new com.rameses.rcp.control.XLabel();
         xLabel5 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
-        xLabel17 = new com.rameses.rcp.control.XLabel();
         xLabel14 = new com.rameses.rcp.control.XLabel();
+        xLabel17 = new com.rameses.rcp.control.XLabel();
+        xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
+        xLabel2 = new com.rameses.rcp.control.XLabel();
+        xLabel3 = new com.rameses.rcp.control.XLabel();
+        xLabel11 = new com.rameses.rcp.control.XLabel();
+        xLabel31 = new com.rameses.rcp.control.XLabel();
+        xLabel21 = new com.rameses.rcp.control.XLabel();
+        xLabel10 = new com.rameses.rcp.control.XLabel();
+        xLabel32 = new com.rameses.rcp.control.XLabel();
+        xLabel36 = new com.rameses.rcp.control.XLabel();
+        xLabel37 = new com.rameses.rcp.control.XLabel();
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
+        xFormPanel2.setCaption("Building Permit Info");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder1.setPadding(new java.awt.Insets(20, 10, 10, 10));
         xTitledBorder1.setTitle("Project Information");
         xFormPanel2.setBorder(xTitledBorder1);
         xFormPanel2.setCaptionWidth(190);
 
+        xLabel29.setCaption("Bldg Permit No");
+        xLabel29.setExpression("#{entity.permitno}");
+        xLabel29.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel29.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel2.add(xLabel29);
+
+        xLabel30.setCaption("Permit Date Issued");
+        xLabel30.setExpression("#{entity.dtissued}");
+        xLabel30.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel2.add(xLabel30);
+
+        xLabel33.setCaption("Expiry date");
+        xLabel33.setExpression("#{entity.expirydate}");
+        xLabel33.setDateFormat("yyyy MMM dd");
+        xLabel33.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel2.add(xLabel33);
+
         xLabel8.setCaption("Project Title");
         xLabel8.setExpression("<html>#{entity.title}</html>");
         xLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel8.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel8.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel2.add(xLabel8);
 
@@ -90,30 +109,6 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xLabel4.setExpression("#{entity.applicant.name}");
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel4);
-
-        xLabel10.setCaption("No. of Units");
-        xLabel10.setExpression("#{entity.numunits}");
-        xLabel10.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel10);
-
-        xLabel32.setCaption("No. of Storeys");
-        xLabel32.setExpression("#{entity.numfloors}");
-        xLabel32.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel32);
-
-        xLabel36.setCaption("Total Floor Area");
-        xLabel36.setExpression("#{entity.totalfloorarea}");
-        xLabel36.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        xLabel36.setNumberFormat("##0.00");
-        xLabel36.setPreferredSize(new java.awt.Dimension(200, 20));
-        xFormPanel2.add(xLabel36);
-
-        xLabel37.setCaption("Bldg Height");
-        xLabel37.setExpression("#{entity.height}");
-        xLabel37.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        xLabel37.setNumberFormat("##0.00");
-        xLabel37.setPreferredSize(new java.awt.Dimension(200, 20));
-        xFormPanel2.add(xLabel37);
 
         xLabel34.setCaption("Project Cost");
         xLabel34.setExpression("#{entity.projectcost}");
@@ -142,82 +137,90 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xLabel16.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel16);
 
-        xLabel2.setCaption("Occupancy Type ");
-        xLabel2.setExpression("<html>#{entity.occupancytype.title}</html>");
-        xLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        xLabel2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel2.setPreferredSize(new java.awt.Dimension(0, 40));
-        xFormPanel2.add(xLabel2);
-
-        xLabel3.setCaption("Division");
-        xLabel3.setExpression("#{entity.occupancytype.division.objid}");
-        xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel3);
-
-        xLabel21.setCaption("Group");
-        xLabel21.setExpression("#{entity.occupancytype.group.objid}");
-        xLabel21.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel21);
-
-        xLabel11.setCaption("Zone classification");
-        xLabel11.setExpression("#{entity.zoneclass.objid} - #{entity.zoneclass.title}");
-        xLabel11.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel11.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel11);
-
-        xLabel31.setCaption("Zone ");
-        xLabel31.setExpression("#{entity.zone}");
-        xLabel31.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel31);
-
-        xFormPanel3.setCaption("");
-        com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
-        xTitledBorder2.setPadding(new java.awt.Insets(20, 10, 10, 10));
-        xTitledBorder2.setTitle("Application Info");
-        xFormPanel3.setBorder(xTitledBorder2);
-        xFormPanel3.setCaptionWidth(180);
-        xFormPanel3.setPreferredSize(new java.awt.Dimension(0, 100));
-
-        xLabel29.setCaption("Permit No");
-        xLabel29.setExpression("#{entity.permitno}");
-        xLabel29.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel29.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel29);
-
-        xLabel30.setCaption("Permit Date Issued");
-        xLabel30.setExpression("#{entity.dtissued}");
-        xLabel30.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel30);
-
-        xLabel33.setCaption("Expiry date");
-        xLabel33.setExpression("#{entity.expirydate}");
-        xLabel33.setDateFormat("yyyy MMM dd");
-        xLabel33.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel33);
-
         xLabel5.setCaption("App No");
         xLabel5.setExpression("#{entity.appno}");
         xLabel5.setName("entity.rptinfo.text"); // NOI18N
         xLabel5.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel5.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel5);
+        xFormPanel2.add(xLabel5);
 
         xLabel12.setCaption("App Date");
         xLabel12.setExpression("#{entity.dtfiled}");
         xLabel12.setName("entity.rptinfo.text"); // NOI18N
         xLabel12.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel12);
-
-        xLabel17.setCaption("Txn Mode");
-        xLabel17.setExpression("#{entity.txnmode}");
-        xLabel17.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel17);
+        xFormPanel2.add(xLabel12);
 
         xLabel14.setCaption("App Type");
         xLabel14.setExpression("#{entity.apptype}");
         xLabel14.setName("entity.rptinfo.text"); // NOI18N
         xLabel14.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel14);
+        xFormPanel2.add(xLabel14);
+
+        xLabel17.setCaption("Txn Mode");
+        xLabel17.setExpression("#{entity.txnmode}");
+        xLabel17.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel2.add(xLabel17);
+
+        xFormPanel3.setCaption("");
+        com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
+        xTitledBorder2.setPadding(new java.awt.Insets(20, 10, 10, 10));
+        xTitledBorder2.setTitle("Building Info");
+        xFormPanel3.setBorder(xTitledBorder2);
+        xFormPanel3.setCaptionWidth(180);
+        xFormPanel3.setPreferredSize(new java.awt.Dimension(0, 100));
+
+        xLabel2.setCaption("Occupancy Type ");
+        xLabel2.setExpression("<html>#{entity.occupancytype.title}</html>");
+        xLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel2.setPreferredSize(new java.awt.Dimension(0, 40));
+        xFormPanel3.add(xLabel2);
+
+        xLabel3.setCaption("Division");
+        xLabel3.setExpression("#{entity.occupancytype.division.objid}");
+        xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel3.add(xLabel3);
+
+        xLabel11.setCaption("Zone classification");
+        xLabel11.setExpression("#{entity.zoneclass.objid} - #{entity.zoneclass.title}");
+        xLabel11.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel11.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel3.add(xLabel11);
+
+        xLabel31.setCaption("Zone ");
+        xLabel31.setExpression("#{entity.zone}");
+        xLabel31.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel3.add(xLabel31);
+
+        xLabel21.setCaption("Group");
+        xLabel21.setExpression("#{entity.occupancytype.group.objid}");
+        xLabel21.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel3.add(xLabel21);
+
+        xLabel10.setCaption("No. of Units");
+        xLabel10.setExpression("#{entity.numunits}");
+        xLabel10.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel10.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel3.add(xLabel10);
+
+        xLabel32.setCaption("No. of Storeys");
+        xLabel32.setExpression("#{entity.numfloors}");
+        xLabel32.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel3.add(xLabel32);
+
+        xLabel36.setCaption("Total Floor Area");
+        xLabel36.setExpression("#{entity.totalfloorarea}");
+        xLabel36.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        xLabel36.setNumberFormat("##0.00");
+        xLabel36.setPreferredSize(new java.awt.Dimension(200, 20));
+        xFormPanel3.add(xLabel36);
+
+        xLabel37.setCaption("Bldg Height");
+        xLabel37.setExpression("#{entity.height}");
+        xLabel37.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        xLabel37.setNumberFormat("##0.00");
+        xLabel37.setPreferredSize(new java.awt.Dimension(200, 20));
+        xFormPanel3.add(xLabel37);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -253,7 +256,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                .addComponent(xTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

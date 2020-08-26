@@ -67,69 +67,14 @@
 			<key field="applicantid" target="objid" />
 		</complex>	
 
+		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one" required="false">
+			<key field="supervisorid" target="objid" />
+		</complex>	
+
 		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one" required="false">
 			<key field="bldgpermit_occupancytypeid" target="objid" />
 		</complex>	
 
-		<!-- DESIGN PROFESSIONALS -->
-		<complex name="profarchitect" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="profarchitectid" target="objid" />
-		</complex>	
-		<complex name="profcivil" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="profcivilid" target="objid" />
-		</complex>	
-		<complex name="profelectrical" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="profelectricalid" target="objid" />
-		</complex>	
-		<complex name="profmechanical" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="profmechanicalid" target="objid" />
-		</complex>	
-		<complex name="profsanitary" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="profsanitaryid" target="objid" />
-		</complex>	
-		<complex name="profplumbing" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="profplumbingid" target="objid" />
-		</complex>	
-		<complex name="profelectronic" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="profelectronicid" target="objid" />
-		</complex>	
-		<complex name="profinterior" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="profinteriorid" target="objid" />
-		</complex>	
-
-		<!-- SUPERVISORS -->
-		<complex name="supervisorelectrical" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="supervisorelectricalid" target="objid" />
-		</complex>
-		<complex name="supervisormechanical" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="supervisormechanicalid" target="objid" />
-		</complex>
-		<complex name="supervisorsanitary" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="supervisorsanitaryid" target="objid" />
-		</complex>
-		<complex name="supervisorplumbing" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="supervisorplumbingid" target="objid" />
-		</complex>
-		<complex name="supervisorelectronic" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="supervisorelectronicid" target="objid" />
-		</complex>
-		<complex name="supervisorinterior" ref="vw_online_occupancy_permit_professional" 
-			jointype="many-to-one" required="false">
-				<key field="supervisorinteriorid" target="objid" />
-		</complex>
 	</element>
 </schema>
 

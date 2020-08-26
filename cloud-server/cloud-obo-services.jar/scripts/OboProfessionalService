@@ -28,10 +28,17 @@ public class OboProfessionalService  {
 
 	@ProxyMethod
 	public def create( def o ) {
-		println "entering info " + o;
-		o.objid = o.profession+"_"+o.prcno;
+		if(!o.profession) throw new Exception("profession is required");
+		if(!o.prcno) throw new Exception("prcno is required");
+
+		//add this so it will match the requirement of the professional
+		o.prc.idno = o.prcno;
+
 		def m = profInfoEm.create( o );
+
+		//build the profession registration
 		def p = [:];
+		p.objid = o.profession.toLowerCase()+"_"+o.prcno;		
 		p.infoid = m.objid;
 		p.profession = o.profession;
 		p.prcno = o.prcno;

@@ -5,17 +5,17 @@ import com.rameses.services.extended.*
 
 class OboOnlineService  {
 
-    @Service(value="TDOnlineService", connection="local-etracs")
+    @Service(value="TDOnlineService", connection="local-etracs-server")
     def svc;
 
-    @Service(value="EntityService", connection="local-entity")
+    @Service(value="EntityService", connection="local-entity-server")
     def entitySvc;
 
-    @Service(value="BuildingPermitOnlineService", connection="local-obo")
+    @Service(value="BuildingPermitOnlineService", connection="local-obo-server")
     def localOboSvc;
 
-    @Service(value="obo/OnlineBuildingPermitService", connection="cloud-server")
-    def cloudOboSvc;
+    @Service(value="BuildingPermitService", connection="local-obo-server")
+    def bldgPermitSvc;
 
     @Service(value="obo/OnlineBuildingPermitDownloadService", connection="cloud-server")
     def downloadSvc;
@@ -68,6 +68,17 @@ class OboOnlineService  {
         def app = downloadSvc.getInfo( [appid: o.appid ] );
         localOboSvc.upload( app );
         return [status: 'OK'];
+    }
+
+    @ProxyMethod
+    public def findBldgPermitNo( def params ) {
+        def res = bldgPermitSvc.findByPermitNo( [permitno: params.permitno ] );
+        if(res==null)
+            throw new Exception("Permit no " + params.permitno + " not found");
+        res.each { k,v->
+            println k+"="+v;
+        }
+        return res;
     }
 
 }

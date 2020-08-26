@@ -10,12 +10,6 @@ public class OnlineOccupancyPermitService  {
 	def appEm;
 
 	@DataContext("online_occupancy_permit_entity")
-	def entityEm;
-
-	@DataContext("online_occupancy_permit_professional")
-	def professionalEm;
-
-	@DataContext("vw_online_occupancy_permit_professional")
 	def vwProfessionalEm;
 
 	@Service("DateService")
@@ -30,12 +24,6 @@ public class OnlineOccupancyPermitService  {
 		if(!o.appid) throw new Exception("appid is required in determining the next step");
 		def app = appEm.find( [objid: o.appid] ).first();
 		def step = app.step;
-
-		//check if step is professional but does not have any entry
-		if( step == 3 ) {
-			boolean hasItems = professionalEm.find( [appid: o.appid ] ).exists();
-			if( !hasItems ) throw new Exception("Please add at least one professional");
-		}
 
 		def nextStep = step + 1;
 		if( nextStep == 2 ) {
@@ -59,6 +47,7 @@ public class OnlineOccupancyPermitService  {
 		o.step = 1;
 
 		def applicant = o.remove("applicant");
+		applicant.remove("objid");
 		def app = appEm.create( o );
 		applicant.appid = app.objid;
 		applicant =  entityEm.create( applicant );
@@ -89,114 +78,7 @@ public class OnlineOccupancyPermitService  {
 	}
 
 
-	/*==============================================================================
-	*
-	* PROFESSIONAL SUPPORT 
-	*
-	==============================================================================*/
-	@ProxyMethod
-	public def getProfessionalList( def o ) {
-		return professionalEm.select("objid,entity.objid,entity.name,entity.address.text,profession,prc.*")
-				.find([appid: o.appid])
-				.list();
-	}
-
-	@ProxyMethod 
-	public def getProfessional(def o) {
-		return professionalEm.find( [objid: o.objid]).first();
-	}
-
-	@ProxyMethod 
-	public def saveProfessional(def o) {
-		o.entity.appid = o.appid;
-		o.entity = saveEntity(o.entity);
-		o.entityid = o.entity.objid; 
-		if(o.objid) {
-			return professionalEm.find( [objid: o.objid]).update( o );
-		}
-		else {
-			return professionalEm.create( o );
-		}
-	}
-
-	@ProxyMethod
-	public void removeProfessional( def o) {
-		professionalEm.find( [objid: o.objid]).delete();
-
-		//check first the main app if entity is neither a lot owner or applicant before deleting
-		def entityid = o.entity.objid;
-		boolean b = appEm.find( [applicantid: entityid] ).exists();
-		entityEm.find( [objid: entityid ]).delete();
-	}
-
-
-
-	/*==============================================================================
-	*
-	* DESIGN PROFESSIONAL SUPPORT 
-	*
-	==============================================================================*/
-
-	@ProxyMethod
-	public def getDesignProfessionals( o ) {
-		def app = appEm.read([objid: o.appid])
-		if (!app) throw new Exception('Application does not exist or has been deleted.');
-		return [
-			objid: app.objid,
-			profarchitect: app.profarchitect,
-			profcivil: app.profcivil,
-			profelectrical: app.profelectrical,
-			profmechanical: app.profmechanical,
-			profsanitary: app.profsanitary,
-			profplumbing: app.profplumbing,
-			profelectronic: app.profelectronic,
-			profinterior: app.profinterior,
-		]
-	}
-
-	@ProxyMethod
-	public void updateDesignProfessional( o ) {
-		def info = [:]
-		info[o.name + 'id'] = o.prof.objid
-		appEm.find([objid: o.appid]).update(info)
-	}
-
-
-	/*==============================================================================
-	*
-	* SUPERVISOR SUPPORT 
-	*
-	==============================================================================*/
-
-	@ProxyMethod
-	public def getSupervisors( o ) {
-		def app = appEm.read([objid: o.appid])
-		if (!app) throw new Exception('Application does not exist or has been deleted.');
-		return [
-			objid: app.objid,
-			supervisorelectrical: app.supervisorelectrical,
-			supervisormechanical: app.supervisormechanical,
-			supervisorsanitary: app.supervisorsanitary,
-			supervisorplumbing: app.supervisorplumbing,
-			supervisorelectronic: app.supervisorelectronic,
-			supervisorinterior: app.supervisorinterior,
-		]
-	}
-
-	@ProxyMethod
-	public void updateSupervisor( o ) {
-		def info = [:]
-		info[o.name + 'id'] = o.prof.objid
-		appEm.find([objid: o.appid]).update(info)
-	}
-
-
-
-	@ProxyMethod
-	public def getLookupProfessionalList( def o ) {
-		return vwProfessionalEm.find([appid: o.appid]).list();
-	}	
-
+	
 
 
 	//This is called by the local client
@@ -212,12 +94,6 @@ public class OnlineOccupancyPermitService  {
 		//add the entities, locations, professionals
 		app.entities = entityEm.find( [appid: appid ]).list();
 
-
-		app.rpus = locationEm.find( [appid: appid] ).list();
-		app.rpus.each{ it.remove("owner") };
-		app.professionals = professionalEm.find( [appid:appid] ).list();
-		app.professionals.each{ it.remove("entity") }
-		
 
 		app.ancillaries = ancillaryEm.find([appid: appid]).list();
 		app.ancillaries.each{ it.remove("type"); it.remove("designprofessional"); it.remove("supervisor"); }
