@@ -10,6 +10,9 @@ class OccupancyApplicationWorkflowInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
+	@Service("OccupancyInspectionScheduleService")
+	def occSkedSvc;
+
 	@DataContext("occupancy_inspection")
 	def inspEm;
 
@@ -119,7 +122,10 @@ class OccupancyApplicationWorkflowInterceptor {
 					wfSvc.start(f);				
 				}
 			}
-		}	
+		}
+
+		//notify the google mail calendar after sending the inspections
+		occSkedSvc.sendToCalendar( [appid: p.refid ] );
 	}
 
 	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each

@@ -1,0 +1,77 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import com.rameses.http.*;
+import com.rameses.osiris3.server.*;
+
+
+class OccupancyInspectionScheduleService {
+	
+	@XConnection("cloud-server")
+	def cloudServer;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("vw_occupancy_application")
+	def vwAppEm;
+
+	@DataContext("occupancy_application")
+	def appEm;
+
+	@Service("Var")
+	def var;
+
+	@Service
+	def self;
+
+	@ProxyMethod
+	public def updateSchedule( def o ) {
+		appEm.find( [objid: o.objid ]).update( [inspectionschedule: o.date ] );
+		
+		//test sample here
+		//self.sendToCalendar( [appid: o.objid] );
+    }    
+
+    @ProxyMethod
+    public void sendToCalendar( def o ) {
+		def app = vwAppEm.find( [objid: o.appid]).first();
+
+		def emails = var.obo_inspection_calendar_group.split(",");
+		def buff  = [];
+		buff << "Bldg Permit No: " + app.bldgpermit.permitno;		
+		buff << "Project Title: " + app.bldgpermit.title;
+		buff << "Occupancy Class: " + app.bldgpermit.occupancytype.division.objid;
+		buff << "Project Cost: " + app.bldgpermit.projectcost;
+		buff << "Total Floor Area: " + app.bldgpermit.totalfloorarea;
+
+		def v = [:];
+		v.summary = "Building Inspection Schedule for Occupancy Permit ["+ app.appno + "]";
+		v.description = buff.join("<br>");
+		if( app.bldgpermit.location?.text ) {
+			v.location = app.bldgpermit.location.text;
+		}
+		v.start = [
+			dateTime: app.inspectionschedule,
+			timeZone: "Asia/Manila"
+		];
+		v.end = [
+			dateTime: dateSvc.add( app.inspectionschedule, "5h" ),
+			timeZone: "Asia/Manila"
+		];
+		v.recurrence = "RRULE:FREQ=DAILY;COUNT=1";
+		v.attendees = emails.collect{ [email: it ] };
+		v.reminders = [
+			useDefault: false,
+			overrides: [
+				[method: "email", minutes: 1440],
+				[method: "popup", minutes: 10],				
+			]
+		];
+
+		def httpClient = new HttpClient("192.168.254.131:5000");
+		def json = new JSON();
+		def data = json.encode( v );
+		httpClient.post("calendar/event/insert", [data: data] );
+    }
+	
+}

@@ -36,8 +36,7 @@ class OccupancyInspectionWorkflowInterceptor {
 	public void afterStart( def evt ) {
 		def p = evt.args[0];
 		def appid = p.info.appid;	//appid
-
-		def dlist = inspEm.getSubdocsToActivate( [appid: p.refid, typeid: p.info.type ] );
+		def dlist = inspEm.getSubdocsToActivate( [appid:appid, typeid: p.info.type ] );
 		if( dlist) {
 			dlist*.objid.each {
 				def m = [:];
@@ -49,7 +48,6 @@ class OccupancyInspectionWorkflowInterceptor {
 			}
 		}
 	}
-
 
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_inspection' && args[0].action == 'send-for-revision' }" ) 
 	public void doActionBeforeRevision( def evt ) {

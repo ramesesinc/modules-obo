@@ -16,6 +16,9 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class OccupancyApplicationModel extends AbstractApplicationModel {
   
+    @Service("OccupancyInspectionScheduleService")
+    def scheduleSvc;
+    
     public String getNotificationid() {
         return "occupancy_application";
     }
@@ -38,11 +41,7 @@ class OccupancyApplicationModel extends AbstractApplicationModel {
     
     def specifySchedule() {
         def h = { o->
-            def m = [_schemaname: "occupancy_application"];
-            m.debug = true;
-            m.findBy = [objid: entity.objid ];
-            m.inspectionschedule = o.date + " " + o.hour + ":" + o.minute;
-            persistenceService.update( m );
+            scheduleSvc.updateSchedule( [objid: entity.objid, date:  o.date + " " + o.hour + ":" + o.minute]);
             reload();
         };
         
