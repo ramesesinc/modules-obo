@@ -6,18 +6,17 @@ import java.text.*;
 
 public class OnlineOccupancyPermitService  {
 
-	@DataContext("online_occupancy_permit")
-	def appEm;
-
-	@DataContext("online_occupancy_permit_entity")
-	def vwProfessionalEm;
-
 	@Service("DateService")
 	def dateSvc;
 
 	@Service(dynamic=true)
 	def dynamicSvc;
 
+	@DataContext("online_occupancy_permit")
+	def appEm;
+
+	@DataContext("online_occupancy_permit_entity")
+	def entityEm;
 
 	@ProxyMethod
 	public def moveNextStep( def o ) {
@@ -26,9 +25,6 @@ public class OnlineOccupancyPermitService  {
 		def step = app.step;
 
 		def nextStep = step + 1;
-		if( nextStep == 2 ) {
-			if(app.applicantid) nextStep = 3; 
-		}
 		//compare next step if less than existing then you can update otherwise stay the same
 		if(app.step < nextStep ) {
 			appEm.find( [objid: o.appid] ).update([step: nextStep]);			

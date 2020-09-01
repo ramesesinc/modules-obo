@@ -2,61 +2,63 @@ import com.rameses.annotations.*;
 
 public class OccupancyInspectionMobileService {
 	
+	@Service("OboUserRoleService")
+	def roleSvc;
+
+	@Service(value="AdminAuthService", connection="admin-server")
+	def adminSvc;
+
 	@DataContext("occupancy_inspection_finding")
 	def findingEm;
+
+	@DataContext("vw_occupancy_application")
+	def vwApp;
+
+	@DataContext("vw_occupancy_inspection")
+	def vwInsp;
+
+	@DataContext("vw_building_application_info")
+	def bldgInfoEm;
 
 	@Env
 	def env;
 
 	@ProxyMethod
+	public def login( def o ) {
+		def pwd = Encoder.md5.encode( o.pwd, o.username );
+		def result = adminSvc.authenticate(o.username, pwd);
+		result.roles = roleSvc.getRoles( [userid: result.userid ] );
+		return result;
+	}
+
+	@ProxyMethod
 	public def download( def o ) {
 		def userid = o.userid;
+		def taskList = vwInsp.select("objid,appid,typeid,type.*,task.*").where(" app.task.state = 'inspection' AND task.assignee.objid = :userid ", [userid: userid]).list();
+		def appGrps = taskList.groupBy{ it.appid };
 
 		def list = [];
-		list << [
-			appno: "OCC-01-011",
-			bldgpermit: [
-				permitno: "B-01-0001",
-				title: "2BR APARTMENT"
-				applicant: [ name: "FLORES, WORGIE" ] ,
-				occupancytype: [
-					division: [ objid: "B1"]
-				],	
-				projectcost: 200000000,
-				totalfloorarea: 300,
-				height: 100,
-				numunits: 1,
-				numfloors: 2,
-				location: [ text: "CAPITOL SITE CEBU CITY" ],
-			],
-			actualheight:10,
-			actualnumunits: 1,
-			actualnumfloors: 2,
-			actualtotalfloorarea: 300,
-			sections: [
-				[objid:'OCCSEC1281828128', typeid: "ELECTRICAL", 
-					info:[
-						[
-							name: 'TOTAL_CONNECTED_LOAD',
-							type: [type:'decimal', caption:'Total Connected Load'],
-							value: 2.0
-						],
-						[
-							name: 'ELECTRIC_METER',
-							type: [type:'integer', caption:'Electric Meters'],
-							value: 10
-						]	
-					],
-				]
-			]
-		]
+		appGrps.each{ appid, tasks ->
+			def app = vwApp.find( [objid: appid] ).first();
+			def appInfos = bldgInfoEm.find([bldgpermitid: app.bldgpermitid ]).list();
+			appInfos.each {
+				println it;
+			}
+
+			app.sections = tasks.collect{ tsk->
+				[ objid: tsk.objid, typeid: tsk.typeid, title: tsk.type.title, sortorder: tsk.type.sortorder ]
+			};
+			app.sections.each {
+			}
+			list << app;
+		} 
 		return list;
 	}
 
 	@ProxyMethod
 	public def upload( def app ) {
 		def userid = o.userid;
-
+		/*
 		app.sections.each { section->
 			println section.typeid,
 			sections.findings.each { fnd->
@@ -64,11 +66,11 @@ public class OccupancyInspectionMobileService {
 				f.appid = app.objid;
 				f.parentid = section.objid,
 				f.particulars = fnd.particulars,
-				f.image = fnd.image,
+				f.image = fnd.image
 				f.createdby = [objid:env.USERID, name:env.FULLNAME],
 			}
 		}
-		
+		*/
 
 	}
 

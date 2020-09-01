@@ -1,0 +1,23 @@
+import com.rameses.annotations.*;
+import java.rmi.server.*;
+import com.rameses.util.*;
+import com.rameses.functions.*;
+import java.text.*;
+
+class OboLoginService {
+
+	@Service(value="AdminAuthService", connection="admin-server")
+	def adminSvc;
+
+	@Service("OboUserRoleService")
+	def roleSvc;
+
+	@ProxyMethod
+	public def login( def o ) {
+		def pwd = Encoder.md5.encode( o.pwd, o.username );
+		def result = adminSvc.authenticate(o.username, pwd);
+		result.roles = roleSvc.getRoles( [userid: result.userid ] );
+		return result;
+	}
+
+}

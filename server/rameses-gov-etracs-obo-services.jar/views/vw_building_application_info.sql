@@ -6,6 +6,8 @@ SELECT ai.*,
    ov.unit,
    ov.caption, 
    ov.category, 
-   ov.sortorder 
+   ov.sortorder, 
+   bp.objid AS bldgpermitid 
 FROM building_application_info ai 
 INNER JOIN obo_variable ov ON ov.objid = ai.name 
+LEFT JOIN building_permit bp ON bp.appid = ai.objid 

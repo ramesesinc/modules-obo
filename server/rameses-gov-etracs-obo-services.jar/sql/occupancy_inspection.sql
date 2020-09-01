@@ -16,3 +16,4 @@ INNER JOIN occupancy_inspection be ON be.appid = sd.appid AND dt.inspectiontypei
 WHERE be.objid = $P{inpsectionid}
 AND dt.requirefee = 1 
 AND (sd.amount IS NULL OR sd.amount <= 0)
+

@@ -24,71 +24,11 @@ public class OnlineBuildingPermitService  {
 	@DataContext("online_building_permit_info")
 	def appInfoEm;
 
-	@DataContext("online_building_permit_professional")
-	def professionalEm;
-
-	@DataContext("vw_online_building_permit_professional")
-	def vwProfessionalEm;
-
 	@DataContext("obo_variable")
 	def varEm;
 
 	@Service("DateService")
 	def dateSvc;
-
-	def validateAncillary = { o->
-		def c = ancillaryEm.find( [appid : o.appid ] ).where( "designprofessionalid IS NULL" ).select("c:{COUNT(*)}").val();
-		if( c > 0 ) throw new Exception("Please specify all design professionals for all ancillary permits");
-		c = ancillaryEm.find( [appid : o.appid ] ).where( "supervisorid IS NULL" ).select("c:{COUNT(*)}").val();
-		if( c > 0 ) throw new Exception("Please specify all supervisor professionals for all ancillary permits");		
-	}
-
-	def validateRpu = { o->
-		def c = rpuEm.find( [appid: o.appid ] ).select("c:{COUNT(*)}").val();
-		if( c == 0 ) throw new Exception("Please specify at least one real property unit"); 
-	}
-
-	@ProxyMethod
-	public def moveNextStep( def o ) {
-		/* 
-		steps as follows:
-		0=initial
-		1=applicant
-		2=location
-		3=rpu
-		4=professional
-		5=project
-		6=accessories
-		7=ancillarylist
-		8=confirm
-		9=success
-		*/
-
-		if(!o.appid) throw new Exception("appid is required in determining the next step");
-		def app = appEm.find( [objid: o.appid] ).first();
-		def step = app.step;
-
-		//validation 
-		if( step == 7 ) validateAncillary( o );
-		if( step == 3 ) validateRpu( o );
-
-		def nextStep = step + 1;
-		if( nextStep >= 9 ) {
-			if( app.occupancytypeid == null) {
-				throw new Exception("Please go back to Project Details and specify the occupancy type");
-			}
-			validateRpu(o);
-		} 
-
-		//compare next step if less than existing then you can update otherwise stay the same
-		if(app.step < nextStep ) {
-			appEm.find( [objid: o.appid] ).update([step: nextStep]);			
-		}
-		else {
-			nextStep = app.step;
-		}
-		return [step:nextStep];
-	}
 
 	@ProxyMethod
 	public def create(def o) {
@@ -139,6 +79,13 @@ public class OnlineBuildingPermitService  {
 	public def findCurrentInfo( def o ) {
 		appEm.find( [objid: o.appid ] ).select("orgcode,step").first();
 	}
+
+	@ProxyMethod
+	public def update( def o ) {
+		def appid = o.remove("appid");
+		appEm.find( [objid: appid ] ).update( o );
+	}
+
 
 	//STEP 1
 	@ProxyMethod
@@ -201,47 +148,7 @@ public class OnlineBuildingPermitService  {
 		rpuEm.find( [objid: o.objid ] ).delete();
 	}
 
-	//STEP 4.
-	@ProxyMethod 
-	public def saveProfessional(def o) {
-		o.entity.appid = o.appid;
-		o.entity = saveEntity(o.entity);
-		o.entityid = o.entity.objid; 
-		if(o.objid) {
-			return professionalEm.find( [objid: o.objid]).update( o );
-		}
-		else {
-			return professionalEm.create( o );
-		}
-	}
-
-	@ProxyMethod 
-	public def getProfessional(def o) {
-		return professionalEm.find( [objid: o.objid]).first();
-	}
-
-	@ProxyMethod
-	public void removeProfessional( def o) {
-		professionalEm.find( [objid: o.objid]).delete();
-
-		//check first the main app if entity is neither a lot owner or applicant before deleting
-		def entityid = o.entity.objid;
-		boolean b = appEm.find( [applicantid: entityid] ).exists();
-		if(b) return;
-		b = rpuEm.find( [ownerid: entityid] ).exists();
-		if(b) return;
-		entityEm.find( [objid: entityid ]).delete();
-	}
-
-	@ProxyMethod
-	public def getProfessionalList( def o ) {
-		return professionalEm.select("objid,entity.objid,entity.name,entity.address.text,profession,prc.*").find([appid: o.appid]).list();
-	}
-
-	@ProxyMethod
-	public def getLookupProfessionalList( def o ) {
-		return vwProfessionalEm.find([appid: o.appid]).list();
-	}
+	
 
 	//STEP 5.
 	@ProxyMethod

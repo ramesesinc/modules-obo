@@ -4,7 +4,6 @@ DELETE FROM online_building_permit_info;
 DELETE FROM online_building_permit_requirement;
 DELETE FROM online_building_permit_ancillary;
 DELETE FROM online_building_permit_rpu;
-DELETE FROM online_building_permit_professional;
 DELETE FROM online_building_permit_entity;
 DELETE FROM online_building_permit;
 

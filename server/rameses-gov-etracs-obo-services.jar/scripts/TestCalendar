@@ -1,32 +1,9 @@
 import com.rameses.annotations.*;
 import com.rameses.util.*;
-import java.rmi.server.*;
-import obo.facts.*;
-import java.text.*;
-import treasury.utils.*;
-import treasury.facts.*;
-import enterprise.utils.*;
-import java.io.*;
-import java.rmi.server.*;
-import com.rameses.util.*;
 import com.rameses.http.*;
 import com.rameses.osiris3.server.*;
 
-public class TestSaveFile  {
-
-	@ProxyMethod
-	public def save(o) {
-
-		return Encoder.MD5.encode( ""+new UID() );
-
-		//def f = new File("/apps/server/reports/test.txt");
-        //tries to create new file in the system
-        //def bool = f.createNewFile();
-        //println "File created: "+bool;
-        //println f.getAbsolutePath();
-        //f.delete();
-
-	}
+public class TestCalendar  {
 
 	@ProxyMethod
 	public void sendCalendar() {

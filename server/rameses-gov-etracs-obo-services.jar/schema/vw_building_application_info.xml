@@ -16,5 +16,6 @@
 		<field name="caption" />
 		<field name="category" />
 		<field name="sortorder" />
+		<field name="bldgpermitid" />
 	</element>
 </schema>	

@@ -26,8 +26,11 @@ class BuildingApplicationInitialService {
 	@DataContext("building_application_info")
 	def appInfoEm;
 
-	@DataContext("building_application_professional")
+	@DataContext("obo_professional")
 	def professionalEm;
+
+	@DataContext("obo_professional_info")
+	def professionalInfoEm;
 
 	@DataContext("building_application_requirement")
 	def reqEm;
@@ -58,12 +61,37 @@ class BuildingApplicationInitialService {
 		return cloudBldgSvc.getDownloadInfo( [appid: o.appid, orgcode: env.ORGID ] );
     }
 
+    //check if 	professional exists in the obo_professional database
+    private void updateProfessional( def o ) {
+    	if(!o.objid) return;
+    	def p = professionalInfoEm.find( [objid: o.objid ]).first();
+    	if( !p ) {
+    		professionalInfoEm.create( o );
+    	}
+    	if(o.profid) {
+    		def pp = professionalEm.find( [objid: o.profid ] ).first();
+    		if(!pp) {
+    			def m = [:];
+    			m.objid = o.profid;
+    			m.prcno = o.prc.idno;
+    			m.profession = o.profession;
+    			m.infoid = o.objid;
+    			professionalEm.create( m );
+    		}
+    	}
+    }
+
 	@ProxyMethod
 	public def create( def app ) {
+		//check first all professionals if exist in the obo_professional table
+		updateProfessional( app.contractor );
+		app.ancillaries.each {
+			updateProfessional( it.designprofessional );
+			updateProfessional( it.supervisor );
+		}
 
 		def u = [:]
 		u.applicantid = app.remove("applicantid");
-		u.contractorid = app.remove("contractorid");
 
 		def newapp = appEm.create( app );
 		app.entities.each {
@@ -74,11 +102,6 @@ class BuildingApplicationInitialService {
 			it.appid = newapp.objid;
 			it.owner = [objid: it.ownerid ];
 			rpuEm.create( it );
-		}
-		app.professionals.each {
-			it.appid = newapp.objid;
-			it.entity = [objid: it.entityid ];
-			professionalEm.create( it );
 		}
 		
 		app.accessories.each {

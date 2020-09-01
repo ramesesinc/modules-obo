@@ -60,7 +60,7 @@
 		<field name="contractorid" />
 		<field name="txnmode" />
 		
-		<complex name="contractor" ref="vw_building_application_professional" jointype="many-to-one" required="false" includefields="name,profession,prc.*,ptr.*">
+		<complex name="contractor" ref="obo_professional" jointype="many-to-one" required="false" includefields="name,profession,prc.*,ptr.*">
 			<key field="contractorid" target="objid" />
 		</complex> 
 		

@@ -55,7 +55,7 @@
 		<field name="zoneclass_title" />
 		<field name="location_text" />
 
-		<complex name="contractor" ref="vw_building_application_professional" jointype="many-to-one" required="false" includefields="profession,name,prc.*,ptr.*">
+		<complex name="contractor" ref="obo_professional" jointype="many-to-one" required="false" includefields="profession,name,prc.*,ptr.*">
 			<key field="contractorid" target="objid" />
 		</complex> 
 	</element>

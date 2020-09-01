@@ -1,7 +1,12 @@
 <workunit extends="com/rameses/seti2/templates/CrudForm.xml" schemaName="vw_building_permit" allowDelete="false">
     <invokers>
         <invoker type="vw_building_permit:open" caption="Building Permit" action="open"/>
+        
+        <!-- form Actions -->
+        <invoker type="formActions" caption="View Application" action="viewApp"/>
+
     </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitModel" />
     <pages>
         <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitPage" />
     </pages>

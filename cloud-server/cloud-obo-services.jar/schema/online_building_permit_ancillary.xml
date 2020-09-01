@@ -11,10 +11,10 @@
 			<key field="permittypeid" target="objid" />
 		</complex>  
 
-		<complex name="designprofessional" ref="vw_online_building_permit_professional" jointype="many-to-one" required="false">
+		<complex name="designprofessional" ref="obo_professional_info" jointype="many-to-one" required="false">
 			<key field="designprofessionalid" target="objid" />
 		</complex>  
-		<complex name="supervisor" ref="vw_online_building_permit_professional" jointype="many-to-one"  required="false">
+		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one"  required="false">
 			<key field="supervisorid" target="objid" />
 		</complex>  
 		<complex name="worktypes" type="list" serializer="default" />

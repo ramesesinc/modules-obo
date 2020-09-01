@@ -23,7 +23,7 @@ class OccupancyApplicationInitialService {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@Service(value="obo/OnlineOccupancyPermitDownloadService", connection="cloud-server")
+	@Service(value="OnlineOccupancyPermitDownloadService", connection="cloud-obo-server")
     def cloudBldgSvc;
 
     @Service( "BuildingPermitService" )

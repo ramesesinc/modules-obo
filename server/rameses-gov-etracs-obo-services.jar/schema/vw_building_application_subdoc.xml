@@ -9,10 +9,10 @@
 			<key field="doctypeid" target="objid" />
 		</complex>  
 
-		<complex name="designprofessional" ref="vw_building_application_professional" jointype="many-to-one" required="false">
+		<complex name="designprofessional" ref="obo_professional" jointype="many-to-one" required="false">
 			<key field="designprofessionalid" target="objid" />
 		</complex>  
-		<complex name="supervisor" ref="vw_building_application_professional" jointype="many-to-one"  required="false">
+		<complex name="supervisor" ref="obo_professional" jointype="many-to-one"  required="false">
 			<key field="supervisorid" target="objid" />
 		</complex>  
 
