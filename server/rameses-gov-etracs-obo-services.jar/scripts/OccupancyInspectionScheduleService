@@ -32,7 +32,7 @@ class OccupancyInspectionScheduleService {
 		appEm.find( [objid: o.objid ]).update( [inspectionschedule: o.date ] );
 		
 		//test sample here
-		self.sendToCalendar( [appid: o.objid] );
+		//self.sendToCalendar( [appid: o.objid] );
     }    
 
     @ProxyMethod
@@ -79,10 +79,10 @@ class OccupancyInspectionScheduleService {
 		];
 
 		def httpClient = new HttpClient(conf.host);
-		httpClient.debug = true;
+		httpClient.contentType = "application/json";
+		//httpClient.debug = true;
 		def json = new JSON();
 		def data = json.encode( v );
-		println data;
 
 		httpClient.post("calendar/event/insert", data );
     }

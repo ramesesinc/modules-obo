@@ -32,36 +32,39 @@ public class OboProfessionalPage extends javax.swing.JPanel {
 
         xDataTable1 = new com.rameses.rcp.control.XDataTable();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        entityLookup1 = new com.rameses.entity.components.EntityLookup();
-        lOVList1 = new com.rameses.enterprise.components.LOVList();
-        xTextField2 = new com.rameses.rcp.control.XTextField();
-        xTextField3 = new com.rameses.rcp.control.XTextField();
-        xDateField2 = new com.rameses.rcp.control.XDateField();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
+        xLabel5 = new com.rameses.rcp.control.XLabel();
+        xLabel2 = new com.rameses.rcp.control.XLabel();
+        xLabel3 = new com.rameses.rcp.control.XLabel();
+        xLabel4 = new com.rameses.rcp.control.XLabel();
 
         xFormPanel1.setCaptionWidth(120);
 
-        entityLookup1.setCaption("Name");
-        entityLookup1.setEntityType("individual");
-        entityLookup1.setName("entity.entity"); // NOI18N
-        entityLookup1.setPreferredSize(new java.awt.Dimension(0, 21));
-        xFormPanel1.add(entityLookup1);
+        xLabel1.setCaption("PRC No");
+        xLabel1.setExpression("#{ entity.prc.idno }");
+        xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel1);
 
-        lOVList1.setCaption("Profession");
-        lOVList1.setListName("OBO_PROFESSION");
-        lOVList1.setName("entity.profession"); // NOI18N
-        xFormPanel1.add(lOVList1);
+        xLabel5.setCaption("Profession");
+        xLabel5.setExpression("#{ entity.profession }");
+        xLabel5.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel5);
 
-        xTextField2.setCaption("PRC No");
-        xTextField2.setName("entity.prcno"); // NOI18N
-        xFormPanel1.add(xTextField2);
+        xLabel2.setCaption("Last Name");
+        xLabel2.setExpression("#{ entity.lastname }");
+        xLabel2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel2);
 
-        xTextField3.setCaption("PTR No");
-        xTextField3.setName("entity.ptrno"); // NOI18N
-        xFormPanel1.add(xTextField3);
+        xLabel3.setCaption("First Name");
+        xLabel3.setExpression("#{ entity.firstname }");
+        xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel3);
 
-        xDateField2.setCaption("Validity");
-        xDateField2.setName("entity.validitydate"); // NOI18N
-        xFormPanel1.add(xDateField2);
+        xLabel4.setCaption("Middle Name");
+        xLabel4.setExpression("#{ entity.middlename }");
+        xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -77,16 +80,16 @@ public class OboProfessionalPage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.entity.components.EntityLookup entityLookup1;
-    private com.rameses.enterprise.components.LOVList lOVList1;
     private com.rameses.rcp.control.XDataTable xDataTable1;
-    private com.rameses.rcp.control.XDateField xDateField2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
-    private com.rameses.rcp.control.XTextField xTextField2;
-    private com.rameses.rcp.control.XTextField xTextField3;
+    private com.rameses.rcp.control.XLabel xLabel1;
+    private com.rameses.rcp.control.XLabel xLabel2;
+    private com.rameses.rcp.control.XLabel xLabel3;
+    private com.rameses.rcp.control.XLabel xLabel4;
+    private com.rameses.rcp.control.XLabel xLabel5;
     // End of variables declaration//GEN-END:variables
 }

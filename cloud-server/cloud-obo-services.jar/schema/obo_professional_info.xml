@@ -7,7 +7,6 @@
 		<field name="birthdate" required="true"/>
 		<field name="gender" required="true"/>
 		<field name="resident" required="true"/>
-		<field name="address_objid" required="true"/>
 		<field name="address_text" />
 		<field name="address_unitno" />
 		<field name="address_bldgno" />
