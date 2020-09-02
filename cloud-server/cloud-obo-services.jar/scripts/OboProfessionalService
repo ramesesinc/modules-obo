@@ -55,5 +55,24 @@ public class OboProfessionalService  {
 		return professionEm.limit(100).list();
 	}
 
-
+	@ProxyMethod
+	public def getList( params ) {
+		def filter = [];
+		if (!params) params = [:];
+		if (params.prc?.idno) {
+			params.prcno = params.prc.idno;
+			filter << "prcno = :prcno";
+		}
+		if (params.lastname) filter << "lastname LIKE :lastname";
+		if (params.firstname) filter << "firstname LIKE :firstname";
+		
+		def whereClause = '1=1';
+		if (filter) {
+			whereClause = [filter.join(" AND "), params]
+		}
+		return vwProfEm.where(whereClause)
+			.limit(params.start, params.limit)
+			.orderBy("lastname, firstname")
+			.list();
+	}
 }
