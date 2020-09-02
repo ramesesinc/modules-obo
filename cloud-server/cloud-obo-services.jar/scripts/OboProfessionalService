@@ -18,7 +18,10 @@ public class OboProfessionalService  {
 
 	@ProxyMethod
 	public def verifyInfo( def o ) {
-		def p = profEm.find( [prcno: o.prcno, profession: o.profession ]).first();
+		if(! o.prc?.idno ) throw new Exception("prc idno is required");
+		if(! o.profession ) throw new Exception("profession is required");
+
+		def p = profEm.find( [prcno: o.prc.idno, profession: o.profession ]).first();
 		if( p ) 
 			throw new Exception("The PRC No for this profession is already registered to " + p.lastname + ", " +p.firstname );
 		Random rand = new Random();
@@ -29,20 +32,20 @@ public class OboProfessionalService  {
 	@ProxyMethod
 	public def create( def o ) {
 		if(!o.profession) throw new Exception("profession is required");
-		if(!o.prcno) throw new Exception("prcno is required");
-
-		//add this so it will match the requirement of the professional
-		o.prc.idno = o.prcno;
+		if(!o.prc.idno) throw new Exception("prc idno is required");
 
 		def m = profInfoEm.create( o );
 
 		//build the profession registration
 		def p = [:];
-		p.objid = o.profession.toLowerCase()+"_"+o.prcno;		
+		p.objid = o.profession.toLowerCase().trim().replaceAll("\\s", "_")+"_"+o.prcno;		
 		p.infoid = m.objid;
 		p.profession = o.profession;
-		p.prcno = o.prcno;
-		profEm.create( p );
+		p.prcno = o.prc.idno;
+		def z = profEm.create( p );
+
+		//update also the profid of progfessional after saving the professional
+		profInfoEm.find( [objid: m.objid] ).update([profid: z.objid]);
 	}
 
 	@ProxyMethod
@@ -51,8 +54,8 @@ public class OboProfessionalService  {
 	}
 
 	@ProxyMethod
-	public def getProfessionList(def p ) {
-		return professionEm.limit(100).list();
+	public def getProfessionList() {
+		return professionEm.limit(100).list()*.name;
 	}
 
 	@ProxyMethod
@@ -71,7 +74,7 @@ public class OboProfessionalService  {
 			whereClause = [filter.join(" AND "), params]
 		}
 		return vwProfEm.where(whereClause)
-			.limit(params.start, params.limit)
+			.limit(0, 20)
 			.orderBy("lastname, firstname")
 			.list();
 	}

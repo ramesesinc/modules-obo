@@ -9,6 +9,9 @@ class OccupancyInspectionScheduleService {
 	@XConnection("cloud-server")
 	def cloudServer;
 
+	@XConnection("calendar-server")
+	def calendar;
+
 	@Service("DateService")
 	def dateSvc;
 
@@ -34,15 +37,22 @@ class OccupancyInspectionScheduleService {
 
     @ProxyMethod
     public void sendToCalendar( def o ) {
+    	def useCalendar = var.use_calendar;
+    	if( useCalendar==null || useCalendar !="true" ) return;
+
+    	def conf = calendar.conf;
+
 		def app = vwAppEm.find( [objid: o.appid]).first();
 
 		def emails = var.obo_inspection_calendar_group.split(",");
+		if(!emails) throw new Exception("Please include email addresses at obo_inspection_calendar_group") 
+
 		def buff  = [];
 		buff << "Bldg Permit No: " + app.bldgpermit.permitno;		
 		buff << "Project Title: " + app.bldgpermit.title;
 		buff << "Occupancy Class: " + app.bldgpermit.occupancytype.division.objid;
-		buff << "Project Cost: " + app.bldgpermit.projectcost;
-		buff << "Total Floor Area: " + app.bldgpermit.totalfloorarea;
+		//buff << "Project Cost: " + app.bldgpermit.projectcost;
+		//buff << "Total Floor Area: " + app.bldgpermit.totalfloorarea;
 
 		def v = [:];
 		v.summary = "Building Inspection Schedule for Occupancy Permit ["+ app.appno + "]";
@@ -58,7 +68,7 @@ class OccupancyInspectionScheduleService {
 			dateTime: dateSvc.add( app.inspectionschedule, "5h" ),
 			timeZone: "Asia/Manila"
 		];
-		v.recurrence = "RRULE:FREQ=DAILY;COUNT=1";
+		v.recurrence = ["RRULE:FREQ=DAILY;COUNT=1"];
 		v.attendees = emails.collect{ [email: it ] };
 		v.reminders = [
 			useDefault: false,
@@ -68,12 +78,13 @@ class OccupancyInspectionScheduleService {
 			]
 		];
 
-		def httpClient = new HttpClient("192.168.254.131:5000");
+		def httpClient = new HttpClient(conf.host);
 		httpClient.debug = true;
 		def json = new JSON();
 		def data = json.encode( v );
 		println data;
-		httpClient.post("calendar/event/insert", [data: data] );
+
+		httpClient.post("calendar/event/insert", data );
     }
 	
 }

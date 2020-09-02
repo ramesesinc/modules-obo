@@ -1,9 +1,7 @@
 <schema>
 	<element tablename="vw_obo_professional">
 		<field name="objid" primary="true" />
-		<field name="prcno" />
-		<field name="profession" />
-		<field name="infoid" />
+		<field name="name" />
 		<field name="firstname" />
 		<field name="middlename" />
 		<field name="lastname" />
@@ -25,18 +23,21 @@
 		<field name="email" />
 		<field name="mobileno" />
 		<field name="phoneno" />
+		<field name="profession" />
 		<field name="id_idno" />
 		<field name="id_type_name" />
+		<field name="id_type_caption" />
+		<field name="id_type_title" />		
 		<field name="id_dtissued" />
 		<field name="id_placeissued" />
+		<field name="prc_idno" />
 		<field name="prc_dtissued" />
 		<field name="prc_dtvalid" />
 		<field name="prc_placeissued" />
 		<field name="ptr_refno" />
 		<field name="ptr_dtissued" />
 		<field name="ptr_placeissued" />
-		<field name="id_type_caption" />
-		<field name="id_type_title" />
+		<field name="profid" />
 	</element>
 </schema>		
 
