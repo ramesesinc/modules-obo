@@ -14,7 +14,7 @@ import com.rameses.gov.etracs.obo.models.*;
 class OccupancyInspectionModel extends AbstractApplicationSubTaskModel {
     
     public String getNotificationid() {
-        return "occupancy_application:" + entity.typeid.toLowerCase();
+        return "occupancy_inspection:" + entity.typeid.toLowerCase();
     }
 
     public String getCaption() {

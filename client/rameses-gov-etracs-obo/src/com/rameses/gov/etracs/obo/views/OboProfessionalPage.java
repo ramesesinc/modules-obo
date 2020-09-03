@@ -32,55 +32,90 @@ public class OboProfessionalPage extends javax.swing.JPanel {
 
         xDataTable1 = new com.rameses.rcp.control.XDataTable();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
-        xLabel5 = new com.rameses.rcp.control.XLabel();
-        xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel3 = new com.rameses.rcp.control.XLabel();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
+        xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
+        xLabel5 = new com.rameses.rcp.control.XLabel();
+        xLabel6 = new com.rameses.rcp.control.XLabel();
+        xLabel7 = new com.rameses.rcp.control.XLabel();
+        xLabel8 = new com.rameses.rcp.control.XLabel();
+        xLabel9 = new com.rameses.rcp.control.XLabel();
 
         xFormPanel1.setCaptionWidth(120);
 
-        xLabel1.setCaption("PRC No");
-        xLabel1.setExpression("#{ entity.prc.idno }");
-        xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel1);
-
-        xLabel5.setCaption("Profession");
-        xLabel5.setExpression("#{ entity.profession }");
-        xLabel5.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel5);
-
-        xLabel2.setCaption("Last Name");
-        xLabel2.setExpression("#{ entity.lastname }");
-        xLabel2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel2);
-
-        xLabel3.setCaption("First Name");
-        xLabel3.setExpression("#{ entity.firstname }");
+        xLabel3.setCaption("Profession");
+        xLabel3.setExpression("#{ entity.profession }");
+        xLabel3.setName(""); // NOI18N
         xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel3);
 
+        xLabel1.setCaption("Last Name");
+        xLabel1.setExpression("#{ entity.lastname }");
+        xLabel1.setName(""); // NOI18N
+        xLabel1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel1);
+
+        xLabel2.setCaption("First Name");
+        xLabel2.setExpression("#{ entity.firstname }");
+        xLabel2.setName(""); // NOI18N
+        xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel2);
+
         xLabel4.setCaption("Middle Name");
         xLabel4.setExpression("#{ entity.middlename }");
+        xLabel4.setName(""); // NOI18N
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
+
+        xLabel5.setCaption("PRC Id No");
+        xLabel5.setExpression("#{ entity.prc.idno }");
+        xLabel5.setName(""); // NOI18N
+        xLabel5.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel5.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel5);
+
+        xLabel6.setCaption("PRC Date Issued");
+        xLabel6.setExpression("#{ entity.prc.dtissued }");
+        xLabel6.setName(""); // NOI18N
+        xLabel6.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel6);
+
+        xLabel7.setCaption("PRC Expiry Date");
+        xLabel7.setExpression("#{ entity.prc.expirydate }");
+        xLabel7.setName(""); // NOI18N
+        xLabel7.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel7);
+
+        xLabel8.setCaption("PTR No");
+        xLabel8.setExpression("#{ entity.ptr.idno }");
+        xLabel8.setName(""); // NOI18N
+        xLabel8.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel8);
+
+        xLabel9.setCaption("PTR Date");
+        xLabel9.setExpression("#{ entity.ptr.dtissued }");
+        xLabel9.setName(""); // NOI18N
+        xLabel9.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel9);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
-                .addGap(34, 34, 34))
+                .addGap(15, 15, 15)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(77, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -91,5 +126,9 @@ public class OboProfessionalPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
+    private com.rameses.rcp.control.XLabel xLabel6;
+    private com.rameses.rcp.control.XLabel xLabel7;
+    private com.rameses.rcp.control.XLabel xLabel8;
+    private com.rameses.rcp.control.XLabel xLabel9;
     // End of variables declaration//GEN-END:variables
 }

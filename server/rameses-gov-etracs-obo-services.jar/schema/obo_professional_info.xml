@@ -1,6 +1,6 @@
 <schema>
 	<element tablename="obo_professional_info">
-		<field name="objid" primary="true" prefix="OBOPROFINFO" />
+		<field name="objid" primary="true" />
 		<field name="firstname" required="true"/>
 		<field name="middlename" required="true"/>
 		<field name="lastname" required="true"/>
@@ -25,7 +25,7 @@
 		<field name="id_idno" required="true"/>
 		<field name="id_type_name" required="true"/>
 		<field name="id_dtissued"  type="date"  required="true"/>
-		<field name="id_placeissued"required="true"/>
+		<field name="id_placeissued" required="true"/>
 		<field name="profession" required="true"/>				
 		<field name="prc_idno" required="true"/>		
 		<field name="prc_dtissued"  type="date" required="true"/>

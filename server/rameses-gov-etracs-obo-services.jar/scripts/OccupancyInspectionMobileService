@@ -2,14 +2,11 @@ import com.rameses.annotations.*;
 
 public class OccupancyInspectionMobileService {
 	
-	@Service("OboUserRoleService")
-	def roleSvc;
-
-	@Service(value="AdminAuthService", connection="admin-server")
-	def adminSvc;
-
 	@DataContext("occupancy_inspection_finding")
 	def findingEm;
+
+	@DataContext("occupancy_inspection")
+	def inspEm;
 
 	@DataContext("vw_occupancy_application")
 	def vwApp;
@@ -18,37 +15,50 @@ public class OccupancyInspectionMobileService {
 	def vwInsp;
 
 	@DataContext("vw_building_application_info")
-	def bldgInfoEm;
+	def vwBldgInfoEm;
+
+	@DataContext("occupancy_application_info")
+	def occInfoEm;
 
 	@Env
 	def env;
 
-	@ProxyMethod
-	public def login( def o ) {
-		def pwd = Encoder.md5.encode( o.pwd, o.username );
-		def result = adminSvc.authenticate(o.username, pwd);
-		result.roles = roleSvc.getRoles( [userid: result.userid ] );
-		return result;
-	}
 
 	@ProxyMethod
 	public def download( def o ) {
 		def userid = o.userid;
-		def taskList = vwInsp.select("objid,appid,typeid,type.*,task.*").where(" app.task.state = 'inspection' AND task.assignee.objid = :userid ", [userid: userid]).list();
+		def taskList = vwInsp.select("objid,appid,typeid,type.*,task.*").where(" app.task.state = 'inspection' AND task.assignee.objid = :userid AND uploaded=0", [userid: userid]).list();
+
+		if( !taskList ) 
+			return [ status: "ERROR", message: "There are no tasks for download" ];
+
 		def appGrps = taskList.groupBy{ it.appid };
 
 		def list = [];
 		appGrps.each{ appid, tasks ->
 			def app = vwApp.find( [objid: appid] ).first();
-			def appInfos = bldgInfoEm.find([bldgpermitid: app.bldgpermitid ]).list();
-			appInfos.each {
-				println it;
-			}
-
 			app.sections = tasks.collect{ tsk->
-				[ objid: tsk.objid, typeid: tsk.typeid, title: tsk.type.title, sortorder: tsk.type.sortorder ]
+				[ objid: tsk.objid, typeid: tsk.typeid, title: tsk.type.title, sortorder: tsk.type.sortorder ];
 			};
-			app.sections.each {
+
+			//if there is no appid then for sure there will be no infos
+			if( app.bldgpermit.appid ) {
+				app.sections.each { sec->
+					sec.infos = [];
+					def appInfos = vwBldgInfoEm.find( [appid: app.bldgpermit.appid, typeid: sec.typeid ] ).list();
+					appInfos?.each { info->
+						def m = [caption: info.caption, datatype:info.datatype, 
+							name: info.name, category: info.category, unit: info.unit];
+						if( m.datatype == 'decimal') m.value = info.decimalvalue;
+						else if( m.datatype == 'integer') m.value = info.intvalue;
+						else if( m.datatype == 'boolean') m.value = true;
+						else if( m.datatype == 'date') m.value = info.datevalue;
+						else m.value = info.stringvalue;	
+						sec.infos << m;
+					}	
+					//load also other infos not in the list so it can be selected just in case
+					sec.otherinfos = inspEm.getOtherInfos(  [typeid: sec.typeid, appid: app.bldgpermit.appid ] );
+				}
 			}
 			list << app;
 		} 
@@ -56,22 +66,48 @@ public class OccupancyInspectionMobileService {
 	}
 
 	@ProxyMethod
-	public def upload( def app ) {
+	public def upload( def o ) {
+		if(!app.objid) return [status:"ERROR", message: "appid is required in upload"];
+		if(!app.userid) return [status:"ERROR", message: "userid is required in upload"];
+
 		def userid = o.userid;
-		/*
+
+		//clear first all infos per section
 		app.sections.each { section->
-			println section.typeid,
+			//clear first all infos within a section
+			occInfoEm.find( [parentid: section.objid ] ).delete();
+
+			section.infos.each { info->
+				if( !info.value ) info.value = null;
+				if( !info.actualvalue ) info.actualvalue = null;
+				if( info.value != info.actualvalue ) {
+					def m = [:];
+					m.appid = app.objid;
+					m.parentid = section.objid;
+					m.name = info.name;
+					m.type = [name: info.name ];
+					if( info.datatype == 'decimal') m.decimalvalue = info.actualvalue;
+					else if( info.datatype == 'integer') m.intvalue = info.actualvalue;
+					else if( info.datatype == 'boolean') m.booleanvalue = true;
+					else if( info.datatype == 'date') m.datevalue = info.actualvalue;
+					else m.stringvalue = info.actualvalue;
+					occInfoEm.create( m );
+				}
+			}
 			sections.findings.each { fnd->
 				def f = [:];
 				f.appid = app.objid;
-				f.parentid = section.objid,
-				f.particulars = fnd.particulars,
-				f.image = fnd.image
-				f.createdby = [objid:env.USERID, name:env.FULLNAME],
+				f.parentid = section.objid;
+				f.particulars = fnd.particulars;
+				f.photo = fnd.photo;
+				f.state = 0;
+				f.createdby = [objid:env.USERID, name:env.FULLNAME];
+				findingEm.create( f );
 			}
-		}
-		*/
 
+			//update the inspection mark as uploaded so it cant be loaded again
+			inspEm.find( [objid: section.objid]).update( [uploaded: 1]);
+		}
 	}
 
 

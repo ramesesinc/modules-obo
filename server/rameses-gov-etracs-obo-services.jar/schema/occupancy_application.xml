@@ -2,7 +2,7 @@
 	<element tablename="occupancy_application">
 		<field name="objid" primary="true" prefix="OCCPERM" visible="true"/>
 		<field name="orgcode" required="true"/>
-		<field name="appno" searchable="true" indexed="true"/>
+		<field name="appno" searchable="true" indexed="true" caption="App No"/>
 
 		<field name="trackingno" searchable="true" indexed="true"/>
 		<field name="dtfiled" type="timestamp"/>

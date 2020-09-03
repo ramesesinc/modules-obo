@@ -36,6 +36,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xActionBar2 = new com.rameses.rcp.control.XActionBar();
         xTabbedPane1 = new com.rameses.rcp.control.XTabbedPane();
         pnlProject = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xLabel8 = new com.rameses.rcp.control.XLabel();
         xLabel7 = new com.rameses.rcp.control.XLabel();
@@ -77,8 +78,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         pnlDoc = new javax.swing.JPanel();
         schemaList4 = new com.rameses.seti2.components.SchemaList();
         xActionBar4 = new com.rameses.rcp.control.XActionBar();
-        pnlProfessionals = new javax.swing.JPanel();
-        schemaList5 = new com.rameses.seti2.components.SchemaList();
         pnlRpt = new javax.swing.JPanel();
         schemaList8 = new com.rameses.seti2.components.SchemaList();
         xActionBar5 = new com.rameses.rcp.control.XActionBar();
@@ -133,13 +132,15 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xFormPanel1.setPreferredSize(new java.awt.Dimension(200, 300));
 
         xLabel8.setCaption("Project Title");
-        xLabel8.setExpression("#{entity.title}");
-        xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel8.setExpression("<html>#{entity.title}</html>");
+        xLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel8.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel8);
 
         xLabel7.setCaption("Project Description");
-        xLabel7.setExpression("#{entity.description}");
-        xLabel7.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel7.setExpression("<html>#{entity.description}</html>");
+        xLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel7.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel7);
 
         xLabel6.setCaption("Location");
@@ -314,7 +315,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xFormPanel3.add(xLabel20);
 
         xLabel22.setCaption("Contractor Name");
-        xLabel22.setExpression("#{entity.contractor.name}");
+        xLabel22.setExpression("#{entity.contractor.lastname}, #{entity.contractor.firstname} ");
         xLabel22.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel22.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel22);
@@ -351,30 +352,42 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel33.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel33);
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout pnlProjectLayout = new javax.swing.GroupLayout(pnlProject);
         pnlProject.setLayout(pnlProjectLayout);
         pnlProjectLayout.setHorizontalGroup(
             pnlProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlProjectLayout.createSequentialGroup()
-                .addGap(0, 630, Short.MAX_VALUE)
-                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(pnlProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlProjectLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                    .addGap(402, 402, 402)))
+            .addGroup(pnlProjectLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         pnlProjectLayout.setVerticalGroup(
             pnlProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProjectLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 484, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(80, Short.MAX_VALUE))
-            .addGroup(pnlProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(pnlProjectLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(81, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         xTabbedPane1.addTab("Project Details", pnlProject);
@@ -506,107 +519,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         pnlDoc.add(xActionBar4, java.awt.BorderLayout.NORTH);
 
         xTabbedPane1.addTab("Documents", pnlDoc);
-
-        pnlProfessionals.setLayout(new java.awt.BorderLayout());
-
-        schemaList5.setColumns(new com.rameses.rcp.common.Column[]{
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "profession"}
-                , new Object[]{"caption", "Profession"}
-                , new Object[]{"width", 200}
-                , new Object[]{"minWidth", 200}
-                , new Object[]{"maxWidth", 250}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "entity.lastname"}
-                , new Object[]{"caption", "Last Name"}
-                , new Object[]{"width", 200}
-                , new Object[]{"minWidth", 200}
-                , new Object[]{"maxWidth", 250}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "entity.firstname"}
-                , new Object[]{"caption", "First Name"}
-                , new Object[]{"width", 200}
-                , new Object[]{"minWidth", 200}
-                , new Object[]{"maxWidth", 250}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "prc.idno"}
-                , new Object[]{"caption", "PRC No"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 150}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "prc.dtissued"}
-                , new Object[]{"caption", "PRC Issued"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 100}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.DateColumnHandler("yyyy MM dd", null, null)}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", null}
-                , new Object[]{"caption", "-"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 0}
-                , new Object[]{"maxWidth", 0}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            })
-        });
-        schemaList5.setCustomFilter("appid = :objid");
-        schemaList5.setQueryName("entityQry");
-        schemaList5.setSchemaName("building_application_professional");
-        pnlProfessionals.add(schemaList5, java.awt.BorderLayout.CENTER);
-
-        xTabbedPane1.addTab("Professionals", pnlProfessionals);
 
         pnlRpt.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pnlRpt.setLayout(new java.awt.BorderLayout());
@@ -810,7 +722,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
                 .addComponent(xRadio5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xRadio6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 477, Short.MAX_VALUE))
+                .addGap(0, 518, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -936,7 +848,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 999, Short.MAX_VALUE)
+            .addGap(0, 1040, Short.MAX_VALUE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1316,7 +1228,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(605, Short.MAX_VALUE)
+                .addContainerGap(646, Short.MAX_VALUE)
                 .addComponent(xFormPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
         );
@@ -1428,6 +1340,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
@@ -1439,7 +1352,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private javax.swing.JPanel pnlDoc;
     private com.rameses.rcp.control.XPanel pnlEval;
     private com.rameses.rcp.control.XPanel pnlFinding;
-    private javax.swing.JPanel pnlProfessionals;
     private javax.swing.JPanel pnlProject;
     private com.rameses.rcp.control.XPanel pnlReq;
     private javax.swing.JPanel pnlRpt;
@@ -1448,7 +1360,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.seti2.components.SchemaList schemaList12;
     private com.rameses.seti2.components.SchemaList schemaList3;
     private com.rameses.seti2.components.SchemaList schemaList4;
-    private com.rameses.seti2.components.SchemaList schemaList5;
     private com.rameses.seti2.components.SchemaList schemaList6;
     private com.rameses.seti2.components.SchemaList schemaList7;
     private com.rameses.seti2.components.SchemaList schemaList8;

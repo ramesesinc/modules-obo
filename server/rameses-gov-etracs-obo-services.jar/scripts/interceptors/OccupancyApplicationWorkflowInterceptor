@@ -109,7 +109,7 @@ class OccupancyApplicationWorkflowInterceptor {
 		if( mlist ) {
 			def dt = dateSvc.getServerDate();
 			mlist.each {
-				def m = [appid: appid, typeid: it.objid ]
+				def m = [appid: appid, typeid: it.objid, uploaded: 0 ]
 				boolean b = inspEm.find( m ).exists();
 				if(!b) {
 					m = inspEm.create( m );

@@ -1,6 +1,7 @@
 <schema>
 	<element tablename="vw_obo_professional">
 		<field name="objid" primary="true" />
+		<field name="name" caption="Name"/>
 		<field name="firstname" caption="First Name"/>
 		<field name="middlename" caption="Middle Name"/>
 		<field name="lastname" caption="Last Name"/>

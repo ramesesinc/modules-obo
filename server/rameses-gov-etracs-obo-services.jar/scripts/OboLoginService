@@ -9,15 +9,29 @@ class OboLoginService {
 	@Service(value="AdminAuthService", connection="admin-server")
 	def adminSvc;
 
-	@Service("OboUserRoleService")
-	def roleSvc;
-
 	@ProxyMethod
 	public def login( def o ) {
-		def pwd = Encoder.md5.encode( o.pwd, o.username );
+		if( !o.username) return [status:"ERROR", message: "username is required"];
+		if( !o.password) return [status:"ERROR", message: "password is required"];
+
+		def pwd = Encoder.md5.encode( o.password, o.username );
 		def result = adminSvc.authenticate(o.username, pwd);
-		result.roles = roleSvc.getRoles( [userid: result.userid ] );
+		if(!result) 
+			return [ status: "ERROR", message: "User account not found" ];
+		result.password = pwd;	
 		return result;
+	}
+
+	@ProxyMethod
+	public def register( def o ) {
+		println o;
+		return [terminalid: (new UID()).toString(), macaddress:o.macaddress];
+	}
+
+	@ProxyMethod
+	public def recover( def o ) {
+		println o;
+		return [terminalid: (new UID()).toString(), macaddress:o.macaddress ];
 	}
 
 }

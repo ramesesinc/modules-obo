@@ -17,3 +17,13 @@ WHERE be.objid = $P{inpsectionid}
 AND dt.requirefee = 1 
 AND (sd.amount IS NULL OR sd.amount <= 0)
 
+
+[getOtherInfos]
+SELECT name,datatype,category,unit,caption 
+FROM obo_variable
+WHERE typeid = $P{typeid}
+AND name NOT IN ( 
+	SELECT name FROM vw_building_application_info 
+	WHERE appid=$P{appid}
+)
+

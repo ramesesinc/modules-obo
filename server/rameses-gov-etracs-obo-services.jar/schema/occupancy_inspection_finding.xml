@@ -18,6 +18,7 @@
 		<complex name="section" ref="vw_occupancy_inspection" jointype="many-to-one" includefields="type.*" required="false">
 			<key field="parentid" target="objid"/>
 		</complex>	
-
+		
+		<field name="photo" hidden="true"/>
 	</element>
 </schema>
