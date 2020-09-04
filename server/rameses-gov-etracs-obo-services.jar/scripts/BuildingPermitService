@@ -8,7 +8,7 @@ class BuildingPermitService {
 	@DataContext("building_application_entity")
 	def permitEntity;
 
-	@DataContext("building_application_professional")
+	@DataContext("obo_professional_info")
 	def professionalEm;
 
 	@DataContext("building_application_subdoc")
@@ -34,17 +34,6 @@ class BuildingPermitService {
 		if( p._show_minimal == true ) return perm;	
 
 		perm.entities = permitEntity.find( [appid: perm.appid ] ).list();
-		perm.professionals = professionalEm.find( [appid: perm.appid ]).list();
-
-		//find the professionals 
-		perm.profarchitectid = subdocEm.find( [appid: perm.appid, doctypeid: 'ARCHITECTURAL' ] ).first()?.designprofessionalid;
-		perm.profcivilid = subdocEm.find( [appid: perm.appid, doctypeid: 'CIVIL_STRUCTURAL' ] ).first()?.designprofessionalid;
-		perm.profelectricalid = subdocEm.find( [appid: perm.appid, doctypeid: 'ELECTRICAL' ] ).first()?.designprofessionalid;
-		perm.profmechanicalid = subdocEm.find( [appid: perm.appid, doctypeid: 'MECHANICAL' ] ).first()?.designprofessionalid;
-		perm.profsanitaryid = subdocEm.find( [appid: perm.appid, doctypeid: 'SANITARY' ] ).first()?.designprofessionalid;
-		perm.profplumbingid = subdocEm.find( [appid: perm.appid, doctypeid: 'PLUMBING' ] ).first()?.designprofessionalid;
-		perm.profelectronicid = subdocEm.find( [appid: perm.appid, doctypeid: 'ELECTRONIC' ] ).first()?.designprofessionalid;
-
 		return perm;
 	}	
 	

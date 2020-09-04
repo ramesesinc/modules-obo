@@ -102,36 +102,32 @@
                 <Property name="verticalGap" type="int" value="0"/>
               </Layout>
               <SubComponents>
-                <Component class="com.rameses.rcp.control.XButton" name="xButton5">
+                <Component class="com.rameses.rcp.control.XButton" name="addFile">
                   <Properties>
-                    <Property name="disableWhen" type="java.lang.String" value=""/>
-                    <Property name="name" type="java.lang.String" value="addAttachment" noResource="true"/>
-                    <Property name="visibleWhen" type="java.lang.String" value="#{ editable == true  &amp;&amp; entity.attachment?.fileid == null }"/>
-                    <Property name="contentAreaFilled" type="boolean" value="false"/>
-                    <Property name="text" type="java.lang.String" value="Add"/>
-                  </Properties>
-                </Component>
-                <Component class="com.rameses.rcp.control.XLabel" name="xLabel1">
-                  <Properties>
-                    <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
-                      <StringArray count="1">
-                        <StringItem index="0" value="entity.attachment"/>
-                      </StringArray>
+                    <Property name="caption" type="java.lang.String" value=""/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/images/clip.png"/>
                     </Property>
-                    <Property name="expression" type="java.lang.String" value="#{ entity.attachment.title }"/>
+                    <Property name="name" type="java.lang.String" value="addAttachment" noResource="true"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ editable == true  &amp;&amp; entity.attachment == null }"/>
+                    <Property name="fontStyle" type="java.lang.String" value="font-size: 10;"/>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[2, 4, 2, 4]"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Add Attachment"/>
                   </Properties>
                 </Component>
                 <Component class="com.rameses.rcp.control.XButton" name="xButton6">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="removeAttachment" noResource="true"/>
-                    <Property name="visibleWhen" type="java.lang.String" value="#{ editable == true &amp;&amp; entity.attachment?.fileid != null }"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ editable == true &amp;&amp; entity.attachment != null }"/>
                     <Property name="text" type="java.lang.String" value="Remove"/>
                   </Properties>
                 </Component>
                 <Component class="com.rameses.rcp.control.XButton" name="xButton7">
                   <Properties>
                     <Property name="name" type="java.lang.String" value="viewAttachment" noResource="true"/>
-                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.attachment?.fileid != null }"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.attachment != null }"/>
                     <Property name="text" type="java.lang.String" value="View"/>
                   </Properties>
                 </Component>

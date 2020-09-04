@@ -3,7 +3,7 @@
 		<field name="objid" primary="true" prefix="OCCPMTFND"/>
 		<field name="appid" required="true"/>
 		<field name="parentid" />
-		<field name="rootid" required="true"/>
+		<field name="rootid" />
 
 		<field name="particulars" />
 		<field name="dtcreated" />
@@ -19,6 +19,6 @@
 			<key field="parentid" target="objid"/>
 		</complex>	
 		
-		<field name="photo" hidden="true"/>
+		<field name="attachment" hidden="true"/>
 	</element>
 </schema>

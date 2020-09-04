@@ -3,6 +3,10 @@
     <invokers>
         <invoker type="vw_occupancy_inspection:open" caption="Occupancy Inspection" action="open" index="1"/>
 
+        <!-- finding related actions -->         
+        <invoker type="findingActions" caption="Add New Finding" action="addFinding" index="1" 
+                visibleWhen="#{ editable == true }" />
+        
     </invokers>
     <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyInspectionModel" />
     <pages>

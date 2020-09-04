@@ -1,6 +1,6 @@
 import com.rameses.annotations.*; 
 
-class OccupancyApplicationTransmittalInterceptor {
+class OccupancyApplicationTransmittalReportInterceptor {
 	
 	@DataContext("occupancy_application_transmittal")
 	def transmittalEm;
@@ -11,11 +11,11 @@ class OccupancyApplicationTransmittalInterceptor {
 	@DataContext("occupancy_application_requirement")
 	def reqEm;
 
-	@DataContext("occupancy_inspection_finding")
+	@DataContext("occupancy_evaluation_finding")
 	def findingEm;
 
 	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid == 'occupancy_application_transmittal' }")
-	public void getOccupancyPermitVerificationChecklistReport( def evt ) {
+	public void getOccupancyApplicationTransmittal( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def transmittalid = p.parameters.transmittalid;
@@ -26,9 +26,6 @@ class OccupancyApplicationTransmittalInterceptor {
 		//check if requirement or finding transmittal.
 
 		def ea = appEm.find( [objid: t.appid ] ).first();
-		ea.title = ea.bldgpermit.title;
-		ea.location = ea.bldgpermit.location;
-
 		ea.receiver = t.createdby;
 		ea.transmittalno = t.objid;
 		ea.transmittaltype = t.type;
@@ -38,7 +35,12 @@ class OccupancyApplicationTransmittalInterceptor {
 			ea.items = reqEm.find( [transmittalid : t.objid ] ).orderBy("type.sortorder").list(); 
 		}
 		else {
-			ea.items = findingEm.find( [transmittalid : t.objid ] ).orderBy("type.sortorder").list(); 
+			ea.items = findingEm.find( [transmittalid : t.objid ] ).orderBy("section.type.sortindex").list(); 
+			ea.items.each {
+				if(it.attachment ) {
+					it.attachment = "image:"+it.attachment;
+				}
+			}
 		}
 
 		result.data = ea;

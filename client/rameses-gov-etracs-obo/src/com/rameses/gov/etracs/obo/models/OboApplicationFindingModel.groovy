@@ -9,6 +9,8 @@ import com.rameses.osiris2.common.*;
 import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /******
 * state is similar to the requirements
@@ -136,48 +138,22 @@ class OboApplicationFindingModel {
         caller.findingListHandler.reload();
         return "_close";
     }
-    
-    /*
-    void viewHistory() {
-        pagename = "hist";
-    }
-    
-    void viewBack() {
-        pagename = "view";
-    }
-    
-    def listModel = [
-        fetchList: { o->
-            def m = [_schemaname: entity.schemaname + "_finding"];
-            m.findBy = [rootid: entity.rootid];
-            m.orderBy ="dtcreated";
-            return querySvc.getList(m)
-        }
-    ] as BasicListModel;
-    */
-   
+
     void addAttachment() {
-        def rp = varSvc.get("file_attachment_filepath");
-        if(!rp) 
-            throw new Exception("Please specify the attachments location-> file_attachment_filepath in sysvar");
-        
-        boolean pass = false;
-        def s  = { o->
-           def a = [:];
-           a.fileid = o.fileid.replace(rp+"/", "");
-           a.title = a.fileid;
-           entity.attachment = a;
-           pass = true;
-        }
-        Modal.show( "webfile_chooser", [onselect:s, filePath: rp] );
-        /*
-        if(!pass ) return;
-        def t = MsgBox.prompt("Enter tag name" );
-        if( t ) {
-            def ext = entity.attachment.fileid.substring( entity.attachment.fileid.indexOf(".") );
-            entity.attachment.title = t + ext;
-        }
-        */
+        def jfc = new JFileChooser();
+        jfc.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "jpeg", "png"));
+        jfc.setFileSelectionMode( JFileChooser.FILES_ONLY );
+        int retval = jfc.showOpenDialog(null); 
+        if (retval == JFileChooser.APPROVE_OPTION) {
+            def bytes = com.rameses.io.IOStream.toByteArray( jfc.selectedFile );
+            entity.attachment = (new Base64Cipher().encode(  bytes ));
+            binding.refresh();
+        } 
+    }
+    
+    def viewAttachment() {
+        if(!entity.attachment) throw new Exception("There must be an attachment");
+        return Inv.lookupOpener("obo_finding_attachment:view", [image: entity.attachment]);
     }
     
     def removeAttachment() {
@@ -185,12 +161,5 @@ class OboApplicationFindingModel {
         binding.refresh();
     }
 
-    def viewAttachment() {
-        def rp = varSvc.get("file_attachment_filepath");
-        if(!rp) 
-            throw new Exception("Please specify the attachments location-> file_attachment_filepath in sysvar");
-        rp += "/" + entity.attachment.fileid;    
-        Modal.show( "webfile_chooser", [filePath:rp] );   
-    }
 
 }

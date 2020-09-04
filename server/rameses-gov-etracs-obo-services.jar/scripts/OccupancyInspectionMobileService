@@ -27,10 +27,11 @@ public class OccupancyInspectionMobileService {
 	@ProxyMethod
 	public def download( def o ) {
 		def userid = o.userid;
-		def taskList = vwInsp.select("objid,appid,typeid,type.*,task.*").where(" app.task.state = 'inspection' AND task.assignee.objid = :userid AND uploaded=0", [userid: userid]).list();
+		def taskList = vwInsp.select("objid,appid,typeid,type.*,task.*,task.assignee.*").where(" app.task.state = 'inspection' AND task.assignee.objid = :userid AND uploaded=0", [userid: userid]).list();
 
 		if( !taskList ) 
 			return [ status: "ERROR", message: "There are no tasks for download" ];
+
 
 		def appGrps = taskList.groupBy{ it.appid };
 
@@ -38,7 +39,9 @@ public class OccupancyInspectionMobileService {
 		appGrps.each{ appid, tasks ->
 			def app = vwApp.find( [objid: appid] ).first();
 			app.sections = tasks.collect{ tsk->
-				[ objid: tsk.objid, typeid: tsk.typeid, title: tsk.type.title, sortorder: tsk.type.sortorder ];
+				[ objid: tsk.objid, typeid: tsk.typeid, 
+				title: tsk.type.title, sortorder: tsk.type.sortorder, assignee: tsk.task.assignee
+				 ];
 			};
 
 			//if there is no appid then for sure there will be no infos
@@ -54,6 +57,7 @@ public class OccupancyInspectionMobileService {
 						else if( m.datatype == 'boolean') m.value = true;
 						else if( m.datatype == 'date') m.value = info.datevalue;
 						else m.value = info.stringvalue;	
+						m.actualvalue = m.value;
 						sec.infos << m;
 					}	
 					//load also other infos not in the list so it can be selected just in case
@@ -66,16 +70,14 @@ public class OccupancyInspectionMobileService {
 	}
 
 	@ProxyMethod
-	public def upload( def o ) {
+	public def upload( def app ) {
 		if(!app.objid) return [status:"ERROR", message: "appid is required in upload"];
 		if(!app.userid) return [status:"ERROR", message: "userid is required in upload"];
 
-		def userid = o.userid;
-
+		def userid = app.userid;
+		
 		//clear first all infos per section
 		app.sections.each { section->
-			//clear first all infos within a section
-			occInfoEm.find( [parentid: section.objid ] ).delete();
 
 			section.infos.each { info->
 				if( !info.value ) info.value = null;
@@ -94,14 +96,14 @@ public class OccupancyInspectionMobileService {
 					occInfoEm.create( m );
 				}
 			}
-			sections.findings.each { fnd->
+			section.findings.each { fnd->
 				def f = [:];
 				f.appid = app.objid;
 				f.parentid = section.objid;
-				f.particulars = fnd.particulars;
-				f.photo = fnd.photo;
-				f.state = 0;
-				f.createdby = [objid:env.USERID, name:env.FULLNAME];
+				f.particulars = fnd.description;
+				f.attachment = fnd.attachment;
+				f.state = 2;
+				f.createdby = section.assignee;
 				findingEm.create( f );
 			}
 

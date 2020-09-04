@@ -40,8 +40,7 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         xTextArea2 = new com.rameses.rcp.control.XTextArea();
         xPanel3 = new com.rameses.rcp.control.XPanel();
-        xButton5 = new com.rameses.rcp.control.XButton();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
+        addFile = new com.rameses.rcp.control.XButton();
         xButton6 = new com.rameses.rcp.control.XButton();
         xButton7 = new com.rameses.rcp.control.XButton();
         xRadio1 = new com.rameses.rcp.control.XRadio();
@@ -88,24 +87,22 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
         xPanel3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xPanel3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
 
-        xButton5.setDisableWhen("");
-        xButton5.setName("addAttachment"); // NOI18N
-        xButton5.setVisibleWhen("#{ editable == true  && entity.attachment?.fileid == null }");
-        xButton5.setContentAreaFilled(false);
-        xButton5.setText("Add");
-        xPanel3.add(xButton5);
-
-        xLabel1.setDepends(new String[] {"entity.attachment"});
-        xLabel1.setExpression("#{ entity.attachment.title }");
-        xPanel3.add(xLabel1);
+        addFile.setCaption("");
+        addFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clip.png"))); // NOI18N
+        addFile.setName("addAttachment"); // NOI18N
+        addFile.setVisibleWhen("#{ editable == true  && entity.attachment == null }");
+        addFile.setFontStyle("font-size: 10;");
+        addFile.setMargin(new java.awt.Insets(2, 4, 2, 4));
+        addFile.setText("Add Attachment");
+        xPanel3.add(addFile);
 
         xButton6.setName("removeAttachment"); // NOI18N
-        xButton6.setVisibleWhen("#{ editable == true && entity.attachment?.fileid != null }");
+        xButton6.setVisibleWhen("#{ editable == true && entity.attachment != null }");
         xButton6.setText("Remove");
         xPanel3.add(xButton6);
 
         xButton7.setName("viewAttachment"); // NOI18N
-        xButton7.setVisibleWhen("#{ entity.attachment?.fileid != null }");
+        xButton7.setVisibleWhen("#{ entity.attachment != null }");
         xButton7.setText("View");
         xPanel3.add(xButton7);
 
@@ -220,18 +217,17 @@ public class OboApplicationFindingPage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.rameses.rcp.control.XButton addFile;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XButton xButton2;
     private com.rameses.rcp.control.XButton xButton3;
     private com.rameses.rcp.control.XButton xButton4;
-    private com.rameses.rcp.control.XButton xButton5;
     private com.rameses.rcp.control.XButton xButton6;
     private com.rameses.rcp.control.XButton xButton7;
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
-    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XPanel xPanel1;

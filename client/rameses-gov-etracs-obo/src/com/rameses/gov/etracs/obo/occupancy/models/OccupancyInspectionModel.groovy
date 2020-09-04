@@ -18,7 +18,7 @@ class OccupancyInspectionModel extends AbstractApplicationSubTaskModel {
     }
 
     public String getCaption() {
-        return "Occupancy Inspection";
+        return "Occupancy Inspection ";
     }
     
     public String getPrefix() {

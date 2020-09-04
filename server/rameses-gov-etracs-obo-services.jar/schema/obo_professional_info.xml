@@ -4,10 +4,9 @@
 		<field name="firstname" required="true"/>
 		<field name="middlename" required="true"/>
 		<field name="lastname" required="true"/>
-		<field name="birthdate" required="true"/>
-		<field name="gender" required="true"/>
+		<field name="birthdate" />
+		<field name="gender" />
 		<field name="resident" required="true"/>
-		<field name="address_objid" required="true"/>
 		<field name="address_text" />
 		<field name="address_unitno" />
 		<field name="address_bldgno" />
@@ -18,14 +17,14 @@
 		<field name="address_barangay_name" required="true"/>
 		<field name="address_citymunicipality" required="true"/>
 		<field name="address_province" required="true"/>
-		<field name="tin" required="true"/>
-		<field name="email" required="true"/>
-		<field name="mobileno" required="true"/>
-		<field name="phoneno" required="true"/>
-		<field name="id_idno" required="true"/>
-		<field name="id_type_name" required="true"/>
-		<field name="id_dtissued"  type="date"  required="true"/>
-		<field name="id_placeissued" required="true"/>
+		<field name="tin" />
+		<field name="email" />
+		<field name="mobileno" />
+		<field name="phoneno"/>
+		<field name="id_idno" />
+		<field name="id_type_name" />
+		<field name="id_dtissued"  />
+		<field name="id_placeissued" />
 		<field name="profession" required="true"/>				
 		<field name="prc_idno" required="true"/>		
 		<field name="prc_dtissued"  type="date" required="true"/>
