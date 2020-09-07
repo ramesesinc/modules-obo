@@ -26,14 +26,15 @@ SELECT
    )) AS location_text,
 
    t.state AS task_state,
+   t.dtcreated AS task_dtcreated,
    t.startdate AS task_startdate,
    t.enddate AS task_enddate,
    t.assignee_objid AS task_assignee_objid,
    t.assignee_name AS task_assignee_name,
    t.actor_objid AS task_actor_objid,
    t.actor_name AS task_actor_name,
-   (SELECT title FROM sys_wf_node WHERE processname = 'building_application' AND name=t.state) AS task_title,
-
+   sn.title AS task_title,
+   sn.tracktime AS task_tracktime,
    pmt.permitno,
    pmt.expirydate,
    pmt.dtissued,
@@ -43,6 +44,7 @@ SELECT
 FROM building_application a 
 INNER JOIN building_application_entity ae ON a.applicantid = ae.objid
 INNER JOIN building_application_task t ON a.taskid = t.taskid 
+INNER JOIN sys_wf_node sn ON sn.processname = 'building_application' AND sn.name = t.state 
 INNER JOIN obo_occupancy_type bt ON a.occupancytypeid = bt.objid 
 INNER JOIN obo_occupancy_type_division od ON bt.divisionid = od.objid 
 INNER JOIN obo_occupancy_type_group og ON od.groupid = og.objid 

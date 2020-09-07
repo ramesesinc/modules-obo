@@ -42,6 +42,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel7 = new com.rameses.rcp.control.XLabel();
         xLabel6 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
+        xLabel38 = new com.rameses.rcp.control.XLabel();
         xLabel10 = new com.rameses.rcp.control.XLabel();
         xLabel32 = new com.rameses.rcp.control.XLabel();
         xLabel36 = new com.rameses.rcp.control.XLabel();
@@ -53,8 +54,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xLabel21 = new com.rameses.rcp.control.XLabel();
-        xLabel11 = new com.rameses.rcp.control.XLabel();
-        xLabel31 = new com.rameses.rcp.control.XLabel();
         xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
         xLabel5 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
@@ -75,6 +74,10 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel29 = new com.rameses.rcp.control.XLabel();
         xLabel30 = new com.rameses.rcp.control.XLabel();
         xLabel33 = new com.rameses.rcp.control.XLabel();
+        pnlZoning = new com.rameses.rcp.control.XPanel();
+        xFormPanel4 = new com.rameses.rcp.control.XFormPanel();
+        xLabel55 = new com.rameses.rcp.control.XLabel();
+        xLabel56 = new com.rameses.rcp.control.XLabel();
         pnlDoc = new javax.swing.JPanel();
         schemaList4 = new com.rameses.seti2.components.SchemaList();
         xActionBar4 = new com.rameses.rcp.control.XActionBar();
@@ -153,9 +156,17 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
 
+        xLabel38.setCaption("Txn Type");
+        xLabel38.setExpression("#{entity.txntype}");
+        xLabel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel38.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel38.setPreferredSize(new java.awt.Dimension(150, 20));
+        xFormPanel1.add(xLabel38);
+
         xLabel10.setCaption("No. of Units");
         xLabel10.setExpression("#{entity.numunits}");
         xLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel10.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel10.setPreferredSize(new java.awt.Dimension(150, 20));
         xFormPanel1.add(xLabel10);
 
@@ -228,17 +239,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel21.setExpression("#{entity.occupancytype.group.objid}");
         xLabel21.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel21);
-
-        xLabel11.setCaption("Zone classification");
-        xLabel11.setExpression("#{entity.zoneclass.objid} - #{entity.zoneclass.title}");
-        xLabel11.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel11.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel11);
-
-        xLabel31.setCaption("Zone ");
-        xLabel31.setExpression("#{entity.zone}");
-        xLabel31.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel31);
 
         xFormPanel3.setCaption("");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -314,7 +314,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel20.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel20);
 
-        xLabel22.setCaption("Contractor Name");
+        xLabel22.setCaption("Project Supervisor ");
         xLabel22.setExpression("#{entity.contractor.lastname}, #{entity.contractor.firstname} ");
         xLabel22.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel22.setPreferredSize(new java.awt.Dimension(0, 16));
@@ -358,19 +358,19 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
 
         javax.swing.GroupLayout pnlProjectLayout = new javax.swing.GroupLayout(pnlProject);
@@ -379,18 +379,56 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
             pnlProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProjectLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         pnlProjectLayout.setVerticalGroup(
             pnlProjectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlProjectLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         xTabbedPane1.addTab("Project Details", pnlProject);
+
+        xFormPanel4.setCaption("Zoning Classification");
+        com.rameses.rcp.control.border.XTitledBorder xTitledBorder3 = new com.rameses.rcp.control.border.XTitledBorder();
+        xTitledBorder3.setPadding(new java.awt.Insets(20, 10, 10, 10));
+        xTitledBorder3.setTitle("Zoning Classification");
+        xFormPanel4.setBorder(xTitledBorder3);
+        xFormPanel4.setCaptionWidth(190);
+        xFormPanel4.setPreferredSize(new java.awt.Dimension(200, 300));
+
+        xLabel55.setCaption("Zone classification");
+        xLabel55.setExpression("#{entity.zoneclass.objid} - #{entity.zoneclass.title}");
+        xLabel55.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel55.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel4.add(xLabel55);
+
+        xLabel56.setCaption("Zone ");
+        xLabel56.setExpression("#{entity.zone}");
+        xLabel56.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel4.add(xLabel56);
+
+        javax.swing.GroupLayout pnlZoningLayout = new javax.swing.GroupLayout(pnlZoning);
+        pnlZoning.setLayout(pnlZoningLayout);
+        pnlZoningLayout.setHorizontalGroup(
+            pnlZoningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlZoningLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(xFormPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                .addGap(433, 433, 433))
+        );
+        pnlZoningLayout.setVerticalGroup(
+            pnlZoningLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlZoningLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(xFormPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(219, Short.MAX_VALUE))
+        );
+
+        xTabbedPane1.addTab("Zoning", pnlZoning);
 
         pnlDoc.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pnlDoc.setLayout(new java.awt.BorderLayout());
@@ -1355,6 +1393,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private javax.swing.JPanel pnlProject;
     private com.rameses.rcp.control.XPanel pnlReq;
     private javax.swing.JPanel pnlRpt;
+    private com.rameses.rcp.control.XPanel pnlZoning;
     private com.rameses.seti2.components.SchemaList schemaList10;
     private com.rameses.seti2.components.SchemaList schemaList11;
     private com.rameses.seti2.components.SchemaList schemaList12;
@@ -1371,9 +1410,9 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
+    private com.rameses.rcp.control.XFormPanel xFormPanel4;
     private com.rameses.rcp.control.XFormPanel xFormPanel6;
     private com.rameses.rcp.control.XLabel xLabel10;
-    private com.rameses.rcp.control.XLabel xLabel11;
     private com.rameses.rcp.control.XLabel xLabel12;
     private com.rameses.rcp.control.XLabel xLabel13;
     private com.rameses.rcp.control.XLabel xLabel14;
@@ -1395,15 +1434,17 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel29;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLabel xLabel30;
-    private com.rameses.rcp.control.XLabel xLabel31;
     private com.rameses.rcp.control.XLabel xLabel32;
     private com.rameses.rcp.control.XLabel xLabel33;
     private com.rameses.rcp.control.XLabel xLabel34;
     private com.rameses.rcp.control.XLabel xLabel35;
     private com.rameses.rcp.control.XLabel xLabel36;
     private com.rameses.rcp.control.XLabel xLabel37;
+    private com.rameses.rcp.control.XLabel xLabel38;
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel5;
+    private com.rameses.rcp.control.XLabel xLabel55;
+    private com.rameses.rcp.control.XLabel xLabel56;
     private com.rameses.rcp.control.XLabel xLabel6;
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;

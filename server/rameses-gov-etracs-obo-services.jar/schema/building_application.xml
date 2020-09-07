@@ -51,6 +51,9 @@
 		<field name="contractorid" />
 		<field name="permitid" />
 
+		<!-- VALUES ARE SIMPLE OR COMPLEX -->
+		<field name="txntype" />
+
 	</element>
 </schema>
 

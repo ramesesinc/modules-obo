@@ -1,0 +1,206 @@
+DROP VIEW IF EXISTS vw_building_application;
+CREATE VIEW vw_building_application AS 
+SELECT 
+   a.*,
+   ae.name AS applicant_name,
+
+   bt.objid AS occupancytype_objid,
+   bt.title AS occupancytype_title,   
+   od.objid AS occupancytype_division_objid,
+   od.title AS occupancytype_division_title,   
+   og.objid AS occupancytype_group_objid,
+   og.title AS occupancytype_group_title,   
+
+   zc.objid AS zoneclass_objid,
+   zc.title AS zoneclass_title,
+
+   LTRIM(CONCAT(
+      (CASE WHEN a.location_lotno IS NULL THEN '' ELSE CONCAT( ' Lot ', a.location_lotno) END),
+      (CASE WHEN a.location_blockno IS NULL THEN '' ELSE CONCAT(' Blk ', a.location_blockno) END),
+      (CASE WHEN a.location_unitno IS NULL THEN '' ELSE CONCAT(' ', a.location_unitno) END),
+      (CASE WHEN a.location_bldgno IS NULL THEN '' ELSE CONCAT(' ', a.location_bldgno) END),
+      (CASE WHEN a.location_bldgname IS NULL THEN '' ELSE CONCAT(' ', a.location_bldgname) END),
+      (CASE WHEN a.location_street IS NULL THEN '' ELSE CONCAT(' ', a.location_street) END),
+      (CASE WHEN a.location_subdivision IS NULL THEN '' ELSE CONCAT(', ', a.location_subdivision) END),      
+      (CASE WHEN a.location_barangay_name IS NULL THEN '' ELSE CONCAT(', ', a.location_barangay_name ) END)
+   )) AS location_text,
+
+   t.state AS task_state,
+   t.startdate AS task_startdate,
+   t.enddate AS task_enddate,
+   t.assignee_objid AS task_assignee_objid,
+   t.assignee_name AS task_assignee_name,
+   t.actor_objid AS task_actor_objid,
+   t.actor_name AS task_actor_name,
+   (SELECT title FROM sys_wf_node WHERE processname = 'building_application' AND name=t.state) AS task_title,
+
+   pmt.permitno,
+   pmt.expirydate,
+   pmt.dtissued,
+   pmt.issuedby_name,
+   pmt.template 
+
+FROM building_application a 
+INNER JOIN building_application_entity ae ON a.applicantid = ae.objid
+INNER JOIN building_application_task t ON a.taskid = t.taskid 
+INNER JOIN obo_occupancy_type bt ON a.occupancytypeid = bt.objid 
+INNER JOIN obo_occupancy_type_division od ON bt.divisionid = od.objid 
+INNER JOIN obo_occupancy_type_group og ON od.groupid = og.objid 
+LEFT JOIN obo_zoneclass zc ON a.zoneclassid = zc.objid 
+LEFT JOIN building_permit pmt ON a.permitid=pmt.objid;
+
+DROP VIEW IF EXISTS vw_building_application_subdoc; 
+CREATE VIEW vw_building_application_subdoc AS 
+SELECT 
+   bt.state AS appstate,
+   bt.assignee_objid AS appuserid,
+   a.*,
+   iss.controlno,
+   iss.dtissued,
+   iss.expirydate,
+   iss.issuedby_name,
+   iss.issuedby_objid,
+   iss.remarks AS issue_remarks,
+   iss.template,
+   iss.transmittalid  
+FROM building_application_subdoc a  
+LEFT JOIN building_issuance iss ON a.issuanceid = iss.objid 
+INNER JOIN building_application ba ON a.appid = ba.objid 
+LEFT JOIN building_application_task bt ON ba.taskid = bt.taskid 
+
+
+CREATE TABLE `building_evaluation_type_role`  (
+  `objid` varchar(50) NOT NULL,
+  `typeid` varchar(50) NULL,
+  `state` varchar(50) NULL,
+  `role` varchar(50) NULL,
+  PRIMARY KEY (`objid`),
+  CONSTRAINT `fk_building_evaluation_type_role_typeid` FOREIGN KEY (`typeid`) REFERENCES `building_evaluation_type` (`objid`)
+);
+
+CREATE TABLE `occupancy_inspection_type_role`  (
+  `objid` varchar(50) NOT NULL,
+  `typeid` varchar(50) NULL,
+  `state` varchar(50) NULL,
+  `role` varchar(50) NULL,
+  PRIMARY KEY (`objid`),
+  CONSTRAINT `fk_building_inspection_type_role_typeid` FOREIGN KEY (`typeid`) REFERENCES `occupancy_inspection_type` (`objid`)
+);
+
+ALTER TABLE `building_evaluation_type_role` 
+ADD UNIQUE INDEX `uix_building_evaluation_type_typeid_state`(`typeid`, `state`);
+
+ALTER TABLE `building_application_transmittal` 
+ADD PRIMARY KEY (`objid`);
+
+ALTER TABLE `building_evaluation_type` 
+DROP COLUMN `role`;
+
+ALTER TABLE `occupancy_inspection_type` 
+DROP COLUMN `type`,
+DROP COLUMN `activationstate`,
+DROP COLUMN `optional`,
+DROP COLUMN `requirefee`,
+DROP COLUMN `permitid`;
+
+ALTER TABLE `building_doc_type` 
+ADD COLUMN `inspectiontypeid` varchar(50) NULL AFTER `subtypeof`;
+
+ALTER TABLE `building_doc_type` DROP FOREIGN KEY `fk_building_subdoc_type_evaltypeid`;
+
+ALTER TABLE `building_doc_type` 
+ADD CONSTRAINT `fk_obo_doc_type_evaltypeid` FOREIGN KEY (`evaltypeid`) REFERENCES `building_evaluation_type` (`objid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+ADD CONSTRAINT `fk_obo_doc_type_inspectiontypeid` FOREIGN KEY (`inspectiontypeid`) REFERENCES `occupancy_inspection_type` (`objid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+CREATE TABLE `occupancy_application_subdoc` (
+  `objid` varchar(50) NOT NULL,
+  `appid` varchar(50) DEFAULT NULL,
+  `state` int(50) DEFAULT NULL,
+  `doctypeid` varchar(50) DEFAULT NULL,
+  `remarks` varchar(255) DEFAULT NULL,
+  `amount` decimal(16,2) DEFAULT NULL,
+  `issuanceid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) ,
+  UNIQUE KEY `uix_occupancy_application_subdoc_appid_doctypeid` (`appid`,`doctypeid`) ,
+  KEY `fk_occupancy_application_subdoc_doctypeid` (`doctypeid`) ,
+  CONSTRAINT `occupancy_application_subdoc_appid` FOREIGN KEY (`appid`) REFERENCES `occupancy_application` (`objid`),
+  CONSTRAINT `occupancy_application_subdoc_doctypeid` FOREIGN KEY (`doctypeid`) REFERENCES `building_doc_type` (`objid`)
+) ;
+
+
+CREATE TABLE `occupancy_issuance` (
+  `objid` varchar(50) NOT NULL,
+  `subdocid` varchar(50) DEFAULT NULL,
+  `controlno` varchar(50) DEFAULT NULL,
+  `dtissued` datetime DEFAULT NULL,
+  `issuedby_objid` varchar(50) DEFAULT NULL,
+  `issuedby_name` varchar(255) DEFAULT NULL,
+  `state` int(50) DEFAULT NULL,
+  `remarks` mediumtext,
+  `expirydate` date DEFAULT NULL,
+  `template` varchar(255) DEFAULT NULL,
+  `transmittalid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`),
+  UNIQUE KEY `uix_occupancy_issuance_controlno` (`controlno`),
+  KEY `fk_occupancy_issuance_appid` (`subdocid`),
+  CONSTRAINT `occupancy_issuance_subdocid` FOREIGN KEY (`subdocid`) REFERENCES `occupancy_application_subdoc` (`objid`)
+);
+
+DROP VIEW IF EXISTS vw_occupancy_application_subdoc; 
+CREATE VIEW vw_occupancy_application_subdoc AS 
+SELECT 
+   bt.state AS appstate,
+   bt.assignee_objid AS appuserid,
+   a.*,
+   iss.controlno,
+   iss.dtissued,
+   iss.expirydate,
+   iss.issuedby_name,
+   iss.issuedby_objid,
+   iss.remarks AS issue_remarks,
+   iss.template,
+   iss.transmittalid  
+FROM occupancy_application_subdoc a  
+LEFT JOIN occupancy_issuance iss ON a.issuanceid = iss.objid 
+INNER JOIN occupancy_application ba ON a.appid = ba.objid 
+LEFT JOIN occupancy_application_task bt ON ba.taskid = bt.taskid;
+
+ALTER TABLE `building_doc_type` ADD COLUMN `apptype` varchar(50) NULL;
+
+UPDATE building_doc_type SET apptype = 'building';
+
+UPDATE building_doc_type SET apptype = 'occupancy' WHERE objid='FSIC';
+
+ALTER TABLE `occupancy_inspection_type` 
+DROP COLUMN `role`;
+
+CREATE TABLE `idtype` (
+  `name` varchar(50) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `caption` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`name`) USING BTREE
+);
+INSERT INTO `idtype`(`name`, `title`, `caption`) VALUES ('ctc', 'CTC No', 'Community Tax Certficate');
+INSERT INTO `idtype`(`name`, `title`, `caption`) VALUES ('drivers', 'License No', 'Drivers License');
+INSERT INTO `idtype`(`name`, `title`, `caption`) VALUES ('gsis', 'GSIS No', 'GSIS');
+INSERT INTO `idtype`(`name`, `title`, `caption`) VALUES ('passport', 'Passport No.', 'PASSPORT');
+INSERT INTO `idtype`(`name`, `title`, `caption`) VALUES ('sss', 'SSS No', 'SSS');
+INSERT INTO `idtype`(`name`, `title`, `caption`) VALUES ('tin', 'TIN', 'TIN');
+INSERT INTO `idtype`(`name`, `title`, `caption`) VALUES ('umid', 'UMID No', 'UMID');
+
+
+DROP VIEW IF EXISTS vw_obo_professional;
+CREATE VIEW vw_obo_professional  AS   
+SELECT 
+    pi.*,
+  id.caption AS id_type_caption,
+  id.title AS id_type_title
+
+FROM obo_professional p
+INNER JOIN obo_professional_info pi ON p.infoid = pi.objid 
+LEFT JOIN idtype id ON pi.id_type_name = id.name; 
+
+ALTER TABLE `building_application` 
+ADD COLUMN `txntype` varchar(10) NULL;
+
+
+

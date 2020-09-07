@@ -4,8 +4,6 @@
 		<field name="firstname" required="true"/>
 		<field name="middlename" required="true"/>
 		<field name="lastname" required="true"/>
-		<field name="birthdate" />
-		<field name="gender" />
 		<field name="resident" required="true"/>
 		<field name="address_text" />
 		<field name="address_unitno" />

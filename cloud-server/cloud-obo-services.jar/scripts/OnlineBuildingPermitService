@@ -82,7 +82,6 @@ public class OnlineBuildingPermitService  {
 
 	@ProxyMethod
 	public def update( def o ) {
-		appEm.debug = true;
 		appEm.find( [objid: o.appid ] ).update( o );
 	}
 
@@ -250,12 +249,17 @@ public class OnlineBuildingPermitService  {
 		o.permits.each { 
 			def z = ancillaryEm.find( [appid:o.appid, permittypeid:it.objid ] ).select("objid").val();
 			if( !z ) {
-				def m = [appid: o.appid, permittypeid: k, state: 'PENDING' ];
-				m.type = [objid: k];
+				def m = [appid: o.appid, permittypeid: it.objid, state: 'PENDING' ];
+				m.type = [objid: it.objid];
 				m.worktypes = [];
 				ancillaryEm.create( m );	
 			}
 		}
+	}
+
+	@ProxyMethod
+	public void removeAncillaryPermit( def o ) {
+		ancillaryEm.find( [objid: o.objid] ).delete();
 	}
 
 	@ProxyMethod
@@ -268,7 +272,8 @@ public class OnlineBuildingPermitService  {
 	public def getAncillaryPermit( def o ) {
 		if(!o.objid) throw new Exception("getAncillary error. objid is required");
 		def m = ancillaryEm.find( [objid: o.objid] ).first();
-		m.infos = getAppInfos([appid: o.appid, typeid: m.permittypeid, parentid: m.objid ]);
+		if(!m) throw new Exception("ancillary id " + o.objid + " does not exist");
+		m.infos = getAppInfos([appid: m.appid, typeid: m.permittypeid, parentid: m.objid ]);
 		return m;	
 	}
 
@@ -284,6 +289,26 @@ public class OnlineBuildingPermitService  {
 		saveAppInfos( [parentid: o.objid, infos: o.infos, appid: o.appid ] );
 	}
 
+	@ProxyMethod
+	public void updateAncillaryPermit( def o ) {
+		if(!o.objid) throw new Exception("updateAncillaryPermit error. objid is required");
+		if(o.designprofessional) {
+			o.designprofessionalid = o.designprofessional.objid;
+		} 
+		if( o.supervisor ) {
+			o.supervisorid = o.supervisor.objid;
+		}
+		ancillaryEm.find( [objid: o.objid ] ).update( o );
+	}
+
+	@ProxyMethod
+	public void updateAncillaryPermitInfos( def o ) {
+		if(!o.objid) throw new Exception("updateAncillaryPermitInfos error. objid is required");
+		if(!o.infos) throw new Exception("updateAncillaryPermitInfos error. infos is required");	
+		appInfoEm.find([parentid: o.objid]).delete();
+		saveAppInfos( [parentid: o.objid, infos: o.infos, appid: o.appid ] );
+	}
+
 	/* ************************************************************
 	* UTILITY FOR APP INFO FUNCTIONS
 	****************************************************************/
@@ -292,7 +317,7 @@ public class OnlineBuildingPermitService  {
 		def list = [];
 		varEm.find([typeid: o.typeid]).list().each {
 			def m = [name:it.objid, datatype:it.datatype, caption: it.caption, 
-				unit: it.unit, value:null, parentid: o.parentid ];
+				unit: it.unit, value:null, parentid: o.parentid, category: it.category, sortorder: it.sortorder ];
 			//search info if exist
 			def info = appInfoEm.find( [appid: o.appid, name: m.name ] ).first();
 			if( info ) {
@@ -304,12 +329,14 @@ public class OnlineBuildingPermitService  {
 			}
 			list << m;
 		};
+		list = list.sort{ [it.category, it.sortorder] }
 		return list;
 	}
 
 	private void saveAppInfos( o ) {
 		if(!o.appid) throw new Exception("saveAppInfos error. parentid is required");
 		if(!o.infos) throw new Exception("saveAppInfos error. infos is required");
+
 		o.infos.findAll{ it.value }.each {
 			def m = [:];
 			m.appid = o.appid;
@@ -325,6 +352,7 @@ public class OnlineBuildingPermitService  {
 		}
 	}
 	
+
 
 
 

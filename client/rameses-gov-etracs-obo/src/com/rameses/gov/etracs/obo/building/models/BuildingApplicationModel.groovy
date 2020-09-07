@@ -69,6 +69,22 @@ class BuildingApplicationModel extends AbstractApplicationModel {
         return Inv.lookupOpener("vw_obo_occupancy_type:lookup", [onselect: h] );
     }
     
+    public void changeTxnType() {
+        def m = [:];
+        m.fields = [
+            [name:"txntype", caption:"SIMPLE", optionValue:"SIMPLE", datatype:"radio"],
+            [name:"txntype", caption:"COMPLEX", optionValue:"COMPLEX", datatype:"radio"]            
+        ];
+        m.data = [txntype:entity.txntype];
+        m.handler = { o->
+            def u = [objid: entity.objid, txntype: o.txntype, _schemaname:"building_application"];
+            persistenceService.update( u );
+            entity.txntype = u.txntype;
+            binding.refresh("entity.txntype");
+        }
+        Modal.show("dynamic:form", m, [title:"Change Txn Type"]);
+    }
+    
      /**************************************************************************
     * assessment actions
     ***************************************************************************/
@@ -97,6 +113,8 @@ class BuildingApplicationModel extends AbstractApplicationModel {
         }
         return Inv.lookupOpener("building_application_fee", m );
     }
+    
+   
     
     void clearFees() {
         feeSvc.clearFees( [appid:entity.objid ]);

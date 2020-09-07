@@ -125,7 +125,7 @@ class OccupancyApplicationWorkflowInterceptor {
 		}
 
 		//notify the google mail calendar after sending the inspections
-		occSkedSvc.sendToCalendar( [appid: p.refid ] );
+		//occSkedSvc.sendToCalendar( [appid: p.refid ] );
 	}
 
 	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each
@@ -138,7 +138,7 @@ class OccupancyApplicationWorkflowInterceptor {
 			list.each {
 				def f = [:];
 				f.processname = 'occupancy_inspection';
-				f.notificationid = 'occupancy_inspection:'+it.typeid.toLowerCase();
+				f.notificationid = ('occupancy_inspection:'+it.typeid.toLowerCase()).trim();
 				f.refid = it.objid;
 				f.taskid = it.taskid;
 				f.startdate = dt;

@@ -5,8 +5,6 @@
 		<field name="firstname" caption="First Name"/>
 		<field name="middlename" caption="Middle Name"/>
 		<field name="lastname" caption="Last Name"/>
-		<field name="birthdate" />
-		<field name="gender" />
 		<field name="resident" />
 		<field name="address_objid" />
 		<field name="address_text" />

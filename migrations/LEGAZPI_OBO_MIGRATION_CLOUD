@@ -1,0 +1,212 @@
+CREATE TABLE `obo_professional_info` (
+  `objid` varchar(50) NOT NULL DEFAULT '',
+  `firstname` varchar(100) DEFAULT NULL,
+  `middlename` varchar(100) DEFAULT NULL,
+  `lastname` varchar(100) DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
+  `gender` varchar(1) DEFAULT NULL,
+  `resident` int(255) DEFAULT NULL,
+  `address_objid` varchar(50) DEFAULT NULL,
+  `address_text` varchar(255) DEFAULT NULL,
+  `address_unitno` varchar(50) DEFAULT NULL,
+  `address_bldgno` varchar(50) DEFAULT NULL,
+  `address_bldgname` varchar(100) DEFAULT NULL,
+  `address_street` varchar(255) DEFAULT NULL,
+  `address_subdivision` varchar(255) DEFAULT NULL,
+  `address_barangay_objid` varchar(50) DEFAULT NULL,
+  `address_barangay_name` varchar(50) DEFAULT NULL,
+  `address_citymunicipality` varchar(50) DEFAULT NULL,
+  `address_province` varchar(50) DEFAULT NULL,
+  `tin` varchar(50) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `mobileno` varchar(50) DEFAULT NULL,
+  `phoneno` varchar(50) DEFAULT NULL,
+  `id_idno` varchar(50) DEFAULT NULL,
+  `id_type_name` varchar(50) DEFAULT NULL,
+  `id_dtissued` date DEFAULT NULL,
+  `id_placeissued` varchar(50) DEFAULT NULL,
+  `profession` varchar(100) DEFAULT NULL,
+  `prc_idno` varchar(50) DEFAULT NULL,
+  `prc_dtissued` date DEFAULT NULL,
+  `prc_dtvalid` date DEFAULT NULL,
+  `prc_placeissued` varchar(50) DEFAULT NULL,
+  `ptr_refno` varchar(50) DEFAULT NULL,
+  `ptr_dtissued` date DEFAULT NULL,
+  `ptr_placeissued` varchar(50) DEFAULT NULL,
+  `profid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE
+);
+
+ALTER TABLE obo_professional_info
+ADD COLUMN `xprc_dtissued` varchar(50) DEFAULT NULL;
+ALTER TABLE obo_professional_info
+ADD COLUMN `xprc_dtvalid` varchar(50) DEFAULT NULL;
+ALTER TABLE obo_professional_info
+ADD COLUMN `xptr_dtissued` varchar(50) DEFAULT NULL;
+ALTER TABLE obo_professional_info
+ADD COLUMN `xid_dtissued` varchar(50) DEFAULT NULL;
+
+CREATE TABLE `obo_professional` (
+  `objid` varchar(50) NOT NULL,
+  `prcno` varchar(50) NOT NULL,
+  `profession` varchar(255) DEFAULT NULL,
+  `infoid` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`objid`) USING BTREE,
+  UNIQUE KEY `uix_obo_professional_prcno_profession` (`prcno`,`profession`),
+  KEY `fk_obo_professional_infoid` (`infoid`),
+  CONSTRAINT `fk_obo_professional_infoid` FOREIGN KEY (`infoid`) REFERENCES `obo_professional_info` (`objid`)
+);
+
+
+INSERT INTO obo_professional_info 
+(objid,name,firstname,middlename,lastname,resident,
+address_objid,address_text,address_unitno,address_bldgno,address_bldgname,address_street,
+address_subdivision,address_barangay_objid,address_barangay_name,address_citymunicipality,address_province,
+tin,email,mobileno,phoneno,profession)
+SELECT 
+p.objid,pe.name,pe.firstname,pe.middlename,pe.lastname,pe.resident,pe.address_objid,
+pe.address_text,pe.address_unitno,pe.address_bldgno,pe.address_bldgname,pe.address_street,
+pe.address_subdivision,pe.address_barangay_objid,pe.address_barangay_name,pe.address_citymunicipality,
+pe.address_province,pe.tin,pe.email,pe.mobileno,pe.phoneno,p.profession
+FROM online_building_permit_professional p
+INNER JOIN online_building_permit_entity pe ON p.entityid = pe.objid;
+
+UPDATE obo_professional_info pi, 
+( SELECT 
+  b.profid AS objid,
+  SUBSTR( b.prc, b.prc_idno_start, b.prc_idno_len ) AS prc_idno,
+  SUBSTR( b.prc, b.prc_dtissued_start, b.prc_dtissued_len ) AS prc_dtissued,
+  SUBSTR( b.prc, b.prc_placeissued_start, b.prc_placeissued_len ) AS prc_placeissued,
+  SUBSTR( b.prc, b.prc_dtvalid_start, b.prc_dtvalid_len ) AS prc_dtvalid,
+  SUBSTR( b.ptr, b.ptr_refno_start, b.ptr_refno_len ) AS ptr_refno,
+  SUBSTR( b.ptr, b.ptr_dtissued_start, b.ptr_dtissued_len ) AS ptr_dtissued,
+  SUBSTR( b.ptr, b.ptr_placeissued_start, b.ptr_placeissued_len ) AS ptr_placeissued  
+FROM
+(
+  SELECT a.*, 
+  LOCATE( '"', a.prc, a.prc_idno_start ) - a.prc_idno_start AS prc_idno_len,
+  LOCATE( '"', a.prc, a.prc_dtissued_start ) - a.prc_dtissued_start AS prc_dtissued_len,
+  LOCATE( '"', a.prc, a.prc_placeissued_start ) - a.prc_placeissued_start AS prc_placeissued_len,
+  LOCATE( '"', a.prc, a.prc_dtvalid_start ) - a.prc_dtvalid_start AS prc_dtvalid_len,   
+  LOCATE( '"', a.ptr, a.ptr_refno_start ) - a.ptr_refno_start AS ptr_refno_len,
+  LOCATE( '"', a.ptr, a.ptr_dtissued_start ) - a.ptr_dtissued_start AS ptr_dtissued_len,
+  LOCATE( '"', a.ptr, a.ptr_placeissued_start ) - a.ptr_placeissued_start AS ptr_placeissued_len
+  FROM
+  ( SELECT p.prc, p.objid AS profid, pe.objid AS entityid, 
+    POSITION('idno:"' IN p.prc)+6 AS prc_idno_start, 
+    POSITION('dtissued:"' IN p.prc )+10 AS prc_dtissued_start,
+    POSITION('placeissued:"' IN p.prc )+13 AS prc_placeissued_start,
+    POSITION('dtvalid:"' IN p.prc )+9 AS prc_dtvalid_start,  
+    p.ptr, 
+    POSITION('idno:"' IN p.ptr)+6 AS ptr_refno_start, 
+    POSITION('dtissued:"' IN p.ptr )+10 AS ptr_dtissued_start,
+    POSITION('placeissued:"' IN p.ptr )+13 AS ptr_placeissued_start
+    FROM online_building_permit_professional p
+    INNER JOIN online_building_permit_entity pe ON p.entityid = pe.objid
+  ) a
+)b
+) p 
+SET pi.prc_idno = p.prc_idno,
+  pi.prc_dtissued = p.prc_dtissued,
+  pi.prc_placeissued=p.prc_placeissued,
+  pi.prc_dtvalid=p.prc_dtvalid,
+  pi.ptr_refno=p.ptr_refno,
+  pi.ptr_dtissued=p.ptr_dtissued,
+  pi.ptr_placeissued=p.ptr_placeissued,
+  pi.xprc_dtissued =  p.prc_dtissued,
+  pi.xprc_dtvalid = p.prc_dtvalid,
+  pi.xptr_dtissued = p.ptr_dtissued
+WHERE pi.objid = p.objid ; 
+
+UPDATE obo_professional_info pi, 
+(SELECT 
+  b.profid AS objid,
+  SUBSTR( b.id, b.id_type_start, b.id_type_len ) AS id_type_name,
+  SUBSTR( b.id, b.id_idno_start, b.id_idno_len ) AS id_idno,
+  SUBSTR( b.id, b.id_dtissued_start, b.id_dtissued_len ) AS id_dtissued,
+  SUBSTR( b.id, b.id_placeissued_start, b.id_placeissued_len ) AS id_placeissued
+FROM  
+(
+  SELECT a.*, 
+  LOCATE( '"', a.id, a.id_type_start ) - a.id_type_start AS id_type_len,
+  LOCATE( '"', a.id, a.id_idno_start ) - a.id_idno_start AS id_idno_len,
+  LOCATE( '"', a.id, a.id_dtissued_start ) - a.id_dtissued_start AS id_dtissued_len,
+  LOCATE( '"', a.id, a.id_placeissued_start ) - a.id_placeissued_start AS id_placeissued_len
+  FROM
+  ( 
+    SELECT pe.id, p.objid AS profid,
+    POSITION('name:"' IN pe.id)+6 AS id_type_start,     
+    POSITION('idno:"' IN pe.id)+6 AS id_idno_start, 
+    POSITION('dtissued:"' IN pe.id )+10 AS id_dtissued_start,
+    POSITION('placeissued:"' IN pe.id )+13 AS id_placeissued_start
+    FROM online_building_permit_professional p
+    INNER JOIN online_building_permit_entity pe ON p.entityid = pe.objid
+    WHERE NOT( pe.id IS NULL )
+  ) a 
+) b
+) p 
+SET 
+pi.id_type_name=p.id_type_name, 
+pi.id_idno=p.id_idno,
+pi.id_dtissued=p.id_dtissued, 
+pi.id_placeissued=p.id_placeissued,
+pi.xid_dtissued=p.id_dtissued
+WHERE pi.objid = p.objid;
+
+
+ALTER TABLE `online_building_permit` DROP FOREIGN KEY `fk_online_building_permit_contractorid`;
+
+ALTER TABLE `online_building_permit` 
+ADD CONSTRAINT `fk_online_building_permit_contractorid` FOREIGN KEY (`contractorid`) REFERENCES `obo_professional_info` (`objid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `online_building_permit_ancillary` DROP FOREIGN KEY `fk_online_building_application_ancillary_professionalid`;
+
+ALTER TABLE `online_building_permit_ancillary` DROP FOREIGN KEY `fk_online_building_application_ancillary_supervisorid`;
+
+ALTER TABLE `online_building_permit_ancillary` 
+ADD CONSTRAINT `fk_online_building_application_ancillary_professionalid` FOREIGN KEY (`designprofessionalid`) REFERENCES `obo_professional_info` (`objid`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+ADD CONSTRAINT `fk_online_building_application_ancillary_supervisorid` FOREIGN KEY (`supervisorid`) REFERENCES `obo_professional_info` (`objid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `online_building_permit_professional` DROP FOREIGN KEY `online_building_permit_professional_entityid`;
+
+DELETE FROM online_building_permit_entity 
+WHERE objid IN (SELECT entityid FROM online_building_permit_professional );
+
+CREATE TABLE `obo_profession` (
+  `name` varchar(50) NOT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`name`)
+);
+
+INSERT INTO obo_profession( name,title )
+VALUES
+('ARCHITECT', UPPER('Architect')),
+('CIVIL_ENGINEER', UPPER('Civil Engineer')),
+('ELECTRONICS_ENGINEER', UPPER('Electronics Engineer')),
+('GEODETIC_ENGINEER', UPPER('Geodetic engineer')),
+('INTERIOR_DESIGNER', UPPER('Interior Designer')),
+('LANDSCAPE_ARCHITECT', UPPER('Landscape architect')),
+('MASTER_PLUMBER', UPPER('Master plumber')),
+('MECHANICAL_ENGINEER', UPPER('Mechanical engineer')),
+('PROFESSIONAL_ELECTRICAL_ENGINEER', UPPER('Professional electrical engineer')),
+('PROFESSIONAL_ELECTRONICS_ENGINEER', UPPER('Professional electronics engineer')),
+('PROFESSIONAL_MECHANICAL_ENGINEER', UPPER('Professional mechanical engineer')),
+('REGISTERED_ELECTRICAL_ENGINEER', UPPER('Registered electrical engineer')),
+('REGISTERED_MASTER_ELECTRICIAN', UPPER('Registered master electrician')),
+('SANITARY_ENGINEER', UPPER('Sanitary engineer'));
+
+UPDATE obo_professional_info SET profession = 'CIVIL ENGINEER' WHERE profession='CIVIL/STRUCTURAL ENGINEER';
+UPDATE obo_professional_info SET profession = 'MECHANICAL ENGINEER' WHERE profession='REGISTERED MECHANICAL ENGINEER';
+
+DROP VIEW vw_online_building_permit_professional;
+
+UPDATE obo_professional_info SET id_dtissued = NULL WHERE id_dtissued = '0000-00-00'; 
+UPDATE obo_professional_info SET prc_dtissued = NULL WHERE prc_dtissued = '0000-00-00'; 
+UPDATE obo_professional_info SET prc_dtvalid = NULL WHERE prc_dtvalid = '0000-00-00'; 
+UPDATE obo_professional_info SET ptr_dtissued = NULL WHERE ptr_dtissued = '0000-00-00'; 
+
+ALTER TABLE `obo_professional_info` 
+ADD CONSTRAINT `fk_obo_professional_info_profid` FOREIGN KEY (`profid`) REFERENCES `obo_professional` (`objid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `obo_professional_info` 
+ADD CONSTRAINT `fk_obo_professional_info_id_type_name` FOREIGN KEY (`id_type_name`) REFERENCES `idtype` (`name`) ON DELETE RESTRICT ON UPDATE RESTRICT;

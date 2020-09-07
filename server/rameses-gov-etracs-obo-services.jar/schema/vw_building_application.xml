@@ -50,6 +50,7 @@
 		<field name="occupancytype_group_objid" />
 		<field name="occupancytype_group_title" />
 		<field name="task_state" />
+		<field name="task_dtcreated" />
 		<field name="task_startdate" />
 		<field name="task_enddate" />
 		<field name="task_assignee_objid" />
@@ -57,6 +58,8 @@
 		<field name="task_actor_objid" />
 		<field name="task_actor_name" />
 		<field name="task_title" />
+		<field name="task_tracktime" />
+
 		<field name="contractorid" />
 		<field name="txnmode" />
 		
@@ -70,6 +73,7 @@
 		<field name="expirydate" />
 		<field name="issuedby_name" />
 		<field name="template" />
+		<field name="txntype" />
 	</element>
 </schema>	
 

@@ -34,6 +34,11 @@
                 index="2"
                 visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
        
+       <invoker type="appActions" 
+                caption="Change Txn Type"
+                action="changeTxnType" 
+                visibleWhen="#{ task.assignee.objid == userInfo.userid }" />
+       
         <invoker type="appActions" 
                 caption="Issue Permit"
                 action="issuePermit" 

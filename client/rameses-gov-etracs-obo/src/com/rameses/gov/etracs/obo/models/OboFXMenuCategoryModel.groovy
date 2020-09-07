@@ -44,7 +44,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
             int i = 100;
             list.each {
                 def id = title + "/" + it.objid;
-                def notid = title + ":" + it.objid.toLowerCase();
+                def notid = (title + ":" + it.objid.toLowerCase()).trim();
                 def subitem = [ id: id, caption: it.title, index: (i++), notificationid: notid, event: title ];
                 subitems << subitem;
                 def sinv = title + ":list"
