@@ -26,6 +26,12 @@ class BuildingApplicationService {
 	@DataContext("building_issuance")
 	def issEm;
 
+	@DataContext("vw_building_application")
+	def vwAppEm;
+
+	@DataContext("vw_building_evaluation")
+	def vwEvalEm;
+
 	@Env
 	def env;
 
@@ -45,6 +51,25 @@ class BuildingApplicationService {
 		return u;
 	} 
 
+	@ProxyMethod
+	public def verifyApp( def o  ) {
+		def app = vwAppEm.find( o ).first();
+		if(!app) throw new Exception("Application does not exist");
+		return [trackingno:app.trackingno, appno:app.appno, email: app.contact.email, mobileno: app.contact.mobileno ];
+	}
+
+	@ProxyMethod
+	public def findAppStatus( def o  ) {
+		def app = vwAppEm.find( o ).first();
+		if(app.task.tracktime !=1) {
+			app.task.assignee = [name:"Applicant"];
+		}
+
+		if( app.task.state == 'trade-evaluation' ) {
+			app.subtasks = vwEvalEm.find( [appid: app.objid ]).where("task.state NOT IN ('start','end','obo-processing')").list();
+		}
+		return app;
+	}
 	
 	@ProxyMethod
 	public void issuePermitNo( def p ) {

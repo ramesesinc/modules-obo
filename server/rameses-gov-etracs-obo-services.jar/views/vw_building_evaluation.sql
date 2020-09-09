@@ -17,9 +17,8 @@ SELECT
    t.actor_objid AS task_actor_objid,
    t.actor_name AS task_actor_name,
    sn.title AS task_title,
-   TIME_TO_SEC( TIMEDIFF( CASE WHEN t.enddate IS NULL THEN NOW() ELSE t.enddate END, t.dtcreated )) AS task_timediff 
+   sn.tracktime AS task_tracktime
 
-   
 FROM building_evaluation a 
 INNER JOIN building_evaluation_task t ON a.taskid = t.taskid 
 INNER JOIN building_evaluation_type et ON a.typeid = et.objid 

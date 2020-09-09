@@ -53,7 +53,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel16 = new com.rameses.rcp.control.XLabel();
         xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel3 = new com.rameses.rcp.control.XLabel();
-        xLabel21 = new com.rameses.rcp.control.XLabel();
         xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
         xLabel5 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
@@ -95,6 +94,8 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         schemaList7 = new com.rameses.seti2.components.SchemaList();
+        jPanel3 = new javax.swing.JPanel();
+        applicationRequirementList2 = new com.rameses.gov.etracs.common.components.ApplicationRequirementList();
         pnlEval = new com.rameses.rcp.control.XPanel();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xRadio1 = new com.rameses.rcp.control.XRadio();
@@ -147,8 +148,9 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xFormPanel1.add(xLabel7);
 
         xLabel6.setCaption("Location");
-        xLabel6.setExpression("#{entity.location.text}");
-        xLabel6.setPreferredSize(new java.awt.Dimension(0, 20));
+        xLabel6.setExpression("<html>#{entity.location.text}</html>");
+        xLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel6.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel6);
 
         xLabel4.setCaption("Applicant");
@@ -192,7 +194,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel37.setPreferredSize(new java.awt.Dimension(150, 20));
         xFormPanel1.add(xLabel37);
 
-        xLabel34.setCaption("Project Cost");
+        xLabel34.setCaption("Est. Project Cost");
         xLabel34.setExpression("#{entity.projectcost}");
         xLabel34.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         xLabel34.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -230,15 +232,10 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel2);
 
-        xLabel3.setCaption("Division");
-        xLabel3.setExpression("#{entity.occupancytype.division.objid}");
+        xLabel3.setCaption("Group / Division");
+        xLabel3.setExpression("#{entity.occupancytype.group.objid} / #{entity.occupancytype.division.objid}");
         xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel3);
-
-        xLabel21.setCaption("Group");
-        xLabel21.setExpression("#{entity.occupancytype.group.objid}");
-        xLabel21.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel21);
 
         xFormPanel3.setCaption("");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
@@ -868,12 +865,12 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
             })
         });
         schemaList6.setHandlerName("reqListHandler");
-        schemaList6.setId("reqListHandler");
         schemaList6.setOrderBy("type.sortorder");
         schemaList6.setQueryName("reqQuery");
+        schemaList6.setSchemaName("building_application_requirement");
+        schemaList6.setId("reqListHandler");
         schemaList6.setRowHeight(20);
         schemaList6.setRows(50);
-        schemaList6.setSchemaName("building_application_requirement");
         jPanel7.add(schemaList6, java.awt.BorderLayout.CENTER);
 
         xTabbedPane3.addTab("Items", jPanel7);
@@ -952,6 +949,15 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         jPanel11.add(schemaList7, java.awt.BorderLayout.CENTER);
 
         xTabbedPane3.addTab("Transmittals", jPanel11);
+
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        applicationRequirementList2.setAppid("entity.objid");
+        applicationRequirementList2.setSchemaName("building_application_requirement");
+        applicationRequirementList2.setVisibleWhen("#{ entity.txntype == 'COMPLEX' }");
+        jPanel3.add(applicationRequirementList2, java.awt.BorderLayout.CENTER);
+
+        xTabbedPane3.addTab("tab3", jPanel3);
 
         pnlReq.add(xTabbedPane3, java.awt.BorderLayout.CENTER);
 
@@ -1378,10 +1384,12 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.rameses.gov.etracs.common.components.ApplicationRequirementList applicationRequirementList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -1423,7 +1431,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel19;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel20;
-    private com.rameses.rcp.control.XLabel xLabel21;
     private com.rameses.rcp.control.XLabel xLabel22;
     private com.rameses.rcp.control.XLabel xLabel23;
     private com.rameses.rcp.control.XLabel xLabel24;

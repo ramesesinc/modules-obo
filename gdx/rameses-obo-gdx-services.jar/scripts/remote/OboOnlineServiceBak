@@ -11,19 +11,18 @@ class OboOnlineService  {
     @Service(value="EntityService", connection="local-entity-server")
     def entitySvc;
 
+    @Service(value="BuildingPermitOnlineService", connection="local-obo-server")
+    def localOboSvc;
+
     @Service(value="BuildingPermitService", connection="local-obo-server")
     def bldgPermitSvc;
 
-    @Service(value="BuildingApplicationService", connection="local-obo-server")
-    def appSvc;
+    @Service(value="obo/OnlineBuildingPermitDownloadService", connection="cloud-server")
+    def downloadSvc;
 
     @ProxyMethod
     public def findLocation( def params ) {
-        println "FINDING LOCATION"
         def info = svc.verifyTaxDec(params);
-        info.each { k,v->
-            println k+"="+v;
-        }
 
         if(info.state != "CURRENT" ) {
             throw new Exception("The tax declaration must be in current state. Please verify with the assessors office");
@@ -57,27 +56,23 @@ class OboOnlineService  {
         info.owner.resident =  (entity.address.type == "nonlocal") ? 0 : 1;
         return info;
     }
+    
+    @ProxyMethod
+    public def submitOnlineApplication( def o ) {
+        def app = downloadSvc.getInfo( [appid: o.appid ] );
+        localOboSvc.upload( app );
+        return [status: 'OK'];
+    }
 
     @ProxyMethod
     public def findBldgPermitNo( def params ) {
         def res = bldgPermitSvc.findByPermitNo( [permitno: params.permitno ] );
         if(res==null)
             throw new Exception("Permit no " + params.permitno + " not found");
+        res.each { k,v->
+            println k+"="+v;
+        }
         return res;
-    }
-
-    @ProxyMethod
-    public def verifyApplication( def params ) {
-        def app = appSvc.verifyApp(params);
-        Random rand = new Random();
-        def otp = rand.nextInt(100000000);
-        app.key = String.format("%06d", otp).substring(0,6);
-        return app;
-    }
-
-    @ProxyMethod
-    public def findApplicationStatus( def params ) {
-        return appSvc.findAppStatus(params);
     }
 
 }
