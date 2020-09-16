@@ -1,0 +1,31 @@
+import com.rameses.annotations.*;
+
+class AncillaryPermitReportInterceptor {
+
+	@Service(value="OnlineBuildingPermitService", connection="cloud-obo-server")
+	def oboReportSvc;
+
+	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('electricalpermit') }" )
+	public def beforeGenerateReport( evt ) {
+		def req = evt.args[0];
+		def reportid =  req.reportid;
+		def refid = req.params?.refid;
+
+	 	def app = oboReportSvc.getAncillaryPermit([ objid: refid ]);
+	 	def parent = oboReportSvc.getApplication([ appid: app.appid ]);
+		if ( parent) { 
+			app.putAll( parent );
+		}
+
+		app.lotowner  = app.location?.owner;
+		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename[0].toString() : '');
+
+		def infos = oboReportSvc.getAppInfos([ parentid: refid, typeid: app.permittypeid ]);
+		infos.each {
+			app.put( it.name.toLowerCase(), it.value );	
+		}	
+		req.data = app;
+		req.template = reportid;
+		req.modulename = "obo";
+	}
+}
