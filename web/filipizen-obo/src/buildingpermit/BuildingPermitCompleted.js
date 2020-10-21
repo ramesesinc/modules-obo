@@ -121,12 +121,12 @@ const BuildingPermitCompleted = ({
           <Panel style={styles.linkContainer}>
             <ButtonLink
               caption="Preview"
-              href={`/jreports/obo/bldgpermit?refid=${appno}`}
+              href={`/jreports/obo/buildingpermit?refid=${appno}`}
               Icon={PageviewIcon}
             />
             <ButtonLink
               caption="Download"
-              href={`/jreports/download/obo/bldgpermit?refid=${appno}`}
+              href={`/jreports/download/obo/buildingpermit?refid=${appno}`}
               Icon={CloudDownloadIcon}
             />
           </Panel>

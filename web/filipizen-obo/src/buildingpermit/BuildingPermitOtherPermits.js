@@ -69,11 +69,7 @@ const BuildingPermitOtherPermits = ({
 
   useEffect(() => {
     loadAncillaryPermits();
-  }, [mode]);
-
-  useEffect(() => {
-    loadAncillaryPermits();
-  }, [loaded]);
+  }, [mode, loaded]);
 
   const submitSelectedAncillaryPermits = () => {
     const selectedPermits = availableAncillaryPermits.filter((permit => permit.selected === true));
@@ -98,7 +94,6 @@ const BuildingPermitOtherPermits = ({
       if (err) {
         setError(err);
       } else {
-        console.log("workTypes", workTypes);
         workTypes.forEach(wt => {
           if (permit.worktypes.findIndex(pwt => pwt.toLowerCase() === wt.name.toLowerCase()) >= 0) {
             wt.checked = true;
@@ -228,7 +223,6 @@ const BuildingPermitOtherPermits = ({
   let hasIncompletePermit = false;
   if (ancillaryPermits.length > 0) {
     const idx = ancillaryPermits.findIndex(permit => !permit.designprofessionalid);
-    console.log("idx", idx)
     hasIncompletePermit =  idx >= 0;
   }
 

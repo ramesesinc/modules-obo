@@ -72,8 +72,8 @@ public class OboProfessionalService  {
 		def filter = [];
 		if (!params) params = [:];
 		if (params.prc?.idno) {
-			params.prcno = params.prc.idno;
-			filter << "prcno = :prcno";
+			params.idno = params.prc.idno;
+			filter << "prc_idno = :idno";
 		}
 		if (params.lastname) filter << "lastname LIKE :lastname";
 		if (params.firstname) filter << "firstname LIKE :firstname";
