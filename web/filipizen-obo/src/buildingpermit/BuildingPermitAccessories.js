@@ -53,7 +53,7 @@ const BuildingPermitAccessories = ({
 
   const loadAccessoryOccupancyTypes = () => {
     const svc = Service.lookup("OboMiscListService", "obo");
-    svc.getAccessoryOccupancyTypes((err, occupancyTypes) => {
+    svc.invoke("getAccessoryOccupancyTypes", null, (err, occupancyTypes) => {
       if (err) {
         setError(err);
       } else {

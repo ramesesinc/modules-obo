@@ -88,7 +88,7 @@ const OccupancyPermitInitial = ({
   const loadBuildingPermit = () => {
     if (bldgPermitNo) {
       setError(null);
-      const svc = Service.lookup(`${partner.id}:OboOnlineService`);
+      const svc = Service.lookup(`${partner.id}:OboOnlineService`, "obo");
       svc.findBldgPermitNo({permitno: bldgPermitNo}, (err, permit) => {
         if (err) {
           setError(err);

@@ -2,26 +2,14 @@ import React, { useState, useEffect } from "react";
 import {
   ActionBar,
   Button,
-  Checkbox,
   Panel,
   Error,
   Subtitle,
-  Subtitle2,
-  FormPanel,
-  Text,
   Spacer,
-  BackLink,
-  Service,
-  Integer,
-  Decimal,
-  Date,
 } from "rsi-react-web-components";
 
 import ProfessionalLookup from "../components/ProfessionalLookup";
 import ProfessionalCard from "../components/ProfessionalCard";
-
-const svc = Service.lookup("OboMiscListService", "obo");
-
 
 const BuildingPermitContractor = ({
   partner,

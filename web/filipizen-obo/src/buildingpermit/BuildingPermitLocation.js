@@ -49,8 +49,8 @@ const BuildingPermitLocation = (props) => {
 
   const findProperty = () => {
     const orgcode = partner.orgcode || partner.id;
-    const svc = Service.lookup( orgcode + ":OboOnlineService" );
-    svc.findLocation( { refno: refno || newRefno }, (err, property) => {
+    const svc = Service.lookup( orgcode + ":OboOnlineService", "obo");
+    svc.invoke("findLocation", { refno: refno || newRefno }, (err, property) => {
       if (err) {
         setError(err);
       } else {

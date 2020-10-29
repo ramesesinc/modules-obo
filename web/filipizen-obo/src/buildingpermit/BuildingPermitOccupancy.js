@@ -11,7 +11,6 @@ import {
   Spacer,
   BackLink,
   Service,
-  MsgBox,
 } from "rsi-react-web-components";
 
 const svc = Service.lookup("OboMiscListService", "obo");
@@ -75,7 +74,7 @@ const BuildingPermitOccupancy = ({
   }, [])
 
   const loadOccupancyGroups = () => {
-    svc.getOccupancyTypeGroups((err, groups) => {
+    svc.invoke("getOccupancyTypeGroups", null, (err, groups) => {
       if (err) {
         setError(err)
       } else {
@@ -86,7 +85,7 @@ const BuildingPermitOccupancy = ({
 
   const loadOccupancyDivisions = () => {
     const groupid = project.occupancytype.group.objid;
-    svc.getOccupancyTypeDivisions({groupid} ,(err, divisions) => {
+    svc.invoke("getOccupancyTypeDivisions", {groupid} ,(err, divisions) => {
       if (err) {
         setError(err)
       } else {
@@ -97,7 +96,7 @@ const BuildingPermitOccupancy = ({
 
   const loadOccupancyTypes = () => {
     const divisionid = project.occupancytype.division.objid;
-    svc.getOccupancyTypes({divisionid} ,(err, types) => {
+    svc.invoke("getOccupancyTypes", {divisionid} ,(err, types) => {
       if (err) {
         setError(err)
       } else {

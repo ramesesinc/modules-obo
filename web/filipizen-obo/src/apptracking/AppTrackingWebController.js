@@ -36,8 +36,8 @@ const AppTrackingWebController = (props) => {
     if (!trackingno) {
       setError('Tracking No. is required.')
     } else {
-      const svc = Service.lookup(`${partner.id}:OboOnlineService`);
-      svc.verifyApplication({ trackingno }, (err, info) => {
+      const svc = Service.lookup(`${partner.id}:OboOnlineService`, "obo");
+      svc.invoke("verifyApplication", { trackingno }, (err, info) => {
         if (err) {
           setError(err);
         } else {
@@ -60,8 +60,8 @@ const AppTrackingWebController = (props) => {
 
   const getApplicationStatus = () => {
     setLoading(true);
-    const svc = Service.lookup(`${partner.id}:OboOnlineService`);
-    svc.findApplicationStatus({ trackingno }, (err, app) => {
+    const svc = Service.lookup(`${partner.id}:OboOnlineService`, "obo");
+    svc.invoke("findApplicationStatus", { trackingno }, (err, app) => {
       if (err) {
         setError(err);
       } else {
