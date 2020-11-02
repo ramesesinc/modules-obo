@@ -161,7 +161,7 @@ public class BuildingApplicationFeeService  {
 
 	@ProxyMethod
 	public def clearFees(def o ) {
-		if(!o.appid) throw new Exception("appid is required in clearFees");
+		if(!o.appid && !o.parentid) throw new Exception("appid or parentid is required in clearFees");
 		if( o.parentid ) {
 			feeEm.find( [parentid: o.parentid ]).delete();
 		}

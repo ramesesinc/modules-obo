@@ -11,6 +11,9 @@ class BuildingApplicationInitialService {
 	@DataContext("building_application")
 	def appEm;
 
+	@DataContext("building_info")
+	def binfoEm;
+
 	@DataContext("vw_building_application")
 	def vwAppEm;
 
@@ -47,7 +50,7 @@ class BuildingApplicationInitialService {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@Service(value="OnlineBuildingPermitDownloadService", connection="cloud-obo-server")
+	@Service(value="obo/OnlineBuildingPermitDownloadService", connection="cloud-server")
     def cloudBldgSvc;
 
     @Env
@@ -90,10 +93,17 @@ class BuildingApplicationInitialService {
 			updateProfessional( it.supervisor );
 		}
 
-		def u = [:]
-		u.applicantid = app.remove("applicantid");
+		//assign an objid to the application. This should be same value as the info.
+		app.objid = "BAPP" + new UID();
+
+		//remove application before so it can be replaced
+		def applicantid = app.remove("applicantid");
+		def bb = binfoEm.create( app );
+		app.infoid = bb.objid;
+		app.txnmode = "ONLINE";
 
 		def newapp = appEm.create( app );
+
 		app.entities.each {
 			it.appid = newapp.objid;
 			entityEm.create( it );
@@ -104,6 +114,7 @@ class BuildingApplicationInitialService {
 			rpuEm.create( it );
 		}
 		
+		//insert items in sub doc ancillaries,accessories and all other subdocs 
 		app.accessories.each {
 			it.appid = newapp.objid;
 			it.state = 0;
@@ -118,15 +129,24 @@ class BuildingApplicationInitialService {
 			it.doctype = [ objid: it.permittypeid.toUpperCase() ];
 			it.amount = 0;
 			it.state = 0;
-			it.occupancytypeid = '';
 			subdocEm.create( it );
+		};
+
+		//save all documents that are auto create that does not exist above
+		subdocEm.getBuildingSubdocsToAutoCreate().each {
+			def sd = [:];
+			sd.appid = newapp.objid;
+			sd.doctype = [objid: it.objid];
+			sd.amount = 0;
+			sd.state = 0;
+			subdocEm.create( sd );			
 		}
+
 		app.infos.each {
 			it.appid = newapp.objid;
 			it.type = [name: it.name ];
 			appInfoEm.create( it );
 		}
-		appEm.find( [objid: newapp.objid ] ).update( u );
 
 		//immediatly accept and fire the workflow
 		app = newapp;
@@ -138,9 +158,15 @@ class BuildingApplicationInitialService {
 		param.occupancytype = app.occupancytype;
 
 		def cost = costSvc.calc( param );
-		u = [:];
-		u.fixedcost = cost;
-		appEm.find( [objid: app.objid ] ).update( u );
+
+		//update applicant, cost and appid for info
+		def u = [:];
+		u.createdby = [objid: env.USERID, name: env.FULLNAME];
+		u.dtcreated = dt;
+		u.applicantid = applicantid;
+		u.appid = newapp.objid;
+		u.fixedcost = cost; 
+		binfoEm.find( [objid: newapp.objid ] ).update( u );
 
 		//update the requirements
 		def reqTypes = reqTypeEm.where("permittype = 'building_application' ").list();

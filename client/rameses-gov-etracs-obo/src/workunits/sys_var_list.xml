@@ -1,31 +1,6 @@
-<workunit extends="com/rameses/seti2/templates/CrudList.xml" 
-         allowDelete="false" schemaName="sys_var" >
+<workunit extends="enterprise/templates/SysVarList.xml" >
     <invokers>
-        <invoker folderid="/explorer/setting" caption="OBO" 
-                 cols="name,value,description"
-                 action="init" index="50" role="MASTER"/>
+        <invoker folderid="/explorer/master/obo" caption="System Variables" 
+                 action="init" index="102" role="MASTER"/>
     </invokers>
-    <code>
-        <![CDATA[
-        import com.rameses.rcp.annotations.*;
-        import com.rameses.rcp.common.*;
-        import com.rameses.seti2.models.*;
-        import com.rameses.osiris2.common.*;
-        import com.rameses.util.*;
-        import com.rameses.osiris2.client.*;
-        
-        class VarModel extends CrudListModel {
-        
-            public def open() {
-                return Inv.lookupOpener("obo_sys_var:open", [entity: selectedItem] );
-            }
-            
-            public def create() {
-                return Inv.lookupOpener("obo_sys_var:create", [entity: [:]] );
-            }
-        
-        }
-        
-        ]]>
-    </code>    
 </workunit>

@@ -1,0 +1,6 @@
+<workunit extends="enterprise/templates/SysSignatureList.xml">
+    <invokers>
+        <invoker folderid="explorer/master/obo" caption="Signature List" action="init" 
+                 role="MASTER"/>
+    </invokers>
+</workunit>

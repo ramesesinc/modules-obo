@@ -7,6 +7,9 @@ class OccupancyApplicationWorkflowInterceptor {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
+	@Service("WorkflowNotificationService")
+    def wfNotificationSvc;
+
 	@Service("DateService")
 	def dateSvc;
 
@@ -47,6 +50,8 @@ class OccupancyApplicationWorkflowInterceptor {
 	@Service("OccupancyApplicationService")
     def appSvc;
 
+
+
     /*
     @Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' }") 
 	public void testAction( def evt ) {
@@ -86,8 +91,6 @@ class OccupancyApplicationWorkflowInterceptor {
 		appSvc.generateAppNo( [appid: p.refid ] );
 	}
 
-	
-
 	//trigger when entering evaluation state
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'send-for-inspection' }") 
 	public void beforeSendForInspection( def evt ) {
@@ -106,6 +109,7 @@ class OccupancyApplicationWorkflowInterceptor {
 		def state = r.state;
 
 		def mlist = appEm.getInspectionsToActivate( [appid: appid ] );
+		p._notificationlist = [];
 		if( mlist ) {
 			def dt = dateSvc.getServerDate();
 			mlist.each {
@@ -115,13 +119,24 @@ class OccupancyApplicationWorkflowInterceptor {
 					m = inspEm.create( m );
 					def f = [:];
 					f.processname = 'occupancy_inspection';
-					f.notificationid = 'occupancy_inspection:'+it.objid.toLowerCase();
 					f.refid = m.objid;
 					f.startdate = dt;
 					f.info = [ type: it.objid, appid: appid ];
-					wfSvc.start(f);				
+					wfSvc.start(f);		
+
+					//we need to do this so we can fire this later. see next interceptor		
+					p._notificationlist << 'occupancy_inspection:'+it.objid.toLowerCase();
 				}
 			}
+		}
+	}
+
+	//this should fire after all the tasks have been saved
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0]._notificationlist!=null }", index=50000) 
+	public void afterFireInspectionSections( def evt ) {
+		def p = evt.args[0];
+		p._notificationlist.each {
+			wfNotificationSvc.notify( [notificationid: it] );
 		}
 
 		//notify the google mail calendar after sending the inspections

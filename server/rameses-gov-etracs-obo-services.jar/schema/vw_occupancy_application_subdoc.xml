@@ -4,7 +4,7 @@
 		<field name="appid" required="true"/>
 		<field name="state" required="true" type="integer"/>
 
-		<complex name="doctype" ref="vw_building_doc_type" jointype="many-to-one" required="false">
+		<complex name="doctype" ref="obo_doctype" jointype="many-to-one" required="false">
 			<key field="doctypeid" target="objid" />
 		</complex>  
 

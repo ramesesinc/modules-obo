@@ -4,9 +4,8 @@
         <!--
         <invoker type="obo_professional:create" caption="New Profession"  action="create" target="popup"/>
         -->
-        <invoker type="obo_professional:open" caption="Profession"  action="open" target="popup"/>
+        <invoker type="vw_obo_professional:open" caption="Profession"  action="open" target="popup"/>
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboProfessionalModel" />
     <pages>
         <page template="com.rameses.gov.etracs.obo.views.OboProfessionalPage" />
     </pages>

@@ -1,0 +1,10 @@
+<workunit schemaName="obo_doctype">
+    <invokers>       
+        <invoker type="obo_doctype:open" action="open" caption="Document Type" role="MASTER" target="popup"/>
+        <invoker type="obo_doctype:create" action="create" caption="Document Type" role="MASTER"  target="popup"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboDocTypeModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboDocTypePage"/>
+    </pages>
+</workunit>

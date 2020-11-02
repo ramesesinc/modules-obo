@@ -7,7 +7,7 @@ class OboUserRoleService {
 	@Env
 	def env;
 
-	@Service(value='UserRoleService', connection="admin-server")
+	@Service(value='UserRoleService', connection="admin")
     def roleSvc;
 
 	@ProxyMethod

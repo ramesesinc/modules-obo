@@ -17,7 +17,7 @@ class BuildingApplicationService {
 	@DataContext("building_permit")
 	def permitEm;
 
-	@DataContext("building_doc_type")
+	@DataContext("obo_doctype")
 	def docTypeEm;
 
 	@DataContext("building_application_subdoc")
@@ -66,7 +66,10 @@ class BuildingApplicationService {
 		}
 
 		if( app.task.state == 'trade-evaluation' ) {
-			app.subtasks = vwEvalEm.find( [appid: app.objid ]).where("task.state NOT IN ('start','end','obo-processing')").list();
+			app.subtasks = vwEvalEm.find( [appid: app.objid ]).where("task.state NOT IN ('start','end')").list();
+		}
+		else {
+			app.subtasks = [];
 		}
 		return app;
 	}
@@ -113,5 +116,12 @@ class BuildingApplicationService {
 
 		appEm.find( [objid: app.objid] ).update( [permitid: u.objid ] );
 	}
+
+	@ProxyMethod
+	public def getProfessionalList(def o) {
+		return vwAppEm.getProfessionalList( [appid: o.objid ] );
+	}
+
+
 
 }

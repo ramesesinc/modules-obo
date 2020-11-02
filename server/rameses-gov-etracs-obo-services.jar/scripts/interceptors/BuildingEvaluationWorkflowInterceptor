@@ -17,43 +17,13 @@ class BuildingEvaluationWorkflowInterceptor {
 	@DataContext("building_evaluation")
 	def evalEm;
 
-	@DataContext("building_application_fee")
-	def feeEm;
-
 	@DataContext("vw_building_application")
 	def appEm;
 
-	@DataContext("building_application_subdoc")
-	def subdocEm;
-
-	@DataContext("building_doc_type")
-	def doctypeEm;
-
-	@DataContext("building_evaluation_type")
-	def evalTypeEm;
 
 	@DataContext("building_evaluation_type_role")
 	def evalTypeRoleEm;
 	
-
-	@After(pattern="WorkflowTaskService.start", eval="#{args[0].processname == 'building_evaluation' }" ) 
-	public void afterStart( def evt ) {
-		def p = evt.args[0];
-		def appid = p.info.appid;	//appid
-		def dlist = evalEm.getSubdocsToActivate( [objid: p.refid ] );
-		if( dlist) {
-			dlist*.objid.each {
-				def m = [:];
-				m.appid = appid;
-				m.doctype = [objid: it ];
-				m.state = 0;
-				m.amount = 0;
-				m.occupancytypeid = '';
-				subdocEm.create( m );
-			}
-		}
-	}
-
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action == 'send-for-revision' }" ) 
 	public void doActionBeforeRevision( def evt ) {
 		def p = evt.args[0];
@@ -61,13 +31,19 @@ class BuildingEvaluationWorkflowInterceptor {
 		if( c == 0 ) throw new Exception("There must be at least one open finding");
 	}
 
-
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action == 'approve' }" ) 
 	public void doActionBeforeApprove( def evt ) {
 		def p = evt.args[0];
 		def c = findingEm.find([parentid: p.refid]).where("state = 2 AND supersederid IS NULL").select("c:{COUNT(*)}").val();
 
 		if( c > 0 ) throw new Exception("There must be no unresolved findings");
+
+		//check if there is zoning info in application.
+		def appid = vwEvalEm.find( [objid: p.refid ]).select("appid").val();
+		def app = appEm.find( [objid:  appid] ).first();
+		if( !app.zoneclass?.objid ) throw new Exception("Zone class must be specified");
+		if( !app.txntype ) throw new Exception("Txn type must be specified");
+
 		//check here if there are fees
 		def list = evalEm.getDocsThatRequireFees( [evaluationid: p.refid ] );
 		if(list) {
@@ -83,7 +59,7 @@ class BuildingEvaluationWorkflowInterceptor {
 		def appid = vwEvalEm.find( [objid: p.refid] ).select("appid").val();
 		def tlist = vwEvalEm.find([appid:appid]).select("task.state").list();
 
-		def hasOpen = tlist.find{ !it.task.state.matches( "for-revision|obo-processing" ) };
+		def hasOpen = tlist.find{ !it.task.state.matches( "for-revision|end" ) };
 		if( hasOpen ) {
 			return;
 		}
@@ -101,24 +77,6 @@ class BuildingEvaluationWorkflowInterceptor {
 		f.action = resultAction;
 		f.taskid = app.taskid;
 		wfSvc.signal(f);
-	}
-
-
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_evaluation' && args[0].action == 'release' }" ) 
-	public void doActionBeforeRelease( def evt ) {
-		def p = evt.args[0];
-
-		def ev = vwEvalEm.find( [objid: p.refid ] ).first();
-
-		//issuetype = 2 means it requires it to be issued
-		def where = "doctype.evaltypeid = :typeid AND doctype.issuetype = 2 AND issuanceid IS NULL";
-		def wlist = subdocEm.find( [appid: ev.appid] ).select("doctype.title").where(where, [typeid: ev.typeid]).list();
-		
-		def errs = [];
-		wlist.each {
-			errs << it.doctype.title;
-		}
-		if(errs) throw new Exception("The ff. documents must be released: \n" + errs.join(","));
 	}
 
 

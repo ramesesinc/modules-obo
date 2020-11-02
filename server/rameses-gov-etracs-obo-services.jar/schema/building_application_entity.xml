@@ -30,9 +30,14 @@
 		<field name="mobileno" />
 		<field name="phoneno" />
 
-		<complex name="id" serializer="default" type="object" required="false"/>
-		
+		<field name="id_type_name" />
+		<field name="id_idno" />
+		<field name="id_placeissued" />
+		<field name="id_dtissued" />
 
+		<complex name="id" ref="idtype" jointype="many-to-one" required="false">
+			<key field="id_type_name" target="name" />	
+		</complex>	
 	</element>
 </schema>		
 

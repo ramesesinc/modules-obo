@@ -1,0 +1,7 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="building_evaluation_type">
+    <invokers>
+        <invoker folderid="/explorer/master/obo" caption="Building Evaluation Types" action="init"
+                 cols="objid,title,section.title,section.org.name"
+                 role="MASTER" />
+    </invokers>
+</workunit>

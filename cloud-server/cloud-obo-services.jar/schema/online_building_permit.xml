@@ -51,6 +51,10 @@
 
 		<!-- shows where the current step is at -->		
 		<field name="step" type="integer"/>
+
+		<!-- SIMPLE OR COMPLEX -->
+		<field name="txntype"/>
+		
 	</element>
 </schema>
 

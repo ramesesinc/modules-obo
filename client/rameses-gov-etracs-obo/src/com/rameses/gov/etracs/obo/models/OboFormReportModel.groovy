@@ -12,19 +12,29 @@ import com.rameses.rcp.constant.*;
 
 class OboFormReportModel extends FormReportModel {
     
+    @Service("JasperEmailQueueService")
+    def emailSvc;
+    
     def entity;
-    private String reportPath = "com/rameses/gov/etracs/obo/reports/";
+    private String reportPath = "reports/obo/";
     
     boolean allowSave = false;
     boolean allowPrint = false;
     
     public String getReportName() {
-        if( invoker.properties.reportName !=null ) {
-            return invoker.properties.reportName;
+        String rptName = invoker.properties.reportName;
+        if( rptName !=null ) {
+            rptName = invoker.properties.reportName;
+        }
+        else if(reportData.template != null) {
+            rptName = reportData.template;
         }
         else {
-            return reportPath + reportData.template + ".jasper"            
+            throw new Exception("report template not specified");
         }
+        if(!rptName.contains('/')) rptName = reportPath + rptName;
+        if(!rptName.endsWith(".jasper")) rptName += ".jasper";
+        return rptName;
     }    
     
     def getQuery() {
@@ -39,5 +49,13 @@ class OboFormReportModel extends FormReportModel {
         }
         return super.preview();
     }    
+    
+    void sendEmail() {
+        def m = [:];
+        m.reportid = reportId;
+        m.refid = query.objid;
+        emailSvc.send( m  );
+        MsgBox.alert("message queued for sending");
+    }
     
 }

@@ -10,7 +10,7 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class OboApplicationSubworkflowListModel extends WorkflowTaskListModel {
+class OboApplicationSubdowrkflowListModel extends WorkflowTaskListModel {
     
     def typeid;
     String title;
@@ -28,12 +28,6 @@ class OboApplicationSubworkflowListModel extends WorkflowTaskListModel {
         return getProcessName() + ":" + typeid.toLowerCase();
     }
     
-    /*
-    def beforeFetchNodes( param ) {
-        super.beforeFetchNodes(param);
-        param.typeid = typeid;
-        return null;
-    }
-    */
+   
     
 }

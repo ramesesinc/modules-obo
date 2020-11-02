@@ -6,7 +6,12 @@
         
          <invoker type="obo_itemaccount:type:lookup" caption="Obo Item Account Lookup" 
                  action="init" index="15"
-                 customFilter="sectionid = :sectionid"
+                 customFilter="doctypeid = :doctypeid"
+            cols="objid,title,item.title"/>
+         
+         <invoker type="obo_itemaccount:obo:lookup" caption="Obo Item Account Lookup" 
+                 action="init" index="15"
+                 customFilter="doctype.org.objid IS NULL"
             cols="objid,title,item.title"/>
     </invokers>
 </workunit>

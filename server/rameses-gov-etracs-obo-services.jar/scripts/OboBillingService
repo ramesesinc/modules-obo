@@ -10,15 +10,28 @@ class OboBillingService {
 
 	@ProxyMethod
 	public def getBillItems( o ) { 
-		if(!o.txntype ) throw new Exception("txntype is required is OboBillingService.getBillItems");
-		if(!o.refno ) throw new Exception("txntype is required is OboBillingService.getBillItems");
+		if(!o.refno ) throw new Exception("refno is required in OboBillingService.getBillItems");
+		if(!o.apptype ) {
+			throw new Exception("apptype is required in OboBillingService.getBillItems");
+		}	
 
-		def appdb = dynaDb.lookup('vw_'+ o.txntype.toString()); 
+		def zapptype = null;
+		if( o.apptype == "building" ) {
+			zapptype = "building_application";
+		}
+		else if( o.apptype == "occupancy" ) {
+			zapptype = "occupancy_application";
+		}
+		else {
+			throw new Exception("apptype is either building or occupancy");
+		}
+
+		def appdb = dynaDb.lookup('vw_'+zapptype); 
 		def app = appdb.find([ appno: o.refno ]).first(); 
 		if ( !app ) 
 			throw new Exception("ref no" + o.refno + " not found");
 
-		def appFeeEm = dynaDb.lookup(o.txntype.toString() +'_fee'); 
+		def appFeeEm = dynaDb.lookup(zapptype +'_fee'); 
 		def fees = 	appFeeEm.find([ appid: app.objid ]).orderBy("item.sortorder").where("amount - amtpaid > 0").list().collect{ 
 			[ item: it.item.item, amount: it.amount, refid: it.objid ]
 		} 
@@ -26,8 +39,8 @@ class OboBillingService {
 		if ( !fees ) throw new Exception("There are no items for payment");
 
 		def p = [:];
-		p.txntype = o.txntype;
-		p.permittype = ( p.txntype == 'building_application') ? 'Building Permit' : 'Occupancy Permit';
+		p.apptype = o.apptype;
+		p.permittype = ( p.apptype == 'building') ? 'Building Permit' : 'Occupancy Permit';
 
 		p.items = fees; 
 		p.amount = p.items.sum{( it.amount ? it.amount : 0.0 )} 
@@ -36,6 +49,8 @@ class OboBillingService {
 		p.objid = app.objid;
 		p.appno = app.appno;
 		p.apptype = app.apptype;
+		p.trackingno = app.trackingno;
+		p.txntype = "obo";
 		p.title = app.title;
 		p.address = app.location?.lotno + ' ' + app.location?.barangay;
 		p.applicant = app.applicant;

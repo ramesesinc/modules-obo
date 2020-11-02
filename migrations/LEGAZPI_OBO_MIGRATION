@@ -203,4 +203,11 @@ ALTER TABLE `building_application`
 ADD COLUMN `txntype` varchar(10) NULL;
 
 
+UPDATE building_evaluation_task bt
+SET bt.state = 'end' 
+WHERE bt.state IN ('obo-processing', 'releasing' );
+
+
+
+
 

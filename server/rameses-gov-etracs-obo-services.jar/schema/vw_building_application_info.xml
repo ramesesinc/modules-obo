@@ -3,7 +3,7 @@
 		<field name="objid" primary="true"/>
 		<field name="appid" />
 		<field name="parentid" />
-		<field name="typeid" />
+		<field name="doctypeid" />
 		<field name="name" />
 		<field name="caption" />
 		<field name="stringvalue" />
@@ -17,5 +17,6 @@
 		<field name="category" />
 		<field name="sortorder" />
 		<field name="bldgpermitid" />
+		<field name="remarks" />
 	</element>
 </schema>	

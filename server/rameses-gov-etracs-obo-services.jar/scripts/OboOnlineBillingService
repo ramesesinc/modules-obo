@@ -1,0 +1,55 @@
+import com.rameses.annotations.*
+import com.rameses.util.*
+import com.rameses.common.*
+
+class OboOnlineBillingService  {
+
+	@Service("OboBillingService")
+	def billSvc;
+
+	@Service("OboPaymentService")
+	def pmtSvc;
+
+    @ProxyMethod
+    public def getBilling( def o ) {
+        def bill = billSvc.getBillItems( o );
+        if(bill.amount==0)
+            throw new Exception("There are no unpaid items for this application");
+        return bill;    
+    }
+
+    @ProxyMethod
+    public def verifyPayment( def o ) {
+        //check if the bill was already paid
+        //retrieve first the document
+        def r = [:];
+        r.apptype = o.info.apptype;
+        r.refno = o.refno;    
+        def bill = billSvc.getBillItems( r );
+
+        if( bill.amount == 0 )
+            throw new Exception("There are no unpaid items for this application");        
+
+        if( bill.amount != o.amount )
+            throw new Exception("Bill amount that does not match with specified amount");
+
+        return bill;
+    }
+
+    @ProxyMethod
+    public def postPayment( def eor ) {
+        def parm = [:];
+        parm.txnmode = "ONLINE";
+        parm.receiptno = eor.receiptno;
+        parm.receiptdate = eor.receiptdate;
+        parm.amount = eor.amount;   
+        parm.reftype = "eor";
+        parm.txndate = eor.txndate;   
+        parm.refid = eor.objid;  
+        parm.appid = eor.paymentorder.refid;
+        parm.apptype = eor.paymentorder.info.apptype;        
+    	pmtSvc.postPayment( parm );
+    }
+
+
+}
