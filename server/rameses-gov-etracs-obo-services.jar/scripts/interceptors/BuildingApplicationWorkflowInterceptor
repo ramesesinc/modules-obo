@@ -20,7 +20,7 @@ class BuildingApplicationWorkflowInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-	@Service("EmailQueueService")
+	@Service("JasperReportEmailService")
     def emailSvc;
 
 	@DataContext("building_evaluation")
@@ -230,7 +230,6 @@ class BuildingApplicationWorkflowInterceptor {
 		docList.each {
 			p._notificationlist <<  'building_application_subdoc:' + it.doctype.objid.toLowerCase();				
 		}
-		throw new Exception("fired post payment " + p._notificationlist );
 	}
 
 	//this should fire after all the tasks have been saved
@@ -248,8 +247,6 @@ class BuildingApplicationWorkflowInterceptor {
 		def p = evt.args[0];
 		def appid = p.refid;
 		def docList = subdocEm.find( [appid: appid]).where("doctype.issuetype = 2 AND issuanceid IS NULL").select("doctype.title").list();		
-		if( docList ) 
-			throw new Exception("Please release the ff. documents first: /n" + docList*.title.join("\n"));
 	}
 
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }", index=0 ) 

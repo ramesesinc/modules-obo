@@ -10,6 +10,9 @@ class OboOnlineBillingService  {
 	@Service("OboPaymentService")
 	def pmtSvc;
 
+    @Env
+    def env;
+
     @ProxyMethod
     public def getBilling( def o ) {
         def bill = billSvc.getBillItems( o );
@@ -25,19 +28,18 @@ class OboOnlineBillingService  {
         def r = [:];
         r.apptype = o.info.apptype;
         r.refno = o.refno;    
-        def bill = billSvc.getBillItems( r );
+        def b = billSvc.getBillItems( r );
 
-        if( bill.amount == 0 )
-            throw new Exception("There are no unpaid items for this application");        
-
-        if( bill.amount != o.amount )
-            throw new Exception("Bill amount that does not match with specified amount");
-
-        return bill;
+        def bill = [:];
+        bill.appid = b.objid;
+        bill.apptype = r.apptype;
+        bill.items = b.items;
+        bill.amount = b.amount;        
+        return bill;    
     }
 
     @ProxyMethod
-    public def postPayment( def eor ) {
+    public def postPayment( def eor, def bill ) {
         def parm = [:];
         parm.txnmode = "ONLINE";
         parm.receiptno = eor.receiptno;
@@ -46,8 +48,8 @@ class OboOnlineBillingService  {
         parm.reftype = "eor";
         parm.txndate = eor.txndate;   
         parm.refid = eor.objid;  
-        parm.appid = eor.paymentorder.refid;
-        parm.apptype = eor.paymentorder.info.apptype;        
+        parm.appid = bill.appid;
+        parm.apptype = bill.apptype;        
     	pmtSvc.postPayment( parm );
     }
 
