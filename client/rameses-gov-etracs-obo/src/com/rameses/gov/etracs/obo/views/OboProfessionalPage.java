@@ -41,18 +41,21 @@ public class OboProfessionalPage extends javax.swing.JPanel {
         xLabel7 = new com.rameses.rcp.control.XLabel();
         xLabel8 = new com.rameses.rcp.control.XLabel();
         xLabel9 = new com.rameses.rcp.control.XLabel();
+        xLabel10 = new com.rameses.rcp.control.XLabel();
 
         xFormPanel1.setCaptionWidth(120);
 
         xLabel3.setCaption("Profession");
         xLabel3.setExpression("#{ entity.profession }");
         xLabel3.setName(""); // NOI18N
+        xLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel3);
 
         xLabel1.setCaption("Last Name");
         xLabel1.setExpression("#{ entity.lastname }");
         xLabel1.setName(""); // NOI18N
+        xLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel1);
@@ -60,18 +63,21 @@ public class OboProfessionalPage extends javax.swing.JPanel {
         xLabel2.setCaption("First Name");
         xLabel2.setExpression("#{ entity.firstname }");
         xLabel2.setName(""); // NOI18N
+        xLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel2);
 
         xLabel4.setCaption("Middle Name");
         xLabel4.setExpression("#{ entity.middlename }");
         xLabel4.setName(""); // NOI18N
+        xLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
 
         xLabel5.setCaption("PRC Id No");
         xLabel5.setExpression("#{ entity.prc.idno }");
         xLabel5.setName(""); // NOI18N
+        xLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel5.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel5.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel5);
@@ -79,18 +85,21 @@ public class OboProfessionalPage extends javax.swing.JPanel {
         xLabel6.setCaption("PRC Date Issued");
         xLabel6.setExpression("#{ entity.prc.dtissued }");
         xLabel6.setName(""); // NOI18N
+        xLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel6.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel6);
 
         xLabel7.setCaption("PRC Expiry Date");
         xLabel7.setExpression("#{ entity.prc.expirydate }");
         xLabel7.setName(""); // NOI18N
+        xLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel7.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel7);
 
         xLabel8.setCaption("PTR No");
-        xLabel8.setExpression("#{ entity.ptr.idno }");
+        xLabel8.setExpression("#{ entity.ptr.refno }");
         xLabel8.setName(""); // NOI18N
+        xLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel8.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel8);
@@ -98,8 +107,16 @@ public class OboProfessionalPage extends javax.swing.JPanel {
         xLabel9.setCaption("PTR Date");
         xLabel9.setExpression("#{ entity.ptr.dtissued }");
         xLabel9.setName(""); // NOI18N
+        xLabel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel9.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel9);
+
+        xLabel10.setCaption("PTR Place Issued");
+        xLabel10.setExpression("#{ entity.ptr.placeissued }");
+        xLabel10.setName(""); // NOI18N
+        xLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel10.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel10);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -114,14 +131,15 @@ public class OboProfessionalPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(60, 60, 60))
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XLabel xLabel1;
+    private com.rameses.rcp.control.XLabel xLabel10;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLabel xLabel4;

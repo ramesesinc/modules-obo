@@ -48,9 +48,9 @@
         <Component class="com.rameses.rcp.control.XRadio" name="xRadio1">
           <Properties>
             <Property name="caption" type="java.lang.String" value="Txn Type"/>
-            <Property name="name" type="java.lang.String" value="query.txntype" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="query.apptype" noResource="true"/>
             <Property name="optionValue" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;building_application&quot;" type="code"/>
+              <Connection code="&quot;building&quot;" type="code"/>
             </Property>
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 20, 0, 0]"/>
@@ -62,9 +62,9 @@
         <Component class="com.rameses.rcp.control.XRadio" name="xRadio2">
           <Properties>
             <Property name="caption" type="java.lang.String" value="Txn Type"/>
-            <Property name="name" type="java.lang.String" value="query.txntype" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="query.apptype" noResource="true"/>
             <Property name="optionValue" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;occupancy_application&quot;" type="code"/>
+              <Connection code="&quot;occupancy&quot;" type="code"/>
             </Property>
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 20, 0, 0]"/>

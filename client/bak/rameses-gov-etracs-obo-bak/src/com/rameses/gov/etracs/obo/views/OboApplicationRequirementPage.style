@@ -1,0 +1,9 @@
+"info.*" [ editable == true ] {
+    enabled: true;
+    editable : true;
+}
+
+"info.*" [ editable == false ] {
+    enabled: false;
+    editable: false;
+}

@@ -40,13 +40,12 @@ public class OboVariablePage extends javax.swing.JPanel {
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xTextField5 = new com.rameses.rcp.control.XTextField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
-        xTextField6 = new com.rameses.rcp.control.XTextField();
 
         formPanel1.setCaptionWidth(130);
         formPanel1.setPadding(new java.awt.Insets(5, 5, 5, 0));
 
         xLabel1.setCaption("Type");
-        xLabel1.setExpression("#{ entity.typeid }");
+        xLabel1.setExpression("#{ entity.doctypeid }");
         xLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
         formPanel1.add(xLabel1);
@@ -97,20 +96,13 @@ public class OboVariablePage extends javax.swing.JPanel {
         xTextField5.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         formPanel1.add(xTextField5);
 
-        xLookupField1.setCaption("Classification");
-        xLookupField1.setExpression("#{entity.classification.title}");
-        xLookupField1.setHandler("lookupClassifcations");
-        xLookupField1.setName("entity.classification"); // NOI18N
+        xLookupField1.setCaption("Occupancy Type");
+        xLookupField1.setExpression("#{entity.occupancytype.objid}");
+        xLookupField1.setHandler("vw_obo_occupancy_type:lookup");
+        xLookupField1.setName("entity.occupancytype"); // NOI18N
+        xLookupField1.setVisibleWhen("#{ entity.typeid == 'ACCESSORIES' }");
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         formPanel1.add(xLookupField1);
-
-        xTextField6.setCaption("Occupancy Type");
-        xTextField6.setDisableWhen("");
-        xTextField6.setName("entity.occupancytypeid"); // NOI18N
-        xTextField6.setVisibleWhen("#{ entity.typeid == 'ACCESSORIES' }");
-        xTextField6.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField6.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        formPanel1.add(xTextField6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -140,6 +132,5 @@ public class OboVariablePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XTextField xTextField3;
     private com.rameses.rcp.control.XTextField xTextField4;
     private com.rameses.rcp.control.XTextField xTextField5;
-    private com.rameses.rcp.control.XTextField xTextField6;
     // End of variables declaration//GEN-END:variables
 }

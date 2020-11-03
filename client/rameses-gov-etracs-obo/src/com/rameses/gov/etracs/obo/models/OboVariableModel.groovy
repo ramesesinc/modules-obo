@@ -15,7 +15,7 @@ class OboVariableModel extends CrudFormModel {
     def datatypes = ['integer','decimal','boolean','string','date']
         
     void afterCreate() {
-        entity.typeid =  caller.selectedNode.id;
+        entity.doctypeid =  caller.selectedNode.id;
     }
     
     @PropertyChangeListener
@@ -24,6 +24,5 @@ class OboVariableModel extends CrudFormModel {
             entity.objid = o;
         }
     ];
-    
     
 }

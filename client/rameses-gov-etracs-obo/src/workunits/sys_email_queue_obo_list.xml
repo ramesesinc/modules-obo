@@ -1,0 +1,6 @@
+<workunit extends="com/rameses/jasper/templates/SysEmailQueueList.xml">
+    <invokers>
+       <invoker folderid="/explorer/master/obo" caption="Email Queue" 
+                 action="init" index="101" role="MASTER"/>
+    </invokers>
+</workunit>

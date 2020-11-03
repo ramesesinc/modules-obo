@@ -2,6 +2,41 @@ DROP VIEW IF EXISTS vw_building_application;
 CREATE VIEW vw_building_application AS 
 SELECT 
    a.*,
+
+   bi.contact_name,
+   bi.contact_detail,
+   bi.contact_email,
+   bi.contact_mobileno,
+   bi.applicantid,
+   bi.description,
+   bi.title,
+   bi.occupancytypeid,
+   bi.numunits,
+   bi.fixedcost,
+   bi.projectcost,
+   bi.dtproposedconstruction,
+   bi.dtexpectedcompletion,
+   bi.totalfloorarea,
+   bi.height,
+   bi.numfloors,
+   bi.worktypes,
+   bi.zoneclassid,
+   bi.zone,
+   bi.location_lotno,
+   bi.location_blockno,
+   bi.location_street,
+   bi.location_barangay_name,
+   bi.location_barangay_objid,
+   bi.contractorid,
+   bi.location_unitno,
+   bi.location_bldgno,
+   bi.location_bldgname,
+   bi.location_subdivision,
+   bi.createdby_objid,
+   bi.createdby_name,
+   bi.dtcreated,
+   bi.txntype,
+
    ae.name AS applicant_name,
 
    bt.objid AS occupancytype_objid,
@@ -15,14 +50,14 @@ SELECT
    zc.title AS zoneclass_title,
 
    LTRIM(CONCAT(
-      (CASE WHEN a.location_lotno IS NULL THEN '' ELSE CONCAT( ' Lot ', a.location_lotno) END),
-      (CASE WHEN a.location_blockno IS NULL THEN '' ELSE CONCAT(' Blk ', a.location_blockno) END),
-      (CASE WHEN a.location_unitno IS NULL THEN '' ELSE CONCAT(' ', a.location_unitno) END),
-      (CASE WHEN a.location_bldgno IS NULL THEN '' ELSE CONCAT(' ', a.location_bldgno) END),
-      (CASE WHEN a.location_bldgname IS NULL THEN '' ELSE CONCAT(' ', a.location_bldgname) END),
-      (CASE WHEN a.location_street IS NULL THEN '' ELSE CONCAT(' ', a.location_street) END),
-      (CASE WHEN a.location_subdivision IS NULL THEN '' ELSE CONCAT(', ', a.location_subdivision) END),      
-      (CASE WHEN a.location_barangay_name IS NULL THEN '' ELSE CONCAT(', ', a.location_barangay_name ) END)
+      (CASE WHEN bi.location_lotno IS NULL THEN '' ELSE CONCAT( ' Lot ', bi.location_lotno) END),
+      (CASE WHEN bi.location_blockno IS NULL THEN '' ELSE CONCAT(' Blk ', bi.location_blockno) END),
+      (CASE WHEN bi.location_unitno IS NULL THEN '' ELSE CONCAT(' ', bi.location_unitno) END),
+      (CASE WHEN bi.location_bldgno IS NULL THEN '' ELSE CONCAT(' ', bi.location_bldgno) END),
+      (CASE WHEN bi.location_bldgname IS NULL THEN '' ELSE CONCAT(' ', bi.location_bldgname) END),
+      (CASE WHEN bi.location_street IS NULL THEN '' ELSE CONCAT(' ', bi.location_street) END),
+      (CASE WHEN bi.location_subdivision IS NULL THEN '' ELSE CONCAT(', ', bi.location_subdivision) END),      
+      (CASE WHEN bi.location_barangay_name IS NULL THEN '' ELSE CONCAT(', ', bi.location_barangay_name ) END)
    )) AS location_text,
 
    t.state AS task_state,
@@ -42,12 +77,13 @@ SELECT
    pmt.template 
 
 FROM building_application a 
-INNER JOIN building_application_entity ae ON a.applicantid = ae.objid
+INNER JOIN building_info bi ON a.infoid = bi.objid
+INNER JOIN building_application_entity ae ON bi.applicantid = ae.objid
 INNER JOIN building_application_task t ON a.taskid = t.taskid 
 INNER JOIN sys_wf_node sn ON sn.processname = 'building_application' AND sn.name = t.state 
-INNER JOIN obo_occupancy_type bt ON a.occupancytypeid = bt.objid 
+INNER JOIN obo_occupancy_type bt ON bi.occupancytypeid = bt.objid 
 INNER JOIN obo_occupancy_type_division od ON bt.divisionid = od.objid 
 INNER JOIN obo_occupancy_type_group og ON od.groupid = og.objid 
-LEFT JOIN obo_zoneclass zc ON a.zoneclassid = zc.objid 
+LEFT JOIN obo_zoneclass zc ON bi.zoneclassid = zc.objid 
 LEFT JOIN building_permit pmt ON a.permitid=pmt.objid 
 

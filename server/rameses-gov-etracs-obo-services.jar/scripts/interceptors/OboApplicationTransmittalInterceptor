@@ -1,0 +1,109 @@
+import com.rameses.annotations.*; 
+
+class OboApplicationTransmittalInterceptor {
+	
+	@DataContext(dynamic=true)
+	def db;
+
+
+	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid.matches('.*_transmittal') }", index=0 )
+	public void getTransmittalReport( def evt ) {
+		def p = evt.args[0];
+		def result = evt.result;
+		def transmittalid = p.parameters.objid;
+		if(!transmittalid) throw new Exception("objid is required in requirement checklist report")
+
+		def appEm, transmittalEm, findingEm, requirementEm, permitType;
+
+		if( p.reportid.startsWith("building") ) {
+			appEm = db.lookup( "vw_building_application" );
+			transmittalEm = db.lookup( "building_application_transmittal" );
+			requirementEm = db.lookup( "building_application_requirement")
+			findingEm = db.lookup( "building_evaluation_finding" );
+			permitType = "BUILDING PERMIT";
+		}
+		else if( p.reportid.startsWith("occupancy")) {
+			appEm = db.lookup( "vw_occupancy_application" );
+			transmittalEm = db.lookup( "occupancy_application_transmittal" );
+			requirementEm = db.lookup( "occupancy_application_requirement")
+			findingEm = db.lookup( "occupancy_inspection_finding" );
+			permitType = "OCCUPANCY PERMIT";
+		}
+		else {
+			throw new Exception("unsupported transmittal " + p.reportid );
+		}
+
+		def t = transmittalEm.find([objid: transmittalid]).first();
+		if(!t) throw new Exception("Transmittal " + transmittalid + " not found ");
+		//check if requirement or finding transmittal.
+
+		def ea = appEm.find( [objid: t.appid ] ).first();
+		ea.receiver = t.createdby;
+		ea.transmittalno = t.objid;
+		ea.transmittaltype = t.type;
+		ea.permittype = permitType;
+
+		if(t.type == "requirement") {
+			ea.items = requirementEm.find( [transmittalid : t.objid ] ).orderBy("type.sortorder").list(); 
+			ea.template = "reports/obo/requirement_transmittal";
+		}
+		else {
+			ea.items = findingEm.find( [transmittalid : t.objid ] ).orderBy("type.sortindex").list(); 
+			ea.items.each {
+				if(it.attachment ) {
+					it.attachment = "image:" + it.attachment;
+				}
+			}
+			ea.template = "reports/obo/finding_transmittal";
+		}
+		result.data = ea;
+	}	
+
+	@Before(pattern="JasperEmailQueueService.send", eval="#{args[0].reportid?.matches('.*_transmittal') }")
+	public void beforeSendEmail( def evt ) {
+		def p = evt.args[0];
+		def appEm, transmittalEm;
+		if( p.reportid.startsWith("building") ) {
+			appEm = db.lookup( "vw_building_application" );
+			transmittalEm = db.lookup( "building_application_transmittal" );
+			if( p.reportid.contains("requirement") ) {
+				p.reportid = "building_requirement_transmittal";
+			}
+			else {
+				p.reportid = "building_finding_transmittal";
+			}
+		}
+		else {
+			appEm = db.lookup( "vw_occupancy_application" );
+			transmittalEm = db.lookup( "occupancy_application_transmittal" );
+			if( p.reportid.contains("requirement") ) {
+				p.reportid = "occupancy_requirement_transmittal";
+			}
+			else {
+				p.reportid = "occupancy_finding_transmittal";
+			}
+		}
+		def t = transmittalEm.find([objid: p.refid ]).select("appid").first();
+		def ea = appEm.find( [objid: t.appid ] ).first();
+		p.to = ea.contact.email;
+		p.info = ea;
+	}
+
+  	@Before(pattern="JasperReportEmailService.send", eval="#{ args[0].reportid.matches('.*_transmittal') }", index=-10000)
+    public void emailTransmittal(def evt) {
+        def o = evt.args[0];
+        def refid = o.refid;
+        o.attachments = [
+            [ title: "Transmittal.pdf", 
+                reportid: o.reportid, 
+                parameters: [objid: refid ]
+            ]
+        ];
+        o.to = o.to;
+        o.subject = o.subject;
+        o.message = o.message;
+        o.connection = "obo-email-server";
+    }  
+
+
+}

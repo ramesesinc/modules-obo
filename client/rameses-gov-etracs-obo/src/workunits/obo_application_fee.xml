@@ -1,0 +1,11 @@
+<workunit>
+    <invokers>
+        <invoker type="application_fee" 
+                caption="Add Fee" target="popup" action="init"/>
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.ApplicationFeeModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.ApplicationFeePage" />
+    </pages>
+</workunit>

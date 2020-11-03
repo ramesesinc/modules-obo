@@ -32,23 +32,6 @@ class OccupancyInspectionWorkflowInterceptor {
 	@DataContext("occupancy_application_subdoc")
 	def subdocEm;
 
-	@After(pattern="WorkflowTaskService.start", eval="#{args[0].processname == 'occupancy_inspection' }" ) 
-	public void afterStart( def evt ) {
-		def p = evt.args[0];
-		def appid = p.info.appid;	//appid
-		def dlist = inspEm.getSubdocsToActivate( [appid:appid, typeid: p.info.type ] );
-		if( dlist) {
-			dlist*.objid.each {
-				def m = [:];
-				m.appid = appid;
-				m.doctype = [objid: it ];
-				m.state = 0;
-				m.amount = 0;
-				subdocEm.create( m );
-			}
-		}
-	}
-
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_inspection' && args[0].action == 'send-for-revision' }" ) 
 	public void doActionBeforeRevision( def evt ) {
 		def p = evt.args[0];
@@ -76,7 +59,7 @@ class OccupancyInspectionWorkflowInterceptor {
 
 	//release process. Ensure that all tasks are closed before firing main
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_inspection' && args[0].action.matches('send-for-revision|approve') }" ) 
-	public void doActioAfterApproveOrRevise( def evt ) {
+	public void doActionAfterApproveOrRevise( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def appid = vwInspEm.find( [objid: p.refid] ).select("appid").val();

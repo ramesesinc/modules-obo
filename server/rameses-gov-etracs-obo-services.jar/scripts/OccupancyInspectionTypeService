@@ -14,7 +14,7 @@ class OccupancyInspectionTypeService {
     def roleSvc;
 
 	@ProxyMethod
-	public def getAllowedEvaluationTypes( def o ) {
+	public def getAllowedInspectionTypes( def o ) {
 		def m = [:];
         m.roles = roleSvc.getRolesString(o); 
         m.orgid = (env.ORGROOT==1) ? "root" : env.ORGID;

@@ -1,0 +1,6 @@
+<workunit extends="com/rameses/jasper/templates/SysEmailTemplateList.xml" >
+    <invokers>
+        <invoker folderid="/explorer/master/obo" caption="Email Template" 
+                 action="init" index="100" role="MASTER"/>
+    </invokers>
+</workunit>

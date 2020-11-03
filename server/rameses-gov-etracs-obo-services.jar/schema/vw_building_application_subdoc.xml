@@ -5,7 +5,7 @@
 		<field name="state" required="true" type="integer"/>
 		<field name="contractorname"/>
 
-		<complex name="doctype" ref="vw_building_doc_type" jointype="many-to-one" required="false">
+		<complex name="doctype" ref="vw_obo_doctype" jointype="many-to-one" required="false">
 			<key field="doctypeid" target="objid" />
 		</complex>  
 
@@ -37,7 +37,8 @@
 
 		<field name="appstate" />
 		<field name="appuserid" />
-
+		<field name="org_objid" />
+		<field name="sectionid" />
 	</element>
 </schema>
 

@@ -2,13 +2,13 @@ import com.rameses.annotations.*;
 
 class OboVariableListInterceptor { 
 
-	@DataContext("building_doc_type")
+	@DataContext("obo_doctype")
 	def docType;
 
 	@After(pattern="QueryService.getNodeList", eval="#{args[0]._schemaname == 'obo_variable' }")
 	public void getNodeList(def evt) {
 		def result = evt.result;
-		def nodes = docType.orderBy("sortindex").list();
+		def nodes = docType.list();
 		nodes.each {
 			def title = it.title;
 			result << [title: title, id: it.objid ];		
@@ -21,7 +21,7 @@ class OboVariableListInterceptor {
 		//o.debug = true;
 		if( !o.node?.id ) return;
 
-		def str = " typeid = :typeid";
+		def str = " doctypeid = :typeid";
 		def m = [typeid: o.node.id ];
 
 		//add to first position of where

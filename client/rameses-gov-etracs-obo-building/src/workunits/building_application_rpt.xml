@@ -1,0 +1,27 @@
+<workunit schemaName="building_application_rpu">
+    <invokers>
+        <invoker type="building_application_rpu:create" caption="Add New RPU" 
+                target="popup"
+                 action="create" />
+
+        <invoker type="building_application_rpu:open" caption="View RPU" 
+                target="popup"
+                 action="open" />
+        
+        <invoker type="formActions" caption="Close" 
+                 action="_close" />
+        
+        <invoker type="formActions" caption="View Tax Clearance" 
+                visibleWhen="#{entity.taxclearanceid !=null}"
+                 action="viewTaxClearance" />
+        
+        <invoker type="formActions" caption="View True Copy" 
+                visibleWhen="#{entity.truecopycertid !=null}"
+                 action="viewTrueCopy" />
+
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationRptModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationRptPage" />
+    </pages>    
+</workunit>

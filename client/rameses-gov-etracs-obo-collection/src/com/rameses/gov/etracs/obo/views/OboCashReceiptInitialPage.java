@@ -44,16 +44,16 @@ public class OboCashReceiptInitialPage extends javax.swing.JPanel {
         xFormPanel1.add(xLabel1);
 
         xRadio1.setCaption("Txn Type");
-        xRadio1.setName("query.txntype"); // NOI18N
-        xRadio1.setOptionValue("building_application");
+        xRadio1.setName("query.apptype"); // NOI18N
+        xRadio1.setOptionValue("building");
         xRadio1.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
         xRadio1.setShowCaption(false);
         xRadio1.setText("Building Permit Application");
         xFormPanel1.add(xRadio1);
 
         xRadio2.setCaption("Txn Type");
-        xRadio2.setName("query.txntype"); // NOI18N
-        xRadio2.setOptionValue("occupancy_application");
+        xRadio2.setName("query.apptype"); // NOI18N
+        xRadio2.setOptionValue("occupancy");
         xRadio2.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
         xRadio2.setShowCaption(false);
         xRadio2.setText("Occupancy Permit Application");

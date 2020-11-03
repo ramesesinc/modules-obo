@@ -12,24 +12,12 @@ import com.rameses.seti2.models.*;
 
 public class OboItemAccountModel extends CrudFormModel {
     
-    def selectedTag;
+    def docTypeList;
+    def feeGroupList = [ "BFP", "ZONING", "RPT"];
     
-    def addTag() {
-        def h = { o->
-            if( entity.reporttags.find{it.objid == o.objid} ) return;
-            def t = [objid:entity.objid+"-"+o.objid];
-            t.tag = o.objid;
-            t.itemid = entity.objid;
-            addItem( "reporttags", t );
-            //entity.reporttags << t;
-            binding.refresh();
-        }    
-        return Inv.lookupOpener( "sys_report_tag:lookup", [onselect:h ] );
+    public void afterInit() {
+        def m = [_schemaname: "vw_obo_doctype"];
+        m.where = ["1=1"];
+        docTypeList = queryService.getList(m);
     }
-    
-    void removeTag() {
-        removeItem("reporttags", selectedTag );
-        entity.reporttags.remove( selectedTag );
-    }
-    
 }

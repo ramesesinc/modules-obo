@@ -11,7 +11,6 @@
 		<field name="orgcode" />
 		<field name="trackingno" searchable="true" indexed="true"/>
 		<field name="apptype" />
-		<field name="permittype" />
 		<field name="contact_name" />
 		<field name="contact_detail" />
 		<field name="contact_email" />
@@ -74,6 +73,7 @@
 		<field name="issuedby_name" />
 		<field name="template" />
 		<field name="txntype" />
+		<field name="infoid" />
 	</element>
 </schema>	
 

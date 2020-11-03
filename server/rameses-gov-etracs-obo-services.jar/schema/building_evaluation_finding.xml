@@ -15,7 +15,7 @@
 		<field name="supersederid" />
 		<field name="transmittalid" />
 
-		<complex name="section" ref="vw_building_evaluation" jointype="many-to-one" includefields="type.*" required="false">
+		<complex name="parent" ref="vw_building_evaluation" jointype="many-to-one" includefields="type.*" required="false">
 			<key field="parentid" target="objid"/>
 		</complex>	
 		<field name="attachment" />

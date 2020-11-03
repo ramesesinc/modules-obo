@@ -6,7 +6,7 @@ import java.text.*;
 
 class OboLoginService {
 
-	@Service(value="AdminAuthService", connection="admin-server")
+	@Service(value="AdminAuthService", connection="admin")
 	def adminSvc;
 
 	@ProxyMethod

@@ -18,15 +18,14 @@ public class BuildingApplicationRptService  {
 	@DataContext("building_application")
 	def appEm;
 
-	@Service(value="RPTCertificationOnlineService", connection="local-rpt-server")
+	@Service(value="RPTCertificationOnlineService", connection="rpt")
 	def rptSvc;
 
-	@Service(value="TDOnlineService", connection="local-rpt-server")
+	@Service(value="TDOnlineService", connection="rpt")
     def tdSvc;
 
-    @Service(value="EntityService", connection="local-entity-server")
+    @Service(value="EntityService", connection="entity")
     def entitySvc;
-
 
 	@ProxyMethod
 	public def generateDocs( def o ) {

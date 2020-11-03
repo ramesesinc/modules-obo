@@ -10,5 +10,9 @@
 		<field name="expirydate"/>
 		<field name="remarks"/>
 		<field name="template"/>
+
+		<field name="endorserid" />
+		<field name="approverid" />
+
 	</element>
 </schema>

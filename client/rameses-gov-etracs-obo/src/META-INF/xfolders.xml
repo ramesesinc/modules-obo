@@ -27,6 +27,8 @@
             <folder id="occupancy_inspection" caption="Occupancy Permit (For Inspection)" index="60" icon="home/icons/folder.png"/>
             <folder id="master" caption="Master Files" index="70" icon="home/icons/master.png"/>
             <folder id="tools" caption="Tools" index="80" />
+            <folder id="obo_doctype" caption="Documents for Release" index="45" icon="home/icons/folder.png"/>
+
         </folder>
     </folder>
 </folders>    
