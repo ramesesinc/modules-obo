@@ -12,8 +12,7 @@ SELECT
    iss.issuedby_objid,
    iss.remarks AS issue_remarks,
    iss.template,
-   iss.transmittalid,
-   od.sectionid  
+   od.sectionid
 FROM building_application_subdoc a  
 INNER JOIN obo_doctype od ON a.doctypeid = od.objid 
 LEFT JOIN obo_section os ON od.sectionid = os.objid

@@ -37,10 +37,6 @@ class OboMenuNotificationInterceptor {
 		def orgid = (env.ORGROOT ==1 ) ? "root" : env.ORGID;
 		def roleStr = userRole.getRolesString( [:] );
 
-		//println "enter domain count " + p;
-		//println "orgid " + orgid;
-		//println "rolestr " + roleStr;
-
 		def cnt = 0;
 		def nid = p.notificationid;
 
@@ -58,6 +54,7 @@ class OboMenuNotificationInterceptor {
 		g = inspectionTypeEm.getAllTaskCount( [roles: roleStr, orgid: orgid] );
 		if( g ) cnt += g.count;
 
+		g = subdocEm.findAllDocsToReleaseCount( [roles: roleStr,orgid: orgid] )?.count;
 		result.count = cnt;
 	}	
 

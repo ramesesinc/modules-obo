@@ -16,7 +16,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-88,0,0,4,122"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-25,0,0,4,122"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -109,7 +109,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="xFormPanel1" pref="547" max="32767" attributes="0"/>
+                              <Component id="xFormPanel1" pref="610" max="32767" attributes="0"/>
                               <Component id="xFormPanel3" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
@@ -139,6 +139,13 @@
                         <Property name="caption" type="java.lang.String" value="Project Title"/>
                         <Property name="expression" type="java.lang.String" value="&lt;html&gt;#{entity.title}&lt;/html&gt;"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 20]"/>
                         </Property>
@@ -149,6 +156,13 @@
                         <Property name="caption" type="java.lang.String" value="Project Description"/>
                         <Property name="expression" type="java.lang.String" value="&lt;html&gt;#{entity.description}&lt;/html&gt;"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 40]"/>
                         </Property>
@@ -159,6 +173,13 @@
                         <Property name="caption" type="java.lang.String" value="Location"/>
                         <Property name="expression" type="java.lang.String" value="&lt;html&gt;#{entity.location.text}&lt;/html&gt;"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 40]"/>
                         </Property>
@@ -168,6 +189,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Applicant"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.applicant.name}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 20]"/>
                         </Property>
@@ -322,6 +350,13 @@
                         <Property name="caption" type="java.lang.String" value="Occupancy Type "/>
                         <Property name="expression" type="java.lang.String" value="&lt;html&gt;#{entity.occupancytype.group.objid} ( #{entity.occupancytype.division.objid} ) - #{entity.occupancytype.title }&lt;/html&gt;"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[20, 0, 0, 0]"/>
                         </Property>
@@ -334,6 +369,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Zone classification"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.zoneclass.objid} - #{entity.zoneclass.title}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[20, 0, 0, 0]"/>
                         </Property>
@@ -346,6 +388,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Zone "/>
                         <Property name="expression" type="java.lang.String" value="#{entity.zone}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 20]"/>
                         </Property>
@@ -375,6 +424,13 @@
                         <Property name="caption" type="java.lang.String" value="App No"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.appno}"/>
                         <Property name="name" type="java.lang.String" value="entity.rptinfo.text" noResource="true"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -385,6 +441,13 @@
                         <Property name="caption" type="java.lang.String" value="App Date"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.dtfiled}"/>
                         <Property name="name" type="java.lang.String" value="entity.rptinfo.text" noResource="true"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -395,6 +458,13 @@
                         <Property name="caption" type="java.lang.String" value="App Type"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.apptype}"/>
                         <Property name="name" type="java.lang.String" value="entity.rptinfo.text" noResource="true"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -405,6 +475,13 @@
                         <Property name="caption" type="java.lang.String" value="Web Tracking No"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.trackingno}"/>
                         <Property name="name" type="java.lang.String" value="entity.trackingno" noResource="true"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -425,7 +502,7 @@
                           <Insets value="[20, 0, 0, 0]"/>
                         </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[150, 20]"/>
+                          <Dimension value="[0, 20]"/>
                         </Property>
                       </Properties>
                     </Component>
@@ -433,6 +510,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Task State"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.task.state}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[20, 0, 0, 0]"/>
                         </Property>
@@ -445,6 +529,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Task Start"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.task.startdate}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -454,6 +545,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Task Assign To"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.task.assignee.name}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -463,6 +561,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Elapsed Time"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.task.elapsedtime}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -471,19 +576,17 @@
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel17">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Contact Name"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.contact.name}"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.contact.name} ( #{entity.contact.description} )"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[20, 0, 0, 0]"/>
                         </Property>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 16]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel18">
-                      <Properties>
-                        <Property name="caption" type="java.lang.String" value="Contact Description"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.contact.description}"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -493,6 +596,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Contact Email"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.contact.email}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -500,8 +610,15 @@
                     </Component>
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel20">
                       <Properties>
-                        <Property name="caption" type="java.lang.String" value="Contact Phone"/>
+                        <Property name="caption" type="java.lang.String" value="Contact Mobile No"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.contact.mobileno}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -511,6 +628,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Project Supervisor "/>
                         <Property name="expression" type="java.lang.String" value="#{entity.contractor.lastname}, #{entity.contractor.firstname}  ( PRC No: #{entity.contractor.prc.idno} )"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[20, 0, 0, 0]"/>
                         </Property>
@@ -519,10 +643,187 @@
                         </Property>
                       </Properties>
                     </Component>
+                    <Container class="com.rameses.rcp.control.XPanel" name="xPanel8">
+                      <Properties>
+                        <Property name="caption" type="java.lang.String" value="Payment Receipt No"/>
+                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.payment?.objid != null }"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                        <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[20, 0, 0, 0]"/>
+                        </Property>
+                        <Property name="opaque" type="boolean" value="false"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[0, 25]"/>
+                        </Property>
+                      </Properties>
+                      <SubComponents>
+                        <Component class="com.rameses.rcp.control.XLabel" name="xLabel1">
+                          <Properties>
+                            <Property name="expression" type="java.lang.String" value="#{ entity.payment.refno } - ( #{ entity.payment.reftype } )"/>
+                          </Properties>
+                        </Component>
+                        <Component class="com.rameses.rcp.control.XButton" name="xButton1">
+                          <Properties>
+                            <Property name="name" type="java.lang.String" value="viewReceipt" noResource="true"/>
+                            <Property name="text" type="java.lang.String" value="View"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xButton1ActionPerformed"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
+                      <LayoutCode>
+                        <CodeStatement>
+                          <CodeExpression id="1_flowLayout1">
+                            <CodeVariable name="flowLayout1" type="4096" declaredType="java.awt.FlowLayout"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="CodeConstructor">
+                                <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
+                              </ExpressionProvider>
+                              <Parameters>
+                                <CodeExpression id="2">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                                <CodeExpression id="3">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                                <CodeExpression id="4">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeExpression">
+                            <CodeExpression id="1_flowLayout1"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="2"/>
+                            <CodeExpression id="3"/>
+                            <CodeExpression id="4"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="1_flowLayout1"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="5">
+                              <ExpressionOrigin>
+                                <Value type="boolean" value="true"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="6_xPanel8">
+                            <CodeVariable name="xPanel8" type="8194" declaredType="com.rameses.rcp.control.XPanel"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="ComponentRef">
+                                <ComponentRef name="xPanel8"/>
+                              </ExpressionProvider>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="1_flowLayout1"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="6_xPanel8"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="7_xLabel1">
+                              <CodeVariable name="xLabel1" type="8194" declaredType="com.rameses.rcp.control.XLabel"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="xLabel1"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="6_xPanel8"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="8_xButton1">
+                              <CodeVariable name="xButton1" type="8194" declaredType="com.rameses.rcp.control.XButton"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="xButton1"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                      </LayoutCode>
+                    </Container>
+                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel39">
+                      <Properties>
+                        <Property name="caption" type="java.lang.String" value="Date Issued"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.payment.refdate} "/>
+                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.payment?.objid != null }"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                        <Property name="dateFormat" type="java.lang.String" value="yyyy-MM-dd"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[0, 16]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel40">
+                      <Properties>
+                        <Property name="caption" type="java.lang.String" value="Amount Paid"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.payment.amount} "/>
+                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.payment?.objid != null }"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                        <Property name="numberFormat" type="java.lang.String" value="#,##0.00"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[0, 16]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel29">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Permit No"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.permitno}"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.controlno}"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
                         <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[20, 0, 0, 0]"/>
                         </Property>
@@ -535,16 +836,13 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Permit Date Issued"/>
                         <Property name="expression" type="java.lang.String" value="#{entity.dtissued}"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 16]"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
                         </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel33">
-                      <Properties>
-                        <Property name="caption" type="java.lang.String" value="Expiry date"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.expirydate}"/>
-                        <Property name="dateFormat" type="java.lang.String" value="yyyy MMM dd"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>

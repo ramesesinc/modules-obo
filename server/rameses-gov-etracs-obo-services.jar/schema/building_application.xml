@@ -9,7 +9,7 @@
 		<field name="trackingno" searchable="true" indexed="true"/>
 		<field name="taskid" />
 		<field name="accessoryid" />
-		<field name="permitid" />
+		<field name="issuanceid" />
 		<field name="infoid" />
 		<field name="txnmode" />
 	</element>

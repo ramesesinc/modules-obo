@@ -117,7 +117,7 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
         xRadio4.setOptionValue("capture");
         xRadio4.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
         xRadio4.setShowCaption(false);
-        xRadio4.setText("Capture");
+        xRadio4.setText("Manual Capture");
         xFormPanel1.add(xRadio4);
 
         jLabel1.setText("Please enter the tracking number or select a file.");

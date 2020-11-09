@@ -24,9 +24,6 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
     @Service("BuildingApplicationChecklistService")
     def chklistSvc;
 
-    @Service("BuildingIssuanceService")
-    def issuanceSvc;
-    
     def selectedInfo;
     def infos;
     
@@ -41,7 +38,14 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
     boolean canPrint;
     boolean currentOrg = false;
     
+    boolean showOtherDocs = false;
+    def docList;
+    
     def worktypetext;
+    
+    void toggleOtherDocs() {
+        showOtherDocs = !showOtherDocs;
+    }
     
     public String getTitle() {
         return entity.doctype.title;
@@ -57,6 +61,17 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         showChecklist = entity.showchecklist;
         showInfos = entity.showinfo;
         showFees = entity.showfees;
+        if(!docList) {
+            def m = [_schemaname: "vw_building_application_subdoc"];
+            m.findBy = [ appid: entity.appid ];
+            if( entity.doctype.org?.objid !=null ) {
+                m.where = ["doctype.org.objid= :orgid", [orgid: entity.doctype.org?.objid ]];
+            }
+            else {
+                m.where = ["doctype.org.objid IS NULL"];
+            }
+            docList = queryService.getList( m );
+        }
     }
     
     /* ************************************************************************
@@ -81,17 +96,7 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         return Inv.lookupOpener("dynamic:form", p );
     }
     
-    /**************************************************************************
-    * CHECKLIST ITEMS
-    ***************************************************************************/
-     def issueControl() {
-          def h = { o->
-            o.objid = entity.objid;
-            issuanceSvc.issueControl( o );
-            reloadEntity();
-        }
-        return Inv.lookupOpener("obo_issue_controlno", [handler: h, showcontrolno: true]);
-    }
+   
     
     //additional work types
     def editWorktypes() {
@@ -181,6 +186,17 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
             chklistSvc.updateItem( o );
         }
     ]
+    
+    def issueControl() {
+        def p = [:];
+        p.handler = { o->
+            entity.putAll( o );
+            binding.refresh();
+        }
+        p.doctype = entity.doctype;
+        p.appid = entity.objid;
+        return Inv.lookupOpener("obo_issuance", p );
+    }
     
     
 }

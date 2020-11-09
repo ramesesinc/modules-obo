@@ -5,6 +5,8 @@
 		<field name="user_name" />		
 		<field name="displayname" />
 		<field name="signature" />
-		<field name="position" />		
+		<field name="position" />
+		<field name="tag" />	
+		<field name="system" />		
 	</element>
 </schema>	

@@ -6,7 +6,7 @@
                 reportName="reports/obo/assessment.jasper"
                 action="preview"
                 vallowPrint="#{ task.state.matches('billing|payment') }"
-                visibleWhen="#{ task.state.matches('approval|billing|payment') }"/>
+                xvisibleWhen="#{ task.state.matches('approval|billing|payment') }"/>
 
     </invokers>
 </workunit>

@@ -24,30 +24,10 @@
 	<import value="net.sf.jasperreports.engine.*" />
 	<import value="net.sf.jasperreports.engine.data.*" />
 
-	<parameter name="BFP_OFFICE" isForPrompting="false" class="java.lang.String">
-		<defaultValueExpression ><![CDATA["OFFICE OF THE CITY FIRE MARSHAL"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="BFP_STATION" isForPrompting="false" class="java.lang.String">
-		<defaultValueExpression ><![CDATA["Legazpi City Fire Station"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="BFP_ADDRESS" isForPrompting="false" class="java.lang.String">
-		<defaultValueExpression ><![CDATA["Coastal Road, Brgy 57 - Dap-dap, Leg. City"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="BFP_CONTACT" isForPrompting="false" class="java.lang.String">
-		<defaultValueExpression ><![CDATA["Tel No. (052)284-0427; 09199925484; 09178932416"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="BFP_CHIEF_NAME" isForPrompting="false" class="java.lang.String">
-		<defaultValueExpression ><![CDATA["SF02 Bernick N Batas, CE"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="BFP_CHIEF_POSITION" isForPrompting="false" class="java.lang.String">
-		<defaultValueExpression ><![CDATA["CHIEF, FSES"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="BFP_MARSHAL_NAME" isForPrompting="false" class="java.lang.String">
-		<defaultValueExpression ><![CDATA["CINSP JAN GARRY D LUNAS, ME"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="BFP_MARSHAL_POSITION" isForPrompting="false" class="java.lang.String">
-		<defaultValueExpression ><![CDATA["CITY/MUNICIPAL FIRE MARHSAL"]]></defaultValueExpression>
-	</parameter>
+	<parameter name="OFFICE_NAME" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="OFFICE_ADDRESS1" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="OFFICE_ADDRESS2" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="OFFICE_CONTACT" isForPrompting="false" class="java.lang.String"/>
 
 	<field name="controlno" class="java.lang.String"/>
 	<field name="title" class="java.lang.String"/>
@@ -58,6 +38,13 @@
 	<field name="amount" class="java.lang.Number"/>
 	<field name="location.text" class="java.lang.String"/>
 	<field name="applicant.name" class="java.lang.String"/>
+	<field name="approver.displayname" class="java.lang.String"/>
+	<field name="approver.position" class="java.lang.String"/>
+	<field name="approver.signature" class="java.lang.Object"/>
+	<field name="endorser.displayname" class="java.lang.String"/>
+	<field name="endorser.position" class="java.lang.String"/>
+	<field name="endorser.signature" class="java.lang.Object"/>
+	<field name="permittype" class="java.lang.String"/>
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
@@ -65,19 +52,6 @@
 		</background>
 		<title>
 			<band height="814"  isSplitAllowed="true" >
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="40"
-						y="114"
-						width="481"
-						height="438"
-						key="image-5"/>
-					<box></box>
-					<graphicElement stretchType="NoStretch">
-					<pen lineWidth="0.0" lineStyle="Solid"/>
-</graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["images/bfp-bg.png"]]></imageExpression>
-				</image>
 				<staticText>
 					<reportElement
 						x="0"
@@ -95,16 +69,18 @@
 					</textElement>
 				<text><![CDATA[]]></text>
 				</staticText>
-				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="345"
-						y="462"
-						width="157"
-						height="65"
-						key="image-6"/>
+						x="40"
+						y="114"
+						width="481"
+						height="438"
+						key="image-5"/>
 					<box></box>
-					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["images/bernick_batas.png"]]></imageExpression>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/bfp-bg.png"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" pattern="dd-MMM-yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -158,7 +134,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{BFP_CONTACT}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{OFFICE_CONTACT}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -171,7 +147,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{BFP_ADDRESS}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{OFFICE_ADDRESS2}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -184,7 +160,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{BFP_STATION}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{OFFICE_ADDRESS1}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -197,7 +173,7 @@
 					<textElement textAlignment="Center" verticalAlignment="Bottom">
 						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{BFP_OFFICE}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{OFFICE_NAME}]]></textFieldExpression>
 				</textField>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -421,34 +397,8 @@
 				</staticText>
 				<staticText>
 					<reportElement
-						x="338"
-						y="483"
-						width="200"
-						height="13"
-						key="staticText-21"/>
-					<box></box>
-					<textElement textAlignment="Left">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
-					</textElement>
-				<text><![CDATA[RECOMMEND APPROVAL]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="338"
-						y="553"
-						width="200"
-						height="15"
-						key="staticText-24"/>
-					<box></box>
-					<textElement textAlignment="Left">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
-					</textElement>
-				<text><![CDATA[APPROVED:]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
 						x="41"
-						y="603"
+						y="617"
 						width="485"
 						height="36"
 						key="staticText-27"/>
@@ -461,7 +411,7 @@
 				<staticText>
 					<reportElement
 						x="41"
-						y="647"
+						y="654"
 						width="485"
 						height="26"
 						forecolor="#FF0033"
@@ -475,7 +425,7 @@
 				<staticText>
 					<reportElement
 						x="40"
-						y="705"
+						y="712"
 						width="118"
 						height="10"
 						forecolor="#010000"
@@ -489,7 +439,7 @@
 				<staticText>
 					<reportElement
 						x="40"
-						y="715"
+						y="722"
 						width="118"
 						height="10"
 						forecolor="#010000"
@@ -503,7 +453,7 @@
 				<staticText>
 					<reportElement
 						x="40"
-						y="725"
+						y="732"
 						width="118"
 						height="10"
 						forecolor="#010000"
@@ -517,7 +467,7 @@
 				<staticText>
 					<reportElement
 						x="40"
-						y="735"
+						y="742"
 						width="118"
 						height="10"
 						forecolor="#010000"
@@ -545,7 +495,7 @@
 				<staticText>
 					<reportElement
 						x="41"
-						y="686"
+						y="693"
 						width="485"
 						height="22"
 						forecolor="#010000"
@@ -676,60 +626,6 @@
 					</textElement>
 				<text><![CDATA[BFP-OSF-FSED-003 REV. Ø1(07.05.19)]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="338"
-						y="506"
-						width="199"
-						height="15"
-						key="textField-3"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Bottom">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{BFP_CHIEF_NAME}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="338"
-						y="521"
-						width="199"
-						height="15"
-						key="textField-4"/>
-					<box>					<topPen lineWidth="1.0"/>
-</box>
-					<textElement textAlignment="Center" verticalAlignment="Bottom">
-						<font fontName="Arial" size="10"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{BFP_CHIEF_POSITION}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="338"
-						y="586"
-						width="199"
-						height="15"
-						key="textField-5"/>
-					<box>					<topPen lineWidth="1.0"/>
-</box>
-					<textElement textAlignment="Center" verticalAlignment="Bottom">
-						<font fontName="Arial" size="10"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{BFP_MARSHAL_POSITION}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="338"
-						y="571"
-						width="199"
-						height="15"
-						key="textField-6"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Bottom">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$P{BFP_MARSHAL_NAME}]]></textFieldExpression>
-				</textField>
 				<staticText>
 					<reportElement
 						x="202"
@@ -870,10 +766,10 @@
 				</staticText>
 				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="32"
-						y="147"
-						width="515"
-						height="56"
+						x="40"
+						y="154"
+						width="481"
+						height="35"
 						key="image-4"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch">
@@ -907,17 +803,121 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement
+						x="321"
+						y="477"
+						width="200"
+						height="13"
+						key="staticText-48"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[RECOMMEND APPROVAL]]></text>
+				</staticText>
 				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="345"
-						y="527"
-						width="157"
-						height="76"
+						x="341"
+						y="473"
+						width="143"
+						height="66"
+						key="image-6"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.io.InputStream"><![CDATA[$F{endorser.signature}]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="321"
+						y="516"
+						width="199"
+						height="15"
+						key="textField-1"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{endorser.displayname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="321"
+						y="531"
+						width="199"
+						height="15"
+						key="textField-2"/>
+					<box>					<topPen lineWidth="1.0"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{endorser.position}]]></textFieldExpression>
+				</textField>
+				<image  hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="335"
+						y="548"
+						width="153"
+						height="68"
 						key="image-7"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["images/jan_garry_lunas.png"]]></imageExpression>
+					<imageExpression class="java.io.InputStream"><![CDATA[$F{approver.signature}]]></imageExpression>
 				</image>
+				<staticText>
+					<reportElement
+						x="321"
+						y="554"
+						width="200"
+						height="15"
+						key="staticText-49"/>
+					<box></box>
+					<textElement textAlignment="Left">
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<text><![CDATA[APPROVED:]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="321"
+						y="591"
+						width="199"
+						height="15"
+						key="textField-3"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{approver.displayname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="321"
+						y="606"
+						width="199"
+						height="15"
+						key="textField-4"/>
+					<box>					<topPen lineWidth="1.0"/>
+</box>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Arial" size="10"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[""+$F{approver.position}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="40"
+						y="186"
+						width="481"
+						height="26"
+						key="textField-5"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial Black" pdfFontName="Helvetica-Bold" size="15" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["(FOR " + $F{permittype} + ")"]]></textFieldExpression>
+				</textField>
 			</band>
 		</title>
 		<pageHeader>

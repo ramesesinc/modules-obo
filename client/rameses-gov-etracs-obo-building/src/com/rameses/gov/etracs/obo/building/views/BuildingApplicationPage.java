@@ -64,13 +64,16 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel28 = new com.rameses.rcp.control.XLabel();
         xLabel13 = new com.rameses.rcp.control.XLabel();
         xLabel17 = new com.rameses.rcp.control.XLabel();
-        xLabel18 = new com.rameses.rcp.control.XLabel();
         xLabel19 = new com.rameses.rcp.control.XLabel();
         xLabel20 = new com.rameses.rcp.control.XLabel();
         xLabel22 = new com.rameses.rcp.control.XLabel();
+        xPanel8 = new com.rameses.rcp.control.XPanel();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
+        xButton1 = new com.rameses.rcp.control.XButton();
+        xLabel39 = new com.rameses.rcp.control.XLabel();
+        xLabel40 = new com.rameses.rcp.control.XLabel();
         xLabel29 = new com.rameses.rcp.control.XLabel();
         xLabel30 = new com.rameses.rcp.control.XLabel();
-        xLabel33 = new com.rameses.rcp.control.XLabel();
         xPanel2 = new com.rameses.rcp.control.XPanel();
         applicationDocumentList1 = new com.rameses.gov.etracs.obo.components.ApplicationDocumentList();
         xPanel3 = new com.rameses.rcp.control.XPanel();
@@ -112,23 +115,27 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel8.setCaption("Project Title");
         xLabel8.setExpression("<html>#{entity.title}</html>");
         xLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel8);
 
         xLabel7.setCaption("Project Description");
         xLabel7.setExpression("<html>#{entity.description}</html>");
         xLabel7.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel7.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel7);
 
         xLabel6.setCaption("Location");
         xLabel6.setExpression("<html>#{entity.location.text}</html>");
         xLabel6.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel6.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel6);
 
         xLabel4.setCaption("Applicant");
         xLabel4.setExpression("#{entity.applicant.name}");
+        xLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
 
@@ -195,18 +202,21 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel2.setCaption("Occupancy Type ");
         xLabel2.setExpression("<html>#{entity.occupancytype.group.objid} ( #{entity.occupancytype.division.objid} ) - #{entity.occupancytype.title }</html>");
         xLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        xLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel2);
 
         xLabel55.setCaption("Zone classification");
         xLabel55.setExpression("#{entity.zoneclass.objid} - #{entity.zoneclass.title}");
+        xLabel55.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel55.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel55.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel55);
 
         xLabel56.setCaption("Zone ");
         xLabel56.setExpression("#{entity.zone}");
+        xLabel56.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel56.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel56);
 
@@ -221,24 +231,28 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel5.setCaption("App No");
         xLabel5.setExpression("#{entity.appno}");
         xLabel5.setName("entity.rptinfo.text"); // NOI18N
+        xLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel5.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel5);
 
         xLabel12.setCaption("App Date");
         xLabel12.setExpression("#{entity.dtfiled}");
         xLabel12.setName("entity.rptinfo.text"); // NOI18N
+        xLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel12.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel12);
 
         xLabel14.setCaption("App Type");
         xLabel14.setExpression("#{entity.apptype}");
         xLabel14.setName("entity.rptinfo.text"); // NOI18N
+        xLabel14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel14.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel14);
 
         xLabel9.setCaption("Web Tracking No");
         xLabel9.setExpression("#{entity.trackingno}");
         xLabel9.setName("entity.trackingno"); // NOI18N
+        xLabel9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel9.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel9);
 
@@ -246,73 +260,112 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel38.setExpression("#{entity.txntype}");
         xLabel38.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel38.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel38.setPreferredSize(new java.awt.Dimension(150, 20));
+        xLabel38.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel3.add(xLabel38);
 
         xLabel26.setCaption("Task State");
         xLabel26.setExpression("#{entity.task.state}");
+        xLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel26.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel26.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel26);
 
         xLabel27.setCaption("Task Start");
         xLabel27.setExpression("#{entity.task.startdate}");
+        xLabel27.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel27.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel27);
 
         xLabel28.setCaption("Task Assign To");
         xLabel28.setExpression("#{entity.task.assignee.name}");
+        xLabel28.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel28.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel28);
 
         xLabel13.setCaption("Elapsed Time");
         xLabel13.setExpression("#{entity.task.elapsedtime}");
+        xLabel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel13.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel13);
 
         xLabel17.setCaption("Contact Name");
-        xLabel17.setExpression("#{entity.contact.name}");
+        xLabel17.setExpression("#{entity.contact.name} ( #{entity.contact.description} )");
+        xLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel17.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel17.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel17);
 
-        xLabel18.setCaption("Contact Description");
-        xLabel18.setExpression("#{entity.contact.description}");
-        xLabel18.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel18);
-
         xLabel19.setCaption("Contact Email");
         xLabel19.setExpression("#{entity.contact.email}");
+        xLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel19.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel19);
 
-        xLabel20.setCaption("Contact Phone");
+        xLabel20.setCaption("Contact Mobile No");
         xLabel20.setExpression("#{entity.contact.mobileno}");
+        xLabel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel20.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel20);
 
         xLabel22.setCaption("Project Supervisor ");
         xLabel22.setExpression("#{entity.contractor.lastname}, #{entity.contractor.firstname}  ( PRC No: #{entity.contractor.prc.idno} )");
+        xLabel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel22.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel22.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel22);
 
+        xPanel8.setCaption("Payment Receipt No");
+        xPanel8.setVisibleWhen("#{ entity.payment?.objid != null }");
+        xPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xPanel8.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xPanel8.setOpaque(false);
+        xPanel8.setPreferredSize(new java.awt.Dimension(0, 25));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0);
+        flowLayout1.setAlignOnBaseline(true);
+        xPanel8.setLayout(flowLayout1);
+
+        xLabel1.setExpression("#{ entity.payment.refno } - ( #{ entity.payment.reftype } )");
+        xPanel8.add(xLabel1);
+
+        xButton1.setName("viewReceipt"); // NOI18N
+        xButton1.setText("View");
+        xButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xButton1ActionPerformed(evt);
+            }
+        });
+        xPanel8.add(xButton1);
+
+        xFormPanel3.add(xPanel8);
+
+        xLabel39.setCaption("Date Issued");
+        xLabel39.setExpression("#{entity.payment.refdate} ");
+        xLabel39.setVisibleWhen("#{ entity.payment?.objid != null }");
+        xLabel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel39.setDateFormat("yyyy-MM-dd");
+        xLabel39.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel3.add(xLabel39);
+
+        xLabel40.setCaption("Amount Paid");
+        xLabel40.setExpression("#{entity.payment.amount} ");
+        xLabel40.setVisibleWhen("#{ entity.payment?.objid != null }");
+        xLabel40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel40.setNumberFormat("#,##0.00");
+        xLabel40.setPreferredSize(new java.awt.Dimension(0, 16));
+        xFormPanel3.add(xLabel40);
+
         xLabel29.setCaption("Permit No");
-        xLabel29.setExpression("#{entity.permitno}");
+        xLabel29.setExpression("#{entity.controlno}");
+        xLabel29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel29.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel29.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel29);
 
         xLabel30.setCaption("Permit Date Issued");
         xLabel30.setExpression("#{entity.dtissued}");
+        xLabel30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel30.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel30);
-
-        xLabel33.setCaption("Expiry date");
-        xLabel33.setExpression("#{entity.expirydate}");
-        xLabel33.setDateFormat("yyyy MMM dd");
-        xLabel33.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel3.add(xLabel33);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -330,7 +383,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
                     .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(39, 39, 39))
         );
@@ -431,6 +484,10 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         add(xTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void xButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.gov.etracs.obo.components.ApplicationDocumentList applicationDocumentList1;
@@ -445,8 +502,10 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.gov.etracs.obo.components.ProfessionalList professionalList1;
     private com.rameses.gov.etracs.obo.components.TransmittalList transmittalList1;
     private com.rameses.rcp.control.XActionBar xActionBar2;
+    private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
+    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLabel xLabel10;
     private com.rameses.rcp.control.XLabel xLabel12;
     private com.rameses.rcp.control.XLabel xLabel13;
@@ -454,7 +513,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel15;
     private com.rameses.rcp.control.XLabel xLabel16;
     private com.rameses.rcp.control.XLabel xLabel17;
-    private com.rameses.rcp.control.XLabel xLabel18;
     private com.rameses.rcp.control.XLabel xLabel19;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel20;
@@ -465,13 +523,14 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel29;
     private com.rameses.rcp.control.XLabel xLabel30;
     private com.rameses.rcp.control.XLabel xLabel32;
-    private com.rameses.rcp.control.XLabel xLabel33;
     private com.rameses.rcp.control.XLabel xLabel34;
     private com.rameses.rcp.control.XLabel xLabel35;
     private com.rameses.rcp.control.XLabel xLabel36;
     private com.rameses.rcp.control.XLabel xLabel37;
     private com.rameses.rcp.control.XLabel xLabel38;
+    private com.rameses.rcp.control.XLabel xLabel39;
     private com.rameses.rcp.control.XLabel xLabel4;
+    private com.rameses.rcp.control.XLabel xLabel40;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel55;
     private com.rameses.rcp.control.XLabel xLabel56;
@@ -486,6 +545,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XPanel xPanel5;
     private com.rameses.rcp.control.XPanel xPanel6;
     private com.rameses.rcp.control.XPanel xPanel7;
+    private com.rameses.rcp.control.XPanel xPanel8;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,8 +6,9 @@
         <invoker type="formActions" caption="Next" action="next" />
     </invokers>
     
-    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationInitialModel" />
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationCreateModel" />
     <pages>
         <page name="initial" template="com.rameses.gov.etracs.obo.views.OboApplicationInitialPage" />
+        <page name="capture" template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationCapturePage" />
     </pages>
 </workunit>

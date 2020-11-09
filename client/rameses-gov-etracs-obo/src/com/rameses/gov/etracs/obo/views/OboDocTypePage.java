@@ -40,6 +40,7 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xComboBox5 = new com.rameses.rcp.control.XComboBox();
         xComboBox7 = new com.rameses.rcp.control.XComboBox();
         xTextField3 = new com.rameses.rcp.control.XTextField();
+        xTextField7 = new com.rameses.rcp.control.XTextField();
         xComboBox4 = new com.rameses.rcp.control.XComboBox();
         xLabel1 = new com.rameses.rcp.control.XLabel();
         xCheckBox4 = new com.rameses.rcp.control.XCheckBox();
@@ -121,6 +122,12 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xTextField3.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         xFormPanel1.add(xTextField3);
 
+        xTextField7.setCaption("Report Header");
+        xTextField7.setName("entity.reportheader"); // NOI18N
+        xTextField7.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField7.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        xFormPanel1.add(xTextField7);
+
         xComboBox4.setCaption("SubType Of");
         xComboBox4.setDepends(new String[] {"entity.type"});
         xComboBox4.setItemKey("");
@@ -165,7 +172,7 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xRadio4.setName("entity.issuetype"); // NOI18N
         xRadio4.setOptionValue(1);
         xRadio4.setShowCaption(false);
-        xRadio4.setText("Auto-issue of control number");
+        xRadio4.setText("Manual issue, control number auto-generated");
         xFormPanel1.add(xRadio4);
 
         xTextField4.setCaption("Pattern");
@@ -182,14 +189,14 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xRadio5.setName("entity.issuetype"); // NOI18N
         xRadio5.setOptionValue(2);
         xRadio5.setShowCaption(false);
-        xRadio5.setText("Manually issue control number");
+        xRadio5.setText("Manually issue control number specified");
         xFormPanel1.add(xRadio5);
 
         xRadio6.setCaption("");
         xRadio6.setName("entity.issuetype"); // NOI18N
         xRadio6.setOptionValue(3);
         xRadio6.setShowCaption(false);
-        xRadio6.setText("Auto-issue of control number after building permit issued");
+        xRadio6.setText("Auto-issue of control number before releasing");
         xFormPanel1.add(xRadio6);
 
         xTextField5.setCaption("Pattern");
@@ -399,5 +406,6 @@ public class OboDocTypePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XTextField xTextField4;
     private com.rameses.rcp.control.XTextField xTextField5;
     private com.rameses.rcp.control.XTextField xTextField6;
+    private com.rameses.rcp.control.XTextField xTextField7;
     // End of variables declaration//GEN-END:variables
 }

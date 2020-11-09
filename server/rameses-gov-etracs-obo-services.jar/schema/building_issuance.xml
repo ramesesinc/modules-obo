@@ -1,7 +1,7 @@
 <schema>
 	<element tablename="building_issuance">
 		<field name="objid" primary="true" prefix="BLDGISS"/>
-		<field name="subdocid"	required="true"/>
+		<field name="appid"	required="true"/>
 		<field name="controlno"	/>
 		<field name="dtissued"	/>
 		<field name="issuedby_objid" />
@@ -9,10 +9,11 @@
 		<field name="state"	/>
 		<field name="expirydate"/>
 		<field name="remarks"/>
-		<field name="template"/>
 
+		<field name="template"/>
 		<field name="endorserid" />
 		<field name="approverid" />
+		<field name="reportheader" />
 
 	</element>
 </schema>

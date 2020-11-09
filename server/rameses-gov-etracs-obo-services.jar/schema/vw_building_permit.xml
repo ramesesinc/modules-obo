@@ -9,7 +9,7 @@
 
 		<field name="state" />
 		<field name="appid" />
-		<field name="permitno"  searchable="true" indexed="true"/>
+		<field name="controlno"  searchable="true" indexed="true"/>
 		<field name="dtissued" />
 		<field name="dtfiled" />
 		<field name="expirydate" />

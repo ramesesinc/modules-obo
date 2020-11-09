@@ -14,13 +14,13 @@ class BuildingApplicationWorkflowInterceptor {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@Service("WorkflowNotificationService")
-    def wfNotificationSvc;
+	@Service("OboNotificationService")
+    def notificationSvc;
 
 	@Service("DateService")
 	def dateSvc;
 
-	@Service("JasperReportEmailService")
+	@Service("JasperEmailQueueService")
     def emailSvc;
 
 	@DataContext("building_evaluation")
@@ -237,16 +237,18 @@ class BuildingApplicationWorkflowInterceptor {
 	public void notifyOtherTasks( def evt ) {
 		def p = evt.args[0];
 		p._notificationlist.each {
-			wfNotificationSvc.notify( [notificationid: it] );
+			notificationSvc.notify( it );
 		}
 	}
 
 	//release process. Make sure there is at least one building_application_issuance
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }", index=0 ) 
-	public void doActionBeforeRelease( def evt ) {
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }", index=0 )public void doActionBeforeRelease( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;
-		def docList = subdocEm.find( [appid: appid]).where("doctype.issuetype = 2 AND issuanceid IS NULL").select("doctype.title").list();		
+		def docList = subdocEm.find( [appid: appid]).where("issuanceid IS NULL").select("doctype.title").list();
+		if( docList ) {
+			throw new Exception("The ff. documents are not yet issued: " + docList*.doctype.title.join("/n") );
+		}		
 	}
 
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }", index=0 ) 

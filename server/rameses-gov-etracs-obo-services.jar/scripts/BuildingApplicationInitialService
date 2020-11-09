@@ -190,6 +190,103 @@ class BuildingApplicationInitialService {
 		return newapp;
 	}
 
+	@ProxyMethod
+	public def saveCapture( def app ) {
+		//check first all professionals if exist in the obo_professional table
+		app.objid = "BAPP" + new UID();
+
+		//remove application before so it can be replaced
+		def applicant = app.remove("applicant");
+		def bb = binfoEm.create( app );
+		app.infoid = bb.objid;
+		app.txnmode = "CAPTURE";
+		def newapp = appEm.create( app );
+
+		app.entities.each {
+			it.appid = newapp.objid;
+			entityEm.create( it );
+		}
+		app.rpus.each {
+			it.appid = newapp.objid;
+			it.owner = [objid: it.ownerid ];
+			rpuEm.create( it );
+		}
+		
+		//insert items in sub doc ancillaries,accessories and all other subdocs 
+		app.accessories.each {
+			it.appid = newapp.objid;
+			it.state = 0;
+			it.doctype = [ objid: 'ACCESSORIES' ];
+			it.occupancytypeid = (it.occupancytypeid!=null)?it.occupancytypeid:'';	
+			it.amount = 0;		
+			subdocEm.create( it );
+		}
+
+		app.ancillaries.each {
+			it.appid = newapp.objid;
+			it.doctype = [ objid: it.permittypeid.toUpperCase() ];
+			it.amount = 0;
+			it.state = 0;
+			subdocEm.create( it );
+		};
+
+		//save all documents that are auto create that does not exist above
+		subdocEm.getBuildingSubdocsToAutoCreate().each {
+			def sd = [:];
+			sd.appid = newapp.objid;
+			sd.doctype = [objid: it.objid];
+			sd.amount = 0;
+			sd.state = 0;
+			subdocEm.create( sd );			
+		}
+
+		app.infos.each {
+			it.appid = newapp.objid;
+			it.type = [name: it.name ];
+			appInfoEm.create( it );
+		}
+
+		//immediatly accept and fire the workflow
+		app = newapp;
+
+		//calculate the cost first before receiving
+		def dt = dateSvc.getServerDate();
+		def param = [:];
+		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
+		param.occupancytype = app.occupancytype;
+
+		def cost = costSvc.calc( param );
+
+		//update applicant, cost and appid for info
+		def u = [:];
+		u.createdby = [objid: env.USERID, name: env.FULLNAME];
+		u.dtcreated = dt;
+		u.applicantid = applicantid;
+		u.appid = newapp.objid;
+		u.fixedcost = cost; 
+		binfoEm.find( [objid: newapp.objid ] ).update( u );
+
+		//update the requirements
+		def reqTypes = reqTypeEm.where("permittype = 'building_application' ").list();
+		reqTypes.each {
+			def r = [:];
+			r.appid = app.objid;
+			r.state = 0;
+			r.typeid = it.objid;
+			r.type = [objid: it.objid];
+			reqEm.create( r );
+		}
+
+		//fire the workflow to start the process
+		def p = [:];
+		p.processname = 'building_application';
+		p.refid = app.objid;
+		p.startdate = dt;
+		p.info = app;
+		p.assignee = [objid:env.USERID, name:env.FULLNAME];		
+		wfSvc.start(p);	
+		return newapp;
+	}
 
 
 	
