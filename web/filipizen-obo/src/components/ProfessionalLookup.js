@@ -35,7 +35,7 @@ const ProfessionalLookup = ({
   const fetchList = (params) => {
       if (svc && query.prc.idno ) {
         const p = {...query, ...params};
-        svc.getList(p, (err, list) => {
+        svc.invoke("getList", p, (err, list) => {
           if (err) {
             console.log("ERROR", err)
           } else {

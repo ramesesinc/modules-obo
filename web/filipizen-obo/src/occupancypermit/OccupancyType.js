@@ -20,7 +20,7 @@ const OccupancyType = ({
   const [app, setApp] = useState({});
 
   useEffect(() => {
-    appService.getApplication({appid: appno}, (err, app) => {
+    appService.invoke("getApplication", {appid: appno}, (err, app) => {
       if (err) {
         setError(err);
       } else {{

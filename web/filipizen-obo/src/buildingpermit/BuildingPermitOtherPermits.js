@@ -40,7 +40,7 @@ const BuildingPermitOtherPermits = ({
   const [ancillaryPermit, setAncillaryPermit] = useState({worktypes:[], type:{}});
 
   const loadAvailableAccillaryPermits = () => {
-    appService.getAvailableAncillaryPermitTypes({appid: appno}, (err, list) => {
+    appService.invoke("getAvailableAncillaryPermitTypes", {appid: appno}, (err, list) => {
       if (err) {
         setError(err);
       } else {
@@ -50,7 +50,7 @@ const BuildingPermitOtherPermits = ({
   }
 
   const loadAncillaryPermits = () => {
-    appService.getAncillaryPermits({appid: appno}, (err, list) => {
+    appService.invoke("getAncillaryPermits", {appid: appno}, (err, list) => {
       if (err) {
         setError(err)
       } else {
@@ -75,7 +75,7 @@ const BuildingPermitOtherPermits = ({
     const selectedPermits = availableAncillaryPermits.filter((permit => permit.selected === true));
     if (selectedPermits.length > 0 ) {
       setAncillaryPermits(selectedPermits);
-      appService.saveAncillaryPermits({appid: appno, permits: selectedPermits}, (err, _) => {
+      appService.invoke("saveAncillaryPermits", {appid: appno, permits: selectedPermits}, (err, _) => {
         if (err) {
           setError(err);
         } else {
@@ -90,7 +90,7 @@ const BuildingPermitOtherPermits = ({
 
   const loadPermitWorkTypes = (permit) => {
     const svc = Service.lookup("OboMiscListService", "obo");
-    svc.getWorkTypes({typeid: permit.type.objid}, (err, workTypes) => {
+    svc.invoke("getWorkTypes", {typeid: permit.type.objid}, (err, workTypes) => {
       if (err) {
         setError(err);
       } else {
@@ -106,7 +106,7 @@ const BuildingPermitOtherPermits = ({
   }
 
   const editPermit = (o) => {
-    appService.getAncillaryPermit({objid: o.objid}, (err, permit) => {
+    appService.invoke("getAncillaryPermit", {objid: o.objid}, (err, permit) => {
       if (err) {
         setError(err);
       } else {
@@ -117,7 +117,7 @@ const BuildingPermitOtherPermits = ({
   }
 
   const removePermit = (permit) => {
-    appService.removeAncillaryPermit({objid: permit.objid}, (err, res) => {
+    appService.invoke("removeAncillaryPermit", {objid: permit.objid}, (err, res) => {
       if (err) {
         setError(err);
       } else {
@@ -139,7 +139,7 @@ const BuildingPermitOtherPermits = ({
       objid: ancillaryPermit.objid,
       worktypes: ancillaryPermit.worktypes.filter(wt => wt.checked).map(wt => wt.name)
     };
-    appService.updateAncillaryPermit(updatedWorkTypes, (err, proj) => {
+    appService.invoke("updateAncillaryPermit", updatedWorkTypes, (err, proj) => {
       if (err) {
         setError(error);
       } else {
@@ -169,8 +169,24 @@ const BuildingPermitOtherPermits = ({
   }
 
   const submitInfos = () => {
-    const updatedInfos = {objid: ancillaryPermit.objid, infos: ancillaryPermit.infos }
-    appService.updateAncillaryPermit(updatedInfos, (err, _) => {
+    const updatedInfos = {
+      objid: ancillaryPermit.objid,
+      projectcost: ancillaryPermit.projectcost,
+      equipmentcost: ancillaryPermit.equipmentcost,
+    }
+    appService.invoke("updateAncillaryPermit", updatedInfos, (err, _) => {
+      if (err) {
+        setError(err);
+      } else {
+        setMode("cost");
+      }
+    })
+  }
+
+  const saveCost = () => {
+    setError(null);
+    const updatedCost = {objid: ancillaryPermit.objid, infos: ancillaryPermit.infos }
+    appService.invoke("saveAncillaryPermit", updatedCost, (err, _) => {
       if (err) {
         setError(err);
       } else {
@@ -195,7 +211,7 @@ const BuildingPermitOtherPermits = ({
       worktypes: ancillaryPermit.worktypes.filter(wt => wt.checked).map(wt => wt.name)
     }
 
-    appService.saveAncillaryPermit(updatedPermit, (err, _) => {
+    appService.invoke("saveAncillaryPermit", updatedPermit, (err, _) => {
       if (err) {
         setError(err);
       } else {
@@ -320,6 +336,18 @@ const BuildingPermitOtherPermits = ({
           <Button caption="Next" action={submitSelectedAncillaryPermits} />
         </ActionBar>
       </Panel>
+
+      <FormPanel visibleWhen={mode === "cost"} context={ancillaryPermit} handler={setAncillaryPermit}>
+        <Subtitle2>{ancillaryPermit.type?.title}</Subtitle2>
+        <Decimal name="projectcost" caption="Project Cost" textAlign="left" fullWidth={false} />
+        <Decimal name="equipmentcost" caption="Equipment Cost" textAlign="left" />
+        <Spacer />
+        <ActionBar>
+          <BackLink action={() => setMode("infos")} />
+          <Button caption="Next" action={saveCost} />
+        </ActionBar>
+      </FormPanel>
+
 
       <FormPanel visibleWhen={mode === "professional"} context={ancillaryPermit} handler={setAncillaryPermit}>
         <Subtitle2>{ancillaryPermit.type?.title}</Subtitle2>

@@ -34,7 +34,7 @@ const Initial = ({
   const [professionList, setProfessionList] = useState([]);
 
   useEffect(() => {
-    svc.getProfessionList((err, list) => {
+    svc.invoke("getProfessionList", null, (err, list) => {
       setProfessionList(list);
     })
   }, []);
@@ -46,7 +46,7 @@ const Initial = ({
 
   const verifyInfo = () => {
     setLoading(true);
-    svc.verifyInfo(info, (err, res) => {
+    svc.invoke("verifyInfo", info, (err, res) => {
       if (err) {
         handleError(err)
       } else {

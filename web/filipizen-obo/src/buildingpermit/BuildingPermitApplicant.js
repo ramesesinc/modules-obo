@@ -40,7 +40,7 @@ const BuildingPermitApplicant = (props) => {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    appService.getApplicant({appid: appno}, (err, applicant) => {
+    appService.invoke("getApplicant", {appid: appno}, (err, applicant) => {
       if (err) {
         setError(err)
       } else if(!applicant) {
@@ -56,7 +56,7 @@ const BuildingPermitApplicant = (props) => {
 
   const saveApplicant = () => {
     setError(null);
-    appService.saveApplicant(applicant, (err, app) => {
+    appService.invoke("saveApplicant", applicant, (err, app) => {
       if (err) {
         setError(err)
       } else {

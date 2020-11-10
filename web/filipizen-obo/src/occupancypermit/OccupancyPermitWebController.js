@@ -51,7 +51,7 @@ const OccupancyPermitWebController = (props) => {
 
   const findCurrentApp = () => {
     if (!appno) return;
-    svc.findCurrentInfo({appid: appno}, (err, app) => {
+    svc.invoke("findCurrentInfo", {appid: appno}, (err, app) => {
       if (err) {
         setError(err);
       } else {
@@ -86,7 +86,7 @@ const OccupancyPermitWebController = (props) => {
     if (stepCompleted) {
       setStep(ps => ps + 1);
     } else {
-      svc.moveNextStep({appid: appno}, (err, updatedApp) => {
+      svc.invoke("moveNextStep", {appid: appno}, (err, updatedApp) => {
         if (err) {
           setError(err);
         } else {
@@ -114,7 +114,7 @@ const OccupancyPermitWebController = (props) => {
     if (appType === "new") {
       setMode("init");
     } else {
-      svc.findCurrentInfo({appid: appno}, (err, app) => {
+      svc.invoke("findCurrentInfo", {appid: appno}, (err, app) => {
         if (err) {
           setError(err);
         } else if (!app) {

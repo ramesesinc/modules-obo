@@ -81,7 +81,7 @@ const ProfessionalWebController = (props) => {
   const saveProfessional = () => {
     setLoading(true);
     const reconciledProf = getReconciledProfessional();
-    svc.create(reconciledProf, (err, prof) => {
+    svc.invoke("create", reconciledProf, (err, prof) => {
       if (err) {
         handleError(err);
       } else {

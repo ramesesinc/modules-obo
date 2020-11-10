@@ -63,7 +63,7 @@ const BuildingPermitOccupancy = ({
 
 
   useEffect(() => {
-    appService.getApplication({appid: appno}, (err, app) => {
+    appService.invoke("getApplication", {appid: appno}, (err, app) => {
       if (err) {
         setError(err);
       } else {
@@ -132,7 +132,7 @@ const BuildingPermitOccupancy = ({
 
   const updateOccupancyType = () => {
     let occupancytype = {appid: appno, occupancytype: project.occupancytype};
-    appService.updateOccupancyType(occupancytype, (err, res) => {
+    appService.invoke("updateOccupancyType", occupancytype, (err, res) => {
       if (err) {
         setError(err);
       } else {

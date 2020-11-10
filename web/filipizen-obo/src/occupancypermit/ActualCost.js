@@ -32,7 +32,7 @@ const ActualCost = ({
   const [cost, setCost] = useState({items: costs})
 
   useEffect(() => {
-    appService.getApplication({appid: appno}, (err, app) => {
+    appService.invoke("getApplication", {appid: appno}, (err, app) => {
       if (err) {
         setError(err);
       } else {{
@@ -51,7 +51,7 @@ const ActualCost = ({
     cost.items.forEach(item => {
       updatedApp[item.field] = item.value;
     });
-    appService.update(updatedApp, (err, app) => {
+    appService.invoke("update", updatedApp, (err, app) => {
       if (err) {
         setError(err)
       } else {

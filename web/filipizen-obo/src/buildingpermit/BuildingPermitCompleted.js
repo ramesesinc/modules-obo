@@ -38,7 +38,7 @@ const BuildingPermitCompleted = ({
 
   const loadApplication = () => {
     setLoading(true)
-    appService.getProjectInfo({ appid: appno }, (err, app) => {
+    appService.invoke("getProjectInfo", { appid: appno }, (err, app) => {
       if (err) {
         setError(err)
       } else {
@@ -50,7 +50,7 @@ const BuildingPermitCompleted = ({
 
   const loadAncillaryPermits = () => {
     setLoading(true)
-    appService.getAncillaryPermits(
+    appService.invoke("getAncillaryPermits",
       { appid: appno },
       (err, ancillaryPermits) => {
         if (err) {
@@ -121,12 +121,12 @@ const BuildingPermitCompleted = ({
           <Panel style={styles.linkContainer}>
             <ButtonLink
               caption="Preview"
-              href={`/jreports/obo/buildingpermit?refid=${appno}`}
+              href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/buildingpermit?refid=${appno}`}
               Icon={PageviewIcon}
             />
             <ButtonLink
               caption="Download"
-              href={`/jreports/download/obo/buildingpermit?refid=${appno}`}
+              href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/buildingpermit?refid=${appno}`}
               Icon={CloudDownloadIcon}
             />
           </Panel>
@@ -160,12 +160,12 @@ const BuildingPermitCompleted = ({
               <Panel row>
                 <ButtonLink
                   caption="Preview"
-                  href={`/jreports/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
+                  href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
                   Icon={PageviewIcon}
                 />
                 <ButtonLink
                   caption="Download"
-                  href={`/jreports/download/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
+                  href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
                   Icon={CloudDownloadIcon}
                 />
               </Panel>

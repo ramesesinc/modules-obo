@@ -24,7 +24,7 @@ const Confirmation = ({
   const [isContracted, setIsContracted] = useState(false);
 
   useEffect(() => {
-    appService.getApplication({appid: appno}, (err, app) => {
+    appService.invoke("getApplication", {appid: appno}, (err, app) => {
       if (err) {
         setError(err);
       } else {{
@@ -34,7 +34,7 @@ const Confirmation = ({
   }, [appno])
 
   const confirmPermit = () => {
-    appService.update(app, (err, updatedApp) => {
+    appService.invoke("update", app, (err, updatedApp) => {
       if (err) {
         setError(err)
       } else {

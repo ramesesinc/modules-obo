@@ -64,7 +64,7 @@ const OccupancyPermitInitial = ({
     if (appType === "new") {
       moveNextStep();
     } else {
-      appService.findCurrentInfo({appid: appno}, (err, app) => {
+      appService.invoke("findCurrentInfo", {appid: appno}, (err, app) => {
         if (err) {
           setError(err);
         } else if (!app) {
@@ -89,7 +89,7 @@ const OccupancyPermitInitial = ({
     if (bldgPermitNo) {
       setError(null);
       const svc = Service.lookup(`${partner.id}:OboOnlineService`, "obo");
-      svc.findBldgPermitNo({permitno: bldgPermitNo}, (err, permit) => {
+      svc.invoke("findBldgPermitNo", {permitno: bldgPermitNo}, (err, permit) => {
         if (err) {
           setError(err);
         } else {
@@ -115,7 +115,7 @@ const OccupancyPermitInitial = ({
       bldgpermit: bldgPermit,
       contact
     }
-    appService.create(newApp, (err, app) => {
+    appService.invoke("create", newApp, (err, app) => {
       if (err) {
         setError(err);
       } else {
