@@ -21,10 +21,10 @@
                 icon="images/toolbars/edit.png"
                 action="showMenu" 
                 context="edit" />
-       
 
         <invoker type="appActions" 
                 caption="Reports"
+                icon="images/toolbars/reports.png"
                 action="showMenu" 
                 context="reports" />
        
@@ -33,7 +33,7 @@
                 caption="Issue Permit"
                 action="issuePermit" 
                 visibleWhen="#{task.state == 'releasing'
-                    &amp;&amp; entity.permitid == null                   
+                    &amp;&amp; entity.issuanceid == null                   
                     &amp;&amp; task.assignee.objid == userInfo.userid }"   />            
                     
     </invokers>

@@ -35,6 +35,8 @@ public class BuildingApplicationRptList extends AbstractComponent {
         xPanel1 = new com.rameses.rcp.control.XPanel();
         btnRefresh = new com.rameses.rcp.control.XButton();
         xButton1 = new com.rameses.rcp.control.XButton();
+        xButton3 = new com.rameses.rcp.control.XButton();
+        xButton4 = new com.rameses.rcp.control.XButton();
         xButton2 = new com.rameses.rcp.control.XButton();
         xDataTable1 = new com.rameses.rcp.control.XDataTable();
 
@@ -54,18 +56,31 @@ public class BuildingApplicationRptList extends AbstractComponent {
         btnRefresh.setMargin(new java.awt.Insets(1, 1, 1, 1));
         xPanel1.add(btnRefresh);
 
-        xButton1.setName("addNew"); // NOI18N
+        xButton1.setName("addItem"); // NOI18N
         xButton1.setVisibleWhen("#{ editable == true }");
-        xButton1.setText("Add New RPT Entry");
+        xButton1.setText("Add New Entry");
         xPanel1.add(xButton1);
+
+        xButton3.setDepends(new String[] {"selectedItem"});
+        xButton3.setName("openItem"); // NOI18N
+        xButton3.setVisibleWhen("#{ editable == true && selectedItem!=null }");
+        xButton3.setText("Open Entry");
+        xPanel1.add(xButton3);
+
+        xButton4.setDepends(new String[] {"selectedItem"});
+        xButton4.setName("removeItem"); // NOI18N
+        xButton4.setVisibleWhen("#{ editable == true && selectedItem!=null }");
+        xButton4.setText("Remove Entry");
+        xPanel1.add(xButton4);
 
         xButton2.setName("generateDocs"); // NOI18N
         xButton2.setVisibleWhen("#{ editable == true }");
-        xButton2.setText("Generate Docs");
+        xButton2.setText("Generate Clearances");
         xPanel1.add(xButton2);
 
         add(xPanel1, java.awt.BorderLayout.NORTH);
 
+        xDataTable1.setDepends(new String[] {"selectedItem"});
         xDataTable1.setHandler("listHandler");
         xDataTable1.setItems("");
         xDataTable1.setName("selectedItem"); // NOI18N
@@ -230,6 +245,8 @@ public class BuildingApplicationRptList extends AbstractComponent {
     private com.rameses.rcp.control.XButton btnRefresh;
     private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XButton xButton2;
+    private com.rameses.rcp.control.XButton xButton3;
+    private com.rameses.rcp.control.XButton xButton4;
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XPanel xPanel1;
     // End of variables declaration//GEN-END:variables

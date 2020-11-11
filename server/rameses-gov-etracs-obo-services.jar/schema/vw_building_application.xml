@@ -66,12 +66,15 @@
 			<key field="contractorid" target="objid" />
 		</complex> 
 
-		<field name="permitid" />
-		<field name="permitno" />
+		<field name="issuanceid" />
+		<field name="controlno" />
 		<field name="dtissued" />
 		<field name="expirydate" />
 		<field name="issuedby_name" />
+		<field name="approverid" />
+		<field name="endorserid" />		
 		<field name="template" />
+		<field name="reportheader" />
 		<field name="txntype" />
 		<field name="infoid" />
 	</element>

@@ -14,6 +14,8 @@
 		<field name="apptype" />
 		<field name="org_objid" />
 		<field name="org_name" />
+		<field name="endorserid" />
+		<field name="approverid" />
 	</element>
 </schema>	
 

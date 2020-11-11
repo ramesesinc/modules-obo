@@ -18,6 +18,10 @@
         <invoker type="formActions" caption="View True Copy" 
                 visibleWhen="#{entity.truecopycertid !=null}"
                  action="viewTrueCopy" />
+        
+        <invoker type="formActions" caption="Generate Clearance" 
+                visibleWhen="#{entity.objid!=null &amp;&amp; (entity.taxclearanceid==null || entity.truecopycertid==null) }"
+                 action="generateDocs" />
 
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationRptModel" />

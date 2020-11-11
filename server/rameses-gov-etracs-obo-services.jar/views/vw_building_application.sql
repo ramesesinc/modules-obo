@@ -70,11 +70,14 @@ SELECT
    t.actor_name AS task_actor_name,
    sn.title AS task_title,
    sn.tracktime AS task_tracktime,
-   pmt.permitno,
+   pmt.controlno,
    pmt.expirydate,
    pmt.dtissued,
    pmt.issuedby_name,
-   pmt.template 
+   pmt.approverid,
+   pmt.endorserid,
+   pmt.template,
+   pmt.reportheader 
 
 FROM building_application a 
 INNER JOIN building_info bi ON a.infoid = bi.objid
@@ -85,5 +88,5 @@ INNER JOIN obo_occupancy_type bt ON bi.occupancytypeid = bt.objid
 INNER JOIN obo_occupancy_type_division od ON bt.divisionid = od.objid 
 INNER JOIN obo_occupancy_type_group og ON od.groupid = og.objid 
 LEFT JOIN obo_zoneclass zc ON bi.zoneclassid = zc.objid 
-LEFT JOIN building_permit pmt ON a.permitid=pmt.objid 
+LEFT JOIN building_permit pmt ON a.issuanceid=pmt.objid 
 

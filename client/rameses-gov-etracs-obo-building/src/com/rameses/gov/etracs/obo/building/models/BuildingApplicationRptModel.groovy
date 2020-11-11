@@ -17,22 +17,37 @@ class BuildingApplicationRptModel extends CrudFormModel {
     def rptService;
     
     def tdno;
+    def appid;
+    def applicant;
+    def handler;
     
     void lookupTD() {
-        entity = rptService.findRpu( [refno: tdno ] );
-        entity.appid = caller.entity.objid;
-        entity.remove("objid");
-        if( caller.entity.applicant.objid == entity.ownerid ) {
-            entity.lotowned = 1;
-        }
-        else {
-            entity.lotowned = 0;
-        }
+        entity = rptService.findRpu( [refno: tdno, appid: appid ] );
+    }
+    
+    public void generateDocs() {
+        def m = [objid: entity.objid]; 
+        rptService.generateDocs( m );
+        reloadEntity();
+        if(handler) handler();
+        binding.refresh();
+        MsgBox.alert("RPT Docs generated successfully");
+    }
+    
+    def viewTaxClearance() {
+        if(!entity.taxclearanceid ) throw new Exception("Tax clearance not yet generated");
+        return Inv.lookupOpener( 'rpttaxclearance:view', [entity: [objid: entity.taxclearanceid ]] );
+    }
+    
+    def viewTrueCopy() {
+        if(!entity.truecopycertid ) throw new Exception("Clearance not yet generated");
+        return Inv.lookupOpener( 'tdtruecopy:view', [entity: [objid: entity.truecopycertid ]] );
     }
     
     def doOk() {
         if(mode=="create") {
             save();
+            if(handler) handler();
         }
         return "_close";
     } 

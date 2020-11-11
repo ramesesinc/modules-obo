@@ -72,7 +72,7 @@ public class ApplicationDocumentList extends AbstractComponent {
                 , new Object[]{"caption", "Title"}
                 , new Object[]{"width", 200}
                 , new Object[]{"minWidth", 200}
-                , new Object[]{"maxWidth", 300}
+                , new Object[]{"maxWidth", 0}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}
@@ -131,8 +131,8 @@ public class ApplicationDocumentList extends AbstractComponent {
                 new Object[]{"name", "controlno"}
                 , new Object[]{"caption", "Control No"}
                 , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 0}
-                , new Object[]{"maxWidth", 0}
+                , new Object[]{"minWidth", 150}
+                , new Object[]{"maxWidth", 200}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}
@@ -146,8 +146,8 @@ public class ApplicationDocumentList extends AbstractComponent {
                 new Object[]{"name", "issuedby.name"}
                 , new Object[]{"caption", "Issued By"}
                 , new Object[]{"width", 200}
-                , new Object[]{"minWidth", 0}
-                , new Object[]{"maxWidth", 0}
+                , new Object[]{"minWidth", 200}
+                , new Object[]{"maxWidth", 250}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}

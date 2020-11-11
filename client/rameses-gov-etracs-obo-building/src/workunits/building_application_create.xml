@@ -3,11 +3,14 @@
         <invoker folderid="menucategory/obo/building" caption="New Application"
              action="create" index="-2" role="RECEIVER"/>
         <!-- actions -->
-        <invoker type="formActions" caption="Next" action="next" />
+        <invoker type="formActions" caption="Next" action="next" visibleWhen="#{page=='initial'}"/>
+        <invoker type="formActions" caption="Save" action="saveNew" visibleWhen="#{page=='capture'}"/>
+        
     </invokers>
     
-    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationInitialModel" />
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationCreateModel" />
     <pages>
         <page name="initial" template="com.rameses.gov.etracs.obo.views.OboApplicationInitialPage" />
+        <page name="capture" template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationCapturePage" />
     </pages>
 </workunit>

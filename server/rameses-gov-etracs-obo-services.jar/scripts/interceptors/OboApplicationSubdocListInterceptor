@@ -1,0 +1,31 @@
+import com.rameses.annotations.*; 
+
+class OboApplicationSubdocListInterceptor { 
+
+	@After(pattern="QueryService.getNodeList", eval="#{args[0]._schemaname.matches('.*application_subdoc') }")
+	public void getNodeList(def evt) {
+		def result = evt.result;
+		result << [title: "For Release", id: 1 ];
+		result << [title: "Issued", id: 2 ];
+	}
+
+	@Before(pattern="QueryService.getList", eval="#{ args[0]._schemaname.matches('.*application_subdoc') }")
+	public void loadList(def evt) {
+		def o = evt.args[0];
+		//o.debug = true;
+		if( !o.node?.id ) return;
+
+		def str = " state = :state";
+		def m = [state: o.node.id ];
+ 
+		//add to first position of where
+		if( o.where ) {
+			o.where[0] = str + " AND " + o.where[0];	
+			o.where[1].putAll( m );
+		}
+		else {
+			o.where = [str, m];
+		}
+	}
+
+} 

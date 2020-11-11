@@ -32,6 +32,7 @@ class BuildingApplicationService {
 	@DataContext("vw_building_evaluation")
 	def vwEvalEm;
 
+
 	@Env
 	def env;
 
@@ -75,53 +76,21 @@ class BuildingApplicationService {
 	}
 	
 	@ProxyMethod
-	public void issuePermitNo( def p ) {
-		def app = appEm.find( [objid: p.objid] ).first();
-		if(!app) throw new Exception("Application does not exist");
-		if(app.permitid) throw new Exception("Permit for this application has already been issued");
-
-		def doctype = docTypeEm.find( [objid: "building_permit"] ).first();
-		if(!doctype) throw new Exception("doc type building_permit does not exist!");
-		String pattern = doctype.controlnopattern;
-		if(!pattern) throw new Exception("Please specify a controlno pattern in doc type building_permit");
-
-		String permitno = controlNoSvc.getNextNo( pattern );
-		
-		def u = [:];
-		u.state = 0;
-		u.issuedby = [ objid: env.USERID, name: env.FULLNAME ];
-		u.dtissued = dateSvc.getServerDate();
-		u.permitno = permitno;
-		u.remarks = p.remarks;
-		u.expirydate = p.expirydate;
-		u.template = doctype.template;
-		u.appid = app.objid;
-		permitEm.create( u );
-
-		//insert also issuances for all sudocs dependent on the building permit
-		def subList = subdocEm.getSubdocsToIssue( [appid: app.objid ] );
-		subList.each {
-			def ipattern = it.controlnopattern.replace( "[BPNO]", permitno );
-			def uu = [:];
-			uu.state = 1;
-			uu.subdocid = it.objid;
-			uu.issuedby = [ objid: env.USERID, name: env.FULLNAME ];
-			uu.dtissued = dateSvc.getServerDate();
-			uu.controlno = controlNoSvc.getNextNo( ipattern );
-			uu.expirydate = p.expirydate;
-			uu.template = it.template;
-			uu = issEm.create( uu );
-			subdocEm.find( [objid: it.objid] ).update( [issuanceid: uu.objid ] );			
-		}
-
-		appEm.find( [objid: app.objid] ).update( [permitid: u.objid ] );
-	}
-
-	@ProxyMethod
 	public def getProfessionalList(def o) {
 		return vwAppEm.getProfessionalList( [appid: o.objid ] );
 	}
 
+	@Service("JasperReportEmailService")
+	def emailSvc;
 
+	@ProxyMethod
+	public void emailPermits( def o ) {
+		def subdocs = subdocEm.getSubdocsToEmail( [appid: o.objid ]);
+
+		println "**************"
+		subdocs.each {
+			println it.objid + " " + it.doctypeid + " " + it.template;
+		}
+	}
 
 }

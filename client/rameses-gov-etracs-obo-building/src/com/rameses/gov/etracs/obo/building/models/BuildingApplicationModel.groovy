@@ -62,17 +62,26 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
         }
     ];
     
-    
-    def issuePermit() {
-          def h = { o->
-            o.objid = entity.objid;
-            appSvc.issuePermitNo( o );
-            reloadEntity();
-        }
-        return Inv.lookupOpener("obo_issue_controlno", [handler: h, showcontrolno: false]);
+    def viewReceipt() {
+        def op = Inv.lookupOpener(entity.payment.reftype + ":open", [entity:[objid:entity.payment.refid]] );
+        op.target = "popup";
+        return op;
     }
     
+    def issuePermit() {
+        def p = [:];
+        p.handler = { o->
+            entity.putAll( o );
+            binding.refresh();
+        };
+        p.doctype = [objid: "BUILDING_PERMIT"];
+        p.appid = entity.objid;
+        return Inv.lookupOpener("obo_issuance", p );
+    }
     
+    void emailPermits() {
+        appSvc.emailPermits( entity );
+    }
     
     
     

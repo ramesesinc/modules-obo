@@ -31,6 +31,8 @@ class BuildingApplicationRpuPersistenceInterceptor {
 	public void beforeRemoveApplicationRPU(def evt) {
 		def o = evt.args[0];
 		def rpu = rpuEm.find( [objid: o.objid] ).first();
+		if( rpu.taxclearanceid ) throw new Exception("Cannot remove this item. Clearance already issued");
+		if( rpu.truecopycertid ) throw new Exception("Cannot remove this item. Clearance already issued");		
 		o.appid = rpu.appid;
 	}
 
