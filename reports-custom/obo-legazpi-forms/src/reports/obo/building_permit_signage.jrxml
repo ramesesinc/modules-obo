@@ -2,12 +2,13 @@
 <!-- Created with iReport - A designer for JasperReports -->
 <!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
 <jasperReport
-		 name="CONSTRUCTION_SIGNBOARD"
-		 columnCount="1"
+		 name="building_permit_signage"
+
+		 language="groovy"		 columnCount="1"
 		 printOrder="Vertical"
 		 orientation="Landscape"
 		 pageWidth="612"
-		 pageHeight="445"
+		 pageHeight="424"
 		 columnWidth="612"
 		 columnSpacing="0"
 		 leftMargin="0"
@@ -31,7 +32,7 @@
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="title" class="java.lang.String"/>
 	<field name="location.text" class="java.lang.String"/>
-	<field name="permitno" class="java.lang.String"/>
+	<field name="controlno" class="java.lang.String"/>
 	<field name="dtissued" class="java.util.Date"/>
 	<field name="contractor.name" class="java.lang.String"/>
 	<field name="profarchitect.name" class="java.lang.String"/>
@@ -53,7 +54,7 @@
 						key="image-1"/>
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
-					<imageExpression class="java.lang.String"><![CDATA["images/construction_signboard.jpg"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["images/construction_signboard_background.jpg"]]></imageExpression>
 				</image>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -67,7 +68,7 @@
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="9"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permitno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

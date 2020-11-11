@@ -69,7 +69,7 @@ class OboIssuanceService {
 		u = issEm.create( u );
 		appEm.find( [objid: p.appid] ).update( [issuanceid: u.objid ] );
 
-		notificationSvc.notify( [notificationid:notificationid, domain: "obo"] );
+		notificationSvc.notify( [notificationid, "obo"] );
 
 		return u;
 	}	

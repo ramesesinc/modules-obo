@@ -14,8 +14,6 @@ class BuildingApplicationRptListModel extends AbstractComponentModel {
     void afterLoadList() {
     }
     
-    
-    
      //Generate Docs
     void generateDocs() {
         def m = [appid: appid]; 
@@ -36,4 +34,33 @@ class BuildingApplicationRptListModel extends AbstractComponentModel {
         return Inv.lookupOpener( 'tdtruecopy:view', [entity: [objid: selectedItem.truecopycertid ]] );
     }
     
+    def addItem() {
+        def h = [:];
+        h.appid = appid;
+        h.handler = {
+            refresh();
+        }
+        return Inv.lookupOpener( "building_application_rpu:create", h );
+    }
+    
+    def openItem() {
+        if(!selectedItem) throw new Exception("Please select an item");
+        def h = [:];
+        h.appid = appid;
+        h.entity = selectedItem;
+        h.handler = {
+            refresh();
+        }
+        return Inv.lookupOpener( "building_application_rpu:open", h );        
+    }
+    
+    def removeItem() {
+        if(!selectedItem) throw new Exception("Please select an item");
+        def m = [_schemaname: "building_application_rpu"]
+        m.objid = selectedItem.objid;
+        persistenceService.removeEntity( m );
+        refresh();
+    }
+
+
 }

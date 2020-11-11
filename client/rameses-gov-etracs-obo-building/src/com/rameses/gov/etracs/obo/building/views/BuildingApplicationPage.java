@@ -432,6 +432,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         buildingApplicationRptList1.setAppid("entity.objid");
+        buildingApplicationRptList1.setEditableWhen("#{ true }");
         jPanel2.add(buildingApplicationRptList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Real Property", jPanel2);

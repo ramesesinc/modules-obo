@@ -922,6 +922,7 @@
             <Component class="com.rameses.gov.etracs.obo.building.components.BuildingApplicationRptList" name="buildingApplicationRptList1">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
+                <Property name="editableWhen" type="java.lang.String" value="#{ true }"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

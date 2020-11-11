@@ -54,7 +54,8 @@ class OboMenuNotificationInterceptor {
 		g = inspectionTypeEm.getAllTaskCount( [roles: roleStr, orgid: orgid] );
 		if( g ) cnt += g.count;
 
-		g = subdocEm.findAllDocsToReleaseCount( [roles: roleStr,orgid: orgid] )?.count;
+		g = subdocEm.findAllDocsToReleaseCount( [roles: roleStr,orgid: orgid] );
+		if( g ) cnt += g.count;
 		result.count = cnt;
 	}	
 

@@ -33,7 +33,7 @@
 		<field name="totalfloorarea" />
 		<field name="height" />
 		<field name="numfloors" />
-		<field name="worktypes" />
+		<complex name="worktypes" serializer="default"/>
 		<field name="zoneclassid" />
 		<field name="zone" />
 		<field name="location_lotno" />
@@ -54,6 +54,16 @@
 		<field name="zoneclass_objid" />
 		<field name="zoneclass_title" />
 		<field name="location_text" />
+
+		<field name="template"/>
+		<field name="endorserid" />
+		<field name="approverid" />
+		<field name="reportheader" />
+
+		<field name="contact_name" />
+		<field name="contact_detail" />
+		<field name="contact_email" />
+		<field name="contact_mobileno" />
 
 		<complex name="contractor" ref="obo_professional" jointype="many-to-one" required="false" includefields="profession,name,prc.*,ptr.*">
 			<key field="contractorid" target="objid" />

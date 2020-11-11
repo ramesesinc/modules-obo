@@ -21,6 +21,9 @@ class BuildingApplicationCreateModel  {
     def trackingno;
     def source = "web";
     def entity;
+    def txnTypes = ["SIMPLE", "COMPLEX"];
+    def appTypes = ["NEW", "RENOVATION", "AMENDMENT"];
+    def page = "initial";
     
     @FormTitle
     String title = "New Building Permit (Initial)";
@@ -42,29 +45,18 @@ class BuildingApplicationCreateModel  {
             return op;
         }
         else if( source == "capture") {
-            entity = [location:[:], units:1];
-            return "capture";
+            entity = [location:[:], numunits:1, contact: [:]];
+            page = "capture";
+            return page;
         }
         else {
             throw new Exception("File option not yet accepted!");
         }
     }
     
-    @PropertyChangeListener
-    def propListener = [
-        "entity.applicant" : { o->
-            o.each {k,v->
-                println k+"="+v;
-            }
-            o.profiled = o.objid;
-            o.remove("objid");
-        }
-    ]
-    
-    
     void saveNew() {
         if(!MsgBox.confirm("You are about to save this application. Proceed?")) return;
-        svc.create( entity );
+        svc.saveCapture( entity );
     }
     
     

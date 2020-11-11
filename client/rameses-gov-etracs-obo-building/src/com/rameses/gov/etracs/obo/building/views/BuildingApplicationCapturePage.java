@@ -41,12 +41,18 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
         xDecimalField1 = new com.rameses.rcp.control.XDecimalField();
         xDecimalField2 = new com.rameses.rcp.control.XDecimalField();
         xDecimalField3 = new com.rameses.rcp.control.XDecimalField();
-        xDecimalField4 = new com.rameses.rcp.control.XDecimalField();
         xDateField1 = new com.rameses.rcp.control.XDateField();
         xDateField2 = new com.rameses.rcp.control.XDateField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xLabel21 = new com.rameses.rcp.control.XLabel();
+        xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
+        xTextField3 = new com.rameses.rcp.control.XTextField();
+        xTextField4 = new com.rameses.rcp.control.XTextField();
+        xTextField5 = new com.rameses.rcp.control.XTextField();
+        xTextField6 = new com.rameses.rcp.control.XTextField();
+        xComboBox1 = new com.rameses.rcp.control.XComboBox();
+        xComboBox2 = new com.rameses.rcp.control.XComboBox();
 
         xFormPanel1.setCaptionWidth(190);
 
@@ -79,11 +85,11 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
         xIntegerField2.setName("entity.numfloors"); // NOI18N
         xFormPanel1.add(xIntegerField2);
 
-        xDecimalField1.setCaption("Total Floor Area");
+        xDecimalField1.setCaption("Total Floor Area (sqm)");
         xDecimalField1.setName("entity.totalfloorarea"); // NOI18N
         xFormPanel1.add(xDecimalField1);
 
-        xDecimalField2.setCaption("Bldg Height");
+        xDecimalField2.setCaption("Bldg Height (m)");
         xDecimalField2.setName("entity.height"); // NOI18N
         xFormPanel1.add(xDecimalField2);
 
@@ -92,12 +98,6 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
         xDecimalField3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xDecimalField3.setPreferredSize(new java.awt.Dimension(180, 20));
         xFormPanel1.add(xDecimalField3);
-
-        xDecimalField4.setCaption("Fixed Unit Cost (computed)");
-        xDecimalField4.setDisableWhen("#{ true }");
-        xDecimalField4.setName("entity.fixedcost"); // NOI18N
-        xDecimalField4.setPreferredSize(new java.awt.Dimension(180, 20));
-        xFormPanel1.add(xDecimalField4);
 
         xDateField1.setCaption("Proposed cons. Date");
         xDateField1.setName("entity.dtproposedconstruction"); // NOI18N
@@ -131,20 +131,57 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
         xLabel21.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel21);
 
+        xFormPanel2.setCaptionWidth(120);
+
+        xTextField3.setCaption("Contact Name");
+        xTextField3.setName("entity.contact.name"); // NOI18N
+        xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xTextField3);
+
+        xTextField4.setCaption("Contact Email");
+        xTextField4.setName("entity.contact.email"); // NOI18N
+        xTextField4.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        xFormPanel2.add(xTextField4);
+
+        xTextField5.setCaption("Contact Mobile No");
+        xTextField5.setName("entity.contact.mobileno"); // NOI18N
+        xTextField5.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xTextField5);
+
+        xTextField6.setCaption("App No");
+        xTextField6.setName("entity.appno"); // NOI18N
+        xTextField6.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xTextField6);
+
+        xComboBox1.setCaption("Txn Type");
+        xComboBox1.setItems("txnTypes");
+        xComboBox1.setName("entity.txntype"); // NOI18N
+        xFormPanel2.add(xComboBox1);
+
+        xComboBox2.setCaption("App Type");
+        xComboBox2.setItems("appTypes");
+        xComboBox2.setName("entity.apptype"); // NOI18N
+        xFormPanel2.add(xComboBox2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 537, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -153,13 +190,15 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.enterprise.components.AddressEditor addressEditor1;
     private com.rameses.entity.components.EntityLookup entityLookup1;
+    private com.rameses.rcp.control.XComboBox xComboBox1;
+    private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XDateField xDateField1;
     private com.rameses.rcp.control.XDateField xDateField2;
     private com.rameses.rcp.control.XDecimalField xDecimalField1;
     private com.rameses.rcp.control.XDecimalField xDecimalField2;
     private com.rameses.rcp.control.XDecimalField xDecimalField3;
-    private com.rameses.rcp.control.XDecimalField xDecimalField4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
+    private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
     private com.rameses.rcp.control.XIntegerField xIntegerField2;
     private com.rameses.rcp.control.XLabel xLabel21;
@@ -167,5 +206,9 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLookupField xLookupField1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
+    private com.rameses.rcp.control.XTextField xTextField3;
+    private com.rameses.rcp.control.XTextField xTextField4;
+    private com.rameses.rcp.control.XTextField xTextField5;
+    private com.rameses.rcp.control.XTextField xTextField6;
     // End of variables declaration//GEN-END:variables
 }

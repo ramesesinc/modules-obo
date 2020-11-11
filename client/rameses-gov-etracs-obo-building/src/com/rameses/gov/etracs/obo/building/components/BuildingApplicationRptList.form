@@ -53,22 +53,51 @@
         </Component>
         <Component class="com.rameses.rcp.control.XButton" name="xButton1">
           <Properties>
-            <Property name="name" type="java.lang.String" value="addNew" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="addItem" noResource="true"/>
             <Property name="visibleWhen" type="java.lang.String" value="#{ editable == true }"/>
-            <Property name="text" type="java.lang.String" value="Add New RPT Entry"/>
+            <Property name="text" type="java.lang.String" value="Add New Entry"/>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.rcp.control.XButton" name="xButton3">
+          <Properties>
+            <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="selectedItem"/>
+              </StringArray>
+            </Property>
+            <Property name="name" type="java.lang.String" value="openItem" noResource="true"/>
+            <Property name="visibleWhen" type="java.lang.String" value="#{ editable == true &amp;&amp; selectedItem!=null }"/>
+            <Property name="text" type="java.lang.String" value="Open Entry"/>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.rcp.control.XButton" name="xButton4">
+          <Properties>
+            <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
+              <StringArray count="1">
+                <StringItem index="0" value="selectedItem"/>
+              </StringArray>
+            </Property>
+            <Property name="name" type="java.lang.String" value="removeItem" noResource="true"/>
+            <Property name="visibleWhen" type="java.lang.String" value="#{ editable == true &amp;&amp; selectedItem!=null }"/>
+            <Property name="text" type="java.lang.String" value="Remove Entry"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XButton" name="xButton2">
           <Properties>
             <Property name="name" type="java.lang.String" value="generateDocs" noResource="true"/>
             <Property name="visibleWhen" type="java.lang.String" value="#{ editable == true }"/>
-            <Property name="text" type="java.lang.String" value="Generate Docs"/>
+            <Property name="text" type="java.lang.String" value="Generate Clearances"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
     <Component class="com.rameses.rcp.control.XDataTable" name="xDataTable1">
       <Properties>
+        <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
+          <StringArray count="1">
+            <StringItem index="0" value="selectedItem"/>
+          </StringArray>
+        </Property>
         <Property name="handler" type="java.lang.String" value="listHandler"/>
         <Property name="items" type="java.lang.String" value=""/>
         <Property name="name" type="java.lang.String" value="selectedItem" noResource="true"/>

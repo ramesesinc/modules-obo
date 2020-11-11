@@ -21,10 +21,10 @@
                 icon="images/toolbars/edit.png"
                 action="showMenu" 
                 context="edit" />
-       
 
         <invoker type="appActions" 
                 caption="Reports"
+                icon="images/toolbars/reports.png"
                 action="showMenu" 
                 context="reports" />
        
@@ -35,11 +35,6 @@
                 visibleWhen="#{task.state == 'releasing'
                     &amp;&amp; entity.issuanceid == null                   
                     &amp;&amp; task.assignee.objid == userInfo.userid }"   />            
-                    
-        <invoker type="appActions" 
-                caption="Email Permits"
-                action="emailPermits" 
-                 />
                     
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationModel" />

@@ -2,50 +2,46 @@ import com.rameses.annotations.*;
 
 class BuildingPermitSignageReportInterceptor {
 	
-	@DataContext("vw_building_application")
-	def vwApp;
-
-	@DataContext("building_application_payment")
-	def pmtEm;
+	@DataContext("vw_building_permit")
+	def permitEm;
 
 	@DataContext("vw_building_application_subdoc")
 	def vwSubdocEm;
 
+	def findPermit( def id ) {
+		//building permit can be loaded using appid or objid(building permit)
+		def permit = permitEm.find( [objid: id] ).first();	
+		if(!permit) {
+			permit = permitEm.find( [appid: id ]).first();
+			if(!permit) throw new Exception("Permit not found");
+		}
+		return permit;
+	}
 
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_signboard' }")
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'building_permit_signage' }")
 	public void getBuildingPermitReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def id = p.parameters.objid;
 
-		def app = vwApp.find( [objid: id ] ).first();	
-		app.name = app.applicant?.lastname + ", " + app.applicant?.firstname;
-		app.scopeofwork = app.worktypes?.join(",");
+		def permit = findPermit( id );
 
-		def subDocs = vwSubdocEm.find( [appid: app.objid ]  ).where("doctype.type IN ('ANCILLARY', 'CLEARANCE') AND NOT(issuanceid IS NULL)").orderBy("doctype.sortorder ASC").list();
+		permit.name = permit.applicant?.lastname + ", " + permit.applicant?.firstname;
 
-		app.profarchitect =	subDocs.find{ it.doctypeid.toLowerCase() == 'architectural' }?.designprofessional;	 
-		app.profcivil = subDocs.find{ it.doctypeid.toLowerCase() == 'civil_structural' }?.designprofessional;
-		app.profelectrical = subDocs.find{ it.doctypeid.toLowerCase() == 'electrical' }?.designprofessional;
-		app.profelectrical = subDocs.find{ it.doctypeid.toLowerCase() == 'electrical' }?.designprofessional;
-		app.profmechanical =  subDocs.find{ it.doctypeid.toLowerCase() == 'mechanical' }?.designprofessional;
-		app.profsanitary = subDocs.find{ it.doctypeid.toLowerCase() == 'sanitary' }?.designprofessional;
-		app.profplumbing = subDocs.find{ it.doctypeid.toLowerCase() == 'plumbing' }?.designprofessional;
-		app.profelectronic = subDocs.find{ it.doctypeid.toLowerCase() == 'electronic' }?.designprofessional;
+		def subDocs = vwSubdocEm.find([appid: permit.appid ]).where("doctype.type='ANCILLARY' AND NOT(issuanceid IS NULL)").orderBy("doctype.sortorder ASC").list();
 
-		app.issuances = subDocs.collect{ [controlno:it.controlno, dtissued: it.dtissued, type: it.doctype.title ] };
+		permit.profarchitect =	subDocs.find{ it.doctypeid.toLowerCase() == 'architectural' }?.designprofessional;	 
+		permit.profcivil = subDocs.find{ it.doctypeid.toLowerCase() == 'civil_structural' }?.designprofessional;
+		permit.profelectrical = subDocs.find{ it.doctypeid.toLowerCase() == 'electrical' }?.designprofessional;
+		permit.profelectrical = subDocs.find{ it.doctypeid.toLowerCase() == 'electrical' }?.designprofessional;
+		permit.profmechanical =  subDocs.find{ it.doctypeid.toLowerCase() == 'mechanical' }?.designprofessional;
+		permit.profsanitary = subDocs.find{ it.doctypeid.toLowerCase() == 'sanitary' }?.designprofessional;
+		permit.profplumbing = subDocs.find{ it.doctypeid.toLowerCase() == 'plumbing' }?.designprofessional;
+		permit.profelectronic = subDocs.find{ it.doctypeid.toLowerCase() == 'electronic' }?.designprofessional;
 
-		//load the fees
-		def fees = vwApp.getCategorizedFees( [appid: app.objid ] ).collect{
-			[type:it.tag.split(":")[1], amount: it.amount ]
-		}
+		permit.template = "reports/obo/building_permit_signage";
 		
-		app.fees = fees;
-		def pmt = pmtEm.find( [appid: app.objid ]).where("voided = 0").first();
-		app.receiptno = pmt.refno;
-		app.receiptdate = pmt.refdate;
-		app.amount = pmt.amount;
-		result.data = app;
+		result.data = permit;
 	}	
 
 
