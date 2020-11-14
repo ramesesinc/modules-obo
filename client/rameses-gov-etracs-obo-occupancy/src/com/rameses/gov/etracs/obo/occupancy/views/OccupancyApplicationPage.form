@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
-  <Properties>
-    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[1050, 620]"/>
-    </Property>
-  </Properties>
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -16,10 +11,39 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-25,0,0,4,122"/>
   </AuxValues>
 
-  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <EmptySpace min="0" pref="1146" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="xActionBar2" min="-2" pref="1146" max="-2" attributes="0"/>
+                      <Component id="xTabbedPane1" min="-2" pref="1146" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <EmptySpace min="0" pref="743" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="xActionBar2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="xTabbedPane1" min="-2" pref="713" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
   <SubComponents>
     <Component class="com.rameses.rcp.control.XActionBar" name="xActionBar2">
       <Properties>
@@ -37,21 +61,11 @@
           <Dimension value="[91, 30]"/>
         </Property>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-          <BorderConstraints direction="North"/>
-        </Constraint>
-      </Constraints>
     </Component>
     <Container class="com.rameses.rcp.control.XTabbedPane" name="xTabbedPane1">
       <Properties>
         <Property name="dynamic" type="boolean" value="true"/>
       </Properties>
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-          <BorderConstraints direction="Center"/>
-        </Constraint>
-      </Constraints>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -109,8 +123,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="xFormPanel1" pref="610" max="32767" attributes="0"/>
-                              <Component id="xFormPanel3" max="32767" attributes="0"/>
+                              <Component id="xFormPanel1" alignment="0" pref="610" max="32767" attributes="0"/>
+                              <Component id="xFormPanel3" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
@@ -439,7 +453,7 @@
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel12">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="App Date"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.appdate}"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.dtfiled}"/>
                         <Property name="name" type="java.lang.String" value="entity.rptinfo.text" noResource="true"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -580,7 +594,6 @@
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Project Supervisor "/>
                         <Property name="expression" type="java.lang.String" value="#{entity.contractor.lastname}, #{entity.contractor.firstname}  ( PRC No: #{entity.contractor.prc.idno} )"/>
-                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.contractor?.objid == null }"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                             <LineBorder>
@@ -821,9 +834,9 @@
             <Component class="com.rameses.gov.etracs.obo.components.ApplicationDocumentList" name="applicationDocumentList1">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
-                <Property name="apptype" type="java.lang.String" value="building"/>
+                <Property name="apptype" type="java.lang.String" value="occupancy"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
-                <Property name="entitySchemaName" type="java.lang.String" value="building_application_subdoc"/>
+                <Property name="entitySchemaName" type="java.lang.String" value="occupancy_application_subdoc"/>
                 <Property name="handler" type="java.lang.String" value="docHandler"/>
                 <Property name="schemaName" type="java.lang.String" value="vw_building_application_subdoc"/>
               </Properties>
@@ -851,31 +864,7 @@
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
                 <Property name="parentid" type="java.lang.String" value=""/>
-                <Property name="schemaName" type="java.lang.String" value="building_application_requirement"/>
-              </Properties>
-              <Constraints>
-                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-                  <BorderConstraints direction="Center"/>
-                </Constraint>
-              </Constraints>
-            </Component>
-          </SubComponents>
-        </Container>
-        <Container class="javax.swing.JPanel" name="jPanel2">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Real Property">
-                <Property name="tabTitle" type="java.lang.String" value="Real Property"/>
-              </JTabbedPaneConstraints>
-            </Constraint>
-          </Constraints>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-          <SubComponents>
-            <Component class="com.rameses.gov.etracs.obo.building.components.BuildingApplicationRptList" name="buildingApplicationRptList1">
-              <Properties>
-                <Property name="appid" type="java.lang.String" value="entity.objid"/>
-                <Property name="editableWhen" type="java.lang.String" value="#{ true }"/>
+                <Property name="schemaName" type="java.lang.String" value="occupancy_application_requirement"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -888,8 +877,8 @@
         <Container class="com.rameses.rcp.control.XPanel" name="xPanel1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Evaluations">
-                <Property name="tabTitle" type="java.lang.String" value="Evaluations"/>
+              <JTabbedPaneConstraints tabName="Inspections">
+                <Property name="tabTitle" type="java.lang.String" value="Inspections"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -900,7 +889,7 @@
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
-                <Property name="schemaName" type="java.lang.String" value="vw_building_evaluation"/>
+                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_inspection"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -925,7 +914,7 @@
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
-                <Property name="schemaName" type="java.lang.String" value="building_evaluation_finding"/>
+                <Property name="schemaName" type="java.lang.String" value="occupancy_inspection_finding"/>
                 <Property name="sectionTitle" type="java.lang.String" value="entity.type.title"/>
               </Properties>
               <Constraints>
@@ -950,7 +939,7 @@
             <Component class="com.rameses.gov.etracs.obo.components.TransmittalList" name="transmittalList1">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
-                <Property name="schemaName" type="java.lang.String" value="building_application_transmittal"/>
+                <Property name="schemaName" type="java.lang.String" value="occupancy_application_transmittal"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -998,7 +987,7 @@
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
-                <Property name="entitySchemaName" type="java.lang.String" value="building_application_fee"/>
+                <Property name="entitySchemaName" type="java.lang.String" value="occupancy_application_fee"/>
                 <Property name="handler" type="java.lang.String" value="assessmentHandler"/>
                 <Property name="schemaName" type="java.lang.String" value="vw_building_application_fee"/>
               </Properties>

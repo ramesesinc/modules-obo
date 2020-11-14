@@ -31,7 +31,7 @@ public class BuildingApplication {
 	public BuildingApplication(def app) {
         this.appid = app.objid;
         this.appno = app.appno;
-        this.appdate = app.dtfiled;
+        this.appdate = app.appdate;
         this.apptype = app.apptype;
 
         if( app.projectcost !=null ) this.projectcost = app.projectcost;

@@ -1,7 +1,7 @@
 <schema>
 	<element tablename="building_application_entity">
 		<field name="objid" primary="true" prefix="OBBPENT" />
-		<field name="appid" required="true" />
+		<field name="appid"  required="true"/>
 
 
 		<field name="profileid" />

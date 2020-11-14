@@ -3,13 +3,14 @@
 		<field name="objid" primary="true"/>
 		<field name="appno" />
 		<field name="apptype" />
+		<field name="appdate" type="date"/>
+		
 		<field name="orgcode" />
 		<field name="trackingno" />
 		<field name="contact_name" />
 		<field name="contact_detail" />
 		<field name="contact_email" />
 		<field name="contact_mobileno" />
-		<field name="dtfiled" />
 		<field name="taskid" />
 		<field name="txnmode" />
 		<field name="totalmaterialcost" type="decimal"/>

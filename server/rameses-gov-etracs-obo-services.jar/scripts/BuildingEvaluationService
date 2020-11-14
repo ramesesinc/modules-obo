@@ -30,7 +30,7 @@ class BuildingEvaluationService {
 		
 		//check first if current state is trade-evaluation
 		o.appid = app.objid;
-		o.dtfiled = dateSvc.getServerDate();
+		o.appdate = dateSvc.getServerDate();
 
 		o = evalEm.create( o )
 
@@ -39,7 +39,7 @@ class BuildingEvaluationService {
 		f.processname = 'building_evaluation';
 		f.notificationid = 'building_evaluation:' + o.typeid.toLowerCase();
 		f.refid = o.objid;
-		f.startdate = o.dtfiled;
+		f.startdate = o.appdate;
 		f.info = [:];
 		wfSvc.start( f );
 

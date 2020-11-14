@@ -165,7 +165,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="xFormPanel2" pref="170" max="32767" attributes="0"/>
+                      <Component id="xFormPanel2" max="32767" attributes="0"/>
                       <Component id="xFormPanel1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
@@ -179,15 +179,6 @@
             <Property name="captionWidth" type="int" value="100"/>
           </Properties>
           <SubComponents>
-            <Component class="com.rameses.rcp.control.XLabel" name="xLabel9">
-              <Properties>
-                <Property name="caption" type="java.lang.String" value="Doc Type"/>
-                <Property name="expression" type="java.lang.String" value="#{entity.doctype.title}"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[0, 20]"/>
-                </Property>
-              </Properties>
-            </Component>
             <Component class="com.rameses.rcp.control.XLabel" name="xLabel8">
               <Properties>
                 <Property name="caption" type="java.lang.String" value="Control No"/>
@@ -255,6 +246,15 @@
             <Property name="captionWidth" type="int" value="120"/>
           </Properties>
           <SubComponents>
+            <Component class="com.rameses.rcp.control.XLabel" name="xLabel9">
+              <Properties>
+                <Property name="caption" type="java.lang.String" value="Doc Type"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.doctype.title}"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[0, 20]"/>
+                </Property>
+              </Properties>
+            </Component>
             <Component class="com.rameses.rcp.control.XLabel" name="xLabel12">
               <Properties>
                 <Property name="caption" type="java.lang.String" value="App No"/>

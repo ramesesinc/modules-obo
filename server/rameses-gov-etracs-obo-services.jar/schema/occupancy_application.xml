@@ -5,12 +5,14 @@
 		<field name="appno" searchable="true" indexed="true" caption="App No"/>
 
 		<field name="trackingno" searchable="true" indexed="true"/>
-		<field name="dtfiled" type="timestamp"/>
+		<field name="appdate" type="date"/>
 
 		<!-- FULL OR PARTIAL -->
 		<field name="apptype" required="true"/>
-		<!-- permit no is the occupancy permit no -->
-		<field name="bldgpermitid" />
+
+		<complex name="bldgpermit" ref="vw_building_permit" jointype="many-to-one" required="true">
+			<key field="bldgpermitid" target="objid" />
+		</complex>	
 
 		<field name="contact_name" required="true"/>
 		<field name="contact_detail" />
@@ -35,25 +37,9 @@
 		<field name="lpgpipingcost" type="decimal" />
 		<field name="firesuppcost" type="decimal" />
 
-		<!-- actual values -->
-		<field name="applicantid" />
-		<field name="profarchitectid" />
-		<field name="profcivilid" />
-		<field name="profelectricalid" />
-		<field name="profmechanicalid" />
-		<field name="profsanitaryid" />
-		<field name="profplumbingid" />
-		<field name="profelectronicid" />
-		<field name="profinteriorid" />
-
-		<field name="supervisorelectricalid" />
-		<field name="supervisormechanicalid" />
-		<field name="supervisorsanitaryid" />
-		<field name="supervisorplumbingid" />
-		<field name="supervisorelectronicid" />
-		<field name="supervisorinteriorid" />
-		<field name="supervisorid" />
-		<field name="contractorid" />
+		<complex name="contractor" ref="obo_professional_info" jointype="many-to-one" required="false">
+			<key field="contractorid" target="objid" />
+		</complex> 
 
 		<field name="dtactualstarted" />
 		<field name="dtactualcompleted" />

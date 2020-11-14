@@ -4,14 +4,22 @@
 		<field name="orgcode" />
 		<field name="appno" searchable="true" indexed="true"/>
 		<field name="apptype" required="true"/>
+		<field name="appdate" type="date"/>
 
-		<field name="dtfiled" type="timestamp"/>
 		<field name="trackingno" searchable="true" indexed="true"/>
 		<field name="taskid" />
-		<field name="accessoryid" />
 		<field name="issuanceid" />
 		<field name="infoid" />
 		<field name="txnmode" />
+
+		<!-- VALUES ARE SIMPLE OR COMPLEX -->
+		<field name="txntype" />
+
+		<field name="contact_name" />
+		<field name="contact_detail" />
+		<field name="contact_email" />
+		<field name="contact_mobileno"/>
+
 	</element>
 </schema>
 

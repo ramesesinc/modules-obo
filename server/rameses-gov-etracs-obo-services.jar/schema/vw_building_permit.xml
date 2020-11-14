@@ -8,10 +8,13 @@
 		</complex>
 
 		<field name="state" />
+		<field name="appno"  searchable="true" indexed="true"/>
+		<field name="apptype" />
 		<field name="appid" />
+		<field name="appdate" />
+
 		<field name="controlno"  searchable="true" indexed="true"/>
 		<field name="dtissued" />
-		<field name="dtfiled" />
 		<field name="expirydate" />
 
 		<field name="txnmode" />
@@ -19,11 +22,9 @@
 		<field name="issuedby_name" />
 		<field name="expirydate" />
 		<field name="remarks" />
-		<field name="appno"  searchable="true" indexed="true"/>
-		<field name="apptype" />
 		<field name="applicantid" />
 		<field name="description" />
-		<field name="title" />
+		<field name="title" searchable="true" indexed="true"/>
 		<field name="occupancytypeid" />
 		<field name="numunits" />
 		<field name="fixedcost" />
@@ -64,6 +65,9 @@
 		<field name="contact_detail" />
 		<field name="contact_email" />
 		<field name="contact_mobileno" />
+
+		<field name="taskid" />
+		<field name="task_state" />
 
 		<complex name="contractor" ref="obo_professional" jointype="many-to-one" required="false" includefields="profession,name,prc.*,ptr.*">
 			<key field="contractorid" target="objid" />

@@ -2,6 +2,8 @@
 	<element tablename="vw_building_application">
 		<field name="objid" primary="true"/>
 		<field name="appno" searchable="true" indexed="true"/>
+		<field name="apptype" />
+		<field name="appdate" />
 
 		<complex name="applicant" ref="building_application_entity" jointype="many-to-one">
 			<key field="applicantid" target="objid" />
@@ -10,12 +12,11 @@
 		<field name="applicant_name" caption="Applicant" searchable="true"  />
 		<field name="orgcode" />
 		<field name="trackingno" searchable="true" indexed="true"/>
-		<field name="apptype" />
+		
 		<field name="contact_name" />
 		<field name="contact_detail" />
 		<field name="contact_email" />
 		<field name="contact_mobileno" />
-		<field name="dtfiled" />
 		<field name="applicantid" />
 		<field name="description" />
 		<field name="title" searchable="true" indexed="true"/>

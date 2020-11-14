@@ -38,18 +38,16 @@ class BuildingApplicationService {
 
 	@ProxyMethod
 	public def generateAppNo(def o ) {
-		if(!o.appid) throw new Exception("Please specify an appid in OboApplicationService.accept");
-		def appid = o.appid;
-
-
 		def pattern = sysvar.get( "building_application_appno" );
 		if(!pattern) throw new Exception("Please define building_application_appno entry in sys_var. Ex. BP-[yyyyMM]-[%05d]");
-
-		def u = [:];
-		u.appdate = dateSvc.getServerDate();
-		u.appno = controlNoSvc.getNextNo( pattern );
-		appEm.find( [objid: appid ] ).update( u );
-		return u;
+		def appno = controlNoSvc.getNextNo( pattern );
+		if( o.appid ) {
+			def u = [:];
+			u.appdate = dateSvc.getServerDate();
+			u.appno = appno;
+			appEm.find( [objid: o.appid ] ).update( u );
+		}		
+		return appno;
 	} 
 
 	@ProxyMethod
@@ -80,17 +78,6 @@ class BuildingApplicationService {
 		return vwAppEm.getProfessionalList( [appid: o.objid ] );
 	}
 
-	@Service("JasperReportEmailService")
-	def emailSvc;
 
-	@ProxyMethod
-	public void emailPermits( def o ) {
-		def subdocs = subdocEm.getSubdocsToEmail( [appid: o.objid ]);
-
-		println "**************"
-		subdocs.each {
-			println it.objid + " " + it.doctypeid + " " + it.template;
-		}
-	}
 
 }

@@ -1,16 +1,17 @@
 <workunit>
     <invokers>
-        <invoker folderid="menucategory/obo/building" caption="New Application"
-             action="create" index="-2" role="RECEIVER"/>
-        <!-- actions -->
-        <invoker type="formActions" caption="Next" action="next" visibleWhen="#{page=='initial'}"/>
-        <invoker type="formActions" caption="Save" action="saveNew" visibleWhen="#{page=='capture'}"/>
+        <invoker type="building_application:create" caption="Building Application (Manual Capture)"
+                action="create" />
+        
+        <invoker type="vw_building_permit:create" caption="Building Application (Manual Capture)"
+                action="createPermit" />
+        
+        <invoker type="formActions" caption="Close" action="_exit" immediate="true"/>
+        <invoker type="formActions" caption="Save" action="save" />
         
     </invokers>
-    
-    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationCreateModel" />
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationCaptureModel" />
     <pages>
-        <page name="initial" template="com.rameses.gov.etracs.obo.views.OboApplicationInitialPage" />
-        <page name="capture" template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationCapturePage" />
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationCapturePage" />
     </pages>
 </workunit>

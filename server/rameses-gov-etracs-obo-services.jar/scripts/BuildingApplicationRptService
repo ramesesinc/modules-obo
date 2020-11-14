@@ -52,7 +52,7 @@ public class BuildingApplicationRptService  {
 			params.refid = app.objid;
 			//tracking no. is used becuase we cannot yet generate the appno at this time.
 			params.refno = app.trackingno;	
-			params.refdate = app.dtfiled;
+			params.refdate = app.appdate;
 			params.reftype = "building_application";
 			params.purpose = "For Building Permit Application"
 

@@ -40,7 +40,6 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         applicationChecklist1 = new com.rameses.gov.etracs.obo.components.ApplicationChecklist();
         jPanel1 = new javax.swing.JPanel();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        xLabel9 = new com.rameses.rcp.control.XLabel();
         xLabel8 = new com.rameses.rcp.control.XLabel();
         xLabel7 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
@@ -48,6 +47,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xLabel10 = new com.rameses.rcp.control.XLabel();
         xLabel11 = new com.rameses.rcp.control.XLabel();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
+        xLabel9 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
         xLabel15 = new com.rameses.rcp.control.XLabel();
         xLabel16 = new com.rameses.rcp.control.XLabel();
@@ -110,11 +110,6 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
 
         xFormPanel1.setCaptionWidth(100);
 
-        xLabel9.setCaption("Doc Type");
-        xLabel9.setExpression("#{entity.doctype.title}");
-        xLabel9.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel9);
-
         xLabel8.setCaption("Control No");
         xLabel8.setExpression("#{entity.controlno}");
         xLabel8.setVisibleWhen("#{ entity.issuanceid !=null }");
@@ -152,6 +147,11 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xFormPanel1.add(xLabel11);
 
         xFormPanel2.setCaptionWidth(120);
+
+        xLabel9.setCaption("Doc Type");
+        xLabel9.setExpression("#{entity.doctype.title}");
+        xLabel9.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel9);
 
         xLabel12.setCaption("App No");
         xLabel12.setExpression("#{entity.app.appno}");
@@ -205,7 +205,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(xFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                    .addComponent(xFormPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(81, 81, 81))
         );

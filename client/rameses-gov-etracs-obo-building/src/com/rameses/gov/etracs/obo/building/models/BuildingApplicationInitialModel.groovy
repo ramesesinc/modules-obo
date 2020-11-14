@@ -13,24 +13,17 @@ import javax.swing.*;
 import com.rameses.io.*;
 import com.rameses.gov.etracs.obo.models.*;
 
-class BuildingApplicationCreateModel  {
+class BuildingApplicationInitialModel  {
 
     @Service("BuildingApplicationInitialService")
     def svc;
     
     def trackingno;
     def source = "web";
-    def entity;
-    def txnTypes = ["SIMPLE", "COMPLEX"];
-    def appTypes = ["NEW", "RENOVATION", "AMENDMENT"];
-    def page = "initial";
     
     @FormTitle
-    String title = "New Building Permit (Initial)";
+    String title = "New Building Permit Application (Initial)";
     
-    def create() {
-        return "initial";
-    }
     
     def next() {
         if(source.matches("web|local")) {
@@ -45,18 +38,11 @@ class BuildingApplicationCreateModel  {
             return op;
         }
         else if( source == "capture") {
-            entity = [location:[:], numunits:1, contact: [:]];
-            page = "capture";
-            return page;
+            return Inv.lookupOpener( "building_application:create", [:] )
         }
         else {
             throw new Exception("File option not yet accepted!");
         }
-    }
-    
-    void saveNew() {
-        if(!MsgBox.confirm("You are about to save this application. Proceed?")) return;
-        svc.saveCapture( entity );
     }
     
     

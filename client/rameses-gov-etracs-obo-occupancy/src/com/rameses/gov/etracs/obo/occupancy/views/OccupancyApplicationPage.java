@@ -1,26 +1,24 @@
-package com.rameses.gov.etracs.obo.building.views;
-
-
-import com.rameses.rcp.ui.annotations.Template;
-import com.rameses.seti2.views.WorkflowTaskFormPage;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package com.rameses.gov.etracs.obo.occupancy.views;
+
+import com.rameses.rcp.ui.annotations.Template;
+import com.rameses.seti2.views.WorkflowTaskFormPage;
 
 /**
  *
  * @author elmonazareno
  */
 @Template(WorkflowTaskFormPage.class)
-public class BuildingApplicationPage extends javax.swing.JPanel {
+public class OccupancyApplicationPage extends javax.swing.JPanel {
 
     /**
-     * Creates new form BuildingApplicationPage1
+     * Creates new form OccupancyApplicationPage
      */
-    public BuildingApplicationPage() {
+    public OccupancyApplicationPage() {
         initComponents();
     }
 
@@ -75,8 +73,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         applicationDocumentList1 = new com.rameses.gov.etracs.obo.components.ApplicationDocumentList();
         xPanel3 = new com.rameses.rcp.control.XPanel();
         applicationRequirementList1 = new com.rameses.gov.etracs.obo.components.ApplicationRequirementList();
-        jPanel2 = new javax.swing.JPanel();
-        buildingApplicationRptList1 = new com.rameses.gov.etracs.obo.building.components.BuildingApplicationRptList();
         xPanel1 = new com.rameses.rcp.control.XPanel();
         applicationSubTaskList1 = new com.rameses.gov.etracs.obo.components.ApplicationSubTaskList();
         xPanel4 = new com.rameses.rcp.control.XPanel();
@@ -88,15 +84,11 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xPanel7 = new com.rameses.rcp.control.XPanel();
         applicationFeeList1 = new com.rameses.gov.etracs.obo.components.ApplicationFeeList();
 
-        setPreferredSize(new java.awt.Dimension(1050, 620));
-        setLayout(new java.awt.BorderLayout());
-
         xActionBar2.setFormName("formName");
         xActionBar2.setName("appActions"); // NOI18N
         xActionBar2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xActionBar2.setDynamic(true);
         xActionBar2.setPreferredSize(new java.awt.Dimension(91, 30));
-        add(xActionBar2, java.awt.BorderLayout.NORTH);
 
         xTabbedPane1.setDynamic(true);
 
@@ -233,7 +225,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xFormPanel3.add(xLabel5);
 
         xLabel12.setCaption("App Date");
-        xLabel12.setExpression("#{entity.appdate}");
+        xLabel12.setExpression("#{entity.dtfiled}");
         xLabel12.setName("entity.rptinfo.text"); // NOI18N
         xLabel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel12.setPreferredSize(new java.awt.Dimension(0, 16));
@@ -288,7 +280,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         xLabel22.setCaption("Project Supervisor ");
         xLabel22.setExpression("#{entity.contractor.lastname}, #{entity.contractor.firstname}  ( PRC No: #{entity.contractor.prc.idno} )");
-        xLabel22.setVisibleWhen("#{ entity.contractor?.objid == null }");
         xLabel22.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel22.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel22.setPreferredSize(new java.awt.Dimension(0, 16));
@@ -390,9 +381,9 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xPanel2.setLayout(new java.awt.BorderLayout());
 
         applicationDocumentList1.setAppid("entity.objid");
-        applicationDocumentList1.setApptype("building");
+        applicationDocumentList1.setApptype("occupancy");
         applicationDocumentList1.setEditableWhen("#{ canEdit == true }");
-        applicationDocumentList1.setEntitySchemaName("building_application_subdoc");
+        applicationDocumentList1.setEntitySchemaName("occupancy_application_subdoc");
         applicationDocumentList1.setHandler("docHandler");
         applicationDocumentList1.setSchemaName("vw_building_application_subdoc");
         xPanel2.add(applicationDocumentList1, java.awt.BorderLayout.CENTER);
@@ -404,33 +395,25 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         applicationRequirementList1.setAppid("entity.objid");
         applicationRequirementList1.setEditableWhen("#{ canEdit == true }");
         applicationRequirementList1.setParentid("");
-        applicationRequirementList1.setSchemaName("building_application_requirement");
+        applicationRequirementList1.setSchemaName("occupancy_application_requirement");
         xPanel3.add(applicationRequirementList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Requirements", xPanel3);
-
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        buildingApplicationRptList1.setAppid("entity.objid");
-        buildingApplicationRptList1.setEditableWhen("#{ true }");
-        jPanel2.add(buildingApplicationRptList1, java.awt.BorderLayout.CENTER);
-
-        xTabbedPane1.addTab("Real Property", jPanel2);
 
         xPanel1.setLayout(new java.awt.BorderLayout());
 
         applicationSubTaskList1.setAppid("entity.objid");
         applicationSubTaskList1.setEditableWhen("#{ canEdit == true }");
-        applicationSubTaskList1.setSchemaName("vw_building_evaluation");
+        applicationSubTaskList1.setSchemaName("vw_occupancy_inspection");
         xPanel1.add(applicationSubTaskList1, java.awt.BorderLayout.CENTER);
 
-        xTabbedPane1.addTab("Evaluations", xPanel1);
+        xTabbedPane1.addTab("Inspections", xPanel1);
 
         xPanel4.setLayout(new java.awt.BorderLayout());
 
         applicationFindingList2.setAppid("entity.objid");
         applicationFindingList2.setEditableWhen("#{ canEdit == true }");
-        applicationFindingList2.setSchemaName("building_evaluation_finding");
+        applicationFindingList2.setSchemaName("occupancy_inspection_finding");
         applicationFindingList2.setSectionTitle("entity.type.title");
         xPanel4.add(applicationFindingList2, java.awt.BorderLayout.CENTER);
 
@@ -439,7 +422,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xPanel5.setLayout(new java.awt.BorderLayout());
 
         transmittalList1.setAppid("entity.objid");
-        transmittalList1.setSchemaName("building_application_transmittal");
+        transmittalList1.setSchemaName("occupancy_application_transmittal");
         xPanel5.add(transmittalList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Transmittals", xPanel5);
@@ -455,14 +438,37 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         applicationFeeList1.setAppid("entity.objid");
         applicationFeeList1.setEditableWhen("#{ canEdit == true }");
-        applicationFeeList1.setEntitySchemaName("building_application_fee");
+        applicationFeeList1.setEntitySchemaName("occupancy_application_fee");
         applicationFeeList1.setHandler("assessmentHandler");
         applicationFeeList1.setSchemaName("vw_building_application_fee");
         xPanel7.add(applicationFeeList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Assessment", xPanel7);
 
-        add(xTabbedPane1, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1146, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(xActionBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 1146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(xTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 743, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(xActionBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, 0)
+                    .addComponent(xTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 713, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void xButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xButton1ActionPerformed
@@ -476,9 +482,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
     private com.rameses.gov.etracs.obo.components.ApplicationFindingList applicationFindingList2;
     private com.rameses.gov.etracs.obo.components.ApplicationRequirementList applicationRequirementList1;
     private com.rameses.gov.etracs.obo.components.ApplicationSubTaskList applicationSubTaskList1;
-    private com.rameses.gov.etracs.obo.building.components.BuildingApplicationRptList buildingApplicationRptList1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel pnlProject;
     private com.rameses.gov.etracs.obo.components.ProfessionalList professionalList1;
     private com.rameses.gov.etracs.obo.components.TransmittalList transmittalList1;

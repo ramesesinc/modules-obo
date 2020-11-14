@@ -51,7 +51,7 @@ class ApplicationRequirementModel {
     def info = [:];
     boolean editable;
     boolean overridable;
-    boolean supsededed;
+    boolean superseded;
     def saveHandler;
 
     //this will be passed by caller

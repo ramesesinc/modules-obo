@@ -10,7 +10,7 @@ import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
-class BuildingApplicationEditModel  {
+class BuildingApplicationCaptureModel  {
     
     @Binding
     def binding;
@@ -21,11 +21,24 @@ class BuildingApplicationEditModel  {
     def txnTypes = ["SIMPLE", "COMPLEX"];
     def appTypes = ["NEW", "RENOVATION", "AMENDMENT"];
     
-    String title = "Building Permit Application (Edit)";
+    String title = "Building Permit Application (Manual Capture)";
     def entity;
+    boolean askpermitissued = true;
     
-    void edit() {
-        
+    void create() {
+        entity = [:];
+        entity.numunits = 1;
+        entity.numfloors = 1;        
+        entity.contact = [:];        
+        entity.worktypes = [];
+        entity.location = [:];
+        entity.txnmode = "CAPTURE";
+    }
+    
+    void createPermit() {
+        create();
+        askpermitissued = false;
+        entity.permitissued = true;
     }
     
     def selectWorkTypes() {

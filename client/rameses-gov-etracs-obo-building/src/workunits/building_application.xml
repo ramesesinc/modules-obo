@@ -3,7 +3,11 @@
           entitySchemaName="building_application"
           allowCreate="false">
     <invokers>
-        <invoker type="vw_building_application:open" caption="Building Permit Application" action="open" index="1"/>
+        <invoker type="vw_building_application:open" 
+                 caption="Building Permit Application" action="open" />
+        
+        <invoker type="vw_building_permit:open" 
+                 caption="Building Permit Application" action="openPermit" />
 
         <!--
        <invoker type="appActions" 

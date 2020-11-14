@@ -2,11 +2,6 @@ DROP VIEW IF EXISTS vw_building_application;
 CREATE VIEW vw_building_application AS 
 SELECT 
    a.*,
-
-   bi.contact_name,
-   bi.contact_detail,
-   bi.contact_email,
-   bi.contact_mobileno,
    bi.applicantid,
    bi.description,
    bi.title,
@@ -35,7 +30,6 @@ SELECT
    bi.createdby_objid,
    bi.createdby_name,
    bi.dtcreated,
-   bi.txntype,
 
    ae.name AS applicant_name,
 

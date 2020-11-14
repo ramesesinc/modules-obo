@@ -11,7 +11,7 @@ import com.rameses.osiris2.client.*;
 import com.rameses.io.*;
 
 
-class BuildingApplicationModel extends WorkflowTaskModel  {
+class OccupancytApplicationModel extends WorkflowTaskModel  {
 
     @Service("BuildingApplicationService")
     def appSvc;
@@ -20,15 +20,15 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
     def feeSvc;
     
     public String getTitle() {
-        return "Building Permit " + (entity.appno==null? 'Tracking No '+ entity.trackingno: 'App No ' + entity.appno) + " [" +  task?.title + "]" ;
+        return "Occupancy Permit " + (entity.appno==null? 'Tracking No '+ entity.trackingno: 'App No ' + entity.appno) + " [" +  task?.title + "]" ;
     }
     
     public String getWindowTitle() {
-        return "Bldg "+ (entity.appno==null? entity.trackingno : entity.appno);
+        return "Occupancy "+ (entity.appno==null? entity.trackingno : entity.appno);
     }
     
     public String getNotificationid() {
-        return "building_application";
+        return "occupancy_application";
     }
     
     public boolean getCanEdit() {
@@ -58,7 +58,7 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
             return Inv.lookupOpener( "obo_itemaccount:obo:lookup", [:]);
         },
         getAssessHandlerName: {
-            return "building_assessment";
+            return "occupancy_assessment";
         }
     ];
     
@@ -74,17 +74,17 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
             entity.putAll( o );
             binding.refresh();
         };
-        p.doctype = [objid: "BUILDING_PERMIT"];
+        p.doctype = [objid: "OCCUPANCY_PERMIT"];
         p.appid = entity.objid;
         return Inv.lookupOpener("obo_issuance", p );
     }
         
     def openPermit() {
-        def m = [_schemaname: "vw_building_permit"];
+        def m = [_schemaname: "vw_occupancy_permit"];
         m.findBy = [objid: entity.objid];
         def perm = queryService.findFirst( m );
         if(!perm) throw new Exception("Permit does not exist");
-        schemaName = "vw_building_application";
+        schemaName = "vw_occupancy_application";
         entity = [objid: perm.appid ];
         return open();
     }

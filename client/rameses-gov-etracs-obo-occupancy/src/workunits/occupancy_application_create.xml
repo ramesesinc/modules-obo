@@ -1,0 +1,16 @@
+<workunit>
+    <invokers>
+        <invoker type="occupancy_application:create" 
+                 caption="Occupancy Application (Manual Capture)"
+                 action="create" />
+        
+        <invoker type="formActions" caption="Next" action="next" visibleWhen="#{ page=='initial' }"/>
+        <invoker type="formActions" caption="Back" action="back" immediate="true" visibleWhen="#{ page=='view' }"/>
+        <invoker type="formActions" caption="Save" action="save" visibleWhen="#{ page=='view' }"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyApplicationCaptureModel" />
+    <pages>
+        <page name="initial" template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyApplicationCaptureInitialPage" />
+        <page name="view" template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyApplicationCapturePage" />        
+    </pages>
+</workunit>

@@ -14,6 +14,9 @@ class OboApplicationSubdocPersistenceInterceptor {
 	@DataContext("obo_variable")
 	def varEm;
 
+	@Env
+	def env;
+
 	@After(pattern="PersistenceService.read", eval="#{args[0]._schemaname.matches('.*_application_subdoc') }")
 	public void onRead(def evt) {
 		def a = evt.result;
@@ -26,7 +29,7 @@ class OboApplicationSubdocPersistenceInterceptor {
 	public void beforeRemoveApplicationSubdoc(def evt) {
 		def app = evt.args[0];
 
-		def vwSubDocEm = dynEm.lookup( app._schemaname );
+		def vwSubdocEm = dynEm.lookup( app._schemaname );
 
 		def subdoc = vwSubdocEm.find( [objid: app.objid]).first();
 		def docorgid = subdoc.doctype?.org?.objid;

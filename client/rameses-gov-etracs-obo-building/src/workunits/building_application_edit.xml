@@ -1,0 +1,16 @@
+<workunit schemaName="vw_building_application" 
+          processName="building_application" 
+          entitySchemaName="building_application"
+          allowCreate="false">
+    <invokers>
+        <invoker type="vw_building_application:form:edit" 
+                 caption="Edit Info" action="edit" />
+        
+         <invoker type="formActions" 
+                 caption="Save" action="save" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationEditModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationEditPage" />
+    </pages>
+</workunit>
