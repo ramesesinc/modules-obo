@@ -27,7 +27,7 @@ const BuildingPermitFinish = ({
 
   const loadApplication = () => {
     setLoading(true)
-    appService.getApplication({ appid: appno }, (err, app) => {
+    appService.invoke("getApplication", { appid: appno }, (err, app) => {
       if (err) {
         setError(err)
       } else {
@@ -39,7 +39,7 @@ const BuildingPermitFinish = ({
 
   const loadAncillaryPermits = () => {
     setLoading(true)
-    appService.getAncillaryPermits(
+    appService.invoke("getAncillaryPermits",
       { appid: appno },
       (err, ancillaryPermits) => {
         if (err) {

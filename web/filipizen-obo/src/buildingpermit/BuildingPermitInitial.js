@@ -66,7 +66,7 @@ const BuildingPermitInitial = (props) => {
       worktypes: [],
     }
 
-    svc.create(newApp, (err, app) => {
+    svc.invoke("create", newApp, (err, app) => {
       if (err) {
         setError(err);
       } else {

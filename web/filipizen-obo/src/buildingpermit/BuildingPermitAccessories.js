@@ -11,8 +11,6 @@ import {
   ActionBar,
   Button,
   Label,
-  Decimal,
-  Integer,
   Radio,
   Item,
   BackLink
@@ -43,7 +41,7 @@ const BuildingPermitAccessories = ({
   }
 
   const loadAccessories = () => {
-    appService.getAccessories({appid: appno}, (err, accessories) => {
+    appService.invoke("getAccessories", {appid: appno}, (err, accessories) => {
       setAccessories(accessories);
       if (isJAccessoryType(accessories)) {
         setMode("infos")
@@ -53,7 +51,7 @@ const BuildingPermitAccessories = ({
 
   const loadAccessoryOccupancyTypes = () => {
     const svc = Service.lookup("OboMiscListService", "obo");
-    svc.getAccessoryOccupancyTypes((err, occupancyTypes) => {
+    svc.invoke("getAccessoryOccupancyTypes", null, (err, occupancyTypes) => {
       if (err) {
         setError(err);
       } else {
@@ -78,7 +76,7 @@ const BuildingPermitAccessories = ({
 			setMode("select-accessories");
 		} else {
       setError(null);
-      appService.saveAccessories({appid: appno, items: []}, (err, res) => {
+      appService.invoke("saveAccessories", {appid: appno, items: []}, (err, res) => {
         if (err) {
           setError(err);
         } else {
@@ -91,7 +89,7 @@ const BuildingPermitAccessories = ({
   const submitAccessoryTypes = () => {
     if (Object.keys(accessoryTypes).length > 0) {
       const accessories = getSelectedAccessoryTypes();
-      appService.saveAccessories(accessories, (err, accessories) => {
+      appService.invoke("saveAccessories", accessories, (err, accessories) => {
         if (err) {
           setError(err);
         } else {
@@ -121,7 +119,7 @@ const BuildingPermitAccessories = ({
       p.infos.push(...accessory.infos);
     });
 
-		appService.saveAccessoryInfos(p, (err, res) => {
+		appService.invoke("saveAccessoryInfos", p, (err, res) => {
       if (err) {
         setError(err)
       } else {

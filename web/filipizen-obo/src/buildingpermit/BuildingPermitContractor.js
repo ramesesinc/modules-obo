@@ -2,26 +2,14 @@ import React, { useState, useEffect } from "react";
 import {
   ActionBar,
   Button,
-  Checkbox,
   Panel,
   Error,
   Subtitle,
-  Subtitle2,
-  FormPanel,
-  Text,
   Spacer,
-  BackLink,
-  Service,
-  Integer,
-  Decimal,
-  Date,
 } from "rsi-react-web-components";
 
 import ProfessionalLookup from "../components/ProfessionalLookup";
 import ProfessionalCard from "../components/ProfessionalCard";
-
-const svc = Service.lookup("OboMiscListService", "obo");
-
 
 const BuildingPermitContractor = ({
   partner,
@@ -42,7 +30,7 @@ const BuildingPermitContractor = ({
   const [professional, setProfessional] = useState();
 
   useEffect(() => {
-    appService.getProjectInfo({appid: appno}, (err, project) => {
+    appService.invoke("getProjectInfo", {appid: appno}, (err, project) => {
       if (err) {
         setError(err);
       } else {
@@ -66,7 +54,7 @@ const BuildingPermitContractor = ({
       dtproposedconstruction: project.dtproposedconstruction,
       dtexpectedcompletion: project.dtexpectedcompletion,
     };
-    appService.update(detail, (err, proj) => {
+    appService.invoke("update", detail, (err, proj) => {
       if (err) {
         setError(err);
       } else {
@@ -88,7 +76,7 @@ const BuildingPermitContractor = ({
     }
 
     const professional = professionals[0];
-    appService.update({appid: appno, contractorid: professional.objid}, (err, app) => {
+    appService.invoke("update", {appid: appno, contractorid: professional.objid}, (err, app) => {
       if (err) {
         setError(err);
       } else {

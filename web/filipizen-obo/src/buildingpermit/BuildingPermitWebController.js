@@ -56,7 +56,7 @@ const BuildingPermitWebController = (props) => {
   }
 
   const findCurrentApp = () => {
-    svc.findCurrentInfo({appid: appno}, (err, app) => {
+    svc.invoke("findCurrentInfo", {appid: appno}, (err, app) => {
       const orgcode = partner.orgcode || partner.id;
       if (err) {
         setError(err);
@@ -108,7 +108,7 @@ const BuildingPermitWebController = (props) => {
     if (stepCompleted) {
       setStep(ps => ps + 1);
     } else {
-      svc.update({appid: appno, step: step+1}, (err, updatedApp) => {
+      svc.invoke("update", {appid: appno, step: step+1}, (err, updatedApp) => {
         if (err) {
           setError(err);
         } else {

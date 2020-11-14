@@ -49,8 +49,8 @@ const BuildingPermitLocation = (props) => {
 
   const findProperty = () => {
     const orgcode = partner.orgcode || partner.id;
-    const svc = Service.lookup( orgcode + ":OboOnlineService" );
-    svc.findLocation( { refno: refno || newRefno }, (err, property) => {
+    const svc = Service.lookup( orgcode + ":OboOnlineService", "obo");
+    svc.invoke("findLocation", { refno: refno || newRefno }, (err, property) => {
       if (err) {
         setError(err);
       } else {
@@ -72,7 +72,7 @@ const BuildingPermitLocation = (props) => {
   }
 
   const reloadList = () => {
-    appService.getRpus({appid: props.appno}, (err, rpus) => {
+    appService.invoke("getRpus", {appid: props.appno}, (err, rpus) => {
       if (err) {
         setError(err);
       } else {
@@ -106,7 +106,7 @@ const BuildingPermitLocation = (props) => {
       return;
     }
     setError(null);
-    appService.saveRpu(property, (err, rpu) => {
+    appService.invoke("saveRpu", property, (err, rpu) => {
       if (err) {
         setError(err)
       } else {
@@ -133,7 +133,7 @@ const BuildingPermitLocation = (props) => {
 
   const updateLocation = () => {
     setError(null);
-    appService.saveLocation({appid: appno, ...location}, (err, app) => {
+    appService.invoke("saveLocation", {appid: appno, ...location}, (err, app) => {
       if (err) {
         setError(err);
       } else {
@@ -144,7 +144,7 @@ const BuildingPermitLocation = (props) => {
 
   const deleteRpu = (rpu) => {
     setError(null);
-    appService.removeRpu(rpu, (err, res) => {
+    appService.invoke("removeRpu", rpu, (err, res) => {
       if (err) {
         setError(err);
       } else {

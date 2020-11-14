@@ -60,7 +60,7 @@ const BuildingPermitProject = ({
   const [professional, setProfessional] = useState();
 
   const loadOccupancyGroups = () => {
-    svc.getOccupancyTypeGroups((err, groups) => {
+    svc.invoke("getOccupancyTypeGroups", (err, groups) => {
       if (err) {
         setError(err)
       } else {
@@ -71,7 +71,7 @@ const BuildingPermitProject = ({
 
   const loadOccupancyDivisions = () => {
     const groupid = project.occupancytype.group.objid;
-    svc.getOccupancyTypeDivisions({groupid} ,(err, divisions) => {
+    svc.invoke("getOccupancyTypeDivisions", {groupid} ,(err, divisions) => {
       if (err) {
         setError(err)
       } else {
@@ -82,7 +82,7 @@ const BuildingPermitProject = ({
 
   const loadOccupancyTypes = () => {
     const divisionid = project.occupancytype.division.objid;
-    svc.getOccupancyTypes({divisionid} ,(err, types) => {
+    svc.invoke("getOccupancyTypes", {divisionid} ,(err, types) => {
       if (err) {
         setError(err)
       } else {
@@ -92,7 +92,7 @@ const BuildingPermitProject = ({
   }
 
   useEffect(() => {
-    appService.getProjectInfo({appid: appno}, (err, project) => {
+    appService.invoke("getProjectInfo", {appid: appno}, (err, project) => {
       if (err) {
         setError(err);
       } else {
@@ -138,7 +138,7 @@ const BuildingPermitProject = ({
       dtproposedconstruction: project.dtproposedconstruction,
       dtexpectedcompletion: project.dtexpectedcompletion,
     };
-    appService.update(detail, (err, proj) => {
+    appService.invoke("update", detail, (err, proj) => {
       if (err) {
         setError(err);
       } else {
@@ -161,7 +161,7 @@ const BuildingPermitProject = ({
         appid: appno,
         worktypes: project.worktypes.filter(wt => wt.checked).map(wt => wt.value),
       };
-      appService.update(updatedWorkTypes, (err, proj) => {
+      appService.invoke("update", updatedWorkTypes, (err, proj) => {
         if (err) {
           setError(error);
         } else {
@@ -195,7 +195,7 @@ const BuildingPermitProject = ({
       setError("Kindly select an occupancy type.")
     } else {
       let occupancytype = {appid: appno, occupancytype: project.occupancytype};
-      appService.updateOccupancyType(occupancytype, (err, res) => {
+      appService.invoke("updateOccupancyType", occupancytype, (err, res) => {
         if (err) {
           setError(err);
         } else {

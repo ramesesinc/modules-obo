@@ -27,7 +27,7 @@ const VerifyEmail = ({
 
   const verifyInfo = () => {
     setLoading(true);
-    appService.verifyInfo(professional, (err, res) => {
+    appService.invoke("verifyInfo", professional, (err, res) => {
       if (err) {
         handleError(err)
       } else {
