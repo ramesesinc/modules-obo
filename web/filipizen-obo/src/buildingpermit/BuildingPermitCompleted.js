@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import {
   Panel,
   Error,
-  Subtitle,
   FormPanel,
   Text,
   Spacer,
@@ -11,11 +10,40 @@ import {
   ButtonLink,
   PageviewIcon,
   CloudDownloadIcon,
-  LinkIcon,
   Subtitle2,
   ReportViewer,
 } from "rsi-react-web-components";
 
+
+const getHeaderInfo = (contact={}) => {
+  let headerInfo = "";
+  headerInfo += "Please download and print the Building and Ancillary Permit forms, prepare the ";
+  headerInfo += "requirements listed below, and submit at the receiving window of our ";
+  headerInfo += contact.officename;
+  headerInfo += " at the ";
+  headerInfo += contact.address1;
+  if (contact.address2) {
+    headerInfo += ", " + contact.address2 + ". ";
+  } else {
+    headerInfo += ". ";
+  }
+  const phones = [];
+  if (contact.phoneno) phones.push(contact.phoneno)
+  if (contact.mobileno) phones.push(contact.mobileno)
+
+  if (contact.email) {
+    if (phones.length > 0) {
+      headerInfo += "You can email at " + contact.email;
+      headerInfo += " or contact us on " + phones.join(" or ");
+    } else {
+      headerInfo += "You can email us at " + contact.email;
+    }
+    headerInfo += " for any inquiries on application."
+  } else if (phones.length > 0)  {
+    headerInfo += "You can contact us on " + phones.join(" or ") + " for any inquiries on application."
+  }
+  return headerInfo;
+}
 
 const BuildingPermitCompleted = ({
   partner,
@@ -98,6 +126,8 @@ const BuildingPermitCompleted = ({
     })
   })
 
+  const headerInfo = getHeaderInfo(app.obocontactinfo);
+
   return (
     <Panel>
       <Spacer />
@@ -110,12 +140,7 @@ const BuildingPermitCompleted = ({
         onClose={onCloseViewer}
       />
       <FormPanel context={app} handler={setApp}>
-        <label>
-        Please download and print the Building and Ancillary Permit forms, prepare the
-        requirements listed below, and submit at the receiving window of our One-Stop
-        Shop for Construction Permits (OSCP) at the Ground Floor, City of Engineering
-        Office, Miguel Lopez del Legazpi Boulevard, Dapdap, Legazpi City.
-        </label>
+        <label>{headerInfo}</label>
         <Spacer height={10} />
         <Panel style={styles.container}>
           <Panel style={styles.linkContainer}>

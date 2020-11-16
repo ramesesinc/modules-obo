@@ -12,7 +12,6 @@ import {
   Text,
   Decimal,
   Integer,
-  LinkIcon,
   ButtonLink,
   Subtitle2,
   PageviewIcon,
@@ -122,6 +121,7 @@ const BuildingPermitConfirm = ({
 
   return (
     <Panel>
+      <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Confirm Application</Subtitle>
       <Spacer />
 
@@ -146,17 +146,14 @@ const BuildingPermitConfirm = ({
       <FormPanel visibleWhen={!loading} context={app} handler={setApp}>
         <Panel style={styles.container}>
           <Panel style={styles.linkContainer}>
-          {/**
-            <Button caption="Preview Reports" action={() => setShowPreview(true)} />
-           */}
             <ButtonLink
               caption="Preview"
-              href={`/jreports/obo/bldgpermit?refid=${appno}`}
+              href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/buildingpermit?refid=${appno}`}
               Icon={PageviewIcon}
             />
             <ButtonLink
               caption="Download"
-              href={`/jreports/download/obo/bldgpermit?refid=${appno}`}
+              href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/buildingpermit?refid=${appno}`}
               Icon={CloudDownloadIcon}
             />
           </Panel>
@@ -197,12 +194,12 @@ const BuildingPermitConfirm = ({
                 <Panel row>
                   <ButtonLink
                     caption="Preview"
-                    href={`/jreports/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
+                    href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
                     Icon={PageviewIcon}
                   />
                   <ButtonLink
                     caption="Download"
-                    href={`/jreports/download/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
+                    href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
                     Icon={CloudDownloadIcon}
                   />
                 </Panel>

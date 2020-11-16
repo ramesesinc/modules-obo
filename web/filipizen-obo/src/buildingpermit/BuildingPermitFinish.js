@@ -60,6 +60,7 @@ const BuildingPermitFinish = ({
 
   return (
     <Panel>
+      <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Congratulations!</Subtitle>
       <Spacer />
       <label>You have completed the application. Please click and print the following:</label>

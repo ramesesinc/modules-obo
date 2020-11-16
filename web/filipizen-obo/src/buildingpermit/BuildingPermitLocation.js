@@ -48,6 +48,7 @@ const BuildingPermitLocation = (props) => {
   }
 
   const findProperty = () => {
+    setLoading(true);
     const orgcode = partner.orgcode || partner.id;
     const svc = Service.lookup( orgcode + ":OboOnlineService", "obo");
     svc.invoke("findLocation", { refno: refno || newRefno }, (err, property) => {
@@ -62,12 +63,13 @@ const BuildingPermitLocation = (props) => {
         }
         if( property.owner.address.city ) property.owner.address.citymunicipality = property.owner.address.city;
         if( property.owner.address.municipality ) property.owner.address.citymunicipality = property.owner.address.municipality;
-        property.owner.ctc = {};      //allocate ctc
+        property.owner.ctc = {};
         property.lotowned = 1;
         property.appid = props.appno;
         setProperty(property);
         setMode("view-lot");
       }
+      setLoading(false);
     });
   }
 
@@ -83,10 +85,6 @@ const BuildingPermitLocation = (props) => {
 
   const viewList = () => {
     setMode("view-rpus");
-  }
-
-  const editOwner = () => {
-
   }
 
   const editOwnerInfo = props => {
@@ -116,7 +114,7 @@ const BuildingPermitLocation = (props) => {
     });
   }
 
-  const viewSpecifyLocation = () => {
+  const viewLocations = () => {
     setError(null);
     if (rpus.length === 0) {
       setError("Add at least one Lot Information.");
@@ -164,15 +162,17 @@ const BuildingPermitLocation = (props) => {
 
   return (
     <Panel>
+      <label>{`Tracking No. ${appno}`}</label>
+      <Subtitle>Project Location</Subtitle>
+      <Spacer />
+
       <Panel visibleWhen={mode === "view-rpus"}>
-        <Subtitle>Project Location</Subtitle>
-        <Spacer />
         <Subtitle2>Lot Information</Subtitle2>
         <Error msg={error} />
         {rpus.map(rpu => (
           <Panel style={styles.locationContainer} key={rpu.tdno}>
             <div style={styles.tdno}>
-              <Subtitle2>TD No. {rpu.tdno}</Subtitle2>
+              <Subtitle2>{`TD No. ${rpu.tdno}`}</Subtitle2>
             </div>
             <div style={styles.rpuInfoContainer}>
               <Label caption="Title No.">{rpu.titleno}</Label>
@@ -186,25 +186,26 @@ const BuildingPermitLocation = (props) => {
         ))}
         <ActionBar>
           <Button caption="Add Lot Info" action={viewInitial} />
-          <Button caption="Next" action={viewSpecifyLocation} />
+          <Button caption="Next" action={viewLocations} />
         </ActionBar>
       </Panel>
 
       <Panel visibleWhen={mode === "initial"}>
-        <Subtitle>Project Location</Subtitle>
-        <Spacer />
         <Subtitle2>Specify the Site Location/Property</Subtitle2>
         <Error msg={error} />
+        <Spacer />
         <Text caption="Tax Declaration No." value={refno} onChange={setRefno} autoFocus={true} />
         <ActionBar>
           <Button caption="Back to List" action={viewList} variant="text" />
-          <Button caption="Search" action={findProperty} />
+          <Button caption="Search" action={findProperty} disableWhen={loading} loading={loading} />
         </ActionBar>
       </Panel>
 
       <Panel visibleWhen={mode === "view-lot"}>
-        <Subtitle>Project Location</Subtitle>
-        <p>Please check carefully if the information is correct. If not, please contact the Assessor's Office before proceeding.</p>
+        <p>
+        Please check carefully if the information is correct.
+        For any discrepancies, please contact the Assessor's Office before proceeding.
+        </p>
         {/** TODO:
 
         <Label>
@@ -232,7 +233,6 @@ const BuildingPermitLocation = (props) => {
       </Panel>
 
       <Panel visibleWhen={mode === "edit-owner-info"}>
-        <Subtitle>Project Location</Subtitle>
         <p>Please update the information if necessary</p>
         <FormPanel context={property} handler={setProperty}>
           <LotOwnershipType name="lotowned" row autoFocus={true} />
@@ -245,7 +245,6 @@ const BuildingPermitLocation = (props) => {
       </Panel>
 
       <Panel visibleWhen={mode === "specify-location"}>
-        <Subtitle>Project Location</Subtitle>
         <Subtitle2>Specify Project Location</Subtitle2>
         <Spacer />
         <Error msg={error} />

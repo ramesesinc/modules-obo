@@ -73,15 +73,16 @@ const BuildingPermitApplicant = (props) => {
 
   return (
     <Panel>
+      <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Building Applicant Details</Subtitle>
       <Spacer />
       <Error msg={error} />
       <FormPanel context={applicant} handler={setApplicant} >
         <Combobox items={entityTypes} name='entitytype' caption='Type of Applicant'/>
-        <Text caption='Applicant Name' name='name' visibleWhen={applicant.entitytype !== 'INDIVIDUAL'}/>
+        <Text caption='Name' name='name' visibleWhen={applicant.entitytype !== 'INDIVIDUAL'}/>
 
         <Spacer />
-        <Panel visibleWhen={applicant.entitytype === 'INDIVIDUAL'}>
+        <Panel>
           <Subtitle2>Administrator or contact name of applicant</Subtitle2>
           <Text caption='Last Name' name='lastname' required={true}/>
           <Text caption='First Name' name='firstname' required={true}/>

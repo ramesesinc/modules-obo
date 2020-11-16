@@ -12,7 +12,7 @@ public class OboContactInfoService  {
 	@ProxyMethod
 	public def getInfo( def o ) {
 		if(!o.orgcode) throw new Exception("orgcode is required in getInfo");
-		return infoEm.find([objid: o.orgcode]).first();
+		return infoEm.find([orgcode: o.orgcode]).first();
 	}
 
 }

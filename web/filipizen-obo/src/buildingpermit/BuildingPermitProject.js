@@ -19,14 +19,6 @@ import {
 
 const svc = Service.lookup("OboMiscListService", "obo");
 
-const initialWorkTypes = [
-  { name: "addition", caption: "ADDITION", value: "ADDITION" },
-  { name: "alteration", caption: "ALTERATION", value: "ALTERATION" },
-  { name: "demolition", caption: "DEMOLITION", value: "DEMOLITION" },
-  { name: "original", caption: "ORIGINAL", value: "ORIGINAL" },
-  { name: "renovation", caption: "RENOVATION", value: "RENOVATION" },
-];
-
 const BuildingPermitProject = ({
   partner,
   appno,
@@ -37,7 +29,7 @@ const BuildingPermitProject = ({
   const initialProject = {
     appid: appno,
     apptype: "NEW",
-    worktypes: initialWorkTypes,
+    worktypes: [],
     numfloors: 1,
     numunits: 1,
     occupancytype: {
@@ -50,7 +42,7 @@ const BuildingPermitProject = ({
   const [error, setError] = useState();
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  //TOOD: remove mode only
+  //TODO: remove mode only
   const [mode, setMode] = useState("project-detail");
   const [occupancyMode, setOccupancyMode] = useState("group");
   const [project, setProject] = useState(initialProject);
@@ -58,9 +50,10 @@ const BuildingPermitProject = ({
   const [occupancyDivisions, setOccupancyDivisions] = useState([]);
   const [occupancyTypes, setOccupancyTypes] = useState([]);
   const [professional, setProfessional] = useState();
+  const [masterWorkTypes, setMasterWorkTypes] = useState([]);
 
   const loadOccupancyGroups = () => {
-    svc.invoke("getOccupancyTypeGroups", (err, groups) => {
+    svc.invoke("getOccupancyTypeGroups", null, (err, groups) => {
       if (err) {
         setError(err)
       } else {
@@ -92,28 +85,49 @@ const BuildingPermitProject = ({
   }
 
   useEffect(() => {
+    setLoading(true);
+    setError(null);
+    svc.invoke("getWorkTypes", null, (err, workTypes) => {
+      if (err) {
+        setError(err);
+      } else {
+        setMasterWorkTypes(workTypes);
+      }
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (masterWorkTypes.length === 0) return;
+
+    setLoading(true);
+    setError(null);
+
     appService.invoke("getProjectInfo", {appid: appno}, (err, project) => {
       if (err) {
         setError(err);
       } else {
         if (project.worktypes.length === 0) {
-          project.worktypes = initialWorkTypes;
+          project.worktypes = masterWorkTypes;
         } else {
-          const workTypes = initialWorkTypes.map(wt => {
-            let workType = project.worktypes.find(pwt => wt.value === pwt)
+          const updatedWorkTypes = masterWorkTypes.map(wt => {
+            let workType = project.worktypes.find(pwt => wt.objid === pwt)
             if (workType) {
               return {...wt, checked: true};
             }
             return wt;
           })
-          project.worktypes = workTypes;
+          project.worktypes = updatedWorkTypes;
         }
+        project.numunits = project.numunits || 1;
+        project.numfloors = project.numfloors || 1;
         setProfessional(project.contractor);
         setProject(project);
         setMode("project-detail");
       }
+      setLoading(true);
     });
-  }, [])
+  }, [masterWorkTypes])
 
   useEffect(() => {
     if (occupancyMode === "group")
@@ -159,7 +173,7 @@ const BuildingPermitProject = ({
       setError(null);
       const updatedWorkTypes = {
         appid: appno,
-        worktypes: project.worktypes.filter(wt => wt.checked).map(wt => wt.value),
+        worktypes: project.worktypes.filter(wt => wt.checked).map(wt => wt.objid),
       };
       appService.invoke("update", updatedWorkTypes, (err, proj) => {
         if (err) {
@@ -212,6 +226,7 @@ const BuildingPermitProject = ({
 
   return (
     <Panel>
+      <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Project Details</Subtitle>
       <Spacer />
       <Error msg={error} />
@@ -241,19 +256,20 @@ const BuildingPermitProject = ({
       </FormPanel>
 
       <FormPanel visibleWhen={mode === "select-worktype"} context={project} handler={setProject} >
-        <Subtitle2>Select Work Type</Subtitle2>
+        <Subtitle2>Select Work Types</Subtitle2>
         <Panel style={styles.column}>
           {project.worktypes.map((worktype, idx) => (
             <Checkbox
-              caption={worktype.caption}
+              caption={worktype.name}
               name={`worktypes[${idx}].checked`}
-              value={worktype.value} />
+              value={worktype.objid} />
           ))}
         </Panel>
         <ActionBar>
           <BackLink action={() => setMode("project-detail")} />
           <Button caption="Next" action={submitWorkType} />
         </ActionBar>
+        <p>{JSON.stringify(project.worktypes, null, 2)}</p>
       </FormPanel>
     </Panel>
   )

@@ -30,6 +30,9 @@ public class OnlineBuildingPermitService  {
 	@Service("DateService")
 	def dateSvc;
 
+	@Service("OboContactInfoService")
+	def contactSvc;
+
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
@@ -176,6 +179,7 @@ public class OnlineBuildingPermitService  {
 	@ProxyMethod
 	public def getProjectInfo( def o  ) {
 		def proj = appEm.find( [objid: o.appid] ).first();
+		proj.obocontactinfo = contactSvc.getInfo([orgcode: proj.orgcode]);
 		return proj;
 	}
 
@@ -280,7 +284,6 @@ public class OnlineBuildingPermitService  {
 	@ProxyMethod
 	public void saveAncillaryPermit( def o ) {
 		if(!o.objid) throw new Exception("saveAncillary error. objid is required");
-		if(!o.infos) throw new Exception("saveAncillary error. infos is required");		
 		o.designprofessionalid = o.designprofessional?.objid;
 		o.supervisorid = o.supervisor?.objid;
 		if(!o.worktypes) o.worktypes = [];		
@@ -335,7 +338,6 @@ public class OnlineBuildingPermitService  {
 
 	private void saveAppInfos( o ) {
 		if(!o.appid) throw new Exception("saveAppInfos error. parentid is required");
-		if(!o.infos) throw new Exception("saveAppInfos error. infos is required");
 
 		o.infos.findAll{ it.value }.each {
 			def m = [:];
