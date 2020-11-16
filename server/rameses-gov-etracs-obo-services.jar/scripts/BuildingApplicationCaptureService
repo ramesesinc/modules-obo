@@ -14,9 +14,6 @@ class BuildingApplicationCaptureService {
 	@DataContext("building_application_task")
 	def appTaskEm;
 
-	@DataContext("building_info")
-	def binfoEm;
-
 	@DataContext("building_permit")
 	def permitEm;
 
@@ -55,7 +52,9 @@ class BuildingApplicationCaptureService {
 
  	@ProxyMethod
 	public def create( def app ) {
+		throw new Exception("occupancy is " + app.occupancytype)
 
+		def dt = dateSvc.getServerDate();
 		if(!app.appno) {
 			app.appno = appSvc.generateAppNo([:]);
 		}
@@ -65,10 +64,11 @@ class BuildingApplicationCaptureService {
 
 		//remove application before so it can be replaced
 		def applicant = app.remove("applicant");
-		def binfo = binfoEm.create( app );
-		app.infoid = binfo.objid;
 		app.txnmode = "CAPTURE";
-		def newapp = appEm.create( app );
+		app.createdby = [objid: env.USERID, name: env.FULLNAME];
+		app.dtcreated = dt;
+
+		app = appEm.create( app );
 
 		//save applicant
 		applicant.profileid = applicant.remove("objid");
@@ -77,18 +77,8 @@ class BuildingApplicationCaptureService {
 		applicant.appid = app.objid;
 		applicant = entityEm.create( applicant );
 
-		//save all documents that are auto create that does not exist above
-		subdocEm.getSubdocsToAutoCreate( [apptype:'building', appid: newapp.objid ]).each {
-			def sd = [:];
-			sd.appid = app.objid;
-			sd.doctype = [objid: it.objid];
-			sd.amount = 0;
-			sd.state = 0;
-			subdocEm.create( sd );			
-		}
-
 		//calculate the cost first before receiving
-		def dt = dateSvc.getServerDate();
+		
 		def param = [:];
 		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
 		param.occupancytype = app.occupancytype;
@@ -96,23 +86,9 @@ class BuildingApplicationCaptureService {
 
 		//update applicant, cost and appid for info
 		def u = [:];
-		u.createdby = [objid: env.USERID, name: env.FULLNAME];
-		u.dtcreated = dt;
 		u.applicantid = applicant.objid;
-		u.appid = app.objid;
 		u.fixedcost = cost; 
-		binfoEm.find( [objid: app.infoid ] ).update( u );
-
-		//update the requirements
-		def reqTypes = reqTypeEm.where("permittype = 'building_application' ").list();
-		reqTypes.each {
-			def r = [:];
-			r.appid = app.objid;
-			r.state = 0;
-			r.typeid = it.objid;
-			r.type = [objid: it.objid];
-			reqEm.create( r );
-		}
+		appEm.find( [objid: app.objid ] ).update( u );
 
 		if( app.permitissued == true ) {
 			def doctype = doctypeEm.find( [objid: "BUILDING_PERMIT"] ).first();
@@ -122,7 +98,6 @@ class BuildingApplicationCaptureService {
 			bp.dtissued = app.permitdtissued;
 			bp.expirydate = app.permitexpirydate;
 			bp.issuedby = [ objid:env.USERID, name:env.FULLNAME];
-			bp.infoid = binfo.objid;
 			bp.state = 3;
 			bp.template = doctype.template;
 			bp.endorserid = doctype.endorserid;
@@ -139,6 +114,27 @@ class BuildingApplicationCaptureService {
 			appEm.find([objid:app.objid]).update( [ taskid: atask.taskid, issuanceid: bp.objid ] );
 		}
 		else {
+			//save all documents that are auto create that does not exist above
+			subdocEm.getSubdocsToAutoCreate( [apptype:'building', appid: newapp.objid ]).each {
+				def sd = [:];
+				sd.appid = app.objid;
+				sd.doctype = [objid: it.objid];
+				sd.amount = 0;
+				sd.state = 0;
+				subdocEm.create( sd );			
+			}
+
+			//update the requirements
+			def reqTypes = reqTypeEm.where("permittype = 'building_application' ").list();
+			reqTypes.each {
+				def r = [:];
+				r.appid = app.objid;
+				r.state = 0;
+				r.typeid = it.objid;
+				r.type = [objid: it.objid];
+				reqEm.create( r );
+			}
+
 			//fire the workflow to start the process
 			def p = [:];
 			p.processname = 'building_application';
@@ -149,7 +145,7 @@ class BuildingApplicationCaptureService {
 			wfSvc.start(p);				
 		}
 
-		return app;
+		return [objid: app.objid];
 	}
 
 

@@ -77,7 +77,6 @@
 		<field name="template" />
 		<field name="reportheader" />
 		<field name="txntype" />
-		<field name="infoid" />
 	</element>
 </schema>	
 

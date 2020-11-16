@@ -49,6 +49,9 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xLabel21 = new com.rameses.rcp.control.XLabel();
+        xPanel2 = new com.rameses.rcp.control.XPanel();
+        xLabel5 = new com.rameses.rcp.control.XLabel();
+        xButton2 = new com.rameses.rcp.control.XButton();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xTextField6 = new com.rameses.rcp.control.XTextField();
         xLabel2 = new com.rameses.rcp.control.XLabel();
@@ -160,6 +163,24 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
         xLabel21.setExpression("#{entity.occupancytype.group.objid}");
         xLabel21.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel21);
+
+        xPanel2.setCaption("Applicant");
+        java.awt.FlowLayout flowLayout2 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 2, 0);
+        flowLayout2.setAlignOnBaseline(true);
+        xPanel2.setLayout(flowLayout2);
+
+        xLabel5.setCaption("Applicant");
+        xLabel5.setExpression("#{ entity.applicant.name }");
+        xPanel2.add(xLabel5);
+
+        xButton2.setName("lookupApplicant"); // NOI18N
+        xButton2.setIconResource("images/buttons/search.png");
+        xButton2.setImmediate(true);
+        xButton2.setPreferredSize(new java.awt.Dimension(30, 29));
+        xButton2.setTarget("");
+        xPanel2.add(xButton2);
+
+        xFormPanel1.add(xPanel2);
 
         xFormPanel2.setCaptionWidth(140);
 
@@ -283,6 +304,7 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
     private com.rameses.enterprise.components.AddressEditor addressEditor1;
     private com.rameses.entity.components.EntityLookup entityLookup1;
     private com.rameses.rcp.control.XButton xButton1;
+    private com.rameses.rcp.control.XButton xButton2;
     private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XComboBox xComboBox2;
@@ -303,9 +325,11 @@ public class BuildingApplicationCapturePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel21;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLabel xLabel4;
+    private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLookupField xLookupField1;
     private com.rameses.rcp.control.XLookupField xLookupField2;
     private com.rameses.rcp.control.XPanel xPanel1;
+    private com.rameses.rcp.control.XPanel xPanel2;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
     private com.rameses.rcp.control.XTextField xTextField3;
