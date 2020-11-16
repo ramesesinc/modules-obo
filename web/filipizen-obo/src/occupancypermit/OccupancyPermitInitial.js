@@ -17,14 +17,12 @@ import {
 } from 'rsi-react-web-components';
 
 import { EmailVerification } from 'rsi-react-filipizen-components'
-import ApplicationTypeSelect from "../components/ApplicationTypeSelect";
 import Confirmation from "../components/Confirmation";
 import TrackingInfo from "../components/TrackingInfo";
 
 
 const steps = [
   {name: "email", title: "Email Verification"},
-  // {name: "apptype", title: "Application Type"},
   {name: "specifybldgpermit", title: "Specify Building Permit"},
   {name: "verifybldgpermit", title: "Verify Building Permit Information"},
   {name: "confirmation", title: "Confirmation"},
@@ -36,7 +34,8 @@ const OccupancyPermitInitial = ({
   service,
   onComplete,
   history,
-  appService
+  appService,
+  onCancel
 }) => {
 
   const [error, setError] = useState();
@@ -46,7 +45,6 @@ const OccupancyPermitInitial = ({
   const [appno, setAppno] = useState();
   const [bldgPermitNo, setBldgPermitNo] = useState();
   const [bldgPermit, setBldgPermit] = useState({});
-  //TOOD: reset step t0 0
   const [activeStep, setActiveStep] = useState(0);
 
 
@@ -80,7 +78,7 @@ const OccupancyPermitInitial = ({
     onComplete({appType: "new", appno});
   }
 
-  const onverifyEmail = (contact) => {
+  const onVerifyEmail = (contact) => {
     setContact(contact);
     moveNextStep();
   }
@@ -115,6 +113,7 @@ const OccupancyPermitInitial = ({
       bldgpermit: bldgPermit,
       contact
     }
+
     appService.invoke("create", newApp, (err, app) => {
       if (err) {
         setError(err);
@@ -125,15 +124,19 @@ const OccupancyPermitInitial = ({
     });
   }
 
+  if (step.name === "email") {
+    return (
+      <Page>
+          <EmailVerification title={service.title} showName={false}  onCancel={onCancel} onVerify={onVerifyEmail}   partner={partner} />
+      </Page>
+    )
+  }
+
   return (
     <Page>
       <Card>
-        <Title>{service.title}</Title>
-        <Panel visibleWhen={step.name === "email"}>
-          <EmailVerification showName={true} onCancel={history.goBack} onVerify={onverifyEmail}  />
-        </Panel>
-
         <Panel visibleWhen={step.name === "specifybldgpermit"}>
+          <Title>{service.title}</Title>
           <Subtitle>{step.title}</Subtitle>
           <Spacer height={30} />
           <Text
@@ -145,6 +148,7 @@ const OccupancyPermitInitial = ({
             error={errorText.bldgPermitNo || error}
             helperText={errorText.bldgPermitNo || error}
             size="small"
+            autoFocus={true}
             />
           <ActionBar>
             <BackLink action={movePrevStep} />

@@ -96,6 +96,7 @@ const BuildingPermitContractor = ({
 
   return (
     <Panel>
+      <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Project Details</Subtitle>
       <Spacer />
       <Error msg={error} />

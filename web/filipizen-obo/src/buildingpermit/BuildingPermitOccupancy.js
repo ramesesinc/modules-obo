@@ -158,6 +158,7 @@ const BuildingPermitOccupancy = ({
 
   return (
     <Panel>
+      <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Occupancy Type</Subtitle>
       <Spacer />
       <Error msg={error} />

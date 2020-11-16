@@ -4,5 +4,6 @@
 		<field name="title" searchable="true"/>
 		<field name="sortorder" />	
 		<field name="type" />	
+		<field name="includecost" type="integer" />	
 	</element>
 </schema>	
