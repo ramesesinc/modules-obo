@@ -20,11 +20,7 @@
                 action="changeOccupancyType" 
                 xvisibleWhen="#{ task.assignee.objid == userInfo.userid }" />
        -->
-       <invoker type="appActions" 
-                caption="Edit"
-                icon="images/toolbars/edit.png"
-                action="showMenu" 
-                context="edit" />
+    
 
         <invoker type="appActions" 
                 caption="Reports"

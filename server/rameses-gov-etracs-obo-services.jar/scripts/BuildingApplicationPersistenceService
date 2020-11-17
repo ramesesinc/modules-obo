@@ -6,7 +6,7 @@ import java.text.*;
 import treasury.utils.*;
 import treasury.facts.*;
 
-class BuildingApplicationCaptureService {
+class BuildingApplicationPersistenceService {
 	
 	@DataContext("building_application")
 	def appEm;
@@ -22,6 +22,9 @@ class BuildingApplicationCaptureService {
 
 	@DataContext("building_application_entity")
 	def entityEm;
+
+	@DataContext("building_application_payment")
+	def paymentEm;
 
 	@DataContext("building_application_subdoc")
 	def subdocEm;
@@ -52,8 +55,6 @@ class BuildingApplicationCaptureService {
 
  	@ProxyMethod
 	public def create( def app ) {
-		throw new Exception("occupancy is " + app.occupancytype)
-
 		def dt = dateSvc.getServerDate();
 		if(!app.appno) {
 			app.appno = appSvc.generateAppNo([:]);
@@ -61,6 +62,7 @@ class BuildingApplicationCaptureService {
 		//check first all professionals if exist in the obo_professional table
 		app.objid = "BAPP" + new UID();
 		app.occupancytypeid = app.occupancytype?.objid;
+		app.zoneclassid = app.zoneclass?.objid;
 
 		//remove application before so it can be replaced
 		def applicant = app.remove("applicant");
@@ -68,17 +70,13 @@ class BuildingApplicationCaptureService {
 		app.createdby = [objid: env.USERID, name: env.FULLNAME];
 		app.dtcreated = dt;
 
-		app = appEm.create( app );
+		appEm.create( app );
 
 		//save applicant
-		applicant.profileid = applicant.remove("objid");
-		applicant.entitytype = applicant.type?.toLowerCase();
-		applicant.resident = ( applicant.address?.type == "local" ) ? 1 : 0;
 		applicant.appid = app.objid;
 		applicant = entityEm.create( applicant );
 
 		//calculate the cost first before receiving
-		
 		def param = [:];
 		param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
 		param.occupancytype = app.occupancytype;
@@ -112,6 +110,16 @@ class BuildingApplicationCaptureService {
 			atask.dtcreated = dateSvc.getServerDate();
 			atask = appTaskEm.create( atask );
 			appEm.find([objid:app.objid]).update( [ taskid: atask.taskid, issuanceid: bp.objid ] );
+
+			//capture payment
+			def pmt = [:];
+			pmt.appid = app.objid;
+			pmt.refno = app.receiptno;
+			pmt.refdate = app.receiptdate;
+			pmt.amount = app.amtpaid;
+			pmt.reftype = "cashreceipt";
+			pmt.voided = 0;
+			paymentEm.create( pmt );
 		}
 		else {
 			//save all documents that are auto create that does not exist above
@@ -148,6 +156,14 @@ class BuildingApplicationCaptureService {
 		return [objid: app.objid];
 	}
 
+	@ProxyMethod
+	public def update( def app ) {
+		app.occupancytypeid = app.occupancytype?.objid;
+		app.zoneclassid = app.zoneclass?.objid;
+		app.contractorid = app.contractor?.objid;
+		app = appEm.update( app );
+		return app;
+	}
 
 	
 }
