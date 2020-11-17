@@ -6,7 +6,7 @@ import {
   Page,
   Panel,
   Title,
-  Card
+  Content
 } from 'rsi-react-web-components';
 
 import ApplicationTypeSelect from "../components/ApplicationTypeSelect";
@@ -139,7 +139,7 @@ const OccupancyPermitWebController = (props) => {
 
   if (mode === "init") {
     return (
-      <OccupancyPermitInitial {...props} appService={svc} onComplete={onCompleteInitial} onCancel={()=>{ setMode("init")}}/>
+      <OccupancyPermitInitial {...props} appService={svc} onComplete={onCompleteInitial} onCancel={()=> props.history.goBack()} />
     )
   }
 
@@ -162,10 +162,12 @@ const OccupancyPermitWebController = (props) => {
       <Panel target="left" style={styles.stepperContainer} >
         <Stepper steps={pages} completedStep={app.step} activeStep={step} handleStep={handleStep} />
       </Panel>
-      <Card>
-        <Title>{service.title}</Title>
-        <PageComponent page={page} {...compProps} />
-      </Card>
+      <Content center>
+        <Panel>
+          <Title>{service.title}</Title>
+          <PageComponent page={page} {...compProps} />
+        </Panel>
+      </Content>
     </Page>
   )
 }

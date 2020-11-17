@@ -94,13 +94,20 @@ const BuildingPermitOtherPermits = ({
       if (err) {
         setError(err);
       } else {
-        workTypes.forEach(wt => {
-          if (permit.worktypes.findIndex(pwt => pwt.toLowerCase() === wt.name.toLowerCase()) >= 0) {
-            wt.checked = true;
-          }
-        })
-        setAncillaryPermit({...permit, worktypes: workTypes});
-        setMode("select-worktypes");
+        if (workTypes && workTypes.length > 0) {
+          workTypes.forEach(wt => {
+            if (permit.worktypes.findIndex(pwt => pwt.toLowerCase() === wt.name.toLowerCase()) >= 0) {
+              wt.checked = true;
+            }
+          })
+          setAncillaryPermit({...permit, worktypes: workTypes});
+          setMode("select-worktypes");
+        } else {
+          if (permit.infos.length > 0) setMode("infos");
+          else if (permit.type.includecost === 1) setMode("cost");
+          else setMode("professional");
+          setAncillaryPermit(permit);
+        }
       }
     })
   }
@@ -178,7 +185,10 @@ const BuildingPermitOtherPermits = ({
       if (err) {
         setError(err);
       } else {
-        setMode("cost");
+        if (ancillaryPermit.type.includecost === 1)
+          setMode("cost");
+        else
+          setMode("professional");
       }
     })
   }
@@ -244,8 +254,16 @@ const BuildingPermitOtherPermits = ({
 
   let prevInfo = null;
 
+  const backFromInfos = () => {
+    if (ancillaryPermit.worktypes && ancillaryPermit.worktypes.length > 0)
+      setMode("select-worktypes");
+    else
+      setMode("permit-list");
+  }
+
   return (
     <Panel>
+      <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Other Permits</Subtitle>
       <Spacer />
       <Error msg={error} />
@@ -279,7 +297,7 @@ const BuildingPermitOtherPermits = ({
 
       <FormPanel visibleWhen={mode === "select-worktypes"} context={ancillaryPermit} handler={setAncillaryPermit} >
         <h4>{ancillaryPermit.type.title}</h4>
-        <Subtitle2>Select Work Type</Subtitle2>
+        <Subtitle2>Select Work Types</Subtitle2>
         <Panel style={styles.workTypeContainer}>
           {ancillaryPermit.worktypes.map((worktype, idx) => (
             <Checkbox
@@ -316,7 +334,7 @@ const BuildingPermitOtherPermits = ({
           )
         })}
         <ActionBar>
-          <BackLink action={() => setMode("select-worktypes")}  />
+          <BackLink action={backFromInfos}  />
           <Button caption="Next" action={submitInfos} />
         </ActionBar>
       </FormPanel>

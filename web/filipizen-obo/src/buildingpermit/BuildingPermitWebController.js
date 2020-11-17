@@ -132,7 +132,7 @@ const BuildingPermitWebController = (props) => {
 
   if (mode === "new") {
     return (
-      <BuildingPermitInitial {...props} handler={onCreateNewApp} onCancel={()=>{ setMode("apptype")}}/>
+      <BuildingPermitInitial {...props} handler={onCreateNewApp} onCancel={()=> props.history.goBack()} />
     )
   }
 
