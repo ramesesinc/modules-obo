@@ -24,9 +24,10 @@ public class OboProfessionalService  {
 		def p = vwProfEm.where( "prc.idno = :prcno AND profession = :prof", [prcno: o.prc.idno, prof: o.profession ]).first();
 		if( p ) 
 			throw new Exception("The PRC No for this profession is already registered to " + p.lastname + ", " +p.firstname );
-		Random rand = new Random();
-		def otp = rand.nextInt(100000000);
-		return [key: String.format("%06d", otp).substring(0,6)];	
+		// Random rand = new Random();
+		// def otp = rand.nextInt(100000000);
+		// return [key: String.format("%06d", otp).substring(0,6)];	
+		return p;
 	}
 
 	def formatAddress( def addr ) {

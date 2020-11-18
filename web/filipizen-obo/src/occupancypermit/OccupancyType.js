@@ -14,9 +14,13 @@ import {
 const OccupancyType = ({
   appno,
   appService,
+  currentStep,
+  stepCompleted,
+  moveNextStep,
   onSubmitOccupancyType
 }) => {
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
   const [app, setApp] = useState({});
 
   useEffect(() => {
@@ -27,12 +31,21 @@ const OccupancyType = ({
         setApp(app);
       }}
     });
-  }, [])
+  }, []);
+
+  const submitApplicationType = () => {
+    const updatedApp = { objid: app.objid, apptype: app.apptype }
+    appService.invoke("update", updatedApp, (err, app) => {
+      if (!err) {
+        moveNextStep();
+      } else {
+        setError(err)
+      }
+    });
+  }
 
   return (
     <Panel>
-      <Subtitle>Application Type</Subtitle>
-      <Spacer />
       <Error msg={error} />
       <FormPanel context={app} handler={setApp}>
         <Radio name="apptype">
@@ -41,7 +54,7 @@ const OccupancyType = ({
         </Radio>
       </FormPanel>
       <ActionBar>
-        <Button caption="Next" action={() => onSubmitOccupancyType(app.apptype)} />
+        <Button caption="Next" action={submitApplicationType} />
       </ActionBar>
     </Panel>
   )

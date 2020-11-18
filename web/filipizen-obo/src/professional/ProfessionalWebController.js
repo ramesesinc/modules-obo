@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Service,
   Stepper,
@@ -6,8 +6,7 @@ import {
   Panel,
   Title,
   Card,
-  Error,
-  Content
+  Error
 } from 'rsi-react-web-components';
 
 
@@ -37,8 +36,6 @@ const ProfessionalWebController = (props) => {
   const [professional, setProfessional] = useState();
 
   const { partner, service, history } = props;
-
-  console.log("PARTNER", partner)
 
   const handleError = (err) => {
     setLoading(false);

@@ -129,7 +129,7 @@ const OccupancyPermitInitial = ({
       <Page>
           <EmailVerification
             title={service.title}
-            showName={false}
+            showName={true}
             onCancel={onCancel}
             onVerify={onVerifyEmail}
             partner={partner}

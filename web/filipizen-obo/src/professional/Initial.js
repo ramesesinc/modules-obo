@@ -27,6 +27,7 @@ const Initial = ({
 }) => {
 
   const [mode, setMode] = useState("init");
+  const [errors, setErrors] = useState({});
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({});
@@ -39,22 +40,56 @@ const Initial = ({
     })
   }, []);
 
-  const handleError = (err) => {
-    setError(err);
-    setLoading(false);
+  useEffect(() => {
+    if (Object.keys(errors).length > 0)
+    validInfo();
+  }, [info]);
+
+  const verifyEmail = async () => {
+    const emailSvc = Service.lookupAsync(`${partner.id}:VerifyEmailService`, "obo");
+    return emailSvc.invoke("verifyEmail", { email: info.email, mobileno: info.mobileno });
+  };
+
+  const validInfo = () => {
+    const errors = {}
+    if (!info.prc || !info.prc.idno) errors.idno = "PRC No. is required";
+    if (!info.profession) errors.profession = "Profession is required";
+    if (!info.email) errors.email = "Email is required";
+
+    if (Object.keys(errors).length == 0) {
+      setErrors({});
+      return true;
+    } else {
+      setErrors(errors);
+      return false;
+    }
+  }
+
+  const onResendCode = (key) => {
+    setKey(key);
   }
 
   const verifyInfo = () => {
+    if (!validInfo()) return;
+
+    setError(null);
     setLoading(true);
     svc.invoke("verifyInfo", info, (err, res) => {
       if (err) {
-        handleError(err)
+        setError(err);
       } else {
-        setError(null);
-        setKey(res.key);
-        setMode("verify");
+        verifyEmail()
+          .then((data) => {
+            setError(null);
+            setKey(data.key);
+            setMode("verify");
+          })
+          .catch((err) => {
+            setError(err);
+          });
+        setLoading(false);
       }
-    })
+    });
   }
 
   return (
@@ -63,10 +98,10 @@ const Initial = ({
         <Subtitle>Please specify initial information</Subtitle>
         <Spacer />
         <Error msg={error} />
-        <Text name="prc.idno" caption="PRC No." required />
-        <ProfessionList caption="Profession (Copy profession in the PRC card" name="profession" expr={item => item} professions={professionList} required={true} />
-        <Email name="email" required />
-        <Mobileno name="mobileno" required />
+        <Text name="prc.idno" caption="PRC No." required error={errors.idno} helperText={errors.idno} />
+        <ProfessionList caption="Profession (Copy profession in the PRC card" name="profession" expr={item => item} professions={professionList} required={true} error={errors.profession} helperText={errors.profession} />
+        <Email name="email" required error={errors.email} helperText={errors.email} />
+        <Mobileno name="mobileno" />
         <ActionBar>
           <BackLink action={onCancel} />
           <Button caption="Next" action={verifyInfo} />
@@ -84,7 +119,9 @@ const Initial = ({
           email={info.email}
           onCancel={() => setMode("init")}
           onVerified={() => onVerified(info)}
+          onResendCode={onResendCode}
           width={200}
+          connection="obo"
         />
       </Panel>
     </React.Fragment>

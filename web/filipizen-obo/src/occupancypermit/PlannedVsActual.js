@@ -35,7 +35,7 @@ const PlannedVsActual = ({
   }, [appno])
 
   const updatePermit = () => {
-    appService.update(app, (err, updatedApp) => {
+    appService.invoke("update", app, (err, updatedApp) => {
       if (err) {
         setError(err)
       } else {
@@ -46,7 +46,6 @@ const PlannedVsActual = ({
 
   return (
     <Panel style={{maxWidth: 600}}>
-      <Subtitle>Planned vs. Actual</Subtitle>
       <Label>Please indicate the actual values of construction.</Label>
       <Spacer />
       <FormPanel context={app} handler={setApp} style={styles.container}>

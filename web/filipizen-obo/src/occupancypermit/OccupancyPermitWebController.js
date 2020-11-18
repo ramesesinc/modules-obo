@@ -6,7 +6,11 @@ import {
   Page,
   Panel,
   Title,
-  Content
+  Subtitle,
+  Subtitle2,
+  Card,
+  Spacer,
+  Error,
 } from 'rsi-react-web-components';
 
 import ApplicationTypeSelect from "../components/ApplicationTypeSelect";
@@ -51,6 +55,7 @@ const OccupancyPermitWebController = (props) => {
 
   const findCurrentApp = () => {
     if (!appno) return;
+    setLoading(true);
     svc.invoke("findCurrentInfo", {appid: appno}, (err, app) => {
       if (err) {
         setError(err);
@@ -58,10 +63,10 @@ const OccupancyPermitWebController = (props) => {
         if(!app) {
           setError("Application no. does not exist");
         }
-        console.log("partner", partner)
         if( partner.orgcode != app.orgcode ) {
           setError("The application number provided is not for this local government");
         }
+        console.log("app.step", app.step)
         setApp(app);
         setStep(app.step);
         setMode("processing");
@@ -71,7 +76,6 @@ const OccupancyPermitWebController = (props) => {
   }
 
   useEffect(() => {
-    setLoading(true);
     findCurrentApp();
   }, [appno]);
 
@@ -82,19 +86,14 @@ const OccupancyPermitWebController = (props) => {
   }
 
   const moveNextStep = () => {
-    const stepCompleted = step < app.step;
-    if (stepCompleted) {
-      setStep(ps => ps + 1);
-    } else {
-      svc.invoke("moveNextStep", {appid: appno}, (err, updatedApp) => {
-        if (err) {
-          setError(err);
-        } else {
-          setStep(updatedApp.step);
-          setApp({...app, step: updatedApp.step});
-        }
-      });
-    }
+    const nextStep = step < app.step ? app.step : step + 1;
+    svc.invoke("update", {objid: appno, step: nextStep }, (err, updatedApp) => {
+      if (!err) {
+        setStep(nextStep);
+      } else {
+        setError(err);
+      }
+    })
   }
 
   const movePrevStep = () => {
@@ -152,8 +151,8 @@ const OccupancyPermitWebController = (props) => {
     moveNextStep,
     movePrevStep,
     appService: svc,
+    currentStep: step,
     stepCompleted: step < app.step,
-    onSubmitOccupancyType,
     onComplete
   };
 
@@ -162,12 +161,14 @@ const OccupancyPermitWebController = (props) => {
       <Panel target="left" style={styles.stepperContainer} >
         <Stepper steps={pages} completedStep={app.step} activeStep={step} handleStep={handleStep} />
       </Panel>
-      <Content center>
-        <Panel>
-          <Title>{service.title}</Title>
-          <PageComponent page={page} {...compProps} />
-        </Panel>
-      </Content>
+      <Card>
+        <Title>{service.title}</Title>
+        <Subtitle2>{`Tracking No. ${appno}`}</Subtitle2>
+        <Subtitle>{page.caption}</Subtitle>
+        <Spacer />
+        <Error msg={error} />
+        <PageComponent page={page} {...compProps} />
+      </Card>
     </Page>
   )
 }
