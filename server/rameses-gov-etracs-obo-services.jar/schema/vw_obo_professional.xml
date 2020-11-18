@@ -2,9 +2,9 @@
 	<element tablename="vw_obo_professional">
 		<field name="objid" primary="true" />
 		<field name="name" caption="Name"/>
-		<field name="firstname" caption="First Name"/>
+		<field name="firstname" caption="First Name" indexed="true"/>
 		<field name="middlename" caption="Middle Name"/>
-		<field name="lastname" caption="Last Name"/>
+		<field name="lastname" caption="Last Name" indexed="true" searchable="true"/>
 		<field name="resident" />
 		<field name="address_objid" />
 		<field name="address_text" />
@@ -28,7 +28,7 @@
 		<field name="id_type_title" />		
 		<field name="id_dtissued" />
 		<field name="id_placeissued" />
-		<field name="prc_idno" caption="PRC No"/>
+		<field name="prc_idno" caption="PRC No" indexed="true" searchable="true"/>
 		<field name="prc_dtissued" />
 		<field name="prc_dtvalid" />
 		<field name="prc_placeissued" />
@@ -36,6 +36,7 @@
 		<field name="ptr_dtissued" />
 		<field name="ptr_placeissued" />
 		<field name="profid" />
+		<field name="system" />
 	</element>
 </schema>		
 

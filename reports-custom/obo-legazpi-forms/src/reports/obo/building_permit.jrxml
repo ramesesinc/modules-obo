@@ -46,7 +46,7 @@
 	<field name="address.text" class="java.lang.String"/>
 	<field name="controlno" class="java.lang.String"/>
 	<field name="dtissued" class="java.util.Date"/>
-	<field name="fsec.no" class="java.lang.String"/>
+	<field name="fsec.controlno" class="java.lang.String"/>
 	<field name="fsec.dtisssued" class="java.util.Date"/>
 	<field name="apptype" class="java.lang.String"/>
 	<field name="location.lotno" class="java.lang.String"/>
@@ -62,6 +62,7 @@
 	<field name="contractor.lastname" class="java.lang.String"/>
 	<field name="approver.displayname" class="java.lang.String"/>
 	<field name="approver.signature" class="java.lang.Object"/>
+	<field name="contractor.prc.idno" class="java.lang.String"/>
 
 
 		<group  name="P1" >
@@ -87,9 +88,7 @@
 						y="154"
 						width="17"
 						height="16"
-						key="rectangle-1">
-							<printWhenExpression><![CDATA[($F{apptype}.toString().equalsIgnoreCase("NEW") ? "X" : null)]]></printWhenExpression>
-						</reportElement>
+						key="rectangle-1"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
 				<staticText>
@@ -300,7 +299,7 @@ Referral Codes and its Terms and Conditions.
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<text><![CDATA[Owner / Permitte]]></text>
+				<text><![CDATA[Owner / Permittee]]></text>
 				</staticText>
 				<staticText>
 					<reportElement
@@ -806,9 +805,7 @@ Referral Codes and its Terms and Conditions.
 						y="154"
 						width="17"
 						height="16"
-						key="rectangle-2">
-							<printWhenExpression><![CDATA[($F{apptype}.toString().equalsIgnoreCase("NEW") ? "X" : null)]]></printWhenExpression>
-						</reportElement>
+						key="rectangle-2"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
 				<rectangle>
@@ -817,9 +814,7 @@ Referral Codes and its Terms and Conditions.
 						y="153"
 						width="17"
 						height="16"
-						key="rectangle-3">
-							<printWhenExpression><![CDATA[($F{apptype}.toString().equalsIgnoreCase("NEW") ? "X" : null)]]></printWhenExpression>
-						</reportElement>
+						key="rectangle-3"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
 				<staticText>
@@ -911,7 +906,7 @@ Referral Codes and its Terms and Conditions.
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsec.no}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsec.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1106,8 +1101,58 @@ Referral Codes and its Terms and Conditions.
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.firstname} + ' ' + $F{contractor.lastname}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.firstname} + ' ' + $F{contractor.lastname} + ' / PRC No ' + $F{contractor.prc.idno} ]]></textFieldExpression>
 				</textField>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="299"
+						y="158"
+						width="12"
+						height="9"
+						key="image-6">
+							<printWhenExpression><![CDATA[$F{apptype} == "NEW"]]></printWhenExpression>
+						</reportElement>
+					<box>					<pen lineWidth="0.0" lineStyle="Solid"/>
+					<topPen lineWidth="0.0" lineStyle="Solid"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid"/>
+</box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="375"
+						y="158"
+						width="12"
+						height="9"
+						key="image-7">
+							<printWhenExpression><![CDATA[$F{apptype} == "RENEWAL"]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="468"
+						y="157"
+						width="12"
+						height="9"
+						key="image-8">
+							<printWhenExpression><![CDATA[$F{apptype} == "AMENDMENT"]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/check.png"]]></imageExpression>
+				</image>
 			</band>
 			</groupHeader>
 			<groupFooter>

@@ -1,0 +1,11 @@
+"entity.*|applicant.*" [ editable == true ] {
+    enabled: true;
+}
+
+"entity.*|applicant.*" [ editable == false ] {
+    enabled: false;
+}
+
+"entity.(appno|apptype|appdate|permit.*)" [ mode == "edit" ] {
+    visible: false;
+}

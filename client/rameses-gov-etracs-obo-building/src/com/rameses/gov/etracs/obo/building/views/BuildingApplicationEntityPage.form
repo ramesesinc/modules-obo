@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
-  <NonVisualComponents>
-    <Component class="com.rameses.rcp.control.XDataTable" name="xDataTable1">
-    </Component>
-  </NonVisualComponents>
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -21,18 +17,18 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-              <Component id="xFormPanel1" pref="638" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Component id="xFormPanel1" min="-2" pref="559" max="-2" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="xFormPanel1" min="-2" pref="590" max="-2" attributes="0"/>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Component id="xFormPanel1" min="-2" pref="530" max="-2" attributes="0"/>
+              <EmptySpace pref="21" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -40,124 +36,61 @@
   <SubComponents>
     <Container class="com.rameses.rcp.control.XFormPanel" name="xFormPanel1">
       <Properties>
-        <Property name="captionWidth" type="int" value="120"/>
+        <Property name="captionWidth" type="int" value="150"/>
       </Properties>
       <SubComponents>
-        <Component class="com.rameses.rcp.control.XLabel" name="xLabel7">
+        <Component class="com.rameses.rcp.control.XComboBox" name="xComboBox1">
           <Properties>
+            <Property name="caption" type="java.lang.String" value="Entity Type"/>
+            <Property name="items" type="java.lang.String" value="entityTypes"/>
+            <Property name="name" type="java.lang.String" value="entity.entitytype" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.entity.components.EntityLookup" name="entityLookup1">
+          <Properties>
+            <Property name="caption" type="java.lang.String" value="Applicant"/>
             <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
               <StringArray count="1">
                 <StringItem index="0" value="entity.entitytype"/>
               </StringArray>
             </Property>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[5, 0, 0, 0]"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
-            </Property>
-            <Property name="showCaption" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="Profession Info"/>
-          </Properties>
-        </Component>
-        <Component class="com.rameses.rcp.control.XTextField" name="xTextField11">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Profession"/>
-            <Property name="name" type="java.lang.String" value="entity.profession" noResource="true"/>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 20, 0, 0]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 20]"/>
-            </Property>
-            <Property name="required" type="boolean" value="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xTextField11ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="com.rameses.rcp.control.XTextField" name="xTextField10">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="PRC No"/>
-            <Property name="name" type="java.lang.String" value="entity.prc.idno" noResource="true"/>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 20, 0, 0]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 20]"/>
-            </Property>
-            <Property name="required" type="boolean" value="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xTextField10ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="com.rameses.rcp.control.XTextField" name="xTextField12">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Place Issued"/>
-            <Property name="name" type="java.lang.String" value="entity.prc.placeissued" noResource="true"/>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 20, 0, 0]"/>
-            </Property>
+            <Property name="entityType" type="java.lang.String" value=""/>
+            <Property name="entityTypeName" type="java.lang.String" value="entityType"/>
+            <Property name="name" type="java.lang.String" value="applicant" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[0, 20]"/>
             </Property>
             <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="com.rameses.rcp.control.XDateField" name="xDateField3">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Date Issued"/>
-            <Property name="name" type="java.lang.String" value="entity.prc.dtissued" noResource="true"/>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 20, 0, 0]"/>
-            </Property>
-            <Property name="required" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="com.rameses.rcp.control.XDateField" name="xDateField4">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Valid Until"/>
-            <Property name="name" type="java.lang.String" value="entity.prc.dtvalid" noResource="true"/>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 20, 0, 0]"/>
-            </Property>
-            <Property name="required" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="com.rameses.rcp.control.XLabel" name="xLabel5">
+        <Component class="com.rameses.rcp.control.XLabel" name="xLabel1">
           <Properties>
             <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
               <StringArray count="1">
                 <StringItem index="0" value="entity.entitytype"/>
               </StringArray>
             </Property>
+            <Property name="expression" type="java.lang.String" value="Administrator or primary contact name of applicant"/>
+            <Property name="visibleWhen" type="java.lang.String" value="#{ entity.entitytype != &apos;INDIVIDUAL&apos; }"/>
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[5, 0, 0, 0]"/>
+              <Insets value="[20, 0, 0, 0]"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="1"/>
             </Property>
             <Property name="showCaption" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="Personal"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XTextField" name="xTextField2">
           <Properties>
             <Property name="caption" type="java.lang.String" value="Last Name"/>
-            <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="entity.entitytype"/>
-              </StringArray>
-            </Property>
             <Property name="name" type="java.lang.String" value="entity.lastname" noResource="true"/>
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 20, 0, 0]"/>
+              <Insets value="[20, 20, 0, 0]"/>
             </Property>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[200, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xTextField2ActionPerformed"/>
@@ -166,11 +99,6 @@
         <Component class="com.rameses.rcp.control.XTextField" name="xTextField1">
           <Properties>
             <Property name="caption" type="java.lang.String" value="First Name"/>
-            <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="entity.entitytype"/>
-              </StringArray>
-            </Property>
             <Property name="name" type="java.lang.String" value="entity.firstname" noResource="true"/>
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 20, 0, 0]"/>
@@ -178,17 +106,11 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[200, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XTextField" name="xTextField3">
           <Properties>
             <Property name="caption" type="java.lang.String" value="Middle Name"/>
-            <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="entity.entitytype"/>
-              </StringArray>
-            </Property>
             <Property name="name" type="java.lang.String" value="entity.middlename" noResource="true"/>
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 20, 0, 0]"/>
@@ -196,10 +118,9 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[200, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
-        <Component class="com.rameses.rcp.control.XLabel" name="xLabel11">
+        <Component class="com.rameses.rcp.control.XLabel" name="xLabel3">
           <Properties>
             <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
               <StringArray count="1">
@@ -208,7 +129,7 @@
             </Property>
             <Property name="expression" type="java.lang.String" value="Address"/>
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[5, 0, 0, 0]"/>
+              <Insets value="[20, 0, 0, 0]"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="1"/>
@@ -226,7 +147,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[0, 53]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XLabel" name="xLabel2">
@@ -237,7 +157,7 @@
               </StringArray>
             </Property>
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[5, 0, 0, 0]"/>
+              <Insets value="[20, 0, 0, 0]"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="1"/>
@@ -256,7 +176,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[0, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
             <Property name="textCase" type="com.rameses.rcp.constant.TextCase" editor="com.rameses.beaninfo.editor.TextCasePropertyEditor">
               <SerializedValue value="-84,-19,0,5,126,114,0,33,99,111,109,46,114,97,109,101,115,101,115,46,114,99,112,46,99,111,110,115,116,97,110,116,46,84,101,120,116,67,97,115,101,0,0,0,0,0,0,0,0,18,0,0,120,114,0,14,106,97,118,97,46,108,97,110,103,46,69,110,117,109,0,0,0,0,0,0,0,0,18,0,0,120,112,116,0,4,78,79,78,69"/>
             </Property>
@@ -282,7 +201,7 @@
               </StringArray>
             </Property>
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[5, 0, 0, 0]"/>
+              <Insets value="[20, 0, 0, 0]"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="14" style="1"/>
@@ -303,7 +222,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[0, 27]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XTextField" name="xTextField6">
@@ -316,7 +234,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[200, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XTextField" name="xTextField7">
@@ -329,7 +246,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[0, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XDateField" name="xDateField1">
@@ -339,60 +255,6 @@
             <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 20, 0, 0]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="com.rameses.rcp.control.XLabel" name="xLabel6">
-          <Properties>
-            <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
-              <StringArray count="1">
-                <StringItem index="0" value="entity.entitytype"/>
-              </StringArray>
-            </Property>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[5, 0, 0, 0]"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial" size="14" style="1"/>
-            </Property>
-            <Property name="showCaption" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="PTR"/>
-          </Properties>
-        </Component>
-        <Component class="com.rameses.rcp.control.XTextField" name="xTextField8">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Id No"/>
-            <Property name="name" type="java.lang.String" value="entity.ptr.refno" noResource="true"/>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 20, 0, 0]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[200, 20]"/>
-            </Property>
-            <Property name="required" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="com.rameses.rcp.control.XTextField" name="xTextField9">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Place Issued"/>
-            <Property name="name" type="java.lang.String" value="entity.ptr.placeissued" noResource="true"/>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 20, 0, 0]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[0, 20]"/>
-            </Property>
-            <Property name="required" type="boolean" value="true"/>
-          </Properties>
-        </Component>
-        <Component class="com.rameses.rcp.control.XDateField" name="xDateField2">
-          <Properties>
-            <Property name="caption" type="java.lang.String" value="Date Issued"/>
-            <Property name="name" type="java.lang.String" value="entity.ptr.dtissued" noResource="true"/>
-            <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-              <Insets value="[0, 20, 0, 0]"/>
-            </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
       </SubComponents>

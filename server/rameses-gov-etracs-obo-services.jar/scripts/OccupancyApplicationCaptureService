@@ -61,7 +61,6 @@ class OccupancyApplicationCaptureService {
 		app.objid = "OCC" + new UID();
 
 		//remove application before so it can be replaced
-		app.infoid = binfo.objid;
 		app.txnmode = "CAPTURE";
 		def newapp = appEm.create( app );
 

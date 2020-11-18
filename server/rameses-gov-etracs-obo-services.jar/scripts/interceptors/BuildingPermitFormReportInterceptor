@@ -52,9 +52,11 @@ class BuildingPermitFormReportInterceptor {
 		}
 		if(permit.appid) {
 			def pmt = pmtEm.find( [appid: permit.appid ]).where("voided = 0").first();
-			permit.receiptno = pmt.refno;
-			permit.receiptdate = pmt.refdate;
-			permit.amount = pmt.amount;		
+			if( pmt ) {
+				permit.receiptno = pmt.refno;
+				permit.receiptdate = pmt.refdate;
+				permit.amount = pmt.amount;					
+			}
 		}
 		
 		if(permit.worktypes) {

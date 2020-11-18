@@ -69,7 +69,7 @@
 		<field name="taskid" />
 		<field name="task_state" />
 
-		<complex name="contractor" ref="obo_professional" jointype="many-to-one" required="false" includefields="profession,name,prc.*,ptr.*">
+		<complex name="contractor" ref="obo_professional_info" jointype="many-to-one" required="false" includefields="profession,.*name,prc.*,ptr.*">
 			<key field="contractorid" target="objid" />
 		</complex> 
 	</element>

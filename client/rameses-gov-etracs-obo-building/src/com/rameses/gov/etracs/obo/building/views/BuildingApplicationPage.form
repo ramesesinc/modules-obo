@@ -171,7 +171,7 @@
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel6">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Location"/>
-                        <Property name="expression" type="java.lang.String" value="&lt;html&gt;#{entity.location.text}&lt;/html&gt;"/>
+                        <Property name="expression" type="java.lang.String" value="&lt;html&gt;#{entity.location.text?.replace(&apos;\u005cn&apos;, &apos;&lt;br&gt;&apos;)}&lt;/html&gt;" containsInvalidXMLChars="true"/>
                         <Property name="verticalAlignment" type="int" value="1"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -185,22 +185,146 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel4">
+                    <Container class="com.rameses.rcp.control.XPanel" name="xPanel9">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Applicant"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.applicant.name}"/>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                            <LineBorder>
-                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
-                            </LineBorder>
-                          </Border>
+                        <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[10, 0, 0, 0]"/>
                         </Property>
+                        <Property name="opaque" type="boolean" value="false"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 20]"/>
+                          <Dimension value="[0, 29]"/>
                         </Property>
                       </Properties>
-                    </Component>
+                      <SubComponents>
+                        <Component class="com.rameses.rcp.control.XLabel" name="xLabel11">
+                          <Properties>
+                            <Property name="caption" type="java.lang.String" value="Applicant"/>
+                            <Property name="expression" type="java.lang.String" value="#{ entity.applicant.name }"/>
+                            <Property name="name" type="java.lang.String" value="entity.applicant" noResource="true"/>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                <LineBorder>
+                                  <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                                </LineBorder>
+                              </Border>
+                            </Property>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[320, 25]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="com.rameses.rcp.control.XButton" name="xButton2">
+                          <Properties>
+                            <Property name="name" type="java.lang.String" value="viewApplicant" noResource="true"/>
+                            <Property name="iconResource" type="java.lang.String" value="images/buttons/search.png"/>
+                            <Property name="immediate" type="boolean" value="true"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[30, 29]"/>
+                            </Property>
+                            <Property name="target" type="java.lang.String" value=""/>
+                          </Properties>
+                        </Component>
+                      </SubComponents>
+                      <LayoutCode>
+                        <CodeStatement>
+                          <CodeExpression id="1_flowLayout2">
+                            <CodeVariable name="flowLayout2" type="4096" declaredType="java.awt.FlowLayout"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="CodeConstructor">
+                                <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
+                              </ExpressionProvider>
+                              <Parameters>
+                                <CodeExpression id="2">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                                <CodeExpression id="3">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="2"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                                <CodeExpression id="4">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeExpression">
+                            <CodeExpression id="1_flowLayout2"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="2"/>
+                            <CodeExpression id="3"/>
+                            <CodeExpression id="4"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="1_flowLayout2"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="5">
+                              <ExpressionOrigin>
+                                <Value type="boolean" value="true"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="6_xPanel9">
+                            <CodeVariable name="xPanel9" type="8194" declaredType="com.rameses.rcp.control.XPanel"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="ComponentRef">
+                                <ComponentRef name="xPanel9"/>
+                              </ExpressionProvider>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="1_flowLayout2"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="6_xPanel9"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="7_xLabel11">
+                              <CodeVariable name="xLabel11" type="8194" declaredType="com.rameses.rcp.control.XLabel"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="xLabel11"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="6_xPanel9"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="8_xButton2">
+                              <CodeVariable name="xButton2" type="8194" declaredType="com.rameses.rcp.control.XButton"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="xButton2"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                      </LayoutCode>
+                    </Container>
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel10">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="No. of Units"/>
@@ -517,9 +641,6 @@
                             </LineBorder>
                           </Border>
                         </Property>
-                        <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                          <Insets value="[20, 0, 0, 0]"/>
-                        </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>
@@ -576,30 +697,9 @@
                         </Property>
                       </Properties>
                     </Component>
-                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel22">
+                    <Container class="com.rameses.rcp.control.XPanel" name="xPanel10">
                       <Properties>
-                        <Property name="caption" type="java.lang.String" value="Project Supervisor "/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.contractor.lastname}, #{entity.contractor.firstname}  ( PRC No: #{entity.contractor.prc.idno} )"/>
-                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.contractor?.objid == null }"/>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                            <LineBorder>
-                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
-                            </LineBorder>
-                          </Border>
-                        </Property>
-                        <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                          <Insets value="[20, 0, 0, 0]"/>
-                        </Property>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 16]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Container class="com.rameses.rcp.control.XPanel" name="xPanel8">
-                      <Properties>
-                        <Property name="caption" type="java.lang.String" value="Payment Receipt No"/>
-                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.payment?.objid != null }"/>
+                        <Property name="caption" type="java.lang.String" value="Contractor/Supervisor"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                             <LineBorder>
@@ -616,41 +716,47 @@
                         </Property>
                       </Properties>
                       <SubComponents>
-                        <Component class="com.rameses.rcp.control.XLabel" name="xLabel1">
+                        <Component class="com.rameses.rcp.control.XLabel" name="xLabel3">
                           <Properties>
-                            <Property name="expression" type="java.lang.String" value="#{ entity.payment.refno } - ( #{ entity.payment.reftype } )"/>
+                            <Property name="expression" type="java.lang.String" value="#{entity.contractor.lastname}, #{entity.contractor.firstname} -  ( PRC No: #{entity.contractor.prc.idno} )"/>
+                            <Property name="visibleWhen" type="java.lang.String" value="#{ entity.contractor?.objid != null }"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[230, 25]"/>
+                            </Property>
                           </Properties>
                         </Component>
-                        <Component class="com.rameses.rcp.control.XButton" name="xButton1">
+                        <Component class="com.rameses.rcp.control.XButton" name="xButton3">
                           <Properties>
-                            <Property name="name" type="java.lang.String" value="viewReceipt" noResource="true"/>
-                            <Property name="text" type="java.lang.String" value="View"/>
+                            <Property name="disableWhen" type="java.lang.String" value="#{ !entity.contractor }"/>
+                            <Property name="name" type="java.lang.String" value="viewProfessional" noResource="true"/>
+                            <Property name="visibleWhen" type="java.lang.String" value="#{ entity.contractor?.objid != null}"/>
+                            <Property name="iconResource" type="java.lang.String" value="images/buttons/search.png"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xButton1ActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xButton3ActionPerformed"/>
                           </Events>
                         </Component>
                       </SubComponents>
                       <LayoutCode>
                         <CodeStatement>
-                          <CodeExpression id="1_flowLayout1">
-                            <CodeVariable name="flowLayout1" type="4096" declaredType="java.awt.FlowLayout"/>
+                          <CodeExpression id="9_flowLayout3">
+                            <CodeVariable name="flowLayout3" type="4096" declaredType="java.awt.FlowLayout"/>
                             <ExpressionOrigin>
                               <ExpressionProvider type="CodeConstructor">
                                 <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
                               </ExpressionProvider>
                               <Parameters>
-                                <CodeExpression id="2">
+                                <CodeExpression id="10">
                                   <ExpressionOrigin>
                                     <Value type="int" value="0"/>
                                   </ExpressionOrigin>
                                 </CodeExpression>
-                                <CodeExpression id="3">
+                                <CodeExpression id="11">
                                   <ExpressionOrigin>
-                                    <Value type="int" value="0"/>
+                                    <Value type="int" value="2"/>
                                   </ExpressionOrigin>
                                 </CodeExpression>
-                                <CodeExpression id="4">
+                                <CodeExpression id="12">
                                   <ExpressionOrigin>
                                     <Value type="int" value="0"/>
                                   </ExpressionOrigin>
@@ -659,21 +765,21 @@
                             </ExpressionOrigin>
                           </CodeExpression>
                           <StatementProvider type="CodeExpression">
-                            <CodeExpression id="1_flowLayout1"/>
+                            <CodeExpression id="9_flowLayout3"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="2"/>
-                            <CodeExpression id="3"/>
-                            <CodeExpression id="4"/>
+                            <CodeExpression id="10"/>
+                            <CodeExpression id="11"/>
+                            <CodeExpression id="12"/>
                           </Parameters>
                         </CodeStatement>
                         <CodeStatement>
-                          <CodeExpression id="1_flowLayout1"/>
+                          <CodeExpression id="9_flowLayout3"/>
                           <StatementProvider type="CodeMethod">
                             <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="5">
+                            <CodeExpression id="13">
                               <ExpressionOrigin>
                                 <Value type="boolean" value="true"/>
                               </ExpressionOrigin>
@@ -681,11 +787,11 @@
                           </Parameters>
                         </CodeStatement>
                         <CodeStatement>
-                          <CodeExpression id="6_xPanel8">
-                            <CodeVariable name="xPanel8" type="8194" declaredType="com.rameses.rcp.control.XPanel"/>
+                          <CodeExpression id="14_xPanel10">
+                            <CodeVariable name="xPanel10" type="8194" declaredType="com.rameses.rcp.control.XPanel"/>
                             <ExpressionOrigin>
                               <ExpressionProvider type="ComponentRef">
-                                <ComponentRef name="xPanel8"/>
+                                <ComponentRef name="xPanel10"/>
                               </ExpressionProvider>
                             </ExpressionOrigin>
                           </CodeExpression>
@@ -693,36 +799,36 @@
                             <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="1_flowLayout1"/>
+                            <CodeExpression id="9_flowLayout3"/>
                           </Parameters>
                         </CodeStatement>
                         <CodeStatement>
-                          <CodeExpression id="6_xPanel8"/>
+                          <CodeExpression id="14_xPanel10"/>
                           <StatementProvider type="CodeMethod">
                             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="7_xLabel1">
-                              <CodeVariable name="xLabel1" type="8194" declaredType="com.rameses.rcp.control.XLabel"/>
+                            <CodeExpression id="15_xLabel3">
+                              <CodeVariable name="xLabel3" type="8194" declaredType="com.rameses.rcp.control.XLabel"/>
                               <ExpressionOrigin>
                                 <ExpressionProvider type="ComponentRef">
-                                  <ComponentRef name="xLabel1"/>
+                                  <ComponentRef name="xLabel3"/>
                                 </ExpressionProvider>
                               </ExpressionOrigin>
                             </CodeExpression>
                           </Parameters>
                         </CodeStatement>
                         <CodeStatement>
-                          <CodeExpression id="6_xPanel8"/>
+                          <CodeExpression id="14_xPanel10"/>
                           <StatementProvider type="CodeMethod">
                             <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
                           </StatementProvider>
                           <Parameters>
-                            <CodeExpression id="8_xButton1">
-                              <CodeVariable name="xButton1" type="8194" declaredType="com.rameses.rcp.control.XButton"/>
+                            <CodeExpression id="16_xButton3">
+                              <CodeVariable name="xButton3" type="8194" declaredType="com.rameses.rcp.control.XButton"/>
                               <ExpressionOrigin>
                                 <ExpressionProvider type="ComponentRef">
-                                  <ComponentRef name="xButton1"/>
+                                  <ComponentRef name="xButton3"/>
                                 </ExpressionProvider>
                               </ExpressionOrigin>
                             </CodeExpression>
@@ -730,42 +836,6 @@
                         </CodeStatement>
                       </LayoutCode>
                     </Container>
-                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel39">
-                      <Properties>
-                        <Property name="caption" type="java.lang.String" value="Date Issued"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.payment.refdate} "/>
-                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.payment?.objid != null }"/>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                            <LineBorder>
-                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
-                            </LineBorder>
-                          </Border>
-                        </Property>
-                        <Property name="dateFormat" type="java.lang.String" value="yyyy-MM-dd"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 16]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel40">
-                      <Properties>
-                        <Property name="caption" type="java.lang.String" value="Amount Paid"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.payment.amount} "/>
-                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.payment?.objid != null }"/>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                            <LineBorder>
-                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
-                            </LineBorder>
-                          </Border>
-                        </Property>
-                        <Property name="numberFormat" type="java.lang.String" value="#,##0.00"/>
-                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[0, 16]"/>
-                        </Property>
-                      </Properties>
-                    </Component>
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel29">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Permit No"/>
@@ -796,6 +866,179 @@
                             </LineBorder>
                           </Border>
                         </Property>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[0, 16]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel39">
+                      <Properties>
+                        <Property name="caption" type="java.lang.String" value="Date Issued"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.payment.refdate} "/>
+                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.payment?.objid != null }"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                        <Property name="dateFormat" type="java.lang.String" value="yyyy-MM-dd"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[0, 16]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Container class="com.rameses.rcp.control.XPanel" name="xPanel8">
+                      <Properties>
+                        <Property name="caption" type="java.lang.String" value="Payment Receipt No"/>
+                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.payment?.objid != null }"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                        <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                          <Insets value="[5, 0, 0, 0]"/>
+                        </Property>
+                        <Property name="opaque" type="boolean" value="false"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[0, 25]"/>
+                        </Property>
+                      </Properties>
+                      <SubComponents>
+                        <Component class="com.rameses.rcp.control.XLabel" name="xLabel1">
+                          <Properties>
+                            <Property name="expression" type="java.lang.String" value="#{ entity.payment.refno } - ( #{ entity.payment.reftype } )"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[230, 25]"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="com.rameses.rcp.control.XButton" name="xButton1">
+                          <Properties>
+                            <Property name="name" type="java.lang.String" value="viewReceipt" noResource="true"/>
+                            <Property name="iconResource" type="java.lang.String" value="images/buttons/search.png"/>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="xButton1ActionPerformed"/>
+                          </Events>
+                        </Component>
+                      </SubComponents>
+                      <LayoutCode>
+                        <CodeStatement>
+                          <CodeExpression id="17_flowLayout1">
+                            <CodeVariable name="flowLayout1" type="4096" declaredType="java.awt.FlowLayout"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="CodeConstructor">
+                                <CodeConstructor class="java.awt.FlowLayout" parameterTypes="int, int, int"/>
+                              </ExpressionProvider>
+                              <Parameters>
+                                <CodeExpression id="18">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                                <CodeExpression id="19">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="2"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                                <CodeExpression id="20">
+                                  <ExpressionOrigin>
+                                    <Value type="int" value="0"/>
+                                  </ExpressionOrigin>
+                                </CodeExpression>
+                              </Parameters>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeExpression">
+                            <CodeExpression id="17_flowLayout1"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="18"/>
+                            <CodeExpression id="19"/>
+                            <CodeExpression id="20"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="17_flowLayout1"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setAlignOnBaseline" class="java.awt.FlowLayout" parameterTypes="boolean"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="21">
+                              <ExpressionOrigin>
+                                <Value type="boolean" value="true"/>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="22_xPanel8">
+                            <CodeVariable name="xPanel8" type="8194" declaredType="com.rameses.rcp.control.XPanel"/>
+                            <ExpressionOrigin>
+                              <ExpressionProvider type="ComponentRef">
+                                <ComponentRef name="xPanel8"/>
+                              </ExpressionProvider>
+                            </ExpressionOrigin>
+                          </CodeExpression>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="setLayout" class="java.awt.Container" parameterTypes="java.awt.LayoutManager"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="17_flowLayout1"/>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="22_xPanel8"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="23_xLabel1">
+                              <CodeVariable name="xLabel1" type="8194" declaredType="com.rameses.rcp.control.XLabel"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="xLabel1"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                        <CodeStatement>
+                          <CodeExpression id="22_xPanel8"/>
+                          <StatementProvider type="CodeMethod">
+                            <CodeMethod name="add" class="java.awt.Container" parameterTypes="java.awt.Component"/>
+                          </StatementProvider>
+                          <Parameters>
+                            <CodeExpression id="24_xButton1">
+                              <CodeVariable name="xButton1" type="8194" declaredType="com.rameses.rcp.control.XButton"/>
+                              <ExpressionOrigin>
+                                <ExpressionProvider type="ComponentRef">
+                                  <ComponentRef name="xButton1"/>
+                                </ExpressionProvider>
+                              </ExpressionOrigin>
+                            </CodeExpression>
+                          </Parameters>
+                        </CodeStatement>
+                      </LayoutCode>
+                    </Container>
+                    <Component class="com.rameses.rcp.control.XLabel" name="xLabel40">
+                      <Properties>
+                        <Property name="caption" type="java.lang.String" value="Amount Paid"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.payment.amount} "/>
+                        <Property name="visibleWhen" type="java.lang.String" value="#{ entity.payment?.objid != null }"/>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                            <LineBorder>
+                              <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                            </LineBorder>
+                          </Border>
+                        </Property>
+                        <Property name="numberFormat" type="java.lang.String" value="#,##0.00"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 16]"/>
                         </Property>

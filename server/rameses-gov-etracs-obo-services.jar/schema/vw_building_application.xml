@@ -36,6 +36,10 @@
 		<field name="zoneclass_title" />
 		<field name="zone" />
 
+		<field name="location_unitno" />
+		<field name="location_bldgno" />
+		<field name="location_bldgname" />
+		<field name="location_subdivision" />
 		<field name="location_lotno" />
 		<field name="location_blockno" />
 		<field name="location_street" />
@@ -77,7 +81,6 @@
 		<field name="template" />
 		<field name="reportheader" />
 		<field name="txntype" />
-		<field name="infoid" />
 	</element>
 </schema>	
 

@@ -33,6 +33,7 @@
 		<field name="ptr_placeissued" required="true"/>
 
 		<field name="profid" />
+		<field name="system" type="integer" />
 	</element>
 </schema>		
 

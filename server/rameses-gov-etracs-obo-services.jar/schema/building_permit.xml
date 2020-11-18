@@ -9,7 +9,6 @@
 		<field name="issuedby_name" />
 		<field name="remarks" />
 		<field name="expirydate" />
-		<field name="infoid" />
 
 		<field name="template"/>
 		<field name="endorserid" />

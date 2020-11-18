@@ -5,17 +5,17 @@ import com.rameses.services.extended.*
 
 class OboOnlineService  {
 
-    @Service(value="TDOnlineService", connection="local-etracs-server")
+    @Service(value="TDOnlineService", connection="etracs")
     def svc;
 
-    @Service(value="EntityService", connection="local-entity-server")
+    @Service(value="EntityService", connection="entity")
     def entitySvc;
 
-    @Service(value="BuildingPermitService", connection="local-obo-server")
-    def bldgPermitSvc;
-
-    @Service(value="BuildingApplicationService", connection="local-obo-server")
+    @Service("BuildingApplicationService")
     def appSvc;
+
+    @Service("BuildingPermitService")
+    def permitSvc;
 
     @ProxyMethod
     public def findLocation( def params ) {
@@ -60,10 +60,7 @@ class OboOnlineService  {
 
     @ProxyMethod
     public def findBldgPermitNo( def params ) {
-        def res = bldgPermitSvc.findByPermitNo( [permitno: params.permitno ] );
-        if(res==null)
-            throw new Exception("Permit no " + params.permitno + " not found");
-        return res;
+        return permitSvc.findByPermitNo( [permitno: params.permitno ] );
     }
 
     @ProxyMethod

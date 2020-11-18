@@ -62,6 +62,20 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
         }
     ];
     
+    def viewApplicant() {
+        def p = [:];
+        p.editable = false;
+        p.applicant = [name: entity.applicant.name ];
+        p.entity = entity.applicant;
+        return Inv.lookupOpener("building_application_entity", p);
+    }
+    
+    def viewProfessional() {
+        def p = [:];
+        p.entity = entity.contractor;
+        return Inv.lookupOpener("vw_obo_professional:open", p);
+    }
+    
     def viewReceipt() {
         def op = Inv.lookupOpener(entity.payment.reftype + ":open", [entity:[objid:entity.payment.refid]] );
         op.target = "popup";
