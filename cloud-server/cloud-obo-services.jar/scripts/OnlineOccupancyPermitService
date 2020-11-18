@@ -18,22 +18,14 @@ public class OnlineOccupancyPermitService  {
 	@DataContext("online_occupancy_permit_entity")
 	def entityEm;
 
-	@ProxyMethod
-	public def moveNextStep( def o ) {
-		if(!o.appid) throw new Exception("appid is required in determining the next step");
-		def app = appEm.find( [objid: o.appid] ).first();
-		def step = app.step;
+	@DataContext("online_occupancy_permit_professional")
+	def profEm;
 
-		def nextStep = step + 1;
-		//compare next step if less than existing then you can update otherwise stay the same
-		if(app.step < nextStep ) {
-			appEm.find( [objid: o.appid] ).update([step: nextStep]);			
-		}
-		else {
-			nextStep = app.step;
-		}
-		return [step:nextStep];
-	}
+	@DataContext("obo_professional_info")
+	def profInfoEm;
+
+	@DataContext("obo_section")
+	def sectionEm;
 
 	@ProxyMethod
 	public def create(def o) {
@@ -41,7 +33,7 @@ public class OnlineOccupancyPermitService  {
 		o.objid = "OP"+ kg.generateAlphanumKey(o.orgcode+"-",8);
 		o.dtfiled = dateSvc.getServerDate();
 		o.step = 1;
-
+		app.occupancytypeid = o.bldgpermit.occupancytypeid;
 		def applicant = o.remove("applicant");
 		applicant.remove("objid");
 		def app = appEm.create( o );
@@ -50,17 +42,26 @@ public class OnlineOccupancyPermitService  {
 
 		appEm.find([objid: app.objid]).update([applicantid: applicant.objid ]);
 
-		/*
-		def emailSvc = dynamicSvc.lookup(o.orgcode+":EmailService");
-		app.tokenid = "MYTOKEN " + new UID();
-		emailSvc.send( app );
-		*/
-		return app;
-	}
+		//update also all design professionals for occupancy
+		def sections = sectionEm.select( "objid" ).limit(1000).list()*.objid;
 
-	@ProxyMethod
-	public def update( def o ) {
-		return appEm.find([objid: o.objid ]).update( o );
+		if( !o.professionals ) o.professionals = [];
+		sections.each {
+			def m = [:];
+			m.sectionid = it;
+			m.appid = app.objid;
+			def prof = o.professionals.find{ it.sectionid == it };
+			if( prof?.designprofessionalid ) {
+				def dp = profInfoEm.find( [objid: prof.designprofessionalid] ).first();
+				if( dp ) m.designprofessionalid = db.objid;
+			}
+			if( prof?.supervisorid ) {
+				def dp = profInfoEm.find( [objid: prof.supervisorid] ).first();
+				if( dp )  m.supervisorid = dp.objid;
+			}
+			profEm.create( m );
+		}
+		return app;
 	}
 
 	@ProxyMethod
@@ -69,13 +70,14 @@ public class OnlineOccupancyPermitService  {
 	}
 
 	@ProxyMethod
+	public def update( def o ) {
+		return appEm.find([objid: o.objid ]).update( o );
+	}
+
+	@ProxyMethod
 	public def getApplication(def o ) {
 		return appEm.find([objid: o.appid ] ).first();
 	}
-
-
-	
-
 
 	//This is called by the local client
 	@ProxyMethod

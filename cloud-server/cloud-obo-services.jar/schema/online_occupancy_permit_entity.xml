@@ -1,6 +1,6 @@
 <schema>
 	<element tablename="online_occupancy_permit_entity">
-		<field name="objid" primary="true" prefix="OBBPENT" />
+		<field name="objid" primary="true" prefix="OCCPMTENT" />
 		<field name="appid" required="true" />
 
 		<field name="profileid" />

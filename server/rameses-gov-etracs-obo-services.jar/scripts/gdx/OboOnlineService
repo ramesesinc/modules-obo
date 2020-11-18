@@ -14,6 +14,9 @@ class OboOnlineService  {
     @Service("BuildingApplicationService")
     def appSvc;
 
+    @Service("BuildingPermitService")
+    def permitSvc;
+
     @ProxyMethod
     public def findLocation( def params ) {
         println "FINDING LOCATION"
@@ -57,13 +60,7 @@ class OboOnlineService  {
 
     @ProxyMethod
     public def findBldgPermitNo( def params ) {
-        throw new Exception("find building permit findBldgPermitNo not yet supported")
-        /*
-        def res = bldgPermitSvc.findByPermitNo( [permitno: params.permitno ] );
-        if(res==null)
-            throw new Exception("Permit no " + params.permitno + " not found");
-        return res;
-        */
+        return permitSvc.findByPermitNo( [permitno: params.permitno ] );
     }
 
     @ProxyMethod

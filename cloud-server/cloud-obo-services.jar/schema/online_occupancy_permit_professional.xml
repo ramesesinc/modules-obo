@@ -1,0 +1,21 @@
+
+<schema>
+	<element tablename="online_occupancy_permit_professional">
+		<field name="objid" primary="true" prefix="OCCPMTPROF" />
+		<field name="appid" required="true" />
+		
+		<complex name="section" ref="obo_section" jointype="many-to-one">
+			<key field="sectionid" target="objid" />
+		</complex>	
+
+		<complex name="designprofessional" ref="obo_professional_info" jointype="many-to-one">
+			<key field="designprofessionalid" target="objid" />
+		</complex> 
+
+		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one">
+			<key field="designprofessionalid" target="objid" />
+		</complex> 
+
+	</element>
+</schema>		
+

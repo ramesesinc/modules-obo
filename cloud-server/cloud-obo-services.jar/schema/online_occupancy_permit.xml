@@ -72,7 +72,7 @@
 		</complex>	
 
 		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one" required="false">
-			<key field="bldgpermit_occupancytypeid" target="objid" />
+			<key field="occupancytypeid" target="objid" />
 		</complex>	
 
 	</element>
