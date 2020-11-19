@@ -28,6 +28,7 @@ class OboCapturePaymentModel  {
     void init(inv) {
         if(!entity) entity = caller.entity;
         receipt = [:];
+        receipt.apptype = inv.properties.apptype;        
         receipt.type ="cashreceipt";
         receipt.amount = entity.amount;
         receipt.txntype = inv.properties.txntype;
