@@ -18,16 +18,24 @@ const ProfessionalCard = ({ professional  ={}, caption, onSelectProfessional, ph
     address = professional.address.text;
   }
 
+  let container = styles.container;
+  let lookupContainer = styles.lookupContainer;
+
+  if (typeof(professional.lastname) === "string") {
+    container = {...container, backgroundColor:"#9aa5e2"};
+    lookupContainer = {...lookupContainer, backgroundColor: "#454f88"};
+  }
+
   return (
-    <div style={styles.container}>
-      <Panel style={styles.lookupContainer}>
+    <div style={container}>
+      <Panel style={lookupContainer}>
         <Label captionStyle={styles.caption} caption={caption} />
         <ProfessionalLookup hideSearchText={true}
           onSelect={onSelectProfessional}
           fullWidth={false}
         />
       </Panel>
-      <div style={{margin: 10, padding: 10}}>
+      <div style={{marginTop: 10, marginBottom: 10, padding: 10}}>
         <div style={styles.nameContainer}>
           <Panel>
             <Label labelStyle={styles.name}>{name}</Label>
@@ -58,7 +66,7 @@ const styles = {
     borderWidth: 1,
     borderColor: "#aaa",
     boxShadow: "0px 5px 7px -7px rgba(0,0,0,0.75)",
-    backgroundColor: "#eee",
+    backgroundColor: "#d1d1d1",
   },
   caption: {
     fontSize: 18,
@@ -68,7 +76,7 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "lightgray",
+    backgroundColor: "#8b8b8b",
     paddingTop: 5,
     paddingLeft: 10,
     paddingRight: 10,
@@ -76,7 +84,7 @@ const styles = {
   nameContainer: {
     dipslay: "flex",
     justifyContent: "space-between",
-    marginBottom: 5
+    marginBottom: 5,
   },
   name: {
     fontSize: 16,
@@ -85,7 +93,7 @@ const styles = {
   profession: {
     fontSize: 14,
     fontWeight: 600,
-    backgroundColor: "#ddd",
+    backgroundColor: "#ddddd",
     width: "100%",
     padding: 10,
   },
@@ -98,6 +106,5 @@ const styles = {
     paddingBottom: 2,
   }
 }
-
 
 export default ProfessionalCard;

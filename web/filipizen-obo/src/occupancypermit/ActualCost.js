@@ -17,7 +17,6 @@ const ActualCost = ({
   appService,
   moveNextStep,
   movePrevStep,
-  stepCompleted
 }) => {
 
   const costs = [
@@ -62,7 +61,6 @@ const ActualCost = ({
 
   return (
     <Panel style={{maxWidth: 600}}>
-      <Subtitle>Actual Costs</Subtitle>
       <Label>Please indicate the actual cost of construction.</Label>
       <Spacer />
       <Error msg={error} />

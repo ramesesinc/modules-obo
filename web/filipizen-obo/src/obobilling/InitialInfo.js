@@ -50,7 +50,6 @@ const InitialInfo = ({
     setLoading(true);
     setError(null);
     getBilling().then(bill => {
-      console.log("BILL", bill);
       dispatch({type: "SET_BILL", ...params, bill: bill});
       moveNextStep();
     }).catch(err => {
@@ -88,7 +87,6 @@ const InitialInfo = ({
         <BackLink caption='Back' variant="text" action={movePrevStep} />
         <Button caption='Next' action={loadBill} loading={loading} disabled={loading} />
       </ActionBar>
-      <p>{JSON.stringify(params, null, 2)}</p>
     </Card>
   )
 }

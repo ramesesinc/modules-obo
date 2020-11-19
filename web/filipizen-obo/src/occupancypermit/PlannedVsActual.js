@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from "react";
 import {
   Panel,
-  Subtitle,
   Spacer,
   ActionBar,
   Button,
   FormPanel,
-  Text,
   Label,
   Decimal,
   Date,
-  BackLink
+  BackLink,
+  isDateBefore,
+  hasErrors
 } from 'rsi-react-web-components';
+
 
 const PlannedVsActual = ({
   appno,
   appService,
   moveNextStep,
-  movePrevStep,
-  stepCompleted
+  movePrevStep
 }) => {
 
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const [app, setApp] = useState({});
 
   useEffect(() => {
@@ -32,16 +34,42 @@ const PlannedVsActual = ({
         setApp(app);
       }}
     });
-  }, [appno])
+  }, [appno]);
+
+  const isValid = () => {
+    const errors = {};
+    if (!app.actualtotalfloorarea) errors.actualtotalfloorarea = "Required";
+    if (!app.actualprojectcost) errors.actualprojectcost = "Required";
+    if (!app.actualnumunits) errors.actualnumunits = "Required";
+    if (!app.actualnumfloors) errors.actualnumfloors = "Required";
+    if (!app.actualheight) errors.actualheight = "Required";
+    if (!app.dtactualstarted) errors.dtactualstarted = "Required";
+    if (!app.dtactualcompleted) errors.dtactualcompleted = "Required";
+    if (app.dtactualstarted && app.dtactualcompleted && isDateBefore(app.dtactualcompleted, app.dtactualstarted)) {
+      errors.dtactualcompleted = "Actual date completed should be after actual date started."
+    }
+
+    if (hasErrors(errors)) {
+      setErrors(errors);
+      return false;
+    } else {
+      setErrors({});
+      return true;
+    }
+  }
 
   const updatePermit = () => {
-    appService.invoke("update", app, (err, updatedApp) => {
-      if (err) {
-        setError(err)
-      } else {
-        moveNextStep();
-      }
-    })
+    if (isValid()) {
+      setLoading(true);
+      appService.invoke("update", app, (err, updatedApp) => {
+        if (err) {
+          setError(err);
+        } else {
+          moveNextStep();
+        }
+        setLoading(false);
+      });
+    }
   }
 
   return (
@@ -57,42 +85,42 @@ const PlannedVsActual = ({
         <Panel style={styles.row}>
           <Label caption="Total Floor Area (sqm)" style={styles.label}  />
           <Decimal name="bldgpermit.totalfloorarea" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualtotalfloorarea" style={styles.item} fullWdith={false} variant="outlined"/>
+          <Decimal name="actualtotalfloorarea" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualtotalfloorarea}/>
         </Panel>
         <Panel style={styles.row}>
           <Label caption="Project Total Cost" style={styles.label} />
           <Decimal name="bldgpermit.projectcost" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualprojectcost" style={styles.item} fullWdith={false} variant="outlined" />
+          <Decimal name="actualprojectcost" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualprojectcost}/>
         </Panel>
         <Panel style={styles.row}>
           <Label caption="No. of Units" style={styles.label} />
           <Decimal name="bldgpermit.numunits" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualnumunits" style={styles.item} fullWdith={false} variant="outlined" />
+          <Decimal name="actualnumunits" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualnumunits}/>
         </Panel>
         <Panel style={styles.row}>
           <Label caption="No. of Floors" style={styles.label} />
           <Decimal name="bldgpermit.numfloors" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualnumfloors" style={styles.item} fullWdith={false} variant="outlined" />
+          <Decimal name="actualnumfloors" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualnumfloors}/>
         </Panel>
         <Panel style={styles.row}>
           <Label caption="Height (m)" style={styles.label} />
           <Decimal name="bldgpermit.height" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualheight" style={styles.item} fullWdith={false} variant="outlined" />
+          <Decimal name="actualheight" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualheight}/>
         </Panel>
         <Panel style={styles.row}>
           <Label caption="Start Date" style={styles.label} />
           <Date name="bldgpermit.dtproposedconstruction" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Date name="dtactualstarted" style={styles.item} fullWdith={false} variant="outlined" />
+          <Date name="dtactualstarted" style={styles.item} fullWdith={false} variant="outlined" error={errors.dtactualstarted} />
         </Panel>
         <Panel style={styles.row}>
           <Label caption="Completion Date" style={styles.label} />
           <Date name="bldgpermit.dtexpectedcompletion" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Date name="dtactualcompleted" style={styles.item} fullWdith={false} variant="outlined" />
+          <Date name="dtactualcompleted" style={styles.item} fullWdith={false} variant="outlined" error={errors.dtactualcompleted} helperText={errors.dtactualcompleted} />
         </Panel>
       </FormPanel>
       <ActionBar>
         <BackLink action={movePrevStep} />
-        <Button caption="Next" action={updatePermit} />
+        <Button caption="Next" action={updatePermit} loading={loading}/>
       </ActionBar>
     </Panel>
   )
@@ -113,13 +141,13 @@ const styles = {
   row: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   label: {
     width: "100%",
   },
   item: {
-    width: 300,
+    width: 400,
     marginRight: 10,
   }
 }

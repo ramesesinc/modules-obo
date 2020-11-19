@@ -100,7 +100,7 @@ const BuildingPermitWebController = (props) => {
   }
 
   const saveHandler = () => {
-    console.log("SAVE HANDLER");
+    ("SAVE HANDLER");
   }
 
   const moveNextStep = () => {

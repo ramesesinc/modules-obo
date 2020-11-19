@@ -60,6 +60,8 @@
 		<field name="lpgpipingcost" type="decimal" />
 		<field name="firesuppcost" type="decimal" />
 		
+		<field name="contractorid" />
+		
 		<!-- shows where the current step is at -->
 		<field name="step" type="integer"/>
 
@@ -75,6 +77,7 @@
 			<key field="occupancytypeid" target="objid" />
 		</complex>	
 
+		
 		<field name="actualprojectcost" expr="totalmaterialcost + totaldirectlaborcost + totalequipmentcost + totalothercost"  type="decimal" />
 
 	</element>

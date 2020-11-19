@@ -13,7 +13,6 @@ import {
   FormPanel,
   Decimal,
   Service,
-  Error
 } from 'rsi-react-web-components';
 
 import { EmailVerification } from 'rsi-react-filipizen-components'
@@ -33,7 +32,6 @@ const OccupancyPermitInitial = ({
   partner,
   service,
   onComplete,
-  history,
   appService,
   onCancel
 }) => {
@@ -56,22 +54,6 @@ const OccupancyPermitInitial = ({
 
   const movePrevStep = () => {
     setActiveStep(cs => cs-1);
-  }
-
-  const submitAppType = ({appType, appno}) => {
-    if (appType === "new") {
-      moveNextStep();
-    } else {
-      appService.invoke("findCurrentInfo", {appid: appno}, (err, app) => {
-        if (err) {
-          setError(err);
-        } else if (!app) {
-          setError("Application no. does not exist.")
-        } else {
-          onComplete({appType, appno});
-        }
-      })
-    }
   }
 
   const exitInitial = () => {
@@ -142,8 +124,9 @@ const OccupancyPermitInitial = ({
   return (
     <Page>
       <Card>
+        <Title>{service.title}</Title>
+
         <Panel visibleWhen={step.name === "specifybldgpermit"}>
-          <Title>{service.title}</Title>
           <Subtitle>{step.title}</Subtitle>
           <Spacer height={30} />
           <Text

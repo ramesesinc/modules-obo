@@ -3,7 +3,6 @@ import React from "react";
 import "./ProfessionalCard.css";
 
 const ProfessionalCard = ({ professional, imageUrl }) => {
-  console.log("professional", professional)
   return (
     <div className="professionalCard">
       <div className="professionalCard__personal">

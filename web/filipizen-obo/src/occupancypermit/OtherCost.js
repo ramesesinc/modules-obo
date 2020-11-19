@@ -17,7 +17,6 @@ const OtherCost = ({
   appService,
   moveNextStep,
   movePrevStep,
-  stepCompleted
 }) => {
 
   const costs = [
@@ -62,7 +61,6 @@ const OtherCost = ({
 
   return (
     <Panel style={{maxWidth: 600}}>
-      <Subtitle>Other Costs</Subtitle>
       <Label>Please indicate the other cost of construction.</Label>
       <Spacer />
       <Error msg={error} />

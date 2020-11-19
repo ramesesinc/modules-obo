@@ -33,7 +33,7 @@ public class OnlineOccupancyPermitService  {
 		o.objid = "OP"+ kg.generateAlphanumKey(o.orgcode+"-",8);
 		o.dtfiled = dateSvc.getServerDate();
 		o.step = 1;
-		app.occupancytypeid = o.bldgpermit.occupancytypeid;
+		o.occupancytypeid = o.bldgpermit.occupancytypeid;
 		def applicant = o.remove("applicant");
 		applicant.remove("objid");
 		def app = appEm.create( o );
@@ -78,6 +78,24 @@ public class OnlineOccupancyPermitService  {
 	public def getApplication(def o ) {
 		return appEm.find([objid: o.appid ] ).first();
 	}
+
+	@ProxyMethod
+	public def getProfessionals( def o) {
+		return profEm.find([appid: o.appid]).orderBy('sectionid').list();
+	}
+
+	@ProxyMethod
+	public def updateProfessionals( professionals) {
+		professionals.each{
+			println it.sectionid + '==================='
+			println 'designid => ' + it.designprofessionalid
+			println 'supervisorid => ' + it.supervisorid
+			profEm.find([objid: it.objid]).update(it);
+		}
+		return professionals;
+	}
+
+	
 
 	//This is called by the local client
 	@ProxyMethod

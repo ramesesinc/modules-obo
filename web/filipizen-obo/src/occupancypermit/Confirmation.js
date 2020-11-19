@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
 import {
   Panel,
-  Subtitle,
   Spacer,
   ActionBar,
   Button,
   Label,
   BackLink,
-  PreviewButton
+  ButtonLink,
+  PageviewIcon,
 } from 'rsi-react-web-components';
 
 const Confirmation = ({
   appno,
+  partner,
   appService,
-  moveNextStep,
   movePrevStep,
-  onComplete,
-  stepCompleted
+  onComplete
 }) => {
 
   const [error, setError] = useState();
@@ -43,17 +42,8 @@ const Confirmation = ({
     })
   }
 
-  const viewOccupancyPermit = () => {
-
-  }
-
-  const viewCompletionCertificate = () => {
-
-  }
-
   return (
     <Panel>
-      <Subtitle>Confirm Entry</Subtitle>
       <p>
         Before sending please check first the generated
         application info. If everything is in order, you can
@@ -63,11 +53,19 @@ const Confirmation = ({
       <Panel style={styles.container}>
         <Panel  style={styles.row}>
           <Label style={styles.label}>Application for Occupancy Permit</Label>
-          <Button caption="View" action={viewOccupancyPermit} variant="outlined" />
+          <ButtonLink
+              caption="Preview"
+              href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/occupancypermit?refid=${appno}`}
+              Icon={PageviewIcon}
+            />
         </Panel>
         <Panel style={styles.row}>
           <Label style={styles.label}>Certificate of Completion</Label>
-          <Button caption="View" action={viewCompletionCertificate} variant="outlined" />
+          <ButtonLink
+              caption="Preview"
+              href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/completioncertificate?refid=${appno}`}
+              Icon={PageviewIcon}
+            />
         </Panel>
       </Panel>
       <ActionBar>

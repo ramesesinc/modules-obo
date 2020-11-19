@@ -269,7 +269,6 @@ const BuildingPermitProject = ({
           <BackLink action={() => setMode("project-detail")} />
           <Button caption="Next" action={submitWorkType} />
         </ActionBar>
-        <p>{JSON.stringify(project.worktypes, null, 2)}</p>
       </FormPanel>
     </Panel>
   )

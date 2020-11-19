@@ -4,16 +4,16 @@
 		<field name="objid" primary="true" prefix="OCCPMTPROF" />
 		<field name="appid" required="true" />
 		
-		<complex name="section" ref="obo_section" jointype="many-to-one">
+		<complex name="section" ref="obo_section" jointype="many-to-one" required="false">
 			<key field="sectionid" target="objid" />
 		</complex>	
 
-		<complex name="designprofessional" ref="obo_professional_info" jointype="many-to-one">
+		<complex name="designprofessional" ref="obo_professional_info" jointype="many-to-one" required="false">
 			<key field="designprofessionalid" target="objid" />
 		</complex> 
 
-		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one">
-			<key field="designprofessionalid" target="objid" />
+		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one" required="false">
+			<key field="supervisorid" target="objid" />
 		</complex> 
 
 	</element>

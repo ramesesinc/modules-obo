@@ -30,11 +30,11 @@ const pages = [
   { step: 0, component: null },
   { step: 1, name: 'apptype', caption: 'Application Type', component: OccupancyType },
   { step: 2, name: 'plannedactual', caption: 'Planned vs Actual', component: PlannedVsActual },
-  { step: 3, name: 'actualcost', caption: 'Actual Cost', component: ActualCost },
-  { step: 4, name: 'othercost', caption: 'Other Cost', component: OtherCost },
+  { step: 3, name: 'actualcost', caption: 'Actual Costs', component: ActualCost },
+  { step: 4, name: 'othercost', caption: 'Other Costs', component: OtherCost },
   { step: 5, name: 'contractor', caption: 'Contractor', component: Contractor },
-  // { step: 6, name: 'professionals', caption: 'Professionals', component: Professionals },
-  { step: 6, name: 'confirmation', caption: 'Confirmation', component: Confirmation },
+  { step: 6, name: 'professionals', caption: 'Professionals', component: Professionals },
+  { step: 7, name: 'confirmation', caption: 'Confirmation', component: Confirmation },
 ]
 
 const OccupancyPermitWebController = (props) => {
@@ -63,10 +63,9 @@ const OccupancyPermitWebController = (props) => {
         if(!app) {
           setError("Application no. does not exist");
         }
-        if( partner.orgcode != app.orgcode ) {
+        if( partner.id != app.orgcode ) {
           setError("The application number provided is not for this local government");
         }
-        console.log("app.step", app.step)
         setApp(app);
         setStep(app.step);
         setMode("processing");
@@ -86,10 +85,12 @@ const OccupancyPermitWebController = (props) => {
   }
 
   const moveNextStep = () => {
+    setError(null);
     const nextStep = step < app.step ? app.step : step + 1;
     svc.invoke("update", {objid: appno, step: nextStep }, (err, updatedApp) => {
       if (!err) {
         setStep(nextStep);
+        setApp({...app, step: nextStep});
       } else {
         setError(err);
       }
@@ -110,6 +111,7 @@ const OccupancyPermitWebController = (props) => {
   }
 
   const submitAppType = ({appType, appno}) => {
+    setError(null);
     if (appType === "new") {
       setMode("init");
     } else {
@@ -117,7 +119,9 @@ const OccupancyPermitWebController = (props) => {
         if (err) {
           setError(err);
         } else if (!app) {
-          setError("Application no. does not exist.")
+          setError("Application no. does not exist.");
+        } else if (app.step >= pages.length) {
+          setError("Application has already been submitted.");
         } else {
           onCompleteInitial({appType, appno});
         }
@@ -132,7 +136,7 @@ const OccupancyPermitWebController = (props) => {
 
   if (mode === "apptype") {
     return (
-      <ApplicationTypeSelect service={props.service} error={error} onCancel={history.goBack} onSubmit={submitAppType}  />
+      <ApplicationTypeSelect service={props.service} error={error} onCancel={() => props.history.goBack()} onSubmit={submitAppType}  />
     )
   }
 

@@ -15,9 +15,11 @@ const svc = Service.lookup("OboProfessionalService", "obo");
 const ROWS_PER_PAGE = 5;
 
 const ProfessionalLookup = ({
-  caption,
+  caption="Search Professional",
+  searchFieldTitle="PRC No.",
   onSelect,
-  hideSearchText=false
+  hideSearchText=false,
+  fullWidth=true
 }) => {
   const [showLookup, setShowLookup] = useState(false)
   const [query, setQuery] = useState({prc:{}});
@@ -39,7 +41,6 @@ const ProfessionalLookup = ({
           if (err) {
             console.log("ERROR", err)
           } else {
-            console.log("list", list)
             setProfessionals(list);
           }
         });
@@ -51,16 +52,16 @@ const ProfessionalLookup = ({
   }
 
   return (
-    <div>
-      <Lookup caption='Search Professional'
+      <Lookup caption={caption}
         query={query}
         setQuery={setQuery}
-        searchFieldTitle="PRC No."
+        searchFieldTitle={searchFieldTitle}
         searchField="prc.idno"
         onSelect={onAcceptLookup}
         fetchList={fetchList}
         hideSearchText={hideSearchText}
         enableSelect={selectedItems && selectedItems.length > 0}
+        fullWidth={fullWidth}
       >
         <FormPanel context={query} handler={setQuery}>
           <Panel row>
@@ -82,7 +83,6 @@ const ProfessionalLookup = ({
           <TableColumn caption='Profession' expr='profession' />
         </Table>
       </Lookup>
-    </div>
   )
 }
 
