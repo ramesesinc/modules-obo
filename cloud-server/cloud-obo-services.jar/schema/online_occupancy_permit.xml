@@ -75,6 +75,8 @@
 			<key field="occupancytypeid" target="objid" />
 		</complex>	
 
+		<field name="actualprojectcost" expr="totalmaterialcost + totaldirectlaborcost + totalequipmentcost + totalothercost"  type="decimal" />
+
 	</element>
 </schema>
 
