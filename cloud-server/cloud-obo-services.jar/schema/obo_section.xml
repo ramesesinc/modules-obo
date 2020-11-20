@@ -3,5 +3,7 @@
 		<field name="objid" primary="true"/>
 		<field name="title" />
 		<field name="idx" />
+		<field name="designprofessionalrole" />
+		<field name="supervisorrole" />
 	</element>
 </schema>
