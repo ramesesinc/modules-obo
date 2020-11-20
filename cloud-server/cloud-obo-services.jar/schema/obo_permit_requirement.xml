@@ -1,0 +1,8 @@
+<schema>
+	<element tablename="obo_permit_requirement">
+		<field name="objid" primary="true"/>
+		<field name="title" />
+		<field name="sortorder" />
+		<field name="apptype" />
+	</element>
+</schema>

@@ -33,6 +33,9 @@ public class OnlineBuildingPermitService  {
 	@Service("OboContactInfoService")
 	def contactSvc;
 
+	@DataContext("obo_permit_requirement")
+	def reqEm;
+
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
@@ -354,7 +357,23 @@ public class OnlineBuildingPermitService  {
 		}
 	}
 	
+	@ProxyMethod
+	public def getRequirements( def o ) {
+		if(!o.appid) throw new Exception("appid is required");
+		def list = reqEm.find( [apptype: "building"]).orderBy("sortorder").list();
 
+		//apps to download
+		def mitems << [ [objid:"building_permit", title:"Building Permit"] ];
+
+		def alist= ancillaryEm.select("permittypeid,type.title").find( [appid: o.appid ] ).orderBy("type.sortorder").list();
+		alist.each {
+			mitems << [objid: it.permittypeid, title: it.type.title ]; 
+		}
+
+		def firstItem = list[0];
+		firstItem.items = mitems;
+		return list;
+	}
 
 
 
