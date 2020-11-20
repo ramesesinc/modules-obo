@@ -18,18 +18,20 @@ const ProfessionalCard = ({ professional  ={}, caption, onSelectProfessional, ph
     address = professional.address.text;
   }
 
-  let container = styles.container;
-  let lookupContainer = styles.lookupContainer;
+  let containerStyle = styles.container;
+  let lookupContainerStyle = styles.lookupContainer;
+  let captionStyle = styles.caption;
 
   if (typeof(professional.lastname) === "string") {
-    container = {...container, backgroundColor:"#9aa5e2"};
-    lookupContainer = {...lookupContainer, backgroundColor: "#454f88"};
+    containerStyle = {...containerStyle, backgroundColor:"#d1d7f8"};
+    lookupContainerStyle = {...lookupContainerStyle, backgroundColor: "#454f88"};
+    captionStyle = {...captionStyle, color: "white"};
   }
 
   return (
-    <div style={container}>
-      <Panel style={lookupContainer}>
-        <Label captionStyle={styles.caption} caption={caption} />
+    <div style={containerStyle}>
+      <Panel style={lookupContainerStyle}>
+        <Label captionStyle={captionStyle} caption={caption} />
         <ProfessionalLookup hideSearchText={true}
           onSelect={onSelectProfessional}
           fullWidth={false}
@@ -67,6 +69,7 @@ const styles = {
     borderColor: "#aaa",
     boxShadow: "0px 5px 7px -7px rgba(0,0,0,0.75)",
     backgroundColor: "#d1d1d1",
+    borderRadius: 5,
   },
   caption: {
     fontSize: 18,
@@ -80,6 +83,7 @@ const styles = {
     paddingTop: 5,
     paddingLeft: 10,
     paddingRight: 10,
+    borderRadius: 5,
   },
   nameContainer: {
     dipslay: "flex",

@@ -30,13 +30,13 @@ const svc = Service.lookup("OnlineOccupancyPermitService", "obo");
 const pages = [
   { step: 0, component: null },
   { step: 1, name: 'apptype', caption: 'Application Type', component: OccupancyType },
-  { step: 2, name: 'plannedactual', caption: 'Planned vs Actual', component: PlannedVsActual },
-  { step: 3, name: 'actualcost', caption: 'Actual Costs', component: ActualCost },
-  { step: 4, name: 'othercost', caption: 'Other Costs', component: OtherCost },
+  { step: 2, name: 'actualcost', caption: 'Actual Costs', component: ActualCost },
+  { step: 3, name: 'othercost', caption: 'Fire Safety Costs', component: OtherCost },
+  { step: 4, name: 'plannedactual', caption: 'Planned vs Actual', component: PlannedVsActual },
   { step: 5, name: 'contractor', caption: 'Contractor', component: Contractor },
   { step: 6, name: 'professionals', caption: 'Professionals', component: Professionals },
   { step: 7, name: 'confirmation', caption: 'Confirmation', component: Confirmation },
-  { step: 8, name: 'completed', caption: 'Completed Application', component: Completed },
+  { step: 8, name: 'completed', caption: 'Completed', component: Completed },
 ]
 
 const OccupancyPermitWebController = (props) => {

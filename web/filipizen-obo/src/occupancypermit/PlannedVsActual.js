@@ -39,7 +39,6 @@ const PlannedVsActual = ({
   const isValid = () => {
     const errors = {};
     if (!app.actualtotalfloorarea) errors.actualtotalfloorarea = "Required";
-    if (!app.actualprojectcost) errors.actualprojectcost = "Required";
     if (!app.actualnumunits) errors.actualnumunits = "Required";
     if (!app.actualnumfloors) errors.actualnumfloors = "Required";
     if (!app.actualheight) errors.actualheight = "Required";
@@ -83,14 +82,14 @@ const PlannedVsActual = ({
           <div style={styles.columnTitle}>Actual</div>
         </Panel>
         <Panel style={styles.row}>
-          <Label caption="Total Floor Area (sqm)" style={styles.label}  />
-          <Decimal name="bldgpermit.totalfloorarea" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualtotalfloorarea" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualtotalfloorarea}/>
-        </Panel>
-        <Panel style={styles.row}>
           <Label caption="Project Total Cost" style={styles.label} />
           <Decimal name="bldgpermit.projectcost" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualprojectcost" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualprojectcost}/>
+          <Decimal name="actualprojectcost" disabled={true} style={styles.item} fullWdith={false} variant="outlined" />
+        </Panel>
+        <Panel style={styles.row}>
+          <Label caption="Total Floor Area (sqm)" style={styles.label}  />
+          <Decimal name="bldgpermit.totalfloorarea" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
+          <Decimal name="actualtotalfloorarea" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualtotalfloorarea} autoFocus={true} />
         </Panel>
         <Panel style={styles.row}>
           <Label caption="No. of Units" style={styles.label} />
@@ -117,6 +116,7 @@ const PlannedVsActual = ({
           <Date name="bldgpermit.dtexpectedcompletion" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
           <Date name="dtactualcompleted" style={styles.item} fullWdith={false} variant="outlined" error={errors.dtactualcompleted} helperText={errors.dtactualcompleted} />
         </Panel>
+        <Spacer />
       </FormPanel>
       <ActionBar>
         <BackLink action={movePrevStep} />

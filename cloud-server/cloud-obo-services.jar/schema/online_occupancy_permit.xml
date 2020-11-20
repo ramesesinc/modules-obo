@@ -59,8 +59,14 @@
 		<field name="sprinklercost" type="decimal" />
 		<field name="lpgpipingcost" type="decimal" />
 		<field name="firesuppcost" type="decimal" />
-		
-		<field name="contractorid" />
+
+		<field name="contractor_name" />
+		<field name="contractor_address" />
+		<field name="contractor_pcab_idno" />
+		<field name="contractor_pcab_dtvalid" />
+		<field name="contractor_tin" />
+		<field name="contractor_manager_name" />
+		<field name="contractor_manager_email" />
 		
 		<!-- shows where the current step is at -->
 		<field name="step" type="integer"/>
@@ -77,7 +83,6 @@
 			<key field="occupancytypeid" target="objid" />
 		</complex>	
 
-		
 		<field name="actualprojectcost" expr="totalmaterialcost + totaldirectlaborcost + totalequipmentcost + totalothercost"  type="decimal" />
 
 	</element>

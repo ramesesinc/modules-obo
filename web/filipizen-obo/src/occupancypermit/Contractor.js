@@ -14,9 +14,6 @@ import {
   hasErrors
 } from 'rsi-react-web-components';
 
-import ProfessionalCard from "../components/ProfessionalCard";
-
-
 const Contractor = ({
   appno,
   appService,
@@ -35,7 +32,8 @@ const Contractor = ({
       if (err) {
         setError(err);
       } else {{
-        if (app.contractorid) {
+        app.contractor = app.contractor || {pcab:{}, manager: {}}
+        if (app.contractor && app.contractor.name) {
           setIsContracted(true);
         } else {
           setIsContracted(false);
@@ -50,11 +48,11 @@ const Contractor = ({
     const errors = {};
     if (!contractor || !contractor.name) errors.name = "Required";
     if (!contractor || !contractor.address) errors.address = "Required";
-    if (!contractor || !contractor.pcabno) errors.pcabno = "Required";
-    if (!contractor || !contractor.pcabvalidaty) errors.pcabvalidaty = "Required";
+    if (!contractor || !contractor.pcab || !contractor.pcab.idno) errors.pcab.idno = "Required";
+    if (!contractor || !contractor.pcab || !contractor.pcab.dtvalid) errors.pcab.dtvalid = "Required";
     if (!contractor || !contractor.tin) errors.tin = "Required";
-    if (!contractor || !contractor.managingofficer || !contractor.managingofficer.name) errors.managingofficername = "Required";
-    if (!contractor || !contractor.managingofficer || !contractor.managingofficer.email) errors.managingofficeremail = "Required";
+    if (!contractor || !contractor.manager || !contractor.manager.name) errors.manageroffice = "Required";
+    if (!contractor || !contractor.manager || !contractor.manager.email) errors.manageremail = "Required";
 
     if (hasErrors(errors)) {
       setErrors(errors);
@@ -70,7 +68,6 @@ const Contractor = ({
       setLoading(true);
       const updatedApp = {
         objid: app.objid,
-        contractorid: app.contractorid,
         contractor: app.contractor
       }
       appService.invoke("update", updatedApp, (err, app) => {
@@ -92,11 +89,11 @@ const Contractor = ({
       <FormPanel visibleWhen={isContracted} context={app} handler={setApp}>
         <Text name="contractor.name" caption="Contractor" required={true} error={errors.name} />
         <Text name="contractor.address" caption="Address" required={true} error={errors.address} />
-        <Text name="contractor.pcabno" caption="PCAB License No." required={true} error={errors.pcabno} />
-        <Date name="contractor.pcabvalidaty" caption="Validity Date" required={true} error={errors.pcabvalidaty} />
+        <Text name="contractor.pcab.idno" caption="PCAB License No." required={true} error={errors.pcabidno} />
+        <Date name="contractor.pcab.dtvalid" caption="Validity Date" required={true} error={errors.pcabdtvalid} />
         <Text name="contractor.tin" caption="TIN" required={true} error={errors.tin} />
-        <Text name="contractor.managingofficer.name" caption="Authorized Managing Officer" required={true} error={errors.managingofficername} />
-        <Email name="contractor.managingofficer.email" required={true} error={errors.managingofficeremail} />
+        <Text name="contractor.manager.name" caption="Authorized Managing Officer" required={true} error={errors.manageroffice} />
+        <Email name="contractor.manager.email" required={true} error={errors.manageremail} />
       </FormPanel>
       <ActionBar>
         <BackLink action={movePrevStep} />

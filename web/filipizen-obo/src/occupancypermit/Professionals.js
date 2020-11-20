@@ -78,7 +78,7 @@ const Professionals = ({
           <div key={prof.objid}>
             {prof.designprofessionalid ? (
               <ProfessionalCard
-              caption={prof.sectionid}
+              caption={`${prof.sectionid} Design Professional`}
               professional={professionals[idx].designprofessional}
               onSelectProfessional={(professionals) => onSelectProfessional(professionals, idx)}
             />
@@ -103,7 +103,7 @@ const Professionals = ({
           <div key={prof.objid}>
             {prof.supervisorid ? (
               <ProfessionalCard
-              caption={prof.sectionid}
+              caption={`${prof.sectionid} Supervisor`}
               professional={professionals[idx].supervisor}
               onSelectProfessional={(professionals) => onSelectProfessional(professionals, idx)}
             />

@@ -363,7 +363,7 @@ public class OnlineBuildingPermitService  {
 		def list = reqEm.find( [apptype: "building"]).orderBy("sortorder").list();
 
 		//apps to download
-		def mitems << [ [reportid:"building_permit", title:"Building Permit", refid: o.appid] ];
+		def mitems = [ [reportid:"building_permit", title:"Building Permit", refid: o.appid] ];
 
 		def alist= ancillaryEm.select("objid,permittypeid,type.title").find( [appid: o.appid ] ).orderBy("type.sortorder").list();
 		alist.each {

@@ -7,11 +7,8 @@ import {
   Spacer,
   Decimal,
   Date,
-  ButtonLink,
-  PageviewIcon,
-  CloudDownloadIcon,
-  Subtitle2,
-  ReportViewer,
+  PreviewReport,
+  DownloadReport,
 } from "rsi-react-web-components";
 
 
@@ -48,16 +45,12 @@ const getHeaderInfo = (contact={}) => {
 const BuildingPermitCompleted = ({
   partner,
   appno,
-  appService,
-  moveNextStep,
-  stepCompleted
+  appService
 }) => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const [app, setApp] = useState({});
-  const [ancillaryPermits, setAncillaryPermits] = useState([]);
-  const [showPreview, setShowPreview] = useState(false);
-
+  const [requirements, setRequirements] = useState([]);
 
   const resetStatus = () => {
     setError(null)
@@ -76,15 +69,15 @@ const BuildingPermitCompleted = ({
     })
   }
 
-  const loadAncillaryPermits = () => {
+  const loadRequirements = () => {
     setLoading(true)
-    appService.invoke("getAncillaryPermits",
+    appService.invoke("getRequirements",
       { appid: appno },
-      (err, ancillaryPermits) => {
+      (err, requirements) => {
         if (err) {
           setError(err)
         } else {
-          setAncillaryPermits(ancillaryPermits)
+          setRequirements(requirements);
           resetStatus()
         }
       }
@@ -92,8 +85,8 @@ const BuildingPermitCompleted = ({
   }
 
   useEffect(() => {
-    loadApplication()
-    loadAncillaryPermits()
+    loadApplication();
+    loadRequirements();
   }, [])
 
 
@@ -113,48 +106,16 @@ const BuildingPermitCompleted = ({
     contractor += ` PRC NO.: ${app.contractor.prc.idno} Issued: ${app.contractor.prc.dtissued}`;
   }
 
-  const onCloseViewer = () => {
-    setShowPreview(false);
-  }
-
-  let items = [];
-  ancillaryPermits.forEach(permit => {
-    items.push({
-      title: permit.permittypeid.toUpperCase(),
-      icon: '',
-      href: `/jreports/obo/${permit.permittypeid}permit?refid=${permit.objid}`,
-    })
-  })
-
   const headerInfo = getHeaderInfo(app.obocontactinfo);
 
   return (
     <Panel>
       <Spacer />
       <Error msg={error} />
-      <ReportViewer
-        title="Building Permit Application"
-        items={items}
-        open={showPreview}
-        style={{}}
-        onClose={onCloseViewer}
-      />
       <FormPanel context={app} handler={setApp}>
         <label>{headerInfo}</label>
         <Spacer height={10} />
         <Panel style={styles.container}>
-          <Panel style={styles.linkContainer}>
-            <ButtonLink
-              caption="Preview"
-              href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/buildingpermit?refid=${appno}`}
-              Icon={PageviewIcon}
-            />
-            <ButtonLink
-              caption="Download"
-              href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/buildingpermit?refid=${appno}`}
-              Icon={CloudDownloadIcon}
-            />
-          </Panel>
           <Panel style={styles.infoContainer}>
             <Text caption="Tracking No." name="objid" readOnly={true} />
             <Text caption="Project Title" name="title" readOnly={true} />
@@ -176,31 +137,48 @@ const BuildingPermitCompleted = ({
         </Panel>
       </FormPanel>
       <Spacer />
-      <Panel style={styles.ancillaryContainer}>
-        <Subtitle2 style={styles.label}>Other Permits</Subtitle2>
-        <Panel visibleWhen={ancillaryPermits.length > 0}>
-          {ancillaryPermits.map((permit) =>
-            <Panel style={styles.ancillaryItem}>
-              <label style={{marginLeft: 20}}>{permit.type.title}</label>
-              <Panel row>
-                <ButtonLink
-                  caption="Preview"
-                  href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
-                  Icon={PageviewIcon}
-                />
-                <ButtonLink
-                  caption="Download"
-                  href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
-                  Icon={CloudDownloadIcon}
-                />
-              </Panel>
+      <Panel style={styles.requirementsContainer}>
+        {requirements.map((req, idx) => {
+          const titles = req.title.split("\n");
+          const items = getItemsComponent(titles);
+          const docs = getDocumentsComponent(partner, req);
+          return (
+            <Panel>
+              <p key={idx} style={styles.requirement}>{`${idx+1}.  ${titles[0]}`}</p>
+              {docs}
+              {items}
             </Panel>
-          )}
-        </Panel>
+          )
+        })}
       </Panel>
     </Panel>
   )
 }
+
+const getItemsComponent = (titles) => {
+  if (titles.length === 1) return null;
+  const items = titles.map((title, x) => {
+    if (x === 0 || !title) return null;
+    return <li style={styles.requirement}>{title}</li>
+  });
+  return <ul>{items}</ul>
+}
+
+const getDocumentsComponent = (partner, req) => {
+  let docs;
+  if (!req.docs) return null;
+  docs = req.docs.map(doc =>
+    <Panel key={doc.reportid} style={styles.document}>
+      <label style={{marginLeft: 20}}>{doc.title}</label>
+      <Panel row>
+        <PreviewReport href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/${doc.reportid}?refid=${doc.refid}`} />
+        <DownloadReport href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/${doc.reportid}?refid=${doc.refid}`}/>
+      </Panel>
+    </Panel>
+  )
+  return <Panel style={{margin: "0px 20px"}}>{docs}</Panel>;
+}
+
 
 const styles = {
   container: {
@@ -223,19 +201,22 @@ const styles = {
     alignItems: "center",
     width: "100%",
   },
-  ancillaryContainer: {
+  requirementsContainer: {
     marginRight: 15,
     marginBottom: 20,
   },
-  ancillaryItem: {
+  requirement: {
+    fontSize: "0.9rem",
+  },
+  document: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     width: "100%",
     padding: 5,
-    marginRight: 10,
+    marginBottom: "5px",
     border: "1px solid #aaa",
-  },
+  }
 }
 
 

@@ -37,7 +37,7 @@ const Completed = ({
           <Label style={styles.label}>Application for Occupancy Permit</Label>
           <ButtonLink
               caption="Preview"
-              href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/occupancypermit?refid=${appno}`}
+              href={`/jreports/obo/certificate_of_occupancy?refid=${appno}`}
               Icon={PageviewIcon}
             />
         </Panel>
@@ -45,7 +45,7 @@ const Completed = ({
           <Label style={styles.label}>Certificate of Completion</Label>
           <ButtonLink
               caption="Preview"
-              href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/completioncertificate?refid=${appno}`}
+              href={`/jreports/obo/certificate_of_completion?refid=${appno}`}
               Icon={PageviewIcon}
             />
         </Panel>
