@@ -5,5 +5,7 @@
 		<field name="sortorder" />	
 		<field name="type" />	
 		<field name="includecost" type="integer" />	
+		<field name="designprofessionalrole" />
+		<field name="supervisorrole" />
 	</element>
 </schema>	

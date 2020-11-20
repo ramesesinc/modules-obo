@@ -13,12 +13,12 @@ import com.rameses.rcp.ui.annotations.Template;
  * @author elmonazareno
  */
 @Template(FormPage.class)
-public class OccupancyApplicationCaptureInitialPage extends javax.swing.JPanel {
+public class OccupancyApplicationInitialPage extends javax.swing.JPanel {
 
     /**
      * Creates new form OccupancyApplicationAskPermitNoPage
      */
-    public OccupancyApplicationCaptureInitialPage() {
+    public OccupancyApplicationInitialPage() {
         initComponents();
     }
 

@@ -13,10 +13,13 @@ import javax.swing.*;
 import com.rameses.io.*;
 import com.rameses.gov.etracs.obo.models.*;
 
-class OccupancyApplicationCaptureModel  {
+class OccupancyApplicationEditModel  {
 
-    @Service("OccupancyApplicationCaptureService")
+    @Service("OccupancyApplicationPersistenceService")
     def svc;
+    
+    @Binding
+    def binding;
     
     def permitno;
     def entity;
@@ -27,6 +30,15 @@ class OccupancyApplicationCaptureModel  {
     
     String title  = "New Occupancy Permit Application";
     
+    @PropertyChangeListener
+    def listener = [
+        "entity.total(material|directlabor|equipment|other)cost" : { o->
+            entity.actualprojectcost = entity.totalmaterialcost+entity.totaldirectlaborcost+entity.totalequipmentcost+entity.totalothercost;
+            binding.refresh("entity.actualprojectcost");
+        }
+    ]
+    
+    
     def create() {
         entity = [:];
         page = "initial";
@@ -36,6 +48,18 @@ class OccupancyApplicationCaptureModel  {
         def permit = svc.findBldgPermit( [controlno: permitno] );
         if(!permit) throw new Exception("Building Permit not found");
         entity.bldgpermit = permit;
+        entity.txntype = permit.txntype;
+        entity.occupancytype = permit.occupancytype;
+        entity.actualnumunits = permit.numunits;
+        entity.actualnumfloors = permit.numfloors;
+        entity.actualtotalfloorarea = permit.totalfloorarea;
+        entity.actualheight = permit.height;
+        
+        entity.totalmaterialcost = 0;
+        entity.totaldirectlaborcost = 0;
+        entity.totalequipmentcost = 0;
+        entity.totalothercost = 0;
+        entity.actualprojectcost = 0;
         page = "view";
         return page;
     }
