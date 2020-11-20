@@ -123,7 +123,6 @@ const BuildingPermitWebController = (props) => {
     setStep(step);
   }
 
-
   if (mode === "apptype") {
     return (
       <ApplicationTypeSelect service={service} error={error} onCancel={history.goBack} onSubmit={processAppType}  />

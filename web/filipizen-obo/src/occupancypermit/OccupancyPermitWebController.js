@@ -22,6 +22,7 @@ import OtherCost from "./OtherCost";
 import Contractor from "./Contractor";
 import Professionals from "./Professionals";
 import Confirmation from "./Confirmation";
+import Completed from "./Completed";
 
 
 const svc = Service.lookup("OnlineOccupancyPermitService", "obo");
@@ -35,6 +36,7 @@ const pages = [
   { step: 5, name: 'contractor', caption: 'Contractor', component: Contractor },
   { step: 6, name: 'professionals', caption: 'Professionals', component: Professionals },
   { step: 7, name: 'confirmation', caption: 'Confirmation', component: Confirmation },
+  { step: 8, name: 'completed', caption: 'Completed Application', component: Completed },
 ]
 
 const OccupancyPermitWebController = (props) => {
@@ -85,6 +87,8 @@ const OccupancyPermitWebController = (props) => {
   }
 
   const moveNextStep = () => {
+    if (app.step == pages.length - 1) return;
+
     setError(null);
     const nextStep = step < app.step ? app.step : step + 1;
     svc.invoke("update", {objid: appno, step: nextStep }, (err, updatedApp) => {
@@ -120,8 +124,6 @@ const OccupancyPermitWebController = (props) => {
           setError(err);
         } else if (!app) {
           setError("Application no. does not exist.");
-        } else if (app.step >= pages.length) {
-          setError("Application has already been submitted.");
         } else {
           onCompleteInitial({appType, appno});
         }
@@ -162,9 +164,11 @@ const OccupancyPermitWebController = (props) => {
 
   return (
     <Page>
-      <Panel target="left" style={styles.stepperContainer} >
-        <Stepper steps={pages} completedStep={app.step} activeStep={step} handleStep={handleStep} />
-      </Panel>
+      {app.step < 8 &&
+        <Panel target="left" style={styles.stepperContainer} >
+          <Stepper steps={pages} completedStep={app.step} activeStep={step} handleStep={handleStep} />
+        </Panel>
+      }
       <Card>
         <Title>{service.title}</Title>
         <Subtitle2>{`Tracking No. ${appno}`}</Subtitle2>

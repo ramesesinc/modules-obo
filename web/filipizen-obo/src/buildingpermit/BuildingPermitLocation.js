@@ -165,7 +165,6 @@ const BuildingPermitLocation = (props) => {
       <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Project Location</Subtitle>
       <Spacer />
-
       <Panel visibleWhen={mode === "view-rpus"}>
         <Subtitle2>Lot Information</Subtitle2>
         <Error msg={error} />
@@ -206,20 +205,13 @@ const BuildingPermitLocation = (props) => {
         Please check carefully if the information is correct.
         For any discrepancies, please contact the Assessor's Office before proceeding.
         </p>
-        {/** TODO:
 
-        <Label>
-          <a href="mailto:assessor@filipizen.com?subject=Building Application Inquiry No: #{appid}&body=Please state your concern: ">[Click Here to Send Message] </a>
-        </Label>
-
-            {(property && property.appno)  &&
-              <Label style={styles.balanceText}>
-                Note: There is still an unpaid balance of <u>Php #{property.bill.amtdue}</u>.
-                You can settle this by paying online <a  href="/partners/${partner.name}/services/rptis/billing#viewbill?refno=#{refno}" target="0"><u>here</u></a>
-              </Label>
-            }
-           */}
-
+          {(property && property.bill && property.appno )  &&
+            <label style={styles.balanceText}>
+              Note: There is still an unpaid balance of <u>Php #{property.bill ? property.bill.amtdue : 0.0}</u>.
+              You can settle this by paying online <a  href={`/partner/${partner.group.name}_${partner.name}/rptis/rptbilling`} target="0"><u>here</u></a>
+            </label>
+          }
         <FormPanel context={property} handler={setProperty}>
           <LotInformation editable={false} />
           <LotOwnershipType property={property} name="lotowned" row editable={false} />
