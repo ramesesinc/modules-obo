@@ -37,8 +37,8 @@
 			<key field="applicantid" target="objid" />
 		</complex>	
 
-		<complex name="contractor" ref="obo_professional_info" jointype="many-to-one" required="false">
-			<key field="contractorid" target="objid" />
+		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one" required="false">
+			<key field="supervisorid" target="objid" />
 		</complex>
 
 		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one" required="false">

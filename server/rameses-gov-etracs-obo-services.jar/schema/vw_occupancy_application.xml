@@ -18,12 +18,7 @@
 		<field name="totalequipmentcost"  type="decimal"/>
 		<field name="totalothercost"  type="decimal"/>
 
-		<field name="totalprojectcost"  type="decimal"/>
-
-		<field name="firealarmcost" type="decimal" />
-		<field name="sprinklercost" type="decimal" />
-		<field name="lpgpipingcost" type="decimal" />
-		<field name="firesuppcost" type="decimal" />
+		<field name="actualprojectcost"  type="decimal"/>
 
 		<field name="occupancytypeid" />
 		<field name="actualnumunits" />

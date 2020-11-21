@@ -10,7 +10,7 @@ SELECT
    t.actor_objid AS task_actor_objid,
    t.actor_name AS task_actor_name,
    (SELECT title FROM sys_wf_node WHERE processname = 'occupancy_application' AND name=t.state) AS task_title,
-   (op.totalmaterialcost + op.totaldirectlaborcost + op.totalequipmentcost + op.totalothercost) AS totalprojectcost
+   (op.totalmaterialcost + op.totaldirectlaborcost + op.totalequipmentcost + op.totalothercost) AS actualprojectcost
 
 FROM occupancy_application op 
 INNER JOIN occupancy_application_task t ON op.taskid = t.taskid
