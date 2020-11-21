@@ -13,10 +13,10 @@ import com.rameses.io.*;
 
 class OccupancytApplicationModel extends WorkflowTaskModel  {
 
-    @Service("BuildingApplicationService")
+    @Service("OccupancyApplicationService")
     def appSvc;
     
-    @Service("BuildingApplicationFeeService")
+    @Service("OccupancyApplicationFeeService")
     def feeSvc;
     
     public String getTitle() {

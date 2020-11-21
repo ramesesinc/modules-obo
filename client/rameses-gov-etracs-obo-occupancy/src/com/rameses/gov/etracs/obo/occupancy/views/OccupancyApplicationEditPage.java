@@ -39,26 +39,6 @@ public class OccupancyApplicationEditPage extends javax.swing.JPanel {
         xLabel6 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
         xLabel2 = new com.rameses.rcp.control.XLabel();
-        xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
-        xLabel22 = new com.rameses.rcp.control.XLabel();
-        xTextField6 = new com.rameses.rcp.control.XTextField();
-        xLabel3 = new com.rameses.rcp.control.XLabel();
-        xComboBox1 = new com.rameses.rcp.control.XComboBox();
-        xComboBox2 = new com.rameses.rcp.control.XComboBox();
-        xDateField5 = new com.rameses.rcp.control.XDateField();
-        xTextField3 = new com.rameses.rcp.control.XTextField();
-        xTextField4 = new com.rameses.rcp.control.XTextField();
-        xTextField5 = new com.rameses.rcp.control.XTextField();
-        xLabel19 = new com.rameses.rcp.control.XLabel();
-        xLabel55 = new com.rameses.rcp.control.XLabel();
-        xLabel56 = new com.rameses.rcp.control.XLabel();
-        xLabel17 = new com.rameses.rcp.control.XLabel();
-        xTextField7 = new com.rameses.rcp.control.XTextField();
-        xDateField3 = new com.rameses.rcp.control.XDateField();
-        xDateField4 = new com.rameses.rcp.control.XDateField();
-        xTextField9 = new com.rameses.rcp.control.XTextField();
-        xDateField8 = new com.rameses.rcp.control.XDateField();
-        xDecimalField8 = new com.rameses.rcp.control.XDecimalField();
         jPanel1 = new javax.swing.JPanel();
         xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
         xLabel11 = new com.rameses.rcp.control.XLabel();
@@ -86,6 +66,31 @@ public class OccupancyApplicationEditPage extends javax.swing.JPanel {
         xLabel35 = new com.rameses.rcp.control.XLabel();
         xDateField6 = new com.rameses.rcp.control.XDateField();
         xDateField7 = new com.rameses.rcp.control.XDateField();
+        xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
+        xLabel22 = new com.rameses.rcp.control.XLabel();
+        xTextField6 = new com.rameses.rcp.control.XTextField();
+        xLabel3 = new com.rameses.rcp.control.XLabel();
+        xComboBox1 = new com.rameses.rcp.control.XComboBox();
+        xComboBox2 = new com.rameses.rcp.control.XComboBox();
+        xDateField5 = new com.rameses.rcp.control.XDateField();
+        xTextField3 = new com.rameses.rcp.control.XTextField();
+        xTextField4 = new com.rameses.rcp.control.XTextField();
+        xTextField5 = new com.rameses.rcp.control.XTextField();
+        xLabel19 = new com.rameses.rcp.control.XLabel();
+        xLabel55 = new com.rameses.rcp.control.XLabel();
+        xLabel56 = new com.rameses.rcp.control.XLabel();
+        xLookupField3 = new com.rameses.rcp.control.XLookupField();
+        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
+        xPanel2 = new com.rameses.rcp.control.XPanel();
+        xLabel18 = new com.rameses.rcp.control.XLabel();
+        xButton2 = new com.rameses.rcp.control.XButton();
+        xLabel17 = new com.rameses.rcp.control.XLabel();
+        xTextField7 = new com.rameses.rcp.control.XTextField();
+        xDateField3 = new com.rameses.rcp.control.XDateField();
+        xDateField4 = new com.rameses.rcp.control.XDateField();
+        xTextField9 = new com.rameses.rcp.control.XTextField();
+        xDateField8 = new com.rameses.rcp.control.XDateField();
+        xDecimalField8 = new com.rameses.rcp.control.XDecimalField();
 
         xFormPanel1.setCaptionWidth(190);
         xFormPanel1.setPreferredSize(new java.awt.Dimension(200, 300));
@@ -135,124 +140,6 @@ public class OccupancyApplicationEditPage extends javax.swing.JPanel {
         xLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 60));
         xFormPanel1.add(xLabel2);
-
-        xFormPanel2.setCaptionWidth(140);
-
-        xLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        xLabel22.setShowCaption(false);
-        xLabel22.setText("Application Info");
-        xFormPanel2.add(xLabel22);
-
-        xTextField6.setCaption("App No");
-        xTextField6.setName("entity.appno"); // NOI18N
-        xTextField6.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xTextField6);
-
-        xLabel3.setCaption("");
-        xLabel3.setExpression("Leave this blank to auto generate the app no");
-        xFormPanel2.add(xLabel3);
-
-        xComboBox1.setCaption("Txn Type");
-        xComboBox1.setItems("txnTypes");
-        xComboBox1.setName("entity.txntype"); // NOI18N
-        xFormPanel2.add(xComboBox1);
-
-        xComboBox2.setCaption("App Type");
-        xComboBox2.setItems("appTypes");
-        xComboBox2.setName("entity.apptype"); // NOI18N
-        xFormPanel2.add(xComboBox2);
-
-        xDateField5.setCaption("App Date");
-        xDateField5.setName("entity.appdate"); // NOI18N
-        xDateField5.setPreferredSize(new java.awt.Dimension(120, 20));
-        xFormPanel2.add(xDateField5);
-
-        xTextField3.setCaption("Contact Name");
-        xTextField3.setName("entity.contact.name"); // NOI18N
-        xTextField3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xTextField3);
-
-        xTextField4.setCaption("Contact Email");
-        xTextField4.setName("entity.contact.email"); // NOI18N
-        xTextField4.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        xFormPanel2.add(xTextField4);
-
-        xTextField5.setCaption("Contact Mobile No");
-        xTextField5.setName("entity.contact.mobileno"); // NOI18N
-        xTextField5.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xTextField5);
-
-        xLabel19.setExpression("Zone Classification");
-        xLabel19.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        xLabel19.setShowCaption(false);
-        xFormPanel2.add(xLabel19);
-
-        xLabel55.setCaption("Zone classification");
-        xLabel55.setExpression("#{entity.bldgpermit.zoneclass.objid} - #{entity.bldgpermit.zoneclass.title}");
-        xLabel55.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        xLabel55.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel55);
-
-        xLabel56.setCaption("Zone ");
-        xLabel56.setExpression("#{entity.bldgpermit.zone}");
-        xLabel56.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        xLabel56.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel56);
-
-        xLabel17.setCaption("");
-        xLabel17.setExpression("Occupancy Permit Info");
-        xLabel17.setName("zonetitle"); // NOI18N
-        xLabel17.setVisibleWhen("#{ entity.permitissued == true }");
-        xLabel17.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        xLabel17.setShowCaption(false);
-        xFormPanel2.add(xLabel17);
-
-        xTextField7.setCaption("Permit No");
-        xTextField7.setDepends(new String[] {"entity.permitissued"});
-        xTextField7.setName("entity.permitno"); // NOI18N
-        xTextField7.setVisibleWhen("#{ entity.permitissued == true }");
-        xTextField7.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField7.setRequired(true);
-        xFormPanel2.add(xTextField7);
-
-        xDateField3.setCaption("Date Issued");
-        xDateField3.setDepends(new String[] {"entity.permitissued"});
-        xDateField3.setName("entity.permitdtissued"); // NOI18N
-        xDateField3.setVisibleWhen("#{ entity.permitissued == true }");
-        xDateField3.setPreferredSize(new java.awt.Dimension(180, 20));
-        xDateField3.setRequired(true);
-        xFormPanel2.add(xDateField3);
-
-        xDateField4.setCaption("Permit Expiry Date");
-        xDateField4.setDepends(new String[] {"entity.permitissued"});
-        xDateField4.setName("entity.permitexpirydate"); // NOI18N
-        xDateField4.setVisibleWhen("#{ entity.permitissued == true }");
-        xDateField4.setPreferredSize(new java.awt.Dimension(180, 20));
-        xDateField4.setRequired(true);
-        xFormPanel2.add(xDateField4);
-
-        xTextField9.setCaption("Payment Ref No");
-        xTextField9.setName("entity.receiptno"); // NOI18N
-        xTextField9.setVisibleWhen("#{ entity.permitissued == true }");
-        xTextField9.setPreferredSize(new java.awt.Dimension(180, 20));
-        xTextField9.setRequired(true);
-        xFormPanel2.add(xTextField9);
-
-        xDateField8.setCaption("Payment Date");
-        xDateField8.setName("entity.receiptdate"); // NOI18N
-        xDateField8.setVisibleWhen("#{ entity.permitissued == true }");
-        xDateField8.setPreferredSize(new java.awt.Dimension(180, 20));
-        xDateField8.setRequired(true);
-        xFormPanel2.add(xDateField8);
-
-        xDecimalField8.setCaption("Amount Paid");
-        xDecimalField8.setName("entity.amtpaid"); // NOI18N
-        xDecimalField8.setVisibleWhen("#{ entity.permitissued == true }");
-        xFormPanel2.add(xDecimalField8);
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -434,6 +321,168 @@ public class OccupancyApplicationEditPage extends javax.swing.JPanel {
 
         jPanel1.add(xFormPanel4, java.awt.BorderLayout.EAST);
 
+        xFormPanel2.setCaptionWidth(160);
+
+        xLabel22.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xLabel22.setShowCaption(false);
+        xLabel22.setText("Application Info");
+        xFormPanel2.add(xLabel22);
+
+        xTextField6.setCaption("App No");
+        xTextField6.setName("entity.appno"); // NOI18N
+        xTextField6.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xTextField6);
+
+        xLabel3.setCaption("");
+        xLabel3.setExpression("Leave this blank to auto generate the app no");
+        xFormPanel2.add(xLabel3);
+
+        xComboBox1.setCaption("Txn Type");
+        xComboBox1.setItems("txnTypes");
+        xComboBox1.setName("entity.txntype"); // NOI18N
+        xComboBox1.setRequired(true);
+        xFormPanel2.add(xComboBox1);
+
+        xComboBox2.setCaption("App Type");
+        xComboBox2.setItems("appTypes");
+        xComboBox2.setName("entity.apptype"); // NOI18N
+        xComboBox2.setRequired(true);
+        xFormPanel2.add(xComboBox2);
+
+        xDateField5.setCaption("App Date");
+        xDateField5.setName("entity.appdate"); // NOI18N
+        xDateField5.setPreferredSize(new java.awt.Dimension(120, 20));
+        xDateField5.setRequired(true);
+        xFormPanel2.add(xDateField5);
+
+        xTextField3.setCaption("Contact Name");
+        xTextField3.setName("entity.contact.name"); // NOI18N
+        xTextField3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xTextField3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField3.setRequired(true);
+        xFormPanel2.add(xTextField3);
+
+        xTextField4.setCaption("Contact Email");
+        xTextField4.setName("entity.contact.email"); // NOI18N
+        xTextField4.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField4.setRequired(true);
+        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        xFormPanel2.add(xTextField4);
+
+        xTextField5.setCaption("Contact Mobile No");
+        xTextField5.setName("entity.contact.mobileno"); // NOI18N
+        xTextField5.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField5.setRequired(true);
+        xFormPanel2.add(xTextField5);
+
+        xLabel19.setExpression("Zone Classification");
+        xLabel19.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xLabel19.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xLabel19.setShowCaption(false);
+        xFormPanel2.add(xLabel19);
+
+        xLabel55.setCaption("Zone classification");
+        xLabel55.setExpression("#{entity.bldgpermit.zoneclass.objid} - #{entity.bldgpermit.zoneclass.title}");
+        xLabel55.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel55.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel55);
+
+        xLabel56.setCaption("Zone ");
+        xLabel56.setExpression("#{entity.bldgpermit.zone}");
+        xLabel56.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel56.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel56);
+
+        xLookupField3.setCaption("Project Supervisor");
+        xLookupField3.setExpression("#{ entity.supervisor?.objid == null ? '' : entity.supervisor.lastname + ', ' + entity.supervisor.firstname + '/'+ entity.supervisor.profession + '-PRC No:' + entity.supervisor.prc.idno }");
+        xLookupField3.setHandler("obo_professional:lookup");
+        xLookupField3.setName("entity.supervisor"); // NOI18N
+        xLookupField3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLookupField3.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLookupField3);
+
+        xCheckBox1.setName("hascontractor"); // NOI18N
+        xCheckBox1.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xCheckBox1.setShowCaption(false);
+        xCheckBox1.setText("Has Contractor?");
+        xFormPanel2.add(xCheckBox1);
+
+        xPanel2.setCaption("Contractor");
+        xPanel2.setDepends(new String[] {"hascontractor"});
+        xPanel2.setVisibleWhen("#{ hascontractor == true }");
+        xPanel2.setPreferredSize(new java.awt.Dimension(0, 29));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 2, 0);
+        flowLayout1.setAlignOnBaseline(true);
+        xPanel2.setLayout(flowLayout1);
+
+        xLabel18.setCaption("Contractor");
+        xLabel18.setExpression("#{ entity.contractor.name }");
+        xLabel18.setName("entity.contractor"); // NOI18N
+        xLabel18.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel18.setPreferredSize(new java.awt.Dimension(250, 25));
+        xPanel2.add(xLabel18);
+
+        xButton2.setName("editContractor"); // NOI18N
+        xButton2.setIconResource("images/toolbars/edit.png");
+        xButton2.setImmediate(true);
+        xButton2.setPreferredSize(new java.awt.Dimension(30, 29));
+        xButton2.setTarget("");
+        xPanel2.add(xButton2);
+
+        xFormPanel2.add(xPanel2);
+
+        xLabel17.setCaption("");
+        xLabel17.setExpression("Occupancy Permit Info");
+        xLabel17.setName("zonetitle"); // NOI18N
+        xLabel17.setVisibleWhen("#{ entity.permitissued == true }");
+        xLabel17.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xLabel17.setShowCaption(false);
+        xFormPanel2.add(xLabel17);
+
+        xTextField7.setCaption("Permit No");
+        xTextField7.setDepends(new String[] {"entity.permitissued"});
+        xTextField7.setName("entity.permitno"); // NOI18N
+        xTextField7.setVisibleWhen("#{ entity.permitissued == true }");
+        xTextField7.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField7.setRequired(true);
+        xFormPanel2.add(xTextField7);
+
+        xDateField3.setCaption("Date Issued");
+        xDateField3.setDepends(new String[] {"entity.permitissued"});
+        xDateField3.setName("entity.permitdtissued"); // NOI18N
+        xDateField3.setVisibleWhen("#{ entity.permitissued == true }");
+        xDateField3.setPreferredSize(new java.awt.Dimension(180, 20));
+        xDateField3.setRequired(true);
+        xFormPanel2.add(xDateField3);
+
+        xDateField4.setCaption("Permit Expiry Date");
+        xDateField4.setDepends(new String[] {"entity.permitissued"});
+        xDateField4.setName("entity.permitexpirydate"); // NOI18N
+        xDateField4.setVisibleWhen("#{ entity.permitissued == true }");
+        xDateField4.setPreferredSize(new java.awt.Dimension(180, 20));
+        xDateField4.setRequired(true);
+        xFormPanel2.add(xDateField4);
+
+        xTextField9.setCaption("Payment Ref No");
+        xTextField9.setName("entity.receiptno"); // NOI18N
+        xTextField9.setVisibleWhen("#{ entity.permitissued == true }");
+        xTextField9.setPreferredSize(new java.awt.Dimension(180, 20));
+        xTextField9.setRequired(true);
+        xFormPanel2.add(xTextField9);
+
+        xDateField8.setCaption("Payment Date");
+        xDateField8.setName("entity.receiptdate"); // NOI18N
+        xDateField8.setVisibleWhen("#{ entity.permitissued == true }");
+        xDateField8.setPreferredSize(new java.awt.Dimension(180, 20));
+        xDateField8.setRequired(true);
+        xFormPanel2.add(xDateField8);
+
+        xDecimalField8.setCaption("Amount Paid");
+        xDecimalField8.setName("entity.amtpaid"); // NOI18N
+        xDecimalField8.setVisibleWhen("#{ entity.permitissued == true }");
+        xFormPanel2.add(xDecimalField8);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -464,6 +513,8 @@ public class OccupancyApplicationEditPage extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private com.rameses.rcp.control.XButton xButton2;
+    private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XDateField xDateField3;
@@ -494,6 +545,7 @@ public class OccupancyApplicationEditPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel15;
     private com.rameses.rcp.control.XLabel xLabel16;
     private com.rameses.rcp.control.XLabel xLabel17;
+    private com.rameses.rcp.control.XLabel xLabel18;
     private com.rameses.rcp.control.XLabel xLabel19;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel21;
@@ -512,6 +564,8 @@ public class OccupancyApplicationEditPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XLabel xLabel9;
+    private com.rameses.rcp.control.XLookupField xLookupField3;
+    private com.rameses.rcp.control.XPanel xPanel2;
     private com.rameses.rcp.control.XTextField xTextField3;
     private com.rameses.rcp.control.XTextField xTextField4;
     private com.rameses.rcp.control.XTextField xTextField5;

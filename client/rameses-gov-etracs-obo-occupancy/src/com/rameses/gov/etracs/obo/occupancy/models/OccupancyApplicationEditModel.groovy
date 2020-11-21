@@ -24,6 +24,7 @@ class OccupancyApplicationEditModel  {
     def permitno;
     def entity;
     def page;
+    boolean hascontractor;
     
     def appTypes = ["FULL", "PARTIAL"];
     def txnTypes = ["SIMPLE","COMPLEX"];
@@ -40,7 +41,7 @@ class OccupancyApplicationEditModel  {
     
     
     def create() {
-        entity = [:];
+        entity = [contact:[:]];
         page = "initial";
     }
     
@@ -49,12 +50,13 @@ class OccupancyApplicationEditModel  {
         if(!permit) throw new Exception("Building Permit not found");
         entity.bldgpermit = permit;
         entity.txntype = permit.txntype;
+        entity.applicant = permit.applicant;
         entity.occupancytype = permit.occupancytype;
         entity.actualnumunits = permit.numunits;
         entity.actualnumfloors = permit.numfloors;
         entity.actualtotalfloorarea = permit.totalfloorarea;
         entity.actualheight = permit.height;
-        
+        entity.supervisor = permit.supervisor;
         entity.totalmaterialcost = 0;
         entity.totaldirectlaborcost = 0;
         entity.totalequipmentcost = 0;
@@ -70,9 +72,20 @@ class OccupancyApplicationEditModel  {
     }
     
     def save() {
-        
+        if(!MsgBox.confirm("You are about to create this application. Proceed?")) return null;
+        def e = svc.create( entity );
+        def op = Inv.lookupOpener("vw_occupancy_application:open", [entity:e]);
+        op.target = "topwindow";
+        return op;
     }
     
+    def editContractor() {
+        def h = { o->
+            entity.contractor = o;
+            binding.refresh()
+        }
+        return Inv.lookupOpener("occupancy_contractor", [entity: entity.contractor, handler: h])
+    }
     
     
 }

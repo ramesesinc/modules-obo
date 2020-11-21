@@ -52,7 +52,7 @@
 		<field name="location_barangay_objid" />
 
 		<complex name="worktypes" type="list" serializer="default" required="false"/>
-		<field name="contractorid" />
+		<field name="supervisorid" />
 
 		<field name="createdby_objid" />
 		<field name="createdby_name" />

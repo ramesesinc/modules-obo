@@ -33,7 +33,7 @@ SELECT
    a.location_street,
    a.location_barangay_name,
    a.location_barangay_objid,
-   a.contractorid,
+   a.supervisorid,
    a.location_unitno,
    a.location_bldgno,
    a.location_bldgname,

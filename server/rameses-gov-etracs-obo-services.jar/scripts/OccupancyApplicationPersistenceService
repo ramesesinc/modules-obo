@@ -53,8 +53,17 @@ class OccupancyApplicationPersistenceService {
     @Env
     def env;
 
+    @ProxyMethod
+    public def findBldgPermit( def o ) {
+    	return bldgPermitEm.find( [controlno: o.controlno ] ).first();
+    }
+
  	@ProxyMethod
 	public def create( def app ) {
+		if( !app.actualprojectcost )
+			throw new Exception("Actual Project cost is required");
+		app.orgcode = env.ORGID;	
+
 		def dt = dateSvc.getServerDate();
 		if(!app.appno) {
 			app.appno = appSvc.generateAppNo([:]);
@@ -65,6 +74,7 @@ class OccupancyApplicationPersistenceService {
 
 		//remove application before so it can be replaced
 		def applicant = app.remove("applicant");
+		
 		app.txnmode = "CAPTURE";
 		app.createdby = [objid: env.USERID, name: env.FULLNAME];
 		app.dtcreated = dt;
@@ -113,7 +123,7 @@ class OccupancyApplicationPersistenceService {
 		}
 		else {
 			//save all documents that are auto create that does not exist above
-			subdocEm.getSubdocsToAutoCreate( [apptype:'occupancy', appid: newapp.objid ]).each {
+			subdocEm.getSubdocsToAutoCreate( [apptype:'occupancy', appid: app.objid ]).each {
 				def sd = [:];
 				sd.appid = app.objid;
 				sd.doctype = [objid: it.objid];
