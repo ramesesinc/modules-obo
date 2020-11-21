@@ -28,6 +28,5 @@ class AncillaryPermitReportInterceptor {
 		req.data = app;
 		req.reportid = reportid.replace("building_ancillary_", "") + "_permit";
 		req.template = "reports/obo/" + req.reportid;
-		println 'ancillary template => ' + req.template;
 	}
 }

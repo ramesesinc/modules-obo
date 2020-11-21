@@ -8,6 +8,8 @@ import {
   BackLink,
   ButtonLink,
   PageviewIcon,
+  PreviewReport,
+  DownloadReport,
 } from 'rsi-react-web-components';
 
 const Confirmation = ({
@@ -20,7 +22,6 @@ const Confirmation = ({
 
   const [error, setError] = useState();
   const [app, setApp] = useState({});
-  const [isContracted, setIsContracted] = useState(false);
 
   useEffect(() => {
     appService.invoke("getApplication", {appid: appno}, (err, app) => {
@@ -53,19 +54,17 @@ const Confirmation = ({
       <Panel style={styles.container}>
         <Panel  style={styles.row}>
           <Label style={styles.label}>Application for Occupancy Permit</Label>
-          <ButtonLink
-              caption="Preview"
-              href={`/jreports/obo/certificate_of_occupancy?refid=${appno}`}
-              Icon={PageviewIcon}
-            />
+          <Panel row>
+            <PreviewReport href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/certificate_of_occupancy?refid=${appno}`} />
+            <DownloadReport href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/certificate_of_occupancy?refid=${appno}`}/>
+          </Panel>
         </Panel>
         <Panel style={styles.row}>
           <Label style={styles.label}>Certificate of Completion</Label>
-          <ButtonLink
-              caption="Preview"
-              href={`/jreports/obo/certificate_of_completion?refid=${appno}`}
-              Icon={PageviewIcon}
-            />
+          <Panel row>
+            <PreviewReport href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/certificate_of_completion?refid=${appno}`} />
+            <DownloadReport href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/certificate_of_completion?refid=${appno}`}/>
+          </Panel>
         </Panel>
       </Panel>
       <ActionBar>
@@ -78,8 +77,7 @@ const Confirmation = ({
 
 const styles = {
   container: {
-    maxWidth: 350,
-    marginLeft: 50,
+    padding: "0px 30px",
   },
   row: {
     display: "flex",

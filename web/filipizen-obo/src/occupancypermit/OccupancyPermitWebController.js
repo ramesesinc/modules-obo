@@ -14,6 +14,7 @@ import {
 } from 'rsi-react-web-components';
 
 import ApplicationTypeSelect from "../components/ApplicationTypeSelect";
+import Applicant from "./Applicant";
 import OccupancyPermitInitial from "./OccupancyPermitInitial";
 import OccupancyType from "./OccupancyType";
 import PlannedVsActual from "./PlannedVsActual";
@@ -30,13 +31,14 @@ const svc = Service.lookup("OnlineOccupancyPermitService", "obo");
 const pages = [
   { step: 0, component: null },
   { step: 1, name: 'apptype', caption: 'Application Type', component: OccupancyType },
-  { step: 2, name: 'actualcost', caption: 'Actual Costs', component: ActualCost },
-  { step: 3, name: 'othercost', caption: 'Fire Safety Costs', component: OtherCost },
-  { step: 4, name: 'plannedactual', caption: 'Planned vs Actual', component: PlannedVsActual },
-  { step: 5, name: 'contractor', caption: 'Contractor', component: Contractor },
-  { step: 6, name: 'professionals', caption: 'Professionals', component: Professionals },
-  { step: 7, name: 'confirmation', caption: 'Confirmation', component: Confirmation },
-  { step: 8, name: 'completed', caption: 'Completed', component: Completed },
+  { step: 2, name: 'applicant', caption: 'Applicant', component: Applicant },
+  { step: 3, name: 'actualcost', caption: 'Actual Costs', component: ActualCost },
+  { step: 4, name: 'othercost', caption: 'Fire Safety Costs', component: OtherCost },
+  { step: 5, name: 'plannedactual', caption: 'Planned vs Actual', component: PlannedVsActual },
+  { step: 6, name: 'contractor', caption: 'Contractor', component: Contractor },
+  { step: 7, name: 'professionals', caption: 'Professionals', component: Professionals },
+  { step: 8, name: 'confirmation', caption: 'Confirmation', component: Confirmation },
+  { step: 9, name: 'completed', caption: 'Completed', component: Completed },
 ]
 
 const OccupancyPermitWebController = (props) => {
@@ -133,7 +135,6 @@ const OccupancyPermitWebController = (props) => {
 
   const onComplete = () => {
     moveNextStep();
-    props.history.goBack();
   }
 
   if (mode === "apptype") {
@@ -159,12 +160,13 @@ const OccupancyPermitWebController = (props) => {
     appService: svc,
     currentStep: step,
     stepCompleted: step < app.step,
-    onComplete
+    onComplete,
+    history: props.history,
   };
 
   return (
     <Page>
-      {app.step < 8 &&
+      {app.step < 9 &&
         <Panel target="left" style={styles.stepperContainer} >
           <Stepper steps={pages} completedStep={app.step} activeStep={step} handleStep={handleStep} />
         </Panel>

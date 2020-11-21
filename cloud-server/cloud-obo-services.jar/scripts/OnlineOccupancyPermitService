@@ -87,15 +87,23 @@ public class OnlineOccupancyPermitService  {
 	@ProxyMethod
 	public def updateProfessionals( professionals) {
 		professionals.each{
-			println it.sectionid + '==================='
-			println 'designid => ' + it.designprofessionalid
-			println 'supervisorid => ' + it.supervisorid
 			profEm.find([objid: it.objid]).update(it);
 		}
 		return professionals;
 	}
 
-	
+	@ProxyMethod 
+	public def getApplicant(def o) {
+		def app = appEm.select("applicantid").find( [objid: o.appid ] ).first();
+		if(!app.applicantid) return null;
+		return entityEm.find( [objid: app.applicantid ] ).first();		
+	}
+
+	@ProxyMethod
+	public def saveApplicant(def o) {
+		def applicant = saveEntity(o);
+		appEm.find([objid:o.appid]).update([applicantid: applicant.objid]);
+	}
 
 	//This is called by the local client
 	@ProxyMethod

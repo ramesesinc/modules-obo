@@ -11,7 +11,8 @@ import {
   Subtitle,
   Page,
   Card,
-  Title
+  Title,
+  Panel
 } from 'rsi-react-web-components';
 
 const ApplicationTypeSelect = ({
@@ -44,18 +45,20 @@ const ApplicationTypeSelect = ({
           <Item caption="Create New Application" value="new" />
           <Item caption="Resume Pending Application" value="resume" />
         </Radio>
-        <Text
-          caption="Application Tracking No."
-          value={appno} onChange={setAppno}
-          visibleWhen={appType === "resume"}
-          variant="outlined"
-          fullWidth={false}
-          required
-          style={{marginLeft: 40}}
-          error={errorText.appno || error}
-          helperText={errorText.appno || error}
-          size="small"
-          />
+        <Panel style={{paddingLeft: 30}}>
+          <Text
+            caption="Application Tracking No."
+            value={appno} onChange={setAppno}
+            visibleWhen={appType === "resume"}
+            variant="outlined"
+            fullWidth={false}
+            required
+            style={{marginLeft: 40}}
+            error={errorText.appno || error}
+            helperText={errorText.appno || error}
+            size="small"
+            />
+        </Panel>
         <ActionBar>
           <BackLink caption="Cancel" action={onCancel} />
           <Button caption="Next" action={submitAppType} />
