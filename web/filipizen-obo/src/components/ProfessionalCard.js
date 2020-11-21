@@ -5,10 +5,9 @@ import {
   Image,
 } from "rsi-react-web-components";
 
-import "./ProfessionalCard.css";
 import ProfessionalLookup from "./ProfessionalLookup";
 
-const ProfessionalCard = ({ professional  ={}, caption, onSelectProfessional, photoUrl }) => {
+const ProfessionalCard = ({ professional = {prc:{}, ptr:{}}, caption, onSelectProfessional, photoUrl }) => {
   let name = "";
   if (professional.lastname) {
     name = `${professional.lastname}, ${professional.firstname} ${professional.middlename}`
@@ -39,7 +38,7 @@ const ProfessionalCard = ({ professional  ={}, caption, onSelectProfessional, ph
       </Panel>
       <div style={{marginTop: 10, marginBottom: 10, padding: 10}}>
         <div style={styles.nameContainer}>
-          <Panel>
+          <Panel center>
             <Label labelStyle={styles.name}>{name}</Label>
             <Label labelStyle={styles.profession}>{professional.profession}</Label>
           </Panel>
@@ -84,6 +83,7 @@ const styles = {
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 5,
+    minWidth: 400
   },
   nameContainer: {
     dipslay: "flex",
@@ -91,15 +91,14 @@ const styles = {
     marginBottom: 5,
   },
   name: {
-    fontSize: 16,
-    fontWeight: 600,
+    fontSize: 18,
+    fontWeight: 800,
   },
   profession: {
     fontSize: 14,
     fontWeight: 600,
     backgroundColor: "#ddddd",
     width: "100%",
-    padding: 10,
   },
   row: {
     display: "flex",

@@ -11,12 +11,11 @@ import {
 import ProfessionalLookup from "../components/ProfessionalLookup";
 import ProfessionalCard from "../components/ProfessionalCard";
 
-const BuildingPermitContractor = ({
+const BuildingPermitSupervisor = ({
   partner,
   appno,
   appService,
   moveNextStep,
-  stepCompleted
 }) => {
   const initialProject = {
     appid: appno,
@@ -34,40 +33,11 @@ const BuildingPermitContractor = ({
       if (err) {
         setError(err);
       } else {
-        setProfessional(project.contractor);
+        setProfessional(project.supervisor);
         setProject(project);
       }
     });
   }, [])
-
-  const submitProjectDetail = () => {
-    setError(null);
-    const detail = {
-      appid: appno,
-      title: project.title,
-      description: project.description,
-      numunits: project.numunits,
-      totalfloorarea: project.totalfloorarea,
-      height: project.height,
-      numfloors: project.numfloors,
-      projectcost: project.projectcost,
-      dtproposedconstruction: project.dtproposedconstruction,
-      dtexpectedcompletion: project.dtexpectedcompletion,
-    };
-    appService.invoke("update", detail, (err, proj) => {
-      if (err) {
-        setError(err);
-      } else {
-        clearStatus();
-        setMode("select-worktype");
-      }
-    });
-  }
-
-  const clearStatus = () => {
-    setError(null);
-    setLoading(false);
-  }
 
   const onSelectProfessional = (professionals) => {
     if (professionals.length === 0) {
@@ -76,7 +46,7 @@ const BuildingPermitContractor = ({
     }
 
     const professional = professionals[0];
-    appService.invoke("update", {appid: appno, contractorid: professional.objid}, (err, app) => {
+    appService.invoke("update", {appid: appno, supervisorid: professional.objid}, (err, app) => {
       if (err) {
         setError(err);
       } else {
@@ -126,4 +96,4 @@ const BuildingPermitContractor = ({
 }
 
 
-export default BuildingPermitContractor
+export default BuildingPermitSupervisor

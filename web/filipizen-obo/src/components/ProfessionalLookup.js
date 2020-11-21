@@ -62,6 +62,7 @@ const ProfessionalLookup = ({
         hideSearchText={hideSearchText}
         enableSelect={selectedItems && selectedItems.length > 0}
         fullWidth={fullWidth}
+        rootStyle={{minWidth: 400}}
       >
         <FormPanel context={query} handler={setQuery}>
           <Panel row>
