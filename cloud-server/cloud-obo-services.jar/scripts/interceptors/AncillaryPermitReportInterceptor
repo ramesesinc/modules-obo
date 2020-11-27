@@ -5,11 +5,11 @@ class AncillaryPermitReportInterceptor {
 	@Service(value="OnlineBuildingPermitService")
 	def oboReportSvc;
 
-	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
-	public def beforeGenerateReport( evt ) {
+	@Before( pattern="FormReportService.getData", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
+	public def getData( evt ) {
 		def req = evt.args[0];
 		def reportid =  req.reportid;
-		def refid = req.params?.refid;
+		def refid = req.parameters.objid;
 
 	 	def app = oboReportSvc.getAncillaryPermit([ objid: refid ]);
 	 	def parent = oboReportSvc.getApplication([ appid: app.appid ]);
@@ -35,4 +35,11 @@ class AncillaryPermitReportInterceptor {
 		req.reportid = reportid.replace("building_ancillary_", "") + "_permit";
 		req.template = "reports/obo/" + req.reportid;
 	}
+
+	/*
+	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
+	public def beforeGenerateReport( evt ) {
+		def req = evt.args[0];
+	}
+	*/
 }

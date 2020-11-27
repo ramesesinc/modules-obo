@@ -68,6 +68,7 @@
 
 		<field name="bldgpermitno" />	
 		<field name="bldgpermitdtissued" />	
+		<field name="location_text" />
 
 	</element>
 </schema>	
