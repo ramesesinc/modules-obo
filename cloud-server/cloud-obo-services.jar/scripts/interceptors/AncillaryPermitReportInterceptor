@@ -28,7 +28,7 @@ class AncillaryPermitReportInterceptor {
 		
 		def worktypes = [:];
 		app.worktypes?.each {
-			worktypes.put( it.toLowerCase(), true );
+			worktypes.put( it.toLowerCase()?.replace("/s", "_") , true );
 		}
 		app.worktypes = worktypes;
 		
