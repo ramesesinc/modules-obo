@@ -28,7 +28,8 @@
 		<field name="actualnumfloors" />
 		<field name="dtactualstarted" />
 		<field name="dtactualcompleted" />
-		<field name="inspectiondate" />
+
+		<field name="title" />
 
 		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one" required="false" includefields="objid,profession,.*name,prc.*,ptr.*">
 			<key field="supervisorid" target="objid" />
@@ -64,6 +65,10 @@
 		<field name="approverid" />
 		<field name="endorserid" />
 		<field name="issuedby_objid" />	
+
+		<field name="bldgpermitno" />	
+		<field name="bldgpermitdtissued" />	
+
 	</element>
 </schema>	
 

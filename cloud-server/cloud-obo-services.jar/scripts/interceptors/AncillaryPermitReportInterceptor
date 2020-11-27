@@ -14,7 +14,8 @@ class AncillaryPermitReportInterceptor {
 	 	def app = oboReportSvc.getAncillaryPermit([ objid: refid ]);
 	 	def parent = oboReportSvc.getApplication([ appid: app.appid ]);
 		if ( parent) { 
-			app.putAll( parent );
+			parent.putAll( app );
+			app = parent;
 		}
 
 		app.lotowner  = app.location?.owner;
@@ -24,6 +25,11 @@ class AncillaryPermitReportInterceptor {
 			app.put( it.name.toLowerCase(), it.value );	
 		}	
 		
+		def worktypes = [:];
+		app.worktypes?.each {
+			worktypes.put( it.toLowerCase(), true );
+		}
+		app.worktypes = worktypes;
 		
 		req.data = app;
 		req.reportid = reportid.replace("building_ancillary_", "") + "_permit";
