@@ -28,7 +28,7 @@ class AncillaryPermitReportInterceptor {
 		
 		def worktypes = [:];
 		app.worktypes?.each {
-			worktypes.put( it.toLowerCase(), true );
+			worktypes.put( it.toLowerCase()?.replace("/s", "_") , true );
 		}
 		app.worktypes = worktypes;
 		
@@ -36,12 +36,12 @@ class AncillaryPermitReportInterceptor {
 		result.data = app;
 	}
 
-	/*
 	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
 	public def beforeGenerateReport( evt ) {
 		def req = evt.args[0];
-
+		req.each { k,v->
+			println k+"="+v;
+		}
 	}
-	*/
 
 }
