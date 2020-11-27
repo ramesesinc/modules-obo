@@ -1,0 +1,183 @@
+<link href="/themes/default/css/search.css?ver=1" type="text/css" rel="stylesheet" />
+
+<div class="profile">
+  <button onclick="goBack()" class="btn btn-primary">Go Back</button>
+  <div class="profile-inner">
+      <div class="row">
+        <div class="col-md-9">
+          <h1>{entity?.name}</h1>
+          <p>Address: {entity?.address?.text ? entity.address.text : ''}</p>
+          <p>Email: {entity?.email ? entity.email : ''}</p>
+          <p>Contact Nos: {[entity?.mobileno, entity?.phoneno].findAll{( it )}.join(' / ')}</p>
+        </div>
+        <div class="col-md-3">
+          <img src="{photolink}" class="img-profile">
+        </div>
+      </div>
+      <div class="row">
+        <h3>Personal Information</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <p>Date of Birth</p>
+          <p>Age </p>
+          <p>Sex </p>
+          <p>Place of Birth</p>
+          <p>Civil Status</p>
+          <p>Citizenship</p>
+          <p>Weight</p>
+          <p>Height</p>
+          <p>Religion</p>
+          <p>Disability</p>
+          <p>Employment Status</p>
+          <p>TIN</p>
+           if ( entity?.gsis?.idno ) { %> 
+            <p>GSIS No.</p> 
+           } %> 
+          <p>SSS No.</p>
+          <p>PAG-IBIG No.</p>
+          <p>PHILHEALTH No.</p>
+          <br>
+          <p><strong>Present Address</strong></p>
+          <p>House No. / Street/ Subdivision</p>
+          <p>Barangay</p>
+          <p>Municipality / City</p>
+          <p>Province</p>
+          <br>
+          <p><strong>Permanent Address</strong></p>
+          <p>House No. / Street / Subdivision</p>
+          <p>Barangay</p>
+          <p>Municipality / City</p>
+          <p>Province</p> 
+        </div>
+        <div class="col-md-6">
+          <p>: {entity?.birthdate ? entity.birthdate: ''}</p>
+          <p>: {entity?.age ? entity.age: ''}</p>
+          <p>: {entity?.gender ? entity.gender: ''}</p>
+          <p>: {entity?.birthplace ? entity.birthplace : ''}</p>
+          <p>: {entity?.civilstatus ? entity.civilstatus : ''}</p>
+          <p>: {entity?.citizenship ? entity.citizenship : ''}</p>
+          <p>: {entity?.weight ? entity.weight : ''}</p>
+          <p>: {entity?.height ? entity.height : ''}</p>
+          <p>: {entity?.religion ? entity.religion : ''}</p>
+          <p>: {entity?.disability ? entity.disability : ''}</p>
+          <p>: {entity?.employment ? entity.employment : ''}</p>
+          <p>: {entity?.tin?.idno ? entity.tin.idno : ''}</p>
+           if ( entity?.gsis?.idno ) { %> 
+            <p>: {entity.gsis.idno} </p>
+           } %> 
+          <p>: {entity?.sss?.idno ? entity.sss.idno : ''}</p>
+          <p>: {entity?.paibig?.idno ? entity.paibig.idno : ''}</p>
+          <p>: {entity?.philhealth?.idno ? entity.philhealth.idno : ''}</p>
+          <br>
+          <p>: </p>
+          <p>: 
+             if ( entity?.address ) { 
+                def addr = entity.address; 
+            %> 
+              {[addr.bldgno, addr.bldgname, addr.unitno, addr.street, addr.subdivision].findAll{( it )}.join(' ')} 
+             } %> 
+          </p>
+          <p>: {entity?.address?.barangay?.name ? entity.address.barangay.name : ''}</p>
+          <p>: {
+              entity?.address?.municipality ? entity.address.municipality : 
+              (entity?.address?.city ? entity.address.city : '') 
+          }</p> 
+          <p>: {entity?.address?.province ? entity.address.province : ''}</p>
+          <br>
+          <p>:</p>
+          <p>: 
+             if ( entity?.address ) { 
+                def addr = entity.address; 
+            %> 
+              {[addr.bldgno, addr.bldgname, addr.unitno, addr.street, addr.subdivision].findAll{( it )}.join(' ')} 
+             } %> 
+          </p>
+          <p>: {entity?.address?.barangay?.name ? entity.address.barangay.name : ''}</p>
+          <p>: {
+              entity?.address?.municipality ? entity.address.municipality : 
+              (entity?.address?.city ? entity.address.city : '') 
+          }</p> 
+          <p>: {entity?.address?.province ? entity.address.province : ''}</p>
+        </div>
+      </div>
+      <div class="row">
+        <h3>Job Preferences</h3>
+      </div>
+        <h4>Preferred Occupation and Industry</h4>
+            entity.jobpreferenceoccupation.each{occupation ->%>
+              <p>{occupation.occupation ? occupation.occupation : ''}</p>
+              <p>{occupation.industry ? occupation.industry : ''}</p>
+            
+        
+          <h4>Preferred Work Location</h4>
+           entity.jobpreferencelocation.each{location ->%>  
+            <p>{location.location ? location.location : ''}</p>
+            <p></p>
+            
+            <p>With Passport(hardcode)</p>
+          <p>Expiry date : (hardcode)</p>
+      <div class="row">
+        <h3>Language Proficiency</h3>
+      </div>
+          entity.language.each{language ->%>  
+              <p><strong>{language.language}</strong></p> 
+               if ( language.read ) { %>
+            <p>- Can Read</p>
+               } %> 
+               if ( language.write ) { %>
+            <p>- Can Write</p>
+               } %> 
+               if ( language.speak ) { %>
+            <p>- Can Speak</p>
+               } %> 
+               if ( language.understand ) { %>
+            <p>- Can Understand</p>
+               } %> 
+        
+      <div class="row">
+        <h3>Educational Background</h3>
+      </div>
+      entity.education.each{education ->%>  
+        <p><strong>Year</strong> : {education.fromyear} - {education.toyear}</p>
+        <p><strong>School</strong> : {education.schoolname}</p>
+        <p><strong>Course</strong> : {education.course?.name ? education.course?.name : ''}</p>
+        <p><strong>Awards</strong> : {education.awards ? education.awards : ''}</p>
+      
+      <div class="row">
+        <h3>Technical / Vocational and Other Training</h3>
+      </div>
+      entity.training.each{training ->%>  
+        <p><strong>{training.fromdate} - {training.todate}</strong></p>
+        <p>{training.institution ? training.institution : ''}</p>
+        <p>{training.training ? training.training : ''}</p>
+        <p>{training.certificates ? training.certificates : ''}</p>
+        <p>{training.completed ? 'Completed' : ''}</p>
+        <br>
+      
+      <div class="row">
+        <h3>Eligibility / License</h3>
+      </div>
+      entity.eligibility.each{eligibility ->%>  
+        <p>{eligibility.name ? eligibility.name : ''}</p>
+        <p>{eligibility.licenseno ? eligibility.licenseno : ''}</p>
+        <p>{eligibility.expirydate ? eligibility.expirydate : ''}</p>
+      
+      <div class="row">
+        <h3>Work Experience (Limit to 10 years experience)</h3>
+      </div>
+      entity.experience.each{experience ->%>  
+        <p>{experience.companyname ? experience.companyname : ''}</p>
+        <p>{experience.address ? experience.address : ''}</p>
+        <p>{experience.jobtitle?.name ? experience.jobtitle?.name : ''}</p>
+        <p>{experience.fromdate} - {experience.todate}</p>
+      
+      <div class="row">
+        <h3>Other Skills Acquired without formal Training</h3>
+      </div>
+      entity.skill.each{skill ->%>  
+        <p>{skill.name}</p>
+      
+  </div>
+</div>
+

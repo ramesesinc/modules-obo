@@ -1,0 +1,132 @@
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-3">
+          <div class="side-filter">
+            <div class="side-content">
+            <p class="searched">{searchtext ? searchtext : criteria.profession}</p>
+    
+            <!-- Single button -->
+            <div class="btn-group mb20">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Export <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                
+                    <li><a href="/previewtoexcel?searchtext={searchtext}">Microsoft excel</a></li>
+              
+                
+                    <li><a href="/previewtoexcel?barangay={req.getParameter('barangay')}&skill={req.getParameter('skill')}&gender={req.getParameter('gender')}&education={req.getParameter('education')}&profession={req.getParameter('profession')}">Microsoft excel</a></li>
+                
+                
+                    <li><a href="/previewtopdf?searchtext={searchtext}">PDF</a></li>
+              
+                
+                    <li><a href="/previewtopdf?barangay={req.getParameter('barangay')}&skill={req.getParameter('skill')}&gender={req.getParameter('gender')}&education={req.getParameter('education')}&profession={req.getParameter('profession')}">PDF</a></li>
+                
+              </ul>
+            </div>
+            <br>
+            <p> Sorted by: <br><span><b>Surname</b> - Alphabetically</span></p>
+            <br>
+            <div class="mb20">
+              <p><strong>Job Titles</strong></p>
+              <form action="" method="get">
+             
+                    <a href="/result?search={jobtitle.name}">{jobtitle.name}</a> <span class="count">({jobtitle.counter})</span><br>
+                
+              </form>
+            </div>
+             <button onclick="goBack()" >Back</button>
+             <button onclick="goForward()" >Forward</button>
+            <!--- <div class="mb20">
+              <p><strong>Years of Work Experience</strong></p>
+              <form action="" method="get">
+                <a href="">1-2 years</a> <span class="count">(1)</span><br>
+                <a href="">3-5 years</a> <span class="count">(2)</span><br>
+                <a href="">5-10 years</a> <span class="count">(6)</span><br>
+                <a href="">10-15 years</a> <span class="count">(3)</span><br>
+                <a href="">more than 15 years</a> <span class="count">(4)</span><br>
+              </form>
+            </div>
+            <div class="mb20">
+              <p>Education</p>
+              <form action="" method="get">
+                <a href="">Doctorate</a> <span class="count">(3)</span><br>
+                <a href="">Masters</a> <span class="count">(6)</span><br>
+                <a href="">Bachelors</a> <span class="count">(3)</span><br>
+                <a href="">Associate</a> <span class="count">(5)</span><br>
+                <a href="">Diploma</a> <span class="count">(8)</span><br>
+              </form>
+            </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-9">
+            <p class="result">{searchresult.size()} profile results</p>
+            <div class="profile-container">
+              <div id="popup">
+                
+            
+
+                    <a href="/profile?id={entity.objid}" class="profile-data">
+                      <div class="entity-div">
+                          <div class="inline">                        
+                            <div class="name">{mycapitalize(entity?.name)} </div>                 
+                            <div class="address" id="ebtity-address"> - {mycapitalize(entity?.address?.text)}</div>
+                          </div>
+                          <p id="entity-occupation"><strong>{mycapitalize(entity?.profession)}</strong></p>
+                          <p>
+                            Gender: {entity?.gender} &nbsp;&nbsp;|&nbsp;&nbsp; 
+                            Age: {entity?.age ? entity.age : '-'} &nbsp;&nbsp;|&nbsp;&nbsp;  
+                            Civil Status: {entity?.civilstatus ? entity.civilstatus : '-'}
+                          </p>
+                          <p>Profession: {entity?.profession ? entity.profession : '-'}</p>
+                        <span>
+                          <div class="preview">
+                            <div class="row">
+                              <div class="col-md-7">
+                                    <h3>{entity?.name}</h3>
+                                    <h4>{entity?.profession ? entity?.profession : ''}</h4>
+                                    <p>Email: {entity?.email ? entity?.email : ''}</p>
+                                    <p>Contact Nos: {[entity?.mobileno, entity?.phoneno].findAll{( it )}.join(' / ')}</p>
+                              </div>
+                              <div class="col-md-5">
+                                  <div class="col-md-11">
+                                    <div class="img-profile">
+                                      <img src="{entity.photolink}" class="preview-profile">
+                                    </div>
+                                  </div> 
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="">
+                                <h3>Work Experience</h3>
+                                
+                                  <h4>{experience?.companyname ? experience?.companyname : ''}</h4>
+                                  <p>{experience?.address ? experience?.address : ''}</p>
+                                  <p>{experience?.position ? experience?.position : ''}</p>
+                                  <p>{experience?.fromdate} - {experience.todate}</p>
+                                
+                            </div>
+                            <div class="">
+                                <h3>Other Skills Acquired w/o Formal Training</h3>
+                                 
+                                  <p>{skill?.name}</p>
+                                
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                    </a>
+
+                  
+              </div>
+          </div>
+        </div>
+    </div> 
+</div>
+
+

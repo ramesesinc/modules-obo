@@ -102,10 +102,17 @@
 </div>
 
 <div r:context="monitor" r:visibleWhen="#{mode == 'initial'}" style="display:none;">
-	<div class="form">
-	  @wx:text(caption:'Application No', context:'billing', name:'refno')
+
+	<div class="col-md-4 row">
+	  <div class="input-group">
+	    @wx:text(caption:'Application No', context:'billing', name:'refno', inputClass:'searchtext form-control')
+	    <span class="input-group-btn">
+	    @wx:button( caption:'Submit', context:'billing', name:'loadBill', inputClass:'btn-response btn btn-submit btn-primary')
+	    </span>
+	  </div>
 	</div>
-	@wx:button( caption:'Submit', context:'billing', name:'loadBill')
+
+	
 </div>
 
 <div r:context="monitor" r:visibleWhen="#{mode == 'viewbill'}" style="display:none;">
