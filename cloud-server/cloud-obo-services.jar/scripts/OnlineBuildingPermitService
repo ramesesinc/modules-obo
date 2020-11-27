@@ -36,6 +36,9 @@ public class OnlineBuildingPermitService  {
 	@DataContext("obo_permit_requirement")
 	def reqEm;
 
+	@DataContext("obo_permit_type")
+	def permitTypeEm;
+
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
@@ -183,6 +186,7 @@ public class OnlineBuildingPermitService  {
 	public def getProjectInfo( def o  ) {
 		def proj = appEm.find( [objid: o.appid] ).first();
 		proj.obocontactinfo = contactSvc.getInfo([orgcode: proj.orgcode]);
+		proj.type = permitTypeEm.find([objid: "building_permit"]).first();
 		return proj;
 	}
 

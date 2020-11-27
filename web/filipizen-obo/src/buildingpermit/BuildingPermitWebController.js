@@ -157,7 +157,7 @@ const BuildingPermitWebController = (props) => {
 
 const styles = {
   stepperContainer: {
-    paddingTop: 30,
+    paddingTop: 10,
     paddingLeft: 40,
   }
 }

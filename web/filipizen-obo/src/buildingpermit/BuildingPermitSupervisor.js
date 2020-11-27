@@ -39,13 +39,7 @@ const BuildingPermitSupervisor = ({
     });
   }, [])
 
-  const onSelectProfessional = (professionals) => {
-    if (professionals.length === 0) {
-      setProfessional({});
-      return;
-    }
-
-    const professional = professionals[0];
+  const onSelectProfessional = (professional) => {
     appService.invoke("update", {appid: appno, supervisorid: professional.objid}, (err, app) => {
       if (err) {
         setError(err);
@@ -80,6 +74,7 @@ const BuildingPermitSupervisor = ({
               caption="Inspector/Supervisor"
               professional={professional}
               onSelectProfessional={onSelectProfessional}
+              role={project.type ? project.type.supervisorrole : null}
             />
           </Panel>
         }

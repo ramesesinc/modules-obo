@@ -7,7 +7,8 @@ import {
   Button,
   Table,
   TableColumn,
-  Service
+  Service,
+  MsgBox
 } from 'rsi-react-web-components'
 
 const svc = Service.lookup("OboProfessionalService", "obo");
@@ -19,19 +20,53 @@ const ProfessionalLookup = ({
   searchFieldTitle="PRC No.",
   onSelect,
   hideSearchText=false,
-  fullWidth=true
+  fullWidth=true,
+  role
 }) => {
-  const [showLookup, setShowLookup] = useState(false)
   const [query, setQuery] = useState({prc:{}});
   const [selectedItems, setSelectedItems] = useState();
-  const [professionals, setProfessionals] = useState()
+  const [professionals, setProfessionals] = useState();
+  const [showError, setShowError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState();
 
   const onSelectItems = (items) => {
     setSelectedItems(items);
   }
 
+  const validProfession = (professional) => {
+    if (!role) return true;
+
+    const validRole = role.toLowerCase();
+    let valid = validRole.indexOf(professional.profession.toLowerCase()) >= 0;
+
+    let requiredRoles = ""
+    if (!valid) {
+      const roles = validRole.split(",");
+      if(roles.length == 1) {
+        requiredRoles = "Only " + roles[0].toLowerCase() + " profession is allowed."
+      } else {
+        requiredRoles = "Only " + roles.join(", ") + " professions are allowed."
+        const lastCommaIdx = requiredRoles.lastIndexOf(",");
+        requiredRoles = requiredRoles.substring(0, lastCommaIdx) + " and " + requiredRoles.substring(lastCommaIdx+2);
+      }
+
+      let msg = "The profession of the selected professional is invalid. " + requiredRoles;
+      setErrorMsg(msg);
+      console.log("ERROR", msg);
+      return false;
+    }
+    return true;
+  }
+
   const onAcceptLookup = () => {
-    onSelect(selectedItems);
+    const profession = selectedItems[0];
+    if (validProfession(profession)) {
+      onSelect(profession);
+      return true;
+    } else {
+      setShowError(true);
+      return false;
+    }
   }
 
   const fetchList = (params) => {
@@ -52,6 +87,8 @@ const ProfessionalLookup = ({
   }
 
   return (
+    <React.Fragment>
+      <MsgBox title="Invalid Profession" open={showError} msg={errorMsg} onAccept={() => setShowError(false)} />
       <Lookup caption={caption}
         query={query}
         setQuery={setQuery}
@@ -84,6 +121,7 @@ const ProfessionalLookup = ({
           <TableColumn caption='Profession' expr='profession' />
         </Table>
       </Lookup>
+    </React.Fragment>
   )
 }
 

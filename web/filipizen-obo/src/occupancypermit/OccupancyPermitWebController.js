@@ -50,7 +50,7 @@ const OccupancyPermitWebController = (props) => {
   const [appType, setAppType] = useState("full");
   const [appno, setAppno] = useState(getUrlParameter(props.location, "appid"));
   const [app, setApp] = useState({});
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(1)
 
   const { partner, service } = props
 
@@ -86,7 +86,7 @@ const OccupancyPermitWebController = (props) => {
 
   const onCompleteInitial = ({appType, appno, step}) => {
     setAppno(appno);
-    setStep(step);
+    setStep(1);
     setMode("processing");
   }
 

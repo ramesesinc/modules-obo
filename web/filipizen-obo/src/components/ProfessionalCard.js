@@ -7,7 +7,7 @@ import {
 
 import ProfessionalLookup from "./ProfessionalLookup";
 
-const ProfessionalCard = ({ professional = {prc:{}, ptr:{}}, caption, onSelectProfessional, photoUrl }) => {
+const ProfessionalCard = ({ professional = {prc:{}, ptr:{}}, caption, onSelectProfessional, photoUrl, role }) => {
   let name = "";
   if (professional.lastname) {
     name = `${professional.lastname}, ${professional.firstname} ${professional.middlename}`
@@ -34,6 +34,7 @@ const ProfessionalCard = ({ professional = {prc:{}, ptr:{}}, caption, onSelectPr
         <ProfessionalLookup hideSearchText={true}
           onSelect={onSelectProfessional}
           fullWidth={false}
+          role={role}
         />
       </Panel>
       <div style={{marginTop: 10, marginBottom: 10, padding: 10}}>
