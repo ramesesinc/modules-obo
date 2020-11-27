@@ -1,0 +1,20 @@
+<workunit>
+    <invokers>
+        <invoker type="vw_occupancy_inspection:form:extActions"
+                 caption="Add FAAS" 
+                 action="createFaas"
+                 target="popup"
+                 visibleWhen="#{ entity.typeid == 'RPT' }"   />
+        
+        
+        <invoker type="vw_occupancy_inspection:form:extActions"
+                 caption="View Attached TDs" 
+                 action="createFaas"
+                 target="process"
+                 visibleWhen="#{ entity.typeid == 'RPT' }"   />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.rpt.models.OboFaasModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.rpt.views.SamplePage" />
+    </pages>    
+</workunit>

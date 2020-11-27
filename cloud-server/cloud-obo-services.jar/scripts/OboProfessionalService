@@ -1,0 +1,91 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import java.rmi.server.*;
+
+public class OboProfessionalService  {
+
+	@DataContext("obo_professional")	
+	def profEm;
+
+	@DataContext("obo_professional_info")	
+	def profInfoEm;
+
+	@DataContext("vw_obo_professional")	
+	def vwProfEm;
+
+	@DataContext("obo_profession")	
+	def professionEm;
+
+	@ProxyMethod
+	public def verifyInfo( def o ) {
+		if(! o.prc?.idno ) throw new Exception("prc idno is required");
+		if(! o.profession ) throw new Exception("profession is required");
+
+		def p = vwProfEm.where( "prc.idno = :prcno AND profession = :prof", [prcno: o.prc.idno, prof: o.profession ]).first();
+		if( p ) 
+			throw new Exception("The PRC No for this profession is already registered to " + p.lastname + ", " +p.firstname );
+		// Random rand = new Random();
+		// def otp = rand.nextInt(100000000);
+		// return [key: String.format("%06d", otp).substring(0,6)];	
+		return p;
+	}
+
+	def formatAddress( def addr ) {
+		def lst = [];
+		lst << [addr.unitno, addr.bldgno, addr.bldgname ].findAll{it!=null}.join(" ");
+		lst << [addr.street, addr.subdivision ].findAll{it!=null}.join(",");
+		lst << [addr.barangay?.name, addr.citymunicipality, addr.province ].findAll{it!=null}.join(",");
+		return lst.findAll{it}.join(",");		
+	}
+
+	@ProxyMethod
+	public def create( def o ) {
+		if(!o.profession) throw new Exception("profession is required");
+		if(!o.prc.idno) throw new Exception("prc idno is required");
+
+		o.address.text = formatAddress( o.address );
+		def m = profInfoEm.create( o );
+
+		//build the profession registration
+		def p = [:];
+		p.objid = o.profession.toUpperCase().trim().replaceAll("\\s", "_")+"_"+o.prc.idno;		
+		p.infoid = m.objid;
+		p.profession = o.profession;
+		p.prcno = o.prc.idno;
+		def z = profEm.create( p );
+
+		//update also the profid of progfessional after saving the professional
+		profInfoEm.find( [objid: m.objid] ).update([profid: z.objid]);
+	}
+
+	@ProxyMethod
+	public def findProfessionals( def o ) {
+		return vwProfEm.find( o ).list();
+	}
+
+	@ProxyMethod
+	public def getProfessionList() {
+		return professionEm.limit(100).list()*.name;
+	}
+
+	@ProxyMethod
+	public def getList( params ) {
+		def filter = [];
+		if (!params) params = [:];
+		if (params.prc?.idno) {
+			params.idno = params.prc.idno;
+			filter << "prc_idno = :idno";
+		}
+		if (params.lastname) filter << "lastname LIKE :lastname";
+		if (params.firstname) filter << "firstname LIKE :firstname";
+		
+		def whereClause = '1=1';
+		if (filter) {
+			whereClause = [filter.join(" AND "), params]
+		}
+		return vwProfEm.where(whereClause)
+			.limit(0, 20)
+			.orderBy("lastname, firstname")
+			.list();
+	}
+}

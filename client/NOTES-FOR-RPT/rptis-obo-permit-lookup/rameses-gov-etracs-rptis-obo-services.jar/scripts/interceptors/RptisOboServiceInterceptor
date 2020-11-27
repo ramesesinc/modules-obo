@@ -1,0 +1,21 @@
+import com.rameses.annotations.*; 
+
+class RptisOboServiceInterceptor { 
+
+	@Service(value="BuildingPermitService", connection="obo")
+	def oboSvc;
+
+	@After(pattern="FAASService.approveFaas", eval="#{result.rpu?.rputype?.matches('bldg') }") 
+	public void afterFaasSave( def evt ) {
+		def faas = evt.result
+		oboSvc.addRPTEntry([
+			permitno: faas.rpu.permitno,
+			tdno: faas.tdno,
+			refid: faas.objid,
+			rputype: faas.rpu.rputype,
+			pin: faas.rpu.fullpin,
+			particulars: 'BUILDING FAAS'
+		])
+	} 
+
+} 

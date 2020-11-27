@@ -1,0 +1,1132 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="building-permit-cert"
+
+		 language="groovy"		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="792"
+		 pageHeight="612"
+		 columnWidth="792"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+
+	<field name="dtsubmitted" class="java.util.Date"/>
+	<field name="submittedby.name" class="java.lang.String"/>
+	<field name="submittedby.profession" class="java.lang.String"/>
+	<field name="certificate.no" class="java.lang.Number"/>
+	<field name="feepaid" class="java.lang.Number"/>
+	<field name="receiptno" class="java.lang.Number"/>
+	<field name="receiptdate" class="java.util.Date"/>
+	<field name="certificate.dtissued" class="java.util.Date"/>
+	<field name="owner.name" class="java.lang.String"/>
+	<field name="project.name" class="java.lang.String"/>
+	<field name="occupancy.character" class="java.lang.String"/>
+	<field name="occupancy.group" class="java.lang.String"/>
+	<field name="address.text" class="java.lang.String"/>
+	<field name="permit.controlno" class="java.lang.Number"/>
+	<field name="permit.dtissued" class="java.util.Date"/>
+	<field name="fsec.no" class="java.lang.String"/>
+	<field name="fsec.dtisssued" class="java.util.Date"/>
+	<field name="apptype" class="java.lang.String"/>
+	<field name="location.lotno" class="java.lang.Number"/>
+	<field name="location.blkno" class="java.lang.Number"/>
+	<field name="location.tctno" class="java.lang.Number"/>
+	<field name="location.street" class="java.lang.String"/>
+	<field name="location.zipcode" class="java.lang.Number"/>
+	<field name="location.barangay.name" class="java.lang.String"/>
+	<field name="worktypes" class="java.lang.String"/>
+	<field name="org.title" class="java.lang.String"/>
+	<field name="project.totalcost" class="java.lang.Integer"/>
+	<field name="contractor.firstname" class="java.lang.String"/>
+	<field name="contractor.middlename" class="java.lang.String"/>
+	<field name="contractor.lastname" class="java.lang.String"/>
+
+		<background>
+			<band height="612"  isSplitAllowed="true" >
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="792"
+						height="612"
+						key="image-14"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch"/>
+					<imageExpression class="java.lang.String"><![CDATA["images/building-permi-2020-bg.jpg"]]></imageExpression>
+				</image>
+			</band>
+		</background>
+		<title>
+			<band height="612"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="307"
+						y="53"
+						width="211"
+						height="51"
+						key="staticText-74"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font/>
+					</textElement>
+				<text><![CDATA[Republic of the Philippines
+City of Legazpi
+Province of Albay
+OFFICE OF THE BUILDING OFFICIAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="241"
+						y="114"
+						width="349"
+						height="45"
+						key="staticText-75"/>
+					<box></box>
+					<textElement textAlignment="Center">
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="36" isBold="true"/>
+					</textElement>
+				<text><![CDATA[BUILDING PERMIT]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement
+						x="280"
+						y="165"
+						width="17"
+						height="16"
+						key="rectangle-5">
+							<printWhenExpression><![CDATA[($F{apptype}.toString().equalsIgnoreCase("NEW") ? "X" : null)]]></printWhenExpression>
+						</reportElement>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="305"
+						y="165"
+						width="38"
+						height="16"
+						key="staticText-76"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[NEW]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement
+						x="356"
+						y="165"
+						width="17"
+						height="16"
+						key="rectangle-6">
+							<printWhenExpression><![CDATA[($F{apptype}.toString().equalsIgnoreCase("RENEWAL") ? "X" : null)]]></printWhenExpression>
+						</reportElement>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="380"
+						y="165"
+						width="51"
+						height="16"
+						key="staticText-77"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[RENEWAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="472"
+						y="165"
+						width="90"
+						height="16"
+						key="staticText-78"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[AMENDATORY]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement
+						x="445"
+						y="165"
+						width="17"
+						height="16"
+						key="rectangle-7">
+							<printWhenExpression><![CDATA[($F{apptype}.toString().equalsIgnoreCase("AMENDATORY") ? "X" : null)]]></printWhenExpression>
+						</reportElement>
+					<graphicElement stretchType="NoStretch"/>
+				</rectangle>
+				<staticText>
+					<reportElement
+						x="105"
+						y="206"
+						width="125"
+						height="16"
+						key="staticText-79"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[BUILDING PERMIT NO.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="105"
+						y="222"
+						width="125"
+						height="16"
+						key="staticText-80"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[DATE ISSUED :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="105"
+						y="238"
+						width="125"
+						height="16"
+						key="staticText-81"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[FSEC NO. :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="105"
+						y="254"
+						width="125"
+						height="16"
+						key="staticText-82"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[DATE ISSUED :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="445"
+						y="222"
+						width="122"
+						height="16"
+						key="staticText-85"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[DATE PAID :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="445"
+						y="206"
+						width="122"
+						height="16"
+						key="staticText-86"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[OFFICIAL RECEIPT NO.]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="218"
+						y="221"
+						width="213"
+						height="0"
+						key="line-18"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="183"
+						y="236"
+						width="248"
+						height="0"
+						key="line-19"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="158"
+						y="251"
+						width="273"
+						height="0"
+						key="line-20"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="183"
+						y="265"
+						width="248"
+						height="0"
+						key="line-21"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="565"
+						y="220"
+						width="123"
+						height="0"
+						key="line-22"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="512"
+						y="235"
+						width="176"
+						height="0"
+						key="line-23"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="99"
+						y="283"
+						width="608"
+						height="26"
+						key="staticText-87"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[				This PERMIT is issued pursuant to Sections 207, 301, 302, 303 and 304 of the National Building Code of the Philippines (PD1096), its Revised IRR, other
+Referral Codes and its Terms and Conditions.
+
+
+]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="201"
+						y="326"
+						width="490"
+						height="1"
+						key="line-24"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="99"
+						y="315"
+						width="102"
+						height="10"
+						key="staticText-88"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Owner / Permitte]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="99"
+						y="327"
+						width="102"
+						height="10"
+						key="staticText-89"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Project Title]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="198"
+						y="315"
+						width="5"
+						height="10"
+						key="staticText-90"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="198"
+						y="327"
+						width="5"
+						height="10"
+						key="staticText-91"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="99"
+						y="337"
+						width="102"
+						height="10"
+						key="staticText-92"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Location of Construction]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="198"
+						y="338"
+						width="5"
+						height="10"
+						key="staticText-93"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="201"
+						y="336"
+						width="490"
+						height="1"
+						key="line-25"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="222"
+						y="338"
+						width="5"
+						height="10"
+						key="staticText-94"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="207"
+						y="338"
+						width="16"
+						height="10"
+						key="staticText-95"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Lot]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="297"
+						y="337"
+						width="16"
+						height="10"
+						key="staticText-96"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Blk.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="312"
+						y="337"
+						width="5"
+						height="10"
+						key="staticText-97"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="370"
+						y="337"
+						width="37"
+						height="10"
+						key="staticText-98"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[TCT NO.]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="403"
+						y="337"
+						width="5"
+						height="10"
+						key="staticText-99"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="495"
+						y="338"
+						width="5"
+						height="10"
+						key="staticText-100"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="470"
+						y="338"
+						width="26"
+						height="10"
+						key="staticText-101"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Street]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="626"
+						y="338"
+						width="5"
+						height="10"
+						key="staticText-102"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="608"
+						y="338"
+						width="18"
+						height="10"
+						key="staticText-103"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Brgy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="207"
+						y="349"
+						width="71"
+						height="10"
+						key="staticText-104"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[City/Municipality]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="276"
+						y="349"
+						width="5"
+						height="10"
+						key="staticText-105"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="470"
+						y="349"
+						width="37"
+						height="10"
+						key="staticText-106"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Zip Code]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="506"
+						y="349"
+						width="5"
+						height="10"
+						key="staticText-107"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="99"
+						y="361"
+						width="123"
+						height="10"
+						key="staticText-108"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Use or Character of Occupancy]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="223"
+						y="361"
+						width="5"
+						height="10"
+						key="staticText-109"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="229"
+						y="370"
+						width="462"
+						height="1"
+						key="line-26"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="99"
+						y="373"
+						width="102"
+						height="10"
+						key="staticText-110"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Scope of Work]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="198"
+						y="373"
+						width="5"
+						height="10"
+						key="staticText-111"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="202"
+						y="382"
+						width="490"
+						height="1"
+						key="line-27"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="99"
+						y="385"
+						width="102"
+						height="10"
+						key="staticText-112"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Total Project Cost]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="198"
+						y="385"
+						width="5"
+						height="10"
+						key="staticText-113"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="201"
+						y="394"
+						width="490"
+						height="1"
+						key="line-28"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<staticText>
+					<reportElement
+						x="99"
+						y="397"
+						width="156"
+						height="10"
+						key="staticText-114"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[Professional In Charge of Construction]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="251"
+						y="397"
+						width="5"
+						height="10"
+						key="staticText-115"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<text><![CDATA[:]]></text>
+				</staticText>
+				<line direction="TopDown">
+					<reportElement
+						x="255"
+						y="406"
+						width="436"
+						height="1"
+						key="line-29"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="226"
+						y="346"
+						width="69"
+						height="0"
+						key="line-30"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="319"
+						y="346"
+						width="48"
+						height="0"
+						key="line-31"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="407"
+						y="346"
+						width="62"
+						height="0"
+						key="line-32"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="499"
+						y="346"
+						width="108"
+						height="0"
+						key="line-33"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="630"
+						y="346"
+						width="61"
+						height="0"
+						key="line-34"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="279"
+						y="358"
+						width="187"
+						height="0"
+						key="line-35"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<line direction="TopDown">
+					<reportElement
+						x="510"
+						y="358"
+						width="181"
+						height="1"
+						key="line-36"/>
+					<graphicElement stretchType="NoStretch"/>
+				</line>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="32"
+						y="30"
+						width="90"
+						height="90"
+						key="image-12"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/legazpi-logo.png"]]></imageExpression>
+				</image>
+				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="668"
+						y="30"
+						width="90"
+						height="90"
+						key="image-13"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/bldg-logo.png"]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="220"
+						y="204"
+						width="211"
+						height="19"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{permit.controlno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="184"
+						y="220"
+						width="247"
+						height="19"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{permit.dtissued}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="160"
+						y="235"
+						width="271"
+						height="19"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsec.no}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="183"
+						y="249"
+						width="248"
+						height="19"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{fsec.dtisssued}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="567"
+						y="204"
+						width="121"
+						height="19"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{receiptno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="518"
+						y="220"
+						width="170"
+						height="19"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{receiptdate}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="205"
+						y="315"
+						width="483"
+						height="11"
+						key="textField"/>
+					<box></box>
+					<textElement verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{owner.name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="205"
+						y="327"
+						width="483"
+						height="11"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{project.name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="230"
+						y="360"
+						width="457"
+						height="11"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.character}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="228"
+						y="337"
+						width="50"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{location.lotno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="319"
+						y="337"
+						width="50"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{location.blkno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="410"
+						y="337"
+						width="50"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{location.tctno}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="501"
+						y="337"
+						width="99"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.street}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="631"
+						y="337"
+						width="57"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.barangay.name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="203"
+						y="373"
+						width="485"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{worktypes}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="280"
+						y="349"
+						width="182"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{org.title}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="512"
+						y="348"
+						width="176"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{location.zipcode}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="203"
+						y="385"
+						width="485"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{project.totalcost}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="261"
+						y="396"
+						width="95"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.firstname}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="365"
+						y="396"
+						width="66"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.middlename}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="435"
+						y="396"
+						width="165"
+						height="9"
+						key="textField"/>
+					<box></box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.lastname}]]></textFieldExpression>
+				</textField>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

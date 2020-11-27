@@ -1,0 +1,12 @@
+<workunit extends="com/rameses/jasper/templates/JasperFormReport.xml"> 
+    <invokers>
+         <invoker type="vw_building_application:form:reports" 
+                caption="Print Order of Payment"
+                reportId="building_application_assessment"
+                reportName="reports/obo/assessment.jasper"
+                action="preview"
+                vallowPrint="#{ task.state.matches('billing|payment') }"
+                xvisibleWhen="#{ task.state.matches('approval|billing|payment') }"/>
+
+    </invokers>
+</workunit>

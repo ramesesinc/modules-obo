@@ -2,87 +2,110 @@ import com.rameses.annotations.*;
 
 class BuildingPermitFormReportInterceptor {
 	
+	@DataContext("building_application_payment")
+	def pmtEm;
+
+	@DataContext("building_application_rpu")
+	def rpuEm;
+
 	@DataContext("vw_building_permit")
-	def vwAppEm;
+	def permitEm;
 
-	@DataContext("vw_building_permit_section")
-	def evalEm;
+	@DataContext("obo_doctype")
+	def doctypeEm;
 
-	@DataContext("building_permit_task")
-	def taskEm;
+	@DataContext("sys_signature")
+	def sigEm;
 
-	@DataContext("building_permit_transmittal")
-	def transmittalEm;
+	@Service("FormReportService")
+	def formReportSvc;
 
-	@DataContext("building_permit_requirement")
-	def reqEm;
+	@Service(value="JasperReportService", connection="rpt")
+	def jasperSvc;
 
-	@DataContext("building_permit_finding")
-	def findingEm;
+	@DataContext("vw_building_application_subdoc")
+	def vwSubdocEm;
 
-	@DataContext("vw_building_permit_fee_payment")
-	def payEm;
+	String outputReportPath = "/apps/server/output/";
 
-	@DataContext("vw_building_permit_ancillary")
-	def vwAncillaryEm;
+	def findPermit( def id ) {
+		//building permit can be loaded using appid or objid(building permit)
+		def permit = permitEm.find( [objid: id] ).first();	
+		if(!permit) {
+			permit = permitEm.find( [appid: id ]).first();
+			if(!permit) throw new Exception("Permit not found");
+		}
+		return permit;
+	}
 
-	@DataContext("vw_building_permit_section")
-	def vwSectionEm;
-
-	@DataContext(dynamic=true)
-	def em;
-
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid.matches('building_permit|building_permit_signboard')}")
+	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid == 'building_permit' }")
 	public void getBuildingPermitReport( def evt ) {
 		def p = evt.args[0];
+
 		def result = evt.result;
 		def id = p.parameters.objid;
-		
-		def app = vwAppEm.find( [objid: id ] ).first();	
-		app.name = app.applicant?.lastname + ", " + app.applicant?.firstname;
 
-		//find the professionals 
-		app.profarchitect = vwAncillaryEm.find( [appid: app.objid, sectionid: 'ARCHITECTURAL' ] ).first()?.designprofessional;
-		app.profcivil = vwAncillaryEm.find( [appid: app.objid, sectionid: 'CIVIL_STRUCTURAL' ] ).first()?.designprofessional;
-		app.profelectrical = vwAncillaryEm.find( [appid: app.objid, sectionid: 'ELECTRICAL' ] ).first()?.designprofessional;
-		app.profmechanical = vwAncillaryEm.find( [appid: app.objid, sectionid: 'MECHANICAL' ] ).first()?.designprofessional;
-		app.profsanitary = vwAncillaryEm.find( [appid: app.objid, sectionid: 'SANITARY' ] ).first()?.designprofessional;
-		app.profplumbing = vwAncillaryEm.find( [appid: app.objid, sectionid: 'PLUMBING' ] ).first()?.designprofessional;
-		app.profelectronic = vwAncillaryEm.find( [appid: app.objid, sectionid: 'ELECTRONIC' ] ).first()?.designprofessional;
-
-		app.scopeofowrk = app.worktypes?.join(",")
-
-		app.bill = [:];
-		def pmts = payEm.find( [appid: app.objid ] ).list();
-		pmts.each {
-			app.bill.put( it.item.objid.toLowerCase(), it.amount );
+		def permit = findPermit( id );
+		if(!permit.template) {
+			def doctype = doctypeEm.find( [objid: 'BUILDING_PERMIT'] ).first();
+			permit.template = doctype.template;		
 		}
-		
-		//loop all sections with issuanceid
-		def list = vwSectionEm.find( [appid: app.objid ] ).where("NOT(issuanceid IS NULL)").list();
-		list.each {
-			def db = em.lookup(it.type.reportname );
-			def xx = db.find( [objid: it.issuanceid ]).first();
-			if( xx ) {
-				app.put( it.typeid.toLowerCase(), [controlno: xx.controlno, dtissued: xx.dtcreated ] );
+		if(permit.appid) {
+			def pmt = pmtEm.find( [appid: permit.appid ]).where("voided = 0").first();
+			if( pmt ) {
+				permit.receiptno = pmt.refno;
+				permit.receiptdate = pmt.refdate;
+				permit.amount = pmt.amount;					
 			}
-		};
-
-		
-
-		//get the total payment per section
-		def em = payEm.find( [appid: app.objid ] ).select("payment.refno,payment.refdate,amount:{SUM(amount)}").groupBy( "payment.refno,payment.refdate" );
-		def totals = em.where( " org.objid IS NULL " ).first();
-		if( totals ) {
-			app.receiptno = totals.payment.refno;
-			app.receiptdate = totals.payment.refdate;
-			app.amount = totals.amount;		
 		}
+		
+		if(permit.worktypes) {
+			permit.worktypes = permit.worktypes?.join(", ");
+		}	
 
-
-
-		result.data = app;
+		if(permit.endorserid) {
+			permit.endorser = sigEm.find( [objid: permit.endorserid ]).first();
+		}
+		if(permit.approverid) {
+			permit.approver = sigEm.find( [objid: permit.approverid]).first();
+		}
+		permit.rpus = rpuEm.find([appid: permit.appid ]).select( "tdno,taxclearanceid,truecopycertid" ).list();
+		result.data = permit;
 	}	
+
+	@Before(pattern="JasperEmailQueueService.send", eval="#{args[0].reportid == 'building_permit' }")
+	public void beforeSendEmailQueue( def evt ) {
+		def p = evt.args[0];
+		def pmt = findPermit( p.refid );
+		p.to = pmt.contact.email;
+		p.info = pmt;
+		p.connection = "obo-email-server";
+	}
+
+  	@Before(pattern="JasperReportEmailService.send", eval="#{ args[0].reportid == 'building_permit' }", index=-10000)
+    public void beforeSendEmail(def evt) {
+        def o = evt.args[0];
+        def refid = o.refid;
+        def permit = formReportSvc.getData( [reportid:"building_permit", parameters:[objid:refid] ] )?.data;
+        o.attachments = [
+            [ reportid: o.reportid, data: permit, title: "BuildingPermit.pdf"],
+            [ reportid: "building_permit_signage", parameters: [objid:refid], title: "ConstructionSignage.pdf" ] 
+        ];
+
+        //load accompanying subdocuments
+        def subdocs = vwSubdocEm.find( [appid: permit.appid ] ).where( "doctype.issuetype = 2 ").list();
+        subdocs.each {
+        	o.attachments << [ reportid: "building_application_subdoc", parameters: [objid: it.objid], title: it.doctypeid + ".pdf" ];
+        }
+
+        permit.rpus.each {
+        	def res = jasperSvc.generateReport([reportid: "rpttaxclearance", refid: it.taxclearanceid] );
+        	o.attachments << [title: "TaxClearance_"+it.tdno+".pdf", filename:outputReportPath +res.tokenid + ".pdf" ];
+	        res = jasperSvc.generateReport([reportid: "tdtruecopy", refid: it.truecopycertid] );        	
+        	o.attachments << [title: "TrueCopyCert_"+it.tdno+".pdf", filename:outputReportPath+res.tokenid+".pdf" ];        	
+        } 
+    }  
+
 
 
 }

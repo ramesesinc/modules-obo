@@ -11,8 +11,14 @@
 		<field name="system" required="false" defaultValue="0" visible="false"/>
 		<field name="sortorder" required="true" />
 		<field name="category" hidden="true"/>
-		<field name="typeid" />
 		<field name="unit" width="40"/>
+		
+		<field name="doctypeid"/>
+
+		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one" required="false">
+			<key field="occupancytypeid" target="objid" />
+		</complex>	
+
 	</element>
 
 </schema>

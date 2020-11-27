@@ -1,0 +1,14 @@
+<schema>
+	<element tablename="obo_contactinfo">
+		<!-- this should be the orgcode -->
+		<field name="orgcode" primary="true" visible="true"  />
+		<field name="officename" />
+		<field name="address1" />
+		<field name="address2" />
+		<field name="email" />
+		<field name="phoneno" />
+		<field name="mobileno" />
+	</element>
+</schema>
+		
+

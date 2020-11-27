@@ -1,0 +1,23 @@
+import com.rameses.annotations.*;
+
+class BuildingPermitReportInterceptor {
+
+	@Service(value="OnlineBuildingPermitService")
+	def oboReportSvc;
+
+	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('building_permit') }" )
+	public def beforeGenerateReport( evt ) {
+		def req = evt.args[0];
+		def reportid =  req.reportid;
+		def refid = req.params?.refid;
+
+		def app = oboReportSvc.getApplication([ appid: refid ]);
+		 
+		app.lotowner  = app.location?.owner;
+		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename[0].toString() : '');
+
+		req.data = app;
+		req.reportid = reportid;
+		req.template = "reports/obo/" + reportid;
+	}
+}

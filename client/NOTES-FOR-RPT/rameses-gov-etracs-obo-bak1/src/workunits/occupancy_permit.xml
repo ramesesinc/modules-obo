@@ -1,0 +1,42 @@
+<workunit schemaName="vw_occupancy_permit" processName="occupancy_permit">
+    <invokers>
+        <invoker type="vw_occupancy_permit:open" caption="Occupancy Permit Application" action="open" index="1"/>
+
+        <invoker type="appActions" 
+                caption="View Building Permit"
+                action="viewBldgPermit" 
+                index="0" />
+        
+        <invoker type="appActions" 
+                caption="Specify Inspection Schedule"
+                action="specifySchedule" 
+                index="1"
+                visibleWhen="#{
+                    task.state == 'schedule-inspection' 
+                    &amp;&amp; task.assignee.objid == userInfo.userid }" />
+
+        <!-- assessment actions -->        
+        <invoker type="feeActions" 
+                caption="Assess"
+                action="assess" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
+                
+        <invoker type="feeActions" 
+                caption="Add Fee"
+                action="addFee" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />        
+
+        <invoker type="feeActions" 
+                caption="Clear Fees"
+                action="clearFees" 
+                index="1"
+                visibleWhen="#{task.state == 'assessment' &amp;&amp; task.assignee.objid == userInfo.userid }"    />
+
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OccupancyPermitModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OccupancyPermitPage" />
+    </pages>
+</workunit>

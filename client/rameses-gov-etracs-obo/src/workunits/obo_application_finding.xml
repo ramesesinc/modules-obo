@@ -1,48 +1,14 @@
 <workunit>
     <invokers>
-        <!-- INVOKERS -->
-        <invoker type="building_permit_finding:create" caption="Building Permit Finding"
-                action="create" index="1" target="popup" schemaname="building_permit" />
-        
-        <invoker type="building_permit_finding:open" caption="Building Permit Finding"
-                action="open" index="1" target="popup" schemaname="building_permit"/>
-        
-        <invoker type="occupancy_permit_finding:create" caption="Occupancy Permit Finding"
-                action="create" index="1" target="popup" schemaname="occupancy_permit"/>
-        
-        <invoker type="occupancy_permit_finding:open" caption="Occupancy Permit Finding"
-                action="open" index="1" target="popup" schemaname="occupancy_permit"/>
-        
-        
-        <!-- finding actions -->
-        <invoker type="formActions" caption="Cancel"
-                action="_close" index="1" />
+        <invoker type="application_finding:create" action="create"
+                 caption="Finding" target="popup"/>        
 
-        <invoker type="formActions" caption="Save"
-                action="save" index="2" visibleWhen="#{entity.state == 0 &amp;&amp; pagename == 'view' }"/>
-
-        <invoker type="formActions" caption="Edit"
-                action="edit" visibleWhen="#{editable == true &amp;&amp; pagename == 'view' }" index="2"/>
-
-        <invoker type="formActions" caption="Revert Changes"
-                action="revert" visibleWhen="#{editable == true &amp;&amp; pagename == 'view' }" index="2"/>
-
-        <invoker type="formActions" caption="Supersede"
-                action="supersede" index="1" visibleWhen="#{closeable == true &amp;&amp; pagename == 'view' }"/>
-
-        <invoker type="formActions" caption="Close Issue"
-            action="closeIssue" index="2" visibleWhen="#{closeable == true &amp;&amp; pagename == 'view' }"/>
+        <invoker type="application_finding:open" action="open"
+                 caption="Finding" target="popup"/>        
         
-        <!-- non dynamic actions -->
-        <invoker type="formActions" caption="View History"
-            action="viewHistory" index="3" visibleWhen="#{pagename == 'view'}" />
-
-        <invoker type="formActions" caption="Back"
-            action="viewBack" index="3" visibleWhen="#{pagename == 'hist'}" />
-        
-    </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.OboApplicationFindingModel" />
-    <pages> 
-        <page template="com.rameses.gov.etracs.obo.views.OboApplicationFindingPage" />
-    </pages>
+    </invokers>   
+    <code class="com.rameses.gov.etracs.obo.models.ApplicationFindingModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.ApplicationFindingPage" />
+    </pages>          
 </workunit>

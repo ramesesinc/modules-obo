@@ -35,8 +35,8 @@ public class OboVariablePage extends javax.swing.JPanel {
         xTextField1 = new com.rameses.rcp.control.XTextField();
         xTextField2 = new com.rameses.rcp.control.XTextField();
         xTextField3 = new com.rameses.rcp.control.XTextField();
-        xTextField4 = new com.rameses.rcp.control.XTextField();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
+        xTextField4 = new com.rameses.rcp.control.XTextField();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
         xTextField5 = new com.rameses.rcp.control.XTextField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
@@ -45,7 +45,7 @@ public class OboVariablePage extends javax.swing.JPanel {
         formPanel1.setPadding(new java.awt.Insets(5, 5, 5, 0));
 
         xLabel1.setCaption("Type");
-        xLabel1.setExpression("#{ entity.typeid }");
+        xLabel1.setExpression("#{ entity.doctypeid }");
         xLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
         formPanel1.add(xLabel1);
@@ -69,19 +69,21 @@ public class OboVariablePage extends javax.swing.JPanel {
         xTextField3.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         formPanel1.add(xTextField3);
 
-        xTextField4.setCaption("Unit of Measure");
-        xTextField4.setName("entity.unit"); // NOI18N
-        xTextField4.setPreferredSize(new java.awt.Dimension(80, 20));
-        xTextField4.setRequired(true);
-        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        formPanel1.add(xTextField4);
-
         xComboBox1.setCaption("Data Type");
         xComboBox1.setItems("datatypes");
         xComboBox1.setName("entity.datatype"); // NOI18N
         xComboBox1.setPreferredSize(new java.awt.Dimension(170, 22));
         xComboBox1.setRequired(true);
         formPanel1.add(xComboBox1);
+
+        xTextField4.setCaption("Unit of Measure");
+        xTextField4.setDepends(new String[] {"entity.datatype"});
+        xTextField4.setName("entity.unit"); // NOI18N
+        xTextField4.setVisibleWhen("#{ entity.datatype?.matches('decimal|integer') }");
+        xTextField4.setPreferredSize(new java.awt.Dimension(80, 20));
+        xTextField4.setRequired(true);
+        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        formPanel1.add(xTextField4);
 
         xIntegerField1.setCaption("Sort order");
         xIntegerField1.setName("entity.sortorder"); // NOI18N
@@ -94,10 +96,11 @@ public class OboVariablePage extends javax.swing.JPanel {
         xTextField5.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
         formPanel1.add(xTextField5);
 
-        xLookupField1.setCaption("Classification");
-        xLookupField1.setExpression("#{entity.classification.title}");
-        xLookupField1.setHandler("lookupClassifcations");
-        xLookupField1.setName("entity.classification"); // NOI18N
+        xLookupField1.setCaption("Occupancy Type");
+        xLookupField1.setExpression("#{entity.occupancytype.objid}");
+        xLookupField1.setHandler("vw_obo_occupancy_type:lookup");
+        xLookupField1.setName("entity.occupancytype"); // NOI18N
+        xLookupField1.setVisibleWhen("#{ entity.typeid == 'ACCESSORIES' }");
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         formPanel1.add(xLookupField1);
 

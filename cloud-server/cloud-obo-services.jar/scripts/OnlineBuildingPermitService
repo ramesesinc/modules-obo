@@ -24,58 +24,17 @@ public class OnlineBuildingPermitService  {
 	@DataContext("online_building_permit_info")
 	def appInfoEm;
 
-	@DataContext("online_building_permit_professional")
-	def professionalEm;
-
-	@DataContext("vw_online_building_permit_professional")
-	def vwProfessionalEm;
-
 	@DataContext("obo_variable")
 	def varEm;
 
 	@Service("DateService")
 	def dateSvc;
 
-	def validateAncillary = { o->
-		def c = ancillaryEm.find( [appid : o.appid ] ).where( "designprofessionalid IS NULL" ).select("c:{COUNT(*)}").val();
-		if( c > 0 ) throw new Exception("Please specify all design professionals for all ancillary permits");
-		c = ancillaryEm.find( [appid : o.appid ] ).where( "supervisorid IS NULL" ).select("c:{COUNT(*)}").val();
-		if( c > 0 ) throw new Exception("Please specify all supervisor professionals for all ancillary permits");		
-	}
+	@Service("OboContactInfoService")
+	def contactSvc;
 
-	@ProxyMethod
-	public def moveNextStep( def o ) {
-		/* 
-		steps as follows:
-		0=initial
-		1=applicant
-		2=location
-		3=rpu
-		4=professional
-		5=project
-		6=accessories
-		7=ancillarylist
-		8=confirm
-		9=success
-		*/
-
-		if(!o.appid) throw new Exception("appid is required in determining the next step");
-		def app = appEm.find( [objid: o.appid] ).first();
-		def step = app.step;
-
-		//validation 
-		if( step == 7 ) validateAncillary( o );
-
-		def nextStep = step + 1;
-		//compare next step if less than existing then you can update otherwise stay the same
-		if(app.step < nextStep ) {
-			appEm.find( [objid: o.appid] ).update([step: nextStep]);			
-		}
-		else {
-			nextStep = app.step;
-		}
-		return [step:nextStep];
-	}
+	@DataContext("obo_permit_requirement")
+	def reqEm;
 
 	@ProxyMethod
 	public def create(def o) {
@@ -125,6 +84,11 @@ public class OnlineBuildingPermitService  {
 	@ProxyMethod
 	public def findCurrentInfo( def o ) {
 		appEm.find( [objid: o.appid ] ).select("orgcode,step").first();
+	}
+
+	@ProxyMethod
+	public def update( def o ) {
+		appEm.find( [objid: o.appid ] ).update( o );
 	}
 
 	//STEP 1
@@ -188,64 +152,29 @@ public class OnlineBuildingPermitService  {
 		rpuEm.find( [objid: o.objid ] ).delete();
 	}
 
-	//STEP 4.
-	@ProxyMethod 
-	public def saveProfessional(def o) {
-		o.entity.appid = o.appid;
-		o.entity = saveEntity(o.entity);
-		o.entityid = o.entity.objid; 
-		if(o.objid) {
-			return professionalEm.find( [objid: o.objid]).update( o );
-		}
-		else {
-			return professionalEm.create( o );
-		}
-	}
+	
 
-	@ProxyMethod 
-	public def getProfessional(def o) {
-		return professionalEm.find( [objid: o.objid]).first();
-	}
-
+	//call this method when updating occupancy type
 	@ProxyMethod
-	public void removeProfessional( def o) {
-		professionalEm.find( [objid: o.objid]).delete();
-
-		//check first the main app if entity is neither a lot owner or applicant before deleting
-		def entityid = o.entity.objid;
-		boolean b = appEm.find( [applicantid: entityid] ).exists();
-		if(b) return;
-		b = rpuEm.find( [ownerid: entityid] ).exists();
-		if(b) return;
-		entityEm.find( [objid: entityid ]).delete();
-	}
-
-	@ProxyMethod
-	public def getProfessionalList( def o ) {
-		return professionalEm.select("objid,entity.objid,entity.name,entity.address.text,profession,prc.*").find([appid: o.appid]).list();
-	}
-
-	@ProxyMethod
-	public def getLookupProfessionalList( def o ) {
-		return vwProfessionalEm.find([appid: o.appid]).list();
-	}
-
-	//STEP 5.
-	@ProxyMethod
-	public def updateProjectInfo( def o  ) {
+	public def updateOccupancyType( def o  ) {
 		o.occupancytypeid = o.occupancytype?.objid;
-		appEm.find( [objid: o.appid] ).update( o );
+		if( !o.occupancytypeid ) throw new Exception("Please specify an occupancy type");
+		if(!o.appid ) throw new Exception("appid is required");
 
-		//check if occupancy type is an accessory, then automatically add an entry the accessory table
-		if( o.occupancytype.group.objid == 'J' ) {
-			def m = addAccessory( o.appid, o.occupancytype.objid );
-			appEm.find( [objid: o.appid] ).update( [accessoryid: m.objid ] );
-		}
-		else {
-			def oldaccessoryid = appEm.find( [objid: o.appid] ).select("accessoryid").val();
-			if( oldaccessoryid ) {
-				appEm.find( [objid: o.appid] ).update( [accessoryid: "{NULL}" ] );
-				removeAccessory(oldaccessoryid, null, null );
+		def app = appEm.find( [objid: o.appid ] ).first();
+		def oldOccupancy = app.occupancytype;
+
+		if( oldOccupancy.objid != o.occupancytypeid ) {
+			//if not the same occupancy we need to remove all accessories and its infos
+			appInfoEm.removeAccessoryInfos( [appid: o.appid ] );
+			accessoryEm.find([appid: o.appid]).delete();
+
+			//save the occupancy type
+			appEm.find( [objid: o.appid] ).update( o );
+
+			//if new occupancy is type J then we need to auto add the accessory
+			if( o.occupancytype.group.objid == 'J' ) {
+				addAccessory( o.appid, o.occupancytype.objid );
 			}
 		}
 	}
@@ -253,153 +182,9 @@ public class OnlineBuildingPermitService  {
 	@ProxyMethod
 	public def getProjectInfo( def o  ) {
 		def proj = appEm.find( [objid: o.appid] ).first();
+		proj.obocontactinfo = contactSvc.getInfo([orgcode: proj.orgcode]);
 		return proj;
 	}
-
-	//on creating the accessory, automatically add the associated variables
-	def addAccessory( def appid, typeid ) {
-		def m = [:];
-		m.appid = appid;
-		m.type = [objid: typeid];			
-		m = accessoryEm.create( m );
-		varEm.find([typeid: typeid]).list().each {
-			def vinfo = [:];
-			vinfo.appid = appid;
-			vinfo.parentid = m.objid;
-			vinfo.name = it.objid;
-			vinfo.type = [name :it.objid];
-			appInfoEm.create( vinfo );
-		};
-		return m;
-	}
-
-	def removeAccessory( def objid, def appid, typeid ) {
-		if( objid == null ) {
-			objid = accessoryEm.find( [appid: appid ] ).where("type.objid = :type", [type: typeid ] ).select("objid").val();
-		}
-		//delete first if there are infos for this accessory
-		appInfoEm.find([parentid: objid]).delete();
-		accessoryEm.find( [objid: objid ]).delete();
-	}
-
-	//STEP 6. ACCESSORY
-	@ProxyMethod
-	public def saveAccessories(  def o ) {
-		if(!o.appid) throw new Exception("appid is required for saveAccessories");	
-		o.items?.each {
-			it = it.toUpperCase();
-			if(!accessoryEm.find( [appid: o.appid ] ).where("type.objid = :type", [type: it ] ).exists()) {
-				addAccessory( o.appid, it );
-			}
-		}
-		o.deleted?.each {
-			removeAccessory( null, o.appid, it );
-		}
-	}
-
-	@ProxyMethod
-	public def saveAccessoryInfos( def o ) {
-		if(!o.appid) throw new Exception("updateAccessories error. appid is required");
-		o.infos.each {
-			def info = appInfoEm.find( [appid: o.appid, name: it.name ] ).first();
-			def u = [:];
-			if( info.type.datatype == 'decimal') u.decimalvalue = it.value;
-			else if( info.type.datatype == 'integer') u.intvalue = it.value;
-			else if( info.type.datatype == 'boolean') u.booleanvalue = true;
-			else if( info.type.datatype == 'date') u.datevalue = it.value;
-			else u.stringvalue = it.value;
-			println "saving to " + info.objid + " " + u;
-			appInfoEm.find( [objid: info.objid ] ).update( u );
-		};
-	}
-
-	@ProxyMethod
-	public def getAccessories( def o ) {
-		def list = accessoryEm.find( [appid: o.appid ] ).list();
-		list.each {
-			it.infos = getAppInfos([parentid: it.objid]);
-		}
-		return list;
-	}
-
-	//STEP 7. ANCILLARY
-	@ProxyMethod
-	public def saveAncillaryPermits( def o ) {
-		o.permits.each { k,v->
-			def z = ancillaryEm.find( [appid:o.appid, permittypeid:k ] ).select("objid").val();
-			if( !z && v.toInteger() == 1 ) {
-				def m = [appid: o.appid, permittypeid: k, state: 'PENDING' ];
-				m.type = [objid: k];
-				m = ancillaryEm.create( m );	
-			} 
-			else if( z && v.toInteger() == 0 ) {
-				def x = ancillaryEm.find( [appid: o.appid, permittypeid: k] ).first();
-				ancillaryEm.find( [objid:x.objid] ).delete()	
-			}
-		}		
-		return null;
-	}
-
-	@ProxyMethod
-	public def getAncillaryPermits( def o ) {
-		return ancillaryEm.find( [appid: o.appid] ).orderBy("type.sortorder").list();	
-	}
-
-	@ProxyMethod
-	public def getAncillaryPermit( def o ) {
-		if(!o.objid) throw new Exception("getAncillary error. objid is required");
-		
-		def m = ancillaryEm.find( [objid: o.objid] ).first();
-		m.infos = getAppInfos( [parentid: o.objid ] );
-		return m;	
-	}
-
-	@ProxyMethod
-	public void saveAncillaryPermit( def o ) {
-		if(!o.objid) throw new Exception("updateAncillary error. objid is required");
-		//if(!o.infos) throw new Exception("updateAncillary error. infos is required");
-		o.designprofessionalid = o.designprofessional?.objid;
-		o.supervisorid = o.supervisor?.objid;
-
-		ancillaryEm.find( [objid: o.objid ] ).update( o );
-		saveAppInfos( [parentid: o.objid, infos: o.infos, appid: o.appid ] );
-	}
-
-	//UTILITY METHODS FOR APP INFOS
-	private void saveAppInfos( o ) {
-		if(!o.parentid) throw new Exception("saveAppInfos error. parentid is required");
-		//if(!o.infos) throw new Exception("saveAppInfos error. infos is required");
-
-		//clear first existing infos.
-		appInfoEm.find([parentid: o.parentid]).delete();
-		o.infos.each { info->
-			def m = [parentid: o.parentid, name: info.name, appid: o.appid];
-			m.type = [objid: info.name];
-			if( info.datatype == 'decimal') m.decimalvalue = info.value;
-			else if( info.datatype == 'integer') m.intvalue = info.value;
-			else if( info.datatype == 'boolean') m.booleanvalue = true;
-			else if( info.datatype == 'date') m.datevalue = info.value;
-			else m.stringvalue = info.value;
-			appInfoEm.create( m );
-		}
-	}
-
-	private def getAppInfos( o ) {
-		def list = [];
-		def tmpList = appInfoEm.find( [parentid: o.parentid] ).list();
-		tmpList.each { info->
-			def m = [name:info.name, datatype:info.type.datatype, caption: info.type.caption, unit: info.type.unit ];
-			if( m.datatype == 'decimal') m.value = info.decimalvalue;
-			else if( m.datatype == 'integer') m.value = info.intvalue;
-			else if( m.datatype == 'boolean') m.value = true;
-			else if( m.datatype == 'date') m.value = info.datevalue;
-			else m.value = info.stringvalue;
-			list << m;
-		}
-		return list;
-	}
-
-	
 
 	@ProxyMethod
 	public def getApplication(def o ) {
@@ -409,6 +194,185 @@ public class OnlineBuildingPermitService  {
 			app.ancillaries = ancillaryEm.find([appid: o.appid]).list();
 		}
 		return app;
+	}
+
+	/* ************************************************************
+	* ACCESSORY RELATED FUNCTIONS
+	****************************************************************/
+	def addAccessory( def appid, typeid ) {
+		def m = [:];
+		m.appid = appid;
+		m.type = [objid: typeid];			
+		return accessoryEm.create( m );
+	}
+
+	@ProxyMethod
+	public def saveAccessories(  def o ) {
+		if(!o.appid) throw new Exception("appid is required for saveAccessories");
+
+		//delete first all accessories and all related infos	
+		appInfoEm.removeAccessoryInfos( [appid: o.appid ] );
+		accessoryEm.find( [appid: o.appid ] ).delete();
+
+		o.items?.each {
+			it = it.toUpperCase();
+			addAccessory( o.appid, it );
+		}
+	}
+
+	@ProxyMethod
+	public def getAccessories( def o ) {
+		def app = appEm.find( [objid: o.appid ] ).first();
+		if(!app) throw new Exception("getAccessories error. Application " + o.appid + " not found ");
+		def list = accessoryEm.find( [appid: o.appid ] ).list();
+		list.each {
+			it.app = [occupancytypeid: app.occupancytypeid  ];
+			it.infos = getAppInfos([appid: app.objid, typeid: it.type.objid, parentid: it.objid ]);
+		}
+		return list;
+	}
+
+	@ProxyMethod
+	public def saveAccessoryInfos( def o ) {
+		if(!o.appid) throw new Exception("updateAccessories error. appid is required");	
+		//remove all accessory type infos from 
+		appInfoEm.removeAccessoryInfos( [appid: o.appid ] );
+		saveAppInfos( [appid: o.appid, infos: o.infos ] );
+	}
+
+	/* ************************************************************
+	* ANCILLARY FUNCTIONS
+	****************************************************************/
+	@ProxyMethod
+	public def getAvailableAncillaryPermitTypes( def o ) {
+		if(!o.appid) throw new Exception("appid is required");
+		return ancillaryEm.getAvailableAncillaryPermitTypes( [appid: o.appid] );
+	}
+
+	@ProxyMethod
+	public void saveAncillaryPermits( def o ) {
+		if(!o.appid) throw new Exception("appid is required");
+		if(!o.permits) throw new Exception("permits is required");
+		o.permits.each { 
+			def z = ancillaryEm.find( [appid:o.appid, permittypeid:it.objid ] ).select("objid").val();
+			if( !z ) {
+				def m = [appid: o.appid, permittypeid: it.objid, state: 'PENDING' ];
+				m.type = [objid: it.objid];
+				m.worktypes = [];
+				ancillaryEm.create( m );	
+			}
+		}
+	}
+
+	@ProxyMethod
+	public void removeAncillaryPermit( def o ) {
+		ancillaryEm.find( [objid: o.objid] ).delete();
+	}
+
+	@ProxyMethod
+	public def getAncillaryPermits( def o ) {
+		if(!o.appid) throw new Exception("appid is required");
+		return ancillaryEm.find( [appid: o.appid] ).orderBy("type.sortorder").list();	
+	}
+
+	@ProxyMethod
+	public def getAncillaryPermit( def o ) {
+		if(!o.objid) throw new Exception("getAncillary error. objid is required");
+		def m = ancillaryEm.find( [objid: o.objid] ).first();
+		if(!m) throw new Exception("ancillary id " + o.objid + " does not exist");
+		m.infos = getAppInfos([appid: m.appid, typeid: m.permittypeid, parentid: m.objid ]);
+		return m;	
+	}
+
+	@ProxyMethod
+	public void saveAncillaryPermit( def o ) {
+		if(!o.objid) throw new Exception("saveAncillary error. objid is required");
+		o.designprofessionalid = o.designprofessional?.objid;
+		o.supervisorid = o.supervisor?.objid;
+		if(!o.worktypes) o.worktypes = [];		
+		ancillaryEm.find( [objid: o.objid ] ).update( o );
+		appInfoEm.find([parentid: o.objid]).delete();
+		saveAppInfos( [parentid: o.objid, infos: o.infos, appid: o.appid ] );
+	}
+
+	@ProxyMethod
+	public void updateAncillaryPermit( def o ) {
+		if(!o.objid) throw new Exception("updateAncillaryPermit error. objid is required");
+		if(o.designprofessional) {
+			o.designprofessionalid = o.designprofessional.objid;
+		} 
+		if( o.supervisor ) {
+			o.supervisorid = o.supervisor.objid;
+		}
+		ancillaryEm.find( [objid: o.objid ] ).update( o );
+	}
+
+	@ProxyMethod
+	public void updateAncillaryPermitInfos( def o ) {
+		if(!o.objid) throw new Exception("updateAncillaryPermitInfos error. objid is required");
+		if(!o.infos) throw new Exception("updateAncillaryPermitInfos error. infos is required");	
+		appInfoEm.find([parentid: o.objid]).delete();
+		saveAppInfos( [parentid: o.objid, infos: o.infos, appid: o.appid ] );
+	}
+
+	/* ************************************************************
+	* UTILITY FOR APP INFO FUNCTIONS
+	****************************************************************/
+	private def getAppInfos( o ) {
+		if( !o.typeid) throw new Exception("typeid is required in getAppInfos");
+		def list = [];
+		varEm.find([typeid: o.typeid]).list().each {
+			def m = [name:it.objid, datatype:it.datatype, caption: it.caption, 
+				unit: it.unit, value:null, parentid: o.parentid, category: it.category, sortorder: it.sortorder ];
+			//search info if exist
+			def info = appInfoEm.find( [appid: o.appid, name: m.name ] ).first();
+			if( info ) {
+				if( m.datatype == 'decimal') m.value = info.decimalvalue;
+				else if( m.datatype == 'integer') m.value = info.intvalue;
+				else if( m.datatype == 'boolean') m.value = true;
+				else if( m.datatype == 'date') m.value = info.datevalue;
+				else m.value = info.stringvalue;			
+			}
+			list << m;
+		};
+		list = list.sort{ [it.category, it.sortorder] }
+		return list;
+	}
+
+	private void saveAppInfos( o ) {
+		if(!o.appid) throw new Exception("saveAppInfos error. parentid is required");
+
+		o.infos.findAll{ it.value }.each {
+			def m = [:];
+			m.appid = o.appid;
+			m.parentid = it.parentid;
+			m.name = it.name;
+			m.type = [name: it.name];
+			if( it.datatype == 'decimal') m.decimalvalue = it.value;
+			else if( it.datatype == 'integer') m.intvalue = it.value;
+			else if( it.datatype == 'boolean') m.booleanvalue = true;
+			else if( it.datatype == 'date') m.datevalue = it.value;
+			else m.stringvalue = it.value;
+			appInfoEm.create( m );
+		}
+	}
+	
+	@ProxyMethod
+	public def getRequirements( def o ) {
+		if(!o.appid) throw new Exception("appid is required");
+		def list = reqEm.find( [apptype: "building"]).orderBy("sortorder").list();
+
+		//apps to download
+		def mitems = [ [reportid:"building_permit", title:"Building Permit", refid: o.appid] ];
+
+		def alist= ancillaryEm.select("objid,permittypeid,type.title").find( [appid: o.appid ] ).orderBy("type.sortorder").list();
+		alist.each {
+			mitems << [reportid: 'building_ancillary_' + it.permittypeid, title: it.type.title, refid: it.objid ]; 
+		}
+
+		def firstItem = list[0];
+		firstItem.docs = mitems;
+		return list;
 	}
 
 

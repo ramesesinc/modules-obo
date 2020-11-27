@@ -1,0 +1,18 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import java.rmi.server.*;
+import obo.facts.*;
+import java.text.*;
+
+public class OboContactInfoService  {
+
+	@DataContext("obo_contactinfo")
+	def infoEm;
+
+	@ProxyMethod
+	public def getInfo( def o ) {
+		if(!o.orgcode) throw new Exception("orgcode is required in getInfo");
+		return infoEm.find([orgcode: o.orgcode]).first();
+	}
+
+}

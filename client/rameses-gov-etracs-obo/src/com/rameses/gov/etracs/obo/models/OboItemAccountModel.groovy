@@ -10,14 +10,14 @@ import com.rameses.util.*;
 import com.rameses.osiris2.reports.*;
 import com.rameses.seti2.models.*;
 
-public class OboSectionModel extends CrudFormModel {
+public class OboItemAccountModel extends CrudFormModel {
     
-    public def getLookupSection() {
-        def s = { o->
-            entity.sectionid = o.objid;
-            binding.refresh("entity.sectionid");
-        }
-        return Inv.lookupOpener("obo_section:lookup", [onselect: s])
+    def docTypeList;
+    def feeGroupList = [ "BFP", "ZONING", "RPT"];
+    
+    public void afterInit() {
+        def m = [_schemaname: "vw_obo_doctype"];
+        m.where = ["1=1"];
+        docTypeList = queryService.getList(m);
     }
-    
 }

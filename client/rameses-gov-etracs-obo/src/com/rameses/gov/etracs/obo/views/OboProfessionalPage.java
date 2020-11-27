@@ -32,35 +32,215 @@ public class OboProfessionalPage extends javax.swing.JPanel {
 
         xDataTable1 = new com.rameses.rcp.control.XDataTable();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        entityLookup1 = new com.rameses.entity.components.EntityLookup();
-        lOVList1 = new com.rameses.enterprise.components.LOVList();
+        xLabel7 = new com.rameses.rcp.control.XLabel();
+        xTextField11 = new com.rameses.rcp.control.XTextField();
+        xTextField10 = new com.rameses.rcp.control.XTextField();
+        xTextField12 = new com.rameses.rcp.control.XTextField();
+        xDateField3 = new com.rameses.rcp.control.XDateField();
+        xDateField4 = new com.rameses.rcp.control.XDateField();
+        xLabel5 = new com.rameses.rcp.control.XLabel();
         xTextField2 = new com.rameses.rcp.control.XTextField();
+        xTextField1 = new com.rameses.rcp.control.XTextField();
         xTextField3 = new com.rameses.rcp.control.XTextField();
+        xLabel11 = new com.rameses.rcp.control.XLabel();
+        addressEditor1 = new com.rameses.enterprise.components.AddressEditor();
+        xLabel2 = new com.rameses.rcp.control.XLabel();
+        xTextField4 = new com.rameses.rcp.control.XTextField();
+        xTextField5 = new com.rameses.rcp.control.XTextField();
+        xLabel4 = new com.rameses.rcp.control.XLabel();
+        xComboBox2 = new com.rameses.rcp.control.XComboBox();
+        xTextField6 = new com.rameses.rcp.control.XTextField();
+        xTextField7 = new com.rameses.rcp.control.XTextField();
+        xDateField1 = new com.rameses.rcp.control.XDateField();
+        xLabel6 = new com.rameses.rcp.control.XLabel();
+        xTextField8 = new com.rameses.rcp.control.XTextField();
+        xTextField9 = new com.rameses.rcp.control.XTextField();
         xDateField2 = new com.rameses.rcp.control.XDateField();
 
         xFormPanel1.setCaptionWidth(120);
 
-        entityLookup1.setCaption("Name");
-        entityLookup1.setEntityType("individual");
-        entityLookup1.setName("entity.entity"); // NOI18N
-        entityLookup1.setPreferredSize(new java.awt.Dimension(0, 21));
-        xFormPanel1.add(entityLookup1);
+        xLabel7.setDepends(new String[] {"entity.entitytype"});
+        xLabel7.setCellPadding(new java.awt.Insets(5, 0, 0, 0));
+        xLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xLabel7.setShowCaption(false);
+        xLabel7.setText("Profession Info");
+        xFormPanel1.add(xLabel7);
 
-        lOVList1.setCaption("Profession");
-        lOVList1.setListName("OBO_PROFESSION");
-        lOVList1.setName("entity.profession"); // NOI18N
-        xFormPanel1.add(lOVList1);
+        xTextField11.setCaption("Profession");
+        xTextField11.setName("entity.profession"); // NOI18N
+        xTextField11.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField11.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField11.setRequired(true);
+        xTextField11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xTextField11ActionPerformed(evt);
+            }
+        });
+        xFormPanel1.add(xTextField11);
 
-        xTextField2.setCaption("PRC No");
-        xTextField2.setName("entity.prcno"); // NOI18N
+        xTextField10.setCaption("PRC No");
+        xTextField10.setName("entity.prc.idno"); // NOI18N
+        xTextField10.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField10.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField10.setRequired(true);
+        xTextField10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xTextField10ActionPerformed(evt);
+            }
+        });
+        xFormPanel1.add(xTextField10);
+
+        xTextField12.setCaption("Place Issued");
+        xTextField12.setName("entity.prc.placeissued"); // NOI18N
+        xTextField12.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField12.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField12.setRequired(true);
+        xFormPanel1.add(xTextField12);
+
+        xDateField3.setCaption("Date Issued");
+        xDateField3.setName("entity.prc.dtissued"); // NOI18N
+        xDateField3.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xDateField3.setRequired(true);
+        xFormPanel1.add(xDateField3);
+
+        xDateField4.setCaption("Valid Until");
+        xDateField4.setName("entity.prc.dtvalid"); // NOI18N
+        xDateField4.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xDateField4.setRequired(true);
+        xFormPanel1.add(xDateField4);
+
+        xLabel5.setDepends(new String[] {"entity.entitytype"});
+        xLabel5.setCellPadding(new java.awt.Insets(5, 0, 0, 0));
+        xLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xLabel5.setShowCaption(false);
+        xLabel5.setText("Personal");
+        xFormPanel1.add(xLabel5);
+
+        xTextField2.setCaption("Last Name");
+        xTextField2.setDepends(new String[] {"entity.entitytype"});
+        xTextField2.setName("entity.lastname"); // NOI18N
+        xTextField2.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField2.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField2.setRequired(true);
+        xTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xTextField2ActionPerformed(evt);
+            }
+        });
         xFormPanel1.add(xTextField2);
 
-        xTextField3.setCaption("PTR No");
-        xTextField3.setName("entity.ptrno"); // NOI18N
+        xTextField1.setCaption("First Name");
+        xTextField1.setDepends(new String[] {"entity.entitytype"});
+        xTextField1.setName("entity.firstname"); // NOI18N
+        xTextField1.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField1.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField1.setRequired(true);
+        xFormPanel1.add(xTextField1);
+
+        xTextField3.setCaption("Middle Name");
+        xTextField3.setDepends(new String[] {"entity.entitytype"});
+        xTextField3.setName("entity.middlename"); // NOI18N
+        xTextField3.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField3.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField3.setRequired(true);
         xFormPanel1.add(xTextField3);
 
-        xDateField2.setCaption("Validity");
-        xDateField2.setName("entity.validitydate"); // NOI18N
+        xLabel11.setDepends(new String[] {"entity.entitytype"});
+        xLabel11.setExpression("Address");
+        xLabel11.setCellPadding(new java.awt.Insets(5, 0, 0, 0));
+        xLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xLabel11.setShowCaption(false);
+        xFormPanel1.add(xLabel11);
+
+        addressEditor1.setCaption("Address");
+        addressEditor1.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        addressEditor1.setName("entity.address"); // NOI18N
+        addressEditor1.setPreferredSize(new java.awt.Dimension(0, 53));
+        addressEditor1.setRequired(true);
+        xFormPanel1.add(addressEditor1);
+
+        xLabel2.setDepends(new String[] {"entity.entitytype"});
+        xLabel2.setCellPadding(new java.awt.Insets(5, 0, 0, 0));
+        xLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xLabel2.setShowCaption(false);
+        xLabel2.setText("Contact Info");
+        xFormPanel1.add(xLabel2);
+
+        xTextField4.setCaption("Email");
+        xTextField4.setName("entity.email"); // NOI18N
+        xTextField4.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField4.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField4.setRequired(true);
+        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        xFormPanel1.add(xTextField4);
+
+        xTextField5.setCaption("Mobile No");
+        xTextField5.setName("entity.mobileno"); // NOI18N
+        xTextField5.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField5.setPreferredSize(new java.awt.Dimension(200, 20));
+        xFormPanel1.add(xTextField5);
+
+        xLabel4.setDepends(new String[] {"entity.entitytype"});
+        xLabel4.setCellPadding(new java.awt.Insets(5, 0, 0, 0));
+        xLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xLabel4.setShowCaption(false);
+        xLabel4.setText("Proof of Identification");
+        xFormPanel1.add(xLabel4);
+
+        xComboBox2.setCaption("Select ID Type");
+        xComboBox2.setExpression("#{ item.title }");
+        xComboBox2.setItems("idTypes");
+        xComboBox2.setName("entity.id.type"); // NOI18N
+        xComboBox2.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xComboBox2.setPreferredSize(new java.awt.Dimension(0, 27));
+        xComboBox2.setRequired(true);
+        xFormPanel1.add(xComboBox2);
+
+        xTextField6.setCaption("Id No");
+        xTextField6.setName("entity.id.idno"); // NOI18N
+        xTextField6.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField6.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField6.setRequired(true);
+        xFormPanel1.add(xTextField6);
+
+        xTextField7.setCaption("Place Issued");
+        xTextField7.setName("entity.id.placeissued"); // NOI18N
+        xTextField7.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField7.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField7.setRequired(true);
+        xFormPanel1.add(xTextField7);
+
+        xDateField1.setCaption("Date Issued");
+        xDateField1.setName("entity.id.dtissued"); // NOI18N
+        xDateField1.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xDateField1.setRequired(true);
+        xFormPanel1.add(xDateField1);
+
+        xLabel6.setDepends(new String[] {"entity.entitytype"});
+        xLabel6.setCellPadding(new java.awt.Insets(5, 0, 0, 0));
+        xLabel6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xLabel6.setShowCaption(false);
+        xLabel6.setText("PTR");
+        xFormPanel1.add(xLabel6);
+
+        xTextField8.setCaption("Id No");
+        xTextField8.setName("entity.ptr.refno"); // NOI18N
+        xTextField8.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField8.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField8.setRequired(true);
+        xFormPanel1.add(xTextField8);
+
+        xTextField9.setCaption("Place Issued");
+        xTextField9.setName("entity.ptr.placeissued"); // NOI18N
+        xTextField9.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xTextField9.setPreferredSize(new java.awt.Dimension(0, 20));
+        xTextField9.setRequired(true);
+        xFormPanel1.add(xTextField9);
+
+        xDateField2.setCaption("Date Issued");
+        xDateField2.setName("entity.ptr.dtissued"); // NOI18N
+        xDateField2.setCellPadding(new java.awt.Insets(0, 20, 0, 0));
+        xDateField2.setRequired(true);
         xFormPanel1.add(xDateField2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -68,25 +248,57 @@ public class OboProfessionalPage extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
-                .addGap(34, 34, 34))
+                .addGap(15, 15, 15)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void xTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xTextField2ActionPerformed
+
+    private void xTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xTextField10ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xTextField10ActionPerformed
+
+    private void xTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xTextField11ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_xTextField11ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.entity.components.EntityLookup entityLookup1;
-    private com.rameses.enterprise.components.LOVList lOVList1;
+    private com.rameses.enterprise.components.AddressEditor addressEditor1;
+    private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XDataTable xDataTable1;
+    private com.rameses.rcp.control.XDateField xDateField1;
     private com.rameses.rcp.control.XDateField xDateField2;
+    private com.rameses.rcp.control.XDateField xDateField3;
+    private com.rameses.rcp.control.XDateField xDateField4;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
+    private com.rameses.rcp.control.XLabel xLabel11;
+    private com.rameses.rcp.control.XLabel xLabel2;
+    private com.rameses.rcp.control.XLabel xLabel4;
+    private com.rameses.rcp.control.XLabel xLabel5;
+    private com.rameses.rcp.control.XLabel xLabel6;
+    private com.rameses.rcp.control.XLabel xLabel7;
+    private com.rameses.rcp.control.XTextField xTextField1;
+    private com.rameses.rcp.control.XTextField xTextField10;
+    private com.rameses.rcp.control.XTextField xTextField11;
+    private com.rameses.rcp.control.XTextField xTextField12;
     private com.rameses.rcp.control.XTextField xTextField2;
     private com.rameses.rcp.control.XTextField xTextField3;
+    private com.rameses.rcp.control.XTextField xTextField4;
+    private com.rameses.rcp.control.XTextField xTextField5;
+    private com.rameses.rcp.control.XTextField xTextField6;
+    private com.rameses.rcp.control.XTextField xTextField7;
+    private com.rameses.rcp.control.XTextField xTextField8;
+    private com.rameses.rcp.control.XTextField xTextField9;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,0 +1,24 @@
+<workunit>
+    <invokers>
+        <invoker type="vw_occupancy_inspection:form:extActions"
+                 caption="View FAAS" 
+                 index="1"
+                 target="popup"
+                 visibleWhen="#{entity.typeid == 'RPT'}"   />
+        
+        <!-- actions -->
+        <!--
+        <invoker type="formActions"
+                 caption="Close" 
+                 action="_close" index="0"/>
+        
+        <invoker type="formActions"
+                 caption="Load RPT Units" 
+                 action="loadRptUnits" index="0"/>
+        -->         
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OccupancyPermitRptModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OccupancyPermitRptPage" />
+    </pages>
+</workunit>

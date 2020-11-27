@@ -1,0 +1,33 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import java.rmi.server.*;
+
+public class OnlineOccupancyPermitDownloadService  {
+
+	@DataContext("online_occupancy_permit")
+	def appEm;
+
+	@DataContext("online_occupancy_permit_entity")
+	def entityEm;
+
+	//This is called by the local client
+	@ProxyMethod
+	public def getDownloadInfo(def parm) {
+		println "ENTERING DOWNLOAD SERVOCE"
+		def appid = parm.appid;
+
+		def app = appEm.find([objid: appid ] ).first();
+
+		if( parm.orgcode != app.orgcode ) {
+			throw new Exception("This application is not for this organization");
+		}	
+		if( app.step < 5 ) {
+			throw new Exception("This application is not yet completed");
+		}
+
+		app.entities = entityEm.find( [appid: appid ]).list();
+		app.trackingno = app.remove("objid");
+		return app;
+	}
+
+}

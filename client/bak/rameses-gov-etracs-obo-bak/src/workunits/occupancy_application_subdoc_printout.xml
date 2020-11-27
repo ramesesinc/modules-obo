@@ -1,0 +1,16 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+        <invoker type="vw_occupancy_application_subdoc:form:formActions" 
+                 caption="View Printout"
+                 action="preview" 
+                 index="1" 
+                 zallowPrint="#{ entity.issuanceid !=null }"
+                 zvisibleWhen="#{ entity.template !=null || entity.doctype.template !=null }"
+                 reportId="occupancy_application_subdoc" />
+        
+       <invoker type="vw_occupancy_application_subdoc:attachment" 
+                 action="preview" 
+                 reportId="occupancy_application_subdoc"/> 
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
+</workunit>

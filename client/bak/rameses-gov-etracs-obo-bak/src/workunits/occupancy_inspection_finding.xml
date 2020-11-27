@@ -1,0 +1,10 @@
+<workunit extends="com/rameses/gov/etracs/obo/templates/OboApplicationFinding.xml" schemaName="occupancy_inspection_finding">
+    <invokers>
+        <invoker type="occupancy_inspection_finding:create" action="create"
+                 caption="Occupancy Inspection Finding" target="popup"/>        
+
+        <invoker type="occupancy_inspection_finding:open" action="open"
+                 caption="Occupancy Inspection Finding" target="popup"/>        
+        
+    </invokers>             
+</workunit>

@@ -1,0 +1,12 @@
+<workunit>
+    <invokers>
+        <invoker type="vw_occupancy_inspection:form:extActions"
+                 caption="Upload File" 
+                 target="popup"
+                 />
+    </invokers>
+    <code class="filemgmt.models.TestAttachmentModel" />
+    <pages>
+        <page template="filemgmt.views.TestAttachmentPage" />
+    </pages>    
+</workunit>

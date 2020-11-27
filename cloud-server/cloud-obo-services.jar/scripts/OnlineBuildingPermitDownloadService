@@ -15,7 +15,7 @@ public class OnlineBuildingPermitDownloadService  {
 	@DataContext("online_building_permit_rpu")
 	def rpuEm;
 
-	@DataContext("online_building_permit_professional")
+	@DataContext("obo_professional")
 	def professionalEm;
 
 	@DataContext("online_building_permit_accessory")
@@ -43,7 +43,6 @@ public class OnlineBuildingPermitDownloadService  {
 
 		app.entities = entityEm.find( [appid: appid ]).list();
 		app.rpus = rpuEm.find( [appid: appid] ).list();
-		app.professionals = professionalEm.find( [appid:appid] ).list();
 		app.accessories = accessoryEm.find( [appid: appid ]).list();
 		app.ancillaries = ancillaryEm.find( [appid: appid ]).list();
 		app.infos = appInfoEm.find( [appid: appid ] ).list();

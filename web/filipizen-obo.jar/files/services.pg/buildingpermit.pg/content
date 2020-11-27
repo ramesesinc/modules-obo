@@ -6,11 +6,11 @@
 	list << [step:0, name:'initial', caption: "Initial"];
 	list << [step:1, name:'applicant', caption:'Applicant'];
 	list << [step:2, name:'location', caption:'Location'];	
-	list << [step:3, name:'rpu', caption:'Lot Information'];	
+	list << [step:3, name:'rpu', caption:'Real Property'];	
 	list << [step:4, name:'professional', caption:'Professionals'];
 	list << [step:5, name:'project', , caption:'Project Details'];
 	list << [step:6, name:'accessories',caption:'Accessories'];
-	list << [step:7, name:'ancillarylist', caption:'Ancillary Permits'];
+	list << [step:7, name:'ancillarylist', caption:'Other Permits'];
 	list << [step:8, name:'confirm', caption:'Confirm'];
 	list << [step:9, name:'finish', caption:'Finish'];				
 

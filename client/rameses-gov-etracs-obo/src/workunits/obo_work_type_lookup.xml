@@ -1,7 +1,11 @@
-<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="obo_work_type">
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" 
+    allowCreate="false" allowOpen="false" allowDelete="false"
+          schemaName="obo_work_type">
     <invokers>
-        <invoker type="obo_work_type:lookup" caption="Lookup Construction Type" 
+        <invoker type="obo_work_type:lookup" caption="Lookup Work Type" 
                  cols="description"
+                 multiSelect="true"
+                 customFilter="doctypeid = :typeid"
                  action="init" orderBy="idx" target="popup"/>
     </invokers>
 </workunit>

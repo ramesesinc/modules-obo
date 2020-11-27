@@ -1,0 +1,22 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"
+        reportId="occupancy_application_transmittal"
+        reportName="com/rameses/gov/etracs/obo/reports/finding_transmittal.jasper"> 
+    <invokers>
+      
+        <invoker type="vw_occupancy_application:form:appActions" 
+                 caption="View Finding Transmittal"
+                 action="preview"
+                 index="30"
+                 visibleWhen="#{ entity.transmittalid != null }"/>   
+
+        <!-- open from the transmittal list -->
+        <invoker type="occupancy_inspection_finding_transmittal:open" 
+                 caption="View Finding Transmittal"
+                 action="openPreview" />
+
+          <!-- inside the report -->
+        <invoker type="formActions" caption="Send Email" action="sendEmail" 
+                 fileid="occupancy_inspection_finding_transmittal"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationTransmittalModel" />
+</workunit>

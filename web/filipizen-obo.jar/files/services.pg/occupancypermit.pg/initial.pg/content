@@ -17,8 +17,6 @@
 		this.appno;
 		this.error;
 		this.permitno;
-		this.permit;
-		this.contact = {};
 		this.occupancy = {apptype: 'FULL'};
 		this.menuOption = 'new';
 
@@ -33,23 +31,13 @@
 			}
 		}
 
-		this.putAll = function(target, source) {
-			if (!target) target = {}
-			Object.keys(source).forEach(function(key) {
-				target[key] = source[key];
-			});
-		}
-
 		this.findPermit = function() {
-
 			function initOccupancyInfo(occupancy, permit) {
 				occupancy.contact = {};
 				occupancy.orgcode = app.orgcode;
-				occupancy.bldgpermitid = permit.objid;
-				occupancy.contact = permit.contact;
-				occupancy.dtactualstarted = permit.dtproposedconstruction
-				occupancy.dtactualcompleted = permit.dtexpectedcompletion
-				occupancy.bldgpermit = permit
+				occupancy.bldgpermit = permit;
+				occupancy.bldgpermit.location.text = permit.location.street + ' ' + permit.location.barangay.name;
+				occupancy.applicant = permit.applicant;
 				occupancy.permittype = "OCCUPANCY_PERMIT";
 				occupancy.totalmaterialcost = 0.0;
 				occupancy.totaldirectlaborcost = 0.0;
@@ -60,28 +48,12 @@
 				occupancy.lpgpipingcost = 0.0;
 				occupancy.firesuppcost = 0.0;
 
-				//set actual values from permit as default
-				var fields = [
-					'dtproposedconstruction',
-					'dtexpectedcompletion',
-					'totalfloorarea',
-					'numfloors',
-					'numunits',
-					'professionals',
-					'entities',
-					'profarchitectid',
-					'profcivilid',
-					'profelectricalid',
-					'profmechanicalid',
-					'profsanitaryid',
-					'profplumbingid',
-					'profelectronicid',
-					'profinteriorid',
-				];
-
-				fields.forEach(function(key) {
-					self.occupancy[key] = self.permit[key];
-				});
+				occupancy.dtactualstarted = permit.dtproposedconstruction
+				occupancy.dtactualcompleted = permit.dtexpectedcompletion
+				occupancy.actualheight = permit.height;
+				occupancy.actualnumunits = permit.numunits;
+				occupancy.actualnumfloors = permit.numfloors;
+				occupancy.actualtotalfloorarea = permit.totalfloorarea;
 			}
 
 			var p = {permitno: self.permitno}
@@ -91,32 +63,11 @@
 				}
 				else {
 					self.mode = "view-bldg-permit";
-					self.permit = o;
-					initOccupancyInfo(self.occupancy, self.permit);
+					initOccupancyInfo(self.occupancy, o);
 					self.error = null;
 				}
 				self._controller.refresh();
 			});
-		}
-
-		this.editContact = function() {
-			self.mode = 'edit-contact';
-			self.contact = {};
-			this.putAll(self.contact, self.occupancy.contact);
-			self._controller.refresh();
-		}
-
-		this.cancelEditContact = function() {
-			self.mode = 'view-bldg-permit';
-			self.contact = {};
-			self._controller.refresh();	
-		}
-
-		this.updateContact = function() {
-			self.mode = 'view-bldg-permit';
-			this.putAll(self.occupancy.contact, self.contact);
-			self.contact = {};
-			self._controller.refresh();	
 		}
 
 		this.showConfirm = function() {
@@ -142,9 +93,12 @@
 		this.proceed = function() {
 			app.reload( { appid: this.appid }, "costing" );
 		}
+
+		this.backToInitial = function() {
+			self.mode = "new-application"
+		}
 	});
 </script>
-
 
 <div r:context="initial" r:visibleWhen="#{error != null }" style='display:none'>
 	<label r:context="initial" style="color:red;">#{error}</label>
@@ -178,56 +132,28 @@
     @wx:button( context:'initial', name:'findPermit', caption: 'Next' )
 </div>
 
-
 <div r:context="initial" r:visibleWhen="#{mode=='view-bldg-permit'}" style='display:none'>
 	<div style="padding-bottom:20px;font-size:1.5rem">Please check building permit and applicaton info if correct. Click next to continue</div>
 	<h4>Building Permit Information</h4>
 	<div class="form">
-	  @wx:label(caption:'Permit Type', context:'initial', expr:'#{permit.permittype}', captionClass:'caption-class2')  
-	  @wx:label(caption:'Permit No.', context:'initial', expr:'#{permit.permitno}', captionClass:'caption-class2')  
-	  @wx:label(caption:'Date Issued', context:'initial', expr:'#{permit.dtissued}', captionClass:'caption-class2')  
-	  @wx:label(caption:'Name of Owner', context:'initial', expr:'#{permit.applicant.name}', captionClass:'caption-class2')  	
-	  @wx:label(caption:'Address of Owner', context:'initial', expr:'#{permit.applicant.address.text}', captionClass:'caption-class2')  	
+	  @wx:label(caption:'Bldg Permit No.', context:'initial', expr:'#{occupancy.bldgpermit.permitno}', captionClass:'caption-class2')  
+	  @wx:label(caption:'Project Title', context:'initial', expr:'#{occupancy.bldgpermit.title}', captionClass:'caption-class2')   
+	  @wx:label(caption:'Project Location', context:'initial', expr:'#{occupancy.bldgpermit.location.text}', captionClass:'caption-class2')   
 
+	  @wx:label(caption:'Name of Bldg Owner', context:'initial', expr:'#{occupancy.applicant.name}', captionClass:'caption-class2')  	
+	  @wx:label(caption:'Address of Bldg Owner', context:'initial', expr:'#{occupancy.applicant.address.text}', captionClass:'caption-class2')  	
+	  @wx:label(caption:'Application Type', context:'initial', expr:'#{occupancy.apptype}', captionClass:'caption-class2')  		  
 	  <br />
-	  <h4>Application Information</h4>
 
-		@wx:label(caption:'Application Type', context:'initial', expr:'#{occupancy.apptype}', captionClass:'caption-class2')  		  
-
-	  @wx:label(caption:'Name of Owner/Applicant', context:'initial', expr:'#{occupancy.contact.name}', captionClass:'caption-class2')  	
-	  @wx:label(caption:'Address of Owner/Applicant', context:'initial', expr:'#{occupancy.contact.address}', captionClass:'caption-class2')  	
-	  @wx:label(caption:'Email Address', context:'initial', expr:'#{occupancy.contact.email}', captionClass:'caption-class2')  	
-	  @wx:label(caption:'Mobile No.', context:'initial', expr:'#{occupancy.contact.mobileno}', captionClass:'caption-class2')  	
+	  <h4>Contact Information</h4>
+	  @wx:text(caption:'Name of Contact', context:'initial', name:'occupancy.contact.name', captionClass:'caption-class2')  	
+	  @wx:text(caption:'Contact Details', context:'initial', name:'occupancy.contact.detail', captionClass:'caption-class2')  	
+	  @wx:email(context:'initial', name:'occupancy.contact.email', captionClass:'caption-class2')
+	  @wx:mobile(context:'initial', name:'occupancy.contact.mobileno' , captionClass:'caption-class2')
   </div>
-
-	@wx:button(context:'initial', caption:'Edit Contact', name:'editContact')
+	@wx:button( context:'initial', name:'backToInitial', caption: 'Back' )  
   	@wx:button( context:'initial', caption: 'Next', name:'showConfirm')
 </div>
-
-
-<div r:context="initial" r:visibleWhen="#{mode=='edit-contact'}" style='display:none'>
-	<div style="padding-bottom:20px;">Edit Contact Information</div>
-	<h4>Building Permit Information</h4>
-	<div class="form">
-	  @wx:label(caption:'Permit No', context:'initial', expr:'#{permit.permitno}', captionClass:'caption-class2')  
-	  @wx:label(caption:'Date Issued', context:'initial', expr:'#{permit.dtissued}', captionClass:'caption-class2')  
-	  @wx:label(caption:'Name of Owner', context:'initial', expr:'#{permit.applicant.name}', captionClass:'caption-class2')  	
-	  @wx:label(caption:'Address of Owner', context:'initial', expr:'#{permit.applicant.address.text}', captionClass:'caption-class2')  	
-
-	  <br />
-	  <h4>Application Information</h4>
-
-		@wx:label(caption:'Application Type', context:'initial', expr:'#{occupancy.apptype}', captionClass:'caption-class2')  		  
-		@wx:text(caption:'Name of Owner/Applicant', context:'initial', name:'contact.name', captionClass:'caption-class2')  	
-		@wx:text(caption:'Address of Owner/Applicant', context:'initial', name:'contact.address', captionClass:'caption-class2')  	
-		@wx:email(context:'initial', name:'contact.email')
-		@wx:mobile(context:'initial', name:'contact.mobileno' )
-  </div>
-
-	@wx:button(context:'initial', caption:'Cancel', name:'cancelEditContact' )
-  @wx:button( context:'initial', caption:'Update', name:'updateContact')
-</div>
-
 
 <div r:context="initial" r:visibleWhen="#{mode=='confirm'}" style='display:none'>
 	<div class="subtitle">Please read throughly before proceeding</div>
@@ -245,7 +171,6 @@
     	<input type="checkbox" r:context="initial" r:name="agreed"> Yes I have read and agree to the terms and conditions 
 	</div>	
 	<div>
-		@wx:button( context:'initial', name:'cancelApp', caption: 'Cancel' )
 		@wx:button( context:'initial', name:'confirm', caption: 'Continue' )
   	</div>
 </div>

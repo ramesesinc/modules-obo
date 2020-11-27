@@ -1,0 +1,15 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml"
+          schemaName="vw_building_issuance" allowDelete="false" allowNotify="false">
+    <invokers>
+        <invoker type="building_issuance_release:list" caption="Building Issuance List (For Release)"
+             cols="appno,applicant.name,title,occupancytype.title"
+             state="for-release"
+             action="init" srole="SHARED"/>
+        
+        <invoker type="building_issuance:list" caption="Building Issuances"
+             cols="controlno,dtissued,appno,issuedby.name,applicant.name,title,occupancytype.title"
+             state="issued"
+             action="init" srole="SHARED"/>        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboIssuanceListModel" />
+</workunit>

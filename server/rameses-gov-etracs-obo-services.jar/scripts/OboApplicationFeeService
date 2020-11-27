@@ -1,0 +1,72 @@
+import com.rameses.annotations.*;
+import com.rameses.util.*;
+import obo.facts.*;
+import java.text.*;
+import enterprise.utils.*;
+
+public class OboApplicationFeeService  {
+
+	@DataContext(dynamic=true)
+	def db;
+
+	@ProxyMethod
+	public def getFees( def o ) {
+		def feeEm = db.lookup( o._schemaname );
+		return feeEm.find([appid: o.appid ]).orderBy("item.sortorder").list();
+	}
+
+	//This will save the fees and returns the total
+	@ProxyMethod
+	public def saveFees(o) {
+		throw new Exception("param is " + o);
+		def feeEm = db.lookup( o._schemaname );
+		o.items.each {
+			//delete if there are existing items
+			def zz = feeEm.find( [appid: o.appid, itemid: it.item.objid ] ).delete();
+			if( zz ) feeEm.find( [objid: zz.objid] ).delete();
+			feeEm.create( it );
+		}
+		return [:];
+	}
+
+	@ProxyMethod
+	public def saveFee(def o ) {
+		if(!o.appid) throw new Exception("appid is required in saveFee");
+		def feeEm = db.lookup( o._schemaname );		
+		if(o.objid) {
+			feeEm.find( [objid: o.objid] ).update( o );
+		}
+		else {
+			feeEm.create( o );
+		}
+		return [:];
+	}
+
+	@ProxyMethod
+	public def removeFee(def o ) {
+		def feeEm = db.lookup( o._schemaname );	
+		if(o.objid) {
+			feeEm.find( [objid: o.objid] ).delete();
+		}
+		return [:];
+	}
+
+	@ProxyMethod
+	public def clearFees(def o ) {
+		if(!o.appid && !o.parentid) throw new Exception("appid or parentid is required in clearFees");
+		def feeEm = db.lookup( o._schemaname );	
+		if( o.parentid ) {
+			feeEm.find( [parentid: o.parentid ]).delete();
+		}
+		else {
+			feeEm.find( [appid: o.appid ] ).where( "parentid IS NULL" ).delete();
+		}
+		return [:];
+	}
+
+	@ProxyMethod
+	public def assess( def o ) {
+		return [:]
+	}
+
+}

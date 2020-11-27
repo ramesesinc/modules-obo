@@ -15,7 +15,7 @@ class OboVariablePickListModel extends CrudLookupModel  {
     def typeid;
     
     def getCustomFilter() {
-        return [ "typeid = :type", [type: typeid] ];
+        return [ "doctypeid = :type", [type: typeid] ];
     }
     
     def doOk() {

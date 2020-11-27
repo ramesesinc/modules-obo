@@ -13,69 +13,48 @@ import com.rameses.menu.models.*;
 
 class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
 
-    @Service("QueryService")
-    def querySvc;
+    @Service("OboMenuService")
+    def menuSvc;
     
-    @Service("OboMenuNotificationService")
-    def oboMenuSvc;
-    
-    public String getMenuContextName() {
-        return "building_permit";
-    }
-    
-    public def getMenuNotificationService() {
-        return oboMenuSvc;
-    }
-    
-    void loadDynamicItems( String _id, def subitems, def invokers ) {
-        def secProvider = clientContext.getSecurityProvider();
-        def orgFilter = [:];
-        boolean isRoot = (OsirisContext.env.ORGROOT == 1);
-        if(isRoot) {
-            orgFilter = ["org.objid IS NULL"];
-        }
-        else {
-            orgFilter = ["org.objid = :orgid", [orgid: OsirisContext.env.ORGID] ];
-        }
-        
-        def buildInvokers = { list, title ->
-            int i = 100;
-            list.each {
-                if(it.role) {
-                    boolean b = secProvider.checkPermission( workunit.workunit.module.domain, it.role, ".*" );
-                    if(!b) return;
-                };
+    def buildInvokers = { list, subitems, invokers ->
+        int i = 100;
+        list.each {
+            try {
+                if(!it.handler) return;
+                def title = it.handler;
                 def id = title + "/" + it.objid;
-                def notid = title + ":" + it.objid.toLowerCase();
-                subitems << [ id: id, caption: it.title, index: (i++), notificationid: notid, event: title ];
-                def sinv = title + ":list"
+                def notid = (title + ":" + it.objid.toLowerCase()).trim();
+                def subitem = [ id: id, caption: it.title, index: (i++), notificationid: notid, event: title ];
+                subitems << subitem;
+                def sinv = title + ":list";
                 def op = Inv.lookupOpener(sinv, [typeid: it.objid, 'title': it.title ]);
                 op.domain = "OBO";
                 op.target = 'window';
                 op.id = sinv;
                 invokers.put( id, op );
+                subitem.modulename = "obo";
+                subitem.domain = op.domain;
+                subitem.connection = "obo";      
+            }
+            catch(e) {
+                //println e.message;
             }
         }
-        
-        if(_id == 'building_permit_section' ) {
-            def m = [_schemaname: "obo_section" ];
-            m._limit = 100;
-            orgFilter[0]+= " AND NOT(buildingpermitstate IS NULL)"
-            m.where =  orgFilter;
-            m.orderBy = "sortindex";
-            def list = querySvc.getList( m );
-            buildInvokers( list, 'building_permit_section' );
+    }
+    
+    void loadDynamicItems( String _id, def subitems, def invokers ) {
+        if(_id == 'building_evaluation' ) {
+            def list = menuSvc.getEvaluationTypesMenu();
+            buildInvokers( list, subitems, invokers );
         }
-        else if(_id == 'occupancy_permit_section' ) {
-            def m = [_schemaname: "obo_section" ];
-            m._limit = 100;
-            orgFilter[0] += " AND NOT(occupancypermitstate IS NULL)"
-            m.where =  orgFilter;
-            m.orderBy = "sortindex";
-            def list = querySvc.getList( m );
-            buildInvokers( list, 'occupancy_permit_section' );
+        else if(_id == 'occupancy_inspection' ) {
+            def list = menuSvc.getInspectionTypesMenu();
+            buildInvokers( list, subitems, invokers );
         }        
-       
+        else if( _id == 'obo_doctype' ) {
+            def list = menuSvc.getDocumentsForIssuance();
+            buildInvokers( list, subitems, invokers );
+        }
     }
     
 }

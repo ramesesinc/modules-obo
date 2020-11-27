@@ -1,0 +1,67 @@
+import com.rameses.annotations.*;
+
+class BuildingApplicationPersistenceInterceptor {
+	
+	@Service("DateService")
+	def dateSvc;
+
+	@Service("OboConstructionCostRuleService")
+	def costSvc;
+
+	@DataContext("building_application_transmittal")
+	def transmittalEm;
+
+	@DataContext("building_application_entity")
+	def appEntityEm;
+
+	@DataContext("vw_building_application")
+	def vwAppEm;
+
+
+	@DataContext("building_application_fee")
+	def feeEm;
+
+	@DataContext("building_application_payment")
+	def pmtEm;
+
+	@Env
+	def env;
+
+	//BUILDING PERMIT APPLICATION
+	@Before(pattern="PersistenceService.update", eval="#{ args[0]._schemaname == 'building_application' }")
+	public void beforeUpdateApplication(def evt) {
+		def app = evt.args[0];
+
+		if( app.occupancytype?.objid  ) {
+			app.occupancytypeid = app.occupancytype?.objid;
+			//update the fixed cost
+			def param = [:];
+			param.app = [apptype:app.apptype, totalfloorarea:app.totalfloorarea];
+			param.occupancytype = app.occupancytype;
+			def cost = costSvc.calc( param );
+			app.fixedcost = cost;		
+		}
+		if( app.applicantid ) {
+			appEntityEm.find( [objid: app.applicantid]).update( app.applicant );
+		}
+	}
+
+	@After(pattern="PersistenceService.update", eval="#{ args[0]._schemaname == 'building_application' }")
+	public void afterUpdateApplication(def evt) {
+		def app = evt.args[0];
+		appEntityEm.cleanUpEntity( [appid: app.objid] );
+	}	
+
+	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_building_application' }")
+	public void afterOpenApplication(def evt) {
+		def p = evt.args[0];
+		def a = evt.result;
+		a.occupancytype.title = a.occupancytype.title?.toUpperCase();
+
+		//auto compute fees after opening:
+		a.amount = feeEm.find([appid:a.objid]).select("c:{SUM(amount)}").val();
+		a.payment = pmtEm.find([appid: a.objid ]).where("voided=0").orderBy("refdate DESC, refno DESC").first();
+	}
+
+
+}

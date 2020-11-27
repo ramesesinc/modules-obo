@@ -1,0 +1,9 @@
+"entity.*" [ editable == true ] {
+    enabled: true;
+    editable : true;
+}
+
+"entity.*" [ editable == false ] {
+    enabled: false;
+    editable: false;
+}

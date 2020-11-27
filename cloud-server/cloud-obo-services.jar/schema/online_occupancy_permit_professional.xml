@@ -1,16 +1,21 @@
+
 <schema>
 	<element tablename="online_occupancy_permit_professional">
-		<field name="objid" primary="true" prefix="OBOBPPROF"/>
-		<field name="appid" required="true"/>
-		<field name="profession" required="true"/>
-		<field name="entityid" required="true" />
-
-		<!-- link to actual reference -->
-		<complex name="entity" ref="online_occupancy_permit_entity" jointype="many-to-one" required="true">
-			<key field="entityid" target="objid" />
+		<field name="objid" primary="true" prefix="OCCPMTPROF" />
+		<field name="appid" required="true" />
+		
+		<complex name="section" ref="obo_section" jointype="many-to-one" required="false">
+			<key field="sectionid" target="objid" />
 		</complex>	
 
-		<complex name="prc" serializer="default" type="object" caption="PRC" required="true"/>
-		<complex name="ptr" serializer="default" type="object" caption="PTR" required="true"/>
+		<complex name="designprofessional" ref="obo_professional_info" jointype="many-to-one" required="false">
+			<key field="designprofessionalid" target="objid" />
+		</complex> 
+
+		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one" required="false">
+			<key field="supervisorid" target="objid" />
+		</complex> 
+
 	</element>
-</schema>
+</schema>		
+

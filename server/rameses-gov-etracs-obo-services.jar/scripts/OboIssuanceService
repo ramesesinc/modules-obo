@@ -1,0 +1,90 @@
+import com.rameses.annotations.*;
+
+class OboIssuanceService {
+	
+	@Service("DateService")
+	def dateSvc;
+
+	@DataContext("obo_doctype")
+	def doctypeEm;
+
+	@DataContext(dynamic=true)
+	def dynEm;
+
+	@Service("ControlnoGeneratorService")
+	def controlNoSvc;
+
+	@Service("MenuNotificationService")
+    def notificationSvc;
+
+	@Env
+	def env;
+
+	@ProxyMethod
+	public def create( def p ) {
+		if( !p.appid ) throw new Exception("appid is required");
+		def doctype = doctypeEm.find( [objid: p.doctypeid ]).first();
+
+		if( doctype.issuetype == 2 ) {
+			if( !p.controlno ) throw new Exception("controlno is required");
+		}
+		else if( doctype.issuetype == 1 || doctype.issuetype == 3 ) {
+			def pattern = doctype.controlnopattern;
+			if(!pattern) throw new Exception("Please define controlnopattern entry in doctype");
+			p.controlno = controlNoSvc.getNextNo( pattern );
+		}
+		else {
+			throw new Exception("issuetype is not supported " + doctype.issuetype + " .. ");
+		}
+
+		def issEm, appEm, notificationid, infoid;
+		if( doctype.apptype == "building" && doctype.type.toLowerCase() == 'main' ) {
+			issEm = dynEm.lookup( "building_permit" );
+			appEm = dynEm.lookup( "building_application" );	
+			notificationid = "building_permit";		
+		}
+		else if(doctype.apptype == "building" && !doctype.type.toLowerCase() != 'main' )  {
+			issEm = dynEm.lookup( "building_issuance" );
+			appEm = dynEm.lookup( "building_application_subdoc" );	
+			notificationid = "building_application_subdoc:"+p.doctypeid.toLowerCase();		
+		}
+		else if( doctype.apptype == "occupancy" && doctype.type.toLowerCase() == 'main' ) {
+			issEm = dynEm.lookup( "occupancy_permit" );
+			appEm = dynEm.lookup( "occupancy_application" );	
+			notificationid = "occupancy_permit";		
+		}
+		else if(doctype.apptype == "occupancy" && !doctype.type.toLowerCase() != 'main' )  {
+			issEm = dynEm.lookup( "occupancy_issuance" );
+			appEm = dynEm.lookup( "occupancy_application_subdoc" );	
+			notificationid = "occupancy_application_subdoc:"+p.doctypeid.toLowerCase();		
+		}
+		def app = appEm.find( [objid: p.appid] ).first();			
+		if(!app) throw new Exception("Application does not exist");
+		if(app.issuanceid) throw new Exception("This has already been issued");			
+
+		def u = [:];
+		u.state = 1;
+		u.appid = p.appid;
+		u.issuedby = [ objid: env.USERID, name: env.FULLNAME ];
+		u.dtissued = dateSvc.getServerDate();
+		u.controlno = p.controlno;
+		u.remarks = p.remarks;
+		u.expirydate = p.expirydate;
+		u.template = doctype.template;
+		u.approverid = doctype.approverid;
+		u.endorserid = doctype.endorserid;
+		u.reportheader = doctype.reportheader;
+		u.infoid = app.infoid;
+
+		u = issEm.create( u );
+		appEm.find( [objid: p.appid] ).update( [issuanceid: u.objid ] );
+
+		notificationSvc.notify( [notificationid, "obo"] );
+
+		return u;
+	}	
+	
+
+
+
+}

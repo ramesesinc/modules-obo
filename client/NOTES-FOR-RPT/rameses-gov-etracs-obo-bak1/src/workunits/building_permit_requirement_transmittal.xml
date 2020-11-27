@@ -1,0 +1,24 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml" 
+    reportId="building_permit_transmittal"
+    reportName="com/rameses/gov/etracs/obo/reports/requirement_transmittal.jasper"> 
+    
+    <invokers>
+        <invoker type="vw_building_permit:form:appActions" 
+                 caption="View Requirement Transmittal "
+                 action="preview"
+                 visibleWhen="#{ 
+                    task.state.matches('requirement.*')
+                    &amp;&amp; entity.transmittalid != null  }"/>
+
+        <!-- open from the transmittal list -->
+        <invoker type="building_permit_requirement_transmittal:open" 
+                 caption="View Requirement Transmittal"
+                 action="openPreview" />
+        
+        <!-- inside the report -->
+        <invoker type="formActions" caption="Send Email" action="sendEmail" 
+                 fileid="building_permit_requirement_transmittal"/>
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationTransmittalModel" />
+</workunit>

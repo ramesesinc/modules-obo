@@ -1,0 +1,11 @@
+<workunit>
+    <invokers>
+        <invoker type="vw_building_application:form:appActions" caption="Email Permit"
+                visibleWhen="#{ task.state == 'end' }"
+                 action="init" index="1" target="popup" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitMailModel" />
+    <pages>
+        <page template="com.rameses.email.views.MailSenderPage" />
+    </pages>
+</workunit>

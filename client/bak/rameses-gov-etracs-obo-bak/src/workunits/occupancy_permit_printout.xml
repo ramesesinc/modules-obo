@@ -1,0 +1,12 @@
+<workunit  extends="com/rameses/seti2/templates/FormReport.xml"> 
+    <invokers>
+        <invoker type="vw_occupancy_application:form:formActions" 
+                 caption="View Building Permit"
+                 action="preview" 
+                 index="1" 
+                 reportId="occupancy_application"
+                 reportName="com/rameses/gov/etracs/obo/reports/occupancy_application.jasper"
+                 visibleWhen="#{ entity.permitno !=null }"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboFormReportModel" />
+</workunit>

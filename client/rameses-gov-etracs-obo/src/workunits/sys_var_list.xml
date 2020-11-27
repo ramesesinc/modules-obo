@@ -1,0 +1,6 @@
+<workunit extends="enterprise/templates/SysVarList.xml" >
+    <invokers>
+        <invoker folderid="/explorer/master/obo" caption="System Variables" 
+                 action="init" index="102" role="MASTER"/>
+    </invokers>
+</workunit>

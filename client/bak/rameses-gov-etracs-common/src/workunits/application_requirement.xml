@@ -1,0 +1,10 @@
+<workunit>
+    <invokers>
+        <invoker type="application_requirement:open" action="init"
+                 caption="Requirement Verification" target="popup"/>        
+    </invokers>  
+    <code class="com.rameses.gov.etracs.common.models.ApplicationRequirementModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.common.views.ApplicationRequirementPage" />
+    </pages>           
+</workunit>

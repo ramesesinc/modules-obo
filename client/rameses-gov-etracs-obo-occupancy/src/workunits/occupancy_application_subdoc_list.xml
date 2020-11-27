@@ -1,0 +1,10 @@
+<workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" 
+          schemaName="vw_occupancy_application_subdoc"
+          allowDelete="false" allowNotify="false">
+    <invokers>
+        <invoker type="occupancy_application_subdoc:list"
+                action="init" index="10" notificationid="occupancy_application_subdoc"
+                cols="app.appno,app.trackingno,app.title,app.location.text,app.applicant.name" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboDocListModel" />
+</workunit>

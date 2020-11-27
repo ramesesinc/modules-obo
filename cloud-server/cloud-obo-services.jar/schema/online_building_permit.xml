@@ -25,7 +25,11 @@
 
 		<field name="location_lotno" />
 		<field name="location_blockno" />
+		<field name="location_unitno" />				
+		<field name="location_bldgno" />
+		<field name="location_bldgname" />		
 		<field name="location_street" />
+		<field name="location_subdivision" />
 		<field name="location_barangay_name" />
 		<field name="location_barangay_objid" />
 
@@ -33,8 +37,8 @@
 			<key field="applicantid" target="objid" />
 		</complex>	
 
-		<complex name="contractor" ref="vw_online_building_permit_professional" jointype="many-to-one" required="false">
-			<key field="contractorid" target="objid" />
+		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one" required="false">
+			<key field="supervisorid" target="objid" />
 		</complex>
 
 		<complex name="occupancytype" ref="vw_obo_occupancy_type" jointype="many-to-one" required="false">
@@ -47,6 +51,10 @@
 
 		<!-- shows where the current step is at -->		
 		<field name="step" type="integer"/>
+
+		<!-- SIMPLE OR COMPLEX -->
+		<field name="txntype"/>
+		
 	</element>
 </schema>
 
