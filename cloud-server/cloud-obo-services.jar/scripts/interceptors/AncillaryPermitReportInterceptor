@@ -5,12 +5,13 @@ class AncillaryPermitReportInterceptor {
 	@Service(value="OnlineBuildingPermitService")
 	def oboReportSvc;
 
-	@Before( pattern="FormReportService.getData", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
+	@After( pattern="FormReportService.getData", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
 	public def getData( evt ) {
 		def req = evt.args[0];
+		def result = evt.result;
 		def reportid =  req.reportid;
 		def refid = req.parameters.objid;
-
+	
 	 	def app = oboReportSvc.getAncillaryPermit([ objid: refid ]);
 	 	def parent = oboReportSvc.getApplication([ appid: app.appid ]);
 		if ( parent) { 
@@ -31,15 +32,16 @@ class AncillaryPermitReportInterceptor {
 		}
 		app.worktypes = worktypes;
 		
-		req.data = app;
-		req.reportid = reportid.replace("building_ancillary_", "") + "_permit";
-		req.template = "reports/obo/" + req.reportid;
+		app.template = "reports/obo/" + reportid.replace("building_ancillary_", "") + "_permit";
+		result.data = app;
 	}
 
 	/*
 	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
 	public def beforeGenerateReport( evt ) {
 		def req = evt.args[0];
+
 	}
 	*/
+
 }
