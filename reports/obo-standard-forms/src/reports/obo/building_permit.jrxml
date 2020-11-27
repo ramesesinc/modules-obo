@@ -57,12 +57,12 @@
 	<field name="location.barangay.name" class="java.lang.String"/>
 	<field name="worktypes" class="java.lang.String"/>
 	<field name="projectcost" class="java.lang.Number"/>
-	<field name="contractor.firstname" class="java.lang.String"/>
-	<field name="contractor.middlename" class="java.lang.String"/>
-	<field name="contractor.lastname" class="java.lang.String"/>
+	<field name="supervisor.firstname" class="java.lang.String"/>
+	<field name="supervisor.middlename" class="java.lang.String"/>
+	<field name="supervisor.lastname" class="java.lang.String"/>
 	<field name="approver.displayname" class="java.lang.String"/>
 	<field name="approver.signature" class="java.lang.Object"/>
-	<field name="contractor.prc.idno" class="java.lang.String"/>
+	<field name="supervisor.prc.idno" class="java.lang.String"/>
 
 
 		<group  name="P1" >
@@ -737,7 +737,7 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{fsec.no}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="130"
 						y="234"
@@ -904,7 +904,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="11"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.firstname} + ' ' + $F{contractor.lastname} + ' / PRC No ' + $F{contractor.prc.idno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{supervisor.firstname} + ' ' + $F{supervisor.lastname} + ' / PRC No ' + $F{supervisor.prc.idno}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
