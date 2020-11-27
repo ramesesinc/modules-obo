@@ -62,6 +62,7 @@
 	<field name="contractor.lastname" class="java.lang.String"/>
 	<field name="approver.displayname" class="java.lang.String"/>
 	<field name="approver.signature" class="java.lang.Object"/>
+	<field name="contractor.prc.idno" class="java.lang.String"/>
 
 
 		<group  name="P1" >
@@ -122,9 +123,7 @@
 						y="164"
 						width="17"
 						height="16"
-						key="rectangle-1">
-							<printWhenExpression><![CDATA[($F{apptype}.toString().equalsIgnoreCase("NEW") ? "X" : null)]]></printWhenExpression>
-						</reportElement>
+						key="rectangle-1"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
 				<staticText>
@@ -242,7 +241,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="11"/>
 					</textElement>
-				<text><![CDATA[OFFICIAL RECEIPT1 NO.]]></text>
+				<text><![CDATA[OFFICIAL RECEIPT: NO.]]></text>
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
@@ -898,14 +897,14 @@
 					<reportElement
 						x="259"
 						y="423"
-						width="435"
+						width="529"
 						height="16"
 						key="textField-19"/>
 					<box></box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="11"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.firstname} + ' ' + $F{contractor.lastname}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.firstname} + ' ' + $F{contractor.lastname} + ' / PRC No ' + $F{contractor.prc.idno}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -977,7 +976,7 @@
 						key="line-21"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="0"
 						y="477"
@@ -1006,7 +1005,7 @@ AND ITS REVISED IRR
 
 ]]></text>
 				</staticText>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="250"
 						y="125"
@@ -1051,9 +1050,7 @@ AND ITS REVISED IRR
 						y="164"
 						width="17"
 						height="16"
-						key="rectangle-2">
-							<printWhenExpression><![CDATA[($F{apptype}.toString().equalsIgnoreCase("NEW") ? "X" : null)]]></printWhenExpression>
-						</reportElement>
+						key="rectangle-2"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
 				<rectangle>
@@ -1062,12 +1059,10 @@ AND ITS REVISED IRR
 						y="164"
 						width="17"
 						height="16"
-						key="rectangle-3">
-							<printWhenExpression><![CDATA[($F{apptype}.toString().equalsIgnoreCase("NEW") ? "X" : null)]]></printWhenExpression>
-						</reportElement>
+						key="rectangle-3"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="0"
 						y="73"
@@ -1080,7 +1075,7 @@ AND ITS REVISED IRR
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$P{LGU_NAME}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="0"
 						y="86"
@@ -1114,8 +1109,68 @@ AND ITS REVISED IRR
 						height="78"
 						key="image-6"/>
 					<box></box>
-					<graphicElement stretchType="NoStretch"/>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
 					<imageExpression class="java.io.InputStream"><![CDATA[$F{approver.signature}]]></imageExpression>
+				</image>
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="582"
+						y="48"
+						width="73"
+						height="69"
+						key="image-7"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/lgulogo.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="287"
+						y="168"
+						width="12"
+						height="9"
+						key="image-8">
+							<printWhenExpression><![CDATA[$F{apptype} == "NEW"]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="365"
+						y="168"
+						width="12"
+						height="9"
+						key="image-9">
+							<printWhenExpression><![CDATA[$F{apptype} == "RENEWAL"]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/check.png"]]></imageExpression>
+				</image>
+				<image  scaleImage="FillFrame" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="458"
+						y="167"
+						width="12"
+						height="9"
+						key="image-10">
+							<printWhenExpression><![CDATA[$F{apptype} == "AMENDMENT"]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/check.png"]]></imageExpression>
 				</image>
 			</band>
 			</groupHeader>
@@ -1541,7 +1596,7 @@ AND ITS REVISED IRR]]></text>
 					<graphicElement stretchType="RelativeToBandHeight">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["images/frame.jpg"]]></imageExpression>
+					<imageExpression class="java.lang.String"><![CDATA["images/building_background.png"]]></imageExpression>
 				</image>
 			</band>
 		</background>

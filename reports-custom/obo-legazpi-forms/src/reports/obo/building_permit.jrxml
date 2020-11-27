@@ -760,7 +760,7 @@ Referral Codes and its Terms and Conditions.
 						key="line-19"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="48"
 						y="23"
@@ -773,7 +773,7 @@ Referral Codes and its Terms and Conditions.
 </graphicElement>
 					<imageExpression class="java.lang.String"><![CDATA["images/lgulogo.png"]]></imageExpression>
 				</image>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="699"
 						y="23"
@@ -1101,9 +1101,9 @@ Referral Codes and its Terms and Conditions.
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.firstname} + ' ' + $F{contractor.lastname} + ' / PRC No ' + $F{contractor.prc.idno} ]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.firstname} + ' ' + $F{contractor.lastname} + ' / PRC No ' + $F{contractor.prc.idno}]]></textFieldExpression>
 				</textField>
-				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  scaleImage="FillFrame" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="299"
 						y="158"
@@ -1123,7 +1123,7 @@ Referral Codes and its Terms and Conditions.
 </graphicElement>
 					<imageExpression class="java.lang.String"><![CDATA["images/check.png"]]></imageExpression>
 				</image>
-				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  scaleImage="FillFrame" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="375"
 						y="158"
@@ -1138,7 +1138,7 @@ Referral Codes and its Terms and Conditions.
 </graphicElement>
 					<imageExpression class="java.lang.String"><![CDATA["images/check.png"]]></imageExpression>
 				</image>
-				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  scaleImage="FillFrame" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="468"
 						y="157"
@@ -1201,7 +1201,7 @@ Referral Codes and its Terms and Conditions.
 					<graphicElement stretchType="RelativeToBandHeight"/>
 					<imageExpression class="java.lang.String"><![CDATA["images/building_permit_front.jpg"]]></imageExpression>
 				</image>
-				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  vAlign="Middle" hAlign="Center" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="329"
 						y="403"
