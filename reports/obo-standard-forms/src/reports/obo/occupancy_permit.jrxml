@@ -43,7 +43,7 @@
 	<field name="title" class="java.lang.String"/>
 	<field name="occupancytype.title" class="java.lang.String"/>
 	<field name="occupancytype.group.objid" class="java.lang.String"/>
-	<field name="address.text" class="java.lang.String"/>
+	<field name="location.text" class="java.lang.String"/>
 	<field name="controlno" class="java.lang.String"/>
 	<field name="dtissued" class="java.util.Date"/>
 	<field name="fsec.controlno" class="java.lang.String"/>
@@ -65,8 +65,8 @@
 	<field name="org.group.fullname" class="java.lang.String"/>
 	<field name="org.fullname" class="java.lang.String"/>
 	<field name="permit.issuedby.name" class="java.lang.String"/>
-	<field name="bldgpermit.no" class="java.lang.String"/>
-	<field name="bldgpermit.dtissued" class="java.util.Date"/>
+	<field name="bldgpermitno" class="java.lang.String"/>
+	<field name="bldgpermitdtissued" class="java.util.Date"/>
 
 
 		<group  name="P1" >
@@ -147,7 +147,7 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtactualcompleted}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="678"
 						y="228"
@@ -158,7 +158,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="11" isUnderline="false"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bldgpermit.no}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bldgpermitno}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -692,7 +692,7 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{amount}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="71"
 						y="244"
@@ -703,7 +703,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="11"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{bldgpermit.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{bldgpermitdtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -729,7 +729,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{address.text}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.text}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement

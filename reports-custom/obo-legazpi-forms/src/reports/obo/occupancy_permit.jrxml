@@ -37,7 +37,7 @@
 	<field name="title" class="java.lang.String"/>
 	<field name="occupancytype.title" class="java.lang.String"/>
 	<field name="occupancytype.group.objid" class="java.lang.String"/>
-	<field name="address.text" class="java.lang.String"/>
+	<field name="location.text" class="java.lang.String"/>
 	<field name="controlno" class="java.lang.String"/>
 	<field name="dtissued" class="java.util.Date"/>
 	<field name="fsec.controlno" class="java.lang.String"/>
@@ -59,8 +59,8 @@
 	<field name="org.group.fullname" class="java.lang.String"/>
 	<field name="org.fullname" class="java.lang.String"/>
 	<field name="permit.issuedby.name" class="java.lang.String"/>
-	<field name="bldgpermit.no" class="java.lang.String"/>
-	<field name="bldgpermit.dtissued" class="java.util.Date"/>
+	<field name="bldgpermitno" class="java.lang.String"/>
+	<field name="bldgpermitdtissued" class="java.util.Date"/>
 
 		<background>
 			<band height="595"  isSplitAllowed="true" >
@@ -667,7 +667,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{bldgpermit.no}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{bldgpermitno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -680,7 +680,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{bldgpermit.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{bldgpermitdtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -745,7 +745,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{address.text}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{location.text}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
