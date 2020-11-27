@@ -52,13 +52,9 @@
 	<field name="worktypes" class="java.lang.String"/>
 	<field name="org.title" class="java.lang.String"/>
 	<field name="project.totalcost" class="java.lang.Integer"/>
-	<field name="contractor.firstname" class="java.lang.String"/>
-	<field name="contractor.middlename" class="java.lang.String"/>
-	<field name="contractor.lastname" class="java.lang.String"/>
 	<field name="dtactualcompleted" class="java.util.Date"/>
 	<field name="org.group.fullname" class="java.lang.String"/>
 	<field name="org.fullname" class="java.lang.String"/>
-	<field name="permit.issuedby.name" class="java.lang.String"/>
 	<field name="bldgpermitno" class="java.lang.String"/>
 	<field name="bldgpermitdtissued" class="java.util.Date"/>
 
@@ -669,7 +665,7 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{bldgpermitno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="136"
 						y="264"

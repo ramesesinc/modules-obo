@@ -58,13 +58,10 @@
 	<field name="worktypes" class="java.lang.String"/>
 	<field name="org.title" class="java.lang.String"/>
 	<field name="project.totalcost" class="java.lang.Integer"/>
-	<field name="contractor.firstname" class="java.lang.String"/>
-	<field name="contractor.middlename" class="java.lang.String"/>
-	<field name="contractor.lastname" class="java.lang.String"/>
 	<field name="dtactualcompleted" class="java.util.Date"/>
 	<field name="org.group.fullname" class="java.lang.String"/>
 	<field name="org.fullname" class="java.lang.String"/>
-	<field name="permit.issuedby.name" class="java.lang.String"/>
+	<field name="approver.displayname" class="java.lang.String"/>
 	<field name="bldgpermitno" class="java.lang.String"/>
 	<field name="bldgpermitdtissued" class="java.util.Date"/>
 
@@ -158,7 +155,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="11" isUnderline="false"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bldgpermitno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{bldgpermitno}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -692,7 +689,7 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{amount}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="71"
 						y="244"
@@ -872,7 +869,7 @@ AND ITS REVISED IRR]]></text>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Arial" size="12"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permit.issuedby.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{approver.displayname}]]></textFieldExpression>
 				</textField>
 				<line direction="TopDown">
 					<reportElement
