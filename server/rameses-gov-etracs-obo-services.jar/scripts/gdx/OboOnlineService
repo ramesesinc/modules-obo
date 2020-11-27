@@ -19,11 +19,7 @@ class OboOnlineService  {
 
     @ProxyMethod
     public def findLocation( def params ) {
-        println "FINDING LOCATION"
         def info = svc.verifyTaxDec(params);
-        info.each { k,v->
-            println k+"="+v;
-        }
 
         if(info.state != "CURRENT" ) {
             throw new Exception("The tax declaration must be in current state. Please verify with the assessors office");
@@ -54,6 +50,7 @@ class OboOnlineService  {
                 address: entity.address
             ]
         );
+
         info.owner.resident =  (entity.address.type == "nonlocal") ? 0 : 1;
         return info;
     }

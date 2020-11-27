@@ -47,10 +47,8 @@ class OccupancyPermitFormReportInterceptor {
 		if(permit.approverid) {
 			permit.approver = sigEm.find( [objid: permit.approverid]).first();
 		}
+
 		result.data = permit;
-		permit.each { k,v->
-			println k+"="+v;
-		}
 	}	
 
 	/*

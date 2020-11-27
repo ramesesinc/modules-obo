@@ -1,0 +1,12 @@
+<workunit schemaName="vw_occupancy_inspection" processName="occupancy_inspection">
+    <invokers>
+        <invoker type="vw_occupancy_inspection:open" caption="Occupancy Inspection" action="open"/>
+        <!-- -->
+        <invoker type="formActions" caption="View Application" action="viewApplication"/>
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyInspectionModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyInspectionPage" />
+    </pages>
+</workunit>

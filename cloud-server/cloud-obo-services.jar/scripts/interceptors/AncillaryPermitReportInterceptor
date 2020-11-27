@@ -5,16 +5,18 @@ class AncillaryPermitReportInterceptor {
 	@Service(value="OnlineBuildingPermitService")
 	def oboReportSvc;
 
-	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
-	public def beforeGenerateReport( evt ) {
+	@After( pattern="FormReportService.getData", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
+	public def getData( evt ) {
 		def req = evt.args[0];
+		def result = evt.result;
 		def reportid =  req.reportid;
-		def refid = req.params?.refid;
-
+		def refid = req.parameters.objid;
+	
 	 	def app = oboReportSvc.getAncillaryPermit([ objid: refid ]);
 	 	def parent = oboReportSvc.getApplication([ appid: app.appid ]);
 		if ( parent) { 
-			app.putAll( parent );
+			parent.putAll( app );
+			app = parent;
 		}
 
 		app.lotowner  = app.location?.owner;
@@ -24,9 +26,23 @@ class AncillaryPermitReportInterceptor {
 			app.put( it.name.toLowerCase(), it.value );	
 		}	
 		
+		def worktypes = [:];
+		app.worktypes?.each {
+			worktypes.put( it.toLowerCase()?.replace("/s", "_") , true );
+		}
+		app.worktypes = worktypes;
 		
-		req.data = app;
-		req.reportid = reportid.replace("building_ancillary_", "") + "_permit";
-		req.template = "reports/obo/" + req.reportid;
+		app.template = "reports/obo/" + reportid.replace("building_ancillary_", "") + "_permit";
+		result.data = app;
 	}
+
+	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('building_ancillary_.*') }" )
+	public def beforeGenerateReport( evt ) {
+		def req = evt.args[0];
+		req.each { k,v->
+			println k+"="+v;
+		}
+		req.refid = req.params.refid;
+	}
+
 }
