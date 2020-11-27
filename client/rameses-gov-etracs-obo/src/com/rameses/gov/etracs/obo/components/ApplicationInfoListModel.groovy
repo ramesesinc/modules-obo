@@ -8,20 +8,12 @@ import com.rameses.seti2.models.*;
 
 class ApplicationInfoListModel extends AbstractComponentModel {
     
+    @Service("OboApplicationInfoService")
+    def infoSvc;
+    
+    def doctypeid;
     def infos;
     
-    /*
-    def listHandler = [
-        isMultiSelect: {
-            return true;
-        },
-        fetchList: { o -> 
-            if(!infos) infos = handler.getInfos();
-            return infos;      
-        }
-    ] as EditorListModel;
-    */
-   
     public boolean isMultiSelect() {
         return true;
     }
@@ -55,18 +47,21 @@ class ApplicationInfoListModel extends AbstractComponentModel {
                 _infos << existInfo;                    
             }
         }
-        handler.saveInfos( _infos );
+        def sname = entitySchemaName;
+        if(!sname) throw new Exception("Please specify entitySchemaName");
+        infoSvc.saveInfos( [_schemaname: sname, items: _infos] );
         listHandler.load();
     }
-    
     
     def addInfos() {
         def p = [:];
         p.onselect = { o->
             saveInfos(o);
         }
-        def filter = handler.getLookupFilter();
-        if( filter ) p.putAll( filter );
+        def filter = []
+        if( doctypeid ) {
+            p.typeid =  doctypeid; 
+        }
         return Inv.lookupOpener( "obo_variable:picklist", p );
     }
     
@@ -76,7 +71,7 @@ class ApplicationInfoListModel extends AbstractComponentModel {
         def h = { o->
             saveInfos(o);
         }
-        def op= Inv.lookupOpener("obo_detail_info", [items: selectedItems, onselect: h ]);
+        def op = Inv.lookupOpener("obo_detail_info", [items: selectedItems, onselect: h ]);
         op.target = "popup";
         return op;
     }
@@ -84,7 +79,9 @@ class ApplicationInfoListModel extends AbstractComponentModel {
     void removeInfos() {
         def selectedItems = listHandler.getSelectedValue();
         if( !selectedItems ) throw new Exception("Please select items to remove");
-        handler.removeInfos( selectedItems );
+        def sname = entitySchemaName;
+        if(!sname) throw new Exception("Please specify entitySchemaName");
+        infoSvc.removeInfos( [_schemaname: sname, items: selectedItems] );
         listHandler.load();
     }
 

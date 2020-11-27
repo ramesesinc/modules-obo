@@ -1,6 +1,0 @@
-<workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="obo_itemaccount">
-    <invokers>
-        <invoker folderid="explorer/master/obo"  caption="Obo Item Account" action="init" index="20"
-            cols="objid,title,item.title,sectionid" orderBy="sortorder" role="MASTER"/>
-    </invokers>
-</workunit>

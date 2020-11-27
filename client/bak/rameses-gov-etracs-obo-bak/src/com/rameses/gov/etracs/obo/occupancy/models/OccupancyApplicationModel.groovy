@@ -45,7 +45,7 @@ class OccupancyApplicationModel extends AbstractApplicationModel {
             reload();
         };
         
-        def d = entity.inspectionschedule;
+        def d = entity.inspectiondate;
         return Inv.lookupOpener("date:prompt", [handler: h, title:"Enter Inspection Schedule", date:d, includeTime:true]);
     }
     

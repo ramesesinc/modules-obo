@@ -289,10 +289,10 @@ public class BuildingApplicationEditPage extends javax.swing.JPanel {
         xLookupField2.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLookupField2);
 
-        xLookupField3.setCaption("Contractor/Supervisor");
-        xLookupField3.setExpression("#{ entity.contractor?.objid == null ? '' : entity.contractor.lastname + ', ' + entity.contractor.firstname + '/'+ entity.contractor.profession + '-PRC No:' + entity.contractor.prc.idno }");
+        xLookupField3.setCaption("Project Supervisor");
+        xLookupField3.setExpression("#{ entity.supervisor?.objid == null ? '' : entity.supervisor.lastname + ', ' + entity.supervisor.firstname + '/'+ entity.supervisor.profession + '-PRC No:' + entity.supervisor.prc.idno }");
         xLookupField3.setHandler("obo_professional:lookup");
-        xLookupField3.setName("entity.contractor"); // NOI18N
+        xLookupField3.setName("entity.supervisor"); // NOI18N
         xLookupField3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLookupField3.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLookupField3);

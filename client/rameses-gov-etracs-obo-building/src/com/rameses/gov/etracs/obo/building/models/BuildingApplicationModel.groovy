@@ -16,9 +16,6 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
     @Service("BuildingApplicationService")
     def appSvc;
     
-    @Service("BuildingApplicationFeeService")
-    def feeSvc;
-    
     public String getTitle() {
         return "Building Permit " + (entity.appno==null? 'Tracking No '+ entity.trackingno: 'App No ' + entity.appno) + " [" +  task?.title + "]" ;
     }
@@ -32,7 +29,8 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
     }
     
     public boolean getCanEdit() {
-        return ( task.assignee?.objid == user.objid );
+        return true;
+        //return ( task.assignee?.objid == user.objid );
     }
     
     def professionalListHandler  = [
@@ -41,26 +39,6 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
         }
     ];
     
-    def assessmentHandler = [
-        saveFee: { o->
-            feeSvc.saveFee( o );
-        },
-        saveFees: { o->
-            feeSvc.saveFees( o );
-        },
-        removeFee: { o->
-            feeSvc.removeFee( o );
-        },
-        clearFees: {
-            feeSvc.clearFees( [parentid: entity.objid] );
-        },
-        getAccountLookupHandler: {
-            return Inv.lookupOpener( "obo_itemaccount:obo:lookup", [:]);
-        },
-        getAssessHandlerName: {
-            return "building_assessment";
-        }
-    ];
     
     def viewApplicant() {
         def p = [:];

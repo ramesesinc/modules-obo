@@ -32,7 +32,7 @@ class OccupancyPermitModel extends AbstractOboApplicationModel {
             def m = [_schemaname: "occupancy_permit"];
             m.debug = true;
             m.findBy = [objid: entity.objid ];
-            m.inspectionschedule = o.date + " " + o.hour + ":" + o.minute;
+            m.inspectiondate = o.date + " " + o.hour + ":" + o.minute;
             persistenceService.update( m );
             reload();
         };

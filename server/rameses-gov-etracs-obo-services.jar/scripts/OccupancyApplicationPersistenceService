@@ -41,6 +41,9 @@ class OccupancyApplicationPersistenceService {
 	@DataContext("obo_doctype")
 	def doctypeEm;
 
+	@DataContext("occupancy_rpu")
+	def occRpuEm;
+
 	@Service("DateService")
 	def dateSvc;
 
@@ -50,11 +53,23 @@ class OccupancyApplicationPersistenceService {
 	@Service("OccupancyApplicationService")
 	def appSvc;
 
+	@Service("OboConstructionCostRuleService")
+	def costSvc;
+
     @Env
     def env;
 
+    @ProxyMethod
+    public def findBldgPermit( def o ) {
+    	return bldgPermitEm.find( [controlno: o.controlno ] ).first();
+    }
+
  	@ProxyMethod
 	public def create( def app ) {
+		if( !app.actualprojectcost )
+			throw new Exception("Actual Project cost is required");
+		app.orgcode = env.ORGID;	
+
 		def dt = dateSvc.getServerDate();
 		if(!app.appno) {
 			app.appno = appSvc.generateAppNo([:]);
@@ -65,18 +80,25 @@ class OccupancyApplicationPersistenceService {
 
 		//remove application before so it can be replaced
 		def applicant = app.remove("applicant");
+		
 		app.txnmode = "CAPTURE";
 		app.createdby = [objid: env.USERID, name: env.FULLNAME];
 		app.dtcreated = dt;
-
+		app.actualprojectcost = app.totalmaterialcost + app.totaldirectlaborcost + app.totalequipmentcost + app.totalothercost;
 		appEm.create( app );
 
 		//save applicant
 		applicant.appid = app.objid;
 		applicant = entityEm.create( applicant );
 
+		//calculate the cost first before receiving
+		def param = [:];
+		param.app = [apptype:app.apptype, totalfloorarea:app.actualtotalfloorarea];
+		param.occupancytype = app.occupancytype;
+		def cost = costSvc.calc( param );
+
 		//update applicant, cost and appid for info
-		appEm.find( [objid: app.objid ] ).update( [applicantid: applicant.objid] );
+		appEm.find( [objid: app.objid ] ).update( [applicantid: applicant.objid, actualfixedcost: cost] );
 
 		if( app.permitissued == true ) {
 			def doctype = doctypeEm.find( [objid: "OCCUPANCY_PERMIT"] ).first();
@@ -110,10 +132,17 @@ class OccupancyApplicationPersistenceService {
 			pmt.reftype = "cashreceipt";
 			pmt.voided = 0;
 			paymentEm.create( pmt );
+
+			//also create the occupancy_rpu as CAPTURED
+			def c = [:];
+			c.appid = app.objid;
+			c.state = 0;
+			c.txnmode = "CAPTURED";
+			occRpuEm.create( c );
 		}
 		else {
 			//save all documents that are auto create that does not exist above
-			subdocEm.getSubdocsToAutoCreate( [apptype:'occupancy', appid: newapp.objid ]).each {
+			subdocEm.getSubdocsToAutoCreate( [apptype:'occupancy', appid: app.objid ]).each {
 				def sd = [:];
 				sd.appid = app.objid;
 				sd.doctype = [objid: it.objid];

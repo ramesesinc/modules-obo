@@ -307,7 +307,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel20.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel20);
 
-        xPanel10.setCaption("Contractor/Supervisor");
+        xPanel10.setCaption("Project Supervisor");
         xPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xPanel10.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xPanel10.setOpaque(false);
@@ -316,8 +316,8 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         flowLayout3.setAlignOnBaseline(true);
         xPanel10.setLayout(flowLayout3);
 
-        xLabel3.setExpression("#{entity.contractor.lastname}, #{entity.contractor.firstname} -  ( PRC No: #{entity.contractor.prc.idno} )");
-        xLabel3.setVisibleWhen("#{ entity.contractor?.objid != null }");
+        xLabel3.setExpression("#{entity.supervisor.lastname}, #{entity.supervisor.firstname} -  ( PRC No: #{entity.supervisor.prc.idno} )");
+        xLabel3.setVisibleWhen("#{ entity.supervisor?.objid != null }");
         xLabel3.setPreferredSize(new java.awt.Dimension(230, 25));
         xPanel10.add(xLabel3);
 
@@ -462,7 +462,9 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         applicationSubTaskList1.setAppid("entity.objid");
         applicationSubTaskList1.setEditableWhen("#{ canEdit == true }");
+        applicationSubTaskList1.setEntitySchemaName("building_evaluation");
         applicationSubTaskList1.setSchemaName("vw_building_evaluation");
+        applicationSubTaskList1.setTypeSchema("building_evaluation_type");
         xPanel1.add(applicationSubTaskList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Evaluations", xPanel1);
@@ -497,7 +499,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         applicationFeeList1.setAppid("entity.objid");
         applicationFeeList1.setEditableWhen("#{ canEdit == true }");
         applicationFeeList1.setEntitySchemaName("building_application_fee");
-        applicationFeeList1.setHandler("assessmentHandler");
         applicationFeeList1.setSchemaName("vw_building_application_fee");
         xPanel7.add(applicationFeeList1, java.awt.BorderLayout.CENTER);
 

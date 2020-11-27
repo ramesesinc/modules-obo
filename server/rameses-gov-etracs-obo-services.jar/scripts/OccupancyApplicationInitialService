@@ -29,6 +29,9 @@ class OccupancyApplicationInitialService {
     @Service( "BuildingPermitService" )
     def bldgPermitSvc;
 
+	@Service("OboConstructionCostRuleService")
+	def costSvc;
+
     @Env
     def env;
 
@@ -65,6 +68,8 @@ class OccupancyApplicationInitialService {
 		app.occupancytypeid = app.bldgpermit.occupancytypeid;
 		if(!app.occupancytypeid ) throw new Exception("occupancy type is required");
 
+		app.actualprojectcost = app.totalmaterialcost + app.totaldirectlaborcost + app.totalequipmentcost + app.totalothercost;
+
 		def newapp = appEm.create( app );
 		app.entities.each {
 			it.appid = newapp.objid;
@@ -75,6 +80,13 @@ class OccupancyApplicationInitialService {
 			it.entity = [objid: it.entityid ];
 			professionalEm.create( it );
 		}
+
+		def param = [:];
+		param.app = [apptype:app.apptype, totalfloorarea:app.actualtotalfloorarea];
+		param.occupancytype = app.occupancytype;
+		def cost = costSvc.calc( param );
+
+		
 
 		appEm.find( [objid: newapp.objid ] ).update( u );
 		

@@ -13,11 +13,8 @@ import com.rameses.io.*;
 
 class OccupancytApplicationModel extends WorkflowTaskModel  {
 
-    @Service("BuildingApplicationService")
+    @Service("OccupancyApplicationService")
     def appSvc;
-    
-    @Service("BuildingApplicationFeeService")
-    def feeSvc;
     
     public String getTitle() {
         return "Occupancy Permit " + (entity.appno==null? 'Tracking No '+ entity.trackingno: 'App No ' + entity.appno) + " [" +  task?.title + "]" ;
@@ -38,27 +35,6 @@ class OccupancytApplicationModel extends WorkflowTaskModel  {
     def professionalListHandler  = [
         getList: {
              return appSvc.getProfessionalList([objid: entity.objid]);
-        }
-    ];
-    
-    def assessmentHandler = [
-        saveFee: { o->
-            feeSvc.saveFee( o );
-        },
-        saveFees: { o->
-            feeSvc.saveFees( o );
-        },
-        removeFee: { o->
-            feeSvc.removeFee( o );
-        },
-        clearFees: {
-            feeSvc.clearFees( [parentid: entity.objid] );
-        },
-        getAccountLookupHandler: {
-            return Inv.lookupOpener( "obo_itemaccount:obo:lookup", [:]);
-        },
-        getAssessHandlerName: {
-            return "occupancy_assessment";
         }
     ];
     
@@ -87,6 +63,22 @@ class OccupancytApplicationModel extends WorkflowTaskModel  {
         schemaName = "vw_occupancy_application";
         entity = [objid: perm.appid ];
         return open();
+    }    
+    
+    def setInspectionDate() {
+        def h = { o->
+            def m = [_schemaname: "occupancy_application"];
+            m.objid = entity.objid;
+            m.inspectiondate = o.date + " " + o.hour + ":" + o.minute;
+            persistenceService.update( m );
+            reload();
+        };
+        def d = entity.inspectiondate;
+        return Inv.lookupOpener("date:prompt", [handler: h, title:"Enter Inspection Date/Time", date:d, includeTime:true]);
+    }
+    
+    def editContractor() {
+        return Inv.lookupOpener("occupancy_contractor", [entity: entity.contractor, editable: false])
     }
     
 }

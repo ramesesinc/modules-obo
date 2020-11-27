@@ -1,0 +1,97 @@
+<!-- search people page -->
+
+<link href="/themes/default/css/search.css?ver=1" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/res/obo/js/search.js"></script>
+<div class="search-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="search-content">
+                    <div class="search-form form-inline">
+                        <input type="search" id="search-field" class="form-control"  placeholder=" job title, course, skill or training " >
+                        <button type="button" id="search-button" class="btn btn-search">Find Profile</button>
+                    </div>
+                    <div class="filter-btn"><a href="#credits" class="toggle">Advanced Search</a></div>
+
+                    <div id="credits" class="hidden">
+
+                              <div class="row">
+                                <div class="col-lg-8 col-lg-offset-2">
+                                  <div class="panel panel-default"> 
+                                   
+                                    <div class="panel-body">
+                                      <div class="form-horizontal row-border" action="#">
+                                        <div class="row">
+
+                                            <div class="col-md-10">
+                                                <div class="form-group">
+                                                  <label class="col-md-3 control-label">Barangay</label>
+                                                  <div class="col-md-9">
+                                                      <select id="brgy" class="form-control">
+                                                          <option selected>-Select barangay-</option>
+          
+                                                            <option value="{barangay.name}">{barangay.name}</option> 
+                                                      
+                                                      </select>
+                                                  </div>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label class="col-md-3 control-label">Skills</label>
+                                                  <div class="col-md-9">
+                                                    <input class="form-control" type="text" name="" id="skill">
+                                                  </div>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label class="col-md-3 control-label">Gender</label>
+                                                  <div class="col-md-9">
+                                                      <select id="gender" class="form-control">
+                                                          <option selected>-Select gender-</option>
+                                                          <option value="male">Male</option>
+                                                          <option value="female">Female</option>
+                                                      </select>
+                                                  </div>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label class="col-md-3 control-label">Education</label>
+                                                  <div class="col-md-9">
+                                                      <select id="education" class="form-control">
+                                                          <option selected>-Select education-</option>
+                                                         
+                                                            <option value="{course.name}">{course.name}</option> 
+                                                         
+                                                      </select>
+                                                  </div>
+                                                </div>
+                                                <div class="form-group">
+                                                  <label class="col-md-3 control-label">Profession</label>
+                                                  <div class="col-md-9">
+                                                      <select id="profession" class="form-control">
+                                                          <option selected>-Select profession-</option>
+                                                          
+                                                            <option value="{jobtitle.name}">{jobtitle.name}</option> 
+                                                          
+                                                      </select>
+                                                  </div>
+                                                </div>
+                                                <button type="button" onclick="advancesearch()" class="btn btn-search pull-right"><span aria-hidden="true"></span>Find Profile</button>
+
+                                            </div>
+
+                                        </div> 
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -95,8 +95,8 @@ class OccupancyApplicationWorkflowInterceptor {
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'send-for-inspection' }") 
 	public void beforeSendForInspection( def evt ) {
 		def p = evt.args[0];
-		def t = appEm.find( [objid: p.refid] ).select("inspectionschedule").val();
-		if(!t) throw new Exception("Please specify the inspection schedule first");
+		def t = appEm.find( [objid: p.refid] ).select("inspectiondate").val();
+		if(!t) throw new Exception("Please specify the inspection date first");
 	}
 
 	//trigger when entering evaluation state

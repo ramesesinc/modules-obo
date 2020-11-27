@@ -422,7 +422,7 @@ public class OccupancyApplicationCapturePage extends javax.swing.JPanel {
         xFormPanel7.add(xLabel44);
 
         xLabel45.setCaption("Inspection Date");
-        xLabel45.setExpression("#{entity.inspectionschedule}");
+        xLabel45.setExpression("#{entity.inspectiondate}");
         xLabel45.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel45.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel7.add(xLabel45);

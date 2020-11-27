@@ -48,8 +48,18 @@ class OboIssuanceService {
 			appEm = dynEm.lookup( "building_application_subdoc" );	
 			notificationid = "building_application_subdoc:"+p.doctypeid.toLowerCase();		
 		}
+		else if( doctype.apptype == "occupancy" && doctype.type.toLowerCase() == 'main' ) {
+			issEm = dynEm.lookup( "occupancy_permit" );
+			appEm = dynEm.lookup( "occupancy_application" );	
+			notificationid = "occupancy_permit";		
+		}
+		else if(doctype.apptype == "occupancy" && !doctype.type.toLowerCase() != 'main' )  {
+			issEm = dynEm.lookup( "occupancy_issuance" );
+			appEm = dynEm.lookup( "occupancy_application_subdoc" );	
+			notificationid = "occupancy_application_subdoc:"+p.doctypeid.toLowerCase();		
+		}
 		def app = appEm.find( [objid: p.appid] ).first();			
-		if(!app) throw new Exception("Document does not exist");
+		if(!app) throw new Exception("Application does not exist");
 		if(app.issuanceid) throw new Exception("This has already been issued");			
 
 		def u = [:];

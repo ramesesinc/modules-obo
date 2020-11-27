@@ -29,7 +29,7 @@ class OccupancyInspectionScheduleService {
 
 	@ProxyMethod
 	public def updateSchedule( def o ) {
-		appEm.find( [objid: o.objid ]).update( [inspectionschedule: o.date ] );
+		appEm.find( [objid: o.objid ]).update( [inspectiondate: o.date ] );
 		
 		//test sample here
 		//self.sendToCalendar( [appid: o.objid] );
@@ -61,11 +61,11 @@ class OccupancyInspectionScheduleService {
 			v.location = app.bldgpermit.location.text;
 		}
 		v.start = [
-			dateTime: app.inspectionschedule,
+			dateTime: app.inspectiondate,
 			timeZone: "Asia/Manila"
 		];
 		v.end = [
-			dateTime: dateSvc.add( app.inspectionschedule, "5h" ),
+			dateTime: dateSvc.add( app.inspectiondate, "5h" ),
 			timeZone: "Asia/Manila"
 		];
 		v.recurrence = ["RRULE:FREQ=DAILY;COUNT=1"];

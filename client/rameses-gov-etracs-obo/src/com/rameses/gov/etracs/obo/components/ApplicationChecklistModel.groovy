@@ -9,6 +9,9 @@ import java.text.*;
 
 class ApplicationChecklistModel extends AbstractComponentModel {
 
+    @Service("OboApplicationChecklistService")
+    def chklstSvc;
+    
     def doctypeid;
     
     /*
@@ -31,33 +34,37 @@ class ApplicationChecklistModel extends AbstractComponentModel {
     void afterLoadList() {
         def result = [];
         _items.each {
-                def m = [:];
-                m.objid = it.objid;
-                m.template = it.type.title;
-                m.category = it.type.category;
-                m.params = it.type.params;
-                m.typeid = it.typeid;
-                m.indexno = it.type.indexno;
-                m.values = it.values;
-                if( it.values ) {
-                    Object[] ov = it.values;
-                    m.particulars = MessageFormat.format( m.template, ov );
-                }
-                else {
-                    m.particulars = m.template;
-                }
-                result << m;
+            def m = [:];
+            m.objid = it.objid;
+            m.template = it.type.title;
+            m.category = it.type.category;
+            m.params = it.type.params;
+            m.typeid = it.typeid;
+            m.indexno = it.type.indexno;
+            m.values = it.values;
+            if( it.values ) {
+                Object[] ov = it.values;
+                m.particulars = MessageFormat.format( m.template, ov );
+            }
+            else {
+                m.particulars = m.template;
+            }
+            result << m;
         }
         _items = result.sort{ it.typeid };
     }    
     
+    public boolean isMultiSelect() {
+        return true;
+    }
+    
     public def addItems() {
         def pp = [:]
         pp.onselect = { o->
-            def p = [:];
+            def p = [_schemaname:entitySchemaName];
             p.objid = parentid;
             p.items = o.collect{ [objid: it.objid ] };
-            handler.saveItems( p );
+            chklstSvc.saveItems( p );
             listHandler.reload();
         };
         pp.put("query.typeid", doctypeid );
@@ -67,12 +74,11 @@ class ApplicationChecklistModel extends AbstractComponentModel {
     public def removeItems() {
         def selectedChecklistItems = listHandler.getSelectedValue();
         if(!selectedChecklistItems) return;
-        def p = [:];
+        def p = [_schemaname:entitySchemaName];
         p.items = selectedChecklistItems.collect{[objid: it.objid] };
-        handler.removeItems( p );
+        chklstSvc.removeItems( p );
         listHandler.reload();
     }
-    
     
     public def editItem() {
         if(selectedItem == null) throw new Exception("Please select an item");
@@ -85,7 +91,8 @@ class ApplicationChecklistModel extends AbstractComponentModel {
     
     public def updateItem(def o) {
         def h = { u ->
-            handler.updateItem( u );
+            u._schemaname = entitySchemaName
+            chklstSvc.updateItem( u );
             listHandler.reload();
         }
         return Inv.lookupOpener( "application_checklist_item", [entity: o, handler: h])

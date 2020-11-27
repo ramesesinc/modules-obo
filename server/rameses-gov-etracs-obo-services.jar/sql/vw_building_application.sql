@@ -36,7 +36,7 @@ FROM building_application_subdoc
 WHERE appid = $P{appid}
 AND NOT(supervisorid IS NULL)
 UNION 
-SELECT ba.contractorid AS profid
+SELECT ba.supervisorid AS profid
 FROM building_application ba 
 WHERE ba.objid =   $P{appid}
-AND NOT(ba.contractorid IS NULL)) 
+AND NOT(ba.supervisorid IS NULL)) 

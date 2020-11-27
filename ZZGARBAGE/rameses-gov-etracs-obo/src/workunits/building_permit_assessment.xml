@@ -1,9 +1,0 @@
-<workunit>
-    <invokers>
-        <invoker type="building_permit_assessment" caption="View Assessment"  target="popup" action="execute"/>
-    </invokers>
-    <code class="com.rameses.gov.etracs.obo.models.BuildingPermitAssessmentModel" />
-    <pages>
-        <page template="com.rameses.gov.etracs.obo.views.ViewAssessmentPage" />
-    </pages>
-</workunit>

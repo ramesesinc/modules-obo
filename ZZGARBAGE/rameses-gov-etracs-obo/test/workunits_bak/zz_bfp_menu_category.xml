@@ -1,9 +1,0 @@
-<workunit extends="com/rameses/menu/templates/MenuCategory.xml" context="bfp" cols="2">
-    <invokers>
-        <invoker type="home.action" 
-                 caption="BFP" icon="home/icons/bfp-logo.png"
-                 role="BFP"
-                 index="1" action="init"/>
-    </invokers> 
-    <code class="com.rameses.gov.etracs.obo.models.ZZBFPMenuCategoryModel" />
-</workunit>
