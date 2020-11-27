@@ -16,7 +16,7 @@
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
   <SubComponents>
-    <Component class="com.rameses.rcp.control.XDataTable" name="xDataTable1">
+    <Component class="com.rameses.rcp.control.XDataTable" name="tblItems">
       <Properties>
         <Property name="handler" type="java.lang.String" value="listHandler"/>
         <Property name="name" type="java.lang.String" value="selectedItem" noResource="true"/>

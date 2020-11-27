@@ -9,7 +9,7 @@
 			<key field="objid" target="typeid" />
 		</complex>	
 
-	<complex name="section" ref="obo_section" jointype="many-to-one" required="false">
+		<complex name="section" ref="obo_section" jointype="many-to-one" required="false">
 			<key field="sectionid" target="objid" />
 		</complex>	
 

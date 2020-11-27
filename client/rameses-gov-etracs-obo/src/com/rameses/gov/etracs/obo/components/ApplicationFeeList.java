@@ -5,11 +5,7 @@
  */
 package com.rameses.gov.etracs.obo.components;
 
-import com.rameses.osiris2.client.WorkUnitUIController;
-import com.rameses.rcp.common.MsgBox;
-import com.rameses.rcp.control.XComponentPanel;
 import com.rameses.rcp.ui.annotations.ComponentBean;
-import com.rameses.rcp.util.UIControlUtil;
 
 /**
  *
@@ -18,6 +14,8 @@ import com.rameses.rcp.util.UIControlUtil;
 @ComponentBean("com.rameses.gov.etracs.obo.components.ApplicationFeeListModel")
 public class ApplicationFeeList extends AbstractComponent {
 
+    private String doctypeid;
+    
     /**
      * Creates new form ApplicationFeeList
      */
@@ -118,21 +116,6 @@ public class ApplicationFeeList extends AbstractComponent {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "remarks"}
-                , new Object[]{"caption", "Remarks"}
-                , new Object[]{"width", 200}
-                , new Object[]{"minWidth", 0}
-                , new Object[]{"maxWidth", 0}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "amount"}
                 , new Object[]{"caption", "Amount"}
                 , new Object[]{"width", 100}
@@ -146,6 +129,21 @@ public class ApplicationFeeList extends AbstractComponent {
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.DecimalColumnHandler("#,##0.00", -1.0, -1.0, false, 2)}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "remarks"}
+                , new Object[]{"caption", "Remarks"}
+                , new Object[]{"width", 200}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
         add(xDataTable1, java.awt.BorderLayout.CENTER);
@@ -166,7 +164,11 @@ public class ApplicationFeeList extends AbstractComponent {
         add(jPanel1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    @Override
+    protected void initComponentBean(com.rameses.rcp.common.ComponentBean bean) { 
+        super.initComponentBean( bean );
+        bean.setProperty("doctypeid", getProperty(getDoctypeid())); 
+    }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -181,4 +183,18 @@ public class ApplicationFeeList extends AbstractComponent {
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XPanel xPanel1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the doctypeid
+     */
+    public String getDoctypeid() {
+        return doctypeid;
+    }
+
+    /**
+     * @param doctypeid the doctypeid to set
+     */
+    public void setDoctypeid(String doctypeid) {
+        this.doctypeid = doctypeid;
+    }
 }

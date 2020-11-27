@@ -20,7 +20,10 @@
                 action="changeOccupancyType" 
                 xvisibleWhen="#{ task.assignee.objid == userInfo.userid }" />
        -->
-    
+        <invoker type="appActions" 
+                caption="Set Inspection Date"
+                action="setInspectionDate" 
+                />
 
         <invoker type="appActions" 
                 caption="Reports"
@@ -32,7 +35,8 @@
         <invoker type="appActions" 
                 caption="Issue Permit"
                 action="issuePermit" 
-                visibleWhen="#{task.state == 'releasing'
+                visibleWhen="#{ entity.issuanceid == null }"
+                xvisibleWhen="#{task.state == 'releasing'
                     &amp;&amp; entity.issuanceid == null                   
                     &amp;&amp; task.assignee.objid == userInfo.userid }"   />            
                     

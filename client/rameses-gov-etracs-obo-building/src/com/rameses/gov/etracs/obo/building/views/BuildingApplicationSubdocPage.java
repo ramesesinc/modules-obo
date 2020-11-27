@@ -67,8 +67,9 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xPanel2.setLayout(new java.awt.BorderLayout());
 
         applicationInfoList1.setAppid("entity.appid");
+        applicationInfoList1.setDoctypeid("entity.doctypeid");
         applicationInfoList1.setEditableWhen("#{ editable }");
-        applicationInfoList1.setHandler("infoHandler");
+        applicationInfoList1.setEntitySchemaName("building_application_info");
         applicationInfoList1.setParentid("entity.objid");
         applicationInfoList1.setSchemaName("vw_building_application_info");
         xPanel2.add(applicationInfoList1, java.awt.BorderLayout.CENTER);
@@ -79,9 +80,9 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         xPanel1.setLayout(new java.awt.BorderLayout());
 
         applicationFeeList1.setAppid("entity.appid");
+        applicationFeeList1.setDoctypeid("entity.doctypeid");
         applicationFeeList1.setEditableWhen("#{ editable }");
         applicationFeeList1.setEntitySchemaName("building_application_fee");
-        applicationFeeList1.setHandler("feeHandler");
         applicationFeeList1.setParentid("entity.objid");
         applicationFeeList1.setSchemaName("vw_building_application_fee");
         xPanel1.add(applicationFeeList1, java.awt.BorderLayout.CENTER);
@@ -94,7 +95,7 @@ public class BuildingApplicationSubdocPage extends javax.swing.JPanel {
         applicationChecklist1.setAppid("entity.appid");
         applicationChecklist1.setDoctypeid("entity.doctypeid");
         applicationChecklist1.setEditableWhen("#{ editable }");
-        applicationChecklist1.setHandler("checklistHandler");
+        applicationChecklist1.setEntitySchemaName("building_application_checklist_item");
         applicationChecklist1.setParentid("entity.objid");
         applicationChecklist1.setSchemaName("building_application_checklist_item");
         xPanel3.add(applicationChecklist1, java.awt.BorderLayout.CENTER);

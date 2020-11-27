@@ -1,7 +1,0 @@
-<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="obo_work_type">
-    <invokers>
-        <invoker type="obo_work_type:lookup" caption="Lookup Construction Type" 
-                 cols="description"
-                 action="init" orderBy="idx" target="popup"/>
-    </invokers>
-</workunit>

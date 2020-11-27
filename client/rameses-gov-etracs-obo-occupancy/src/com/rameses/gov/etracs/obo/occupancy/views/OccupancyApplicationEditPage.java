@@ -403,6 +403,7 @@ public class OccupancyApplicationEditPage extends javax.swing.JPanel {
 
         xCheckBox1.setName("hascontractor"); // NOI18N
         xCheckBox1.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xCheckBox1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         xCheckBox1.setShowCaption(false);
         xCheckBox1.setText("Has Contractor?");
         xFormPanel2.add(xCheckBox1);

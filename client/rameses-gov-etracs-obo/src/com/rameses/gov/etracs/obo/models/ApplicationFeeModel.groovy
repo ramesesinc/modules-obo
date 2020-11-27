@@ -10,7 +10,7 @@ import com.rameses.enterprise.models.*;
 
 class ApplicationFeeModel  {
     
-    def handler;
+    def doctypeid;
     def entity;
     def saveHandler;
 
@@ -20,7 +20,13 @@ class ApplicationFeeModel  {
     }
     
     def getLookupAccount() {
-        return handler.getAccountLookupHandler();
+        if( doctypeid ) {
+            def filter = ["query.doctypeid": doctypeid];
+            return Inv.lookupOpener( "obo_itemaccount:type:lookup", filter );
+        }
+        else {
+            return Inv.lookupOpener( "obo_itemaccount:obo:lookup", [:] );
+        } 
     }
     
     def doOk() {

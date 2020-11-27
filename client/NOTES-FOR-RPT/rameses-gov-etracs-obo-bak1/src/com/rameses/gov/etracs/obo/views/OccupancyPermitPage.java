@@ -201,7 +201,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xFormPanel3.add(xLabel13);
 
         xLabel33.setCaption("Inspection Date");
-        xLabel33.setExpression("#{entity.inspectionschedule}");
+        xLabel33.setExpression("#{entity.inspectiondate}");
         xLabel33.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel33.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel33);

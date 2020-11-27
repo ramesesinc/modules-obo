@@ -1143,7 +1143,9 @@
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
+                <Property name="entitySchemaName" type="java.lang.String" value="building_evaluation"/>
                 <Property name="schemaName" type="java.lang.String" value="vw_building_evaluation"/>
+                <Property name="typeSchema" type="java.lang.String" value="building_evaluation_type"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -1242,7 +1244,6 @@
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
                 <Property name="entitySchemaName" type="java.lang.String" value="building_application_fee"/>
-                <Property name="handler" type="java.lang.String" value="assessmentHandler"/>
                 <Property name="schemaName" type="java.lang.String" value="vw_building_application_fee"/>
               </Properties>
               <Constraints>

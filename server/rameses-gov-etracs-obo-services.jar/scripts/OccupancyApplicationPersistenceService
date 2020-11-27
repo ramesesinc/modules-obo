@@ -41,6 +41,9 @@ class OccupancyApplicationPersistenceService {
 	@DataContext("obo_doctype")
 	def doctypeEm;
 
+	@DataContext("occupancy_rpu")
+	def occRpuEm;
+
 	@Service("DateService")
 	def dateSvc;
 
@@ -49,6 +52,9 @@ class OccupancyApplicationPersistenceService {
 
 	@Service("OccupancyApplicationService")
 	def appSvc;
+
+	@Service("OboConstructionCostRuleService")
+	def costSvc;
 
     @Env
     def env;
@@ -78,15 +84,21 @@ class OccupancyApplicationPersistenceService {
 		app.txnmode = "CAPTURE";
 		app.createdby = [objid: env.USERID, name: env.FULLNAME];
 		app.dtcreated = dt;
-
+		app.actualprojectcost = app.totalmaterialcost + app.totaldirectlaborcost + app.totalequipmentcost + app.totalothercost;
 		appEm.create( app );
 
 		//save applicant
 		applicant.appid = app.objid;
 		applicant = entityEm.create( applicant );
 
+		//calculate the cost first before receiving
+		def param = [:];
+		param.app = [apptype:app.apptype, totalfloorarea:app.actualtotalfloorarea];
+		param.occupancytype = app.occupancytype;
+		def cost = costSvc.calc( param );
+
 		//update applicant, cost and appid for info
-		appEm.find( [objid: app.objid ] ).update( [applicantid: applicant.objid] );
+		appEm.find( [objid: app.objid ] ).update( [applicantid: applicant.objid, actualfixedcost: cost] );
 
 		if( app.permitissued == true ) {
 			def doctype = doctypeEm.find( [objid: "OCCUPANCY_PERMIT"] ).first();
@@ -120,6 +132,13 @@ class OccupancyApplicationPersistenceService {
 			pmt.reftype = "cashreceipt";
 			pmt.voided = 0;
 			paymentEm.create( pmt );
+
+			//also create the occupancy_rpu as CAPTURED
+			def c = [:];
+			c.appid = app.objid;
+			c.state = 0;
+			c.txnmode = "CAPTURED";
+			occRpuEm.create( c );
 		}
 		else {
 			//save all documents that are auto create that does not exist above

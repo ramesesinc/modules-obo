@@ -14,10 +14,6 @@ import com.rameses.io.*;
 
 class BuildingApplicationSubdocModel extends CrudFormModel {
 
-    
-    @Service("BuildingApplicationInfoService")
-    def infoSvc;
-    
     @Service("BuildingApplicationFeeService")
     def feeSvc;
 
@@ -65,7 +61,7 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
             def m = [_schemaname: "vw_building_application_subdoc"];
             m.findBy = [ appid: entity.appid ];
             if( entity.doctype.org?.objid !=null ) {
-                m.where = ["doctype.org.objid= :orgid", [orgid: entity.doctype.org?.objid ]];
+                m.where = ["doctype.org.objid = :orgid", [orgid: entity.doctype.org?.objid ]];
             }
             else {
                 m.where = ["doctype.org.objid IS NULL"];
@@ -136,44 +132,6 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
         }
         return Inv.lookupOpener("dynamic:form", p );
     }
-    
-    def infoHandler = [
-        /*
-        getInfos: {
-            return infoSvc.getInfos( [parentid: entity.objid ] );
-        },
-        */
-        saveInfos: { items ->
-            infoSvc.saveInfos( items );
-        },
-        removeInfos: { items ->
-            infoSvc.removeInfos( items );
-        },
-        getLookupFilter: {
-            return [typeid: entity.doctype.objid ]
-        }
-    ];
-    
-    def feeHandler = [
-        saveFee: { o->
-            feeSvc.saveFee( o );
-        },
-        saveFees: { o->
-            feeSvc.saveFees( o );
-        },
-        removeFee: { o->
-            feeSvc.removeFee( o );
-        },
-        clearFees: {
-            feeSvc.clearFees( [parentid: entity.objid] );
-        },
-        getAccountLookupHandler: {
-            return Inv.lookupOpener( "obo_itemaccount:type:lookup", ["query.doctypeid":entity.doctypeid ]);
-        },
-        getAssessHandlerName: {
-            return "building_assessment";
-        }
-    ];
     
     def checklistHandler = [
         saveItems: { o->

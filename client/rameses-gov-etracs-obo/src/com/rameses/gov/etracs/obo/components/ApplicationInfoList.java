@@ -14,6 +14,8 @@ import com.rameses.rcp.ui.annotations.ComponentBean;
 @ComponentBean("com.rameses.gov.etracs.obo.components.ApplicationInfoListModel")
 public class ApplicationInfoList extends AbstractComponent {
 
+    private String doctypeid;
+    
     /**
      * Creates new form ApplicationFeeList
      */
@@ -153,8 +155,11 @@ public class ApplicationInfoList extends AbstractComponent {
         add(jPanel9, java.awt.BorderLayout.SOUTH);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-   
+    @Override
+    protected void initComponentBean(com.rameses.rcp.common.ComponentBean bean) { 
+        super.initComponentBean( bean );
+        bean.setProperty("doctypeid", getProperty(getDoctypeid())); 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
@@ -165,4 +170,18 @@ public class ApplicationInfoList extends AbstractComponent {
     private com.rameses.rcp.control.XButton xButton9;
     private com.rameses.rcp.control.XDataTable xDataTable5;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the doctypeid
+     */
+    public String getDoctypeid() {
+        return doctypeid;
+    }
+
+    /**
+     * @param doctypeid the doctypeid to set
+     */
+    public void setDoctypeid(String doctypeid) {
+        this.doctypeid = doctypeid;
+    }
 }

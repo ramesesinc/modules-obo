@@ -14,6 +14,8 @@ import com.rameses.rcp.ui.annotations.ComponentBean;
 @ComponentBean("com.rameses.gov.etracs.obo.components.ApplicationSubTaskListModel")
 public class ApplicationSubTaskList extends AbstractComponent {
 
+    private String typeSchema;
+    
     
     /**
      * Creates new form ApplicationDocumentList
@@ -235,4 +237,24 @@ public class ApplicationSubTaskList extends AbstractComponent {
     private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XRadio xRadio3;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    protected void initComponentBean(com.rameses.rcp.common.ComponentBean bean) { 
+        super.initComponentBean( bean );
+        bean.setProperty("typeSchema", getTypeSchema() ); 
+    }
+    
+    /**
+     * @return the typeSchema
+     */
+    public String getTypeSchema() {
+        return typeSchema;
+    }
+
+    /**
+     * @param typeSchema the typeSchema to set
+     */
+    public void setTypeSchema(String typeSchema) {
+        this.typeSchema = typeSchema;
+    }
 }

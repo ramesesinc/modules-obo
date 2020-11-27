@@ -1,9 +1,0 @@
-<workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
-          processName="occupancy_permit" schemaName="vw_occupancy_permit"
-          allowDelete="false" allowNotify="false">
-    <invokers>
-        <invoker folderid="menucategory/obo/occupancy" caption="View Application List"
-             cols="appno,appdate,applicant.name,title,projectcost,task.state,task.assignee.name"
-                action="init" index="-1" role="INFO" notificationid="occupancy_permit" event="occupancy_permit"/>
-    </invokers>
-</workunit>

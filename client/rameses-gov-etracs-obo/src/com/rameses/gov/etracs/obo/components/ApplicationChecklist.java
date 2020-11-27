@@ -37,7 +37,7 @@ public class ApplicationChecklist extends AbstractComponent {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        xDataTable1 = new com.rameses.rcp.control.XDataTable();
+        tblItems = new com.rameses.rcp.control.XDataTable();
         xPanel1 = new com.rameses.rcp.control.XPanel();
         btnRefresh = new com.rameses.rcp.control.XButton();
         xButton1 = new com.rameses.rcp.control.XButton();
@@ -46,9 +46,9 @@ public class ApplicationChecklist extends AbstractComponent {
 
         setLayout(new java.awt.BorderLayout());
 
-        xDataTable1.setHandler("listHandler");
-        xDataTable1.setName("selectedItem"); // NOI18N
-        xDataTable1.setColumns(new com.rameses.rcp.common.Column[]{
+        tblItems.setHandler("listHandler");
+        tblItems.setName("selectedItem"); // NOI18N
+        tblItems.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "indexno"}
                 , new Object[]{"caption", "No"}
@@ -95,7 +95,7 @@ public class ApplicationChecklist extends AbstractComponent {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
-        add(xDataTable1, java.awt.BorderLayout.CENTER);
+        add(tblItems, java.awt.BorderLayout.CENTER);
 
         xPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         xPanel1.setPreferredSize(new java.awt.Dimension(896, 33));
@@ -132,10 +132,10 @@ public class ApplicationChecklist extends AbstractComponent {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.rcp.control.XButton btnRefresh;
+    private com.rameses.rcp.control.XDataTable tblItems;
     private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XButton xButton2;
     private com.rameses.rcp.control.XButton xButton3;
-    private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XPanel xPanel1;
     // End of variables declaration//GEN-END:variables
 

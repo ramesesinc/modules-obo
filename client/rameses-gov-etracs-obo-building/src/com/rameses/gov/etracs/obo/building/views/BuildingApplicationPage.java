@@ -462,7 +462,9 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         applicationSubTaskList1.setAppid("entity.objid");
         applicationSubTaskList1.setEditableWhen("#{ canEdit == true }");
+        applicationSubTaskList1.setEntitySchemaName("building_evaluation");
         applicationSubTaskList1.setSchemaName("vw_building_evaluation");
+        applicationSubTaskList1.setTypeSchema("building_evaluation_type");
         xPanel1.add(applicationSubTaskList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Evaluations", xPanel1);
@@ -497,7 +499,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         applicationFeeList1.setAppid("entity.objid");
         applicationFeeList1.setEditableWhen("#{ canEdit == true }");
         applicationFeeList1.setEntitySchemaName("building_application_fee");
-        applicationFeeList1.setHandler("assessmentHandler");
         applicationFeeList1.setSchemaName("vw_building_application_fee");
         xPanel7.add(applicationFeeList1, java.awt.BorderLayout.CENTER);
 

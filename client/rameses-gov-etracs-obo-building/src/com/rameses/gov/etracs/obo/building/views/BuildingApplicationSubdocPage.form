@@ -47,8 +47,9 @@
             <Component class="com.rameses.gov.etracs.obo.components.ApplicationInfoList" name="applicationInfoList1">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.appid"/>
+                <Property name="doctypeid" type="java.lang.String" value="entity.doctypeid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ editable }"/>
-                <Property name="handler" type="java.lang.String" value="infoHandler"/>
+                <Property name="entitySchemaName" type="java.lang.String" value="building_application_info"/>
                 <Property name="parentid" type="java.lang.String" value="entity.objid"/>
                 <Property name="schemaName" type="java.lang.String" value="vw_building_application_info"/>
               </Properties>
@@ -77,9 +78,9 @@
             <Component class="com.rameses.gov.etracs.obo.components.ApplicationFeeList" name="applicationFeeList1">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.appid"/>
+                <Property name="doctypeid" type="java.lang.String" value="entity.doctypeid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ editable }"/>
                 <Property name="entitySchemaName" type="java.lang.String" value="building_application_fee"/>
-                <Property name="handler" type="java.lang.String" value="feeHandler"/>
                 <Property name="parentid" type="java.lang.String" value="entity.objid"/>
                 <Property name="schemaName" type="java.lang.String" value="vw_building_application_fee"/>
               </Properties>
@@ -110,7 +111,7 @@
                 <Property name="appid" type="java.lang.String" value="entity.appid"/>
                 <Property name="doctypeid" type="java.lang.String" value="entity.doctypeid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ editable }"/>
-                <Property name="handler" type="java.lang.String" value="checklistHandler"/>
+                <Property name="entitySchemaName" type="java.lang.String" value="building_application_checklist_item"/>
                 <Property name="parentid" type="java.lang.String" value="entity.objid"/>
                 <Property name="schemaName" type="java.lang.String" value="building_application_checklist_item"/>
               </Properties>

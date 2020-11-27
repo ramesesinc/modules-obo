@@ -21,7 +21,7 @@
 		<field name="contact_email" required="true"/>
 		<field name="contact_mobileno"/>
 
-		<field name="occupancytypeid" />
+		<field name="occupancytypeid" required="true"/>
 		
 		<field name="actualnumunits" type="integer"/>
 		<field name="actualtotalfloorarea" type="decimal"/>
@@ -34,7 +34,7 @@
 		<field name="totalequipmentcost" type="decimal"/>
 		<field name="totalothercost" type="decimal"/>
 
-		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one">
+		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one" required="false">
 			<key field="supervisorid" target="objid" />
 		</complex> 
 
@@ -42,7 +42,7 @@
 		<field name="dtactualcompleted" />
 		<field name="txnmode" />
 		<field name="taskid" />
-		<field name="inspectionschedule" type="timestamp" />
+		<field name="inspectiondate" type="timestamp" />
 
 		<field name="contractor_name" />
 		<field name="contractor_address" />
@@ -51,6 +51,11 @@
 		<field name="contractor_tin" />
 		<field name="contractor_manager_name" />
 		<field name="contractor_manager_email" />
+
+		<field name="issuanceid" />
+
+		<field name="actualprojectcost" type="decimal"/>
+		<field name="actualfixedcost" type="decimal"/>
 	</element>
 </schema>
 

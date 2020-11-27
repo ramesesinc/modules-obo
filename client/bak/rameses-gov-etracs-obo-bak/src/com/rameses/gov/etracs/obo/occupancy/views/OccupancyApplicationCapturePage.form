@@ -715,7 +715,7 @@
                     <Component class="com.rameses.rcp.control.XLabel" name="xLabel45">
                       <Properties>
                         <Property name="caption" type="java.lang.String" value="Inspection Date"/>
-                        <Property name="expression" type="java.lang.String" value="#{entity.inspectionschedule}"/>
+                        <Property name="expression" type="java.lang.String" value="#{entity.inspectiondate}"/>
                         <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                           <Insets value="[20, 0, 0, 0]"/>
                         </Property>

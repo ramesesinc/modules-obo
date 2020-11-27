@@ -6,12 +6,14 @@
 package com.rameses.gov.etracs.obo.occupancy.views;
 
 import com.rameses.osiris2.themes.OKCancelPage;
+import com.rameses.rcp.ui.annotations.StyleSheet;
 import com.rameses.rcp.ui.annotations.Template;
 
 /**
  *
  * @author elmonazareno
  */
+@StyleSheet
 @Template(OKCancelPage.class)
 public class ContractorPage extends javax.swing.JPanel {
 

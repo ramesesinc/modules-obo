@@ -17,6 +17,7 @@ class ContractorModel  {
 
     def entity;
     def handler;
+    boolean editable = true;
     
     void init() {
         if( entity == null ) {
@@ -25,7 +26,7 @@ class ContractorModel  {
     }
     
     def doOk() {
-        handler( entity );
+        if(handler) handler( entity );
         return "_close";
     }
     
