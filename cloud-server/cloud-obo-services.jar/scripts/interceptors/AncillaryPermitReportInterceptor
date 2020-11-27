@@ -42,6 +42,7 @@ class AncillaryPermitReportInterceptor {
 		req.each { k,v->
 			println k+"="+v;
 		}
+		req.refid = req.params.refid;
 	}
 
 }
