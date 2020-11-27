@@ -1,48 +1,17 @@
 DROP VIEW IF EXISTS vw_building_permit;
 CREATE VIEW vw_building_permit AS 
 SELECT 
-   pmt.*,
-
-   a.appno,
-   a.txnmode,
-   a.apptype,
-   a.appdate,   
-   a.contact_name,  
-   a.contact_detail,
-   a.contact_email,
-   a.contact_mobileno,
-   a.txntype,
-
-   a.applicantid,
-   a.description,
-   a.title,
-   a.occupancytypeid,
-   a.numunits,
-   a.fixedcost,
-   a.projectcost,
-   a.dtproposedconstruction,
-   a.dtexpectedcompletion,
-   a.totalfloorarea,
-   a.height,
-   a.numfloors,
-   a.worktypes,
-   a.zoneclassid,
-   a.zone,
-   a.location_lotno,
-   a.location_blockno,
-   a.location_street,
-   a.location_barangay_name,
-   a.location_barangay_objid,
-   a.supervisorid,
-   a.location_unitno,
-   a.location_bldgno,
-   a.location_bldgname,
-   a.location_subdivision,
-   a.createdby_objid,
-   a.createdby_name,
-   a.dtcreated,
-   
-
+   a.*,
+   p.controlno,
+   p.dtissued,
+   p.template,
+   p.approverid,
+   p.endorserid,   
+   p.issuedby_objid,
+   p.issuedby_name,   
+   p.expirydate,
+   p.remarks,
+   p.reportheader,
    ae.name AS applicant_name,
 
    bt.objid AS occupancytype_objid,
@@ -64,22 +33,15 @@ SELECT
       (CASE WHEN a.location_street IS NULL THEN '' ELSE CONCAT(' ', a.location_street) END),
       (CASE WHEN a.location_subdivision IS NULL THEN '' ELSE CONCAT(' ', a.location_subdivision) END),      
       (CASE WHEN a.location_barangay_name IS NULL THEN '' ELSE CONCAT(' ', a.location_barangay_name ) END)
-   )) AS location_text,
+   )) AS location_text
 
-   at.taskid AS taskid,
-   at.state AS task_state
-
-FROM building_permit pmt 
-INNER JOIN building_application a ON pmt.appid = a.objid
+FROM building_permit p 
+INNER JOIN building_application a ON a.issuanceid = p.objid 
 INNER JOIN building_application_entity ae ON a.applicantid = ae.objid
-INNER JOIN building_application_task at ON a.taskid=at.taskid
 
 INNER JOIN obo_occupancy_type bt ON a.occupancytypeid = bt.objid
 INNER JOIN obo_occupancy_type_division od ON bt.divisionid = od.objid
 INNER JOIN obo_occupancy_type_group og ON od.groupid = og.objid
 LEFT JOIN obo_zoneclass zc ON a.zoneclassid = zc.objid
-
-WHERE at.state = 'end'
-
 
 

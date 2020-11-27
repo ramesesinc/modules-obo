@@ -7,10 +7,8 @@
 			<key field="applicantid" target="objid" />
 		</complex>
 
-		<field name="state" />
 		<field name="appno"  searchable="true" indexed="true"/>
 		<field name="apptype" />
-		<field name="appid" />
 		<field name="appdate" />
 		<field name="txntype" />
 
@@ -67,8 +65,6 @@
 		<field name="contact_email" />
 		<field name="contact_mobileno" />
 
-		<field name="taskid" />
-		<field name="task_state" />
 
 		<complex name="supervisor" ref="obo_professional_info" jointype="many-to-one" required="false" includefields="objid,profession,.*name,prc.*,ptr.*">
 			<key field="supervisorid" target="objid" />

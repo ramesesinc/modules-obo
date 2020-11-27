@@ -7,8 +7,12 @@ SELECT
    p.template,
    p.approverid,
    p.endorserid,   
-   p.issuedby_objid
+   p.issuedby_objid,
+   ba.title,
+   ba.controlno AS bldgpermitno,
+   ba.controlno AS bldgpermitdtissued
 FROM vw_occupancy_application app 
+INNER JOIN vw_building_permit ba ON app.bldgpermitid=ba.objid
 INNER JOIN occupancy_permit p ON app.issuanceid = p.objid
 
 
