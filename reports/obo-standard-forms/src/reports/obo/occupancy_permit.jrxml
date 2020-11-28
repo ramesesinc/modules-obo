@@ -64,6 +64,7 @@
 	<field name="approver.displayname" class="java.lang.String"/>
 	<field name="bldgpermitno" class="java.lang.String"/>
 	<field name="bldgpermitdtissued" class="java.util.Date"/>
+	<field name="approver.signature" class="java.lang.Object"/>
 
 
 		<group  name="P1" >
@@ -87,36 +88,14 @@
 					<reportElement
 						x="281"
 						y="309"
-						width="191"
+						width="434"
 						height="13"
 						key="textField-1"/>
 					<box></box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.title}]]></textFieldExpression>
-				</textField>
-				<line direction="TopDown">
-					<reportElement
-						x="510"
-						y="322"
-						width="206"
-						height="0"
-						key="line-1"/>
-					<graphicElement stretchType="NoStretch"/>
-				</line>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="510"
-						y="309"
-						width="206"
-						height="13"
-						key="textField-2"/>
-					<box></box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.group.objid}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.title} + ' ' + 'Group' + ':' + ' '+ $F{occupancytype.group.objid}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -390,8 +369,8 @@
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="75"
-						y="260"
+						x="74"
+						y="259"
 						width="117"
 						height="0"
 						key="line-9"/>
@@ -486,9 +465,9 @@
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="281"
+						x="280"
 						y="322"
-						width="196"
+						width="435"
 						height="1"
 						key="line-11"/>
 					<graphicElement stretchType="NoStretch"/>
@@ -572,35 +551,9 @@
 						key="line-14"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
-				<staticText>
-					<reportElement
-						x="477"
-						y="309"
-						width="33"
-						height="13"
-						key="staticText-24"/>
-					<box></box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10"/>
-					</textElement>
-				<text><![CDATA[Group]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="507"
-						y="310"
-						width="5"
-						height="13"
-						key="staticText-25"/>
-					<box></box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10"/>
-					</textElement>
-				<text><![CDATA[:]]></text>
-				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="87"
+						x="88"
 						y="155"
 						width="290"
 						height="19"
@@ -611,9 +564,9 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{controlno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="144"
+						x="145"
 						y="170"
 						width="237"
 						height="19"
@@ -624,7 +577,7 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="558"
 						y="185"
@@ -650,7 +603,7 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{receiptno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="150"
 						y="201"
@@ -665,7 +618,7 @@
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="118"
+						x="120"
 						y="185"
 						width="261"
 						height="19"
@@ -689,10 +642,10 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{amount}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="71"
-						y="244"
+						x="75"
+						y="243"
 						width="117"
 						height="16"
 						key="textField-13"/>
@@ -785,19 +738,6 @@ posted within the premises of the buiding/structure and shall not be removed wit
 				</staticText>
 				<staticText>
 					<reportElement
-						x="429"
-						y="492"
-						width="201"
-						height="10"
-						key="staticText-29"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial" size="8"/>
-					</textElement>
-				<text><![CDATA[(SIGNATURE OVER PRINTED NAME)]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
 						x="470"
 						y="499"
 						width="104"
@@ -861,7 +801,7 @@ AND ITS REVISED IRR]]></text>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="429"
-						y="457"
+						y="459"
 						width="201"
 						height="17"
 						key="textField-18"/>
@@ -949,6 +889,32 @@ AND ITS REVISED IRR]]></text>
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
 					<imageExpression class="java.lang.String"><![CDATA["images/check.png"]]></imageExpression>
+				</image>
+				<staticText>
+					<reportElement
+						x="429"
+						y="492"
+						width="201"
+						height="10"
+						key="staticText-29"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8"/>
+					</textElement>
+				<text><![CDATA[(SIGNATURE OVER PRINTED NAME)]]></text>
+				</staticText>
+				<image  vAlign="Middle" hAlign="Center" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="448"
+						y="412"
+						width="162"
+						height="70"
+						key="image-11"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.io.InputStream"><![CDATA[$F{approver.signature}]]></imageExpression>
 				</image>
 			</band>
 			</groupHeader>

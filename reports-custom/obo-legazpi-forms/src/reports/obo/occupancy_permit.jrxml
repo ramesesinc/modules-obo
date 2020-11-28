@@ -57,6 +57,7 @@
 	<field name="org.fullname" class="java.lang.String"/>
 	<field name="bldgpermitno" class="java.lang.String"/>
 	<field name="bldgpermitdtissued" class="java.util.Date"/>
+	<field name="approver.signature" class="java.lang.Object"/>
 
 		<background>
 			<band height="595"  isSplitAllowed="true" >
@@ -71,6 +72,19 @@
 					<box></box>
 					<graphicElement stretchType="RelativeToBandHeight"/>
 					<imageExpression class="java.lang.String"><![CDATA["images/occupancy_permit_background.jpg"]]></imageExpression>
+				</image>
+				<image  vAlign="Middle" hAlign="Center" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="499"
+						y="401"
+						width="162"
+						height="70"
+						key="image-6"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.io.InputStream"><![CDATA[$F{approver.signature}]]></imageExpression>
 				</image>
 			</band>
 		</background>
@@ -318,7 +332,7 @@
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="135"
+						x="132"
 						y="278"
 						width="62"
 						height="0"
@@ -414,9 +428,9 @@
 				</staticText>
 				<line direction="TopDown">
 					<reportElement
-						x="255"
+						x="254"
 						y="343"
-						width="204"
+						width="443"
 						height="1"
 						key="line-12"/>
 					<graphicElement stretchType="NoStretch"/>
@@ -500,41 +514,6 @@
 						key="line-24"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
-				<staticText>
-					<reportElement
-						x="459"
-						y="331"
-						width="33"
-						height="13"
-						key="staticText-44"/>
-					<box></box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10"/>
-					</textElement>
-				<text><![CDATA[Group]]></text>
-				</staticText>
-				<staticText>
-					<reportElement
-						x="489"
-						y="331"
-						width="5"
-						height="13"
-						key="staticText-45"/>
-					<box></box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10"/>
-					</textElement>
-				<text><![CDATA[:]]></text>
-				</staticText>
-				<line direction="TopDown">
-					<reportElement
-						x="492"
-						y="341"
-						width="206"
-						height="0"
-						key="line-25"/>
-					<graphicElement stretchType="NoStretch"/>
-				</line>
 				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="22"
@@ -574,9 +553,9 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{controlno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="185"
+						x="187"
 						y="185"
 						width="247"
 						height="19"
@@ -587,7 +566,7 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="516"
 						y="200"
@@ -602,7 +581,7 @@
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="562"
+						x="563"
 						y="184"
 						width="121"
 						height="19"
@@ -613,7 +592,7 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{receiptno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="187"
 						y="214"
@@ -654,9 +633,9 @@
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="636"
-						y="250"
-						width="67"
+						x="645"
+						y="249"
+						width="56"
 						height="16"
 						key="textField-7"/>
 					<box></box>
@@ -665,9 +644,9 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{bldgpermitno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" pattern="yyyy/MM/dd" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="136"
+						x="133"
 						y="264"
 						width="62"
 						height="16"
@@ -706,29 +685,16 @@
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
-						x="254"
+						x="256"
 						y="331"
-						width="200"
+						width="438"
 						height="13"
 						key="textField"/>
 					<box></box>
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.title}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="494"
-						y="330"
-						width="206"
-						height="13"
-						key="textField"/>
-					<box></box>
-					<textElement verticalAlignment="Middle">
-						<font fontName="Arial" size="10"/>
-					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.group.objid}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.title} + ' ' + 'Group' + ':' + ' ' + $F{occupancytype.group.objid}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
