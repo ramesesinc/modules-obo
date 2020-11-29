@@ -22,6 +22,7 @@ import ActualCost from "./ActualCost";
 import OtherCost from "./OtherCost";
 import Contractor from "./Contractor";
 import Professionals from "./Professionals";
+import Supervisor from "./Supervisor";
 import Confirmation from "./Confirmation";
 import Completed from "./Completed";
 
@@ -37,8 +38,9 @@ const pages = [
   { step: 5, name: 'plannedactual', caption: 'Planned vs Actual', component: PlannedVsActual },
   { step: 6, name: 'contractor', caption: 'Contractor', component: Contractor },
   { step: 7, name: 'professionals', caption: 'Professionals', component: Professionals },
-  { step: 8, name: 'confirmation', caption: 'Confirmation', component: Confirmation },
-  { step: 9, name: 'completed', caption: 'Completed', component: Completed },
+  { step: 8, name: 'supervisor', caption: 'Supervisor', component: Supervisor },
+  { step: 9, name: 'confirmation', caption: 'Confirmation', component: Confirmation },
+  { step: 10, name: 'completed', caption: 'Completed', component: Completed },
 ]
 
 const OccupancyPermitWebController = (props) => {
@@ -48,7 +50,7 @@ const OccupancyPermitWebController = (props) => {
   const [appType, setAppType] = useState("full");
   const [appno, setAppno] = useState(getUrlParameter(props.location, "appid"));
   const [app, setApp] = useState({});
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useState(1)
 
   const { partner, service } = props
 
@@ -82,9 +84,9 @@ const OccupancyPermitWebController = (props) => {
     findCurrentApp();
   }, [appno]);
 
-  const onCompleteInitial = ({appType, appno}) => {
+  const onCompleteInitial = ({appType, appno, step}) => {
     setAppno(appno);
-    setStep(step + 1);
+    setStep(1);
     setMode("processing");
   }
 
@@ -127,7 +129,7 @@ const OccupancyPermitWebController = (props) => {
         } else if (!app) {
           setError("Application no. does not exist.");
         } else {
-          onCompleteInitial({appType, appno});
+          onCompleteInitial({appType, appno, step: app.step});
         }
       })
     }
@@ -166,7 +168,7 @@ const OccupancyPermitWebController = (props) => {
 
   return (
     <Page>
-      {app.step < 9 &&
+      {app.step < pages.length - 1 &&
         <Panel target="left" style={styles.stepperContainer} >
           <Stepper steps={pages} completedStep={app.step} activeStep={step} handleStep={handleStep} />
         </Panel>

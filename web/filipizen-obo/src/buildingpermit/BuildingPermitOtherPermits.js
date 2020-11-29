@@ -10,14 +10,12 @@ import {
   FormPanel,
   Spacer,
   BackLink,
-  ViewButton,
   EditButton,
   DeleteButton,
-  Label,
   Decimal,
-  Integer,
   CheckIcon,
-  Service
+  Service,
+  PreviewReport
 } from "rsi-react-web-components";
 
 import ProfessionalCard from "../components/ProfessionalCard";
@@ -157,8 +155,7 @@ const BuildingPermitOtherPermits = ({
 
   }
 
-  const onSelectDesignProfessional = (professionals) => {
-    const professional = professionals[0]
+  const onSelectDesignProfessional = (professional) => {
     setAncillaryPermit({
       ...ancillaryPermit,
       designprofessional: professional,
@@ -166,8 +163,7 @@ const BuildingPermitOtherPermits = ({
     });
   }
 
-  const onSelectSupervisor = (professionals) => {
-    const professional = professionals[0]
+  const onSelectSupervisor = (professional) => {
     setAncillaryPermit({
       ...ancillaryPermit,
       supervisor: professional,
@@ -284,6 +280,9 @@ const BuildingPermitOtherPermits = ({
               <label>{permit.type.title}</label>
             </Panel>
             <Panel row>
+              {permit.designprofessionalid &&
+                <PreviewReport caption={null} href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/building_ancillary_${permit.type.objid}?refid=${permit.objid}`} />
+              }
               <EditButton action={() => editPermit(permit)} size="small" />
               <DeleteButton action={() => removePermit(permit)} size="small" />
             </Panel>
@@ -374,12 +373,14 @@ const BuildingPermitOtherPermits = ({
           caption="Design Professional"
           professional={ancillaryPermit.designprofessional}
           onSelectProfessional={onSelectDesignProfessional}
+          role={ancillaryPermit.type.designprofessionalrole}
         />
         <Spacer />
         <ProfessionalCard
           caption="Supervisor in Charge Professional"
           professional={ancillaryPermit.supervisor}
           onSelectProfessional={onSelectSupervisor}
+          role={ancillaryPermit.type.supervisorrole}
         />
         <ActionBar>
           <BackLink action={() => setMode("permit-list")} />

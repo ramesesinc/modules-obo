@@ -16,12 +16,11 @@ import BuildingPermitInitial from "./BuildingPermitInitial";
 import BuildingPermitApplicant from "./BuildingPermitApplicant";
 import BuildingPermitLocation from "./BuildingPermitLocation";
 import BuildingPermitProject from "./BuildingPermitProject";
-import BuildingPermitContractor from "./BuildingPermitContractor";
+import BuildingPermitSupervisor from "./BuildingPermitSupervisor";
 import BuildingPermitOccupancy from "./BuildingPermitOccupancy";
 import BuildingPermitAccessories from "./BuildingPermitAccessories";
 import BuildingPermitOtherPermits from "./BuildingPermitOtherPermits";
 import BuildingPermitConfirm from "./BuildingPermitConfirm";
-// import BuildingPermitFinish from "./BuildingPermitFinish";
 import BuildingPermitCompleted from "./BuildingPermitCompleted";
 
 const pages = [
@@ -29,13 +28,12 @@ const pages = [
   { step: 1, name: 'applicant', caption: 'Applicant', component: BuildingPermitApplicant },
   { step: 2, name: 'location', caption: 'Project Location', component: BuildingPermitLocation },
   { step: 3, name: 'project', caption: 'Project Details', component: BuildingPermitProject },
-  { step: 4, name: 'contractor', caption: 'Contractor', component: BuildingPermitContractor },
-  { step: 5, name: 'project', caption: 'Occupancy Type', component: BuildingPermitOccupancy },
+  { step: 4, name: 'supervisor', caption: 'Supervisor', component: BuildingPermitSupervisor },
+  { step: 5, name: 'occupancy', caption: 'Occupancy Type', component: BuildingPermitOccupancy },
   { step: 6, name: 'accessories', caption: 'Accessories', component: BuildingPermitAccessories },
   { step: 7, name: 'ancillarylist', caption: 'Other Permits', component: BuildingPermitOtherPermits },
   { step: 8, name: 'confirm', caption: 'Confirm', component: BuildingPermitConfirm },
   { step: 9, name: 'completed', caption: 'Completed', component: BuildingPermitCompleted },
-  // { step: 9, name: 'finish', caption: 'Finish', component: BuildingPermitFinish },
 ]
 
 const BuildingPermitWebController = (props) => {
@@ -99,10 +97,6 @@ const BuildingPermitWebController = (props) => {
     }
   }
 
-  const saveHandler = () => {
-    ("SAVE HANDLER");
-  }
-
   const moveNextStep = () => {
     const stepCompleted = step < app.step && step !== 1;
     if (stepCompleted) {
@@ -143,7 +137,6 @@ const BuildingPermitWebController = (props) => {
     pages,
     moveNextStep,
     appService: svc,
-    saveHandler,
     stepCompleted: step < app.step
   };
 
@@ -164,7 +157,7 @@ const BuildingPermitWebController = (props) => {
 
 const styles = {
   stepperContainer: {
-    paddingTop: 30,
+    paddingTop: 10,
     paddingLeft: 40,
   }
 }

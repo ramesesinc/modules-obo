@@ -4,8 +4,7 @@ import {
   ActionBar,
   Button,
   BackLink,
-  Service,
-  MsgBox
+  Service
 } from 'rsi-react-web-components';
 
 import ProfessionalLookup from "../components/ProfessionalLookup";
@@ -19,8 +18,6 @@ const Professionals = ({
 }) => {
 
   const [error, setError] = useState();
-  const [showError, setShowError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState();
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("design");
   const [permitTypes, setPermitTypes] = useState([]);
@@ -51,41 +48,7 @@ const Professionals = ({
     });
   }, [appno])
 
-
-  const validProfession = (professional, permitType) => {
-    const validRole = (mode === "design" ? permitType.designprofessionalrole : permitType.supervisorrole).toLowerCase();
-    let valid = validRole.indexOf(professional.profession.toLowerCase()) >= 0;
-
-    let requiredRoles = ""
-    if (!valid) {
-      const roles = validRole.split(",");
-      if(roles.length == 1) {
-        requiredRoles = "Only " + roles[0].toLowerCase() + " profession is allowed."
-      } else {
-        requiredRoles = "Only " + roles.join(", ") + " professions are allowed."
-        const lastCommaIdx = requiredRoles.lastIndexOf(",");
-        requiredRoles = requiredRoles.substring(0, lastCommaIdx) + " and " + requiredRoles.substring(lastCommaIdx+2);
-      }
-
-      let msg = "The profession of the selected professional is invalid. " + requiredRoles;
-      setErrorMsg(msg);
-      return false;
-    }
-    return true;
-  }
-
-  const onSelectProfessional = (profList, permitType, idx) => {
-    if (profList.length === 0) {
-      setProfessional({});
-      return;
-    }
-
-    const professional = profList[0];
-    if (!validProfession(professional, permitType)) {
-      setShowError(true);
-      return;
-    }
-
+  const onSelectProfessional = (professional, idx) => {
     const updatedProfessional = professionals[idx];
     if (mode === "design") {
       updatedProfessional.designprofessionalid = professional.objid;
@@ -117,7 +80,6 @@ const Professionals = ({
 
   return (
     <Panel>
-      <MsgBox title="Invalid Profession" open={showError} msg={errorMsg} onAccept={() => setShowError(false)} />
       <Panel visibleWhen={mode === "design"}>
         <h3>List of Design Professionals</h3>
         {professionals.map((prof, idx) => {
@@ -131,13 +93,15 @@ const Professionals = ({
                 <ProfessionalCard
                 caption={`${prof.sectionid} Design Professional`}
                 professional={professionals[idx].designprofessional}
-                onSelectProfessional={(professionals) => onSelectProfessional(professionals, permitType, idx)}
+                onSelectProfessional={(professional) => onSelectProfessional(professional, idx)}
+                role={permitType.designprofessionalrole}
               />
               ) : (
                 <ProfessionalLookup
                   caption={`${prof.sectionid} Design Professional`}
                   searchFieldTitle=""
-                  onSelect={(professionals) => onSelectProfessional(professionals, permitType, idx)}
+                  onSelect={(professional) => onSelectProfessional(professional, idx)}
+                  role={permitType.designprofessionalrole}
                 />
               )}
             </div>
@@ -163,12 +127,14 @@ const Professionals = ({
                 caption={`${prof.sectionid} Supervisor`}
                 professional={professionals[idx].supervisor}
                 onSelectProfessional={(professionals) => onSelectProfessional(professionals, permitType, idx)}
+                role={permitType.supervisorrole}
               />
               ) : (
                 <ProfessionalLookup
                   caption={`${prof.sectionid} Supervisor`}
                   searchFieldTitle=""
                   onSelect={(professionals) => onSelectProfessional(professionals, permitType, idx)}
+                  role={permitType.supervisorrole}
                 />
               )}
             </div>
