@@ -14,7 +14,8 @@ import com.rameses.gov.etracs.obo.models.*;
 class OccupancyInspectionModel extends WorkflowTaskModel {
 
     boolean getCanEdit() {
-        return (userid == task.assignee?.objid);
+        return true;
+        //return (userid == task.assignee?.objid);
     }
     
     @FormTitle

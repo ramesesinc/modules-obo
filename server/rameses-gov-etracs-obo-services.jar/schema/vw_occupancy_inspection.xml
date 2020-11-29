@@ -27,5 +27,8 @@
 		<field name="task_timediff" />
 
 		<field name="app_task_state" />
+
+		<field name="org_objid" />
+		<field name="sectionid" />
 	</element>
 </schema>

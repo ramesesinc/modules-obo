@@ -4,7 +4,7 @@
 		<field name="appid" required="true"/>
 		<field name="state" required="true" type="integer"/>
 
-		<complex name="doctype" ref="obo_doctype" jointype="many-to-one" required="false">
+		<complex name="doctype" ref="vw_obo_doctype" jointype="many-to-one" required="false">
 			<key field="doctypeid" target="objid" />
 		</complex>  
 
@@ -21,12 +21,17 @@
 		<field name="issuedby_objid" />
 		<field name="expirydate" />
 		<field name="template" />
-		<field name="transmittalid" />
 		<field name="issue_remarks"/>
 
 		<field name="appstate" />
 		<field name="appuserid" />
 
+		<field name="org_objid" />
+		<field name="sectionid" />
+
+		<complex name="app" ref="vw_occupancy_application" jointype="many-to-one">
+			<key field="appid" target="objid" />			
+		</complex>	
+
 	</element>
 </schema>
-

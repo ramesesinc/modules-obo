@@ -16,9 +16,12 @@ SELECT
    t.actor_name AS task_actor_name,
    (SELECT title FROM sys_wf_node WHERE processname = 'occupancy_inspection' AND name=t.state) AS task_title,
 
-   TIME_TO_SEC( TIMEDIFF( CASE WHEN t.enddate IS NULL THEN NOW() ELSE t.enddate END, t.dtcreated )) AS task_timediff 
+   TIME_TO_SEC( TIMEDIFF( CASE WHEN t.enddate IS NULL THEN NOW() ELSE t.enddate END, t.dtcreated )) AS task_timediff,
+    os.objid AS sectionid,
+   os.org_objid AS org_objid
 
 FROM occupancy_inspection a 
 INNER JOIN occupancy_inspection_task t ON a.taskid = t.taskid 
 INNER JOIN occupancy_inspection_type et ON a.typeid = et.objid 
 INNER JOIN vw_occupancy_application app ON a.appid = app.objid 
+LEFT JOIN obo_section os ON et.sectionid = os.objid
