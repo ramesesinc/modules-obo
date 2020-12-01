@@ -17,7 +17,7 @@ class BuildingEvaluationWorkflowInterceptor {
 	@DataContext("building_evaluation")
 	def evalEm;
 
-	@DataContext("vw_building_application")
+	@DataContext("vw_building_permit")
 	def appEm;
 
 
@@ -70,7 +70,7 @@ class BuildingEvaluationWorkflowInterceptor {
 		def resultAction = (hasRevision) ? "send-for-verification" : "approve-evaluation";
 		def app = appEm.find([objid:appid]).select("task.*").first();
 		def f = [:];
-		f.processname = 'building_application';
+		f.processname = 'building_permit';
 		f.refid = appid;
 		f.startdate = dateSvc.getServerDate();
 		f.info = [ app: p.info ];

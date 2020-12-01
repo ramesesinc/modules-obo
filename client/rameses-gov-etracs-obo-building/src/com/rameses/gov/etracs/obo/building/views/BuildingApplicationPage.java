@@ -44,6 +44,9 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xPanel9 = new com.rameses.rcp.control.XPanel();
         xLabel11 = new com.rameses.rcp.control.XLabel();
         xButton2 = new com.rameses.rcp.control.XButton();
+        xPanel10 = new com.rameses.rcp.control.XPanel();
+        xLabel3 = new com.rameses.rcp.control.XLabel();
+        xButton3 = new com.rameses.rcp.control.XButton();
         xLabel10 = new com.rameses.rcp.control.XLabel();
         xLabel32 = new com.rameses.rcp.control.XLabel();
         xLabel36 = new com.rameses.rcp.control.XLabel();
@@ -53,8 +56,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel15 = new com.rameses.rcp.control.XLabel();
         xLabel16 = new com.rameses.rcp.control.XLabel();
         xLabel2 = new com.rameses.rcp.control.XLabel();
-        xLabel55 = new com.rameses.rcp.control.XLabel();
-        xLabel56 = new com.rameses.rcp.control.XLabel();
         xFormPanel3 = new com.rameses.rcp.control.XFormPanel();
         xLabel5 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
@@ -65,9 +66,8 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel17 = new com.rameses.rcp.control.XLabel();
         xLabel19 = new com.rameses.rcp.control.XLabel();
         xLabel20 = new com.rameses.rcp.control.XLabel();
-        xPanel10 = new com.rameses.rcp.control.XPanel();
-        xLabel3 = new com.rameses.rcp.control.XLabel();
-        xButton3 = new com.rameses.rcp.control.XButton();
+        xLabel55 = new com.rameses.rcp.control.XLabel();
+        xLabel56 = new com.rameses.rcp.control.XLabel();
         xLabel29 = new com.rameses.rcp.control.XLabel();
         xLabel30 = new com.rameses.rcp.control.XLabel();
         xLabel39 = new com.rameses.rcp.control.XLabel();
@@ -158,6 +158,31 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         xFormPanel1.add(xPanel9);
 
+        xPanel10.setCaption("Project Supervisor");
+        xPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xPanel10.setOpaque(false);
+        xPanel10.setPreferredSize(new java.awt.Dimension(0, 25));
+        java.awt.FlowLayout flowLayout3 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 2, 0);
+        flowLayout3.setAlignOnBaseline(true);
+        xPanel10.setLayout(flowLayout3);
+
+        xLabel3.setExpression("#{entity.supervisor.lastname}, #{entity.supervisor.firstname} -  ( PRC No: #{entity.supervisor.prc.idno} )");
+        xLabel3.setVisibleWhen("#{ entity.supervisor?.objid != null }");
+        xLabel3.setPreferredSize(new java.awt.Dimension(320, 25));
+        xPanel10.add(xLabel3);
+
+        xButton3.setName("viewSupervisor"); // NOI18N
+        xButton3.setVisibleWhen("#{ entity.supervisor?.objid != null}");
+        xButton3.setIconResource("images/buttons/search.png");
+        xButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xButton3ActionPerformed(evt);
+            }
+        });
+        xPanel10.add(xButton3);
+
+        xFormPanel1.add(xPanel10);
+
         xLabel10.setCaption("No. of Units");
         xLabel10.setExpression("#{entity.numunits}");
         xLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -226,19 +251,6 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 40));
         xFormPanel1.add(xLabel2);
 
-        xLabel55.setCaption("Zone classification");
-        xLabel55.setExpression("#{entity.zoneclass.objid} - #{entity.zoneclass.title}");
-        xLabel55.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        xLabel55.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xLabel55.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel55);
-
-        xLabel56.setCaption("Zone ");
-        xLabel56.setExpression("#{entity.zone}");
-        xLabel56.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        xLabel56.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel56);
-
         xFormPanel3.setCaption("");
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder2.setPadding(new java.awt.Insets(20, 10, 10, 10));
@@ -289,7 +301,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xFormPanel3.add(xLabel26);
 
         xLabel17.setCaption("Contact Name");
-        xLabel17.setExpression("#{entity.contact.name} ( #{entity.contact.description} )");
+        xLabel17.setExpression("#{entity.contact.name} ");
         xLabel17.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel17.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel17.setPreferredSize(new java.awt.Dimension(0, 16));
@@ -307,35 +319,22 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xLabel20.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel20);
 
-        xPanel10.setCaption("Project Supervisor");
-        xPanel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        xPanel10.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xPanel10.setOpaque(false);
-        xPanel10.setPreferredSize(new java.awt.Dimension(0, 25));
-        java.awt.FlowLayout flowLayout3 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 2, 0);
-        flowLayout3.setAlignOnBaseline(true);
-        xPanel10.setLayout(flowLayout3);
+        xLabel55.setCaption("Zone classification");
+        xLabel55.setExpression("#{entity.zoneclass.objid} - #{entity.zoneclass.title}");
+        xLabel55.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel55.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel55.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel3.add(xLabel55);
 
-        xLabel3.setExpression("#{entity.supervisor.lastname}, #{entity.supervisor.firstname} -  ( PRC No: #{entity.supervisor.prc.idno} )");
-        xLabel3.setVisibleWhen("#{ entity.supervisor?.objid != null }");
-        xLabel3.setPreferredSize(new java.awt.Dimension(230, 25));
-        xPanel10.add(xLabel3);
-
-        xButton3.setDisableWhen("#{ !entity.contractor }");
-        xButton3.setName("viewProfessional"); // NOI18N
-        xButton3.setVisibleWhen("#{ entity.contractor?.objid != null}");
-        xButton3.setIconResource("images/buttons/search.png");
-        xButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xButton3ActionPerformed(evt);
-            }
-        });
-        xPanel10.add(xButton3);
-
-        xFormPanel3.add(xPanel10);
+        xLabel56.setCaption("Zone ");
+        xLabel56.setExpression("#{entity.zone}");
+        xLabel56.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel56.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel3.add(xLabel56);
 
         xLabel29.setCaption("Permit No");
         xLabel29.setExpression("#{entity.controlno}");
+        xLabel29.setVisibleWhen("#{ entity.controlid != null }");
         xLabel29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel29.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel29.setPreferredSize(new java.awt.Dimension(0, 16));
@@ -343,13 +342,14 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         xLabel30.setCaption("Permit Date Issued");
         xLabel30.setExpression("#{entity.dtissued}");
+        xLabel30.setVisibleWhen("#{ entity.controlid != null }");
         xLabel30.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel30.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel30);
 
         xLabel39.setCaption("Date Issued");
         xLabel39.setExpression("#{entity.payment.refdate} ");
-        xLabel39.setVisibleWhen("#{ entity.payment?.objid != null }");
+        xLabel39.setVisibleWhen("#{ entity.controlid != null }");
         xLabel39.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel39.setDateFormat("yyyy-MM-dd");
         xLabel39.setPreferredSize(new java.awt.Dimension(0, 16));
@@ -366,6 +366,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xPanel8.setLayout(flowLayout1);
 
         xLabel1.setExpression("#{ entity.payment.refno } - ( #{ entity.payment.reftype } )");
+        xLabel1.setVisibleWhen("#{ entity.controlid != null }");
         xLabel1.setPreferredSize(new java.awt.Dimension(230, 25));
         xPanel8.add(xLabel1);
 
@@ -382,7 +383,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         xLabel40.setCaption("Amount Paid");
         xLabel40.setExpression("#{entity.payment.amount} ");
-        xLabel40.setVisibleWhen("#{ entity.payment?.objid != null }");
+        xLabel40.setVisibleWhen("#{ entity.controlid != null }");
         xLabel40.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel40.setNumberFormat("#,##0.00");
         xLabel40.setPreferredSize(new java.awt.Dimension(0, 16));
@@ -433,9 +434,9 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         applicationDocumentList1.setAppid("entity.objid");
         applicationDocumentList1.setApptype("building");
         applicationDocumentList1.setEditableWhen("#{ canEdit == true }");
-        applicationDocumentList1.setEntitySchemaName("building_application_subdoc");
+        applicationDocumentList1.setEntitySchemaName("building_permit_doc");
         applicationDocumentList1.setHandler("docHandler");
-        applicationDocumentList1.setSchemaName("vw_building_application_subdoc");
+        applicationDocumentList1.setSchemaName("vw_building_permit_doc");
         xPanel2.add(applicationDocumentList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Documents", xPanel2);
@@ -445,7 +446,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         applicationRequirementList1.setAppid("entity.objid");
         applicationRequirementList1.setEditableWhen("#{ canEdit == true }");
         applicationRequirementList1.setParentid("");
-        applicationRequirementList1.setSchemaName("building_application_requirement");
+        applicationRequirementList1.setSchemaName("building_permit_requirement");
         xPanel3.add(applicationRequirementList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Requirements", xPanel3);
@@ -482,7 +483,7 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
         xPanel5.setLayout(new java.awt.BorderLayout());
 
         transmittalList1.setAppid("entity.objid");
-        transmittalList1.setSchemaName("building_application_transmittal");
+        transmittalList1.setSchemaName("building_permit_transmittal");
         xPanel5.add(transmittalList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Transmittals", xPanel5);
@@ -498,8 +499,8 @@ public class BuildingApplicationPage extends javax.swing.JPanel {
 
         applicationFeeList1.setAppid("entity.objid");
         applicationFeeList1.setEditableWhen("#{ canEdit == true }");
-        applicationFeeList1.setEntitySchemaName("building_application_fee");
-        applicationFeeList1.setSchemaName("vw_building_application_fee");
+        applicationFeeList1.setEntitySchemaName("building_permit_fee");
+        applicationFeeList1.setSchemaName("vw_building_permit_fee");
         xPanel7.add(applicationFeeList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Assessment", xPanel7);

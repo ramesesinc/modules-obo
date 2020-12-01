@@ -40,7 +40,7 @@ class BuildingApplicationRptListModel extends AbstractComponentModel {
         h.handler = {
             refresh();
         }
-        return Inv.lookupOpener( "building_application_rpu:create", h );
+        return Inv.lookupOpener( "building_permit_rpu:create", h );
     }
     
     def openItem() {
@@ -51,12 +51,12 @@ class BuildingApplicationRptListModel extends AbstractComponentModel {
         h.handler = {
             refresh();
         }
-        return Inv.lookupOpener( "building_application_rpu:open", h );        
+        return Inv.lookupOpener( "building_permit_rpu:open", h );        
     }
     
     def removeItem() {
         if(!selectedItem) throw new Exception("Please select an item");
-        def m = [_schemaname: "building_application_rpu"]
+        def m = [_schemaname: "building_permit_rpu"]
         m.objid = selectedItem.objid;
         persistenceService.removeEntity( m );
         refresh();

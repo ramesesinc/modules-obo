@@ -11,6 +11,40 @@ approve - invoked by OBO Verifier.
 ******************************************************************************************************* */
 class BuildingApplicationWorkflowInterceptor { 
 
+
+	@DataContext("building_evaluation")
+	def evalEm;
+
+	@DataContext("vw_building_evaluation")
+	def vwEvalEm;
+
+	@DataContext("building_permit")
+	def appEm;
+
+	@DataContext("vw_building_permit")
+	def vwAppEm;
+
+	@DataContext("building_permit_rpu")
+	def rpuEm;
+
+	@DataContext("building_permit_requirement")
+	def reqEm;
+
+	@DataContext("building_evaluation_finding")
+	def findingEm;
+
+	@DataContext("building_permit_fee")
+	def feeEm;
+
+	@DataContext("obo_control")
+	def issuanceEm;
+
+	@DataContext("obo_doctype")
+	def doctypeEm;
+
+	@DataContext("building_permit_doc")
+	def subdocEm;
+
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
@@ -23,52 +57,18 @@ class BuildingApplicationWorkflowInterceptor {
 	@Service("JasperEmailQueueService")
     def emailSvc;
 
-	@DataContext("building_evaluation")
-	def evalEm;
-
-	@DataContext("vw_building_evaluation")
-	def vwEvalEm;
-
-	@DataContext("building_application")
-	def appEm;
-
-	@DataContext("vw_building_application")
-	def vwAppEm;
-
-	@DataContext("building_application_rpu")
-	def rpuEm;
-
-	@DataContext("building_application_requirement")
-	def reqEm;
-
-	@DataContext("building_evaluation_finding")
-	def findingEm;
-
-	@DataContext("building_application_fee")
-	def feeEm;
-
-	@DataContext("building_permit")
-	def permitEm;
-
-	@DataContext("building_issuance")
-	def issuanceEm;
-
 	@Service("OboApplicationTransmittalService")
 	def transmittalSvc;
 
-	@Service("BuildingApplicationService")
-    def appSvc;
-
-	@DataContext("obo_doctype")
-	def doctypeEm;
-
-	@DataContext("building_application_subdoc")
-	def subdocEm;
+    @Service("OboAppnoGeneratorService")
+	def appSvc;
 
     // --- RECEIVING ---- //
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action=='send-for-requirement-verification' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action=='send-for-requirement-verification' }") 
 	public void doActionBeforeReceiving( def evt ) {
 		def p = evt.args[0];
+		def app = vwAppEm.find( [objid: p.refid ]).first();
+		if(!app.txntype) throw new Exception("Transaction Type is required");
 		def c = rpuEm.find( [appid: p.refid ]).where("taxclearanceid IS NULL").exists();
 		if( c ) throw new Exception("Please generate the tax declaration documents first");
 		c = rpuEm.find( [appid: p.refid ]).where("truecopycertid IS NULL").exists();
@@ -76,22 +76,22 @@ class BuildingApplicationWorkflowInterceptor {
 	}
 
     // --- REQUIREMENT VERIFICATION ---- //
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'send-for-requirement-revision' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-requirement-revision' }") 
 	public void doActionBeforeRequirementRevision( def evt ) {
 		def p = evt.args[0];
-		transmittalSvc.validateForRevision( [appid:p.refid, apptype: "building_application", type:"requirement"] );
+		transmittalSvc.validateForRevision( [appid:p.refid, apptype: "building_permit", type:"requirement"] );
 	}
 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'send-for-requirement-revision' }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-requirement-revision' }") 
 	public void doActionAfterRequirementRevision( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
-		def trans = transmittalSvc.create( [taskid:r.taskid, appid:p.refid, apptype:"building_application", type: "requirement" ] );
+		def trans = transmittalSvc.create( [taskid:r.taskid, appid:p.refid, apptype:"building_permit", type: "requirement" ] );
 		def app = vwAppEm.find( [objid: p.refid]).first();
 		emailSvc.send( [reportid:"building_requirement_transmittal", refid:trans.objid ]);	
 	}
 
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='building_application' && args[0].action == 'approve-requirement' }")      
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='building_permit' && args[0].action == 'approve-requirement' }")      
 	public void doRequirementValidation( def evt ) { 
 		def p = evt.args[0];
 		//check if there are pending findings
@@ -101,42 +101,32 @@ class BuildingApplicationWorkflowInterceptor {
 		if( t > 0) throw new Exception("There are unresolved requirements. Please click Send for revision instead");
 
 		//generate the app no here
-		appSvc.generateAppNo( [appid: p.refid ] );
+		def appno = appSvc.generate([controlnopattern:"building_permit_appno"]);
 
-		//fire docs here
-		def doctypes = subdocEm.getSubdocsToAutoCreate( [appid: p.refid, apptype: "building"] );
-		doctypes.each {
-			def dd = [:];
-			dd.doctype = [objid: it.objid];
-			dd.state = 0;
-			dd.appid = p.refid;
-			dd.amount = 0;
-			subdocEm.create( dd );
-		}
-
+		appEm.find( [objid: p.refid ]).update( [appno: appno, appdate: dateSvc.getServerDate() ] );
 		//immediately email claim stub after
-		emailSvc.send( [reportid:"building_application_claimstub", refid:p.refid]);
+		emailSvc.send( [reportid:"building_permit_claimstub", refid:p.refid]);
 	}
 
     // --- ZONING AND TRADE EVALUATION ---- //
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'send-for-finding-revision' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-finding-revision' }") 
 	public void doActionBeforeFindingRevision( def evt ) {
 		def p = evt.args[0];
-		transmittalSvc.validateForRevision( [appid:p.refid, apptype: "building_application", type:"finding"] );
+		transmittalSvc.validateForRevision( [appid:p.refid, apptype: "building_permit", type:"finding"] );
 	}
 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'send-for-finding-revision' }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-finding-revision' }") 
 	public void doActionAfterFindingRevision( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
-		def trans = transmittalSvc.create( [taskid:r.taskid, appid:p.refid, apptype:"building_application", type: "finding" ] );
+		def trans = transmittalSvc.create( [taskid:r.taskid, appid:p.refid, apptype:"building_permit", type: "finding" ] );
 		def app = vwAppEm.find( [objid: p.refid]).first();
 		emailSvc.send( [reportid:"building_finding_transmittal", refid:trans.objid ]);	
 	}
 
   
  	//approval of evaluation. 
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='building_application' && args[0].action == 'approve-evaluation' }")
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='building_permit' && args[0].action == 'approve-evaluation' }")
 	public void doEvaluationValidation( def evt ) { 
 		def p = evt.args[0];
 		//check if there are pending findings
@@ -145,7 +135,7 @@ class BuildingApplicationWorkflowInterceptor {
 	}
 
 	//trigger when entering evaluation state
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && result.state.matches('.*evaluation') && args[0].action != 'reactivate' }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && result.state.matches('.*evaluation') && args[0].action != 'reactivate' }") 
 	public void fireEvaluationSections( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
@@ -173,10 +163,8 @@ class BuildingApplicationWorkflowInterceptor {
 		}	
 	}
 
-	
-
 	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'reactivate' }" ) 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'reactivate' }" ) 
 	public void reactivateEvaluationTasks( def evt ) {
 		def p = evt.args[0];
 		p._notificationlist = [];
@@ -201,7 +189,7 @@ class BuildingApplicationWorkflowInterceptor {
 
 	
 	//check at least one fee
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'send-for-assessment-approval' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'send-for-assessment-approval' }") 
 	public void doActionBeforeSendAssessmentForApproval( def evt ) {
 		def p = evt.args[0];
 		def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").where("parentid IS NULL").val();
@@ -209,14 +197,14 @@ class BuildingApplicationWorkflowInterceptor {
 			throw new Exception("There must be at least one fee");		
 	}
 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'approve-assessment' }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve-assessment' }") 
 	public void doActionAfterApproveAssessment( def evt ) {
 		def p = evt.args[0];
 		//immediately send order of payment
-		emailSvc.send( [reportid:"building_application_assessment", refid:p.refid ]);			
+		emailSvc.send( [reportid:"building_permit_assessment", refid:p.refid ]);			
 	}
 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'post-payment' }" ) 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'post-payment' }" ) 
 	public void postPaymentTasks( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;
@@ -228,12 +216,12 @@ class BuildingApplicationWorkflowInterceptor {
 		subdocEm.find( [appid: appid ]).update([state:1]);
 		def docList = subdocEm.find( [appid: appid]).where("doctype.issuetype = 2").list();		
 		docList.each {
-			p._notificationlist <<  'building_application_subdoc:' + it.doctype.objid.toLowerCase();				
+			p._notificationlist <<  'building_permit_doc:' + it.doctype.objid.toLowerCase();				
 		}
 	}
 
 	//this should fire after all the tasks have been saved
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0]._notificationlist!=null }", index=50000) 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0]._notificationlist!=null }", index=50000) 
 	public void notifyOtherTasks( def evt ) {
 		def p = evt.args[0];
 		p._notificationlist.each {
@@ -241,17 +229,18 @@ class BuildingApplicationWorkflowInterceptor {
 		}
 	}
 
-	//release process. Make sure there is at least one building_application_issuance
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }", index=0 )public void doActionBeforeRelease( def evt ) {
+	//release process. Make sure there is at least one building_permit_issuance
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'release' }", index=0 )
+	public void doActionBeforeRelease( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;
-		def docList = subdocEm.find( [appid: appid]).where("issuanceid IS NULL").select("doctype.title").list();
+		def docList = subdocEm.find( [appid: appid]).where("controlid IS NULL").select("doctype.title").list();
 		if( docList ) {
 			throw new Exception("The ff. documents are not yet issued: " + docList*.doctype.title.join("/n") );
 		}		
 	}
 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_application' && args[0].action == 'release' }", index=0 ) 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'release' }", index=0 ) 
 	public void doActionAfterRelease( def evt ) {
 		def p = evt.args[0];
 		throw new Exception("releasing the building permit");

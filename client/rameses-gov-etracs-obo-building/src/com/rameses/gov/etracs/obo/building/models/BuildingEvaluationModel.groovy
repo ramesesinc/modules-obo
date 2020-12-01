@@ -36,7 +36,7 @@ class BuildingEvaluationModel extends WorkflowTaskModel {
     }
     
     public def viewApplication() {
-        def op = Inv.lookupOpener("vw_building_application:open", [entity: [objid: entity.appid]]);
+        def op = Inv.lookupOpener("vw_building_permit:open", [entity: [objid: entity.appid]]);
         op.target = "popup";
         return op;
     }

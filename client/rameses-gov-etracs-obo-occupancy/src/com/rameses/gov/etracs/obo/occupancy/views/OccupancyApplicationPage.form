@@ -1274,9 +1274,9 @@
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
                 <Property name="apptype" type="java.lang.String" value="occupancy"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
-                <Property name="entitySchemaName" type="java.lang.String" value="occupancy_application_subdoc"/>
+                <Property name="entitySchemaName" type="java.lang.String" value="occupancy_permit_doc"/>
                 <Property name="handler" type="java.lang.String" value="docHandler"/>
-                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_application_subdoc"/>
+                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_permit_doc"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -1302,7 +1302,7 @@
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
                 <Property name="parentid" type="java.lang.String" value=""/>
-                <Property name="schemaName" type="java.lang.String" value="occupancy_application_requirement"/>
+                <Property name="schemaName" type="java.lang.String" value="occupancy_permit_requirement"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -1354,8 +1354,8 @@
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
-                <Property name="entitySchemaName" type="java.lang.String" value="occupancy_application_fee"/>
-                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_application_fee"/>
+                <Property name="entitySchemaName" type="java.lang.String" value="occupancy_permit_fee"/>
+                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_permit_fee"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

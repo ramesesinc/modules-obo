@@ -14,7 +14,7 @@ class OboMenuNotificationInterceptor {
 	@DataContext("occupancy_permit")
 	def occPermitEm;
 
-	@DataContext("building_application_subdoc")
+	@DataContext("building_permit_doc")
 	def subdocEm;
 
 	@ActiveDB("occupancy_inspection_type")
@@ -44,14 +44,14 @@ class OboMenuNotificationInterceptor {
 		def nid = p.notificationid;
 
 		//Building Application count
-		def g = wfEm.getTaskCount( [processname: "building_application", roles:roleStr  ] );
+		def g = wfEm.getTaskCount( [processname: "building_permit", roles:roleStr  ] );
 		if( g ) cnt += g.sum{ it.count };
 
 		//Building Application count
 		g = evalTypeEm.getAllTaskCount( [roles: roleStr, orgid: orgid] );
 		if( g ) cnt += g.count;
 
-		g = wfEm.getTaskCount( [processname: "occupancy_application", roles:roleStr ] );
+		g = wfEm.getTaskCount( [processname: "occupancy_permit", roles:roleStr ] );
 		if( g ) cnt += g.sum{ it.count };
 
 		g = inspectionTypeEm.getAllTaskCount( [roles: roleStr, orgid: orgid] );
@@ -59,6 +59,7 @@ class OboMenuNotificationInterceptor {
 
 		g = subdocEm.findAllDocsToReleaseCount( [roles: roleStr,orgid: orgid] );
 		if( g ) cnt += g.count;
+
 		result.count = cnt;
 	}	
 
@@ -66,14 +67,14 @@ class OboMenuNotificationInterceptor {
 	/************************************************************************************************************
 	* BUILDING PERMIT APPLICATION
 	************************************************************************************************************/
-	@After(pattern="MenuNotificationService.getCount", eval="#{ args[0].notificationid == 'building_application' }")
+	@After(pattern="MenuNotificationService.getCount", eval="#{ args[0].notificationid == 'building_permit' }")
 	public void getBuildingApplicationTaskCount( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def nid = p.notificationid;
 		def roleStr = userRole.getRolesString( [:] );
 		result.count = 0;
-		def g = wfEm.getTaskCount( [processname: "building_application", roles:roleStr  ] );
+		def g = wfEm.getTaskCount( [processname: "building_permit", roles:roleStr  ] );
 		if( g ) result.count = g.sum{ it.count };
 	}	
 
@@ -104,7 +105,7 @@ class OboMenuNotificationInterceptor {
 		result.addAll( list );
 	}
 
-	@After(pattern="MenuNotificationService.getCount", eval="#{ args[0].notificationid.startsWith('building_application_subdoc') }")
+	@After(pattern="MenuNotificationService.getCount", eval="#{ args[0].notificationid.startsWith('building_permit_doc') }")
 	public void getBuildingAppSubdocCount( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
@@ -118,14 +119,14 @@ class OboMenuNotificationInterceptor {
 	/************************************************************************************************************
 	* OCCUPANCY PERMIT APPLICATION
 	************************************************************************************************************/
-	@After(pattern="MenuNotificationService.getCount", eval="#{ args[0].notificationid == 'occupancy_application' }")
+	@After(pattern="MenuNotificationService.getCount", eval="#{ args[0].notificationid == 'occupancy_permit' }")
 	public void getOccupancyApplicationTaskCount( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def nid = p.notificationid;
 		def roleStr = userRole.getRolesString( [:] );
 		result.count = 0;
-		def g = wfEm.getTaskCount( [processname: "occupancy_application", roles:roleStr  ] );
+		def g = wfEm.getTaskCount( [processname: "occupancy_permit", roles:roleStr  ] );
 		if( g ) result.count = g.sum{ it.count };
 	}	
 

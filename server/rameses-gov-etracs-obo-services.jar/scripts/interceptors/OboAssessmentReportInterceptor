@@ -2,10 +2,10 @@ import com.rameses.annotations.*;
 
 class OboAssessmentReportInterceptor {
 	
-	@DataContext("vw_building_application")
+	@DataContext("vw_building_permit")
 	def appEm;
 
-	@DataContext("building_application_fee")
+	@DataContext("building_permit_fee")
 	def feeEm;
 
 	@DataContext(dynamic=true)
@@ -21,13 +21,13 @@ class OboAssessmentReportInterceptor {
 
 		def appEm, feeEm, permitType;
 		if( reportid.startsWith("building")) {
-			appEm = dynEm.lookup("vw_building_application");
-			feeEm = dynEm.lookup("building_application_fee");
+			appEm = dynEm.lookup("vw_building_permit");
+			feeEm = dynEm.lookup("building_permit_fee");
 			permitType = "BUILDING PERMIT";
 		}
 		else {
-			appEm = dynEm.lookup("vw_occupancy_application");
-			feeEm = dynEm.lookup("occupancy_application_fee");
+			appEm = dynEm.lookup("vw_occupancy_permit");
+			feeEm = dynEm.lookup("occupancy_permit_fee");
 			permitType = "OCCUPANCY PERMIT";			
 		}
 
@@ -44,10 +44,10 @@ class OboAssessmentReportInterceptor {
 		def reportid = p.reportid;
 		def appEm;
 		if( reportid.startsWith("building")) {
-			appEm = dynEm.lookup("vw_building_application");
+			appEm = dynEm.lookup("vw_building_permit");
 		}
 		else {
-			appEm = dynEm.lookup("vw_occupancy_application");
+			appEm = dynEm.lookup("vw_occupancy_permit");
 		}
 		def ea = appEm.find( [objid: p.refid ] ).first();
 		p.to = ea.contact.email;

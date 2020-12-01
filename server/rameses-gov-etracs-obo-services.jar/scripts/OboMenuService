@@ -52,7 +52,7 @@ class OboMenuService {
         m.orgid = (env.ORGROOT==1) ? "root" : env.ORGID;
 		def list = docTypeEm.getDocumentsToIssue( m );
 		list.each {
-			it.handler = "building_application_subdoc";
+			it.handler = "building_permit_doc";
 		}
 		return list;
 	}

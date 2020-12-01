@@ -8,16 +8,16 @@ public class OccupancyInspectionMobileService {
 	@DataContext("occupancy_inspection")
 	def inspEm;
 
-	@DataContext("vw_occupancy_application")
+	@DataContext("vw_occupancy_permit")
 	def vwApp;
 
 	@DataContext("vw_occupancy_inspection")
 	def vwInsp;
 
-	@DataContext("vw_building_application_info")
+	@DataContext("vw_building_permit_info")
 	def vwBldgInfoEm;
 
-	@DataContext("occupancy_application_info")
+	@DataContext("occupancy_permit_info")
 	def occInfoEm;
 
 	@Env

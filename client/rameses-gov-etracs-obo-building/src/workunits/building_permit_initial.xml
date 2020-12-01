@@ -1,0 +1,17 @@
+<workunit>
+    <invokers>
+        <invoker folderid="menucategory/obo/building" 
+                 caption="New Application" index="-2" role="RECEIVER" 
+                 permitType="building_permit" 
+                 title="Building Permit"  
+                 action="init" />
+        <!-- actions -->
+        <invoker type="formActions" caption="Close" action="_close" immediate="true" />
+        <invoker type="formActions" caption="Next" action="next" />
+    </invokers>
+    
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationInitialModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboApplicationInitialPage" />
+    </pages>
+</workunit>

@@ -593,9 +593,9 @@ public class OccupancyApplicationPage extends javax.swing.JPanel {
         applicationDocumentList1.setAppid("entity.objid");
         applicationDocumentList1.setApptype("occupancy");
         applicationDocumentList1.setEditableWhen("#{ canEdit == true }");
-        applicationDocumentList1.setEntitySchemaName("occupancy_application_subdoc");
+        applicationDocumentList1.setEntitySchemaName("occupancy_permit_doc");
         applicationDocumentList1.setHandler("docHandler");
-        applicationDocumentList1.setSchemaName("vw_occupancy_application_subdoc");
+        applicationDocumentList1.setSchemaName("vw_occupancy_permit_doc");
         xPanel1.add(applicationDocumentList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Documents", xPanel1);
@@ -605,7 +605,7 @@ public class OccupancyApplicationPage extends javax.swing.JPanel {
         applicationRequirementList1.setAppid("entity.objid");
         applicationRequirementList1.setEditableWhen("#{ canEdit == true }");
         applicationRequirementList1.setParentid("");
-        applicationRequirementList1.setSchemaName("occupancy_application_requirement");
+        applicationRequirementList1.setSchemaName("occupancy_permit_requirement");
         xPanel4.add(applicationRequirementList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Requirements", xPanel4);
@@ -625,8 +625,8 @@ public class OccupancyApplicationPage extends javax.swing.JPanel {
 
         applicationFeeList1.setAppid("entity.objid");
         applicationFeeList1.setEditableWhen("#{ canEdit == true }");
-        applicationFeeList1.setEntitySchemaName("occupancy_application_fee");
-        applicationFeeList1.setSchemaName("vw_occupancy_application_fee");
+        applicationFeeList1.setEntitySchemaName("occupancy_permit_fee");
+        applicationFeeList1.setSchemaName("vw_occupancy_permit_fee");
         xPanel5.add(applicationFeeList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Assessment", xPanel5);

@@ -5,7 +5,7 @@ SELECT a.objid FROM
 	UNION ALL 
 	SELECT objid FROM building_evaluation_type WHERE required = 0 AND activationstate = $P{state}
 	AND sectionid IN ( 
-		SELECT dt.sectionid FROM building_application_subdoc sd 
+		SELECT dt.sectionid FROM building_permit_doc sd 
 		INNER JOIN obo_doctype dt ON sd.doctypeid = dt.objid
 		WHERE sd.appid = $P{appid}
 	)
@@ -14,7 +14,7 @@ WHERE a.objid NOT IN ( SELECT typeid FROM building_evaluation WHERE appid = $P{a
 
 [getDocsThatRequireFees]
 SELECT dt.title 
-FROM building_application_subdoc sd 
+FROM building_permit_doc sd 
 INNER JOIN obo_doctype dt ON sd.doctypeid = dt.objid 
 INNER JOIN building_evaluation_type bet ON bet.sectionid = dt.sectionid 
 INNER JOIN building_evaluation be ON be.typeid = bet.objid 

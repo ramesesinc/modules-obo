@@ -2,7 +2,7 @@
 	<element tablename="vw_occupancy_inspection">
 		<field name="objid" primary="true" />
 
-		<complex name="app" ref="vw_occupancy_application" jointype="many-to-one">
+		<complex name="app" ref="vw_occupancy_permit" jointype="many-to-one">
 			<key field="appid" target="objid" />
 		</complex>	
 

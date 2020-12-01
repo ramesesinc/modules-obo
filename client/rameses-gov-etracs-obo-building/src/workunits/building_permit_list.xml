@@ -1,9 +1,9 @@
-<workunit extends="com/rameses/seti2/templates/CrudList.xml" 
-          schemaName="vw_building_permit" allowDelete="false">
+<workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
+          processName="building_permit" schemaName="vw_building_permit"
+          allowDelete="false" allowNotify="false">
     <invokers>
-        <invoker folderid="menucategory/obo/building" caption="Active Building Permit List"
-             cols="controlno,apptype,title,applicant.name,projectcost,expirydate,appno,appdate"
-             action="init" index="21"/>
-        
+        <invoker folderid="menucategory/obo/building" caption="View Building Application List"
+             cols="appno,appdate,trackingno,applicant.name,title,projectcost,task.state,task.assignee.name,permitno"
+                action="init" index="10" notificationid="building_permit" />
     </invokers>
 </workunit>

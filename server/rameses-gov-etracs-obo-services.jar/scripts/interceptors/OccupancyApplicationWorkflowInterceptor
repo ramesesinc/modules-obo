@@ -25,19 +25,19 @@ class OccupancyApplicationWorkflowInterceptor {
 	@DataContext("occupancy_inspection_type")
 	def sectionTypeEm;
 
-	@DataContext("occupancy_application")
+	@DataContext("occupancy_permit")
 	def appEm;
 
 	@DataContext("building_permit_rpu")
 	def rpuEm;
 
-	@DataContext("occupancy_application_requirement")
+	@DataContext("occupancy_permit_requirement")
 	def reqEm;
 
 	@DataContext("occupancy_inspection_finding")
 	def findingEm;
 
-	@DataContext("occupancy_application_fee")
+	@DataContext("occupancy_permit_fee")
 	def feeEm;
 
 	@DataContext("occupancy_permit")
@@ -53,7 +53,7 @@ class OccupancyApplicationWorkflowInterceptor {
 
 
     /*
-    @Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' }") 
+    @Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' }") 
 	public void testAction( def evt ) {
 		def e = evt.args[0];
 		throw new Exception("params is "+ e);
@@ -61,7 +61,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	*/
 
     // --- Requirement and Findings for  revision --- //
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'send-for-revision' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-revision' }") 
 	public void doActionBeforeRevision( def evt ) {
 		def p = evt.args[0];
 		p.type = (p.to == 'requirement-revision' ) ? 'requirement' : 'finding';
@@ -69,7 +69,7 @@ class OccupancyApplicationWorkflowInterceptor {
 		transmittalSvc.validateForRevision( m );
 	}
 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'send-for-revision' }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-revision' }") 
 	public void doActionAfterRevision( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
@@ -78,7 +78,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	}
 
     //approval of requirements
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='occupancy_application' && args[0].action == 'approve-requirement' }")      
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='occupancy_permit' && args[0].action == 'approve-requirement' }")      
 	public void doRequirementValidation( def evt ) { 
 		def p = evt.args[0];
 		//check if there are pending findings
@@ -92,7 +92,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	}
 
 	//trigger when entering evaluation state
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'send-for-inspection' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-inspection' }") 
 	public void beforeSendForInspection( def evt ) {
 		def p = evt.args[0];
 		def t = appEm.find( [objid: p.refid] ).select("inspectiondate").val();
@@ -100,7 +100,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	}
 
 	//trigger when entering evaluation state
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'send-for-inspection' }") 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-inspection' }") 
 	public void fireInspectionSections( def evt ) {
 		def p = evt.args[0];
 		def r = evt.result;
@@ -132,7 +132,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	}
 
 	//this should fire after all the tasks have been saved
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0]._notificationlist!=null }", index=50000) 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0]._notificationlist!=null }", index=50000) 
 	public void afterFireInspectionSections( def evt ) {
 		def p = evt.args[0];
 		p._notificationlist.each {
@@ -144,7 +144,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	}
 
 	//for-reactivation. check if there are evaluations where the task state is for-revision and reactivate each
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'reactivate' }" ) 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'reactivate' }" ) 
 	public void reactivateInspectionTasks( def evt ) {
 		def p = evt.args[0];
 		def list = vwSectionEm.select("objid,taskid,typeid").find( [appid: p.refid ] ).where( " task.state = 'for-revision' " ).list();
@@ -165,7 +165,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	}
 
 	//approve-inspection. 
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='occupancy_application' && args[0].action.matches('approve-inspection') }")      
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname =='occupancy_permit' && args[0].action.matches('approve-inspection') }")      
 	public void doEvaluationValidation( def evt ) { 
 		def p = evt.args[0];
 		//check if there are pending findings
@@ -174,7 +174,7 @@ class OccupancyApplicationWorkflowInterceptor {
 	}
 
 	//check at least one fee
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'send-for-assessment-approval' }") 
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'send-for-assessment-approval' }") 
 	public void doActionBeforeApproveAssessment( def evt ) {
 		def p = evt.args[0];
 		def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").where("sectionid IS NULL").val();
@@ -182,7 +182,7 @@ class OccupancyApplicationWorkflowInterceptor {
 			throw new Exception("There must be at least one fee");		
 	}
 
-	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'post-payment' }" ) 
+	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'post-payment' }" ) 
 	public void postPaymentTasks( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;
@@ -200,8 +200,8 @@ class OccupancyApplicationWorkflowInterceptor {
 		}
 	}
 
-	//release process. Make sure there is at least one occupancy_application_issuance
-	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_application' && args[0].action == 'release' }", index=0 ) 
+	//release process. Make sure there is at least one occupancy_permit_issuance
+	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'release' }", index=0 ) 
 	public void doActionBeforeRelease( def evt ) {
 		def p = evt.args[0];
 		def appid = p.refid;

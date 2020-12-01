@@ -17,10 +17,10 @@ class OboBillingService {
 
 		def zapptype = null;
 		if( o.apptype == "building" ) {
-			zapptype = "building_application";
+			zapptype = "building_permit";
 		}
 		else if( o.apptype == "occupancy" ) {
-			zapptype = "occupancy_application";
+			zapptype = "occupancy_permit";
 		}
 		else {
 			throw new Exception("apptype is either building or occupancy");

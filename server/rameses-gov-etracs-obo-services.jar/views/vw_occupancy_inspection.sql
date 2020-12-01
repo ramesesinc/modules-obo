@@ -23,5 +23,5 @@ SELECT
 FROM occupancy_inspection a 
 INNER JOIN occupancy_inspection_task t ON a.taskid = t.taskid 
 INNER JOIN occupancy_inspection_type et ON a.typeid = et.objid 
-INNER JOIN vw_occupancy_application app ON a.appid = app.objid 
+INNER JOIN vw_occupancy_permit app ON a.appid = app.objid 
 LEFT JOIN obo_section os ON et.sectionid = os.objid

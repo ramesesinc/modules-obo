@@ -2,27 +2,27 @@ import com.rameses.annotations.*;
 
 class OccupancytIssuanceFormReportInterceptor {
 	
-	@DataContext("vw_occupancy_application_subdoc")
+	@DataContext("vw_occupancy_permit_doc")
 	def vwSubdocEm;
 
-	//@DataContext("vw_occupancy_application_info")
+	//@DataContext("vw_occupancy_permit_info")
 	//def vwInfoEm;
 
-	@DataContext("vw_occupancy_application")
+	@DataContext("vw_occupancy_permit")
 	def vwAppEm;
 
-	@DataContext("occupancy_application_task")
+	@DataContext("occupancy_permit_task")
 	def appTaskEm;
 
 	/*
-	@DataContext("vw_occupancy_application_fee_payment")
+	@DataContext("vw_occupancy_permit_fee_payment")
 	def payEm;
 	*/
 
 	@DataContext("obo_signature")
 	def signatureEm;
 
-	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'occupancy_application_subdoc' }")
+	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'occupancy_permit_doc' }")
 	public void getOccupancyIssuanceReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
@@ -113,7 +113,7 @@ class OccupancytIssuanceFormReportInterceptor {
 		}
 
 		//extra settings
-		result.printable = (docsub.issuanceid != null);
+		result.printable = (docsub.controlid != null);
 
 		result.data = docsub;
 	}	

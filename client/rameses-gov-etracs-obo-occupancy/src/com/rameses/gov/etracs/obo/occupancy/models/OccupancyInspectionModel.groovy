@@ -36,7 +36,7 @@ class OccupancyInspectionModel extends WorkflowTaskModel {
     }
     
     public def viewApplication() {
-        def op = Inv.lookupOpener("vw_occupancy_application:open", [entity: [objid: entity.appid]]);
+        def op = Inv.lookupOpener("vw_occupancy_permit:open", [entity: [objid: entity.appid]]);
         op.target = "popup";
         return op;
     }

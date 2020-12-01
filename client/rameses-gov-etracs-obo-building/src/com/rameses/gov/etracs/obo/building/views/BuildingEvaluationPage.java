@@ -192,9 +192,9 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         applicationDocumentList1.setAppid("entity.appid");
         applicationDocumentList1.setApptype("building");
         applicationDocumentList1.setEditableWhen("#{ canEdit == true }");
-        applicationDocumentList1.setEntitySchemaName("building_application_subdoc");
+        applicationDocumentList1.setEntitySchemaName("building_permit_doc");
         applicationDocumentList1.setHandler("docHandler");
-        applicationDocumentList1.setSchemaName("vw_building_application_subdoc");
+        applicationDocumentList1.setSchemaName("vw_building_permit_doc");
         applicationDocumentList1.setSectionid("entity.sectionid");
         jPanel3.add(applicationDocumentList1, java.awt.BorderLayout.CENTER);
 

@@ -13,8 +13,8 @@
 		<field name="address_subdivision"/>
 		<field name="address_barangay_objid" />
 		<field name="address_barangay_name" required="true"/>
-		<field name="address_citymunicipality" required="true"/>
-		<field name="address_province" required="true"/>
+		<field name="address_citymunicipality"/>
+		<field name="address_province" />
 		<field name="tin" />
 		<field name="email" />
 		<field name="mobileno" />
@@ -25,12 +25,12 @@
 		<field name="id_placeissued" />
 		<field name="profession" required="true"/>				
 		<field name="prc_idno" required="true"/>		
-		<field name="prc_dtissued"  type="date" required="true"/>
-		<field name="prc_dtvalid"  type="date" required="true"/>
+		<field name="prc_dtissued"  type="date" />
+		<field name="prc_dtvalid"  type="date" />
 		<field name="prc_placeissued" required="true"/>
 		<field name="ptr_refno" required="true"/>
-		<field name="ptr_dtissued" type="date" required="true"/>
-		<field name="ptr_placeissued" required="true"/>
+		<field name="ptr_dtissued" type="date" />
+		<field name="ptr_placeissued" />
 
 		<field name="profid" />
 		<field name="system" type="integer" />

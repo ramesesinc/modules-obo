@@ -285,9 +285,9 @@
                 <Property name="appid" type="java.lang.String" value="entity.appid"/>
                 <Property name="apptype" type="java.lang.String" value="building"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
-                <Property name="entitySchemaName" type="java.lang.String" value="occupancy_application_subdoc"/>
+                <Property name="entitySchemaName" type="java.lang.String" value="occupancy_permit_doc"/>
                 <Property name="handler" type="java.lang.String" value="docHandler"/>
-                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_application_subdoc"/>
+                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_permit_doc"/>
                 <Property name="sectionid" type="java.lang.String" value="entity.sectionid"/>
               </Properties>
               <Constraints>

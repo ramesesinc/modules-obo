@@ -25,7 +25,7 @@ class OccupancytApplicationModel extends WorkflowTaskModel  {
     }
     
     public String getNotificationid() {
-        return "occupancy_application";
+        return "occupancy_permit";
     }
     
     public boolean getCanEdit() {
@@ -60,14 +60,14 @@ class OccupancytApplicationModel extends WorkflowTaskModel  {
         m.findBy = [objid: entity.objid];
         def perm = queryService.findFirst( m );
         if(!perm) throw new Exception("Permit does not exist");
-        schemaName = "vw_occupancy_application";
+        schemaName = "vw_occupancy_permit";
         entity = [objid: perm.appid ];
         return open();
     }    
     
     def setInspectionDate() {
         def h = { o->
-            def m = [_schemaname: "occupancy_application"];
+            def m = [_schemaname: "occupancy_permit"];
             m.objid = entity.objid;
             m.inspectiondate = o.date + " " + o.hour + ":" + o.minute;
             persistenceService.update( m );
