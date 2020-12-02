@@ -19,7 +19,13 @@ class AncillaryPermitReportInterceptor {
 			app = parent;
 		}
 
-		app.lotowner  = app.location?.owner;
+		def rpus = oboReportSvc.getRpus([ appid: app.appid ]); 
+		if ( rpus ) {
+			app.lotowner = rpus.first().owner; 
+		} else {
+			app.lotowner = [:]; 
+		}
+
 		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename[0].toString() : '');
 
 		app.infos.each {
@@ -33,6 +39,7 @@ class AncillaryPermitReportInterceptor {
 		app.worktypes = worktypes;
 		
 		app.template = "reports/obo/" + reportid.replace("building_ancillary_", "") + "_permit";
+		app.remove('infos'); 
 		result.data = app;
 	}
 }
