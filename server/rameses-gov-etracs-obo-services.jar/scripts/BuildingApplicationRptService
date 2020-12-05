@@ -9,13 +9,13 @@ import enterprise.utils.*;
 
 public class BuildingApplicationRptService  {
 
-	@DataContext("building_application_rpu")
+	@DataContext("building_permit_rpu")
 	def rpuEm;
 
-	@DataContext("building_application_entity")
+	@DataContext("building_permit_entity")
 	def entityEm;
 
-	@DataContext("building_application")
+	@DataContext("building_permit")
 	def appEm;
 
 	@Service(value="RPTCertificationOnlineService", connection="rpt")
@@ -27,7 +27,7 @@ public class BuildingApplicationRptService  {
     @Service(value="EntityService", connection="entity")
     def entitySvc;
 
-    @DataContext("vw_building_application")
+    @DataContext("vw_building_permit")
 	def vwAppEm;
 
 	@ProxyMethod
@@ -53,7 +53,7 @@ public class BuildingApplicationRptService  {
 			//tracking no. is used becuase we cannot yet generate the appno at this time.
 			params.refno = app.trackingno;	
 			params.refdate = app.appdate;
-			params.reftype = "building_application";
+			params.reftype = "building_permit";
 			params.purpose = "For Building Permit Application"
 
 			def u = [:];

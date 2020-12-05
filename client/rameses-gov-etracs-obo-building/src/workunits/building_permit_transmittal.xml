@@ -1,0 +1,18 @@
+<workunit extends="com/rameses/jasper/templates/JasperFormReport.xml"> 
+    <invokers>
+        <invoker type="vw_building_permit:form:appActions" 
+                 caption="View Requirement Transmittal"
+                 action="preview"
+                 index="10"
+                 reportId="building_permit_transmittal"
+                 visibleWhen="#{ entity.transmittalid != null  }"/>
+
+        <!-- open from the transmittal list -->
+        <invoker type="building_permit_transmittal:open" 
+                 caption="View Requirement Transmittal"
+                 reportId="building_permit_transmittal"
+                 action="preview" />
+        
+    </invokers>
+   
+</workunit>

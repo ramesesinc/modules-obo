@@ -1,10 +1,10 @@
 <workunit extends="com/rameses/jasper/templates/JasperFormReport.xml"> 
     <invokers>
-        <invoker type="vw_building_application:form:appActions" 
+        <invoker type="vw_building_permit:form:appActions" 
                  caption="View Permit"
                  action="preview" 
                  index="1" 
-                 visibleWhen="#{ entity.issuanceid !=null }"
+                 visibleWhen="#{ entity.controlid !=null }"
                  reportId="building_permit" />
     </invokers>
 </workunit>

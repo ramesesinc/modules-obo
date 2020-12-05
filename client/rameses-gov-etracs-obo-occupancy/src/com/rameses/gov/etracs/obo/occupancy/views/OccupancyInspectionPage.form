@@ -285,9 +285,9 @@
                 <Property name="appid" type="java.lang.String" value="entity.appid"/>
                 <Property name="apptype" type="java.lang.String" value="building"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
-                <Property name="entitySchemaName" type="java.lang.String" value="building_application_subdoc"/>
+                <Property name="entitySchemaName" type="java.lang.String" value="occupancy_permit_doc"/>
                 <Property name="handler" type="java.lang.String" value="docHandler"/>
-                <Property name="schemaName" type="java.lang.String" value="vw_building_application_subdoc"/>
+                <Property name="schemaName" type="java.lang.String" value="vw_occupancy_permit_doc"/>
                 <Property name="sectionid" type="java.lang.String" value="entity.sectionid"/>
               </Properties>
               <Constraints>
@@ -314,7 +314,7 @@
                 <Property name="appid" type="java.lang.String" value="entity.appid"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
                 <Property name="parentid" type="java.lang.String" value="entity.objid"/>
-                <Property name="schemaName" type="java.lang.String" value="building_evaluation_finding"/>
+                <Property name="schemaName" type="java.lang.String" value="occupancy_inspection_finding"/>
                 <Property name="sectionTitle" type="java.lang.String" value="entity.type.title"/>
               </Properties>
               <Constraints>

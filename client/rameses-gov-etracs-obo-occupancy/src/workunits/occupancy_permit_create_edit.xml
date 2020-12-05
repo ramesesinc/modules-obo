@@ -1,0 +1,15 @@
+<workunit>
+    <invokers>
+        <invoker type="occupancy_permit:create" 
+                 caption="Occupancy Permit Application (Manual Capture)"
+                 action="create" />
+        
+        <invoker type="formActions" caption="Close" action="_close" immediate="true" />
+        <invoker type="formActions" caption="Save" action="save"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyApplicationEditModel" />
+    <pages>
+        <page name="initial" template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyApplicationInitialPage" />
+        <page name="view" template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyApplicationEditPage" />        
+    </pages>
+</workunit>

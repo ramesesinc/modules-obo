@@ -67,9 +67,9 @@ public class OccupancyApplicationSubdocPage extends javax.swing.JPanel {
         applicationInfoList1.setAppid("entity.appid");
         applicationInfoList1.setDoctypeid("entity.doctypeid");
         applicationInfoList1.setEditableWhen("#{ editable }");
-        applicationInfoList1.setEntitySchemaName("occupancy_application_info");
+        applicationInfoList1.setEntitySchemaName("occupancy_permit_info");
         applicationInfoList1.setParentid("entity.objid");
-        applicationInfoList1.setSchemaName("vw_occupancy_application_info");
+        applicationInfoList1.setSchemaName("vw_occupancy_permit_info");
         xPanel2.add(applicationInfoList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Infos", xPanel2);
@@ -79,10 +79,10 @@ public class OccupancyApplicationSubdocPage extends javax.swing.JPanel {
 
         applicationFeeList1.setAppid("entity.appid");
         applicationFeeList1.setEditableWhen("#{ editable }");
-        applicationFeeList1.setEntitySchemaName("building_application_fee");
+        applicationFeeList1.setEntitySchemaName("occupancy_permit_fee");
         applicationFeeList1.setHandler("feeHandler");
         applicationFeeList1.setParentid("entity.objid");
-        applicationFeeList1.setSchemaName("vw_building_application_fee");
+        applicationFeeList1.setSchemaName("vw_occupancy_permit_fee");
         xPanel1.add(applicationFeeList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Fees", xPanel1);
@@ -98,25 +98,25 @@ public class OccupancyApplicationSubdocPage extends javax.swing.JPanel {
 
         xLabel8.setCaption("Control No");
         xLabel8.setExpression("#{entity.controlno}");
-        xLabel8.setVisibleWhen("#{ entity.issuanceid !=null }");
+        xLabel8.setVisibleWhen("#{ entity.controlid !=null }");
         xLabel8.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel8);
 
         xLabel7.setCaption("Date Issued");
         xLabel7.setExpression("#{entity.dtissued}");
-        xLabel7.setVisibleWhen("#{ entity.issuanceid !=null }");
+        xLabel7.setVisibleWhen("#{ entity.controlid !=null }");
         xLabel7.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel7);
 
         xLabel4.setCaption("Issued by");
         xLabel4.setExpression("#{entity.issuedby.name}");
-        xLabel4.setVisibleWhen("#{ entity.issuanceid !=null }");
+        xLabel4.setVisibleWhen("#{ entity.controlid !=null }");
         xLabel4.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel4);
 
         xLabel5.setCaption("Expiry date");
         xLabel5.setExpression("#{entity.expirydate}");
-        xLabel5.setVisibleWhen("#{ entity.issuanceid !=null }");
+        xLabel5.setVisibleWhen("#{ entity.controlid !=null }");
         xLabel5.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel5);
 

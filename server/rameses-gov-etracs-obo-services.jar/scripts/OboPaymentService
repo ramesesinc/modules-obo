@@ -34,10 +34,10 @@ class OboPaymentService {
 
 		def zapptype = null;
 		if(o.apptype == "building") {
-			zapptype = "building_application";
+			zapptype = "building_permit";
 		}
 		else if( o.apptype == "occupancy") {
-			zapptype = "occupancy_application";
+			zapptype = "occupancy_permit";
 		}
 
 		def pmtEm = dynaDb.lookup( zapptype +'_payment' ); 

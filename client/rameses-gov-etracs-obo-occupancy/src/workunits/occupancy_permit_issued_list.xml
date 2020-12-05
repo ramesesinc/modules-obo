@@ -1,0 +1,9 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml" 
+          schemaName="vw_occupancy_permit" allowDelete="false">
+    <invokers>
+        <invoker folderid="menucategory/obo/occupancy" caption="Active Occupancy Permit List"
+             cols="controlno,apptype,title,applicant.name,projectcost,expirydate,appno,appdate"
+             action="init" index="21"/>
+        
+    </invokers>
+</workunit>

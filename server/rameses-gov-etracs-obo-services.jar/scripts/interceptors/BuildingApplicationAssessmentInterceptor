@@ -21,22 +21,19 @@ class BuildingApplicationAssessmentInterceptor {
 	@DataContext("obo_itemaccount")
 	def itemAcctEm;
 
-	@DataContext("vw_building_application")
+	@DataContext("vw_building_permit")
 	def vwAppEm;
 
-	@DataContext("building_application")
+	@DataContext("building_permit")
 	def appEm;
 
-	@DataContext("building_application_subdoc")
+	@DataContext("building_permit_doc")
 	def subdocEm;
 
-	@DataContext("building_application_fee")
-	def feeEm;
-
-	@DataContext("building_application_rpu")
+	@DataContext("building_permit_rpu")
 	def rpuEm;
 
-	@After(pattern="OboApplicationFeeService.assess", eval="#{args[0]._schemaname == 'building_application_fee' }")
+	@After(pattern="OboApplicationFeeService.getAssessment", eval="#{args[0]._schemaname == 'building_permit_fee' }")
 	public void getBuildingAssessment( def evt ) {
 		def o = evt.args[0];
 		def result = evt.result;
@@ -62,11 +59,11 @@ class BuildingApplicationAssessmentInterceptor {
 			def sd = subdocEm.find([objid: o.parentid ] ).first();	
 			//this is for subapplications
 			factBuilder.facts << new BuildingSubdoc( doctype: sd.doctype.objid );
-			infos = infoSvc.getInfos( [parentid: o.parentid, _schemaname: "vw_building_application_info" ] );
+			infos = infoSvc.getInfos( [parentid: o.parentid, _schemaname: "vw_building_permit_info" ] );
 		}
 		else {
 			//this is for applications
-			infos = infoSvc.getInfos( [appid: o.appid, _schemaname: "vw_building_application_info" ] );	
+			infos = infoSvc.getInfos( [appid: o.appid, _schemaname: "vw_building_permit_info" ] );	
 			//load count of RPUs
 			def rpu = new RpuCount();
 			rpu.byownercount = rpuEm.find( [appid: o.appid ] ).select("c:{COUNT( DISTINCT ownerid )}").val();
@@ -94,35 +91,7 @@ class BuildingApplicationAssessmentInterceptor {
 			items << it;			
 		};
 
-		if(!o.savefees) {
-			result.items = items;
-		}
-		else {
-			//return saveFees( [appid:o.appid, parentid:o.parentid, items: items] );
-		}
+		result.items = items;
 	}	
 
-	def updateTotals( def o ) {
-		def result = [:];
-
-		//update the amount in the application also
-		def total = feeEm.find([appid:o.appid]).select("c:{SUM(amount)}").val();
-		if( total == null) total = 0;
-		appEm.find( [objid:o.appid]).update( [amount: total] );
-
-		if( o.parentid ) {
-			total = feeEm.find([parentid:o.parentid]).select("c:{SUM(amount)}").val();
-			if(total==null) total = 0; 
-			subdocEm.find( [objid:o.parentid]).update( [amount: total] );
-		}
-		return [amount: total];
-	}
-
-	@After(pattern="OboApplicationFeeService.(save|clear|remove).*", eval="#{args[0]._schemaname == 'building_application_fee' }")
-	public void updateTotals( def evt ) {
-		def a = evt.args[0];
-		def result = evt.result;
-		def v = updateTotals( a );
-		result.amount = v.amount;
-	}
 }

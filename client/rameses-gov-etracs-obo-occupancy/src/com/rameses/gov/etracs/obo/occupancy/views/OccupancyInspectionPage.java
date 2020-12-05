@@ -192,9 +192,9 @@ public class OccupancyInspectionPage extends javax.swing.JPanel {
         applicationDocumentList1.setAppid("entity.appid");
         applicationDocumentList1.setApptype("building");
         applicationDocumentList1.setEditableWhen("#{ canEdit == true }");
-        applicationDocumentList1.setEntitySchemaName("building_application_subdoc");
+        applicationDocumentList1.setEntitySchemaName("occupancy_permit_doc");
         applicationDocumentList1.setHandler("docHandler");
-        applicationDocumentList1.setSchemaName("vw_building_application_subdoc");
+        applicationDocumentList1.setSchemaName("vw_occupancy_permit_doc");
         applicationDocumentList1.setSectionid("entity.sectionid");
         jPanel3.add(applicationDocumentList1, java.awt.BorderLayout.CENTER);
 
@@ -205,7 +205,7 @@ public class OccupancyInspectionPage extends javax.swing.JPanel {
         applicationFindingList2.setAppid("entity.appid");
         applicationFindingList2.setEditableWhen("#{ canEdit == true }");
         applicationFindingList2.setParentid("entity.objid");
-        applicationFindingList2.setSchemaName("building_evaluation_finding");
+        applicationFindingList2.setSchemaName("occupancy_inspection_finding");
         applicationFindingList2.setSectionTitle("entity.type.title");
         xPanel2.add(applicationFindingList2, java.awt.BorderLayout.CENTER);
 

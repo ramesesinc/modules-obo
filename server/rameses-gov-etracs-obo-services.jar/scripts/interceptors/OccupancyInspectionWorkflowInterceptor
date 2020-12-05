@@ -2,7 +2,7 @@ import com.rameses.annotations.*;
 
 class OccupancyInspectionWorkflowInterceptor {
 	
-	@DataContext("occupancy_application")
+	@DataContext("occupancy_permit")
 	def aEm;
 
 	@DataContext("occupancy_inspection_finding")
@@ -14,10 +14,10 @@ class OccupancyInspectionWorkflowInterceptor {
 	@DataContext("occupancy_inspection")
 	def inspEm;
 
-	@DataContext("occupancy_application_fee")
+	@DataContext("occupancy_permit_fee")
 	def feeEm;
 
-	@DataContext("vw_occupancy_application")
+	@DataContext("vw_occupancy_permit")
 	def appEm;
 
 	@Service("DateService")
@@ -29,7 +29,7 @@ class OccupancyInspectionWorkflowInterceptor {
 	@DataContext("occupancy_inspection_type_role")
 	def inspTypeRoleEm;
 
-	@DataContext("occupancy_application_subdoc")
+	@DataContext("occupancy_permit_doc")
 	def subdocEm;
 
 	@Before(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_inspection' && args[0].action == 'send-for-revision' }" ) 
@@ -67,7 +67,7 @@ class OccupancyInspectionWorkflowInterceptor {
 		if( cnt == 0 ) {
 			def app = appEm.find([objid:appid]).select("task.*").first();
 			def f = [:];
-			f.processname = 'occupancy_application';
+			f.processname = 'occupancy_permit';
 			f.refid = appid;
 			f.startdate = dateSvc.getServerDate();
 			f.info = [ app: p.info ];

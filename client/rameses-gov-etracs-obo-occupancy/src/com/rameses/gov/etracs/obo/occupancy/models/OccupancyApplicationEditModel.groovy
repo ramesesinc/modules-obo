@@ -28,6 +28,8 @@ class OccupancyApplicationEditModel  {
     
     def appTypes = ["FULL", "PARTIAL"];
     def txnTypes = ["SIMPLE","COMPLEX"];
+    def taskstate;
+    def txnmode;
     
     String title  = "New Occupancy Permit Application";
     
@@ -42,6 +44,8 @@ class OccupancyApplicationEditModel  {
     
     def create() {
         entity = [contact:[:]];
+        entity.txnmode = txnmode;
+        if(taskstate) entity.task = [state:taskstate];
         page = "initial";
     }
     
@@ -74,7 +78,7 @@ class OccupancyApplicationEditModel  {
     def save() {
         if(!MsgBox.confirm("You are about to create this application. Proceed?")) return null;
         def e = svc.create( entity );
-        def op = Inv.lookupOpener("vw_occupancy_application:open", [entity:e]);
+        def op = Inv.lookupOpener("vw_occupancy_permit:open", [entity:e]);
         op.target = "topwindow";
         return op;
     }

@@ -14,7 +14,8 @@ import com.rameses.gov.etracs.obo.models.*;
 class BuildingEvaluationModel extends WorkflowTaskModel {
 
     boolean getCanEdit() {
-        return (userid == task.assignee?.objid);
+        return true;
+        //return (userid == task.assignee?.objid);
     }
     
     @FormTitle
@@ -35,7 +36,7 @@ class BuildingEvaluationModel extends WorkflowTaskModel {
     }
     
     public def viewApplication() {
-        def op = Inv.lookupOpener("vw_building_application:open", [entity: [objid: entity.appid]]);
+        def op = Inv.lookupOpener("vw_building_permit:open", [entity: [objid: entity.appid]]);
         op.target = "popup";
         return op;
     }

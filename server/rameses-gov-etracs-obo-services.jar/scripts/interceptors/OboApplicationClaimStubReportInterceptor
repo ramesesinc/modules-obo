@@ -16,13 +16,13 @@ class OboApplicationClaimStubReportInterceptor {
 
 		def appEm, taskEm, permitType;
 		if( p.reportid.startsWith("building") ) {
-			appEm = db.lookup( "vw_building_application" );
-			taskEm = db.lookup( "building_application_task" );
+			appEm = db.lookup( "vw_building_permit" );
+			taskEm = db.lookup( "building_permit_task" );
 			permitType = "BUILDING PERMIT";
 		}
 		else if(p.reportid.startsWith("occupancy")){
-			appEm = db.lookup( "vw_occupancy_application" );
-			taskEm = db.lookup( "occupancy_application_task" );
+			appEm = db.lookup( "vw_occupancy_permit" );
+			taskEm = db.lookup( "occupancy_permit_task" );
 			permitType = "OCCUPANCY PERMIT";			
 		}
 		else {
@@ -46,10 +46,10 @@ class OboApplicationClaimStubReportInterceptor {
 		def p = evt.args[0];
 		def appEm;
 		if( p.reportid.startsWith("building") ) {
-			appEm = db.lookup( "vw_building_application" );
+			appEm = db.lookup( "vw_building_permit" );
 		}
 		else {
-			appEm = db.lookup( "vw_occupancy_application" );
+			appEm = db.lookup( "vw_occupancy_permit" );
 		}
 		def ea = appEm.find( [objid: p.refid ] ).first();
 		p.to = ea.contact.email;

@@ -5,28 +5,16 @@ class BuildingApplicationService {
 	@Service("DateService")
 	def dateSvc;
 
-	@Service("ControlnoGeneratorService")
-	def controlNoSvc;
-
-	@Service("Var")
-	def sysvar;
-
-	@DataContext("building_application")
-	def appEm;
-
-	@DataContext("building_permit")
-	def permitEm;
-
 	@DataContext("obo_doctype")
 	def docTypeEm;
 
-	@DataContext("building_application_subdoc")
+	@DataContext("building_permit_doc")
 	def subdocEm;
 
-	@DataContext("building_issuance")
+	@DataContext("obo_control")
 	def issEm;
 
-	@DataContext("vw_building_application")
+	@DataContext("vw_building_permit")
 	def vwAppEm;
 
 	@DataContext("vw_building_evaluation")
@@ -35,20 +23,6 @@ class BuildingApplicationService {
 
 	@Env
 	def env;
-
-	@ProxyMethod
-	public def generateAppNo(def o ) {
-		def pattern = sysvar.get( "building_application_appno" );
-		if(!pattern) throw new Exception("Please define building_application_appno entry in sys_var. Ex. BP-[yyyyMM]-[%05d]");
-		def appno = controlNoSvc.getNextNo( pattern );
-		if( o.appid ) {
-			def u = [:];
-			u.appdate = dateSvc.getServerDate();
-			u.appno = appno;
-			appEm.find( [objid: o.appid ] ).update( u );
-		}		
-		return appno;
-	} 
 
 	@ProxyMethod
 	public def verifyApp( def o  ) {

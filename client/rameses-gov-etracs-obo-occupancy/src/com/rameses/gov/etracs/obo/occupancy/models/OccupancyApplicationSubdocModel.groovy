@@ -43,7 +43,7 @@ class OccupancyApplicationSubdocModel extends CrudFormModel {
         showInfos = entity.showinfo;
         showFees = entity.showfees;
         if(!docList) {
-            def m = [_schemaname: "vw_occupancy_application_subdoc"];
+            def m = [_schemaname: "vw_occupancy_permit_doc"];
             m.findBy = [ appid: entity.appid ];
             if( entity.doctype.org?.objid !=null ) {
                 m.where = ["doctype.org.objid= :orgid", [orgid: entity.doctype.org?.objid ]];

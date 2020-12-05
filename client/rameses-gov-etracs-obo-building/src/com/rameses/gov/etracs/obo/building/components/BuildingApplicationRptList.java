@@ -19,7 +19,7 @@ public class BuildingApplicationRptList extends AbstractComponent {
      * Creates new form BuildingApplicationRptList
      */
     public BuildingApplicationRptList() {
-        setSchemaName("building_application_rpu");
+        setSchemaName("building_permit_rpu");
         initComponents();
     }
 

@@ -54,11 +54,17 @@ class BuildingApplicationSubdocModel extends CrudFormModel {
     }
     
     void afterOpen() {
-        showChecklist = entity.showchecklist;
-        showInfos = entity.showinfo;
-        showFees = entity.showfees;
+        //showChecklist = entity.showchecklist;
+        //showInfos = entity.showinfo;
+        //showFees = entity.showfees;
+        
+        showChecklist = true;
+        showInfos = true;
+        showFees = true;
+        
+        
         if(!docList) {
-            def m = [_schemaname: "vw_building_application_subdoc"];
+            def m = [_schemaname: "vw_building_permit_doc"];
             m.findBy = [ appid: entity.appid ];
             if( entity.doctype.org?.objid !=null ) {
                 m.where = ["doctype.org.objid = :orgid", [orgid: entity.doctype.org?.objid ]];

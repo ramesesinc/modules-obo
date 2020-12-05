@@ -8,7 +8,7 @@ class OccupancyInspectionPersistenceInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-	@DataContext("vw_occupancy_application")
+	@DataContext("vw_occupancy_permit")
 	def vwAppEm;
 
 	@DataContext("occupancy_inspection")

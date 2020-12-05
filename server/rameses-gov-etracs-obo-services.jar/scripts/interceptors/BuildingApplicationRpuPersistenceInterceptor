@@ -6,16 +6,16 @@ class BuildingApplicationRpuPersistenceInterceptor {
 	def dateSvc;
 
 
-	@DataContext("building_application_rpu")
+	@DataContext("building_permit_rpu")
 	def rpuEm;
 
-	@DataContext("building_application_entity")
+	@DataContext("building_permit_entity")
 	def appEntityEm;
 
 	@Env
 	def env;
 
-	@Before(pattern="PersistenceService.create", eval="#{ args[0]._schemaname == 'building_application_rpu' }")
+	@Before(pattern="PersistenceService.create", eval="#{ args[0]._schemaname == 'building_permit_rpu' }")
 	public void beforeUpdateApplicationRPU(def evt) {
 		def o = evt.args[0];
 		//search first if entity exists in application_entity;	
@@ -27,7 +27,7 @@ class BuildingApplicationRpuPersistenceInterceptor {
 		o.ownerid = appOwner.objid;
 	}
 
-	@Before(pattern="PersistenceService.removeEntity", eval="#{ args[0]._schemaname == 'building_application_rpu' }")
+	@Before(pattern="PersistenceService.removeEntity", eval="#{ args[0]._schemaname == 'building_permit_rpu' }")
 	public void beforeRemoveApplicationRPU(def evt) {
 		def o = evt.args[0];
 		def rpu = rpuEm.find( [objid: o.objid] ).first();
@@ -36,7 +36,7 @@ class BuildingApplicationRpuPersistenceInterceptor {
 		o.appid = rpu.appid;
 	}
 
-	@After(pattern="PersistenceService.removeEntity", eval="#{ args[0]._schemaname == 'building_application_rpu' }")
+	@After(pattern="PersistenceService.removeEntity", eval="#{ args[0]._schemaname == 'building_permit_rpu' }")
 	public void afterRemoveApplicationRPU(def evt) {
 		def o = evt.args[0];
 		appEntityEm.cleanUpEntity( [appid: o.appid] );

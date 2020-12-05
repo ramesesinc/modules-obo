@@ -2,10 +2,10 @@ import com.rameses.annotations.*;
 
 class BuildingPermitFormReportInterceptor {
 	
-	@DataContext("building_application_payment")
+	@DataContext("building_permit_payment")
 	def pmtEm;
 
-	@DataContext("building_application_rpu")
+	@DataContext("building_permit_rpu")
 	def rpuEm;
 
 	@DataContext("vw_building_permit")
@@ -23,7 +23,7 @@ class BuildingPermitFormReportInterceptor {
 	@Service(value="JasperReportService", connection="rpt")
 	def jasperSvc;
 
-	@DataContext("vw_building_application_subdoc")
+	@DataContext("vw_building_permit_doc")
 	def vwSubdocEm;
 
 	String outputReportPath = "/apps/server/output/";
@@ -95,7 +95,7 @@ class BuildingPermitFormReportInterceptor {
         //load accompanying subdocuments
         def subdocs = vwSubdocEm.find( [appid: permit.appid ] ).where( "doctype.issuetype = 2 ").list();
         subdocs.each {
-        	o.attachments << [ reportid: "building_application_subdoc", parameters: [objid: it.objid], title: it.doctypeid + ".pdf" ];
+        	o.attachments << [ reportid: "building_permit_doc", parameters: [objid: it.objid], title: it.doctypeid + ".pdf" ];
         }
 
         permit.rpus.each {

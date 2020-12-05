@@ -8,7 +8,7 @@ class BuildingEvaluationService {
 	@Service("WorkflowTaskService")
 	def wfSvc;
 
-	@DataContext("vw_building_application")
+	@DataContext("vw_building_permit")
 	def vwAppEm;
 
 	@DataContext("building_evaluation")

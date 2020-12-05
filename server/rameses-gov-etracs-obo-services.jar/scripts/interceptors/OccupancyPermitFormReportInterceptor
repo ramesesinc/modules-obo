@@ -2,7 +2,7 @@ import com.rameses.annotations.*;
 
 class OccupancyPermitFormReportInterceptor {
 	
-	@DataContext("occupancy_application_payment")
+	@DataContext("occupancy_permit_payment")
 	def pmtEm;
 
 	@DataContext("vw_occupancy_permit")
@@ -17,7 +17,7 @@ class OccupancyPermitFormReportInterceptor {
 	@Service("FormReportService")
 	def formReportSvc;
 
-	@DataContext("vw_occupancy_application_subdoc")
+	@DataContext("vw_occupancy_permit_doc")
 	def vwSubdocEm;
 
 	String outputReportPath = "/apps/server/output/";
@@ -73,7 +73,7 @@ class OccupancyPermitFormReportInterceptor {
         //load accompanying subdocuments
         def subdocs = vwSubdocEm.find( [appid: permit.appid ] ).where( "doctype.issuetype = 2 ").list();
         subdocs.each {
-        	o.attachments << [ reportid: "occupancy_application_subdoc", parameters: [objid: it.objid], title: it.doctypeid + ".pdf" ];
+        	o.attachments << [ reportid: "occupancy_permit_doc", parameters: [objid: it.objid], title: it.doctypeid + ".pdf" ];
         }
 
         permit.rpus.each {

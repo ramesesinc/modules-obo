@@ -11,28 +11,28 @@ class OccupancyApplicationPersistenceService {
 	@DataContext("vw_building_permit")
 	def bldgPermitEm;
 
-	@DataContext("occupancy_application")
+	@DataContext("occupancy_permit")
 	def appEm;
 
-	@DataContext("occupancy_application_task")
+	@DataContext("occupancy_permit_task")
 	def appTaskEm;
 
 	@DataContext("occupancy_permit")
 	def permitEm;
 
-	@DataContext("vw_occupancy_application")
+	@DataContext("vw_occupancy_permit")
 	def vwAppEm;
 
-	@DataContext("occupancy_application_entity")
+	@DataContext("occupancy_permit_entity")
 	def entityEm;
 
-	@DataContext("occupancy_application_payment")
+	@DataContext("occupancy_permit_payment")
 	def paymentEm;
 
-	@DataContext("occupancy_application_subdoc")
+	@DataContext("occupancy_permit_doc")
 	def subdocEm;
 
-	@DataContext("occupancy_application_requirement")
+	@DataContext("occupancy_permit_requirement")
 	def reqEm;
 
 	@DataContext("obo_requirement_type")
@@ -121,7 +121,7 @@ class OccupancyApplicationPersistenceService {
 			atask.state =  "end";
 			atask.dtcreated = dateSvc.getServerDate();
 			atask = appTaskEm.create( atask );
-			appEm.find([objid:app.objid]).update( [ taskid: atask.taskid, issuanceid: bp.objid ] );
+			appEm.find([objid:app.objid]).update( [ taskid: atask.taskid, controlid: bp.objid ] );
 
 			//capture payment
 			def pmt = [:];
@@ -152,7 +152,7 @@ class OccupancyApplicationPersistenceService {
 			}
 
 			//update the requirements
-			def reqTypes = reqTypeEm.where("permittype = 'occupancy_application' ").list();
+			def reqTypes = reqTypeEm.where("permittype = 'occupancy_permit' ").list();
 			reqTypes.each {
 				def r = [:];
 				r.appid = app.objid;
@@ -164,7 +164,7 @@ class OccupancyApplicationPersistenceService {
 
 			//fire the workflow to start the process
 			def p = [:];
-			p.processname = 'occupancy_application';
+			p.processname = 'occupancy_permit';
 			p.refid = app.objid;
 			p.startdate = dt;
 			p.info = app;

@@ -1,9 +1,9 @@
 <workunit extends="com/rameses/jasper/templates/JasperFormReport.xml"> 
     <invokers>
-         <invoker type="vw_building_application:form:reports" 
+         <invoker type="vw_building_permit:form:reports" 
                 caption="Print Construction Signage"
                 reportId="building_permit_signage"
                 action="preview"
-                visibleWhen="#{ entity.issuanceid !=null }"/>
+                visibleWhen="#{ entity.controlid !=null }"/>
     </invokers>
 </workunit>

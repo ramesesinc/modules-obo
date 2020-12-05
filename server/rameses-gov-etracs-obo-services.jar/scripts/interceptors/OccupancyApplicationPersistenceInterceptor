@@ -5,27 +5,27 @@ class OccupancyApplicationPersistenceInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-	@DataContext("occupancy_application_requirement")
+	@DataContext("occupancy_permit_requirement")
 	def reqEm;
 
 	@DataContext("occupancy_inspection_finding")
 	def findingEm;
 
-	@DataContext("occupancy_application_transmittal")
+	@DataContext("occupancy_permit_transmittal")
 	def transmittalEm;
 
 	@Env
 	def env;
 
 	//REQUIREMENTS
-	@Before(pattern="PersistenceService.(create|update)", eval="#{args[0]._schemaname == 'occupancy_application_requirement' }") 
+	@Before(pattern="PersistenceService.(create|update)", eval="#{args[0]._schemaname == 'occupancy_permit_requirement' }") 
 	public void onSaveRequirement( def evt ) {
 		def o = evt.args[0];
 		o.reviewer = [objid: env.USERID, name: env.FULLNAME ];
 		o.dtreviewed = dateSvc.getServerDate();
 	} 
 	
-	@After(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'occupancy_application_requirement' }") 
+	@After(pattern="PersistenceService.create", eval="#{args[0]._schemaname == 'occupancy_permit_requirement' }") 
 	public void afterCreateReq( def evt ) {
 		def o = evt.args[0];
 		def z = evt.result;
@@ -51,7 +51,7 @@ class OccupancyApplicationPersistenceInterceptor {
 		}	
 	} 
 
-	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_occupancy_application' }")
+	@After(pattern="PersistenceService.read", eval="#{ args[0]._schemaname == 'vw_occupancy_permit' }")
 	public void afterOpenApplication(def evt) {
 		def p = evt.args[0];
 		def a = evt.result;

@@ -5,13 +5,13 @@ class BuildingPermitService {
 	@DataContext("vw_building_permit")
 	def vwPermitEm;
 
-	@DataContext("building_application_entity")
+	@DataContext("building_permit_entity")
 	def permitEntity;
 
 	@DataContext("obo_professional_info")
 	def professionalEm;
 
-	@DataContext("vw_building_application_subdoc")
+	@DataContext("vw_building_permit_doc")
 	def subdocEm;
 
 	@Service("DateService")
@@ -32,38 +32,6 @@ class BuildingPermitService {
 		return perm;
 	}	
 	
-	/*
-	@ProxyMethod
-	public void addRPTEntry( def o  ) {
-		def errs = []
-		if(!o.permitno ) errs << "permitno required";
-		if(!o.tdno ) errs << "tdno required ";
-		if(!o.refid ) errs << "refid required ";
-		if(!o.rputype ) errs << "rputype required ";
-		if(!o.particulars ) errs << "particulars required";
-
-		if( errs ) {
-			throw new Exception( "The ff. parameters are required : \n" + errs.join(",") );
-		}
-
-		def pmt = vwPermitEm.find([permitno: o.permitno]).select("objid").first();
-		if(!pmt) throw new Exception("permit not found ");
-
-		def permitid = pmt.objid;
-
-		//test first if already exists
-		if(!rptEm.find( [permid: permitid, refid: o.refid ]).exists()) {
-			def m = [:];
-			m.permitid = permitid;
-			m.tdno = o.tdno;
-			m.refid = o.refid;
-			m.rputype = o.rputype;
-			m.particulars = o.particulars;
-			m.pin = o.pin;
-			rptEm.create( m );
-		}
-	}
-	*/
 
 	
 }

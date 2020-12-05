@@ -15,9 +15,9 @@
 		<field name="supersederid" />
 		<field name="transmittalid" />
 
-		<complex name="section" ref="vw_occupancy_inspection" jointype="many-to-one" includefields="type.*" required="false">
+		<complex name="parent" ref="vw_occupancy_inspection" jointype="many-to-one" includefields="type.*" required="false">
 			<key field="parentid" target="objid"/>
-		</complex>	
+		</complex>		
 		
 		<field name="attachment" hidden="true"/>
 	</element>

@@ -2,7 +2,7 @@ import com.rameses.annotations.*;
 
 class OccupancyRpuService {
 	
-	@DataContext("building_application_rpu")
+	@DataContext("building_permit_rpu")
 	def bRpuEm;
 
 	@DataContext("occupancy_rpu")

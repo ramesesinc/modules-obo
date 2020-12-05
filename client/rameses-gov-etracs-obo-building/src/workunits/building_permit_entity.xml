@@ -1,0 +1,10 @@
+<workunit>
+    <invokers>
+        <invoker type="building_permit_entity" target="popup"
+                 caption="Building Application Entity" action="init" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationEntityModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationEntityPage" />
+    </pages>
+</workunit>

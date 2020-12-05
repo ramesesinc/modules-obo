@@ -14,7 +14,7 @@ SELECT
  app.dtactualstarted,
  app.dtactualcompleted,
  app.inspectiondate,
- bp.appid AS bldgappid,
+ bp.objid AS bldgappid,
  bp.controlno AS bldgpermitno,
  bp.dtissued AS bldgpermitdtissued,  
  bp.title AS title, 
@@ -23,6 +23,6 @@ SELECT
  op.controlno AS occpermitno, 
  op.dtissued AS occpermitdtissued 
 FROM occupancy_rpu orpt
-INNER JOIN vw_occupancy_application app  ON orpt.appid=app.objid
+INNER JOIN vw_occupancy_permit app  ON orpt.appid=app.objid
 INNER JOIN vw_building_permit bp ON app.bldgpermitid=bp.objid 
-LEFT JOIN occupancy_permit op ON app.issuanceid = op.objid 
+LEFT JOIN obo_control op ON app.controlid = op.objid 

@@ -25,7 +25,7 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
     }
     
     public String getNotificationid() {
-        return "building_application";
+        return "building_permit";
     }
     
     public boolean getCanEdit() {
@@ -45,12 +45,13 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
         p.editable = false;
         p.applicant = [name: entity.applicant.name ];
         p.entity = entity.applicant;
-        return Inv.lookupOpener("building_application_entity", p);
+        return Inv.lookupOpener("building_permit_entity", p);
     }
     
-    def viewProfessional() {
+    
+    def viewSupervisor() {
         def p = [:];
-        p.entity = entity.contractor;
+        p.entity = entity.supervisor;
         return Inv.lookupOpener("vw_obo_professional:open", p);
     }
     
@@ -76,7 +77,7 @@ class BuildingApplicationModel extends WorkflowTaskModel  {
         m.findBy = [objid: entity.objid];
         def perm = queryService.findFirst( m );
         if(!perm) throw new Exception("Permit does not exist");
-        schemaName = "vw_building_application";
+        schemaName = "vw_building_permit";
         entity = [objid: perm.appid ];
         return open();
     }

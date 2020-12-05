@@ -18,13 +18,13 @@ public class OccupancyAssessmentService  {
 	@DataContext("obo_itemaccount")
 	def itemAcctEm;
 
-	@DataContext("vw_occupancy_application")
+	@DataContext("vw_occupancy_permit")
 	def vwAppEm;
 
-	@DataContext("occupancy_application")
+	@DataContext("occupancy_permit")
 	def appEm;
 
-	@DataContext("occupancy_application_fee")
+	@DataContext("occupancy_permit_fee")
 	def feeEm;
 
 	@DataContext("vw_occupancy_inspection")

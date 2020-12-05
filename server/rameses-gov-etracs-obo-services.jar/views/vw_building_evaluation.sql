@@ -23,4 +23,4 @@ INNER JOIN building_evaluation_task t ON a.taskid = t.taskid
 INNER JOIN building_evaluation_type et ON a.typeid = et.objid 
 LEFT JOIN obo_section os ON et.sectionid = os.objid
 INNER JOIN sys_wf_node sn ON sn.processname = 'building_evaluation' AND sn.name = t.state 
-INNER JOIN vw_building_application app ON a.appid = app.objid 
+INNER JOIN vw_building_permit app ON a.appid = app.objid 

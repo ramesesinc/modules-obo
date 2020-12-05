@@ -34,23 +34,50 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
     private void initComponents() {
 
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
+        xRadio4 = new com.rameses.rcp.control.XRadio();
+        xComboBox1 = new com.rameses.rcp.control.XComboBox();
+        xComboBox2 = new com.rameses.rcp.control.XComboBox();
         xRadio1 = new com.rameses.rcp.control.XRadio();
         xTextField1 = new com.rameses.rcp.control.XTextField();
-        xRadio2 = new com.rameses.rcp.control.XRadio();
-        xTextField2 = new com.rameses.rcp.control.XTextField();
         xRadio3 = new com.rameses.rcp.control.XRadio();
         xPanel1 = new com.rameses.rcp.control.XPanel();
         xFileBrowser1 = new com.rameses.rcp.control.XFileBrowser();
-        xRadio4 = new com.rameses.rcp.control.XRadio();
         jLabel1 = new javax.swing.JLabel();
 
         xFormPanel1.setCaptionWidth(160);
 
+        xRadio4.setCaption("");
+        xRadio4.setName("source"); // NOI18N
+        xRadio4.setOptionValue("capture");
+        xRadio4.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xRadio4.setShowCaption(false);
+        xRadio4.setText("Manual Capture");
+        xFormPanel1.add(xRadio4);
+
+        xComboBox1.setCaption("Txn Mode");
+        xComboBox1.setDepends(new String[] {"source"});
+        xComboBox1.setItems("txnModes");
+        xComboBox1.setName("txnmode"); // NOI18N
+        xComboBox1.setVisibleWhen("#{ source == 'capture' }");
+        xComboBox1.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xComboBox1.setRequired(true);
+        xFormPanel1.add(xComboBox1);
+
+        xComboBox2.setCaption("Workflow State");
+        xComboBox2.setDepends(new String[] {"source", "txnmode"});
+        xComboBox2.setItems("taskStates");
+        xComboBox2.setName("taskstate"); // NOI18N
+        xComboBox2.setVisibleWhen("#{ source == 'capture' && txnmode == 'CAPTURE'  }");
+        xComboBox2.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xComboBox2.setRequired(true);
+        xFormPanel1.add(xComboBox2);
+
         xRadio1.setCaption("From");
         xRadio1.setName("source"); // NOI18N
         xRadio1.setOptionValue("web");
+        xRadio1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xRadio1.setShowCaption(false);
-        xRadio1.setText("Web (Filipizen)");
+        xRadio1.setText("Download from web (via Filipizen)");
         xRadio1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 xRadio1ActionPerformed(evt);
@@ -68,28 +95,11 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
         xTextField1.setRequired(true);
         xFormPanel1.add(xTextField1);
 
-        xRadio2.setCaption("");
-        xRadio2.setName("source"); // NOI18N
-        xRadio2.setOptionValue("local");
-        xRadio2.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
-        xRadio2.setShowCaption(false);
-        xRadio2.setText("Local ");
-        xFormPanel1.add(xRadio2);
-
-        xTextField2.setCaption("Enter Tracking No");
-        xTextField2.setDepends(new String[] {"source"});
-        xTextField2.setName("trackingno"); // NOI18N
-        xTextField2.setVisibleWhen("#{ source == 'local' }");
-        xTextField2.setCaptionWidth(150);
-        xTextField2.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xTextField2.setPreferredSize(new java.awt.Dimension(200, 20));
-        xTextField2.setRequired(true);
-        xFormPanel1.add(xTextField2);
-
         xRadio3.setCaption("");
         xRadio3.setName("source"); // NOI18N
         xRadio3.setOptionValue("file");
-        xRadio3.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xRadio3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xRadio3.setEnabled(false);
         xRadio3.setShowCaption(false);
         xRadio3.setText("File");
         xFormPanel1.add(xRadio3);
@@ -112,15 +122,7 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
 
         xFormPanel1.add(xPanel1);
 
-        xRadio4.setCaption("");
-        xRadio4.setName("source"); // NOI18N
-        xRadio4.setOptionValue("capture");
-        xRadio4.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
-        xRadio4.setShowCaption(false);
-        xRadio4.setText("Manual Capture");
-        xFormPanel1.add(xRadio4);
-
-        jLabel1.setText("Please enter the tracking number or select a file.");
+        jLabel1.setText("Select an option and click Next to continue");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -134,7 +136,7 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,8 +144,8 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -154,14 +156,14 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private com.rameses.rcp.control.XComboBox xComboBox1;
+    private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XFileBrowser xFileBrowser1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XRadio xRadio1;
-    private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XRadio xRadio3;
     private com.rameses.rcp.control.XRadio xRadio4;
     private com.rameses.rcp.control.XTextField xTextField1;
-    private com.rameses.rcp.control.XTextField xTextField2;
     // End of variables declaration//GEN-END:variables
 }

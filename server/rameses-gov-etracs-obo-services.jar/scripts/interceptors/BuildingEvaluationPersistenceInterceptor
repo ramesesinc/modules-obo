@@ -8,7 +8,7 @@ class BuildingEvaluationPersistenceInterceptor {
 	@Service("DateService")
 	def dateSvc;
 
-	@DataContext("vw_building_application")
+	@DataContext("vw_building_permit")
 	def vwAppEm;
 
 	@DataContext("building_evaluation")

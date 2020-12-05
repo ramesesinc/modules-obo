@@ -15,10 +15,10 @@ class OccupancyInspectionScheduleService {
 	@Service("DateService")
 	def dateSvc;
 
-	@DataContext("vw_occupancy_application")
+	@DataContext("vw_occupancy_permit")
 	def vwAppEm;
 
-	@DataContext("occupancy_application")
+	@DataContext("occupancy_permit")
 	def appEm;
 
 	@Service("Var")
