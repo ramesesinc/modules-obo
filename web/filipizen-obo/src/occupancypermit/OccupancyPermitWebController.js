@@ -46,21 +46,27 @@ const pages = [
 const OccupancyPermitWebController = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [mode, setMode] = useState("apptype");
+  const [mode, setMode] = useState("init");
   const [appType, setAppType] = useState("full");
   const [appno, setAppno] = useState(getUrlParameter(props.location, "appid"));
+  const [hash, setHash] = useState();
   const [app, setApp] = useState({});
   const [step, setStep] = useState(1)
 
   const { partner, service } = props
 
-  const handleError = (err) => {
-    setLoading(false);
-    setError(err.toString());
+  if (hash !== props.location.hash) {
+    setHash(props.location.hash);
+  }
+
+  const findAppError = () => {
+    if (mode === "init") {
+      setMode("apptype");
+      props.history.push(`${location.pathname}`);
+    }
   }
 
   const findCurrentApp = () => {
-    if (!appno) return;
     setLoading(true);
     svc.invoke("findCurrentInfo", {appid: appno}, (err, app) => {
       if (err) {
@@ -68,21 +74,37 @@ const OccupancyPermitWebController = (props) => {
       } else {
         if(!app) {
           setError("Application no. does not exist");
+          findAppError();
         }
         if( partner.id != app.orgcode ) {
           setError("The application number provided is not for this local government");
+          findAppError();
         }
         setApp(app);
         setStep(app.step);
         setMode("processing");
+        const page = pages[app.step];
+          props.history.push(`${location.pathname}?appid=${appno}#${page.name}`);
       }
       setLoading(false);
     });
   }
 
   useEffect(() => {
-    findCurrentApp();
+    if (appno) {
+      setLoading(true);
+      findCurrentApp();
+    } else {
+      setMode("apptype");
+    }
   }, [appno]);
+
+  useEffect(() => {
+    if (hash) {
+      const page = pages.find(page => page.name === hash.substring(1));
+      setStep(page.step);
+    }
+  }, [hash]);
 
   const onCompleteInitial = ({appType, appno, step}) => {
     setAppno(appno);
@@ -109,13 +131,10 @@ const OccupancyPermitWebController = (props) => {
     setStep(ps => ps - 1);
   }
 
-  const onSubmitOccupancyType = (appType) => {
-    setAppType(appType);
-    moveNextStep();
-  }
-
   const handleStep = (step) => {
     setStep(step);
+    const page = pages[step];
+    props.history.push(`${location.pathname}?appid=${appno}#${page.name}`);
   }
 
   const submitAppType = ({appType, appno}) => {
@@ -137,6 +156,10 @@ const OccupancyPermitWebController = (props) => {
 
   const onComplete = () => {
     moveNextStep();
+  }
+
+  if (mode === "init") {
+    return <div></div>
   }
 
   if (mode === "apptype") {

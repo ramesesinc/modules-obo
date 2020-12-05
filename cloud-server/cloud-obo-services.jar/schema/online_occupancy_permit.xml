@@ -63,7 +63,7 @@
 		<field name="contractor_name" />
 		<field name="contractor_address" />
 		<field name="contractor_pcab_idno" />
-		<field name="contractor_pcab_dtvalid" co/>
+		<field name="contractor_pcab_dtvalid"/>
 		<field name="contractor_tin" />
 		<field name="contractor_manager_name" />
 		<field name="contractor_manager_email" />
