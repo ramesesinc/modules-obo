@@ -1,0 +1,17 @@
+<workunit>
+    <invokers>
+        <invoker type="building_permit:create" caption="Building Application (Manual Capture)"
+                action="create" />
+        
+        <invoker type="vw_building_permit:create" caption="Building Application (Manual Capture)"
+                action="create" />
+        
+        <invoker type="formActions" caption="Close" action="_close" immediate="true" />
+        <invoker type="formActions" caption="Save" action="save" />
+        
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitCreateModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitCreatePage" />
+    </pages>
+</workunit>

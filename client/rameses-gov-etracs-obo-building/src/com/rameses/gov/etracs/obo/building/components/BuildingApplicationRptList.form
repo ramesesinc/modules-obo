@@ -66,7 +66,7 @@
               </StringArray>
             </Property>
             <Property name="name" type="java.lang.String" value="openItem" noResource="true"/>
-            <Property name="visibleWhen" type="java.lang.String" value="#{ editable == true &amp;&amp; selectedItem!=null }"/>
+            <Property name="visibleWhen" type="java.lang.String" value="#{  selectedItem!=null }"/>
             <Property name="text" type="java.lang.String" value="Open Entry"/>
           </Properties>
         </Component>

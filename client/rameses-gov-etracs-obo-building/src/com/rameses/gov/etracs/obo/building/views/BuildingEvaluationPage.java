@@ -195,7 +195,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         applicationDocumentList1.setEntitySchemaName("building_permit_doc");
         applicationDocumentList1.setHandler("docHandler");
         applicationDocumentList1.setSchemaName("vw_building_permit_doc");
-        applicationDocumentList1.setSectionid("entity.sectionid");
+        applicationDocumentList1.setSectionid("sectionid");
         jPanel3.add(applicationDocumentList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Documents", jPanel3);
@@ -203,7 +203,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         xPanel2.setLayout(new java.awt.BorderLayout());
 
         applicationFindingList2.setAppid("entity.appid");
-        applicationFindingList2.setEditableWhen("#{ canEdit == true }");
+        applicationFindingList2.setEditableWhen("#{ editFindings == true }");
         applicationFindingList2.setParentid("entity.objid");
         applicationFindingList2.setSchemaName("building_evaluation_finding");
         applicationFindingList2.setSectionTitle("entity.type.title");

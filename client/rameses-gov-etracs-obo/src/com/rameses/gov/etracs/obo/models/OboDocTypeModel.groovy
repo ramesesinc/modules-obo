@@ -14,7 +14,7 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class OboDocTypeModel extends CrudFormModel {
     
-    def docTypes = ["MAIN", "ANCILLARY","CLEARANCE", "CERTIFICATE", "CHECKLIST",  "OTHER"];
+    def docTypes = ["MAIN", "ANCILLARY","CLEARANCE", "CERTIFICATE","CHECKLIST",  "OTHER", "REPORT"];
     def appTypes = ["building", "occupancy"];
     def sectionList;
     

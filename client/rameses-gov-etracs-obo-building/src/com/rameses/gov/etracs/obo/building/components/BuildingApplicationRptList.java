@@ -63,7 +63,7 @@ public class BuildingApplicationRptList extends AbstractComponent {
 
         xButton3.setDepends(new String[] {"selectedItem"});
         xButton3.setName("openItem"); // NOI18N
-        xButton3.setVisibleWhen("#{ editable == true && selectedItem!=null }");
+        xButton3.setVisibleWhen("#{  selectedItem!=null }");
         xButton3.setText("Open Entry");
         xPanel1.add(xButton3);
 

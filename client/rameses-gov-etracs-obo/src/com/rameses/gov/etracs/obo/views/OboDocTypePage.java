@@ -42,16 +42,16 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xTextField3 = new com.rameses.rcp.control.XTextField();
         xTextField7 = new com.rameses.rcp.control.XTextField();
         xComboBox4 = new com.rameses.rcp.control.XComboBox();
+        xTextField8 = new com.rameses.rcp.control.XTextField();
         xLabel1 = new com.rameses.rcp.control.XLabel();
         xCheckBox4 = new com.rameses.rcp.control.XCheckBox();
         xCheckBox3 = new com.rameses.rcp.control.XCheckBox();
         xLabel2 = new com.rameses.rcp.control.XLabel();
         xRadio3 = new com.rameses.rcp.control.XRadio();
         xRadio4 = new com.rameses.rcp.control.XRadio();
-        xTextField4 = new com.rameses.rcp.control.XTextField();
         xRadio5 = new com.rameses.rcp.control.XRadio();
         xRadio6 = new com.rameses.rcp.control.XRadio();
-        xTextField5 = new com.rameses.rcp.control.XTextField();
+        xTextField4 = new com.rameses.rcp.control.XTextField();
         xTextField6 = new com.rameses.rcp.control.XTextField();
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
@@ -65,7 +65,7 @@ public class OboDocTypePage extends javax.swing.JPanel {
 
         xTabbedPane1.setPreferredSize(new java.awt.Dimension(666, 608));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         xFormPanel1.setCaption("General Info");
@@ -137,8 +137,16 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xComboBox4.setPreferredSize(new java.awt.Dimension(200, 22));
         xFormPanel1.add(xComboBox4);
 
+        xTextField8.setCaption("App No Pattern");
+        xTextField8.setDepends(new String[] {"entity.type"});
+        xTextField8.setName("entity.appnopattern"); // NOI18N
+        xTextField8.setVisibleWhen("#{ entity.type == 'MAIN' }");
+        xTextField8.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField8.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        xFormPanel1.add(xTextField8);
+
         xLabel1.setExpression("Options");
-        xLabel1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel1.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
         xLabel1.setShowCaption(false);
         xFormPanel1.add(xLabel1);
 
@@ -156,7 +164,7 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xCheckBox3.setText("Require Fees to be assessed before approval ");
         xFormPanel1.add(xCheckBox3);
 
-        xLabel2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel2.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
         xLabel2.setShowCaption(false);
         xLabel2.setText("Issuance options");
         xFormPanel1.add(xLabel2);
@@ -165,25 +173,15 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xRadio3.setName("entity.issuetype"); // NOI18N
         xRadio3.setOptionValue(0);
         xRadio3.setShowCaption(false);
-        xRadio3.setText("No issuance of control number");
+        xRadio3.setText("Not issued");
         xFormPanel1.add(xRadio3);
 
         xRadio4.setCaption("");
         xRadio4.setName("entity.issuetype"); // NOI18N
         xRadio4.setOptionValue(1);
         xRadio4.setShowCaption(false);
-        xRadio4.setText("Manual issue, control number auto-generated");
+        xRadio4.setText("Manual release, control number auto-generated");
         xFormPanel1.add(xRadio4);
-
-        xTextField4.setCaption("Pattern");
-        xTextField4.setDepends(new String[] {"entity.issuetype"});
-        xTextField4.setName("entity.controlnopattern"); // NOI18N
-        xTextField4.setVisibleWhen("#{ entity.issuetype == 1 }");
-        xTextField4.setCaptionWidth(80);
-        xTextField4.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xTextField4.setPreferredSize(new java.awt.Dimension(200, 20));
-        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        xFormPanel1.add(xTextField4);
 
         xRadio5.setCaption("");
         xRadio5.setName("entity.issuetype"); // NOI18N
@@ -199,41 +197,46 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xRadio6.setText("Auto-issue of control number before releasing");
         xFormPanel1.add(xRadio6);
 
-        xTextField5.setCaption("Pattern");
-        xTextField5.setDepends(new String[] {"entity.issuetype"});
-        xTextField5.setName("entity.controlnopattern"); // NOI18N
-        xTextField5.setVisibleWhen("#{ entity.issuetype == 3 }");
-        xTextField5.setCaptionWidth(80);
-        xTextField5.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xTextField5.setPreferredSize(new java.awt.Dimension(200, 20));
-        xTextField5.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
-        xFormPanel1.add(xTextField5);
+        xTextField4.setCaption("Control No Pattern");
+        xTextField4.setDepends(new String[] {"entity.issuetype"});
+        xTextField4.setName("entity.controlnopattern"); // NOI18N
+        xTextField4.setVisibleWhen("#{ entity.issuetype == 1 || entity.issuetype == 3 }");
+        xTextField4.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xTextField4.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField4.setTextCase(com.rameses.rcp.constant.TextCase.NONE);
+        xFormPanel1.add(xTextField4);
 
         xTextField6.setCaption("Releaser Role");
         xTextField6.setDepends(new String[] {"entity.issuetype"});
         xTextField6.setName("entity.role"); // NOI18N
-        xTextField6.setVisibleWhen("#{ entity.issuetype == 2 }");
+        xTextField6.setVisibleWhen("#{ entity.issuetype != 0 }");
         xTextField6.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xTextField6.setPreferredSize(new java.awt.Dimension(0, 20));
         xTextField6.setSpaceChar('_');
         xFormPanel1.add(xTextField6);
 
+        xLabel3.setDepends(new String[] {"entity.issuetype"});
         xLabel3.setExpression("Default Signatures");
-        xLabel3.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel3.setVisibleWhen("#{ entity.issuetype != 0 }");
+        xLabel3.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
         xLabel3.setShowCaption(false);
         xFormPanel1.add(xLabel3);
 
         xLookupField1.setCaption("Endorser");
+        xLookupField1.setDepends(new String[] {"entity.issuetype"});
         xLookupField1.setExpression("#{ entity.endorser.displayname } / #{ entity.endorser.position }");
         xLookupField1.setHandler("sys_signature:lookup");
         xLookupField1.setName("entity.endorser"); // NOI18N
+        xLookupField1.setVisibleWhen("#{ entity.issuetype != 0 }");
         xLookupField1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLookupField1);
 
         xLookupField2.setCaption("Approver");
+        xLookupField2.setDepends(new String[] {"entity.issuetype"});
         xLookupField2.setExpression("#{ entity.approver.displayname } / #{ entity.approver.position }");
         xLookupField2.setHandler("sys_signature:lookup");
         xLookupField2.setName("entity.approver"); // NOI18N
+        xLookupField2.setVisibleWhen("#{ entity.issuetype != 0 }");
         xLookupField2.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLookupField2);
 
@@ -404,8 +407,8 @@ public class OboDocTypePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XTextField xTextField2;
     private com.rameses.rcp.control.XTextField xTextField3;
     private com.rameses.rcp.control.XTextField xTextField4;
-    private com.rameses.rcp.control.XTextField xTextField5;
     private com.rameses.rcp.control.XTextField xTextField6;
     private com.rameses.rcp.control.XTextField xTextField7;
+    private com.rameses.rcp.control.XTextField xTextField8;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,7 +50,7 @@ class ApplicationDocumentListModel extends AbstractComponentModel {
                 def m = [_schemaname:"obo_doctype"];
                 m.findBy = [apptype: apptype];
                 if( OsirisContext.getEnv().ORGROOT == 1 ) {
-                    m.where = ["section.org.objid IS NULL"];
+                    m.where = ["section.org.objid IS NULL AND type NOT IN ('MAIN','REPORT') "];
                 }
                 else {
                     m.where = ["section.org.objid = :orgid", [orgid: OsirisContext.getEnv().ORGID ]];
@@ -69,13 +69,14 @@ class ApplicationDocumentListModel extends AbstractComponentModel {
     }
     
     def removeDocument() {
+        def orgid = OsirisContext.getEnv().ORGID;
         if(!selectedItem) throw new Exception("Please select a document.");
-        if( user.org == null ) {
+        if( orgid == null ) {
             if( selectedItem.org?.objid !=null )
                 throw new Exception("Cannot remove this document because it is not on the same org");
         }
         else {
-            if(selectedItem.org?.objid != user.org )
+            if(selectedItem.org?.objid != orgid )
                 throw new Exception("Cannot remove this document because it is not on the same org");            
         }
         if( sectionid != selectedItem.sectionid )

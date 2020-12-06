@@ -48,19 +48,6 @@
 
 		<background>
 			<band height="0"  isSplitAllowed="true" >
-				<image  scaleImage="FillFrame" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="0"
-						y="-293"
-						width="612"
-						height="293"
-						key="image-3"/>
-					<box></box>
-					<graphicElement stretchType="NoStretch">
-					<pen lineWidth="0.0" lineStyle="Solid"/>
-</graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["obo-images/background.jpg"]]></imageExpression>
-				</image>
 			</band>
 		</background>
 		<title>
@@ -715,20 +702,7 @@ deficiencies on my resubmission.]]></text>
 					</textElement>
 				<text><![CDATA[FOR PAYMENT]]></text>
 				</staticText>
-				<staticText>
-					<reportElement
-						x="373"
-						y="149"
-						width="202"
-						height="21"
-						key="staticText-239"/>
-					<box></box>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font fontName="Arial" pdfFontName="Helvetica-Bold" size="10" isBold="true" isItalic="false"/>
-					</textElement>
-				<text><![CDATA[ENGR. CLEMENTE A. IBO]]></text>
-				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="373"
 						y="61"
@@ -741,7 +715,7 @@ deficiencies on my resubmission.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{endorser.displayname}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="373"
 						y="76"
@@ -754,7 +728,7 @@ deficiencies on my resubmission.]]></text>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{endorser.position}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="373"
 						y="161"
@@ -766,6 +740,19 @@ deficiencies on my resubmission.]]></text>
 						<font fontName="Arial"/>
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{approver.position}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="373"
+						y="146"
+						width="202"
+						height="21"
+						key="textField-6"/>
+					<box></box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" pdfFontName="Helvetica-Bold" isBold="true"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{approver.displayname}]]></textFieldExpression>
 				</textField>
 			</band>
 		</summary>

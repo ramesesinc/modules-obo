@@ -66,6 +66,18 @@
 		<field name="contractor_manager_email" />
 
 		<field name="inspectiondate" type="timestamp" />
+
+		<field name="controlid" />
+		<field name="controlno" />
+		<field name="dtissued" />
+		<field name="expirydate" />
+		<field name="issuedby_name" />
+		<field name="approverid" />
+		<field name="endorserid" />		
+		<field name="template" />
+		<field name="reportheader" />
+		<field name="txntype" />
+
 	</element>
 </schema>	
 

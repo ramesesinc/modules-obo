@@ -35,7 +35,7 @@ public class OboApplicationFeeService  {
 
 		if( subAppEm!=null ) {
 			total = feeEm.find([parentid:o.parentid]).select("c:{SUM(amount)}").val();
-			if( total !=null ) total = 0;
+			if( total == null ) total = 0;
 			subAppEm.find( [objid:o.parentid]).update( [amount: total] );
 		}
 		return [amount: total];
@@ -102,6 +102,7 @@ public class OboApplicationFeeService  {
 			def r = saveFees( o, null )
 			result.amount = r.amount;
 		}
+		updateTotals( o, null );
 		return result;
 	}
 

@@ -6,24 +6,9 @@
         <invoker type="vw_occupancy_permit:open" 
                  caption="Occuoancy Permit Application" action="open" />
         
-        <invoker type="vw_occupancy_permit:open" 
-                 caption="Occupancy Permit Application" action="openPermit" />
-
-        <!--
-       <invoker type="appActions" 
-                caption="Change Txn Type"
-                action="changeTxnType" 
-                xvisibleWhen="#{ task.assignee.objid == userInfo.userid }" />
-       
-       <invoker type="appActions" 
-                caption="Change Occupancy Type"
-                action="changeOccupancyType" 
-                xvisibleWhen="#{ task.assignee.objid == userInfo.userid }" />
-       -->
         <invoker type="appActions" 
                 caption="Set Inspection Date"
-                action="setInspectionDate" 
-                />
+                action="setInspectionDate" />
 
         <invoker type="appActions" 
                 caption="Reports"
@@ -41,8 +26,8 @@
                     &amp;&amp; task.assignee.objid == userInfo.userid }"   />            
                     
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyApplicationModel" />
+    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyPermitModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyApplicationPage" />
+        <page template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyPermitPage" />
     </pages>
 </workunit>

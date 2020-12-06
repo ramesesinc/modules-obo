@@ -6,7 +6,7 @@
 -->
 <schema>
 	<element tablename="obo_requirement_type">
-		<field name="objid" primary="true"/>
+		<field name="objid" primary="true" visible="true"/>
 		<field name="title" />
 		<field name="sortorder" />
 		<field name="permittype" />

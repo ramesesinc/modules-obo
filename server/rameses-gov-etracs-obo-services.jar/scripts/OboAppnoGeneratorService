@@ -8,23 +8,24 @@ class OboAppnoGeneratorService {
 	@Service("ControlnoGeneratorService")
 	def controlNoSvc;
 
-	@Service("Var")
-	def sysvar;
-
-	@DataContext("building_permit")
-	def appEm;
-
 	@DataContext(dynamic=true)
 	def db;
+
+	@DataContext("obo_doctype")
+	def doctypeEm;
 
 	@Env
 	def env;
 
 	@ProxyMethod
 	public def generate(def o ) {
-		if(!o.controlnopattern) throw new Exception("controlnopattern is required");
-		def pattern = sysvar.get( o.controlnopattern );
-		if(!pattern) throw new Exception("Please define building_permit_appno entry in sys_var. Ex. BP-[yyyyMM]-[%05d]");
+		if(!o.apptype) throw new Exception("controlnopattern is required");
+
+		def docid = o.apptype.toUpperCase();
+		def doctype = doctypeEm.find( [objid: docid ] ).first();
+
+		def pattern = doctype.appnopattern;
+		if(!pattern) throw new Exception("Please define appnopattern in " + docid );
 		def appno = controlNoSvc.getNextNo( pattern );
 		if( o._schemaname && o.appid ) {
 			def appEm = db.lookup( o._schemaname );

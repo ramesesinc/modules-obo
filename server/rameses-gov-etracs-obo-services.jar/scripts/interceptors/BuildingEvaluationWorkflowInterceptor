@@ -64,18 +64,14 @@ class BuildingEvaluationWorkflowInterceptor {
 			return;
 		}
 
-		//determine what action to fire in business_application flow. if there are still for-revisison then fire send-for-verification. if not send approve-evaluation
-		def hasRevision = tlist.find{ it.task.state == "for-revision" };
+		//determine what action to fire in.  Check worfklow if for-revision it will go thru for revision.
+		boolean hasRevision = (tlist.find{ it.task.state == "for-revision" }!=null) ? true : false;
 
-		def resultAction = (hasRevision) ? "send-for-verification" : "approve-evaluation";
-		def app = appEm.find([objid:appid]).select("task.*").first();
 		def f = [:];
 		f.processname = 'building_permit';
 		f.refid = appid;
 		f.startdate = dateSvc.getServerDate();
-		f.info = [ app: p.info ];
-		f.action = resultAction;
-		f.taskid = app.taskid;
+		f.info = [ hasrevision: hasRevision ];
 		wfSvc.signal(f);
 	}
 

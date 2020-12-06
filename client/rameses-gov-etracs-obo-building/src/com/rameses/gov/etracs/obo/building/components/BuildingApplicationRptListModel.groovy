@@ -8,7 +8,7 @@ import com.rameses.seti2.models.*;
 
 class BuildingApplicationRptListModel extends AbstractComponentModel {
 
-    @Service("BuildingApplicationRptService")
+    @Service("BuildingPermitRpuService")
     def rptService;
     
     void afterLoadList() {
@@ -48,6 +48,7 @@ class BuildingApplicationRptListModel extends AbstractComponentModel {
         def h = [:];
         h.appid = appid;
         h.entity = selectedItem;
+        h.editable = editable;
         h.handler = {
             refresh();
         }

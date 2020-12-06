@@ -1,16 +1,16 @@
 <workunit>
     <invokers>
         <invoker folderid="menucategory/obo/occupancy" 
-                 caption="New Application" index="-2" role="RECEIVER"
+                 caption="New Application" index="-2" role="RECEIVER" 
                  permitType="occupancy_permit" 
-                 title="Occupancy Permit" 
+                 title="Occupancy Permit"  
                  action="init" />
         <!-- actions -->
-        <invoker type="formActions" caption="Close" action="_close" immediate="true"/>
+        <invoker type="formActions" caption="Close" action="_close" immediate="true" />
         <invoker type="formActions" caption="Next" action="next" />
     </invokers>
     
-    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyApplicationInitialModel" />
+    <code class="com.rameses.gov.etracs.obo.models.OboApplicationInitialModel" />
     <pages>
         <page template="com.rameses.gov.etracs.obo.views.OboApplicationInitialPage" />
     </pages>

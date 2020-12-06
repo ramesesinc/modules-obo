@@ -4,7 +4,7 @@
 		<field name="appid" required="true"/>
 		<field name="refno" required="true" />
 		<field name="refdate" required="true"/>
-		<field name="refid" required="true"/>
+		<field name="refid" />
 		<field name="reftype" required="true"/>
 		<field name="amount" datatype="decimal"/>
 		<field name="voided" />

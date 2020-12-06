@@ -1,0 +1,87 @@
+import com.rameses.annotations.*; 
+import com.rameses.util.*;
+import java.rmi.server.*;
+import obo.facts.*;
+import java.text.*;
+import treasury.utils.*;
+import treasury.facts.*;
+import enterprise.utils.*;
+
+class OccupancyPermitAssessmentInterceptor {
+	
+	@Service("BillingRuleService")
+	def billingRuleSvc;
+
+	@Service("DateService")
+	def dateSvc;
+
+	@Service("OboApplicationInfoService")
+	def infoSvc;
+
+	@DataContext("obo_itemaccount")
+	def itemAcctEm;
+
+	@DataContext("vw_occupancy_permit")
+	def vwAppEm;
+
+	@DataContext("occupancy_permit")
+	def appEm;
+
+	@DataContext("occupancy_permit_doc")
+	def subdocEm;
+
+
+	@After(pattern="OboApplicationFeeService.getAssessment", eval="#{args[0]._schemaname == 'occupancy_permit_fee' }")
+	public void getOccupancyAssessment( def evt ) {
+		def o = evt.args[0];
+		def result = evt.result;
+
+		def vapp = vwAppEm.find( [objid: o.appid ] ).first();
+
+		def occ = vapp.occupancytype;
+		def infos = [];
+		def factBuilder = new FactBuilder();
+		factBuilder.facts << new OccupancyPermit( vapp ); 
+        factBuilder.facts << new OccupancyType( occ );
+		factBuilder.variableInfoProvider = new DefaultVariableInfoProvider(
+			schemaName:"obo_variable",
+			createDecimalFact: { return new OboDecimalInfo() },
+			createIntegerFact: { return new OboIntegerInfo() },
+			createBooleanFact: { return new OboBooleanInfo() }
+		);
+
+		if( o.parentid ) {
+			def sd = subdocEm.find([objid: o.parentid ] ).first();	
+			//this is for subapplications
+			factBuilder.facts << new BuildingSubdoc( doctype: sd.doctype.objid );
+			infos = infoSvc.getInfos( [parentid: o.parentid, _schemaname: "vw_occupancy_permit_info" ] );
+		}
+		else {
+			//this is for applications
+			infos = infoSvc.getInfos( [appid: o.appid, _schemaname: "vw_occupancy_permit_info" ] );	
+			factBuilder.facts << new BuildingSubdoc( doctype: "OCCUPANCY_PERMIT" );
+		}
+
+		def req = [:];
+		req.factBuilder = factBuilder;
+		req.rulename = "oboassessment";
+		req.params = [infos: infos];
+		req.include_items = false;
+
+		def res = billingRuleSvc.execute( req );
+
+		def items = [];
+		res.billitems.findAll{ it.billcode && it.item == null && it.amount > 0 }.each {
+			def p = itemAcctEm.find( [objid: it.billcode ] ).first();
+			it.item = p;
+			if(o.parentid) it.parentid = o.parentid;
+			it.amtpaid = 0;
+			it.appid = o.appid;
+			it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
+			items << it;			
+		};
+
+		result.items = items;
+	}	
+
+}

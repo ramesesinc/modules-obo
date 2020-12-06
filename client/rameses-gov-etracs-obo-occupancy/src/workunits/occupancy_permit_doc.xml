@@ -2,13 +2,12 @@
     <invokers>
        <invoker type="vw_occupancy_permit_doc:open" caption="Subdocument" action="open" target="popup"/>
         
-       <invoker type="formActions" caption="Show Docs" action="toggleOtherDocs"/>     
        <invoker type="formActions" caption="Issue" action="issueControl" 
                 visibleWhen="#{ entity.doctype.issuetype == 2 }"/>     
                 
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyApplicationSubdocModel" />
+    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyPermitDocModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyApplicationSubdocPage" />
+        <page template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyPermitDocPage" />
     </pages>
 </workunit>

@@ -15,14 +15,21 @@ SELECT
    od.objid AS occupancytype_division_objid,
    od.title AS occupancytype_division_title,   
    og.objid AS occupancytype_group_objid,
-   og.title AS occupancytype_group_title
-
+   og.title AS occupancytype_group_title,
+   ctl.controlno,
+   ctl.expirydate,
+   ctl.dtissued,
+   ctl.issuedby_name,
+   ctl.approverid,
+   ctl.endorserid,
+   ctl.template,
+   ctl.reportheader 
 
 FROM occupancy_permit op 
 INNER JOIN occupancy_permit_task t ON op.taskid = t.taskid
 INNER JOIN obo_occupancy_type ot ON op.occupancytypeid = ot.objid 
 INNER JOIN obo_occupancy_type_division od ON ot.divisionid = od.objid 
 INNER JOIN obo_occupancy_type_group og ON od.groupid = og.objid 
-
+LEFT JOIN obo_control ctl ON op.controlid=ctl.objid
 
 

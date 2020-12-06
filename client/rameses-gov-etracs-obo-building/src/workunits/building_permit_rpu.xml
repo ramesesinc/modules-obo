@@ -20,12 +20,12 @@
                  action="viewTrueCopy" />
         
         <invoker type="formActions" caption="Generate Clearance" 
-                visibleWhen="#{entity.objid!=null &amp;&amp; (entity.taxclearanceid==null || entity.truecopycertid==null) }"
+                visibleWhen="#{editable==true &amp;&amp; entity.objid!=null &amp;&amp; (entity.taxclearanceid==null || entity.truecopycertid==null) }"
                  action="generateDocs" />
 
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationRptModel" />
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitRpuModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationRptPage" />
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitRpuPage" />
     </pages>    
 </workunit>

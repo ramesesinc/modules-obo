@@ -34,7 +34,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                <EmptyBorder bottom="10" left="10" right="10" top="10"/>
+                <EmptyBorder bottom="5" left="5" right="5" top="5"/>
               </Border>
             </Property>
           </Properties>
@@ -171,11 +171,29 @@
                     </Property>
                   </Properties>
                 </Component>
+                <Component class="com.rameses.rcp.control.XTextField" name="xTextField8">
+                  <Properties>
+                    <Property name="caption" type="java.lang.String" value="App No Pattern"/>
+                    <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
+                      <StringArray count="1">
+                        <StringItem index="0" value="entity.type"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="name" type="java.lang.String" value="entity.appnopattern" noResource="true"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.type == &apos;MAIN&apos; }"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[200, 20]"/>
+                    </Property>
+                    <Property name="textCase" type="com.rameses.rcp.constant.TextCase" editor="com.rameses.beaninfo.editor.TextCasePropertyEditor">
+                      <SerializedValue value="-84,-19,0,5,126,114,0,33,99,111,109,46,114,97,109,101,115,101,115,46,114,99,112,46,99,111,110,115,116,97,110,116,46,84,101,120,116,67,97,115,101,0,0,0,0,0,0,0,0,18,0,0,120,114,0,14,106,97,118,97,46,108,97,110,103,46,69,110,117,109,0,0,0,0,0,0,0,0,18,0,0,120,112,116,0,4,78,79,78,69"/>
+                    </Property>
+                  </Properties>
+                </Component>
                 <Component class="com.rameses.rcp.control.XLabel" name="xLabel1">
                   <Properties>
                     <Property name="expression" type="java.lang.String" value="Options"/>
                     <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                      <Insets value="[20, 0, 0, 0]"/>
+                      <Insets value="[10, 0, 0, 0]"/>
                     </Property>
                     <Property name="showCaption" type="boolean" value="false"/>
                   </Properties>
@@ -209,7 +227,7 @@
                 <Component class="com.rameses.rcp.control.XLabel" name="xLabel2">
                   <Properties>
                     <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                      <Insets value="[20, 0, 0, 0]"/>
+                      <Insets value="[10, 0, 0, 0]"/>
                     </Property>
                     <Property name="showCaption" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="Issuance options"/>
@@ -223,7 +241,7 @@
                       <Connection code="0" type="code"/>
                     </Property>
                     <Property name="showCaption" type="boolean" value="false"/>
-                    <Property name="text" type="java.lang.String" value="No issuance of control number"/>
+                    <Property name="text" type="java.lang.String" value="Not issued"/>
                   </Properties>
                 </Component>
                 <Component class="com.rameses.rcp.control.XRadio" name="xRadio4">
@@ -234,29 +252,7 @@
                       <Connection code="1" type="code"/>
                     </Property>
                     <Property name="showCaption" type="boolean" value="false"/>
-                    <Property name="text" type="java.lang.String" value="Manual issue, control number auto-generated"/>
-                  </Properties>
-                </Component>
-                <Component class="com.rameses.rcp.control.XTextField" name="xTextField4">
-                  <Properties>
-                    <Property name="caption" type="java.lang.String" value="Pattern"/>
-                    <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
-                      <StringArray count="1">
-                        <StringItem index="0" value="entity.issuetype"/>
-                      </StringArray>
-                    </Property>
-                    <Property name="name" type="java.lang.String" value="entity.controlnopattern" noResource="true"/>
-                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.issuetype == 1 }"/>
-                    <Property name="captionWidth" type="int" value="80"/>
-                    <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                      <Insets value="[0, 30, 0, 0]"/>
-                    </Property>
-                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[200, 20]"/>
-                    </Property>
-                    <Property name="textCase" type="com.rameses.rcp.constant.TextCase" editor="com.rameses.beaninfo.editor.TextCasePropertyEditor">
-                      <SerializedValue value="-84,-19,0,5,126,114,0,33,99,111,109,46,114,97,109,101,115,101,115,46,114,99,112,46,99,111,110,115,116,97,110,116,46,84,101,120,116,67,97,115,101,0,0,0,0,0,0,0,0,18,0,0,120,114,0,14,106,97,118,97,46,108,97,110,103,46,69,110,117,109,0,0,0,0,0,0,0,0,18,0,0,120,112,116,0,4,78,79,78,69"/>
-                    </Property>
+                    <Property name="text" type="java.lang.String" value="Manual release, control number auto-generated"/>
                   </Properties>
                 </Component>
                 <Component class="com.rameses.rcp.control.XRadio" name="xRadio5">
@@ -281,19 +277,18 @@
                     <Property name="text" type="java.lang.String" value="Auto-issue of control number before releasing"/>
                   </Properties>
                 </Component>
-                <Component class="com.rameses.rcp.control.XTextField" name="xTextField5">
+                <Component class="com.rameses.rcp.control.XTextField" name="xTextField4">
                   <Properties>
-                    <Property name="caption" type="java.lang.String" value="Pattern"/>
+                    <Property name="caption" type="java.lang.String" value="Control No Pattern"/>
                     <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
                       <StringArray count="1">
                         <StringItem index="0" value="entity.issuetype"/>
                       </StringArray>
                     </Property>
                     <Property name="name" type="java.lang.String" value="entity.controlnopattern" noResource="true"/>
-                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.issuetype == 3 }"/>
-                    <Property name="captionWidth" type="int" value="80"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.issuetype == 1 || entity.issuetype == 3 }"/>
                     <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                      <Insets value="[0, 30, 0, 0]"/>
+                      <Insets value="[10, 0, 0, 0]"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[200, 20]"/>
@@ -312,7 +307,7 @@
                       </StringArray>
                     </Property>
                     <Property name="name" type="java.lang.String" value="entity.role" noResource="true"/>
-                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.issuetype == 2 }"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.issuetype != 0 }"/>
                     <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                       <Insets value="[20, 0, 0, 0]"/>
                     </Property>
@@ -324,9 +319,15 @@
                 </Component>
                 <Component class="com.rameses.rcp.control.XLabel" name="xLabel3">
                   <Properties>
+                    <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
+                      <StringArray count="1">
+                        <StringItem index="0" value="entity.issuetype"/>
+                      </StringArray>
+                    </Property>
                     <Property name="expression" type="java.lang.String" value="Default Signatures"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.issuetype != 0 }"/>
                     <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                      <Insets value="[20, 0, 0, 0]"/>
+                      <Insets value="[10, 0, 0, 0]"/>
                     </Property>
                     <Property name="showCaption" type="boolean" value="false"/>
                   </Properties>
@@ -334,9 +335,15 @@
                 <Component class="com.rameses.rcp.control.XLookupField" name="xLookupField1">
                   <Properties>
                     <Property name="caption" type="java.lang.String" value="Endorser"/>
+                    <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
+                      <StringArray count="1">
+                        <StringItem index="0" value="entity.issuetype"/>
+                      </StringArray>
+                    </Property>
                     <Property name="expression" type="java.lang.String" value="#{ entity.endorser.displayname } / #{ entity.endorser.position }"/>
                     <Property name="handler" type="java.lang.String" value="sys_signature:lookup"/>
                     <Property name="name" type="java.lang.String" value="entity.endorser" noResource="true"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.issuetype != 0 }"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[0, 20]"/>
                     </Property>
@@ -345,9 +352,15 @@
                 <Component class="com.rameses.rcp.control.XLookupField" name="xLookupField2">
                   <Properties>
                     <Property name="caption" type="java.lang.String" value="Approver"/>
+                    <Property name="depends" type="[Ljava.lang.String;" editor="org.netbeans.beaninfo.editors.StringArrayEditor">
+                      <StringArray count="1">
+                        <StringItem index="0" value="entity.issuetype"/>
+                      </StringArray>
+                    </Property>
                     <Property name="expression" type="java.lang.String" value="#{ entity.approver.displayname } / #{ entity.approver.position }"/>
                     <Property name="handler" type="java.lang.String" value="sys_signature:lookup"/>
                     <Property name="name" type="java.lang.String" value="entity.approver" noResource="true"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.issuetype != 0 }"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[0, 20]"/>
                     </Property>

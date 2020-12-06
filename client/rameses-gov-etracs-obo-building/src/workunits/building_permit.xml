@@ -5,19 +5,6 @@
     <invokers>
         <invoker type="vw_building_permit:open" 
                  caption="Building Permit Application" action="open" />
-        
-        <!--
-       <invoker type="appActions" 
-                caption="Change Txn Type"
-                action="changeTxnType" 
-                xvisibleWhen="#{ task.assignee.objid == userInfo.userid }" />
-       
-       <invoker type="appActions" 
-                caption="Change Occupancy Type"
-                action="changeOccupancyType" 
-                xvisibleWhen="#{ task.assignee.objid == userInfo.userid }" />
-       -->
-    
 
         <invoker type="appActions" 
                 caption="Reports"
@@ -27,15 +14,24 @@
        
        
         <invoker type="appActions" 
+                caption="Edit"
+                icon="images/toolbars/edit.png"
+                action="showMenu" 
+                context="edit" 
+                visibleWhen="#{ allowEdit == true }"/>             
+
+        <invoker type="appActions" 
                 caption="Issue Permit"
                 action="issuePermit" 
                 visibleWhen="#{task.state == 'releasing'
                     &amp;&amp; entity.controlid == null                   
                     &amp;&amp; task.assignee.objid == userInfo.userid }"   />            
-                    
+
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationModel" />
+    
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitModel" />
+    
     <pages>
-        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationPage" />
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitPage" />
     </pages>
 </workunit>

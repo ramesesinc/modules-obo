@@ -5,6 +5,11 @@ class OboApplicationTransmittalInterceptor {
 	@DataContext(dynamic=true)
 	def db;
 
+	@DataContext("sys_signature")
+	def sigEm;
+	
+	@DataContext("obo_doctype")
+	def doctypeEm;
 
 	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid.matches('.*_transmittal') }", index=0 )
 	public void getTransmittalReport( def evt ) {
@@ -13,48 +18,60 @@ class OboApplicationTransmittalInterceptor {
 		def transmittalid = p.parameters.objid;
 		if(!transmittalid) throw new Exception("objid is required in requirement checklist report")
 
-		def appEm, transmittalEm, findingEm, requirementEm, permitType;
+		def apptype = (p.reportid.startsWith("building")) ? "building" : "occupancy"; 
+		def permitType = apptype.toUpperCase() + " PERMIT";
 
-		if( p.reportid.startsWith("building") ) {
-			appEm = db.lookup( "vw_building_permit" );
-			transmittalEm = db.lookup( "building_permit_transmittal" );
-			requirementEm = db.lookup( "building_permit_requirement")
-			findingEm = db.lookup( "building_evaluation_finding" );
-			permitType = "BUILDING PERMIT";
-		}
-		else if( p.reportid.startsWith("occupancy")) {
-			appEm = db.lookup( "vw_occupancy_permit" );
-			transmittalEm = db.lookup( "occupancy_permit_transmittal" );
-			requirementEm = db.lookup( "occupancy_permit_requirement")
-			findingEm = db.lookup( "occupancy_inspection_finding" );
-			permitType = "OCCUPANCY PERMIT";
-		}
-		else {
-			throw new Exception("unsupported transmittal " + p.reportid );
-		}
-
+		def transmittalName = apptype + "_permit_transmittal";
+		def transmittalEm = db.lookup( transmittalName );
 		def t = transmittalEm.find([objid: transmittalid]).first();
 		if(!t) throw new Exception("Transmittal " + transmittalid + " not found ");
-		//check if requirement or finding transmittal.
 
+		def items, doctype;
+		def type = t.type;
+		if(type == "requirement") {
+			def itemDb = db.lookup( apptype + "_permit_requirement" ); 
+			items = itemDb.find( [transmittalid : t.objid ] ).orderBy("type.sortorder").list();
+			doctype = doctypeEm.find( [objid: apptype.toUpperCase() + "_PERMIT_REQUIREMENT_TRANSMITTAL"] ).first();
+		}
+		else {
+			def itemName;
+			if(apptype == "building") {
+				itemName = "building_evaluation_finding"; 
+				doctype = doctypeEm.find( [objid: type.replace("-", "_").toUpperCase() + "_TRANSMITTAL"] ).first();
+			}
+			else {
+				itemName = "occupancy_inspection_finding"; 
+				doctype = doctypeEm.find( [objid: "OCCUPANCY_INSPECTION_TRANSMITTAL"] ).first();
+			}
+			def itemDb =  db.lookup( itemName );
+			items = itemDb.find( [transmittalid : t.objid ] ).orderBy("type.sortorder").list();
+			items.each {
+				if(it.attachment ) {
+					it.attachment = "image:" + it.attachment;
+				};
+				it.section = [type: [title: it.parent.type.title ]];
+			}
+		}
+
+		def appEm = db.lookup( "vw_" + apptype + "_permit" );
 		def ea = appEm.find( [objid: t.appid ] ).first();
+		ea.dtfiled = t.dtcreated;
 		ea.receiver = t.createdby;
 		ea.transmittalno = t.objid;
 		ea.transmittaltype = t.type;
 		ea.permittype = permitType;
+		ea.items = items;
+		ea.endorserid = (t.endorserid) ? t.endorserid : doctype.endorserid;
+		ea.approverid = (t.approverid) ? t.approverid : doctype.approverid;
+		ea.template = (t.template) ? t.template : doctype.template;
+		ea.reportheader = (t.reportheader)? t.reportheader : doctype.reportheader;
 
-		if(t.type == "requirement") {
-			ea.items = requirementEm.find( [transmittalid : t.objid ] ).orderBy("type.sortorder").list(); 
-			ea.template = "reports/obo/requirement_transmittal";
+		//apply signatories
+		if(ea.endorserid) {
+			ea.endorser = sigEm.find( [objid: ea.endorserid ]).first();
 		}
-		else {
-			ea.items = findingEm.find( [transmittalid : t.objid ] ).orderBy("type.sortindex").list(); 
-			ea.items.each {
-				if(it.attachment ) {
-					it.attachment = "image:" + it.attachment;
-				}
-			}
-			ea.template = "reports/obo/finding_transmittal";
+		if(ea.approverid) {
+			ea.approver = sigEm.find( [objid: ea.approverid]).first();
 		}
 		result.data = ea;
 	}	

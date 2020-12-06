@@ -1,0 +1,8 @@
+<workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" schemaName="obo_requirement_type">
+    <invokers>
+        <invoker folderid="explorer/master/obo" caption="Obo Requirement Types" 
+            action="init" 
+            index="15"
+            cols="objid,title,sortorder,permittype" role="MASTER" orderBy="sortorder"/>
+    </invokers>
+</workunit>
