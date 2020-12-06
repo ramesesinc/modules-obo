@@ -15,7 +15,8 @@ import {
   Decimal,
   CheckIcon,
   Service,
-  PreviewReport
+  PreviewReport,
+  EditIcon,
 } from "rsi-react-web-components";
 
 import ProfessionalCard from "../components/ProfessionalCard";
@@ -265,7 +266,8 @@ const BuildingPermitOtherPermits = ({
       <Error msg={error} />
 
       <Panel visibleWhen={mode === "permit-list"}>
-        <Spacer />
+        <label>Click on edit <EditIcon fontSize="small" color="primary"/> for each document and complete the details.</label>
+        <Spacer height={40}/>
         {ancillaryPermits.map(permit => (
           <Panel style={{display: "flex", flexDirection: "row", justifyContent: "space-between"}}>
             <Panel row>

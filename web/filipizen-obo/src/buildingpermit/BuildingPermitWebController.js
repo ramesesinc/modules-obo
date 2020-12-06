@@ -14,6 +14,7 @@ const svc = Service.lookup("OnlineBuildingPermitService", "obo");
 import ApplicationTypeSelect from "../components/ApplicationTypeSelect";
 import BuildingPermitInitial from "./BuildingPermitInitial";
 import BuildingPermitApplicant from "./BuildingPermitApplicant";
+import BuildingRealPropertyInfo from "./BuildingRealPropertyInfo";
 import BuildingPermitLocation from "./BuildingPermitLocation";
 import BuildingPermitProject from "./BuildingPermitProject";
 import BuildingPermitSupervisor from "./BuildingPermitSupervisor";
@@ -26,31 +27,38 @@ import BuildingPermitCompleted from "./BuildingPermitCompleted";
 const pages = [
   { step: 0, component: null },
   { step: 1, name: 'applicant', caption: 'Applicant', component: BuildingPermitApplicant },
-  { step: 2, name: 'location', caption: 'Project Location', component: BuildingPermitLocation },
-  { step: 3, name: 'project', caption: 'Project Details', component: BuildingPermitProject },
-  { step: 4, name: 'supervisor', caption: 'Supervisor', component: BuildingPermitSupervisor },
-  { step: 5, name: 'occupancy', caption: 'Occupancy Type', component: BuildingPermitOccupancy },
-  { step: 6, name: 'accessories', caption: 'Accessories', component: BuildingPermitAccessories },
-  { step: 7, name: 'ancillarylist', caption: 'Other Permits', component: BuildingPermitOtherPermits },
-  { step: 8, name: 'confirm', caption: 'Confirm', component: BuildingPermitConfirm },
-  { step: 9, name: 'completed', caption: 'Completed', component: BuildingPermitCompleted },
+  { step: 2, name: 'rpu', caption: 'Real Property Info', component: BuildingRealPropertyInfo },
+  { step: 3, name: 'location', caption: 'Project Location', component: BuildingPermitLocation },
+  { step: 4, name: 'project', caption: 'Project Details', component: BuildingPermitProject },
+  { step: 5, name: 'supervisor', caption: 'Supervisor', component: BuildingPermitSupervisor },
+  { step: 6, name: 'occupancy', caption: 'Occupancy Type', component: BuildingPermitOccupancy },
+  { step: 7, name: 'accessories', caption: 'Accessories', component: BuildingPermitAccessories },
+  { step: 8, name: 'ancillarylist', caption: 'Other Permits', component: BuildingPermitOtherPermits },
+  { step: 9, name: 'confirm', caption: 'Confirm', component: BuildingPermitConfirm },
+  { step: 10, name: 'completed', caption: 'Completed', component: BuildingPermitCompleted },
 ]
 
 const BuildingPermitWebController = (props) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [mode, setMode] = useState("apptype");
-  const [appType, setAppType] = useState("new");
+  const [mode, setMode] = useState("init");
   const [appno, setAppno] = useState(getUrlParameter(props.location, "appid"));
+  const [hash, setHash] = useState();
   const [app, setApp] = useState({step: 1});
   const [step, setStep] = useState(1)
   const [errorText, setErrorText] = useState({});
 
-  const { partner, service, history } = props
+  const { partner, service, history } = props;
 
-  const handleError = (err) => {
-    setLoading(false);
-    setError(err.toString());
+  if (hash !== props.location.hash) {
+    setHash(props.location.hash);
+  }
+
+  const findAppError = () => {
+    if (mode === "init") {
+      setMode("apptype");
+      props.history.push(`${location.pathname}`);
+    }
   }
 
   const findCurrentApp = () => {
@@ -61,12 +69,16 @@ const BuildingPermitWebController = (props) => {
       } else {
         if(!app) {
           setError("Application no. does not exist");
+          findAppError();
         } else if( orgcode != app.orgcode ) {
           setError("The application number provided is not for this local government");
+          findAppError();
         } else {
           setApp(app);
           setStep(app.step);
           setMode("processing");
+          const page = pages[app.step];
+          props.history.push(`${location.pathname}?appid=${appno}#${page.name}`);
         }
       }
       setLoading(false);
@@ -77,8 +89,17 @@ const BuildingPermitWebController = (props) => {
     if (appno) {
       setLoading(true);
       findCurrentApp();
+    } else {
+      setMode("apptype");
     }
   }, [appno]);
+
+  useEffect(() => {
+    if (hash) {
+      const page = pages.find(page => page.name === hash.substring(1));
+      setStep(page.step);
+    }
+  }, [hash]);
 
   const onCreateNewApp = (appno) => {
     setAppno(appno);
@@ -115,6 +136,12 @@ const BuildingPermitWebController = (props) => {
 
   const handleStep = (step) => {
     setStep(step);
+    const page = pages[step];
+    props.history.push(`${location.pathname}?appid=${appno}#${page.name}`);
+  }
+
+  if (mode === "init") {
+    return <div></div>
   }
 
   if (mode === "apptype") {

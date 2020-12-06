@@ -13,8 +13,13 @@ class BuildingPermitReportInterceptor {
 		def refid = req.parameters.objid;
 
 		def app = oboReportSvc.getApplication([ appid: refid ]);
+		def rpus = oboReportSvc.getRpus([ appid: refid ]); 
+		if ( rpus ) {
+			app.lotowner = rpus.first().owner; 
+		} else {
+			app.lotowner = [:]; 
+		}
 		 
-		app.lotowner  = app.location?.owner;
 		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename[0].toString() : '');
 
 		app.template = "reports/obo/" + reportid;
