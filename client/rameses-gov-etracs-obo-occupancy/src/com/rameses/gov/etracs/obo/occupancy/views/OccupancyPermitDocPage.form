@@ -217,7 +217,7 @@
             <Component class="com.rameses.rcp.control.XLabel" name="xLabel15">
               <Properties>
                 <Property name="caption" type="java.lang.String" value="Project Title"/>
-                <Property name="expression" type="java.lang.String" value="#{entity.bldgpermit.title}"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.app.bldgpermit.title}"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[0, 20]"/>
                 </Property>
@@ -226,7 +226,7 @@
             <Component class="com.rameses.rcp.control.XLabel" name="xLabel16">
               <Properties>
                 <Property name="caption" type="java.lang.String" value="Location"/>
-                <Property name="expression" type="java.lang.String" value="#{entity.bldgpermit.location.text}"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.app.bldgpermit.location.text}"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[0, 20]"/>
                 </Property>
@@ -244,7 +244,7 @@
             <Component class="com.rameses.rcp.control.XLabel" name="xLabel14">
               <Properties>
                 <Property name="caption" type="java.lang.String" value="Occupancy Type"/>
-                <Property name="expression" type="java.lang.String" value="#{entity.occupancytypeid}"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.app.occupancytype.title}"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[0, 20]"/>
                 </Property>
@@ -253,7 +253,7 @@
             <Component class="com.rameses.rcp.control.XLabel" name="xLabel18">
               <Properties>
                 <Property name="caption" type="java.lang.String" value="Actual Project Cost"/>
-                <Property name="expression" type="java.lang.String" value="#{entity.actualprojectcost}"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.app.actualprojectcost}"/>
                 <Property name="numberFormat" type="java.lang.String" value="#,##0.00"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[0, 20]"/>

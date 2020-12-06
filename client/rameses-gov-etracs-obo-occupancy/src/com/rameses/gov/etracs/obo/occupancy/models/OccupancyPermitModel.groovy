@@ -1,4 +1,4 @@
-package com.rameses.gov.etracs.obo.building.models;
+package com.rameses.gov.etracs.obo.occupancy.models;
 
 import com.rameses.rcp.annotations.*;
 import com.rameses.rcp.common.*;
@@ -34,6 +34,23 @@ class OccupancytPermitModel extends WorkflowTaskModel  {
     
     public boolean getEditDocuments() {
         return true;
+    }
+    
+    public boolean getAllowEdit() {
+        return isUserTaskAssignee();
+    }
+    
+    public boolean getEditRequirements() {
+        return isUserTaskAssignee() && (task.state == "requirement-verification");
+    }
+    
+    public boolean getEditAssessment() {
+        return true;
+        //return isUserTaskAssignee() && (task.state == "requirement-verification");
+    }
+    
+    public void checkPermission() {
+        def o = secProvider.checkPermission( "OBO", "REQUIREMENT_REVIEWER", null );
     }
     
     

@@ -761,6 +761,24 @@
                     </Property>
                   </Properties>
                 </Component>
+                <Component class="com.rameses.rcp.control.XLabel" name="xLabel64">
+                  <Properties>
+                    <Property name="caption" type="java.lang.String" value="Occupancy Status"/>
+                    <Property name="expression" type="java.lang.String" value="#{  entity.occupancystate == 1 ? &apos;Not yet operating&apos; : &apos;Already operating&apos;  }"/>
+                    <Property name="visibleWhen" type="java.lang.String" value="#{ entity.occupancystate!=null &amp;&amp; entity.occupancystate &gt; 0 }"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                        <LineBorder>
+                          <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                        </LineBorder>
+                      </Border>
+                    </Property>
+                    <Property name="dateFormat" type="java.lang.String" value="yyyy-MM-dd"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[0, 20]"/>
+                    </Property>
+                  </Properties>
+                </Component>
                 <Component class="com.rameses.rcp.control.XLabel" name="xLabel61">
                   <Properties>
                     <Property name="caption" type="java.lang.String" value="Contact Name"/>
@@ -773,7 +791,7 @@
                       </Border>
                     </Property>
                     <Property name="cellPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                      <Insets value="[20, 0, 0, 0]"/>
+                      <Insets value="[10, 0, 0, 0]"/>
                     </Property>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[0, 20]"/>
@@ -798,8 +816,8 @@
                 </Component>
                 <Component class="com.rameses.rcp.control.XLabel" name="xLabel63">
                   <Properties>
-                    <Property name="caption" type="java.lang.String" value="Contact Address"/>
-                    <Property name="expression" type="java.lang.String" value="#{entity.contact.address}"/>
+                    <Property name="caption" type="java.lang.String" value="Contact Mobile No"/>
+                    <Property name="expression" type="java.lang.String" value="#{entity.contact.mobileno}"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder>
@@ -1300,7 +1318,7 @@
             <Component class="com.rameses.gov.etracs.obo.components.ApplicationRequirementList" name="applicationRequirementList1">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
-                <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
+                <Property name="editableWhen" type="java.lang.String" value="#{ editRequirements == true }"/>
                 <Property name="parentid" type="java.lang.String" value=""/>
                 <Property name="schemaName" type="java.lang.String" value="occupancy_permit_requirement"/>
               </Properties>
@@ -1353,9 +1371,34 @@
             <Component class="com.rameses.gov.etracs.obo.components.ApplicationFeeList" name="applicationFeeList1">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
-                <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
+                <Property name="editableWhen" type="java.lang.String" value="#{ editAssessment == true }"/>
                 <Property name="entitySchemaName" type="java.lang.String" value="occupancy_permit_fee"/>
                 <Property name="schemaName" type="java.lang.String" value="vw_occupancy_permit_fee"/>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+                  <BorderConstraints direction="Center"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="com.rameses.rcp.control.XPanel" name="xPanel6">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Transmittals">
+                <Property name="tabTitle" type="java.lang.String" value="Transmittals"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+          <SubComponents>
+            <Component class="com.rameses.gov.etracs.obo.components.TransmittalList" name="transmittalList2">
+              <Properties>
+                <Property name="appid" type="java.lang.String" value="entity.objid"/>
+                <Property name="entitySchemaName" type="java.lang.String" value=""/>
+                <Property name="schemaName" type="java.lang.String" value="occupancy_permit_transmittal"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">

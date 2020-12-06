@@ -126,12 +126,12 @@ public class OccupancyPermitDocPage extends javax.swing.JPanel {
         xFormPanel2.add(xLabel12);
 
         xLabel15.setCaption("Project Title");
-        xLabel15.setExpression("#{entity.bldgpermit.title}");
+        xLabel15.setExpression("#{entity.app.bldgpermit.title}");
         xLabel15.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel15);
 
         xLabel16.setCaption("Location");
-        xLabel16.setExpression("#{entity.bldgpermit.location.text}");
+        xLabel16.setExpression("#{entity.app.bldgpermit.location.text}");
         xLabel16.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel16);
 
@@ -141,12 +141,12 @@ public class OccupancyPermitDocPage extends javax.swing.JPanel {
         xFormPanel2.add(xLabel17);
 
         xLabel14.setCaption("Occupancy Type");
-        xLabel14.setExpression("#{entity.occupancytypeid}");
+        xLabel14.setExpression("#{entity.app.occupancytype.title}");
         xLabel14.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel14);
 
         xLabel18.setCaption("Actual Project Cost");
-        xLabel18.setExpression("#{entity.actualprojectcost}");
+        xLabel18.setExpression("#{entity.app.actualprojectcost}");
         xLabel18.setNumberFormat("#,##0.00");
         xLabel18.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel18);

@@ -23,9 +23,13 @@ SELECT
    ctl.approverid,
    ctl.endorserid,
    ctl.template,
-   ctl.reportheader 
+   ctl.reportheader,
+
+   bp.title,
+   bp.location_text  
 
 FROM occupancy_permit op 
+INNER JOIN vw_building_permit bp ON op.bldgpermitid = bp.objid
 INNER JOIN occupancy_permit_task t ON op.taskid = t.taskid
 INNER JOIN obo_occupancy_type ot ON op.occupancytypeid = ot.objid 
 INNER JOIN obo_occupancy_type_division od ON ot.divisionid = od.objid 

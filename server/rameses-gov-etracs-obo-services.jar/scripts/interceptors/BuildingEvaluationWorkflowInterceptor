@@ -36,7 +36,7 @@ class BuildingEvaluationWorkflowInterceptor {
 		def p = evt.args[0];
 		def c = findingEm.find([parentid: p.refid]).where("state = 2 AND supersederid IS NULL").select("c:{COUNT(*)}").val();
 
-		if( c > 0 ) throw new Exception("There must be no unresolved findings");
+		if( c > 0 ) throw new Exception("There must be no unresolved findings. Click on send for revision instead");
 
 		//check if there is zoning info in application.
 		def appid = vwEvalEm.find( [objid: p.refid ]).select("appid").val();

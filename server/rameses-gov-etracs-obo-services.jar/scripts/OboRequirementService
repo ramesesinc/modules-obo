@@ -33,6 +33,7 @@ class OboRequirementService {
 		if( c<=0) throw new Exception("There must be at least one requirement that needs to be revised");			
 		def docid = o.apptype.toUpperCase() + "_REQUIREMENT_TRANSMITTAL";
 		def doc = doctype.find( [objid: docid] ).first();
+		if(!doc) throw new Exception("doctype " + docid + " not found");
 		def pattern = doc.controlnopattern;
 
 		if(!pattern) throw new Exception("Please define controlnopattern in " + docid );

@@ -26,11 +26,7 @@ class OboMenuService {
 		def m = [:];
         m.roles = roleSvc.getRolesString([:]); 
         m.orgid = (env.ORGROOT==1) ? "root" : env.ORGID;
-        def list = evalTypeEm.getAllowedTypes( m );
-        list.each {
-        	it.handler = "building_evaluation";
-        }
-        return list;
+        return evalTypeEm.getAllowedTypes( m );
 	}
 
 	@ProxyMethod
@@ -38,11 +34,7 @@ class OboMenuService {
 		def m = [:];
         m.roles = roleSvc.getRolesString([:]); 
         m.orgid = (env.ORGROOT==1) ? "root" : env.ORGID;
-        def list = inspTypeEm.getAllowedTypes( m );
-        list.each {
-        	it.handler = "building_evaluation";
-        }
-        return list;        
+        return inspTypeEm.getAllowedTypes( m );
 	}
 
 	@ProxyMethod
@@ -50,11 +42,7 @@ class OboMenuService {
 		def m = [:];
         m.roles = roleSvc.getRolesString([:]); 
         m.orgid = (env.ORGROOT==1) ? "root" : env.ORGID;
-		def list = docTypeEm.getDocumentsToIssue( m );
-		list.each {
-			it.handler = "building_permit_doc";
-		}
-		return list;
+		return docTypeEm.getDocumentsToIssue( m );
 	}
 
 

@@ -56,6 +56,9 @@
 
 		<field name="actualprojectcost" type="decimal"/>
 		<field name="actualfixedcost" type="decimal"/>
+
+		<!-- OCCUPANCY STATE: 1 = Not yet operating  2=already operating -->
+		<field name="occupancystate"  type="integer"/>
 	</element>
 </schema>
 

@@ -1,0 +1,18 @@
+<workunit extends="com/rameses/jasper/templates/JasperFormReport.xml"> 
+    <invokers>
+        <invoker type="vw_occupancy_permit:form:appActions" 
+                 caption="View Occupancy Permit Transmittal"
+                 action="preview"
+                 index="10"
+                 reportId="occupancy_permit_transmittal"
+                 visibleWhen="#{ entity.transmittalid != null  }"/>
+
+        <!-- open from the transmittal list -->
+        <invoker type="occupancy_permit_transmittal:open" 
+                 caption="View Occupancy Permit Transmittal"
+                 reportId="occupancy_permit_transmittal"
+                 action="preview" />
+        
+    </invokers>
+   
+</workunit>

@@ -1,4 +1,4 @@
-package com.rameses.gov.etracs.obo.building.models;
+package com.rameses.gov.etracs.obo.occupancy.models;
 
 import com.rameses.rcp.annotations.*;
 import com.rameses.rcp.common.*;

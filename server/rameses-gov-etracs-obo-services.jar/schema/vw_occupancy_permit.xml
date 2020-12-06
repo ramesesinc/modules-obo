@@ -78,6 +78,10 @@
 		<field name="reportheader" />
 		<field name="txntype" />
 
+		<!-- this is added to make reports easier -->
+		<field name="title" />
+		<field name="location_text" />
+		<field name="occupancystate" />
 	</element>
 </schema>	
 

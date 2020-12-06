@@ -1,0 +1,11 @@
+<workunit extends="com/rameses/jasper/templates/JasperFormReport.xml"> 
+    <invokers>
+         <invoker type="vw_occupancy_permit:form:reports" 
+                caption="View Claim Stub"
+                action="preview"
+                index="10"
+                reportId="occupancy_permit_claimstub"
+                reportName="reports/obo/application_claimstub"
+                visibleWhen="#{ entity.appno != null }"/>
+    </invokers>
+</workunit>

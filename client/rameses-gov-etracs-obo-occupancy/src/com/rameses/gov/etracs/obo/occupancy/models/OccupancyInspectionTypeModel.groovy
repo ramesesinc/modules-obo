@@ -17,11 +17,20 @@ class OccupancyInspectionTypeModel extends CrudFormModel {
     def selectedItem;
     def sectionList;
 
+    def stateList;
+    
     void afterInit() {
          //load sections
         def m = [_schemaname: "obo_section"];
         m.where = ["1=1"];
         sectionList = queryService.getList(m);
+        
+        //load states
+        def m1 = [_schemaname:"sys_wf_node"];
+        m1.where = ["processname='occupancy_inspection' AND nodetype='state' AND tracktime=1 "]
+        m1.select = "name";
+        m1.orderBy = "idx";
+        stateList = queryService.getList(m1)*.name;
     }
     
     def roleListModel = [

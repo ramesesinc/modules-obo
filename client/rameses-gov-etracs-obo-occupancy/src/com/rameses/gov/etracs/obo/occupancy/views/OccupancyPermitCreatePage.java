@@ -71,6 +71,7 @@ public class OccupancyPermitCreatePage extends javax.swing.JPanel {
         xLabel22 = new com.rameses.rcp.control.XLabel();
         xTextField6 = new com.rameses.rcp.control.XTextField();
         xLabel3 = new com.rameses.rcp.control.XLabel();
+        xTextField10 = new com.rameses.rcp.control.XTextField();
         xLabel17 = new com.rameses.rcp.control.XLabel();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
         xComboBox2 = new com.rameses.rcp.control.XComboBox();
@@ -345,6 +346,11 @@ public class OccupancyPermitCreatePage extends javax.swing.JPanel {
         xLabel3.setExpression("Leave this blank to auto generate the app no");
         xFormPanel2.add(xLabel3);
 
+        xTextField10.setCaption("Tracking No");
+        xTextField10.setName("entity.trackingno"); // NOI18N
+        xTextField10.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xTextField10);
+
         xLabel17.setCaption("Txn Mode");
         xLabel17.setExpression("#{ entity.txnmode }");
         xLabel17.setCellPadding(new java.awt.Insets(5, 0, 0, 0));
@@ -576,6 +582,7 @@ public class OccupancyPermitCreatePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XLabel xLabel9;
     private com.rameses.rcp.control.XPanel xPanel2;
+    private com.rameses.rcp.control.XTextField xTextField10;
     private com.rameses.rcp.control.XTextField xTextField3;
     private com.rameses.rcp.control.XTextField xTextField4;
     private com.rameses.rcp.control.XTextField xTextField5;

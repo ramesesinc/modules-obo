@@ -30,6 +30,27 @@ class OccupancyPermitAssessmentInterceptor {
 	@DataContext("occupancy_permit_doc")
 	def subdocEm;
 
+	private def doAssessment( def o ) {
+		def req = [:];
+		req.factBuilder = o.factBuilder;
+		req.rulename = "oboassessment";
+		req.params = [infos: o.infos];
+		req.include_items = false;
+
+		def res = billingRuleSvc.execute( req );
+
+		def items = [];
+		res.billitems.findAll{ it.billcode && it.item == null && it.amount > 0 }.each {
+			def p = itemAcctEm.find( [objid: it.billcode ] ).first();
+			it.item = p;
+			if(o.parentid) it.parentid = o.parentid;
+			it.amtpaid = 0;
+			it.appid = o.appid;
+			it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
+			items << it;			
+		};
+		return items;	
+	}
 
 	@After(pattern="OboApplicationFeeService.getAssessment", eval="#{args[0]._schemaname == 'occupancy_permit_fee' }")
 	public void getOccupancyAssessment( def evt ) {
@@ -37,12 +58,18 @@ class OccupancyPermitAssessmentInterceptor {
 		def result = evt.result;
 
 		def vapp = vwAppEm.find( [objid: o.appid ] ).first();
+		def mapp = [:];
+		mapp.apptype = vapp.apptype;
+		mapp.projectcost = vapp.actualprojectcost;
+		mapp.height = vapp.actualheight;
+		mapp.numunits = vapp.actualnumunits;
+		mapp.totalfloorarea = vapp.actualtotalfloorarea;
 
-		def occ = vapp.occupancytype;
+		//throw new Exception("calculate occupancy fee assessment fired");
 		def infos = [];
 		def factBuilder = new FactBuilder();
-		factBuilder.facts << new OccupancyPermit( vapp ); 
-        factBuilder.facts << new OccupancyType( occ );
+		factBuilder.facts << new OccupancyPermit( mapp ); 
+        factBuilder.facts << new OccupancyType( vapp.occupancytype );
 		factBuilder.variableInfoProvider = new DefaultVariableInfoProvider(
 			schemaName:"obo_variable",
 			createDecimalFact: { return new OboDecimalInfo() },
@@ -62,26 +89,7 @@ class OccupancyPermitAssessmentInterceptor {
 			factBuilder.facts << new BuildingSubdoc( doctype: "OCCUPANCY_PERMIT" );
 		}
 
-		def req = [:];
-		req.factBuilder = factBuilder;
-		req.rulename = "oboassessment";
-		req.params = [infos: infos];
-		req.include_items = false;
-
-		def res = billingRuleSvc.execute( req );
-
-		def items = [];
-		res.billitems.findAll{ it.billcode && it.item == null && it.amount > 0 }.each {
-			def p = itemAcctEm.find( [objid: it.billcode ] ).first();
-			it.item = p;
-			if(o.parentid) it.parentid = o.parentid;
-			it.amtpaid = 0;
-			it.appid = o.appid;
-			it.sortorder = (p.sortorder == null ? 100 : p.sortorder);
-			items << it;			
-		};
-
-		result.items = items;
+		result.items = doAssessment( [appid: o.appid, parentid: o.parentid, factBuilder: factBuilder, infos: infos] );
 	}	
 
 }

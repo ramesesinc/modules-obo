@@ -76,6 +76,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xLabel58 = new com.rameses.rcp.control.XLabel();
         xLabel57 = new com.rameses.rcp.control.XLabel();
         xLabel60 = new com.rameses.rcp.control.XLabel();
+        xLabel64 = new com.rameses.rcp.control.XLabel();
         xLabel61 = new com.rameses.rcp.control.XLabel();
         xLabel62 = new com.rameses.rcp.control.XLabel();
         xLabel63 = new com.rameses.rcp.control.XLabel();
@@ -105,6 +106,8 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         applicationSubTaskList1 = new com.rameses.gov.etracs.obo.components.ApplicationSubTaskList();
         xPanel5 = new com.rameses.rcp.control.XPanel();
         applicationFeeList1 = new com.rameses.gov.etracs.obo.components.ApplicationFeeList();
+        xPanel6 = new com.rameses.rcp.control.XPanel();
+        transmittalList2 = new com.rameses.gov.etracs.obo.components.TransmittalList();
         xActionBar2 = new com.rameses.rcp.control.XActionBar();
 
         setLayout(new java.awt.BorderLayout());
@@ -409,10 +412,18 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xLabel60.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel60);
 
+        xLabel64.setCaption("Occupancy Status");
+        xLabel64.setExpression("#{  entity.occupancystate == 1 ? 'Not yet operating' : 'Already operating'  }");
+        xLabel64.setVisibleWhen("#{ entity.occupancystate!=null && entity.occupancystate > 0 }");
+        xLabel64.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel64.setDateFormat("yyyy-MM-dd");
+        xLabel64.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel64);
+
         xLabel61.setCaption("Contact Name");
         xLabel61.setExpression("#{entity.contact.name}");
         xLabel61.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        xLabel61.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel61.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
         xLabel61.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel61);
 
@@ -422,8 +433,8 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xLabel62.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel62);
 
-        xLabel63.setCaption("Contact Address");
-        xLabel63.setExpression("#{entity.contact.address}");
+        xLabel63.setCaption("Contact Mobile No");
+        xLabel63.setExpression("#{entity.contact.mobileno}");
         xLabel63.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         xLabel63.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel63);
@@ -603,7 +614,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xPanel4.setLayout(new java.awt.BorderLayout());
 
         applicationRequirementList1.setAppid("entity.objid");
-        applicationRequirementList1.setEditableWhen("#{ canEdit == true }");
+        applicationRequirementList1.setEditableWhen("#{ editRequirements == true }");
         applicationRequirementList1.setParentid("");
         applicationRequirementList1.setSchemaName("occupancy_permit_requirement");
         xPanel4.add(applicationRequirementList1, java.awt.BorderLayout.CENTER);
@@ -624,12 +635,21 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xPanel5.setLayout(new java.awt.BorderLayout());
 
         applicationFeeList1.setAppid("entity.objid");
-        applicationFeeList1.setEditableWhen("#{ canEdit == true }");
+        applicationFeeList1.setEditableWhen("#{ editAssessment == true }");
         applicationFeeList1.setEntitySchemaName("occupancy_permit_fee");
         applicationFeeList1.setSchemaName("vw_occupancy_permit_fee");
         xPanel5.add(applicationFeeList1, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Assessment", xPanel5);
+
+        xPanel6.setLayout(new java.awt.BorderLayout());
+
+        transmittalList2.setAppid("entity.objid");
+        transmittalList2.setEntitySchemaName("");
+        transmittalList2.setSchemaName("occupancy_permit_transmittal");
+        xPanel6.add(transmittalList2, java.awt.BorderLayout.CENTER);
+
+        xTabbedPane1.addTab("Transmittals", xPanel6);
 
         add(xTabbedPane1, java.awt.BorderLayout.CENTER);
 
@@ -653,6 +673,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
     private com.rameses.gov.etracs.obo.components.ApplicationSubTaskList applicationSubTaskList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private com.rameses.gov.etracs.obo.components.TransmittalList transmittalList2;
     private com.rameses.rcp.control.XActionBar xActionBar2;
     private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XButton xButton2;
@@ -712,6 +733,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel61;
     private com.rameses.rcp.control.XLabel xLabel62;
     private com.rameses.rcp.control.XLabel xLabel63;
+    private com.rameses.rcp.control.XLabel xLabel64;
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XLabel xLabel9;
@@ -720,6 +742,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XPanel xPanel3;
     private com.rameses.rcp.control.XPanel xPanel4;
     private com.rameses.rcp.control.XPanel xPanel5;
+    private com.rameses.rcp.control.XPanel xPanel6;
     private com.rameses.rcp.control.XPanel xPanel8;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     // End of variables declaration//GEN-END:variables

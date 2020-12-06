@@ -154,7 +154,7 @@ class OccupancyPermitPersistenceInterceptor {
 
 	//save all documents that are auto create that does not exist above
     private void saveInitialDocuments( def app ) {
-		subdocEm.getSubdocsToAutoCreate( [apptype:'building', appid: app.objid ]).each {
+		subdocEm.getSubdocsToAutoCreate( [apptype:'occupancy', appid: app.objid ]).each {
 			def sd = [:];
 			sd.appid = app.objid;
 			sd.doctype = [objid: it.objid];

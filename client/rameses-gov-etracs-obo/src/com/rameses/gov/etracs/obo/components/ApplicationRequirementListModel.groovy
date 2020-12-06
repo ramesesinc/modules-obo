@@ -39,6 +39,7 @@ class ApplicationRequirementListModel extends AbstractComponentModel {
         p.entity = selectedItem;
         p.listHandler = listHandler;
         p.allowEdit = editable;
+        p.editable = editable;
         def op = Inv.lookupOpener("application_requirement:open", p );
         op.target = "popup";
         return op;
