@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Panel,
-  Subtitle,
   Spacer,
   ActionBar,
   Button,
@@ -12,50 +11,37 @@ import {
   BackLink
 } from 'rsi-react-web-components';
 
-const OtherCost = ({
+const FireSafetyCost = ({
   appno,
   appService,
   moveNextStep,
   movePrevStep,
 }) => {
 
-  const costs = [
-    { caption: "Fire Alarm Cost", field: "firealarmcost", value: 0.0, },
-    { caption: "Sprinkler Cost", field: "sprinklercost", value: 0.0, },
-    { caption: "LPG Piping Cost", field: "lpgpipingcost", value: 0.0, },
-    { caption: "Fire Suppression System Cost", field: "firesuppcost", value: 0.0, },
-  ]
-
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [app, setApp] = useState({});
-  const [cost, setCost] = useState({items: costs})
+  const [cost, setCost] = useState({items: []})
 
   useEffect(() => {
-    appService.invoke("getApplication", {appid: appno}, (err, app) => {
+    appService.invoke("getAppInfos", {appid: appno}, (err, infos) => {
       if (err) {
         setError(err);
       } else {{
-        setApp(app);
-        const updatedCost = {...cost};
-        updatedCost.items.forEach(item => {
-          item.value = app[item.field];
-        });
-        setCost(updatedCost);
+        setCost({...cost, items: infos});
       }}
     });
   }, [appno])
 
-  const updatePermit = () => {
-    const updatedApp = { ...app };
-    cost.items.forEach(item => {
-      updatedApp[item.field] = item.value;
-    });
-    appService.invoke("update", updatedApp, (err, app) => {
+  const updateAppInfos = () => {
+    setLoading(true);
+    appService.invoke("saveAppInfos", {appid: appno, infos: cost.items}, (err, infos) => {
       if (err) {
         setError(err)
       } else {
         moveNextStep();
       }
+      setLoading(false);
     })
   }
 
@@ -66,7 +52,7 @@ const OtherCost = ({
       <Error msg={error} />
       <FormPanel context={cost} handler={setCost} style={styles.container}>
         {cost.items.map((cost, idx) => (
-          <Panel key={cost.field} style={styles.row}>
+          <Panel key={cost.objid} style={styles.row}>
             <Label caption={cost.caption} style={styles.label}  />
             <Decimal name={`items[${idx}].value`} variant="outlined" style={styles.item} fullWdith={false} />
           </Panel>
@@ -74,7 +60,7 @@ const OtherCost = ({
       </FormPanel>
       <ActionBar>
         <BackLink action={movePrevStep} />
-        <Button caption="Next" action={updatePermit} />
+        <Button caption="Next" action={updateAppInfos} disableWhen={loading} loading={loading} />
       </ActionBar>
     </Panel>
   )
@@ -100,4 +86,4 @@ const styles = {
   }
 }
 
-export default OtherCost;
+export default FireSafetyCost;

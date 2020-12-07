@@ -19,7 +19,7 @@ import OccupancyPermitInitial from "./OccupancyPermitInitial";
 import OccupancyType from "./OccupancyType";
 import PlannedVsActual from "./PlannedVsActual";
 import ActualCost from "./ActualCost";
-import OtherCost from "./OtherCost";
+import FireSafetyCost from "./FireSafetyCost";
 import Contractor from "./Contractor";
 import Professionals from "./Professionals";
 import Supervisor from "./Supervisor";
@@ -34,7 +34,7 @@ const pages = [
   { step: 1, name: 'apptype', caption: 'Application Type', component: OccupancyType },
   { step: 2, name: 'applicant', caption: 'Applicant', component: Applicant },
   { step: 3, name: 'actualcost', caption: 'Actual Costs', component: ActualCost },
-  { step: 4, name: 'othercost', caption: 'Fire Safety Costs', component: OtherCost },
+  { step: 4, name: 'firesafetycost', caption: 'Fire Safety Costs', component: FireSafetyCost },
   { step: 5, name: 'plannedactual', caption: 'Planned vs Actual', component: PlannedVsActual },
   { step: 6, name: 'contractor', caption: 'Contractor', component: Contractor },
   { step: 7, name: 'professionals', caption: 'Professionals', component: Professionals },
@@ -140,7 +140,7 @@ const OccupancyPermitWebController = (props) => {
   const submitAppType = ({appType, appno}) => {
     setError(null);
     if (appType === "new") {
-      setMode("init");
+      setMode("new");
     } else {
       svc.invoke("findCurrentInfo", {appid: appno}, (err, app) => {
         if (err) {
@@ -168,7 +168,7 @@ const OccupancyPermitWebController = (props) => {
     )
   }
 
-  if (mode === "init") {
+  if (mode === "new") {
     return (
       <OccupancyPermitInitial {...props} appService={svc} onComplete={onCompleteInitial} onCancel={()=> props.history.goBack()} />
     )

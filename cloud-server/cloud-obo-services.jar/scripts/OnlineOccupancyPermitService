@@ -27,6 +27,12 @@ public class OnlineOccupancyPermitService  {
 	@DataContext("obo_section")
 	def sectionEm;
 
+	@DataContext("obo_variable")
+	def varEm;
+
+	@DataContext("online_occupancy_permit_info")
+	def appInfoEm;
+
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
@@ -60,6 +66,14 @@ public class OnlineOccupancyPermitService  {
 				if( dp )  m.supervisorid = dp.objid;
 			}
 			profEm.create( m );
+		}
+
+		// insert infos
+		varEm.find([typeid: 'BFP_SALES_TAX']).list().each{
+			def v = [:];
+			v.appid = app.objid;
+			v.name = it.objid;
+			appInfoEm.create(v);
 		}
 		return app;
 	}
@@ -129,6 +143,50 @@ public class OnlineOccupancyPermitService  {
 
 		app.trackingno = app.remove("objid");
 		return app;
+	}
+
+	@ProxyMethod
+	public def getAppInfos( o ) {
+		if( !o.appid) throw new Exception("appid is required in getAppInfos");
+		def list = [];
+		appInfoEm.find([appid: o.appid]).list().each {
+			def m = [
+				objid: it.objid,
+				name:it.type.objid, 
+				datatype:it.type.datatype, 
+				caption: it.type.caption, 
+				unit: it.type.unit, 
+				sortorder: it.type.sortorder,
+				value:null, 
+			];
+			if( it.type.datatype == 'decimal') m.value = it.decimalvalue;
+			else if( it.type.datatype == 'integer') m.value = it.intvalue;
+			else if( it.type.datatype == 'boolean') m.value = true;
+			else if( it.type.datatype == 'date') m.value = it.datevalue;
+			else m.value = it.stringvalue;			
+			list << m;
+		};
+		return list.sort{it.sortorder}
+	}
+
+	@ProxyMethod
+	public def saveAppInfos( o ) {
+		println 'o => ' + o;
+		if(!o.appid) throw new Exception("saveAppInfos error. appid is required");
+		o.infos.findAll{ it.value }.each {
+			def m = [:];
+			m.objid = it.objid;
+			m.appid = o.appid;
+			m.name = it.name;
+			m.type = [name: it.name];
+			if( it.datatype == 'decimal') m.decimalvalue = it.value;
+			else if( it.datatype == 'integer') m.intvalue = it.value;
+			else if( it.datatype == 'boolean') m.booleanvalue = true;
+			else if( it.datatype == 'date') m.datevalue = it.value;
+			else m.stringvalue = it.value;
+			appInfoEm.update( m );
+		}
+		return o;
 	}
 
 	def formatAddress( def addr ) {
