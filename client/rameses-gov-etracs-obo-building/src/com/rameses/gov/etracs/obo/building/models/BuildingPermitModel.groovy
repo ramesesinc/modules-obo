@@ -34,7 +34,8 @@ class BuildingPermitModel extends WorkflowTaskModel  {
     }
     
     public boolean getAllowEdit() {
-        return isUserTaskAssignee();
+        return true;
+        //return isUserTaskAssignee();
     }
     
     public boolean getEditRpu() {

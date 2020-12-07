@@ -12,7 +12,7 @@ public class OboConstructionCostRuleService  {
 	@ProxyMethod
 	public def calc( def params ) {
 		def facts = [];
-		def ba = new BuildingApplication( params.app );
+		def ba = new BuildingInfo( params.app );
 		facts << ba;
 		facts << new OccupancyType( params.occupancytype );
 		def res = ruleSvc.execute( "oboconstructioncost", facts, null, null );

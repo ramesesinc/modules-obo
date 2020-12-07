@@ -82,6 +82,8 @@
 		<field name="title" />
 		<field name="location_text" />
 		<field name="occupancystate" />
+		<field name="amount" type="decimal"/>
+
 	</element>
 </schema>	
 

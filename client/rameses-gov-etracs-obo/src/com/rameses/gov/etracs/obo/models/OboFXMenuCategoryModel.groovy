@@ -60,7 +60,7 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
         else if( _id == 'obo_doctype' ) {
             def list = menuSvc.getDocumentsForIssuance();
             list.each {
-		it.handler = "building_permit_doc";
+		it.handler = it.apptype + "_permit_doc";
             }
             buildInvokers( list, subitems, invokers );
         }

@@ -253,13 +253,13 @@ class BuildingPermitPersistenceInterceptor {
 			if(!app.appno) {
 				app.appno = appSvc.generate([apptype:"building_permit"]);
 			}	
-			if(app.trackingno) {
-				def orgno = env.ORGID;
-				if( !app.trackingno.startsWith(orgno) ) {
-					app.trackingno = orgno + "-" + app.trackingno;
-				}
-			}		
 		}
+		if(app.trackingno) {
+			def orgno = env.ORGID;
+			if( !app.trackingno.startsWith(orgno) ) {
+				app.trackingno = orgno + "-" + app.trackingno;
+			}
+		}	
 
 		//check first all professionals if exist in the obo_professional table
 		app.objid = "BAPP" + new UID();

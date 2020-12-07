@@ -29,6 +29,9 @@
 		<!-- this is dependent on a particular document. Example fire clearance checklist is dependent on fsec -->
 		<field name="subtypeof"/>
 
+		<!-- This refers to an accompanying document of the specified refdoc -->
+		<field name="refdoc"/>
+
 		<!-- apptype is either building or occupancy -->
 		<field name="apptype" caption="App Type"/>
 

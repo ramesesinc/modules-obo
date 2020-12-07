@@ -73,6 +73,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xLabel22 = new com.rameses.rcp.control.XLabel();
         xLabel59 = new com.rameses.rcp.control.XLabel();
+        xLabel65 = new com.rameses.rcp.control.XLabel();
         xLabel58 = new com.rameses.rcp.control.XLabel();
         xLabel57 = new com.rameses.rcp.control.XLabel();
         xLabel60 = new com.rameses.rcp.control.XLabel();
@@ -393,6 +394,12 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xLabel59.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel59);
 
+        xLabel65.setCaption("Tracking No");
+        xLabel65.setExpression("#{entity.trackingno}");
+        xLabel65.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel65.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel2.add(xLabel65);
+
         xLabel58.setCaption("App Type");
         xLabel58.setExpression("#{entity.apptype}");
         xLabel58.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -594,7 +601,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
                             .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(43, Short.MAX_VALUE)))
+                    .addContainerGap(22, Short.MAX_VALUE)))
         );
 
         xTabbedPane1.addTab("General Info", jPanel2);
@@ -734,6 +741,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel62;
     private com.rameses.rcp.control.XLabel xLabel63;
     private com.rameses.rcp.control.XLabel xLabel64;
+    private com.rameses.rcp.control.XLabel xLabel65;
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XLabel xLabel9;

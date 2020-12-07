@@ -39,14 +39,14 @@
 	<field name="x" class="java.lang.Number"/>
 	<field name="nosizewire" class="java.lang.Number"/>
 	<field name="phase" class="java.lang.Number"/>
-	<field name="bldgpermit.controlno" class="java.lang.Number"/>
+	<field name="bldgpermit.controlno" class="java.lang.String"/>
 	<field name="bldgpermit.dtissued" class="java.util.Date"/>
 	<field name="title" class="java.lang.String"/>
-	<field name="occupancypermit.controlno" class="java.lang.Number"/>
+	<field name="occupancypermit.controlno" class="java.lang.String"/>
 	<field name="occupancypermit.dtissued" class="java.util.Date"/>
-	<field name="controlno" class="java.lang.Number"/>
+	<field name="controlno" class="java.lang.String"/>
 	<field name="amount" class="java.lang.Number"/>
-	<field name="receiptno" class="java.lang.Number"/>
+	<field name="receiptno" class="java.lang.String"/>
 	<field name="receiptdate" class="java.util.Date"/>
 	<field name="dtissued" class="java.util.Date"/>
 	<field name="supervisor.prc.idno" class="java.lang.String"/>
@@ -1725,7 +1725,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bldgpermit.controlno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{bldgpermit.controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1753,7 +1753,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{controlno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{controlno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1781,7 +1781,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{receiptno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{receiptno}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1874,12 +1874,14 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 						width="243"
 						height="14"
 						forecolor="#3399FF"
-						key="textField-27"/>
+						key="textField-27">
+							<printWhenExpression><![CDATA[$F{bldgpermit.controlno} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bldgpermit.controlno} + ' ' + 'DATED' + ' ' + $F{bldgpermit.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{bldgpermit.controlno} + ' ' + 'DATED' + ' ' + $F{bldgpermit.dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1888,12 +1890,14 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 						width="242"
 						height="14"
 						forecolor="#3399FF"
-						key="textField-29"/>
+						key="textField-29">
+							<printWhenExpression><![CDATA[$F{occupancypermit.controlno} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement textAlignment="Left" verticalAlignment="Middle">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{occupancypermit.controlno} + ' ' + 'DATED' + ' ' + $F{occupancypermit.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancypermit.controlno} + ' ' + 'DATED' + ' ' + $F{occupancypermit.dtissued}]]></textFieldExpression>
 				</textField>
 				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

@@ -38,6 +38,24 @@ class OboDocTypeModel extends CrudFormModel {
         return _subTypes;
     }
     
+    def _refDocTypes;
+    public def getRefDocTypes() {
+        if(_refDocTypes) return _refDocTypes;
+        def m = [_schemaname: schemaName];
+        def str = " objid <> :id AND refdoc IS NULL AND issuetype > 0 " ;
+        def p = [id:entity.objid];
+        if( entity.section?.org?.objid ) {
+            str += "AND section.org.objid = :orgid"
+            p.orgid = entity.section?.org.objid; 
+        }
+        else {
+            str += " AND section.org.objid IS NULL";
+        }
+        m.where = [ str, p ];
+        _refDocTypes = queryService.getList(m)*.objid;
+        return _refDocTypes;
+    }
+    
     public void afterInit() {
         def m = [_schemaname: "obo_section"];
         m.where = ["1=1"];

@@ -79,6 +79,8 @@
 		<field name="template" />
 		<field name="reportheader" />
 		<field name="txntype" />
+		<field name="amount" type="decimal"/>
+
 	</element>
 </schema>	
 

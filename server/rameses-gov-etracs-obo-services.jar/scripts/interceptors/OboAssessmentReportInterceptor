@@ -2,14 +2,11 @@ import com.rameses.annotations.*;
 
 class OboAssessmentReportInterceptor {
 	
-	@DataContext("vw_building_permit")
-	def appEm;
-
-	@DataContext("building_permit_fee")
-	def feeEm;
-
 	@DataContext(dynamic=true)
 	def dynEm;
+
+	@Service("DateService")
+	def dateSvc;
 
 	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid.matches('.*_assessment') }")
 	public void getBuildingApplicationAssessmentReport( def evt ) {
@@ -33,7 +30,8 @@ class OboAssessmentReportInterceptor {
 
 		def data = appEm.find( [objid: objid ]).first();
 		data.permittype =  permitType ;
-		data.items = feeEm.getCategorizedFees( [appid: objid ] );;
+		data.items = feeEm.getCategorizedFees( [appid: objid ] );
+		data.dtfiled = dateSvc.getServerDate();
 		result.data = data;
 	}	
 

@@ -124,7 +124,12 @@ class BuildingPermitWorkflowInterceptor {
 		def p = evt.args[0];
 		def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").where("parentid IS NULL").val();
 		if( c==null || c == 0 )
-			throw new Exception("There must be at least one fee");		
+			throw new Exception("There must be at least one fee");	
+		//loop all documents where there is still pending unassessed	
+		def list = subdocEm.getDocsThatRequireFees( [appid: p.refid ] );
+		if(list) {
+			throw new Exception("The ff. must have fees: \n" + list*.title.join("\n") );
+		}	
 	}
 
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'building_permit' && args[0].action == 'approve-assessment' }") 

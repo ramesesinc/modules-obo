@@ -58,6 +58,7 @@
 		<field name="createdby_name" />
 		<field name="dtcreated" type="timestamp"/>
 
+		<field name="amount" type="decimal"/>
 	</element>
 </schema>
 

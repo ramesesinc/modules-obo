@@ -70,6 +70,7 @@ class OccupancyPermitAssessmentInterceptor {
 		def factBuilder = new FactBuilder();
 		factBuilder.facts << new BuildingInfo( mapp ); 
         factBuilder.facts << new OccupancyType( vapp.occupancytype );
+
 		factBuilder.variableInfoProvider = new DefaultVariableInfoProvider(
 			schemaName:"obo_variable",
 			createDecimalFact: { return new OboDecimalInfo() },
@@ -84,6 +85,8 @@ class OccupancyPermitAssessmentInterceptor {
 			infos = infoSvc.getInfos( [parentid: o.parentid, _schemaname: "vw_occupancy_permit_info" ] );
 		}
 		else {
+			if( !vapp.occupancystate  ) throw new Exception("Please specify occupancy status");
+			factBuilder.facts << new OccupancyState( [operational: vapp.occupancystate == 2 ? true: false ] );
 			//this is for applications
 			infos = infoSvc.getInfos( [appid: o.appid, _schemaname: "vw_occupancy_permit_info" ] );	
 			factBuilder.facts << new OboDocument( doctype: "OCCUPANCY_PERMIT" );

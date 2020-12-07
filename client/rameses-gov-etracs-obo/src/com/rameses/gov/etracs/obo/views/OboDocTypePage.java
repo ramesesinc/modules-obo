@@ -42,6 +42,7 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xTextField3 = new com.rameses.rcp.control.XTextField();
         xTextField7 = new com.rameses.rcp.control.XTextField();
         xComboBox4 = new com.rameses.rcp.control.XComboBox();
+        xComboBox6 = new com.rameses.rcp.control.XComboBox();
         xTextField8 = new com.rameses.rcp.control.XTextField();
         xLabel1 = new com.rameses.rcp.control.XLabel();
         xCheckBox4 = new com.rameses.rcp.control.XCheckBox();
@@ -74,7 +75,7 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xTitledBorder1.setTitle("General Info");
         xFormPanel1.setBorder(xTitledBorder1);
         xFormPanel1.setCaptionVAlignment(com.rameses.rcp.constant.UIConstants.CENTER);
-        xFormPanel1.setCaptionWidth(180);
+        xFormPanel1.setCaptionWidth(200);
 
         xTextField1.setCaption("Code");
         xTextField1.setDisableWhen("#{ mode != 'create' }");
@@ -136,6 +137,14 @@ public class OboDocTypePage extends javax.swing.JPanel {
         xComboBox4.setVisibleWhen("#{ entity.type == 'CHECKLIST' }");
         xComboBox4.setPreferredSize(new java.awt.Dimension(200, 22));
         xFormPanel1.add(xComboBox4);
+
+        xComboBox6.setCaption("Accompanying document of");
+        xComboBox6.setDepends(new String[] {"entity.type"});
+        xComboBox6.setItemKey("");
+        xComboBox6.setItems("refDocTypes");
+        xComboBox6.setName("entity.refdoc"); // NOI18N
+        xComboBox6.setPreferredSize(new java.awt.Dimension(200, 22));
+        xFormPanel1.add(xComboBox6);
 
         xTextField8.setCaption("App No Pattern");
         xTextField8.setDepends(new String[] {"entity.type"});
@@ -248,7 +257,7 @@ public class OboDocTypePage extends javax.swing.JPanel {
 
         schemaList3.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "item.objid"}
+                new Object[]{"name", "objid"}
                 , new Object[]{"caption", "ID"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 150}
@@ -263,8 +272,8 @@ public class OboDocTypePage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "item.title"}
-                , new Object[]{"caption", "Account Title"}
+                new Object[]{"name", "title"}
+                , new Object[]{"caption", "Title"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
@@ -278,11 +287,11 @@ public class OboDocTypePage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", null}
-                , new Object[]{"caption", " "}
+                new Object[]{"name", "item.title"}
+                , new Object[]{"caption", "Acct Mapping"}
                 , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
                 , new Object[]{"nullWhenEmpty", true}
@@ -389,6 +398,7 @@ public class OboDocTypePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XComboBox xComboBox2;
     private com.rameses.rcp.control.XComboBox xComboBox4;
     private com.rameses.rcp.control.XComboBox xComboBox5;
+    private com.rameses.rcp.control.XComboBox xComboBox6;
     private com.rameses.rcp.control.XComboBox xComboBox7;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XLabel xLabel1;

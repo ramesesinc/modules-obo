@@ -30,6 +30,7 @@ public class OboApplicationFeeService  {
 			appEm = db.lookup("occupancy_permit");
 			if( o.parentid )  subAppEm = db.lookup("occupancy_permit_doc");
 		}
+
 		def total = feeEm.find([appid:o.appid]).select("c:{SUM(amount)}").val();
 		appEm.find( [objid:o.appid]).update( [amount: total] );
 
@@ -38,6 +39,8 @@ public class OboApplicationFeeService  {
 			if( total == null ) total = 0;
 			subAppEm.find( [objid:o.parentid]).update( [amount: total] );
 		}
+
+
 		return [amount: total];
 	}
 
@@ -71,6 +74,10 @@ public class OboApplicationFeeService  {
 	public def removeFee(def o ) {
 		def feeEm = db.lookup( o._schemaname );	
 		if(o.objid) {
+			def p = feeEm.find( [objid: o.objid ] ).first();
+			if(!p) throw new Exception("Item not found");
+			o.parentid = p.parentid;
+			o.appid = p.appid;
 			feeEm.find( [objid: o.objid] ).delete();
 		}
 		return updateTotals( o, feeEm );

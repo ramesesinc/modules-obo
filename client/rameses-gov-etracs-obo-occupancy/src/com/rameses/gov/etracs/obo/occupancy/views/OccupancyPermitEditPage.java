@@ -194,11 +194,12 @@ public class OccupancyPermitEditPage extends javax.swing.JPanel {
         xRadio1.setOptionValue(1);
         xRadio1.setCaptionWidth(20);
         xRadio1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xRadio1.setText("Not yet started operations");
+        xRadio1.setText("Not yet operational");
         frmOccupancyState.add(xRadio1);
 
         xRadio2.setCaption("");
         xRadio2.setName("entity.occupancystate"); // NOI18N
+        xRadio2.setOptionValue(2);
         xRadio2.setCaptionWidth(20);
         xRadio2.setText("Already operational");
         frmOccupancyState.add(xRadio2);

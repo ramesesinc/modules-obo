@@ -114,6 +114,18 @@ class OccupancytPermitDocFormReportInterceptor {
 			}	
 		}
 
+		//this is a temporary test
+		if( docsub.doctype.endorserid ) {
+			docsub.endorser = signatureEm.find( [objid: docsub.doctype.endorserid] ).first(); 
+		}
+		if( docsub.doctype.approverid ) {
+			docsub.approver = signatureEm.find( [objid: docsub.doctype.approverid] ).first(); 
+		}
+		docsub.permittype = "OCCUPANCY PERMIT";
+		//extra settings
+		result.printable = (docsub.controlid != null);
+		result.data = docsub;
+
 		//extra settings
 		result.printable = (docsub.controlid != null);
 

@@ -16,6 +16,7 @@
 		<field name="org_name" />
 		<field name="endorserid" />
 		<field name="approverid" />
+		<field name="refdoc"/>
 	</element>
 </schema>	
 

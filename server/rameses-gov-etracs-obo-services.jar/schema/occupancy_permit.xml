@@ -59,6 +59,8 @@
 
 		<!-- OCCUPANCY STATE: 1 = Not yet operating  2=already operating -->
 		<field name="occupancystate"  type="integer"/>
+		<field name="amount" type="decimal"/>
+
 	</element>
 </schema>
 
