@@ -18,6 +18,16 @@ class BuildingEvaluationModel extends WorkflowTaskModel {
         //return (userid == task.assignee?.objid);
     }
     
+    public def getSectionid() {
+        if( entity.sectionid !=null ) {
+            return entity.sectionid;
+        }
+        else {
+            //this is default so there will be no items in filter;
+            return "#NULL";
+        }
+    }
+    
     @FormTitle
     public String getTitle() {
         return "Building Evaluation " +  entity.app.appno + " " + entity.type.title + " (" + entity.task?.title + ")";
@@ -34,6 +44,11 @@ class BuildingEvaluationModel extends WorkflowTaskModel {
     public String getNotificationid() {
         return "building_evaluation:" + entity.typeid.toLowerCase();
     }
+    
+    public boolean getEditFindings() {
+        return isUserTaskAssignee() ;
+    }
+    
     
     public def viewApplication() {
         def op = Inv.lookupOpener("vw_building_permit:open", [entity: [objid: entity.appid]]);

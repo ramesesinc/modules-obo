@@ -49,6 +49,7 @@ class ApplicationRequirementModel {
     String title = "Review Requirement";
 
     def info = [:];
+    boolean allowEdit = false; //this is set from the outside
     boolean editable;
     boolean overridable;
     boolean superseded;
@@ -63,7 +64,17 @@ class ApplicationRequirementModel {
     }
 
     void init() {
+        if( entity.state == null ) {
+            info.state = 0;
+        }
+        else {
+            info.state = entity.state;            
+        }    
+        info.remarks = entity.remarks;
         def userid = user.userid;
+
+        if(!allowEdit) return;
+        
         //OsirisContext.getEnv().USERID
         overridable = false;
         if( entity.transmittalid ) {
@@ -75,13 +86,6 @@ class ApplicationRequirementModel {
                 overridable = true;
             }
         }
-        if( entity.state == null ) {
-            info.state = 0;
-        }
-        else {
-            info.state = entity.state;            
-        }    
-        info.remarks = entity.remarks;
     }
     
     def moveUp() {
@@ -130,7 +134,7 @@ class ApplicationRequirementModel {
     }
     
     void supersede() {
-        supsededed = true;
+        superseded = true;
         createEntry(2, info.remarks);
         editable = true;
         overridable = false;
@@ -140,7 +144,11 @@ class ApplicationRequirementModel {
     }
     
     def closeIssue() {
-        createEntry(1, null);
+        def m = [_schemaname:schemaName];
+        m.state = 1;
+        m.objid = entity.objid;
+        persistenceService.update( m );
+        listHandler.reload();
         return "_close";
     }
     

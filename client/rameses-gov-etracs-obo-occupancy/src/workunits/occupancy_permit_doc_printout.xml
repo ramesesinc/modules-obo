@@ -1,0 +1,10 @@
+<workunit extends="com/rameses/jasper/templates/JasperFormReport.xml"> 
+    <invokers>
+        <invoker type="vw_occupancy_permit_doc:form:formActions" 
+                 caption="View Printout"
+                 action="preview" 
+                 index="1" 
+                 visibleWhen="#{ entity.template !=null || entity.doctype.template !=null }"
+                 reportId="occupancy_permit_doc" />
+    </invokers>
+</workunit>

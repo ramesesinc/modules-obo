@@ -504,7 +504,7 @@
 				<image  hAlign="Center" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="373"
-						y="0"
+						y="-22"
 						width="202"
 						height="105"
 						key="image-5"/>
@@ -517,7 +517,7 @@
 				<image  hAlign="Center" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="373"
-						y="91"
+						y="73"
 						width="203"
 						height="91"
 						key="image-6"/>
@@ -744,7 +744,7 @@ deficiencies on my resubmission.]]></text>
 						width="203"
 						height="14"
 						key="textField-3"/>
-					<box>					<topPen lineWidth="1.0"/>
+					<box>					<topPen lineWidth="2.0"/>
 </box>
 					<textElement textAlignment="Center">
 						<font fontName="Arial" pdfFontName="Helvetica" size="9" isBold="false"/>
@@ -771,7 +771,11 @@ deficiencies on my resubmission.]]></text>
 						width="203"
 						height="14"
 						key="textField-5"/>
-					<box>					<topPen lineWidth="1.0"/>
+					<box>					<pen lineWidth="0.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
 </box>
 					<textElement textAlignment="Center">
 						<font fontName="Arial" pdfFontName="Helvetica" size="9" isBold="false"/>

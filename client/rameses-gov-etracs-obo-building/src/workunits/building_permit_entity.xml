@@ -3,8 +3,8 @@
         <invoker type="building_permit_entity" target="popup"
                  caption="Building Application Entity" action="init" />
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationEntityModel" />
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitEntityModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationEntityPage" />
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitEntityPage" />
     </pages>
 </workunit>

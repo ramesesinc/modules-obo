@@ -283,7 +283,7 @@
             <Component class="com.rameses.gov.etracs.obo.components.ApplicationDocumentList" name="applicationDocumentList1">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.appid"/>
-                <Property name="apptype" type="java.lang.String" value="building"/>
+                <Property name="apptype" type="java.lang.String" value="occupancy"/>
                 <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
                 <Property name="entitySchemaName" type="java.lang.String" value="occupancy_permit_doc"/>
                 <Property name="handler" type="java.lang.String" value="docHandler"/>

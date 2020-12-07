@@ -22,6 +22,8 @@
 
 		<!--  0 - no issuance required, 1= auto issue,  2=manual issue -->
 		<field name="issuetype"  type="integer"/>
+
+		<field name="appnopattern"/>
 		<field name="controlnopattern"/>
 
 		<!-- this is dependent on a particular document. Example fire clearance checklist is dependent on fsec -->

@@ -1,7 +1,7 @@
 <schema>
 	<element tablename="occupancy_permit_entity">
 		<field name="objid" primary="true" prefix="OCCPMTENT" />
-		<field name="appid" required="true" />
+		<field name="appid" />
 
 
 		<field name="profileid" />

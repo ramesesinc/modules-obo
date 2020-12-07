@@ -1,0 +1,33 @@
+<workunit>
+    <invokers>
+        <invoker type="vw_building_permit:form:edit" target="popup"
+            caption="Edit Txn Type" action="init" context="txntype" />
+        
+        <invoker type="vw_building_permit:form:edit" target="popup"
+            caption="Edit Contact" action="init" context="contact" />
+        
+        <invoker type="vw_building_permit:form:edit" target="popup"
+            caption="Edit Project Info" action="init" context="project" />
+
+        <invoker type="vw_building_permit:form:edit" target="popup"
+            caption="Edit Applicant" action="init" context="applicant" />
+        
+        <invoker type="vw_building_permit:form:edit" target="popup"
+            caption="Edit Occupancy Type" action="init" context="occupancytype" />
+
+        <invoker type="vw_building_permit:form:edit" target="popup"
+            caption="Edit Zone Class" action="init" context="zoneclass" />
+        
+        <invoker type="vw_building_evaluation:form:extActions" target="popup"
+            caption="Edit Zone Class" action="init" 
+            context="zoning_zoneclass"
+            visibleWhen="#{ entity.typeid == 'ZONING' }"    />
+        
+        <invoker type="formActions" caption="Close" action="_close" immediate="true" />
+        <invoker type="formActions" caption="Save" action="save" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitEditModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitEditPage" />
+    </pages>
+</workunit>

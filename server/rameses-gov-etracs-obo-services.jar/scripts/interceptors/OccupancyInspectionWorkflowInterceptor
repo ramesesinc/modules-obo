@@ -45,7 +45,7 @@ class OccupancyInspectionWorkflowInterceptor {
 		def p = evt.args[0];
 		def c = findingEm.find([parentid: p.refid]).where("state = 2 AND supersederid IS NULL").select("c:{COUNT(*)}").val();
 
-		if( c > 0 ) throw new Exception("There must be no unresolved findings");
+		if( c > 0 ) throw new Exception("There must be no unresolved findings. Click on Send for Revision instead");
 		//check here if there are fees
 		def vs = vwInspEm.find( [objid: p.refid] ).first();
 		if(vs.type.requirefee == 1 ) {
@@ -63,18 +63,28 @@ class OccupancyInspectionWorkflowInterceptor {
 		def p = evt.args[0];
 		def result = evt.result;
 		def appid = vwInspEm.find( [objid: p.refid] ).select("appid").val();
-		def cnt = vwInspEm.find([appid:appid]).select("c:{COUNT(*)}").where( " task.state NOT IN ('for-revision', 'end') ").val();
-		if( cnt == 0 ) {
-			def app = appEm.find([objid:appid]).select("task.*").first();
-			def f = [:];
-			f.processname = 'occupancy_permit';
-			f.refid = appid;
-			f.startdate = dateSvc.getServerDate();
-			f.info = [ app: p.info ];
-			f.action = 'send-for-verification';
-			f.taskid = app.taskid;
-			wfSvc.signal(f);
+		def tlist = vwInspEm.find([appid:appid]).select("task.state").list();
+
+		def hasOpen = tlist.find{ !it.task.state.matches( "for-revision|end" ) };
+		if( hasOpen ) {
+			return;
 		}
+
+		//determine what action to fire in.  Check worfklow if for-revision it will go thru for revision.
+		boolean hasRevision = (tlist.find{ it.task.state == "for-revision" }!=null) ? true : false;
+
+		//throw new Exception("fire action " + ((hasRevision==true) ? 'send-for-verification' : 'approve-inspection'));
+
+		def app = appEm.find([objid:appid]).select("task.*").first();
+		def f = [:];
+		f.processname = 'occupancy_permit';
+		f.refid = appid;
+		f.startdate = dateSvc.getServerDate();
+		f.info = [ app: p.info ];
+		f.action = (hasRevision==true) ? 'send-for-verification' : 'approve-inspection';
+		f.taskid = app.taskid;
+		wfSvc.signal(f);	
+
 	}
 
 

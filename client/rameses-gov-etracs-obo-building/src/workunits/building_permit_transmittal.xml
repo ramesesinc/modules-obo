@@ -1,7 +1,7 @@
 <workunit extends="com/rameses/jasper/templates/JasperFormReport.xml"> 
     <invokers>
         <invoker type="vw_building_permit:form:appActions" 
-                 caption="View Requirement Transmittal"
+                 caption="View Building Permit Transmittal"
                  action="preview"
                  index="10"
                  reportId="building_permit_transmittal"
@@ -9,7 +9,7 @@
 
         <!-- open from the transmittal list -->
         <invoker type="building_permit_transmittal:open" 
-                 caption="View Requirement Transmittal"
+                 caption="View Building Permit Transmittal"
                  reportId="building_permit_transmittal"
                  action="preview" />
         

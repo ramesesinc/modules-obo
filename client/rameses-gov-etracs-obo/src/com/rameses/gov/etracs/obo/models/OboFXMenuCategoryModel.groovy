@@ -45,14 +45,23 @@ class OboFXMenuCategoryModel  extends FXMenuCategoryModel {
     void loadDynamicItems( String _id, def subitems, def invokers ) {
         if(_id == 'building_evaluation' ) {
             def list = menuSvc.getEvaluationTypesMenu();
+            list.each {
+                it.handler = "building_evaluation";
+            }
             buildInvokers( list, subitems, invokers );
         }
         else if(_id == 'occupancy_inspection' ) {
             def list = menuSvc.getInspectionTypesMenu();
+            list.each {
+        	it.handler = "occupancy_inspection";
+            }
             buildInvokers( list, subitems, invokers );
         }        
         else if( _id == 'obo_doctype' ) {
             def list = menuSvc.getDocumentsForIssuance();
+            list.each {
+		it.handler = "building_permit_doc";
+            }
             buildInvokers( list, subitems, invokers );
         }
     }

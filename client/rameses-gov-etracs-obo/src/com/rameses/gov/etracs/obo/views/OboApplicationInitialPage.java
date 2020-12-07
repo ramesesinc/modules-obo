@@ -34,17 +34,40 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
     private void initComponents() {
 
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
+        xRadio1 = new com.rameses.rcp.control.XRadio();
+        xTextField1 = new com.rameses.rcp.control.XTextField();
         xRadio4 = new com.rameses.rcp.control.XRadio();
         xComboBox1 = new com.rameses.rcp.control.XComboBox();
         xComboBox2 = new com.rameses.rcp.control.XComboBox();
-        xRadio1 = new com.rameses.rcp.control.XRadio();
-        xTextField1 = new com.rameses.rcp.control.XTextField();
         xRadio3 = new com.rameses.rcp.control.XRadio();
         xPanel1 = new com.rameses.rcp.control.XPanel();
         xFileBrowser1 = new com.rameses.rcp.control.XFileBrowser();
         jLabel1 = new javax.swing.JLabel();
 
         xFormPanel1.setCaptionWidth(160);
+
+        xRadio1.setCaption("From");
+        xRadio1.setName("source"); // NOI18N
+        xRadio1.setOptionValue("web");
+        xRadio1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xRadio1.setShowCaption(false);
+        xRadio1.setText("Download from web (via Filipizen)");
+        xRadio1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xRadio1ActionPerformed(evt);
+            }
+        });
+        xFormPanel1.add(xRadio1);
+
+        xTextField1.setCaption("Enter Tracking No");
+        xTextField1.setDepends(new String[] {"source"});
+        xTextField1.setName("trackingno"); // NOI18N
+        xTextField1.setVisibleWhen("#{ source == 'web' }");
+        xTextField1.setCaptionWidth(150);
+        xTextField1.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
+        xTextField1.setPreferredSize(new java.awt.Dimension(200, 20));
+        xTextField1.setRequired(true);
+        xFormPanel1.add(xTextField1);
 
         xRadio4.setCaption("");
         xRadio4.setName("source"); // NOI18N
@@ -71,29 +94,6 @@ public class OboApplicationInitialPage extends javax.swing.JPanel {
         xComboBox2.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
         xComboBox2.setRequired(true);
         xFormPanel1.add(xComboBox2);
-
-        xRadio1.setCaption("From");
-        xRadio1.setName("source"); // NOI18N
-        xRadio1.setOptionValue("web");
-        xRadio1.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
-        xRadio1.setShowCaption(false);
-        xRadio1.setText("Download from web (via Filipizen)");
-        xRadio1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xRadio1ActionPerformed(evt);
-            }
-        });
-        xFormPanel1.add(xRadio1);
-
-        xTextField1.setCaption("Enter Tracking No");
-        xTextField1.setDepends(new String[] {"source"});
-        xTextField1.setName("trackingno"); // NOI18N
-        xTextField1.setVisibleWhen("#{ source == 'web' }");
-        xTextField1.setCaptionWidth(150);
-        xTextField1.setCellPadding(new java.awt.Insets(0, 30, 0, 0));
-        xTextField1.setPreferredSize(new java.awt.Dimension(200, 20));
-        xTextField1.setRequired(true);
-        xFormPanel1.add(xTextField1);
 
         xRadio3.setCaption("");
         xRadio3.setName("source"); // NOI18N

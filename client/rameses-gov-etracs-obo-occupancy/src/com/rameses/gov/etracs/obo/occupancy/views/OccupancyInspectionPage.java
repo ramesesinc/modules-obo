@@ -190,7 +190,7 @@ public class OccupancyInspectionPage extends javax.swing.JPanel {
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         applicationDocumentList1.setAppid("entity.appid");
-        applicationDocumentList1.setApptype("building");
+        applicationDocumentList1.setApptype("occupancy");
         applicationDocumentList1.setEditableWhen("#{ canEdit == true }");
         applicationDocumentList1.setEntitySchemaName("occupancy_permit_doc");
         applicationDocumentList1.setHandler("docHandler");

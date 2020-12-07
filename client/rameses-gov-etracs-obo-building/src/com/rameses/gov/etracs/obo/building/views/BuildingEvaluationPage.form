@@ -288,7 +288,7 @@
                 <Property name="entitySchemaName" type="java.lang.String" value="building_permit_doc"/>
                 <Property name="handler" type="java.lang.String" value="docHandler"/>
                 <Property name="schemaName" type="java.lang.String" value="vw_building_permit_doc"/>
-                <Property name="sectionid" type="java.lang.String" value="entity.sectionid"/>
+                <Property name="sectionid" type="java.lang.String" value="sectionid"/>
               </Properties>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -312,7 +312,7 @@
             <Component class="com.rameses.gov.etracs.obo.components.ApplicationFindingList" name="applicationFindingList2">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.appid"/>
-                <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
+                <Property name="editableWhen" type="java.lang.String" value="#{ editFindings == true }"/>
                 <Property name="parentid" type="java.lang.String" value="entity.objid"/>
                 <Property name="schemaName" type="java.lang.String" value="building_evaluation_finding"/>
                 <Property name="sectionTitle" type="java.lang.String" value="entity.type.title"/>

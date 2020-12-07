@@ -1,0 +1,36 @@
+<workunit>
+    <invokers>
+        <invoker type="vw_occupancy_permit:form:edit" target="popup"
+            caption="Edit Txn Type" action="init" context="txntype" />
+
+        <invoker type="vw_occupancy_permit:form:edit" target="popup"
+            caption="Edit App Type" action="init" context="apptype" />
+
+        <!--
+        <invoker type="vw_occupancy_permit:form:edit" target="popup"
+            caption="Edit Inspection Schedule" action="init" context="inspectiondate" />
+        -->
+        
+        <invoker type="vw_occupancy_permit:form:edit" target="popup"
+            caption="Edit Contact" action="init" context="contact" />
+        
+        <invoker type="vw_occupancy_permit:form:edit" target="popup"
+            caption="Edit Occupancy Status" action="init" context="occupancystate" />
+
+        <invoker type="vw_occupancy_permit:form:edit" target="popup"
+            caption="Edit Project Info" action="init" context="project" />
+
+        <invoker type="vw_occupancy_permit:form:edit" target="popup"
+            caption="Edit Applicant" action="init" context="applicant" />
+        
+        <invoker type="vw_occupancy_permit:form:edit" target="popup"
+            caption="Edit Occupancy Type" action="init" context="occupancytype" />
+
+        <invoker type="formActions" caption="Close" action="_close" immediate="true" />
+        <invoker type="formActions" caption="Save" action="save" />
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyPermitEditModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.occupancy.views.OccupancyPermitEditPage" />
+    </pages>
+</workunit>

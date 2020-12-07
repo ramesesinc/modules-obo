@@ -134,7 +134,7 @@ class OboMenuNotificationInterceptor {
 	public void getOccupancyInspectionTaskCount( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
-		def nid = p.notificationid
+		def nid = p.notificationid;
 		def procname = nid.split(":")[0];
 		def cnt = taskCountSvc.getProcessTaskCount( [processname: procname, domain: "OBO", notificationid: nid ] );
 		if(cnt) result.count = cnt.count;

@@ -28,7 +28,7 @@ class OboApplicationInitialModel  {
     def trackingno;
     def txnmode = "ONLINE";
     def txnModes = ["ONLINE", "CAPTURE"];
-    def source = "capture";
+    def source = "web";
     def taskStates;
     def taskstate;
     
@@ -51,7 +51,7 @@ class OboApplicationInitialModel  {
     }
     
     def next() {
-        if(source==null) source = "capture";
+        if(source==null) source = "web";
         
         if(source.matches("web|local")) {
             def v = downloadSvc.getApplication( [trackingno: trackingno, permittype: permitType ]  );

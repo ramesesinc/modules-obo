@@ -5,7 +5,6 @@
  */
 package com.rameses.gov.etracs.obo.components;
 
-import com.rameses.osiris2.common.BasicListModel;
 import com.rameses.rcp.ui.annotations.ComponentBean;
 
 /**

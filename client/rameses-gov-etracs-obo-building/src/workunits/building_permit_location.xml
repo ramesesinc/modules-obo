@@ -3,8 +3,8 @@
         <invoker type="building_permit_location" target="popup"
                  caption="Building Location" action="init" />
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationLocationModel" />
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitLocationModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationLocationPage" />
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitLocationPage" />
     </pages>
 </workunit>

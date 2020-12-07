@@ -30,7 +30,7 @@ class OboApplicationClaimStubReportInterceptor {
 		}
 
 		def ea = appEm.find( [objid: id ] ).first();
-		def r = taskEm.find( [refid: id, state: 'receiving'] ).orderBy("dtcreated DESC").first();
+		def r = taskEm.find( [refid: id, state: 'requirement-verification'] ).orderBy("dtcreated DESC").first();
 		if( r ) {
 			ea.startdate = r.startdate;
 			ea.enddate = r.enddate;

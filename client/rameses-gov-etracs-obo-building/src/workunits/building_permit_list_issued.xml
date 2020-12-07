@@ -3,6 +3,7 @@
     <invokers>
         <invoker folderid="menucategory/obo/building" caption="Active Building Permit List"
              cols="controlno,apptype,title,applicant.name,projectcost,expirydate,appno,appdate"
+             customFilter=" NOT(controlid IS NULL) "
              action="init" index="21"/>
         
     </invokers>

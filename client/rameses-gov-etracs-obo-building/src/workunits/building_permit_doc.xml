@@ -7,8 +7,8 @@
                 visibleWhen="#{ entity.doctype.issuetype == 2 }"/>     
                 
     </invokers>
-    <code class="com.rameses.gov.etracs.obo.building.models.BuildingApplicationSubdocModel" />
+    <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitDocModel" />
     <pages>
-        <page template="com.rameses.gov.etracs.obo.building.views.BuildingApplicationSubdocPage" />
+        <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitDocPage" />
     </pages>
 </workunit>

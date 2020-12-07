@@ -31,7 +31,6 @@ class BuildingPermitService {
 		perm.professionals = subdocEm.select("sectionid,designprofessionalid,supervisorid").find( [appid: perm.appid ] ).where( " NOT(sectionid IS NULL ) AND NOT(designprofessionalid IS NULL) ").list();
 		return perm;
 	}	
-	
 
 	
 }
