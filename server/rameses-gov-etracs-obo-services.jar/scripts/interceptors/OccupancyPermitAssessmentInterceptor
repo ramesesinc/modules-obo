@@ -68,7 +68,7 @@ class OccupancyPermitAssessmentInterceptor {
 		//throw new Exception("calculate occupancy fee assessment fired");
 		def infos = [];
 		def factBuilder = new FactBuilder();
-		factBuilder.facts << new OccupancyPermit( mapp ); 
+		factBuilder.facts << new BuildingInfo( mapp ); 
         factBuilder.facts << new OccupancyType( vapp.occupancytype );
 		factBuilder.variableInfoProvider = new DefaultVariableInfoProvider(
 			schemaName:"obo_variable",
@@ -80,13 +80,13 @@ class OccupancyPermitAssessmentInterceptor {
 		if( o.parentid ) {
 			def sd = subdocEm.find([objid: o.parentid ] ).first();	
 			//this is for subapplications
-			factBuilder.facts << new BuildingSubdoc( doctype: sd.doctype.objid );
+			factBuilder.facts << new OboDocument( doctype: sd.doctype.objid );
 			infos = infoSvc.getInfos( [parentid: o.parentid, _schemaname: "vw_occupancy_permit_info" ] );
 		}
 		else {
 			//this is for applications
 			infos = infoSvc.getInfos( [appid: o.appid, _schemaname: "vw_occupancy_permit_info" ] );	
-			factBuilder.facts << new BuildingSubdoc( doctype: "OCCUPANCY_PERMIT" );
+			factBuilder.facts << new OboDocument( doctype: "OCCUPANCY_PERMIT" );
 		}
 
 		result.items = doAssessment( [appid: o.appid, parentid: o.parentid, factBuilder: factBuilder, infos: infos] );

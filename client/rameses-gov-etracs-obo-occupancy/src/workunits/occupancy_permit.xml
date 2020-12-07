@@ -16,7 +16,13 @@
                 action="showMenu" 
                 context="reports" />
        
-       
+        <invoker type="appActions" 
+                caption="Edit"
+                icon="images/toolbars/edit.png"
+                action="showMenu" 
+                context="edit" 
+                visibleWhen="#{ allowEdit == true }"/>  
+        
         <invoker type="appActions" 
                 caption="Issue Permit"
                 action="issuePermit" 

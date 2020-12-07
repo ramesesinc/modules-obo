@@ -1,6 +1,6 @@
 import com.rameses.annotations.*; 
 
-class BuildingApplicationSubdocFormReportInterceptor {
+class BuildingPermitDocFormReportInterceptor {
 	
 	@DataContext("vw_building_permit_doc")
 	def vwSubdocEm;

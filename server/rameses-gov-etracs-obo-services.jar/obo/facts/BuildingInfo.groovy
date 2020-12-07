@@ -3,17 +3,13 @@ package obo.facts;
 import java.util.*;
 
 public class BuildingInfo {
-
-	Date appdate;
-	String apptype;				//NEW OR RENEW
-	String constructiontype;	
 	String worktype;
 
+	String apptype;
 	double projectcost;			//computed. 
 	double fixedcost;  			//fixed cost
 	double highercost;			//whichever is higher = computed or fixed
 
-	int numstoreys;
 	double floorarea; 			//deprecated
 	double totalfloorarea; 		
 	double height;
@@ -22,13 +18,10 @@ public class BuildingInfo {
 	String zoneclass;
 	String zone;
 
-
 	public BuildingInfo() {}
 
 	public BuildingInfo(def app) {
-        this.appdate = app.appdate;
-        this.apptype = app.apptype;
-
+		if( app.apptype !=null) this.apptype = app.apptype; 
         if( app.projectcost !=null ) this.projectcost = app.projectcost;
         if( app.fixedcost !=null ) this.fixedcost = app.fixedcost;
         if( app.height !=null ) this.height = app.height;

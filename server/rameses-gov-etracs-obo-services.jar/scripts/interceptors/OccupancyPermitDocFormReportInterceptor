@@ -1,12 +1,12 @@
 import com.rameses.annotations.*; 
 
-class OccupancytIssuanceFormReportInterceptor {
+class OccupancytPermitDocFormReportInterceptor {
 	
 	@DataContext("vw_occupancy_permit_doc")
 	def vwSubdocEm;
 
-	//@DataContext("vw_occupancy_permit_info")
-	//def vwInfoEm;
+	@DataContext("vw_occupancy_permit_info")
+	def vwInfoEm;
 
 	@DataContext("vw_occupancy_permit")
 	def vwAppEm;
@@ -14,12 +14,10 @@ class OccupancytIssuanceFormReportInterceptor {
 	@DataContext("occupancy_permit_task")
 	def appTaskEm;
 
-	/*
-	@DataContext("vw_occupancy_permit_fee_payment")
-	def payEm;
-	*/
+	//@DataContext("vw_occupancy_permit_fee_payment")
+	//def payEm;
 
-	@DataContext("obo_signature")
+	@DataContext("sys_signature")
 	def signatureEm;
 
 	@After(pattern="FormReportService.getData", eval="#{args[0].reportid == 'occupancy_permit_doc' }")
@@ -33,8 +31,6 @@ class OccupancytIssuanceFormReportInterceptor {
 		if( docsub.template == null ) {
 			docsub.template = docsub.doctype.template;
 		}
-
-		throw new Exception("template is " + docsub.template);
 
 		def app = vwAppEm.find( [objid: docsub.appid ] ).first();
 
@@ -78,14 +74,17 @@ class OccupancytIssuanceFormReportInterceptor {
 			def papp = vwSubdocEm.find( [appid: docsub.appid, doctypeid: docsub.doctype.subtypeof ]).first();
 			feeParentid = papp.objid;
 		}
+		/*
 		def pay = payEm.find( [ parentid: feeParentid ] ).select("payment.refno,payment.refdate,amount").groupBy("payment.refno,payment.refdate").first();
 		if( pay?.payment ) {
 			docsub.receiptno = pay.payment.refno;
 			docsub.receiptdate = pay.payment.refdate;
 			docsub.amount = pay.amount;		
 		}
+		*/
 
 		//load evaluator. find the associated building evaluation
+		/*
 		def zeval = evalEm.find( [appid: docsub.appid, typeid: docsub.doctype.evaltypeid ] ).first();
 		def tsk = evalTaskEm.find( [refid: zeval.objid, state:'evaluation' ] ).orderBy("dtcreated DESC").first();
 		docsub.evaluator = tsk.assignee;
@@ -97,11 +96,14 @@ class OccupancytIssuanceFormReportInterceptor {
 				docsub.evaluator.name = info.displayname;
 			}	
 		}
+		*/
 
 		//load approver
+		/*
 		tsk = evalTaskEm.find( [refid: zeval.objid, state:'evaluation-approval' ] ).orderBy("dtcreated DESC").first();
 		docsub.approver = tsk?.assignee;
 		docsub.dtapproved = tsk?.enddate;
+		*/
 
 		//load issuer
 		if( docsub.issuedby?.objid ) {

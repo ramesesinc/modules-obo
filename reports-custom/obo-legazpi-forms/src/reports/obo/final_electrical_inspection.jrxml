@@ -27,13 +27,13 @@
 
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="address.text" class="java.lang.String"/>
-	<field name="occupancy.group" class="java.lang.String"/>
+	<field name="occupancytype.division.objid" class="java.lang.String"/>
 	<field name="electrical.engr.name" class="java.lang.String"/>
-	<field name="occupancy.character" class="java.lang.String"/>
+	<field name="occupancytype.group.title" class="java.lang.String"/>
 	<field name="prc.idno" class="java.lang.Number"/>
 	<field name="prcno.dtissued" class="java.util.Date"/>
 	<field name="prcno.dtvalidity" class="java.util.Date"/>
-	<field name="total_connected_load" class="java.lang.Number"/>
+	<field name="actual_total_connected_load" class="java.lang.Number"/>
 	<field name="total_transformer_capacity" class="java.lang.Number"/>
 	<field name="total_generator_ups_capacity" class="java.lang.Number"/>
 	<field name="x" class="java.lang.Number"/>
@@ -1580,7 +1580,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.group}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.division.objid}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1594,7 +1594,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.character}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.group.title}.toUpperCase()]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -1664,7 +1664,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{total_connected_load}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{actual_total_connected_load}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -1960,7 +1960,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.character}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.group.title}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -1988,7 +1988,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.group}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.division.objid}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
