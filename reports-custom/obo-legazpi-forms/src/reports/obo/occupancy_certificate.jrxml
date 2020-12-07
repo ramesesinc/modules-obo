@@ -28,22 +28,22 @@
 	<field name="dtsubmitted" class="java.util.Date"/>
 	<field name="submittedby.name" class="java.lang.String"/>
 	<field name="submittedby.profession" class="java.lang.String"/>
-	<field name="certificate.no" class="java.lang.Number"/>
+	<field name="controlno" class="java.lang.Number"/>
 	<field name="feepaid" class="java.lang.Number"/>
-	<field name="orno" class="java.lang.Number"/>
-	<field name="certificate.dtpaid" class="java.lang.Number"/>
-	<field name="certificate.dtissued" class="java.util.Date"/>
-	<field name="owner.name" class="java.lang.String"/>
-	<field name="project.name" class="java.lang.String"/>
+	<field name="receiptno" class="java.lang.Number"/>
+	<field name="receiptdate" class="java.util.Date"/>
+	<field name="dtissued" class="java.util.Date"/>
+	<field name="applicant.name" class="java.lang.String"/>
+	<field name="title" class="java.lang.String"/>
 	<field name="occupancy.character" class="java.lang.String"/>
 	<field name="occupancy.group" class="java.lang.String"/>
 	<field name="address.text" class="java.lang.String"/>
-	<field name="bldg.permitno" class="java.lang.Number"/>
-	<field name="bldg.issued" class="java.util.Date"/>
+	<field name="permit.controlno" class="java.lang.Number"/>
+	<field name="permit.dtissued" class="java.util.Date"/>
 
 		<background>
 			<band height="612"  isSplitAllowed="true" >
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="0"
 						y="0"
@@ -1042,7 +1042,7 @@
 					</textElement>
 				<text><![CDATA[       A CERTIFIED COPY HEREOF SHALL BE POSTED WITHIN THE PREMISES OF THE BUILDING AND SHALL NOT BE REMOVED WITHOUT AUTHORITY FROM THE BUILDING OFFICIAL.                           ]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="86"
 						y="40"
@@ -1056,7 +1056,7 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtsubmitted}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="73"
 						y="136"
@@ -1070,7 +1070,7 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{submittedby.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="237"
 						y="136"
@@ -1120,7 +1120,7 @@
 						key="rectangle-4"/>
 					<graphicElement stretchType="NoStretch"/>
 				</rectangle>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="557"
 						y="115"
@@ -1132,9 +1132,9 @@
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{certificate.no}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{controlno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="557"
 						y="126"
@@ -1148,7 +1148,7 @@
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{feepaid}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="557"
 						y="136"
@@ -1160,9 +1160,9 @@
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{orno}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{receiptno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="558"
 						y="145"
@@ -1174,9 +1174,9 @@
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{certificate.dtpaid}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{receiptdate}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="651"
 						y="163"
@@ -1188,9 +1188,9 @@
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{certificate.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="555"
 						y="239"
@@ -1202,9 +1202,9 @@
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{owner.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="555"
 						y="249"
@@ -1216,9 +1216,9 @@
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{project.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{title}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="555"
 						y="259"
@@ -1232,7 +1232,7 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{occupancy.character}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="688"
 						y="256"
@@ -1246,7 +1246,7 @@
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{occupancy.group}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="554"
 						y="268"
@@ -1269,7 +1269,7 @@
 						key="line-16"/>
 					<graphicElement stretchType="NoStretch"/>
 				</line>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="168"
 						y="428"
@@ -1281,9 +1281,9 @@
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bldg.permitno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{controlno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="21"
 						y="441"
@@ -1295,7 +1295,7 @@
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{bldg.issued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
 				<line direction="TopDown">
 					<reportElement

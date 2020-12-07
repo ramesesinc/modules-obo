@@ -25,30 +25,30 @@
 	<import value="net.sf.jasperreports.engine.data.*" />
 
 
-	<field name="owner.name" class="java.lang.String"/>
+	<field name="applicant.name" class="java.lang.String"/>
 	<field name="address.text" class="java.lang.String"/>
-	<field name="occupancy.category" class="java.lang.Number"/>
+	<field name="occupancy.group" class="java.lang.String"/>
 	<field name="electrical.engr.name" class="java.lang.String"/>
-	<field name="occupancy.type" class="java.lang.String"/>
-	<field name="prcno" class="java.lang.Number"/>
+	<field name="occupancy.character" class="java.lang.String"/>
+	<field name="prc.idno" class="java.lang.Number"/>
 	<field name="prcno.dtissued" class="java.util.Date"/>
 	<field name="prcno.dtvalidity" class="java.util.Date"/>
-	<field name="total.load" class="java.lang.Number"/>
-	<field name="total.transformer.capacity" class="java.lang.Number"/>
-	<field name="total.generator.capacity" class="java.lang.Number"/>
+	<field name="total_connected_load" class="java.lang.Number"/>
+	<field name="total_transformer_capacity" class="java.lang.Number"/>
+	<field name="total_generator_ups_capacity" class="java.lang.Number"/>
 	<field name="x" class="java.lang.Number"/>
 	<field name="nosizewire" class="java.lang.Number"/>
 	<field name="phase" class="java.lang.Number"/>
-	<field name="bldgno" class="java.lang.Number"/>
-	<field name="bldgno.dtissued" class="java.util.Date"/>
-	<field name="projecttype" class="java.lang.String"/>
+	<field name="permit.controlno" class="java.lang.String"/>
+	<field name="permit.dtissued" class="java.util.Date"/>
+	<field name="title" class="java.lang.String"/>
 	<field name="occupancy.permitno" class="java.lang.Number"/>
 	<field name="occupancy.permitno.dtissued" class="java.lang.String"/>
-	<field name="certificateno" class="java.lang.Number"/>
-	<field name="amount.paid" class="java.lang.Number"/>
-	<field name="orno" class="java.lang.Number"/>
-	<field name="dtpaid" class="java.lang.Number"/>
-	<field name="certificate.dtissued" class="java.util.Date"/>
+	<field name="controlno" class="java.lang.Number"/>
+	<field name="feepaid" class="java.lang.Number"/>
+	<field name="receiptno" class="java.lang.Number"/>
+	<field name="receiptdate" class="java.util.Date"/>
+	<field name="dtissued" class="java.util.Date"/>
 
 		<background>
 			<band height="612"  isSplitAllowed="true" >
@@ -68,7 +68,7 @@
 		</background>
 		<title>
 			<band height="612"  isSplitAllowed="true" >
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="322"
 						y="28"
@@ -1527,7 +1527,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<text><![CDATA[LOCAL BUILDING OFFICIAL]]></text>
 				</staticText>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="448"
 						y="29"
@@ -1540,7 +1540,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 </graphicElement>
 					<imageExpression class="java.lang.String"><![CDATA["images/final_electrical_inspection_header.png"]]></imageExpression>
 				</image>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="38"
 						y="81"
@@ -1552,9 +1552,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{owner.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="34"
 						y="105"
@@ -1568,7 +1568,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{address.text}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="248"
 						y="128"
@@ -1580,9 +1580,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{occupancy.category}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.group}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="36"
 						y="127"
@@ -1594,9 +1594,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.type}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.character}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="82"
 						y="165"
@@ -1610,7 +1610,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA[$F{electrical.engr.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="64"
 						y="177"
@@ -1622,9 +1622,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{prcno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{prc.idno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="158"
 						y="177"
@@ -1638,7 +1638,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{prcno.dtissued}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="250"
 						y="177"
@@ -1652,7 +1652,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{prcno.dtvalidity}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="147"
 						y="237"
@@ -1664,7 +1664,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{total.load}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{total_connected_load}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -1681,7 +1681,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 				<text><![CDATA[KVA
 ]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="148"
 						y="249"
@@ -1693,9 +1693,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{total.transformer.capacity}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{total_transformer_capacity}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="151"
 						y="259"
@@ -1707,9 +1707,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{total.generator.capacity}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{total_generator_ups_capacity}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="90"
 						y="344"
@@ -1738,7 +1738,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 				<text><![CDATA[VOLTS
 ]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="235"
 						y="339"
@@ -1752,7 +1752,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{nosizewire}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="235"
 						y="360"
@@ -1766,7 +1766,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{phase}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="127"
 						y="390"
@@ -1778,9 +1778,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bldgno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{controlno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="35"
 						y="401"
@@ -1792,9 +1792,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{bldgno.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="532"
 						y="152"
@@ -1806,9 +1806,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{certificateno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{controlno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="532"
 						y="164"
@@ -1820,9 +1820,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{amount.paid}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{feepaid}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="532"
 						y="175"
@@ -1834,9 +1834,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{orno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{receiptno}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="532"
 						y="185"
@@ -1848,9 +1848,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{dtpaid}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{receiptdate}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="634"
 						y="214"
@@ -1862,9 +1862,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Center">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{certificate.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{dtissued}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="510"
 						y="306"
@@ -1876,9 +1876,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{owner.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{applicant.name}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="674"
 						y="319"
@@ -1890,9 +1890,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{projecttype}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{title}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="509"
 						y="344"
@@ -1936,7 +1936,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 				</staticText>
 				<staticText>
 					<reportElement
-						x="711"
+						x="726"
 						y="319"
 						width="48"
 						height="11"
@@ -1948,7 +1948,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<text><![CDATA[SPACE]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="510"
 						y="331"
@@ -1960,7 +1960,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.type}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.character}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -1976,7 +1976,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<text><![CDATA[CATEGORY]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="657"
 						y="330"
@@ -1988,9 +1988,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{occupancy.category}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancy.group}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="510"
 						y="357"
@@ -2002,7 +2002,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.Number"><![CDATA[$F{bldgno}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{permit.controlno}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
@@ -2018,7 +2018,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<text><![CDATA[DATED ]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="656"
 						y="356"
@@ -2030,9 +2030,9 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					<textElement textAlignment="Left">
 						<font pdfFontName="Helvetica-Bold" size="8" isBold="true"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{bldgno.dtissued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{permit.dtissued}]]></textFieldExpression>
 				</textField>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="511"
 						y="367"
@@ -2060,7 +2060,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<text><![CDATA[DATED ]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<textField isStretchWithOverflow="false" pattern="dd/MM/yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="665"
 						y="366"
@@ -2074,7 +2074,7 @@ ITS IMPLEMENTING RULES AND REGULATIONS.
 					</textElement>
 				<textFieldExpression   class="java.util.Date"><![CDATA[$F{occupancy.permitno.dtissued}]]></textFieldExpression>
 				</textField>
-				<image  evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="389"
 						y="28"
