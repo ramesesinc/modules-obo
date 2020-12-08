@@ -26,14 +26,11 @@ class BuildingPermitWorkflowInterceptor {
 	@DataContext("obo_control")
 	def issuanceEm;
 
-	@DataContext("obo_doctype")
-	def doctypeEm;
-
 	@DataContext("building_permit_doc")
 	def subdocEm;
 
-	@Service("WorkflowTaskService")
-	def wfSvc;
+	@DataContext("vw_building_permit_doc")
+	def vwSubdocEm;
 
 	@Service("MenuNotificationService")
     def notificationSvc;
@@ -145,14 +142,13 @@ class BuildingPermitWorkflowInterceptor {
 		def appid = p.refid;
 		def dt = dateSvc.getServerDate();
 
-		//update the documents to state=1 which is for release
+		def docList = vwSubdocEm.find( [appid: appid]).where("doctype.issuetype = 2 AND app.task.state = 'releasing' AND controlid IS NULL AND doctype.refdoc IS NULL").list()*.doctype?.objid;	
+		
 		p._notificationlist = [];
-
-		subdocEm.find( [appid: appid ]).update([state:1]);
-		def docList = subdocEm.find( [appid: appid]).where("doctype.issuetype = 2").list();		
 		docList.each {
-			p._notificationlist <<  'building_permit_doc:' + it.doctype.objid.toLowerCase();				
+			p._notificationlist <<  'building_permit_doc:' + it.toLowerCase();				
 		}
+		p._notificationlist << "obo";
 	}
 
 	//this should fire after all the tasks have been saved

@@ -9,7 +9,7 @@ class OboAssessmentReportInterceptor {
 	def dateSvc;
 
 	@After(pattern="FormReportService.getData", eval="#{ args[0].reportid.matches('.*_assessment') }")
-	public void getBuildingApplicationAssessmentReport( def evt ) {
+	public void getOboAssessmentReport( def evt ) {
 		def p = evt.args[0];
 		def result = evt.result;
 		def reportid = p.reportid;

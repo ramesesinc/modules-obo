@@ -1,13 +1,13 @@
 <workunit>
     <invokers>
-         <invoker type="vw_building_permit:form:formActions" 
+         <invoker type="vw_occupancy_permit:form:formActions" 
                 caption="Capture Payment"
                 action="init" 
                 index="1"
                 target="popup"
                 srole="SYSTEM"
-                txntype="building_permit" 
-                apptype="building"
+                txntype="occupancy_permit" 
+                apptype="occupancy"
                 visibleWhen="#{task.state == 'payment'}"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboCapturePaymentModel" />

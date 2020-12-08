@@ -119,7 +119,11 @@ class OccupancyPermitWorkflowInterceptor {
 		def p = evt.args[0];
 		def c = feeEm.find( [appid: p.refid ]).select("c:{COUNT(*)}").where("parentid IS NULL").val();
 		if( c==null || c == 0 )
-			throw new Exception("There must be at least one fee");		
+			throw new Exception("There must be at least one fee");	
+		def list = subdocEm.getDocsThatRequireFees( [appid: p.refid ] );
+		if(list) {
+			throw new Exception("The ff. must have fees: \n" + list*.title.join("\n") );
+		}		
 	}
 
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_permit' && args[0].action == 'approve-assessment' }") 
@@ -135,13 +139,12 @@ class OccupancyPermitWorkflowInterceptor {
 		def appid = p.refid;
 		def dt = dateSvc.getServerDate();
 
-		//update the documents to state=1 which is for release
-		p._notificationlist = [];
+		def docList = subdocEm.find( [appid: appid]).where("doctype.issuetype = 2 AND app.task.state = 'releasing' AND doctype.refdoc IS NULL").list()*.doctype?.objid;	
+		throw new Exception("post payment " + docList );
 
-		subdocEm.find( [appid: appid ]).update([state:1]);
-		def docList = subdocEm.find( [appid: appid]).where("doctype.issuetype = 2").list();		
+		p._notificationlist = [];
 		docList.each {
-			p._notificationlist <<  'occupancy_permit_doc:' + it.doctype.objid.toLowerCase();				
+			p._notificationlist <<  'occupancy_permit_doc:' + it.toLowerCase();				
 		}
 	}
 

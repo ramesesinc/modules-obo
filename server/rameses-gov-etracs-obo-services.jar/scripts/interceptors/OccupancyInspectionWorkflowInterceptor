@@ -44,18 +44,8 @@ class OccupancyInspectionWorkflowInterceptor {
 	public void doActionBeforeApprove( def evt ) {
 		def p = evt.args[0];
 		def c = findingEm.find([parentid: p.refid]).where("state = 2 AND supersederid IS NULL").select("c:{COUNT(*)}").val();
-
 		if( c > 0 ) throw new Exception("There must be no unresolved findings. Click on Send for Revision instead");
-		//check here if there are fees
-		def vs = vwInspEm.find( [objid: p.refid] ).first();
-		if(vs.type.requirefee == 1 ) {
-			def pp = [appid: vs.appid, sectionid: vs.typeid ];
-
-			c = feeEm.find( pp ).select("c:{COUNT(*)}").val();
-			if( c == 0 ) throw new Exception("There must be at least one fee for this section");
-		}
 	}
-
 
 	//release process. Ensure that all tasks are closed before firing main
 	@After(pattern="WorkflowTaskService.signal", eval="#{args[0].processname == 'occupancy_inspection' && args[0].action.matches('send-for-revision|approve') }" ) 
@@ -72,9 +62,6 @@ class OccupancyInspectionWorkflowInterceptor {
 
 		//determine what action to fire in.  Check worfklow if for-revision it will go thru for revision.
 		boolean hasRevision = (tlist.find{ it.task.state == "for-revision" }!=null) ? true : false;
-
-		//throw new Exception("fire action " + ((hasRevision==true) ? 'send-for-verification' : 'approve-inspection'));
-
 		def app = appEm.find([objid:appid]).select("task.*").first();
 		def f = [:];
 		f.processname = 'occupancy_permit';
