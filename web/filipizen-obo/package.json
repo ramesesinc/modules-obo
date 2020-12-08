@@ -1,6 +1,6 @@
 {
   "name": "filipizen-obo",
-  "version": "0.2.14",
+  "version": "0.2.15",
   "description": "Filipizen OBO Web Module",
   "author": "ramesesinc",
   "license": "MIT",
@@ -27,8 +27,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
-    "rsi-react-filipizen-components": "^0.2.1",
-    "rsi-react-web-components": "^0.2.1",
+    "rsi-react-filipizen-components": "^0.2.13",
+    "rsi-react-web-components": "^0.2.11",
     "use-immer": "^0.4.1"
   },
   "devDependencies": {
@@ -51,11 +51,12 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
-    "rsi-react-filipizen-components": "^0.2.1",
-    "rsi-react-web-components": "^0.2.1",
+    "rsi-react-filipizen-components": "^0.2.13",
+    "rsi-react-web-components": "^0.2.11",
     "use-immer": "^0.4.1"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {}
 }
