@@ -5,33 +5,35 @@ class OccupancyPermitReportInterceptor {
 	@Service(value="OnlineOccupancyPermitService")
 	def oboReportSvc;
 
-	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('certificate_of_occupancy') }" )
-	public def beforeOccupancy( evt ) {
+	@After( pattern="FormReportService.getData", eval="#{args[0].reportid.matches('certificate_of_occupancy') }" )
+	public def getOccupancyData( evt ) {
 		def req = evt.args[0];
+		def result = evt.result;
 		def reportid =  req.reportid;
-		def refid = req.params?.refid;
+		def refid = req.parameters.objid;
 
 		def app = oboReportSvc.getApplication([ appid: refid ]);
 		app.lotowner  = app.location?.owner;
 		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename[0].toString() : '');
 
-		req.data = app;
-		req.reportid = reportid;
-		req.template = "reports/obo/" + reportid;
+		app.reportid = reportid;
+		app.template = "reports/obo/" + reportid;
+		result.data = app;
 	}
 
-	@Before( pattern="JasperReportService.generateReport", eval="#{args[0].reportid.matches('certificate_of_completion') }" )
-	public def beforeCompletion( evt ) {
+	@After( pattern="FormReportService.getData", eval="#{args[0].reportid.matches('certificate_of_completion') }" )
+	public def afterCompletionData( evt ) {
 		def req = evt.args[0];
+		def result = evt.result;
 		def reportid =  req.reportid;
-		def refid = req.params?.refid;
+		def refid = req.parameters.objid;
 
 		def app = oboReportSvc.getApplication([ appid: refid ]);
 		app.lotowner  = app.location?.owner;
 		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename[0].toString() : '');
 
-		req.data = app;
-		req.reportid = reportid;
-		req.template = "reports/obo/" + reportid;
+		app.reportid = reportid;
+		app.template = "reports/obo/" + reportid;
+		result.data = app;
 	}
 }

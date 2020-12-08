@@ -104,7 +104,7 @@ const Initial = ({
         <Mobileno name="mobileno" />
         <ActionBar>
           <BackLink action={onCancel} />
-          <Button caption="Next" action={verifyInfo} />
+          <Button caption="Next" action={verifyInfo} loading={loading} disableWhen={loading} />
         </ActionBar>
       </FormPanel>
 

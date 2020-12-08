@@ -8,15 +8,12 @@ import {
   Subtitle,
   Spacer,
   Loading,
-  Error,
   Text,
   Decimal,
   Integer,
-  ButtonLink,
   Subtitle2,
-  PageviewIcon,
-  CloudDownloadIcon,
-  ReportViewer
+  PreviewReport,
+  DownloadReport
 } from 'rsi-react-web-components'
 
 const BuildingPermitConfirm = ({
@@ -109,29 +106,11 @@ const BuildingPermitConfirm = ({
     setShowPreview(false);
   }
 
-  let items = [];
-  ancillaryPermits.forEach(permit => {
-    items.push({
-      title: permit.permittypeid.toUpperCase(),
-      Icon: PageviewIcon,
-      href: `/jreports/obo/${permit.permittypeid}permit?refid=${permit.objid}`,
-      // href: `/jreports/obo/electricalpermit?refid=OBOBPANC25cf462e:174704f4c30:-7fcf`,
-    })
-  })
-
   return (
     <Panel>
       <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Confirm Application</Subtitle>
       <Spacer />
-
-      <ReportViewer
-        title="Building Permit Application"
-        items={items}
-        open={showPreview}
-        style={{}}
-        onClose={onCloseViewer}
-      />
 
       <MsgBox
         open={confirm}
@@ -146,16 +125,8 @@ const BuildingPermitConfirm = ({
       <FormPanel visibleWhen={!loading} context={app} handler={setApp}>
         <Panel style={styles.container}>
           <Panel style={styles.linkContainer}>
-            <ButtonLink
-              caption="Preview"
-              href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/buildingpermit?refid=${appno}`}
-              Icon={PageviewIcon}
-            />
-            <ButtonLink
-              caption="Download"
-              href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/buildingpermit?refid=${appno}`}
-              Icon={CloudDownloadIcon}
-            />
+            <PreviewReport href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/building_permit?refid=${appno}`} />
+            <DownloadReport href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/building_permit?refid=${appno}`}/>
           </Panel>
           <Panel>
             <Text caption="Tracking No." name="objid" readOnly={true} />
@@ -192,16 +163,8 @@ const BuildingPermitConfirm = ({
               <Panel style={styles.ancillaryItem}>
                 <label style={{marginLeft: 20}}>{permit.type.title}</label>
                 <Panel row>
-                  <ButtonLink
-                    caption="Preview"
-                    href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
-                    Icon={PageviewIcon}
-                  />
-                  <ButtonLink
-                    caption="Download"
-                    href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/${permit.permittypeid}permit?refid=${permit.objid}`}
-                    Icon={CloudDownloadIcon}
-                  />
+                  <PreviewReport href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/building_ancillary_${permit.type.objid}?refid=${permit.objid}`} />
+                  <DownloadReport href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/building_ancillary_${permit.type.objid}?refid=${permit.objid}`} />
                 </Panel>
               </Panel>
             )}

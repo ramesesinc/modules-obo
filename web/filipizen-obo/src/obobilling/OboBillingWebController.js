@@ -40,7 +40,7 @@ const OboBillingWebController = ({
   service,
   location,
   history,
-  initialStep=1 //TODO: reset to 0
+  initialStep=0
 }) => {
 
   const [step, setStep] = useState(initialStep);

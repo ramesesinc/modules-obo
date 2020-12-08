@@ -51,8 +51,6 @@ const OnlineBilling = ({
     onCancel(0);
   }
 
-  const blur = contact && contact.email !== bill.email;
-
   return (
     <Card style={{maxWidth: 800}}>
       <Title>{title}</Title>

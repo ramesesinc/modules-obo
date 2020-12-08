@@ -8,6 +8,7 @@ import {
   FormPanel,
   Spacer,
   Text,
+  BackLink
 } from "rsi-react-web-components";
 
 import { Person, IdEntry, PrcCard, PtrCard } from "rsi-react-filipizen-components";
@@ -15,6 +16,7 @@ import { Person, IdEntry, PrcCard, PtrCard } from "rsi-react-filipizen-component
 const NewProfessional = ({
   info = {},
   partner,
+  onCancel,
   onSubmit
 }) => {
 
@@ -49,6 +51,7 @@ const NewProfessional = ({
           <PtrCard name="ptr" />
           <IdEntry caption="Primary Identification" name="id" />
           <ActionBar>
+            <BackLink action={onCancel} />
             <Button caption="Next" action={submitHandler} />
           </ActionBar>
         </FormPanel>

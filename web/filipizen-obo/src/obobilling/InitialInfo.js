@@ -13,7 +13,6 @@ import {
   BackLink,
   useData,
   Card,
-  Combobox,
   Radio,
   Item
 } from 'rsi-react-web-components'
@@ -38,7 +37,7 @@ const InitialInfo = ({
 
   const getBilling = async () => {
     const svc = await Service.lookupAsync(`${partner.id}:OboOnlineBillingService`, "obo");
-    return await svc.getBilling({txntype, ...params, qtr: 4, showdetails:true})
+    return await svc.invoke("getBilling", {txntype, ...params, qtr: 4, showdetails:true})
   }
 
   const loadBill = () => {
