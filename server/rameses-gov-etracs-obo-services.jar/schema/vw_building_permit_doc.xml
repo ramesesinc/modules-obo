@@ -38,7 +38,7 @@
 		<field name="org_objid" />
 		<field name="sectionid" />
 
-		<complex name="app" ref="vw_building_permit" jointype="many-to-one" includefields="appno,trackingno,title,location.text,applicant.name,projectcost,fixedcost">
+		<complex name="app" ref="vw_building_permit" jointype="many-to-one" includefields="appno,trackingno,title,location.text,applicant.name,projectcost,fixedcost,task.state">
 			<key field="appid" target="objid" />			
 		</complex>	
 	</element>

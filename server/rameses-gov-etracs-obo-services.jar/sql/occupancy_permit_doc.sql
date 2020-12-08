@@ -40,3 +40,12 @@ FROM occupancy_permit_doc sd
 INNER JOIN obo_doctype dt ON sd.doctypeid=dt.objid
 WHERE sd.appid = $P{appid}
 AND NOT(dt.template IS NULL)
+
+
+[getDocsThatRequireFees]
+SELECT dt.title 
+FROM occupancy_permit_doc sd 
+INNER JOIN obo_doctype dt ON sd.doctypeid = dt.objid 
+WHERE sd.appid = $P{appid} 
+AND dt.requirefee = 1 
+AND (sd.amount IS NULL OR sd.amount <= 0)
