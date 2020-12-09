@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   FormPanel,
   Panel,
@@ -44,6 +44,8 @@ const BuildingPermitInitial = (props) => {
   const { partner, service, handler, history, onCancel } = props
   const step = steps[activeStep];
 
+  const formRef = useRef();
+
   const moveNextStep = () => {
     setActiveStep(cs => cs + 1);
   }
@@ -80,6 +82,12 @@ const BuildingPermitInitial = (props) => {
     moveNextStep();
   }
 
+  const submitProjectInfo = () => {
+    if (formRef.current.reportValidity()) {
+      moveNextStep();
+    }
+  }
+
   if (step.name === "email") {
     return (
       <Page>
@@ -102,6 +110,7 @@ const BuildingPermitInitial = (props) => {
         <Title>{service.title}</Title>
         <FormPanel visibleWhen={step.name === "select-apptype"} context={app} handler={setApp} >
           <Subtitle>Select Application Type</Subtitle>
+          <Spacer />
           <Panel style={{marginLeft: 20}}>
             <Radio name="apptype">
               <Item caption="New Construction" value="NEW" />
@@ -119,11 +128,13 @@ const BuildingPermitInitial = (props) => {
           <Subtitle>New Building Permit Application</Subtitle>
           <Spacer height={30} />
           <Subtitle2>Project Information</Subtitle2>
-          <Text caption="Project Name" name="title"  autoFocus={true} />
-          <ActionBar>
-            <BackLink action={movePrevStep} />
-            <Button caption='Next' action={moveNextStep} />
-          </ActionBar>
+          <form ref={formRef}>
+            <Text caption="Project Name" name="title" required  autoFocus={true} />
+            <ActionBar>
+              <BackLink action={movePrevStep} />
+              <Button caption='Next' action={submitProjectInfo} />
+            </ActionBar>
+          </form>
         </FormPanel>
 
         <Panel visibleWhen={step.name === "confirmation"}>

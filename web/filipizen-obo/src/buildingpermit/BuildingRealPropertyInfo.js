@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Panel,
   Subtitle,
@@ -28,7 +28,9 @@ const BuildingRealPropertyInfo = ({
 	const [refno, setRefno] = useState();
   const [rpus, setRpus] = useState([]);
   const [property, setProperty] = useState({});
+  const [hasError, setHasError] = useState(false);
 
+  const formRef = useRef();
 
   /* load rpus */
   useEffect(() => {
@@ -95,20 +97,26 @@ const BuildingRealPropertyInfo = ({
     setMode("view-rpus");
   }
 
+  const onError = (error) => {
+    setHasError(error);
+  }
+
   const saveRpu = () => {
-    if( !property.owner.id ) {
-      alert("Please provide proof of identity for owner/administrator of property");
-      return;
+    // if( !property.owner.id ) {
+    //   alert("Please provide proof of identity for owner/administrator of property");
+    //   return;
+    // }
+    if (!hasError && formRef.current.reportValidity()) {
+      setError(null);
+      appService.invoke("saveRpu", property, (err, rpu) => {
+        if (err) {
+          setError(err)
+        } else {
+          reloadList();
+          setMode("view-rpus");
+        }
+      });
     }
-    setError(null);
-    appService.invoke("saveRpu", property, (err, rpu) => {
-      if (err) {
-        setError(err)
-      } else {
-        reloadList();
-        setMode("view-rpus");
-      }
-    });
   }
 
   const viewLocations = () => {
@@ -194,9 +202,6 @@ const BuildingRealPropertyInfo = ({
           }
         <FormPanel context={property} handler={setProperty}>
           <LotInformation editable={false} />
-        {/**
-          <LotOwnershipType property={property} name="lotowned" row editable={false} />
-        */}
           <Spacer />
           <OwnershipInfo name="owner" orgcode={partner.id} owner={property.owner} editable={false} />
         </FormPanel>
@@ -206,22 +211,25 @@ const BuildingRealPropertyInfo = ({
         </ActionBar>
       </Panel>
 
-        <Panel visibleWhen={mode === "edit-owner-info"}>
-          <label>Please update the information if necessary</label>
-          <FormPanel context={property} handler={setProperty}>
-            <LotOwnershipType caption="Is lot owned or leased?" property={property} name="lotowned" row autoFocus={true} />
-            <OwnershipInfo name="owner" owner={property.owner}
-              orgcode={partner.id}
-              editable={false}
-              showIdEntry={true}
-              editableAddress={true}
-              editableIdEntry={true} />
-          </FormPanel>
-          <ActionBar>
-            <BackLink action={() => setMode("view-lot")} caption="Back" />
-            <Button action={saveRpu} caption="Next" />
-          </ActionBar>
-        </Panel>
+      <Panel visibleWhen={mode === "edit-owner-info"}>
+          <form ref={formRef}>
+            <label>Please update the information if necessary</label>
+            <FormPanel context={property} handler={setProperty}>
+              <LotOwnershipType caption="Is lot owned or leased?" property={property} name="lotowned" row autoFocus={true} />
+              <OwnershipInfo name="owner" owner={property.owner}
+                orgcode={partner.id}
+                editable={false}
+                showIdEntry={true}
+                editableAddress={true}
+                editableIdEntry={true}
+                onError={onError} />
+            </FormPanel>
+            <ActionBar>
+              <BackLink action={() => setMode("view-lot")} caption="Back" />
+              <Button action={saveRpu} caption="Next" />
+            </ActionBar>
+          </form>
+      </Panel>
     </Panel>
   );
 }

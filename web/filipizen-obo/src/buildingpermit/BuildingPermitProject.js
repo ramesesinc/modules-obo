@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   ActionBar,
   Button,
@@ -15,6 +15,7 @@ import {
   Integer,
   Decimal,
   Date,
+  isDateBefore
 } from "rsi-react-web-components";
 
 const svc = Service.lookup("OboMiscListService", "obo");
@@ -42,7 +43,6 @@ const BuildingPermitProject = ({
   const [error, setError] = useState();
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  //TODO: remove mode only
   const [mode, setMode] = useState("project-detail");
   const [occupancyMode, setOccupancyMode] = useState("group");
   const [project, setProject] = useState(initialProject);
@@ -51,6 +51,9 @@ const BuildingPermitProject = ({
   const [occupancyTypes, setOccupancyTypes] = useState([]);
   const [professional, setProfessional] = useState();
   const [masterWorkTypes, setMasterWorkTypes] = useState([]);
+  const [errorCompletionDate, setErrorCompletionDate] = useState(false);
+
+  const formRef = useRef();
 
   const loadOccupancyGroups = () => {
     svc.invoke("getOccupancyTypeGroups", null, (err, groups) => {
@@ -138,7 +141,14 @@ const BuildingPermitProject = ({
       loadOccupancyTypes();
   }, [occupancyMode])
 
+  const onErrorCompletionDate = () => {
+    setErrorCompletionDate(true);
+  }
+
   const submitProjectDetail = () => {
+    if (!formRef.current.reportValidity()) return;
+    if (isDateBefore(project.dtexpectedcompletion, project.dtproposedconstruction)) return;
+
     setError(null);
     const detail = {
       appid: appno,
@@ -188,37 +198,6 @@ const BuildingPermitProject = ({
     }
   }
 
-  const submitOccupancyGroup = () => {
-    if (!project.occupancytype.group.objid) {
-      setError("Kindly select an occupancy group.")
-    } else {
-      setOccupancyMode("division");
-    }
-  }
-
-  const submitOccupancyDivision = () => {
-    if (!project.occupancytype.division.objid) {
-      setError("Kindly select an occupancy division group.")
-    } else {
-      setOccupancyMode("type");
-    }
-  }
-
-  const submitOccupancyType = () => {
-    if (!project.occupancytype.objid) {
-      setError("Kindly select an occupancy type.")
-    } else {
-      let occupancytype = {appid: appno, occupancytype: project.occupancytype};
-      appService.invoke("updateOccupancyType", occupancytype, (err, res) => {
-        if (err) {
-          setError(err);
-        } else {
-          clearStatus();
-          moveNextStep();
-        }
-      })
-    }
-  }
   const clearStatus = () => {
     setError(null);
     setLoading(false);
@@ -232,27 +211,33 @@ const BuildingPermitProject = ({
       <Error msg={error} />
 
       <FormPanel visibleWhen={mode === "project-detail"} context={project} handler={setProject}>
-        <Text caption="Project Title" name="title" required={true} readOnly={stepCompleted} autoFocus={true}/>
-        <Text caption="Project Description" name="description" required={true} readOnly={stepCompleted} />
-        {project.occupancytypeid &&
-          <Text caption="Occupancy Type" name="occupancytype.title" required={true} readOnly={stepCompleted} />
-        }
-        <Spacer/>
-        <Integer caption="No of Units" name="numunits" required={true} readOnly={stepCompleted} />
-        <Panel row>
-          <Decimal caption="Total Floor Area [sq.meter]" name="totalfloorarea" required={true} readOnly={stepCompleted} fullWidth textAlign="left" />
-          <Decimal caption="Building Height [meter]" name="height" required={true} readOnly={stepCompleted} fullWidth textAlign="left" />
-        </Panel>
-        <Integer caption="No. of Storeys" name="numfloors" required={true} readOnly={stepCompleted} />
-        <Spacer/>
-        <Decimal caption="Estimated Cost [Php]" name="projectcost" required={true} readOnly={stepCompleted} decimalScale={2} textAlign="left" />
-        <Panel row>
-          <Date caption="Proposed Construction Date" name="dtproposedconstruction" readOnly={stepCompleted} />
-          <Date caption="Expected Completion Date" name="dtexpectedcompletion" readOnly={stepCompleted} />
-        </Panel>
-        <ActionBar>
-          <Button caption="Next" action={submitProjectDetail} />
-        </ActionBar>
+        <form ref={formRef}>
+          <Text caption="Project Title" name="title" required={true} autoFocus={true}/>
+          <Text caption="Project Description" name="description" required={true} />
+          {project.occupancytypeid &&
+            <Text caption="Occupancy Type" name="occupancytype.title" required={true} />
+          }
+          <Spacer/>
+          <Integer caption="No of Units" name="numunits" required={true} fullWidth/>
+          <Panel row>
+            <Decimal caption="Total Floor Area [sq.meter]" name="totalfloorarea" required={true} fullWidth textAlign="left" />
+            <Decimal caption="Building Height [meter]" name="height" required={true} fullWidth textAlign="left" />
+          </Panel>
+          <Integer caption="No. of Storeys" name="numfloors" required={true} fullWidth />
+          <Spacer/>
+          <Decimal caption="Estimated Cost [Php]" name="projectcost" required={true} decimalScale={2} textAlign="left" fullWidth/>
+          <Panel row>
+            <Date caption="Proposed Construction Date" name="dtproposedconstruction" required={true} />
+            <Date caption="Expected Completion Date" name="dtexpectedcompletion" required={true}
+              minDate={project.dtproposedconstruction}
+              helperText={errorCompletionDate ? "Date should not be before proposed date" : null}
+              onError={onErrorCompletionDate}
+              />
+          </Panel>
+          <ActionBar>
+            <Button caption="Next" action={submitProjectDetail} />
+          </ActionBar>
+        </form>
       </FormPanel>
 
       <FormPanel visibleWhen={mode === "select-worktype"} context={project} handler={setProject} >

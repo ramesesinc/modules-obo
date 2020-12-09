@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Subtitle,
   Error,
@@ -34,6 +34,8 @@ const Initial = ({
   const [key, setKey] = useState();
   const [professionList, setProfessionList] = useState([]);
 
+  const formRef = useRef();
+
   useEffect(() => {
     svc.invoke("getProfessionList", null, (err, list) => {
       setProfessionList(list);
@@ -50,19 +52,8 @@ const Initial = ({
     return emailSvc.invoke("verifyEmail", { email: info.email, mobileno: info.mobileno });
   };
 
-  const validInfo = () => {
-    const errors = {}
-    if (!info.prc || !info.prc.idno) errors.idno = "PRC No. is required";
-    if (!info.profession) errors.profession = "Profession is required";
-    if (!info.email) errors.email = "Email is required";
-
-    if (Object.keys(errors).length == 0) {
-      setErrors({});
-      return true;
-    } else {
-      setErrors(errors);
-      return false;
-    }
+  const isValidInfo = () => {
+    return formRef.current.reportValidity();
   }
 
   const onResendCode = (key) => {
@@ -70,7 +61,7 @@ const Initial = ({
   }
 
   const verifyInfo = () => {
-    if (!validInfo()) return;
+    if (!isValidInfo()) return;
 
     setError(null);
     setLoading(true);
@@ -95,17 +86,19 @@ const Initial = ({
   return (
     <React.Fragment>
       <FormPanel visibleWhen={mode === "init"} context={info} handler={setInfo}>
-        <Subtitle>Please specify initial information</Subtitle>
-        <Spacer />
-        <Error msg={error} />
-        <Text name="prc.idno" caption="PRC No." required error={errors.idno} helperText={errors.idno} />
-        <ProfessionList caption="Profession (Copy profession in the PRC card" name="profession" expr={item => item} professions={professionList} required={true} error={errors.profession} helperText={errors.profession} />
-        <Email name="email" required error={errors.email} helperText={errors.email} />
-        <Mobileno name="mobileno" />
-        <ActionBar>
-          <BackLink action={onCancel} />
-          <Button caption="Next" action={verifyInfo} loading={loading} disableWhen={loading} />
-        </ActionBar>
+        <form ref={formRef}>
+          <Subtitle>Please specify initial information</Subtitle>
+          <Spacer />
+          <Error msg={error} />
+          <Text name="prc.idno" caption="PRC No." required />
+          <ProfessionList caption="Profession (Copy profession in the PRC card" name="profession" expr={item => item} professions={professionList} required={true} />
+          <Email name="email" required/>
+          <Mobileno name="mobileno" required />
+          <ActionBar>
+            <BackLink action={onCancel} />
+            <Button caption="Next" action={verifyInfo} loading={loading} disableWhen={loading} />
+          </ActionBar>
+        </form>
       </FormPanel>
 
       <Panel visibleWhen={mode === "verify"}>

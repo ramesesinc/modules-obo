@@ -10,6 +10,7 @@ const OwnershipInfo = ({
   editableAddress=false,
   editableIdEntry=false,
   orgcode,
+  onError=()=>{},
   ...rest
 }) => {
   const title = rest.title || "Lot Owner Information";
@@ -33,7 +34,7 @@ const OwnershipInfo = ({
         <Text caption="First Name" name="owner.firstname" editable={editable} />
         <Text caption="Middle Name" name="owner.middlename" editable={editable} />
         <ResidenceAddress person={owner} orgcode={orgcode} name="owner" editable={editable ? editable: editableAddress} />
-        {showIdEntry && <IdEntry name="owner.id" editable={editable ? editable : editableIdEntry} /> }
+        {showIdEntry && <IdEntry name="owner.id" onError={onError} editable={editable ? editable : editableIdEntry} dtIssued={owner.id ? owner.id.dtissued : null} /> }
       </Panel>
     </React.Fragment>
   );
