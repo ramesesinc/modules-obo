@@ -9,24 +9,22 @@ import com.rameses.osiris2.client.*;
 import com.rameses.enterprise.models.*;
 
 class OccupancyPermitDocModel extends CrudFormModel {
-
-    boolean editable;
     
+    @FormId
+    public String getFormid() {
+        return "occupancy_doc:" + entity.objid;
+    }
+    
+    boolean editable;
     boolean showInfos;
-    boolean showProfessionals;
     boolean showChecklist;
     boolean showFees;
-    boolean canIssue;
-    boolean manualIssue;
-    boolean canPrint;
     boolean currentOrg = false;
     
-    boolean showOtherDocs = false;
     def docList;
+    boolean showDocList;
+    def selectedRefDoc;
     
-    void toggleOtherDocs() {
-        showOtherDocs = !showOtherDocs;
-    }
     
     public String getTitle() {
         return entity.doctype.title;
@@ -39,57 +37,51 @@ class OccupancyPermitDocModel extends CrudFormModel {
     }
     
     void afterOpen() {
-        showChecklist = entity.showchecklist;
-        showInfos = entity.showinfo;
-        showFees = entity.showfees;
+        //showChecklist = entity.showchecklist;
+        //showInfos = entity.showinfo;
+        //showFees = entity.showfees;
         
+        showChecklist = true;
         showInfos = true;
         showFees = true;
-        
-        if(!docList) {
-            def m = [_schemaname: "vw_occupancy_permit_doc"];
-            m.findBy = [ appid: entity.appid ];
-            if( entity.doctype.org?.objid !=null ) {
-                m.where = ["doctype.org.objid= :orgid", [orgid: entity.doctype.org?.objid ]];
-            }
-            else {
-                m.where = ["doctype.org.objid IS NULL"];
-            }
-            docList = queryService.getList( m );
+        reloadRefDocList();
+    }
+    
+    public void checkCanIssue() {
+        if(docList.findAll{ it.controlid==null} ) {
+            throw new Exception("This document cannot be issued because there are unissued reference documents");
         }
     }
     
-    /* ************************************************************************
-    * INFOS ADDED IN THE ANCILLARY 
-    *************************************************************************/
-    def editRemarks() {
-        def p = [:];
-        p.fields = [
-            [caption:'Remarks', name:'remarks' ]
-        ];
-        p.data = [
-            remarks: entity.remarks
-        ];
-        p.handler = { o->
-            def e = [_schemaname: schemaName];
-            e.objid = entity.objid;
-            e.remarks = o.remarks;
-            persistenceService.update(e);
-            entity.remarks = o.remarks;
-            binding.refresh();
-        }
-        return Inv.lookupOpener("dynamic:form", p );
+    void reloadRefDocList() {
+        def m = [_schemaname: "vw_occupancy_permit_doc"];
+        m.findBy = [ appid: entity.appid ];
+        m.where = ["doctype.refdoc = :refdoc", [refdoc: entity.doctype.objid ]];
+        docList = queryService.getList( m );
+        if( docList ) showDocList = true;
     }
     
-    def issueControl() {
-        def p = [:];
-        p.handler = { o->
-            entity.putAll( o );
-            binding.refresh();
+    def openRefDoc() {
+        if(!selectedRefDoc) return null;
+         def op = Inv.lookupOpener( "vw_occupancy_permit_doc:open", [entity: selectedRefDoc] );
+         op.target = "popup";
+         return op;
+    }
+    
+    def docListHandler = [
+        fetchList: { o->
+            return docList;
+        },
+        openItem: { o,col->
+            return openRefDoc();
         }
-        p.doctype = entity.doctype;
-        p.appid = entity.objid;
-        return Inv.lookupOpener("obo_issuance", p );
+    ] as BasicListModel;
+    
+    def reloadEntity() {
+        def r = super.reloadEntity();
+        reloadRefDocList();
+        docListHandler.reload();
+        return r;
     }
     
     

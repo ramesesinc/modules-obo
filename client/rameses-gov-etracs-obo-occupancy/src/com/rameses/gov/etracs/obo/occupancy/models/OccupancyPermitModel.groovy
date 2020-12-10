@@ -33,12 +33,15 @@ class OccupancytPermitModel extends WorkflowTaskModel  {
     }
     
     public boolean getEditDocuments() {
-        return true;
+        return isUserTaskAssignee() && !task.state.matches('receiving|requirement-verification|end');
     }
     
     public boolean getAllowEdit() {
-        return true;
-        //return isUserTaskAssignee();
+        return isUserTaskAssignee() && !task.state.matches('approval|releasing|end');
+    }
+    
+    public boolean getEditInspectionDate() {
+        return (isUserTaskAssignee() && task.state == "schedule-inspection");
     }
     
     public boolean getEditRequirements() {
@@ -46,14 +49,13 @@ class OccupancytPermitModel extends WorkflowTaskModel  {
     }
     
     public boolean getEditAssessment() {
-        return true;
-        //return isUserTaskAssignee() && (task.state == "requirement-verification");
+        return isUserTaskAssignee() && (task.state == "assessment");
     }
+    
     
     public void checkPermission() {
         def o = secProvider.checkPermission( "OBO", "REQUIREMENT_REVIEWER", null );
     }
-    
     
     def professionalListHandler  = [
         getList: {
@@ -66,27 +68,6 @@ class OccupancytPermitModel extends WorkflowTaskModel  {
         op.target = "popup";
         return op;
     }
-    
-    def issuePermit() {
-        def p = [:];
-        p.handler = { o->
-            entity.putAll( o );
-            binding.refresh();
-        };
-        p.doctype = [objid: "OCCUPANCY_PERMIT"];
-        p.appid = entity.objid;
-        return Inv.lookupOpener("obo_issuance", p );
-    }
-        
-    def openPermit() {
-        def m = [_schemaname: "vw_occupancy_permit"];
-        m.findBy = [objid: entity.objid];
-        def perm = queryService.findFirst( m );
-        if(!perm) throw new Exception("Permit does not exist");
-        schemaName = "vw_occupancy_permit";
-        entity = [objid: perm.appid ];
-        return open();
-    }    
     
     def setInspectionDate() {
         def h = { o->

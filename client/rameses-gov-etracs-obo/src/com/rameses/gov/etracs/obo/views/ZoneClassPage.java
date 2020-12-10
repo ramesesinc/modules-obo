@@ -5,20 +5,20 @@
  */
 package com.rameses.gov.etracs.obo.views;
 
-import com.rameses.osiris2.themes.OKCancelPage;
 import com.rameses.rcp.ui.annotations.Template;
+import com.rameses.seti2.views.CrudFormPage;
 
 /**
  *
  * @author elmonazareno
  */
-@Template(OKCancelPage.class)
-public class OboIssuancePage extends javax.swing.JPanel {
+@Template(CrudFormPage.class)
+public class ZoneClassPage extends javax.swing.JPanel {
 
     /**
-     * Creates new form BuildingPermitIssuancePage
+     * Creates new form ZoneClassPage
      */
-    public OboIssuancePage() {
+    public ZoneClassPage() {
         initComponents();
     }
 
@@ -33,56 +33,42 @@ public class OboIssuancePage extends javax.swing.JPanel {
 
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xTextField1 = new com.rameses.rcp.control.XTextField();
-        xDateField1 = new com.rameses.rcp.control.XDateField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        xTextArea1 = new com.rameses.rcp.control.XTextArea();
+        xTextField2 = new com.rameses.rcp.control.XTextField();
 
-        xFormPanel1.setCaptionWidth(120);
-
-        xTextField1.setCaption("Control No");
-        xTextField1.setName("entity.controlno"); // NOI18N
-        xTextField1.setVisibleWhen("#{ doctype.issuetype == 2 }");
+        xTextField1.setCaption("ID");
+        xTextField1.setDisableWhen("#{ mode != 'create' }");
+        xTextField1.setName("entity.objid"); // NOI18N
         xTextField1.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField1.setRequired(true);
+        xTextField1.setSpaceChar('_');
         xFormPanel1.add(xTextField1);
 
-        xDateField1.setCaption("Validity Date");
-        xDateField1.setName("entity.expirydate"); // NOI18N
-        xFormPanel1.add(xDateField1);
-
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 60));
-
-        xTextArea1.setCaption("Remarks");
-        xTextArea1.setLineWrap(true);
-        xTextArea1.setName("entity.remarks"); // NOI18N
-        jScrollPane1.setViewportView(xTextArea1);
-
-        xFormPanel1.add(jScrollPane1);
+        xTextField2.setCaption("Title");
+        xTextField2.setName("entity.title"); // NOI18N
+        xTextField2.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xTextField2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(99, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private com.rameses.rcp.control.XDateField xDateField1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
-    private com.rameses.rcp.control.XTextArea xTextArea1;
     private com.rameses.rcp.control.XTextField xTextField1;
+    private com.rameses.rcp.control.XTextField xTextField2;
     // End of variables declaration//GEN-END:variables
 }

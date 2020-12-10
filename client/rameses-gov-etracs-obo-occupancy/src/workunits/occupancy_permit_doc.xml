@@ -1,10 +1,6 @@
 <workunit schemaName="vw_occupancy_permit_doc" allowCreate="false" allowEdit="false" allowDelete="false">
     <invokers>
-       <invoker type="vw_occupancy_permit_doc:open" caption="Subdocument" action="open" target="popup"/>
-        
-       <invoker type="formActions" caption="Issue" action="issueControl" 
-                visibleWhen="#{ entity.doctype.issuetype == 2 }"/>     
-                
+       <invoker type="vw_occupancy_permit_doc:open" caption="Occupancy Document" action="open" target="popup"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyPermitDocModel" />
     <pages>

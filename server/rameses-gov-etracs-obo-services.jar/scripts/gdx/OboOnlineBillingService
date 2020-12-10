@@ -10,9 +10,7 @@ class OboOnlineBillingService  {
 
     @ProxyMethod
     public def getBilling( def o ) {
-    	def bill = billSvc.getBilling( o );
-        bill.txntypename = 'OBO Tax';
-        return bill;
+    	return billSvc.getBilling( o );
     }
 
 }

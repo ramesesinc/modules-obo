@@ -4,7 +4,7 @@
                  caption="View Permit"
                  action="preview" 
                  index="1" 
-                 cvisibleWhen="#{ entity.controlid !=null }"
+                 visibleWhen="#{ entity.controlid !=null }"
                  reportId="occupancy_permit" />
     </invokers>
 </workunit>

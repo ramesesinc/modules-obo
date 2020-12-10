@@ -63,6 +63,7 @@ public class OnlineBuildingPermitService  {
 	}
 
 	def formatPersonalName( def v ) {
+		//please check
 		return v.lastname + ", " + v.firstname + " " + ((v.middlename!=null)?v.middlename.substring(0,1)+'.': '');
 	}
 

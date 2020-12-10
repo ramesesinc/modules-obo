@@ -31,6 +31,8 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        xTabbedPane2 = new com.rameses.rcp.control.XTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
         xTabbedPane1 = new com.rameses.rcp.control.XTabbedPane();
         xPanel2 = new com.rameses.rcp.control.XPanel();
         applicationInfoList1 = new com.rameses.gov.etracs.obo.components.ApplicationInfoList();
@@ -38,6 +40,8 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
         applicationFeeList1 = new com.rameses.gov.etracs.obo.components.ApplicationFeeList();
         xPanel3 = new com.rameses.rcp.control.XPanel();
         applicationChecklist1 = new com.rameses.gov.etracs.obo.components.ApplicationChecklist();
+        jPanel3 = new javax.swing.JPanel();
+        xActionBar3 = new com.rameses.rcp.control.XActionBar();
         jPanel1 = new javax.swing.JPanel();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xLabel8 = new com.rameses.rcp.control.XLabel();
@@ -56,12 +60,14 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
         xLabel18 = new com.rameses.rcp.control.XLabel();
         xLabel13 = new com.rameses.rcp.control.XLabel();
         xPanel4 = new com.rameses.rcp.control.XPanel();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        xList1 = new com.rameses.rcp.control.XList();
+        xDataTable1 = new com.rameses.rcp.control.XDataTable();
+        jPanel4 = new javax.swing.JPanel();
+        xButton1 = new com.rameses.rcp.control.XButton();
 
         setPreferredSize(new java.awt.Dimension(809, 488));
         setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         xPanel2.setVisibleWhen("#{ showInfos == true }");
         xPanel2.setLayout(new java.awt.BorderLayout());
@@ -102,11 +108,18 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
 
         xTabbedPane1.addTab("Checklist Items", xPanel3);
 
-        add(xTabbedPane1, java.awt.BorderLayout.CENTER);
+        jPanel2.add(xTabbedPane1, java.awt.BorderLayout.CENTER);
 
-        com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
-        xTitledBorder1.setTitle("General Info");
-        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5), xTitledBorder1));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        xActionBar3.setFormName("formName");
+        xActionBar3.setName("docActions"); // NOI18N
+        xActionBar3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xActionBar3.setDynamic(true);
+        xActionBar3.setPreferredSize(new java.awt.Dimension(91, 30));
+        jPanel3.add(xActionBar3, java.awt.BorderLayout.NORTH);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5), null));
         jPanel1.setPreferredSize(new java.awt.Dimension(766, 220));
 
         xFormPanel1.setCaptionWidth(100);
@@ -137,13 +150,13 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
 
         xLabel10.setCaption("Design Prof");
         xLabel10.setExpression("#{entity.designprofessional.name}");
-        xLabel10.setVisibleWhen("#{ showProfessionals == true }");
+        xLabel10.setVisibleWhen("#{ entity.doctype.type == 'ANCILLARY'  }");
         xLabel10.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel10);
 
         xLabel11.setCaption("Super. In Charge");
         xLabel11.setExpression("#{entity.supervisor.name}");
-        xLabel11.setVisibleWhen("#{ showProfessionals == true }");
+        xLabel11.setVisibleWhen("#{ entity.doctype.type == 'ANCILLARY'  }");
         xLabel11.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel11);
 
@@ -198,7 +211,7 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
                 .addGap(9, 9, 9)
                 .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,43 +224,93 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
                 .addGap(81, 81, 81))
         );
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        jPanel3.add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        xPanel4.setVisibleWhen("#{ showOtherDocs == true }");
-        xPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        xPanel4.setPreferredSize(new java.awt.Dimension(200, 100));
+        jPanel2.add(jPanel3, java.awt.BorderLayout.PAGE_START);
 
-        xLabel1.setText("Other Related Documents");
+        xTabbedPane2.addTab("General", jPanel2);
 
-        xList1.setExpression("#{ item.doctype.title }");
-        xList1.setItems("docList");
-        xList1.setName("selectedDoc"); // NOI18N
-        jScrollPane1.setViewportView(xList1);
+        xPanel4.setVisibleWhen("#{ showDocList == true }");
+        xPanel4.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout xPanel4Layout = new javax.swing.GroupLayout(xPanel4);
-        xPanel4.setLayout(xPanel4Layout);
-        xPanel4Layout.setHorizontalGroup(
-            xPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(xPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(xPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(xPanel4Layout.createSequentialGroup()
-                        .addComponent(xLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 21, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-        );
-        xPanel4Layout.setVerticalGroup(
-            xPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(xPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        xDataTable1.setHandler("docListHandler");
+        xDataTable1.setName("selectedRefDoc"); // NOI18N
+        xDataTable1.setColumns(new com.rameses.rcp.common.Column[]{
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "doctype.title"}
+                , new Object[]{"caption", "Document Type"}
+                , new Object[]{"width", 250}
+                , new Object[]{"minWidth", 300}
+                , new Object[]{"maxWidth", 350}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "controlno"}
+                , new Object[]{"caption", "Control No"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 150}
+                , new Object[]{"maxWidth", 200}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "dtissued"}
+                , new Object[]{"caption", "Date Issued"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 100}
+                , new Object[]{"maxWidth", 100}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.DateColumnHandler(null, "yyyy-MM-dd", null)}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", null}
+                , new Object[]{"caption", " "}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            })
+        });
+        xPanel4.add(xDataTable1, java.awt.BorderLayout.CENTER);
 
-        add(xPanel4, java.awt.BorderLayout.WEST);
+        jPanel4.setPreferredSize(new java.awt.Dimension(1180, 30));
+        jPanel4.setLayout(new com.rameses.rcp.control.layout.XLayout());
+
+        xButton1.setName("openRefDoc"); // NOI18N
+        xButton1.setText("Open");
+        jPanel4.add(xButton1);
+
+        xPanel4.add(jPanel4, java.awt.BorderLayout.PAGE_START);
+
+        xTabbedPane2.addTab("Related Documents", xPanel4);
+
+        add(xTabbedPane2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -256,10 +319,14 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
     private com.rameses.gov.etracs.obo.components.ApplicationFeeList applicationFeeList1;
     private com.rameses.gov.etracs.obo.components.ApplicationInfoList applicationInfoList1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private com.rameses.rcp.control.XActionBar xActionBar3;
+    private com.rameses.rcp.control.XButton xButton1;
+    private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
-    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLabel xLabel10;
     private com.rameses.rcp.control.XLabel xLabel11;
     private com.rameses.rcp.control.XLabel xLabel12;
@@ -274,11 +341,11 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XLabel xLabel9;
-    private com.rameses.rcp.control.XList xList1;
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel2;
     private com.rameses.rcp.control.XPanel xPanel3;
     private com.rameses.rcp.control.XPanel xPanel4;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
+    private com.rameses.rcp.control.XTabbedPane xTabbedPane2;
     // End of variables declaration//GEN-END:variables
 }
