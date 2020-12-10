@@ -112,8 +112,6 @@ const BuildingPermitWebController = (props) => {
     } else {
       if (appno) {
         setAppno(appno);
-      } else {
-        setErrorText({...errorText, appno: "Tracking No. is required"})
       }
     }
   }
@@ -146,7 +144,7 @@ const BuildingPermitWebController = (props) => {
 
   if (mode === "apptype") {
     return (
-      <ApplicationTypeSelect service={service} error={error} onCancel={history.goBack} onSubmit={processAppType}  />
+      <ApplicationTypeSelect partner={partner} appService={svc} service={service} error={error} onCancel={history.goBack} onSubmit={processAppType}  />
     )
   }
 
