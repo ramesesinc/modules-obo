@@ -102,10 +102,6 @@ const BuildingRealPropertyInfo = ({
   }
 
   const saveRpu = () => {
-    // if( !property.owner.id ) {
-    //   alert("Please provide proof of identity for owner/administrator of property");
-    //   return;
-    // }
     if (!hasError && formRef.current.reportValidity()) {
       setError(null);
       appService.invoke("saveRpu", property, (err, rpu) => {

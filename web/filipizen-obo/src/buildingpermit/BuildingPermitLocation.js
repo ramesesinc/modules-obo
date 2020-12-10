@@ -98,7 +98,7 @@ const BuildingPermitLocation = (props) => {
           <Text name='bldgname' caption='Building Name' />
           <Text name='street' caption='Street' />
           <Text name='subdivision' caption='Subdivision' />
-          <Text name='barangay.name' caption='Barangay' />
+          <Text name='barangay.name' caption='Barangay' readOnly={true} />
           {/**
             <BarangayList barangays={barangays} name="barangay" caption='Barangay' />
            */}

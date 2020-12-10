@@ -78,13 +78,14 @@ const OccupancyPermitWebController = (props) => {
         }
         if( partner.id != app.orgcode ) {
           setError("The application number provided is not for this local government");
-          findAppError();
+          setMode("init");
+          return;
         }
         setApp(app);
         setStep(app.step);
         setMode("processing");
         const page = pages[app.step];
-          props.history.push(`${location.pathname}?appid=${appno}#${page.name}`);
+        props.history.push(`${location.pathname}?appid=${appno}#${page.name}`);
       }
       setLoading(false);
     });
@@ -106,7 +107,7 @@ const OccupancyPermitWebController = (props) => {
     }
   }, [hash]);
 
-  const onCompleteInitial = ({appType, appno, step}) => {
+  const onCompleteInitial = ({appno}) => {
     setAppno(appno);
     setStep(1);
     setMode("processing");
@@ -145,8 +146,6 @@ const OccupancyPermitWebController = (props) => {
       svc.invoke("findCurrentInfo", {appid: appno}, (err, app) => {
         if (err) {
           setError(err);
-        } else if (!app) {
-          setError("Application no. does not exist.");
         } else {
           onCompleteInitial({appType, appno, step: app.step});
         }
@@ -164,7 +163,7 @@ const OccupancyPermitWebController = (props) => {
 
   if (mode === "apptype") {
     return (
-      <ApplicationTypeSelect service={props.service} error={error} onCancel={() => props.history.goBack()} onSubmit={submitAppType}  />
+      <ApplicationTypeSelect appService={svc} partner={partner} service={props.service} error={error} onCancel={() => props.history.goBack()} onSubmit={submitAppType}  />
     )
   }
 

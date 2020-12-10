@@ -40,7 +40,7 @@ const NewProfessional = ({
   }
 
   const onError = (error, name) => {
-    setHasError(hasError || error);
+    setHasError(error);
     if (name) {
       if (name === "prc.dtissued") {
         const id = {...professional.id}
