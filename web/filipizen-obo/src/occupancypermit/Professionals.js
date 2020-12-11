@@ -109,7 +109,7 @@ const Professionals = ({
         })}
         <ActionBar>
           <BackLink action={movePrevStep} />
-          <Button caption="Next" action={updateProfessionals} disableWhen={loading} />
+          <Button caption="Next" action={updateProfessionals} disableWhen={loading} loading={loading} />
         </ActionBar>
       </Panel>
 
@@ -126,14 +126,14 @@ const Professionals = ({
                 <ProfessionalCard
                 caption={`${prof.sectionid} Supervisor`}
                 professional={professionals[idx].supervisor}
-                onSelectProfessional={(professionals) => onSelectProfessional(professionals, permitType, idx)}
+                onSelectProfessional={(professional) => onSelectProfessional(professional, idx)}
                 role={permitType.supervisorrole}
               />
               ) : (
                 <ProfessionalLookup
                   caption={`${prof.sectionid} Supervisor`}
                   searchFieldTitle=""
-                  onSelect={(professionals) => onSelectProfessional(professionals, permitType, idx)}
+                  onSelect={(professional) => onSelectProfessional(professional, idx)}
                   role={permitType.supervisorrole}
                 />
               )}
@@ -142,7 +142,7 @@ const Professionals = ({
         })}
         <ActionBar>
           <BackLink action={() => setMode("design")} />
-          <Button caption="Next" action={updateProfessionals} disableWhen={loading} />
+          <Button caption="Next" action={updateProfessionals} disableWhen={loading} loading={loading} />
         </ActionBar>
       </Panel>
     </Panel>

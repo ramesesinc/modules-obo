@@ -29,11 +29,14 @@ const ApplicationTypeSelect = ({
   const [error, setError] = useState();
 
   const submitAppType = () => {
-    if (appType !== "new") {
-      if (!appno) {
-        setErrorText({appno: "Tracking No. is required."});
-        return
-      }
+    if (appType === "new") {
+      onSubmit({appType, appno});
+      return;
+    }
+
+    if (!appno) {
+      setErrorText({appno: "Tracking No. is required."});
+      return
     }
 
     setLoading(true);
