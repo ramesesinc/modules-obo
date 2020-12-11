@@ -4,11 +4,12 @@
           allowCreate="false">
     <invokers>
         <invoker type="vw_occupancy_permit:open" 
-                 caption="Occuoancy Permit Application" action="open" />
+                 caption="Occupancy Permit Application" action="open" />
         
         <invoker type="appActions" 
                 caption="Set Inspection Date"
-                action="setInspectionDate" />
+                action="setInspectionDate" 
+                visibleWhen="#{ editInspectionDate == true }" />
 
         <invoker type="appActions" 
                 caption="Reports"
@@ -23,14 +24,6 @@
                 context="edit" 
                 visibleWhen="#{ allowEdit == true }"/>  
         
-        <invoker type="appActions" 
-                caption="Issue Permit"
-                action="issuePermit" 
-                visibleWhen="#{ entity.controlid == null }"
-                xvisibleWhen="#{task.state == 'releasing'
-                    &amp;&amp; entity.controlid == null                   
-                    &amp;&amp; task.assignee.objid == userInfo.userid }"   />            
-                    
     </invokers>
     <code class="com.rameses.gov.etracs.obo.occupancy.models.OccupancyPermitModel" />
     <pages>

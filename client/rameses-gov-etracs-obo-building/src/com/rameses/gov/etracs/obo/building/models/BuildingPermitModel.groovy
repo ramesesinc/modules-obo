@@ -34,17 +34,19 @@ class BuildingPermitModel extends WorkflowTaskModel  {
     }
     
     public boolean getAllowEdit() {
-        return true;
-        //return isUserTaskAssignee();
+        return isUserTaskAssignee();
     }
     
     public boolean getEditRpu() {
-        return  true;
-        //return isUserTaskAssignee() && (task.state == "receiving");
+        return isUserTaskAssignee() && (task.state == "receiving");
     }
     
     public boolean getEditRequirements() {
         return isUserTaskAssignee() && (task.state == "requirement-verification");
+    }
+    
+    public boolean getAllowIssue() {
+        return isUserTaskAssignee() && (task.state == 'releasing') && (entity.controlid == null);
     }
     
     public void checkPermission() {
@@ -58,7 +60,7 @@ class BuildingPermitModel extends WorkflowTaskModel  {
         }
     ];
     
-    
+    /*
     def viewApplicant() {
         def p = [:];
         p.editable = false;
@@ -66,6 +68,7 @@ class BuildingPermitModel extends WorkflowTaskModel  {
         p.entity = entity.applicant;
         return Inv.lookupOpener("building_permit_entity", p);
     }
+    */
     
     def viewReceipt() {
         if(!entity.payment.refid) throw new Exception("Payment refid is not specified for this payment");
@@ -74,26 +77,6 @@ class BuildingPermitModel extends WorkflowTaskModel  {
         return op;
     }
     
-    def issuePermit() {
-        def p = [:];
-        p.handler = { o->
-            entity.putAll( o );
-            binding.refresh();
-        };
-        p.doctype = [objid: "BUILDING_PERMIT"];
-        p.appid = entity.objid;
-        return Inv.lookupOpener("obo_issuance", p );
-    }
-        
-    def openPermit() {
-        def m = [_schemaname: "vw_building_permit"];
-        m.findBy = [objid: entity.objid];
-        def perm = queryService.findFirst( m );
-        if(!perm) throw new Exception("Permit does not exist");
-        schemaName = "vw_building_permit";
-        entity = [objid: perm.appid ];
-        return open();
-    }
     
 }
 

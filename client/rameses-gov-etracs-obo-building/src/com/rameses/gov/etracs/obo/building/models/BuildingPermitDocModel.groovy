@@ -14,17 +14,18 @@ import com.rameses.io.*;
 
 class BuildingPermitDocModel extends CrudFormModel {
 
-    @Service("BuildingApplicationFeeService")
-    def feeSvc;
+    //@Service("BuildingApplicationChecklistService")
+    //def chklistSvc;
 
-    @Service("BuildingApplicationChecklistService")
-    def chklistSvc;
-
+    @FormId
+    public String getFormid() {
+        return "building_doc:" + entity.objid;
+    }
+    
     def selectedInfo;
     def infos;
     
     boolean editable;
-    
     boolean showInfos;
     boolean showProfessionals;
     boolean showChecklist;
@@ -34,14 +35,11 @@ class BuildingPermitDocModel extends CrudFormModel {
     boolean canPrint;
     boolean currentOrg = false;
     
-    boolean showOtherDocs = false;
     def docList;
+    boolean showDocList;
+    def selectedRefDoc;
     
     def worktypetext;
-    
-    void toggleOtherDocs() {
-        showOtherDocs = !showOtherDocs;
-    }
     
     public String getTitle() {
         return entity.doctype.title;
@@ -61,20 +59,24 @@ class BuildingPermitDocModel extends CrudFormModel {
         showChecklist = true;
         showInfos = true;
         showFees = true;
-        
-        
-        if(!docList) {
-            def m = [_schemaname: "vw_building_permit_doc"];
-            m.findBy = [ appid: entity.appid ];
-            if( entity.doctype.org?.objid !=null ) {
-                m.where = ["doctype.org.objid = :orgid", [orgid: entity.doctype.org?.objid ]];
-            }
-            else {
-                m.where = ["doctype.org.objid IS NULL"];
-            }
-            docList = queryService.getList( m );
+        reloadRefDocList();
+    }
+    
+    public void checkCanIssue() {
+        if(docList.findAll{ it.controlid==null} ) {
+            throw new Exception("This document cannot be issued because there are unissued reference documents");
         }
     }
+    
+    void reloadRefDocList() {
+        def m = [_schemaname: "vw_building_permit_doc"];
+        m.findBy = [ appid: entity.appid ];
+        m.where = ["doctype.refdoc = :refdoc", [refdoc: entity.doctype.objid ]];
+        docList = queryService.getList( m );
+        if( docList ) showDocList = true;
+    }
+    
+   
     
     /* ************************************************************************
     * INFOS ADDED IN THE ANCILLARY 
@@ -101,6 +103,7 @@ class BuildingPermitDocModel extends CrudFormModel {
    
     
     //additional work types
+    /*
     def editWorktypes() {
         def p = [:];
         p.onselect = { o->
@@ -150,16 +153,29 @@ class BuildingPermitDocModel extends CrudFormModel {
             chklistSvc.updateItem( o );
         }
     ]
+    */
     
-    def issueControl() {
-        def p = [:];
-        p.handler = { o->
-            entity.putAll( o );
-            binding.refresh();
+    def openRefDoc() {
+        if(!selectedRefDoc) return null;
+         def op = Inv.lookupOpener( "vw_building_permit_doc:open", [entity: selectedRefDoc] );
+         op.target = "popup";
+         return op;
+    }
+    
+    def docListHandler = [
+        fetchList: { o->
+            return docList;
+        },
+        openItem: { o,col->
+            return openRefDoc();
         }
-        p.doctype = entity.doctype;
-        p.appid = entity.objid;
-        return Inv.lookupOpener("obo_issuance", p );
+    ] as BasicListModel;
+    
+    def reloadEntity() {
+        def r = super.reloadEntity();
+        reloadRefDocList();
+        docListHandler.reload();
+        return r;
     }
     
     
