@@ -49,7 +49,7 @@ const ApplicationTypeSelect = ({
       } else if( partner.id !== app.orgcode ) {
         setErrorText({appno: "The application number provided is not for this local government"});
       } else {
-        onSubmit({appType, appno});
+        onSubmit({appType, appno, step: app.step});
       }
       setLoading(false);
     });

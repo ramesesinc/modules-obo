@@ -6,7 +6,8 @@ import {
   Service,
   Stepper,
   getUrlParameter,
-  Page
+  Page,
+  LinearProgress
 } from 'rsi-react-web-components';
 
 const svc = Service.lookup("OnlineBuildingPermitService", "obo");
@@ -138,8 +139,12 @@ const BuildingPermitWebController = (props) => {
     props.history.push(`${location.pathname}?appid=${appno}#${page.name}`);
   }
 
-  if (mode === "init") {
-    return <div></div>
+  if (mode === "init" || loading) {
+    return (
+      <div>
+        <LinearProgress />
+      </div>
+    )
   }
 
   if (mode === "apptype") {
@@ -182,7 +187,6 @@ const BuildingPermitWebController = (props) => {
 
 const styles = {
   stepperContainer: {
-    paddingTop: 10,
     paddingLeft: 40,
   }
 }

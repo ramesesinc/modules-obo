@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   Error,
   FormPanel,
@@ -37,6 +37,8 @@ const Applicant = ({
     resident: false,
   })
 
+  const formRef = useRef();
+
   useEffect(() => {
     setLoading(true);
     setError(null);
@@ -52,7 +54,13 @@ const Applicant = ({
   }, []);
 
   const saveApplicant = () => {
+    if (!formRef.current.reportValidity()) return;
+    if (applicant.resident && applicant.address && !applicant.address.barangay) {
+      return;
+    }
+
     setError(null);
+    setLoading(true);
     appService.invoke("saveApplicant", applicant, (err, app) => {
       if (err) {
         setError(err)
@@ -60,7 +68,7 @@ const Applicant = ({
         moveNextStep();
       }
       setLoading(false)
-    })
+    });
   }
 
   const residentHandler = () => {
@@ -72,35 +80,37 @@ const Applicant = ({
     <Panel>
       <Error msg={error} />
       <FormPanel context={applicant} handler={setApplicant} >
-        <Combobox items={entityTypes} name='entitytype' caption='Type of Applicant'/>
-        <Text caption='Name' name='name' visibleWhen={applicant.entitytype !== 'INDIVIDUAL'}/>
+        <form ref={formRef}>
+          <Combobox items={entityTypes} name='entitytype' caption='Type of Applicant'/>
+          <Text caption='Name' name='name' visibleWhen={applicant.entitytype !== 'INDIVIDUAL'}/>
 
-        <Spacer />
-        <Panel>
-          <Subtitle2>Administrator or contact name of applicant</Subtitle2>
-          <Text caption='Last Name' name='lastname' required={true}/>
-          <Text caption='First Name' name='firstname' required={true}/>
-          <Text caption='Middle Name' name='middlename' required={true}/>
-          <Email name='email'/>
-          <Mobileno name='mobileno'/>
-        </Panel>
+          <Spacer />
+          <Panel>
+            <Subtitle2>Administrator or contact name of applicant</Subtitle2>
+            <Text caption='Last Name' name='lastname' required={true}/>
+            <Text caption='First Name' name='firstname' required={true}/>
+            <Text caption='Middle Name' name='middlename' required={true}/>
+            <Email name='email'/>
+            <Mobileno name='mobileno'/>
+          </Panel>
 
-        <Spacer />
-        <Subtitle2>Applicant Address</Subtitle2>
-        <Checkbox caption='Resident' name='resident' onChange={residentHandler}/>
-        {applicant.resident ?
-          <LocalAddress orgcode={partner.id} name='address' caption='Address' />
-          :
-          <NonLocalAddress name='address' caption='Address'  />
-        }
-        <Spacer />
-        <Subtitle2>Proof of Identity</Subtitle2>
-        <IdEntry name="id" />
+          <Spacer />
+          <Subtitle2>Applicant Address</Subtitle2>
+          <Checkbox caption='Resident' name='resident' onChange={residentHandler}/>
+          {applicant.resident ?
+            <LocalAddress orgcode={partner.id} name='address' caption='Address' isResident={applicant.resident} />
+            :
+            <NonLocalAddress name='address' caption='Address'  />
+          }
+          <Spacer />
+          <Subtitle2>Proof of Identity</Subtitle2>
+          <IdEntry name="id" />
+        </form>
       </FormPanel>
 
       <ActionBar>
         <BackLink action={movePrevStep} />
-        <Button caption='Next' action={saveApplicant} disableWhen={loading}  />
+        <Button caption='Next' action={saveApplicant} disableWhen={loading} loading={loading}  />
       </ActionBar>
     </Panel>
   )

@@ -11,6 +11,7 @@ import {
   Card,
   Spacer,
   Error,
+  LinearProgress
 } from 'rsi-react-web-components';
 
 import ApplicationTypeSelect from "../components/ApplicationTypeSelect";
@@ -138,7 +139,7 @@ const OccupancyPermitWebController = (props) => {
     props.history.push(`${location.pathname}?appid=${appno}#${page.name}`);
   }
 
-  const submitAppType = ({appType, appno}) => {
+  const submitAppType = ({appType, appno, appStep=1}) => {
     setError(null);
     if (appType === "new") {
       setMode("new");
@@ -157,8 +158,12 @@ const OccupancyPermitWebController = (props) => {
     moveNextStep();
   }
 
-  if (mode === "init") {
-    return <div></div>
+  if (mode === "init" || loading) {
+    return (
+      <div>
+        <LinearProgress />
+      </div>
+    )
   }
 
   if (mode === "apptype") {
@@ -209,7 +214,6 @@ const OccupancyPermitWebController = (props) => {
 
 const styles = {
   stepperContainer: {
-    paddingTop: 30,
     paddingLeft: 40,
   }
 }

@@ -71,7 +71,7 @@ const OnlineBilling = ({
         <Text context={bill} caption="Address" expr="applicant.address.text" readOnly={true} />
         <h4>Bill Details</h4>
         <Table items={bill ? bill.items : []} size="small" showPagination={false} >
-          <TableColumn caption="Particulars" expr="item.title" />
+          <TableColumn caption="Particulars" expr="item.title" width={500}/>
           <TableColumn caption="Amount" expr="amount" align="right" format="currency" />
         </Table>
         <Panel style={{display: "flex", flexDirection: "row", justifyContent: "flex-end", paddingRight: 15}}>

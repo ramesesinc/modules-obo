@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Panel,
   Spacer,
@@ -26,6 +26,8 @@ const PlannedVsActual = ({
   const [errors, setErrors] = useState({});
   const [app, setApp] = useState({});
 
+  const formRef = useRef();
+
   useEffect(() => {
     appService.invoke("getApplication", {appid: appno}, (err, app) => {
       if (err) {
@@ -38,12 +40,6 @@ const PlannedVsActual = ({
 
   const isValid = () => {
     const errors = {};
-    if (!app.actualtotalfloorarea) errors.actualtotalfloorarea = "Required";
-    if (!app.actualnumunits) errors.actualnumunits = "Required";
-    if (!app.actualnumfloors) errors.actualnumfloors = "Required";
-    if (!app.actualheight) errors.actualheight = "Required";
-    if (!app.dtactualstarted) errors.dtactualstarted = "Required";
-    if (!app.dtactualcompleted) errors.dtactualcompleted = "Required";
     if (app.dtactualstarted && app.dtactualcompleted && isDateBefore(app.dtactualcompleted, app.dtactualstarted)) {
       errors.dtactualcompleted = "Actual date completed should be after actual date started."
     }
@@ -58,6 +54,8 @@ const PlannedVsActual = ({
   }
 
   const updatePermit = () => {
+    if (!formRef.current.reportValidity()) return;
+
     if (isValid()) {
       setLoading(true);
       appService.invoke("update", app, (err, updatedApp) => {
@@ -76,51 +74,53 @@ const PlannedVsActual = ({
       <Label>Please indicate the actual values of construction.</Label>
       <Spacer />
       <FormPanel context={app} handler={setApp} style={styles.container}>
-        <Panel style={styles.row}>
-          <Label caption="" style={styles.label}  />
-          <div style={styles.columnTitle}>Planned</div>
-          <div style={styles.columnTitle}>Actual</div>
-        </Panel>
-        <Panel style={styles.row}>
-          <Label caption="Project Total Cost" style={styles.label} />
-          <Decimal name="bldgpermit.projectcost" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualprojectcost" disabled={true} style={styles.item} fullWdith={false} variant="outlined" />
-        </Panel>
-        <Panel style={styles.row}>
-          <Label caption="Total Floor Area (sqm)" style={styles.label}  />
-          <Decimal name="bldgpermit.totalfloorarea" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualtotalfloorarea" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualtotalfloorarea} autoFocus={true} />
-        </Panel>
-        <Panel style={styles.row}>
-          <Label caption="No. of Units" style={styles.label} />
-          <Decimal name="bldgpermit.numunits" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualnumunits" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualnumunits}/>
-        </Panel>
-        <Panel style={styles.row}>
-          <Label caption="No. of Floors" style={styles.label} />
-          <Decimal name="bldgpermit.numfloors" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualnumfloors" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualnumfloors}/>
-        </Panel>
-        <Panel style={styles.row}>
-          <Label caption="Height (m)" style={styles.label} />
-          <Decimal name="bldgpermit.height" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Decimal name="actualheight" style={styles.item} fullWdith={false} variant="outlined" error={errors.actualheight}/>
-        </Panel>
-        <Panel style={styles.row}>
-          <Label caption="Start Date" style={styles.label} />
-          <Date name="bldgpermit.dtproposedconstruction" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Date name="dtactualstarted" style={styles.item} fullWdith={false} variant="outlined" error={errors.dtactualstarted} />
-        </Panel>
-        <Panel style={styles.row}>
-          <Label caption="Completion Date" style={styles.label} />
-          <Date name="bldgpermit.dtexpectedcompletion" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
-          <Date name="dtactualcompleted" style={styles.item} fullWdith={false} variant="outlined" error={errors.dtactualcompleted} helperText={errors.dtactualcompleted} />
-        </Panel>
-        <Spacer />
+        <form ref={formRef}>
+          <Panel style={styles.row}>
+            <Label caption="" style={styles.label}  />
+            <div style={styles.columnTitle}>Planned</div>
+            <div style={styles.columnTitle}>Actual</div>
+          </Panel>
+          <Panel style={styles.row}>
+            <Label caption="Project Total Cost" style={styles.label} />
+            <Decimal name="bldgpermit.projectcost" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
+            <Decimal name="actualprojectcost" disabled={true} style={styles.item} fullWdith={false} variant="outlined" />
+          </Panel>
+          <Panel style={styles.row}>
+            <Label caption="Total Floor Area (sqm)" style={styles.label}  />
+            <Decimal name="bldgpermit.totalfloorarea" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
+            <Decimal name="actualtotalfloorarea" required style={styles.item} fullWdith={false} variant="outlined" autoFocus={true} />
+          </Panel>
+          <Panel style={styles.row}>
+            <Label caption="No. of Units" style={styles.label} />
+            <Decimal name="bldgpermit.numunits" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
+            <Decimal name="actualnumunits" style={styles.item} fullWdith={false} variant="outlined" required />
+          </Panel>
+          <Panel style={styles.row}>
+            <Label caption="No. of Floors" style={styles.label} />
+            <Decimal name="bldgpermit.numfloors" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
+            <Decimal name="actualnumfloors" style={styles.item} fullWdith={false} variant="outlined" required />
+          </Panel>
+          <Panel style={styles.row}>
+            <Label caption="Height (m)" style={styles.label} />
+            <Decimal name="bldgpermit.height" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
+            <Decimal name="actualheight" style={styles.item} fullWdith={false} variant="outlined" required />
+          </Panel>
+          <Panel style={styles.row}>
+            <Label caption="Start Date" style={styles.label} />
+            <Date name="bldgpermit.dtproposedconstruction" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
+            <Date name="dtactualstarted" style={styles.item} fullWdith={false} variant="outlined" required />
+          </Panel>
+          <Panel style={styles.row}>
+            <Label caption="Completion Date" style={styles.label} />
+            <Date name="bldgpermit.dtexpectedcompletion" disabled={true} variant="outlined" style={styles.item} fullWdith={false} />
+            <Date name="dtactualcompleted" style={styles.item} fullWdith={false} variant="outlined" required error={errors.dtactualcompleted} helperText={errors.dtactualcompleted} />
+          </Panel>
+          <Spacer />
+        </form>
       </FormPanel>
       <ActionBar>
         <BackLink action={movePrevStep} />
-        <Button caption="Next" action={updatePermit} loading={loading}/>
+        <Button caption="Next" action={updatePermit} disableWhen={loading} loading={loading}/>
       </ActionBar>
     </Panel>
   )

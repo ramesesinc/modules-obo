@@ -78,9 +78,7 @@ const OboBillingWebController = ({
     <StateProvider initialState={initialState} reducer={reducer}>
       <Page>
         <Content center>
-          <Panel>
             <PageComponent page={page} {...compProps} />
-          </Panel>
         </Content>
       </Page>
     </StateProvider>
