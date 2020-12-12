@@ -167,7 +167,8 @@ const BuildingPermitWebController = (props) => {
     pages,
     moveNextStep,
     appService: svc,
-    stepCompleted: step < app.step
+    stepCompleted: step < app.step,
+    history: props.history,
   };
 
   return (
