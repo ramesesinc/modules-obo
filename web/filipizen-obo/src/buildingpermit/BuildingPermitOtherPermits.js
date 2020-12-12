@@ -39,16 +39,19 @@ const BuildingPermitOtherPermits = ({
   const [ancillaryPermit, setAncillaryPermit] = useState({worktypes:[], type:{}});
 
   const loadAvailableAccillaryPermits = () => {
+    setLoading(true);
     appService.invoke("getAvailableAncillaryPermitTypes", {appid: appno}, (err, list) => {
       if (err) {
         setError(err);
       } else {
         setAvailableAncillaryPermits(list);
       }
+      setLoading(false);
     })
   }
 
   const loadAncillaryPermits = () => {
+    setLoading(true);
     appService.invoke("getAncillaryPermits", {appid: appno}, (err, list) => {
       if (err) {
         setError(err)
@@ -59,6 +62,7 @@ const BuildingPermitOtherPermits = ({
           setMode("available-list");
         }
       }
+      setLoading(false);
     })
   }
 
@@ -73,6 +77,7 @@ const BuildingPermitOtherPermits = ({
   const submitSelectedAncillaryPermits = () => {
     const selectedPermits = availableAncillaryPermits.filter((permit => permit.selected === true));
     if (selectedPermits.length > 0 ) {
+      setLoading(true);
       setAncillaryPermits(selectedPermits);
       appService.invoke("saveAncillaryPermits", {appid: appno, permits: selectedPermits}, (err, _) => {
         if (err) {
@@ -81,6 +86,7 @@ const BuildingPermitOtherPermits = ({
           setError(null);
           setMode("permit-list");
         }
+        setLoading(false);
       })
     } else {
       setMode("permit-list");
@@ -88,6 +94,7 @@ const BuildingPermitOtherPermits = ({
   }
 
   const loadPermitWorkTypes = (permit) => {
+    setLoading(true);
     const svc = Service.lookup("OboMiscListService", "obo");
     svc.invoke("getWorkTypes", {typeid: permit.type.objid}, (err, workTypes) => {
       if (err) {
@@ -108,10 +115,12 @@ const BuildingPermitOtherPermits = ({
           setAncillaryPermit(permit);
         }
       }
+      setLoading(false);
     })
   }
 
   const editPermit = (o) => {
+    setLoading(true);
     appService.invoke("getAncillaryPermit", {objid: o.objid}, (err, permit) => {
       if (err) {
         setError(err);
@@ -119,10 +128,12 @@ const BuildingPermitOtherPermits = ({
         setError(null);
         loadPermitWorkTypes(permit);
       }
+      setLoading(false);
     })
   }
 
   const removePermit = (permit) => {
+    setLoading(true);
     appService.invoke("removeAncillaryPermit", {objid: permit.objid}, (err, res) => {
       if (err) {
         setError(err);
@@ -130,17 +141,14 @@ const BuildingPermitOtherPermits = ({
         setError(null);
         loadAncillaryPermits();
       }
+      setLoading(false);
     });
-  }
-
-  const validWorkTypes = () => {
-    const idx = ancillaryPermit.worktypes.findIndex(wt => wt.checked === true);
-    return idx >= 0;
   }
 
   const submitWorkType = () => {
     setError(null);
     setError(null);
+    setLoading(true);
     const updatedWorkTypes = {
       objid: ancillaryPermit.objid,
       worktypes: ancillaryPermit.worktypes.filter(wt => wt.checked).map(wt => wt.name)
@@ -152,6 +160,7 @@ const BuildingPermitOtherPermits = ({
         setMode("infos");
         setLoading(false);
       }
+      setLoading(false);
     });
 
   }
@@ -173,6 +182,7 @@ const BuildingPermitOtherPermits = ({
   }
 
   const submitInfos = () => {
+    setLoading(true);
     const updatedInfos = {
       objid: ancillaryPermit.objid,
       projectcost: ancillaryPermit.projectcost,
@@ -187,10 +197,12 @@ const BuildingPermitOtherPermits = ({
         else
           setMode("professional");
       }
+      setLoading(false);
     })
   }
 
   const saveCost = () => {
+    setLoading(true);
     setError(null);
     const updatedCost = {objid: ancillaryPermit.objid, infos: ancillaryPermit.infos }
     appService.invoke("saveAncillaryPermit", updatedCost, (err, _) => {
@@ -199,6 +211,7 @@ const BuildingPermitOtherPermits = ({
       } else {
         setMode("professional");
       }
+      setLoading(false);
     })
   }
 
@@ -213,17 +226,18 @@ const BuildingPermitOtherPermits = ({
       return;
     }
 
+    setLoading(true);
     const updatedPermit = {
       ...ancillaryPermit,
       worktypes: ancillaryPermit.worktypes.filter(wt => wt.checked).map(wt => wt.name)
     }
-
     appService.invoke("saveAncillaryPermit", updatedPermit, (err, _) => {
       if (err) {
         setError(err);
       } else {
         setMode("permit-list");
       }
+      setLoading(false);
     })
   }
 
@@ -309,7 +323,7 @@ const BuildingPermitOtherPermits = ({
         </Panel>
         <ActionBar>
           <BackLink action={() => setMode("permit-list")} />
-          <Button caption="Next" action={submitWorkType} />
+          <Button caption="Next" action={submitWorkType} disableWhen={loading} loading={loading} />
         </ActionBar>
       </FormPanel>
 
@@ -336,7 +350,7 @@ const BuildingPermitOtherPermits = ({
         })}
         <ActionBar>
           <BackLink action={backFromInfos}  />
-          <Button caption="Next" action={submitInfos} />
+          <Button caption="Next" action={submitInfos} disableWhen={loading} loading={loading}  />
         </ActionBar>
       </FormPanel>
 
@@ -352,7 +366,7 @@ const BuildingPermitOtherPermits = ({
           )}
         </FormPanel>
         <ActionBar>
-          <Button caption="Next" action={submitSelectedAncillaryPermits} />
+          <Button caption="Next" action={submitSelectedAncillaryPermits} disableWhen={loading} loading={loading} />
         </ActionBar>
       </Panel>
 
@@ -363,7 +377,7 @@ const BuildingPermitOtherPermits = ({
         <Spacer />
         <ActionBar>
           <BackLink action={() => setMode("infos")} />
-          <Button caption="Next" action={saveCost} />
+          <Button caption="Next" action={saveCost} disableWhen={loading} loading={loading} />
         </ActionBar>
       </FormPanel>
 
@@ -386,7 +400,7 @@ const BuildingPermitOtherPermits = ({
         />
         <ActionBar>
           <BackLink action={() => setMode("permit-list")} />
-          <Button caption="Save and Complete" action={savePermit} />
+          <Button caption="Save and Complete" action={savePermit} disableWhen={loading} loading={loading}  />
         </ActionBar>
       </FormPanel>
     </Panel>

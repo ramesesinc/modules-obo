@@ -41,15 +41,18 @@ const BuildingPermitAccessories = ({
   }
 
   const loadAccessories = () => {
+    setLoading(true);
     appService.invoke("getAccessories", {appid: appno}, (err, accessories) => {
       setAccessories(accessories);
       if (isJAccessoryType(accessories)) {
         setMode("infos")
       }
+      setLoading(false);
     });
   }
 
   const loadAccessoryOccupancyTypes = () => {
+    setLoading(true);
     const svc = Service.lookup("OboMiscListService", "obo");
     svc.invoke("getAccessoryOccupancyTypes", null, (err, occupancyTypes) => {
       if (err) {
@@ -62,6 +65,7 @@ const BuildingPermitAccessories = ({
         setOccupancyTypes(occupancyTypes);
         setAccessoryTypes(accessoryTypes);
       }
+      setLoading(false);
     });
   }
 
@@ -76,18 +80,21 @@ const BuildingPermitAccessories = ({
 			setMode("select-accessories");
 		} else {
       setError(null);
+      setLoading(true);
       appService.invoke("saveAccessories", {appid: appno, items: []}, (err, res) => {
         if (err) {
           setError(err);
         } else {
           moveNextStep();
         }
+        setLoading(false);
       });
 		}
   }
 
   const submitAccessoryTypes = () => {
     if (Object.keys(accessoryTypes).length > 0) {
+      setLoading(true);
       const accessories = getSelectedAccessoryTypes();
       appService.invoke("saveAccessories", accessories, (err, accessories) => {
         if (err) {
@@ -96,6 +103,7 @@ const BuildingPermitAccessories = ({
           loadAccessories();
           setMode("infos");
         }
+        setLoading(false);
       });
     } else {
       setError("Select at least one accessory type before proceeding.")
@@ -113,18 +121,20 @@ const BuildingPermitAccessories = ({
   }
 
   const saveAccesoryInfos = () => {
+    setLoading(true);
+
 		var p = {appid: appno, infos: []};
     p.infos = [];
     accessories.forEach(accessory => {
       p.infos.push(...accessory.infos);
     });
-
 		appService.invoke("saveAccessoryInfos", p, (err, res) => {
       if (err) {
         setError(err)
       } else {
         moveNextStep();
       }
+      setLoading(false);
     });
 	}
 
@@ -142,7 +152,7 @@ const BuildingPermitAccessories = ({
           <Item caption="No" value="FALSE" />
         </Radio>
         <ActionBar>
-          <Button caption="Next" action={submitInitial} />
+          <Button caption="Next" action={submitInitial}  disableWhen={loading} loading={loading} />
         </ActionBar>
       </Panel>
 
@@ -155,7 +165,7 @@ const BuildingPermitAccessories = ({
         </FormPanel>
         <ActionBar>
           <BackLink action={() => setMode("initial")} />
-          <Button caption="Next" action={submitAccessoryTypes} />
+          <Button caption="Next" action={submitAccessoryTypes}  disableWhen={loading} loading={loading} />
         </ActionBar>
       </Panel>
 
@@ -180,7 +190,7 @@ const BuildingPermitAccessories = ({
         })}
         <ActionBar>
           <BackLink action={() => setMode("select-accessories")}  />
-          <Button caption="Next" action={saveAccesoryInfos} />
+          <Button caption="Next" action={saveAccesoryInfos}  disableWhen={loading} loading={loading}  />
         </ActionBar>
       </FormPanel>
     </Panel>

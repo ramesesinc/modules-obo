@@ -47,7 +47,6 @@ const BuildingPermitOccupancy = ({
   appno,
   appService,
   moveNextStep,
-  stepCompleted
 }) => {
 
   const [error, setError] = useState();
@@ -63,6 +62,7 @@ const BuildingPermitOccupancy = ({
 
 
   useEffect(() => {
+    setLoading(true);
     appService.invoke("getApplication", {appid: appno}, (err, app) => {
       if (err) {
         setError(err);
@@ -70,20 +70,24 @@ const BuildingPermitOccupancy = ({
         setProject({occupancytype: app.occupancytype});
         setPrevOccupancyId(app.occupancytype.objid);
       }
+      setLoading(false);
     })
   }, [])
 
   const loadOccupancyGroups = () => {
+    setLoading(true);
     svc.invoke("getOccupancyTypeGroups", null, (err, groups) => {
       if (err) {
         setError(err)
       } else {
         setOccupancyGroups(groups);
       }
+      setLoading(false);
     });
   }
 
   const loadOccupancyDivisions = () => {
+    setLoading(true);
     const groupid = project.occupancytype.group.objid;
     svc.invoke("getOccupancyTypeDivisions", {groupid} ,(err, divisions) => {
       if (err) {
@@ -91,10 +95,12 @@ const BuildingPermitOccupancy = ({
       } else {
         setOccupancyDivisions(divisions);
       }
+      setLoading(false);
     });
   }
 
   const loadOccupancyTypes = () => {
+    setLoading(true);
     const divisionid = project.occupancytype.division.objid;
     svc.invoke("getOccupancyTypes", {divisionid} ,(err, types) => {
       if (err) {
@@ -102,6 +108,7 @@ const BuildingPermitOccupancy = ({
       } else {
         setOccupancyTypes(types);
       }
+      setLoading(false);
     });
   }
 
@@ -131,6 +138,7 @@ const BuildingPermitOccupancy = ({
   }
 
   const updateOccupancyType = () => {
+    setLoading(true);
     let occupancytype = {appid: appno, occupancytype: project.occupancytype};
     appService.invoke("updateOccupancyType", occupancytype, (err, res) => {
       if (err) {
@@ -140,6 +148,7 @@ const BuildingPermitOccupancy = ({
         setShowConfirm(false);
         moveNextStep();
       }
+      setLoading(false);
     });
   }
 
@@ -168,7 +177,7 @@ const BuildingPermitOccupancy = ({
           <Subtitle2>Select Occupancy Group</Subtitle2>
           <Radio name="occupancytype.group.objid" list={occupancyGroups} Control={RadioItem}/>
           <ActionBar>
-            <Button caption="Next" action={submitOccupancyGroup} />
+            <Button caption="Next" action={submitOccupancyGroup} disableWhen={loading} loading={loading} />
           </ActionBar>
         </FormPanel>
 
@@ -177,7 +186,7 @@ const BuildingPermitOccupancy = ({
           <Radio name="occupancytype.division.objid" list={occupancyDivisions} Control={RadioItem}/>
           <ActionBar>
             <BackLink caption="Back" action={() => setOccupancyMode("group")} />
-            <Button caption="Next" action={submitOccupancyDivision} />
+            <Button caption="Next" action={submitOccupancyDivision}  disableWhen={loading} loading={loading} />
           </ActionBar>
         </FormPanel>
 
@@ -186,7 +195,7 @@ const BuildingPermitOccupancy = ({
           <Radio name="occupancytype.objid" list={occupancyTypes} Control={RadioItem}/>
           <ActionBar>
             <BackLink caption="Back" action={() => setOccupancyMode("division")} />
-            <Button caption="Next" action={submitOccupancyType} />
+            <Button caption="Next" action={submitOccupancyType}  disableWhen={loading} loading={loading}  />
           </ActionBar>
         </FormPanel>
       </Panel>
