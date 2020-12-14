@@ -4,7 +4,7 @@
                  caption="View Printout"
                  action="preview" 
                  index="1" 
-                 visibleWhen="#{ entity.template !=null || entity.doctype.template !=null }"
+                 visibleWhen="#{entity.controlid!=null &amp;&amp; ( entity.template !=null || entity.doctype.template !=null) }"
                  reportId="occupancy_permit_doc" />
     </invokers>
 </workunit>

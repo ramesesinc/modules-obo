@@ -76,7 +76,11 @@ class BuildingPermitDocModel extends CrudFormModel {
         if( docList ) showDocList = true;
     }
     
-   
+    public boolean getCanIssueControl() {
+        return (entity.controlid == null && entity.doctype.issuetype == 2 && entity.app?.task?.state == 'releasing' ); 
+    }
+    
+    
     
     /* ************************************************************************
     * INFOS ADDED IN THE ANCILLARY 

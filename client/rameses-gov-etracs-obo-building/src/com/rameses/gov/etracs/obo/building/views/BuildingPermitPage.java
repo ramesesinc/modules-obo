@@ -442,7 +442,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         pnlEvaluations.setLayout(new java.awt.BorderLayout());
 
         applicationSubTaskList1.setAppid("entity.objid");
-        applicationSubTaskList1.setEditableWhen("#{ canEdit == true }");
+        applicationSubTaskList1.setEditableWhen("#{ editEvaluations == true }");
         applicationSubTaskList1.setEntitySchemaName("building_evaluation");
         applicationSubTaskList1.setSchemaName("vw_building_evaluation");
         applicationSubTaskList1.setTypeSchema("building_evaluation_type");

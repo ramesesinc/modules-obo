@@ -6,7 +6,6 @@ import com.rameses.seti2.models.*;
 import com.rameses.osiris2.common.*;
 import com.rameses.util.*;
 import com.rameses.osiris2.client.*;
-import com.rameses.enterprise.models.*;
 
 class OccupancyPermitDocModel extends CrudFormModel {
     
@@ -82,6 +81,16 @@ class OccupancyPermitDocModel extends CrudFormModel {
         reloadRefDocList();
         docListHandler.reload();
         return r;
+    }
+    
+    public boolean getCanIssueControl() {
+        return ( entity.controlid == null 
+                && entity.doctype.issuetype == 2 
+                && entity.app?.task?.state == 'releasing' ) 
+    }
+
+    public boolean hasRole( def role ) {
+        return secProvider.checkPermission( "OBO", role, null );
     }
     
     

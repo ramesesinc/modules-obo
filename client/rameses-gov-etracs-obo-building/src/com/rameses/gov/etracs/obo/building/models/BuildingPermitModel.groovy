@@ -29,8 +29,7 @@ class BuildingPermitModel extends WorkflowTaskModel  {
     }
     
     public boolean getCanEdit() {
-        return true;
-        //return ( task.assignee?.objid == user.objid );
+        return  isUserTaskAssignee(); 
     }
     
     public boolean getAllowEdit() {
@@ -47,6 +46,14 @@ class BuildingPermitModel extends WorkflowTaskModel  {
     
     public boolean getAllowIssue() {
         return isUserTaskAssignee() && (task.state == 'releasing') && (entity.controlid == null);
+    }
+    
+    public boolean getEditEvaluations() {
+       return hasRole("ADMIN") && (task.state == "trade-evaluation"); 
+    }
+    
+    public boolean hasRole( def role ) {
+        return secProvider.checkPermission( "OBO", role, null );
     }
     
     public void checkPermission() {

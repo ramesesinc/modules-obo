@@ -36,6 +36,7 @@ public class OccupancyPermitDocPage extends javax.swing.JPanel {
         applicationInfoList1 = new com.rameses.gov.etracs.obo.components.ApplicationInfoList();
         xPanel1 = new com.rameses.rcp.control.XPanel();
         applicationFeeList1 = new com.rameses.gov.etracs.obo.components.ApplicationFeeList();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xLabel8 = new com.rameses.rcp.control.XLabel();
@@ -50,6 +51,7 @@ public class OccupancyPermitDocPage extends javax.swing.JPanel {
         xLabel17 = new com.rameses.rcp.control.XLabel();
         xLabel14 = new com.rameses.rcp.control.XLabel();
         xLabel18 = new com.rameses.rcp.control.XLabel();
+        xActionBar3 = new com.rameses.rcp.control.XActionBar();
 
         setPreferredSize(new java.awt.Dimension(809, 488));
         setLayout(new java.awt.BorderLayout());
@@ -81,6 +83,8 @@ public class OccupancyPermitDocPage extends javax.swing.JPanel {
         xTabbedPane1.addTab("Fees", xPanel1);
 
         add(xTabbedPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder1.setTitle("General Info");
@@ -172,7 +176,16 @@ public class OccupancyPermitDocPage extends javax.swing.JPanel {
                 .addGap(81, 81, 81))
         );
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        jPanel2.add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        xActionBar3.setFormName("formName");
+        xActionBar3.setName("docActions"); // NOI18N
+        xActionBar3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xActionBar3.setDynamic(true);
+        xActionBar3.setPreferredSize(new java.awt.Dimension(91, 30));
+        jPanel2.add(xActionBar3, java.awt.BorderLayout.NORTH);
+
+        add(jPanel2, java.awt.BorderLayout.NORTH);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -180,6 +193,8 @@ public class OccupancyPermitDocPage extends javax.swing.JPanel {
     private com.rameses.gov.etracs.obo.components.ApplicationFeeList applicationFeeList1;
     private com.rameses.gov.etracs.obo.components.ApplicationInfoList applicationInfoList1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private com.rameses.rcp.control.XActionBar xActionBar3;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XLabel xLabel12;

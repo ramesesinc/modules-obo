@@ -5,10 +5,7 @@ import com.rameses.rcp.common.*;
 import com.rameses.seti2.models.*;
 import com.rameses.osiris2.common.*;
 import com.rameses.util.*;
-import com.rameses.osiris2.common.*;
-import com.rameses.rcp.common.*;
 import com.rameses.osiris2.client.*;
-import com.rameses.io.*;
 
 
 class OccupancytPermitModel extends WorkflowTaskModel  {
@@ -52,6 +49,13 @@ class OccupancytPermitModel extends WorkflowTaskModel  {
         return isUserTaskAssignee() && (task.state == "assessment");
     }
     
+    public boolean getEditInspections() {
+       return hasRole("ADMIN") && (task.state == "inspection"); 
+    }
+    
+    public boolean hasRole( def role ) {
+        return secProvider.checkPermission( "OBO", role, null );
+    }
     
     public void checkPermission() {
         def o = secProvider.checkPermission( "OBO", "REQUIREMENT_REVIEWER", null );
