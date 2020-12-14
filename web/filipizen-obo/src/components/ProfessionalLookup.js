@@ -43,9 +43,9 @@ const ProfessionalLookup = ({
     if (!valid) {
       const roles = validRole.split(",");
       if(roles.length == 1) {
-        requiredRoles = "Only " + roles[0].toLowerCase() + " profession is allowed."
+        requiredRoles = "Only " + roles[0].toLowerCase() + " is allowed."
       } else {
-        requiredRoles = "Only " + roles.join(", ") + " professions are allowed."
+        requiredRoles = "Only " + roles.join(", ") + " are allowed."
         const lastCommaIdx = requiredRoles.lastIndexOf(",");
         requiredRoles = requiredRoles.substring(0, lastCommaIdx) + " and " + requiredRoles.substring(lastCommaIdx+2);
       }

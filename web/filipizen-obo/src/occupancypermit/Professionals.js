@@ -3,8 +3,7 @@ import {
   Panel,
   ActionBar,
   Button,
-  BackLink,
-  Service
+  BackLink
 } from 'rsi-react-web-components';
 
 import ProfessionalLookup from "../components/ProfessionalLookup";
@@ -20,10 +19,10 @@ const Professionals = ({
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("design");
-  const [permitTypes, setPermitTypes] = useState([]);
   const [professionals, setProfessionals] = useState([]);
 
-  const loadProfessionals = () => {
+  useEffect(() => {
+    setLoading(true);
     appService.invoke("getProfessionals", {appid: appno}, (err, professionals) => {
       if (err) {
         setError(err);
@@ -31,20 +30,6 @@ const Professionals = ({
         setProfessionals(professionals);
       }
       setLoading(false);
-    });
-  }
-
-  useEffect(() => {
-    setLoading(true);
-    const svc = Service.lookup("OboMiscListService", "obo");
-    svc.invoke("getPermitTypes", null, (err, permitTypes) => {
-      if (err) {
-        setError(err);
-      } else {
-        console.log("permitTypes",permitTypes)
-        setPermitTypes(permitTypes);
-        loadProfessionals();
-      }
     });
   }, [appno])
 
@@ -83,10 +68,7 @@ const Professionals = ({
       <Panel visibleWhen={mode === "design"}>
         <h3>List of Design Professionals</h3>
         {professionals.map((prof, idx) => {
-          const permitType = permitTypes.find(pt => pt.objid.toLowerCase() === prof.sectionid.toLowerCase())
-          if (!permitType) return null;
-          if (!permitType.designprofessionalrole) return null;
-
+          if (!prof.section.designprofessionalrole) return null;
           return (
             <div key={prof.objid}>
               {prof.designprofessionalid ? (
@@ -94,14 +76,14 @@ const Professionals = ({
                 caption={`${prof.sectionid} Design Professional`}
                 professional={professionals[idx].designprofessional}
                 onSelectProfessional={(professional) => onSelectProfessional(professional, idx)}
-                role={permitType.designprofessionalrole}
+                role={prof.section.designprofessionalrole}
               />
               ) : (
                 <ProfessionalLookup
                   caption={`${prof.sectionid} Design Professional`}
                   searchFieldTitle=""
                   onSelect={(professional) => onSelectProfessional(professional, idx)}
-                  role={permitType.designprofessionalrole}
+                  role={prof.section.designprofessionalrole}
                 />
               )}
             </div>
@@ -109,32 +91,29 @@ const Professionals = ({
         })}
         <ActionBar>
           <BackLink action={movePrevStep} />
-          <Button caption="Next" action={updateProfessionals} disableWhen={loading} />
+          <Button caption="Next" action={updateProfessionals} disableWhen={loading} loading={loading} />
         </ActionBar>
       </Panel>
 
       <Panel visibleWhen={mode === "supervisor"}>
         <h3>List of Supervisors</h3>
         {professionals.map((prof, idx) => {
-          const permitType = permitTypes.find(pt => pt.objid.toLowerCase() === prof.sectionid.toLowerCase())
-          if (!permitType) return null;
-          if (!permitType.supervisorrole) return null;
-
+          if (!prof.section.supervisorrole) return null;
           return (
             <div key={prof.objid}>
               {prof.supervisorid ? (
                 <ProfessionalCard
                 caption={`${prof.sectionid} Supervisor`}
                 professional={professionals[idx].supervisor}
-                onSelectProfessional={(professionals) => onSelectProfessional(professionals, permitType, idx)}
-                role={permitType.supervisorrole}
+                onSelectProfessional={(professional) => onSelectProfessional(professional, idx)}
+                role={prof.section.supervisorrole}
               />
               ) : (
                 <ProfessionalLookup
                   caption={`${prof.sectionid} Supervisor`}
                   searchFieldTitle=""
-                  onSelect={(professionals) => onSelectProfessional(professionals, permitType, idx)}
-                  role={permitType.supervisorrole}
+                  onSelect={(professional) => onSelectProfessional(professional, idx)}
+                  role={prof.section.supervisorrole}
                 />
               )}
             </div>
@@ -142,7 +121,7 @@ const Professionals = ({
         })}
         <ActionBar>
           <BackLink action={() => setMode("design")} />
-          <Button caption="Next" action={updateProfessionals} disableWhen={loading} />
+          <Button caption="Next" action={updateProfessionals} disableWhen={loading} loading={loading} />
         </ActionBar>
       </Panel>
     </Panel>

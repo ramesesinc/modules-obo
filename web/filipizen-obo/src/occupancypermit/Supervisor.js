@@ -5,10 +5,11 @@ import {
   Panel,
   Error,
   Spacer,
-  BackLink
+  BackLink,
 } from "rsi-react-web-components";
 
 import ProfessionalCard from "../components/ProfessionalCard";
+import ProfessionalLookup from "../components/ProfessionalLookup";
 
 const Supervisor = ({
   partner,
@@ -35,13 +36,7 @@ const Supervisor = ({
     });
   }, [])
 
-  const onSelectProfessional = (professionals) => {
-    if (professionals.length === 0) {
-      setProfessional({});
-      return;
-    }
-
-    const professional = professionals[0];
+  const onSelectProfessional = (professional) => {
     appService.invoke("update", {objid: app.objid, supervisorid: professional.objid}, (err, app) => {
       if (err) {
         setError(err);
@@ -66,15 +61,23 @@ const Supervisor = ({
       <Error msg={error} />
       <Spacer />
       <Panel>
-        <ProfessionalCard
-          caption="Inspector/Supervisor"
-          professional={professional}
-          onSelectProfessional={onSelectProfessional}
-        />
+        {professional && professional.lastname ? (
+          <ProfessionalCard
+            caption="Inspector/Supervisor"
+            professional={professional}
+            onSelectProfessional={onSelectProfessional}
+          />
+        ) : (
+          <ProfessionalLookup
+            caption="Inspector/Supervisor"
+            searchFieldTitle=""
+            onSelect={onSelectProfessional}
+          />
+        )}
       </Panel>
       <ActionBar>
         <BackLink action={movePrevStep} />
-        <Button caption="Next" action={submitProfessional} disableWhen={!professional || !professional.objid}/>
+        <Button caption="Next" action={submitProfessional} disableWhen={!professional || !professional.objid} />
       </ActionBar>
     </Panel>
   )
