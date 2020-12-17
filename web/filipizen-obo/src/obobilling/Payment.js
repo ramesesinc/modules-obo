@@ -13,7 +13,7 @@ const Payment = (props) => {
     <EPayment
       module={module}
       {...props}
-      initialContact={ctx.contact}
+      contact={ctx.contact}
       initialStep={1}
       cancelPayment={props.cancelPayment}
     />

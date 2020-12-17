@@ -189,7 +189,8 @@ public class OnlineOccupancyPermitService  {
 		return o;
 	}
 
-	def formatAddress( def addr ) {
+	@ProxyMethod
+	public def formatAddress( def addr ) {
 		def lst = [];
 		lst << [addr.unitno, addr.bldgno, addr.bldgname ].findAll{it!=null}.join(" ");
 		lst << [addr.street, addr.subdivision ].findAll{it!=null}.join(",");
