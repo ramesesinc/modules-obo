@@ -2,7 +2,7 @@
 	<element tablename="online_occupancy_permit_info">
 		<field name="objid" primary="true" prefix="OBOOCINFO"/>
 		<field name="appid" required="true"/>
-		<field name="parentid" required="true"/>
+		<field name="parentid" />
 		<field name="name" required="true"/>
 		<field name="stringvalue" />
 		<field name="decimalvalue" datatype="decimal"/>

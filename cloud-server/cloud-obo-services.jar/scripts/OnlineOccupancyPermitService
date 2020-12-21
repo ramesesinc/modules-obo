@@ -33,10 +33,13 @@ public class OnlineOccupancyPermitService  {
 	@DataContext("online_occupancy_permit_info")
 	def appInfoEm;
 
+	@DataContext("obo_permit_requirement")
+	def reqEm;
+
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
-		o.objid = kg.generateAlphanumKey(o.orgcode+"-",8);
+		o.objid = "OP"+ kg.generateAlphanumKey(o.orgcode+"-",8);
 		o.dtfiled = dateSvc.getServerDate();
 		o.step = 1;
 		o.occupancytypeid = o.bldgpermit.occupancytypeid;
@@ -73,6 +76,7 @@ public class OnlineOccupancyPermitService  {
 			def v = [:];
 			v.appid = app.objid;
 			v.name = it.objid;
+			v.type = [objid: it.objid, name: it.objid];
 			appInfoEm.create(v);
 		}
 		return app;
@@ -171,7 +175,6 @@ public class OnlineOccupancyPermitService  {
 
 	@ProxyMethod
 	public def saveAppInfos( o ) {
-		println 'o => ' + o;
 		if(!o.appid) throw new Exception("saveAppInfos error. appid is required");
 		o.infos.findAll{ it.value }.each {
 			def m = [:];
@@ -190,7 +193,12 @@ public class OnlineOccupancyPermitService  {
 	}
 
 	@ProxyMethod
-	public def formatAddress( def addr ) {
+	public def getRequirements( def o ) {
+		if(!o.appid) throw new Exception("appid is required");
+		return reqEm.find( [apptype: "occupancy"]).orderBy("sortorder").list();
+	}
+
+	def formatAddress( def addr ) {
 		def lst = [];
 		lst << [addr.unitno, addr.bldgno, addr.bldgname ].findAll{it!=null}.join(" ");
 		lst << [addr.street, addr.subdivision ].findAll{it!=null}.join(",");

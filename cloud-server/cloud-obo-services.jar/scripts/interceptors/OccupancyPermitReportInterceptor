@@ -2,7 +2,7 @@ import com.rameses.annotations.*;
 
 class OccupancyPermitReportInterceptor {
 
-	@Service(value="OnlineOccupancyPermitService")
+	@Service("OnlineOccupancyPermitService")
 	def oboReportSvc;
 
 	@After( pattern="FormReportService.getData", eval="#{args[0].reportid.matches('certificate_of_occupancy') }" )
@@ -32,8 +32,31 @@ class OccupancyPermitReportInterceptor {
 		app.lotowner  = app.location?.owner;
 		app.applicant.middleinitial = (app.applicant.middlename ? app.applicant.middlename[0].toString() : '');
 
+		def professionals = oboReportSvc.getProfessionals([appid: refid]);
+		app.designprofessionals = getProfessionalData("designprofessional", professionals.findAll{ it.designprofessionalid != null})
+		app.supervisors = getProfessionalData("supervisor", professionals.findAll{ it.supervisorid != null})
+
 		app.reportid = reportid;
 		app.template = "reports/obo/" + reportid;
 		result.data = app;
 	}
+
+	def getProfessionalData(type, profList) {
+		def professionals = []
+		profList.each{
+			def prof = (type == "designprofessional" ? it.designprofessional : it.supervisor);
+			professionals << [
+				section: it.section.objid,
+				name: prof.firstname + (prof.middlename ? " " + prof.middlename + " " : " ")  + prof.lastname,
+				address: [text: prof.address.text],
+				prc: prof.prc,
+				ptr: prof.ptr,
+				tin: prof.tin,
+			]
+		}
+		return professionals;
+	}
+
+	
+
 }
