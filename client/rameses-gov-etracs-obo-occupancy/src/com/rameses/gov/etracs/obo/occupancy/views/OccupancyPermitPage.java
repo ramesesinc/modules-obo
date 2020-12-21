@@ -631,7 +631,7 @@ public class OccupancyPermitPage extends javax.swing.JPanel {
         xPanel3.setLayout(new java.awt.BorderLayout());
 
         applicationSubTaskList1.setAppid("entity.objid");
-        applicationSubTaskList1.setEditableWhen("#{ canEdit == true }");
+        applicationSubTaskList1.setEditableWhen("#{ editInspections == true }");
         applicationSubTaskList1.setEntitySchemaName("occupancy_inspection");
         applicationSubTaskList1.setSchemaName("vw_occupancy_inspection");
         applicationSubTaskList1.setTypeSchema("occupancy_inspection_type");

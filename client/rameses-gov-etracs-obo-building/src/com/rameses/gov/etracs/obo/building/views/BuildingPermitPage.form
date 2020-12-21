@@ -1021,7 +1021,7 @@
             <Component class="com.rameses.gov.etracs.obo.components.ApplicationSubTaskList" name="applicationSubTaskList1">
               <Properties>
                 <Property name="appid" type="java.lang.String" value="entity.objid"/>
-                <Property name="editableWhen" type="java.lang.String" value="#{ canEdit == true }"/>
+                <Property name="editableWhen" type="java.lang.String" value="#{ editEvaluations == true }"/>
                 <Property name="entitySchemaName" type="java.lang.String" value="building_evaluation"/>
                 <Property name="schemaName" type="java.lang.String" value="vw_building_evaluation"/>
                 <Property name="typeSchema" type="java.lang.String" value="building_evaluation_type"/>

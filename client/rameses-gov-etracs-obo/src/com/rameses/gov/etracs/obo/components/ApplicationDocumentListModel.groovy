@@ -69,9 +69,11 @@ class ApplicationDocumentListModel extends AbstractComponentModel {
     }
     
     def removeDocument() {
-        def orgid = OsirisContext.getEnv().ORGID;
         if(!selectedItem) throw new Exception("Please select a document.");
-        if( orgid == null ) {
+        def orgid = OsirisContext.getEnv().ORGID;
+        def orgroot = OsirisContext.getEnv().ORGROOT;
+        
+        if( orgroot == 1 ) {
             if( selectedItem.org?.objid !=null )
                 throw new Exception("Cannot remove this document because it is not on the same org");
         }

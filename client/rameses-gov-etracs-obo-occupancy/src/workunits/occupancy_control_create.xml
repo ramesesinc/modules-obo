@@ -1,26 +1,21 @@
 <workunit>
     <invokers>
-         <invoker type="vw_occupancy_permit:form:appActions" 
-                caption="Issue Permit"
+        <!-- for occupancy permit -->
+        <invoker type="vw_occupancy_permit:form:appActions" 
+                caption="Issue Occupancy Permit"
                 schemaName="occupancy_permit"
                 action="init"
                 visibleWhen="#{ entity.controlid == null &amp;&amp; task.state == 'releasing' &amp;&amp; userTaskAssignee == true }"
                 target="popup"/>
         
-       <invoker type="vw_occupancy_permit_doc:form:formActions" 
-                caption="Issue Document Control"
-                schemaName="occupancy_permit_doc"
-                action="initDoc"
-                visibleWhen="#{ entity.controlid == null &amp;&amp; entity.doctype.issuetype == 2 &amp;&amp; entity.app?.task?.state == 'releasing' }"
-                target="popup"/>
-                
+       <!-- for sub permits --> 
        <invoker type="vw_occupancy_permit_doc:form:docActions" 
                 caption="Issue Document Control"
                 schemaName="occupancy_permit_doc"
                 action="initDoc"
-                visibleWhen="#{ entity.controlid == null &amp;&amp; entity.doctype.issuetype == 2 &amp;&amp; entity.app?.task?.state == 'releasing' }"
-                target="popup"/>         
-        
+                visibleWhen="#{canIssueControl == true  }"
+                target="popup"/>    
+                
     </invokers>
     <code class="com.rameses.gov.etracs.obo.models.OboControlModel" />
     <pages>
