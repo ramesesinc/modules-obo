@@ -1,0 +1,9 @@
+<workunit extends="com/rameses/admin/templates/RoleList.xml">
+    
+    <invokers>
+        <invoker type="sys_role_list:obo" 
+                 caption="Manage OBO Roles" action="init" 
+                 index="0" 
+                 icon="home/icons/admin-role.png" />
+   </invokers>
+</workunit>

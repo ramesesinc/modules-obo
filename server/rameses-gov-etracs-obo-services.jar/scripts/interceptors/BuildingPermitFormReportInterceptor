@@ -93,17 +93,24 @@ class BuildingPermitFormReportInterceptor {
         ];
 
         //load accompanying subdocuments
-        def subdocs = vwSubdocEm.find( [appid: permit.objid ] ).where( "doctype.issuetype = 2 ").list();
+        def subdocs = vwSubdocEm.find( [appid: permit.objid ] ).where( "doctype.issuetype IN (2,3) AND NOT(doctype.template IS NULL) ").list();
         subdocs.each {
         	o.attachments << [ reportid: "building_permit_doc", parameters: [objid: it.objid], title: it.doctypeid + ".pdf" ];
         }
 
         permit.rpus.each {
-        	def res = jasperSvc.generateReport([reportid: "rpttaxclearance", refid: it.taxclearanceid] );
-	        if( res ) {
-	        	o.attachments << [title: "TaxClearance_"+it.tdno+".pdf", filename:outputReportPath +res.tokenid + ".pdf" ];
+        	try {
+	        	def res = jasperSvc.generateReport([reportid: "rpttaxclearance", refid: it.taxclearanceid] );
+	        	if(res.tokenid) {
+	        		o.attachments << [title: "TaxClearance_"+it.tdno+".pdf", filename:outputReportPath +res.tokenid + ".pdf" ];
+	        	}
 		        res = jasperSvc.generateReport([reportid: "tdtruecopy", refid: it.truecopycertid] );        	
-	        	o.attachments << [title: "TrueCopyCert_"+it.tdno+".pdf", filename:outputReportPath+res.tokenid+".pdf" ];        	
+		        if( res.tokenid ) {
+	        		o.attachments << [title: "TrueCopyCert_"+it.tdno+".pdf", filename:outputReportPath+res.tokenid+".pdf" ];        	
+		        }
+        	}
+        	catch( ignErr ) {
+        		println "error generating rpt reports for email. " + ignErr.getMessage();
         	}
         } 
 

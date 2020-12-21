@@ -42,7 +42,7 @@ public class OnlineBuildingPermitService  {
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
-		o.objid = kg.generateAlphanumKey(o.orgcode+"-",8);
+		o.objid = kg.generateAlphanumKey(o.orgcode+"BP-",8);
 		o.dtfiled = dateSvc.getServerDate();
 		o.step = 1;
 		def app = appEm.create( o );
