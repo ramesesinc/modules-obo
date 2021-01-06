@@ -951,6 +951,19 @@
 					<graphicElement stretchType="NoStretch"/>
 					<imageExpression class="java.io.InputStream"><![CDATA[$F{endorser.signature}]]></imageExpression>
 				</image>
+				<image  vAlign="Middle" hAlign="Center" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1"
+						y="116"
+						width="566"
+						height="490"
+						key="image-8"/>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/draft.png"]]></imageExpression>
+				</image>
 			</band>
 		</title>
 		<pageHeader>
