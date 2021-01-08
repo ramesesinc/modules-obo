@@ -46,6 +46,8 @@ const BuildingPermitApplicant = (props) => {
         setEditmode("create");
       }
       else {
+        if (!applicant.id) applicant.id = {};
+        applicant.appid = appno;
         setApplicant(applicant);
         setEditmode("read");
       };
@@ -72,7 +74,7 @@ const BuildingPermitApplicant = (props) => {
   }
 
   const residentHandler = () => {
-    const updatedApplicant = {...applicant, resident: !applicant.resident, address: {}};
+    const updatedApplicant = {...applicant, appid: appno, resident: !applicant.resident, address: {}};
     setApplicant(updatedApplicant);
   }
 
