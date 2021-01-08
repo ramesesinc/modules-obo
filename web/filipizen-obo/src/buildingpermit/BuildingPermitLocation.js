@@ -15,6 +15,7 @@ import {
 
 import { BarangayList, useBarangayList } from "rsi-react-filipizen-components";
 
+
 const BuildingPermitLocation = (props) => {
   const { partner, appno, appService, moveNextStep } = props;
   const barangays = useBarangayList(partner.id);
@@ -22,24 +23,7 @@ const BuildingPermitLocation = (props) => {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState({});
-
-
-  const initializeLocation = () => {
-    appService.invoke("getRpus", {appid: props.appno}, (err, rpus) => {
-      if (err) {
-        setError(err);
-      } else {
-        const rpu = rpus[0];
-        setLocation({
-          lotno: rpu.lotno,
-          blockno: rpu.blockno,
-          street: rpu.street,
-          barangay: barangays.find(brgy => brgy.name === rpu.barangay),
-        });
-        setLoading(false);
-      }
-    });
-  }
+  const [brgyName, setBrgyName] = useState();
 
   useEffect(() => {
     setLoading(true);
@@ -48,11 +32,11 @@ const BuildingPermitLocation = (props) => {
         setError(err);
         setLoading(false);
       } else {
-        if (location && location.barangay && location.barangay.objid) {
-          location.barangay.parentid = partner.id;
+        if (location && location.barangay && location.barangay.name) {
           setLocation(location);
+          setBrgyName(location.barangay.name);
         } else {
-          setLocation(null);
+          setLocation({});
         }
       }
     });
@@ -60,10 +44,31 @@ const BuildingPermitLocation = (props) => {
 
 
   useEffect(() => {
-    if (location === null && barangays.length > 0) {
+    const initializeLocation = () => {
+      appService.invoke("getRpus", {appid: props.appno}, (err, rpus) => {
+        if (err) {
+          setError(err);
+        } else {
+          const rpu = rpus[0];
+          const brgyName = location && location.barangay ? location.barangay.name : rpu.barangay;
+          const updatedLocation = {...location};
+          if (!(location && location.barangay && location.barangay.objid)) {
+            updatedLocation.lotno =  rpu.lotno;
+            updatedLocation.blockno =  rpu.blockno;
+            updatedLocation.street =  rpu.street;
+          }
+          updatedLocation.barangay = barangays.find(brgy => brgy.name === brgyName);
+
+          setLocation(updatedLocation);
+          setLoading(false);
+        }
+      });
+    }
+
+    if (barangays.length > 0) {
       initializeLocation();
     }
-  }, [location, barangays])
+  }, [brgyName, barangays])
 
   const updateLocation = () => {
     setError(null);
@@ -98,10 +103,10 @@ const BuildingPermitLocation = (props) => {
           <Text name='bldgname' caption='Building Name' />
           <Text name='street' caption='Street' />
           <Text name='subdivision' caption='Subdivision' />
-          <Text name='barangay.name' caption='Barangay' readOnly={true} />
           {/**
-            <BarangayList barangays={barangays} name="barangay" caption='Barangay' />
+            <Text name='barangay.name' caption='Barangay' readOnly={true} />
            */}
+          <BarangayList barangays={barangays} name="barangay" caption='Barangay' />
         </FormPanel>
         <ActionBar>
           <BackLink caption="Back" action={() => setMode("view-rpus")} variant="text" />
