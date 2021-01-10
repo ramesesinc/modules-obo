@@ -11,7 +11,8 @@ import {
   Button,
   BackLink,
   Panel,
-  Service
+  Service,
+  MaskedInput
 } from 'rsi-react-web-components';
 
 import { VerifyEmailCode } from "rsi-react-filipizen-components";
@@ -90,12 +91,12 @@ const Initial = ({
           <Subtitle>Please specify initial information</Subtitle>
           <Spacer />
           <Error msg={error} />
-          <Text name="prc.idno" caption="PRC No." required />
+          <MaskedInput name="prc.idno" caption="PRC No." required />
           <ProfessionList caption="Profession (Copy profession in the PRC card" name="profession" expr={item => item} professions={professionList} required={true} />
           <Email name="email" required/>
           <Mobileno name="mobileno" required />
           <ActionBar>
-            <BackLink action={onCancel} />
+            <BackLink caption="Cancel" action={onCancel} />
             <Button caption="Next" action={verifyInfo} loading={loading} disableWhen={loading} />
           </ActionBar>
         </form>
