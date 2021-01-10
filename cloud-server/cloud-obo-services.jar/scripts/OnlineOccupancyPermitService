@@ -39,7 +39,7 @@ public class OnlineOccupancyPermitService  {
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
-		o.objid = "OP"+ kg.generateAlphanumKey(o.orgcode+"-",8);
+		o.objid = kg.generateAlphanumKey(o.orgcode+"OP-",8);
 		o.dtfiled = dateSvc.getServerDate();
 		o.step = 1;
 		o.occupancytypeid = o.bldgpermit.occupancytypeid;

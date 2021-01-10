@@ -1,0 +1,6 @@
+<workunit extends="com/rameses/admin/templates/UserRoleList.xml">
+    <invokers>
+        <invoker type="sys_user_role_list:obo" caption="OBO User Role" 
+                 action="init" index="10" />
+    </invokers>
+</workunit>
