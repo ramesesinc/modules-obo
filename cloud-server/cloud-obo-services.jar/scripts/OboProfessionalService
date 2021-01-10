@@ -88,4 +88,17 @@ public class OboProfessionalService  {
 			.orderBy("lastname, firstname")
 			.list();
 	}
+
+	@ProxyMethod
+	public def verifyProfessional(params) {
+		def professional = vwProfEm.find( [prc_idno: params.prc.idno] ).first();
+		if (!professional) throw new Exception("PRC does not exist.")
+		return professional;
+	}
+
+	@ProxyMethod
+	public def updateProfessional(professional) {
+		profInfoEm.find([objid: professional.objid]).update(professional);
+		return professional;
+	}
 }
