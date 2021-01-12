@@ -47,7 +47,6 @@ const BuildingPermitWebController = (props) => {
   const [hash, setHash] = useState();
   const [app, setApp] = useState({step: 1});
   const [step, setStep] = useState(1)
-  const [errorText, setErrorText] = useState({});
 
   const { partner, service, history } = props;
 
@@ -173,7 +172,7 @@ const BuildingPermitWebController = (props) => {
 
   return (
     <Page>
-      {app.step < 9 &&
+      {app.step < 10 &&
         <Panel target="left" style={styles.stepperContainer} >
           <Stepper steps={pages} completedStep={app.step} activeStep={step} handleStep={handleStep} />
         </Panel>
