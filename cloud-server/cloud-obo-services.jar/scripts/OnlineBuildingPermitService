@@ -42,7 +42,7 @@ public class OnlineBuildingPermitService  {
 	@ProxyMethod
 	public def create(def o) {
 		def kg = new KeyGen();
-		o.objid = kg.generateAlphanumKey(o.orgcode+"BP-",8);
+		o.objid = kg.generateAlphanumKey(o.orgcode+"-",8);
 		o.dtfiled = dateSvc.getServerDate();
 		o.step = 1;
 		def app = appEm.create( o );
@@ -92,6 +92,9 @@ public class OnlineBuildingPermitService  {
 	@ProxyMethod
 	public def update( def o ) {
 		appEm.find( [objid: o.appid ] ).update( o );
+		if (o.totalfloorarea) {
+			updateTxnType(o, null);
+		}
 	}
 
 	//STEP 1
@@ -180,6 +183,26 @@ public class OnlineBuildingPermitService  {
 				addAccessory( o.appid, o.occupancytype.objid );
 			}
 		}
+
+		updateTxnType(app, o.occupancytype);
+		return o;
+	}
+
+	void updateTxnType(app, occupancytype) {
+		if (!occupancytype) {
+			app = appEm.find([objid: app.appid]).first();
+			occupancytype = app.occupancytype;
+		}
+
+		def txntype = 'COMPLEX';
+		if (occupancytype.group.objid == 'A' && app.totalfloorarea <= 1500 && app.numfloors <= 3) 
+			txntype = "SIMPLE";
+		else if (occupancytype.group.objid == 'E' && app.totalfloorarea <= 1500 && app.numfloors <= 2) 
+			txntype = "SIMPLE";
+		else if (occupancytype.group.objid == 'F' && app.totalfloorarea <= 1500) 
+			txntype = "SIMPLE";
+
+		appEm.find([objid: app.objid]).update([txntype: txntype]);
 	}
 
 	@ProxyMethod
