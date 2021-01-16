@@ -14,7 +14,7 @@ import { Disclaimer } from "rsi-react-filipizen-components";
 
 import Initial from "./Initial";
 import NewProfessional from "./NewProfessional";
-import Success from "./Success";
+import Success from "../components/Success";
 
 const svc = Service.lookup("OboProfessionalService", "obo");
 

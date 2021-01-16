@@ -10,7 +10,10 @@ import {
   Image
 } from 'rsi-react-web-components'
 
-const Success = ({ onClose }) => {
+const Success = ({
+  onClose,
+  msg="You have successfully registered your professional information."
+}) => {
   return (
     <Panel>
       <Content center>
@@ -19,9 +22,7 @@ const Success = ({ onClose }) => {
         <Spacer />
         <Title>Success!</Title>
         <Spacer />
-        <Label style={{ ...styles.text, ...{ maxWidth: 300 } }}>
-          You have successfully registered your professional information.
-        </Label>
+        <Label style={{ ...styles.text, ...{ maxWidth: 300 } }}>{msg}</Label>
         <Label labelStyle={styles.text}>
           Thank you for using this service.
         </Label>
