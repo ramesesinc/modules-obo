@@ -1,4 +1,4 @@
-<workunit extends="com/rameses/admin/templates/RoleList.xml">
+<workunit extends="com/rameses/admin/plugin/templates/RoleList.xml">
     
     <invokers>
         <invoker type="sys_role_list:obo" 
