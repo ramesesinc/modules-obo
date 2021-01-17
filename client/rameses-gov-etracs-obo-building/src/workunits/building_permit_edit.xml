@@ -1,27 +1,37 @@
 <workunit>
     <invokers>
         <invoker type="vw_building_permit:form:edit" target="popup"
-            caption="Edit Txn Type" action="init" context="txntype" />
+            caption="Edit Txn Type" action="init" context="txntype" visibleWhen="#{task.state == 'receiving' }"/>
         
         <invoker type="vw_building_permit:form:edit" target="popup"
-            caption="Edit Contact" action="init" context="contact" />
-        
-        <invoker type="vw_building_permit:form:edit" target="popup"
-            caption="Edit Project Info" action="init" context="project" />
+            caption="Edit Txn Type" action="init" context="txntype" 
+            role="ADMIN" permission="building_permit.editTxnType" visibleWhen="#{task.state != 'receiving' }"/>
 
         <invoker type="vw_building_permit:form:edit" target="popup"
-            caption="Edit Applicant" action="init" context="applicant" />
+            caption="Edit Contact" action="init" context="contact" 
+            role="ADMIN" permission="building_permit.editContact" />
         
         <invoker type="vw_building_permit:form:edit" target="popup"
-            caption="Edit Occupancy Type" action="init" context="occupancytype" />
+            caption="Edit Project Info" action="init" context="project" 
+            role="ADMIN" permission="building_permit.editProjectInfo" />
 
         <invoker type="vw_building_permit:form:edit" target="popup"
-            caption="Edit Zone Class" action="init" context="zoneclass" />
+            caption="Edit Applicant" action="init" context="applicant" 
+            role="ADMIN" permission="building_permit.editApplicant" />
+        
+        <invoker type="vw_building_permit:form:edit" target="popup"
+            caption="Edit Occupancy Type" action="init" context="occupancytype" 
+            role="ADMIN" permission="building_permit.editOccupancyType"/>
+
+        <!-- ZONE CLASS EDIT -->
+        <invoker type="vw_building_permit:form:edit" target="popup"
+            caption="Edit Zone Class" action="init" context="zoneclass" 
+            role="ZONING_ADMIN" />
         
         <invoker type="vw_building_evaluation:form:extActions" target="popup"
             caption="Edit Zone Class" action="init" 
             context="zoning_zoneclass"
-            visibleWhen="#{ entity.typeid == 'ZONING' }"    />
+            visibleWhen="#{ entity.typeid.toUpperCase() == 'ZONING' }"    />
         
         <invoker type="formActions" caption="Close" action="_close" immediate="true" />
         <invoker type="formActions" caption="Save" action="save" />
