@@ -3,14 +3,13 @@ import {
   Panel,
   Subtitle,
   Subtitle2,
-  BackLink,
   ActionBar,
   Button,
   Spacer,
   Error,
   Text,
   FormPanel,
-  Service
+  Decimal
 } from 'rsi-react-web-components';
 
 import { BarangayList, useBarangayList } from "rsi-react-filipizen-components";
@@ -54,6 +53,7 @@ const BuildingPermitLocation = (props) => {
           const updatedLocation = {...location};
           if (!(location && location.barangay && location.barangay.objid)) {
             updatedLocation.lotno =  rpu.lotno;
+            updatedLocation.lotarea =  rpu.areasqm;
             updatedLocation.blockno =  rpu.blockno;
             updatedLocation.street =  rpu.street;
           }
@@ -81,6 +81,15 @@ const BuildingPermitLocation = (props) => {
     })
   }
 
+  if (loading) {
+    return (
+      <Panel>
+        <label>{`Tracking No. ${appno}`}</label>
+        <Subtitle>Project Location</Subtitle>
+      </Panel>
+    )
+  }
+
   return (
     <Panel>
       <label>{`Tracking No. ${appno}`}</label>
@@ -96,6 +105,7 @@ const BuildingPermitLocation = (props) => {
             <Text name='lotno' caption='Lot No.' />
             <Text name='blockno' caption='Block No.' />
           </Panel>
+          <Decimal name="lotarea" caption="Lot Area (sq.m.)" textAlign="left" />
           <Panel row>
             <Text name='unitno' caption='Unit No.' />
             <Text name='bldgno' caption='Building No.' />
@@ -103,13 +113,9 @@ const BuildingPermitLocation = (props) => {
           <Text name='bldgname' caption='Building Name' />
           <Text name='street' caption='Street' />
           <Text name='subdivision' caption='Subdivision' />
-          {/**
-            <Text name='barangay.name' caption='Barangay' readOnly={true} />
-           */}
           <BarangayList barangays={barangays} name="barangay" caption='Barangay' />
         </FormPanel>
         <ActionBar>
-          <BackLink caption="Back" action={() => setMode("view-rpus")} variant="text" />
           <Button caption='Next' action={updateLocation} />
         </ActionBar>
       </Panel>

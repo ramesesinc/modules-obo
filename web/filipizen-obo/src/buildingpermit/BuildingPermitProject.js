@@ -21,11 +21,9 @@ import {
 const svc = Service.lookup("OboMiscListService", "obo");
 
 const BuildingPermitProject = ({
-  partner,
   appno,
   appService,
   moveNextStep,
-  stepCompleted
 }) => {
   const initialProject = {
     appid: appno,
@@ -128,7 +126,7 @@ const BuildingPermitProject = ({
         setProject(project);
         setMode("project-detail");
       }
-      setLoading(true);
+      setLoading(false);
     });
   }, [masterWorkTypes])
 
@@ -201,6 +199,15 @@ const BuildingPermitProject = ({
   const clearStatus = () => {
     setError(null);
     setLoading(false);
+  }
+
+  if (loading) {
+    return (
+      <Panel>
+        <label>{`Tracking No. ${appno}`}</label>
+        <Subtitle>Project Details</Subtitle>
+      </Panel>
+    )
   }
 
   return (
