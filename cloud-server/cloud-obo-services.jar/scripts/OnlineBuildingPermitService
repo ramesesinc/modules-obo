@@ -95,6 +95,7 @@ public class OnlineBuildingPermitService  {
 		if (o.totalfloorarea) {
 			updateTxnType(o, null);
 		}
+		return o;
 	}
 
 	//STEP 1
