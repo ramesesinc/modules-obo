@@ -40,6 +40,7 @@ public class BuildingPermitLocationPage extends javax.swing.JPanel {
         xTextField6 = new com.rameses.rcp.control.XTextField();
         xTextField3 = new com.rameses.rcp.control.XTextField();
         barangayLookup1 = new com.rameses.etracs.components.BarangayLookup();
+        xDecimalField1 = new com.rameses.rcp.control.XDecimalField();
 
         xFormPanel1.setCaptionWidth(150);
 
@@ -104,6 +105,11 @@ public class BuildingPermitLocationPage extends javax.swing.JPanel {
         barangayLookup1.setName("entity.barangay"); // NOI18N
         xFormPanel1.add(barangayLookup1);
 
+        xDecimalField1.setCaption("Lot Area");
+        xDecimalField1.setName("entity.lotarea"); // NOI18N
+        xDecimalField1.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xFormPanel1.add(xDecimalField1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,8 +123,8 @@ public class BuildingPermitLocationPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -141,6 +147,7 @@ public class BuildingPermitLocationPage extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.etracs.components.BarangayLookup barangayLookup1;
+    private com.rameses.rcp.control.XDecimalField xDecimalField1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;

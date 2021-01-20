@@ -10,7 +10,7 @@ class ProfessionalListModel extends AbstractComponentModel {
 
     def viewProfessional() {
         if(!selectedItem) throw new Exception("Please select an entry");
-        return Inv.lookupOpener("vw_obo_professional:open", [entity: [objid: selectedItem.objid]]);
+        return Inv.lookupOpener("vw_obo_professional_info:open", [entity: [objid: selectedItem.objid]]);
     }
     
     def listHandler = [ 
@@ -18,7 +18,7 @@ class ProfessionalListModel extends AbstractComponentModel {
             return handler.getList(); 
         },
         openItem: { o,col->
-            return Inv.lookupOpener("vw_obo_professional:open", [entity: [objid: o.objid]]);
+            return Inv.lookupOpener("vw_obo_professional_info:open", [entity: [objid: o.objid]]);
         }
     ]as BasicListModel;
     
