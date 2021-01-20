@@ -64,7 +64,6 @@ const BuildingRealPropertyInfo = ({
         property.owner.ctc = {};
         property.lotowned = "1";
         property.appid = appno;
-        console.log("Property", property)
         setProperty(property);
         setMode("view-lot");
       }
@@ -83,14 +82,13 @@ const BuildingRealPropertyInfo = ({
   }
 
   const editOwnerInfo = props => {
-    setMode("edit-owner-info");
-    //TODO: activate validation below
-    // if(property.bill !== null && property.bill.amtdue != null &&  property.bill.amtdue > 0 ) {
-    //   setError("Please settle all unpaid balances first before proceeding");
-    // } else {
-    //   setError(null);
-    //   setMode("edit-owner-info");
-    // }
+    // setMode("edit-owner-info");
+    if(property.bill !== null && property.bill.amtdue != null &&  property.bill.amtdue > 0 ) {
+      setError("Please settle all unpaid balances first before proceeding");
+    } else {
+      setError(null);
+      setMode("edit-owner-info");
+    }
   }
 
   const viewList = () => {

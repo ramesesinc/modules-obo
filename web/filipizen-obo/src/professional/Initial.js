@@ -92,7 +92,7 @@ const Initial = ({
           <Spacer />
           <Error msg={error} />
           <MaskedInput name="prc.idno" caption="PRC No." required />
-          <ProfessionList caption="Profession (Copy profession in the PRC card" name="profession" expr={item => item} professions={professionList} required={true} />
+          <ProfessionList caption="Profession (Copy profession in the PRC card)" name="profession" expr={item => item} professions={professionList} required={true} />
           <Email name="email" required/>
           <Mobileno name="mobileno" required />
           <ActionBar>

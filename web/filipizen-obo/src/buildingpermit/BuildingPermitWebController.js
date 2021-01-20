@@ -47,7 +47,6 @@ const BuildingPermitWebController = (props) => {
   const [hash, setHash] = useState();
   const [app, setApp] = useState({step: 1});
   const [step, setStep] = useState(1)
-  const [errorText, setErrorText] = useState({});
 
   const { partner, service, history } = props;
 
@@ -120,7 +119,9 @@ const BuildingPermitWebController = (props) => {
   const moveNextStep = () => {
     const stepCompleted = step < app.step && step !== 1;
     if (stepCompleted) {
-      setStep(ps => ps + 1);
+      const nextStep = step + 1;
+      setStep(nextStep);
+      handleStep(nextStep);
     } else {
       svc.invoke("update", {appid: appno, step: step+1}, (err, updatedApp) => {
         if (err) {
@@ -128,6 +129,7 @@ const BuildingPermitWebController = (props) => {
         } else {
           setStep(updatedApp.step);
           setApp({...app, step: updatedApp.step});
+          handleStep(updatedApp.step);
         }
       });
     }
@@ -173,7 +175,7 @@ const BuildingPermitWebController = (props) => {
 
   return (
     <Page>
-      {app.step < 9 &&
+      {app.step < 10 &&
         <Panel target="left" style={styles.stepperContainer} >
           <Stepper steps={pages} completedStep={app.step} activeStep={step} handleStep={handleStep} />
         </Panel>
@@ -189,6 +191,10 @@ const BuildingPermitWebController = (props) => {
 const styles = {
   stepperContainer: {
     paddingLeft: 40,
+    marginBottom: 50,
+    overflowY: "auto",
+    overflowX: "hidden",
+    height: "80vh",
   }
 }
 

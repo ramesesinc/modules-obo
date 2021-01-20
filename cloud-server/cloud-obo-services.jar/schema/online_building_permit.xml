@@ -32,6 +32,7 @@
 		<field name="location_subdivision" />
 		<field name="location_barangay_name" />
 		<field name="location_barangay_objid" />
+		<field name="location_lotarea" />
 
 		<complex name="applicant" ref="online_building_permit_entity" jointype="many-to-one" required="false">
 			<key field="applicantid" target="objid" />

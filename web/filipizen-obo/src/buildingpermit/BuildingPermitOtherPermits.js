@@ -204,7 +204,7 @@ const BuildingPermitOtherPermits = ({
   const saveCost = () => {
     setLoading(true);
     setError(null);
-    const updatedCost = {objid: ancillaryPermit.objid, infos: ancillaryPermit.infos }
+    const updatedCost = {appid: appno, objid: ancillaryPermit.objid, infos: ancillaryPermit.infos }
     appService.invoke("saveAncillaryPermit", updatedCost, (err, _) => {
       if (err) {
         setError(err);

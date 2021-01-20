@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Subtitle,
   Error,
@@ -9,35 +9,44 @@ import {
   BackLink,
   Panel,
   Service,
-  MaskedInput
+  MaskedInput,
+  useData
 } from 'rsi-react-web-components';
 
+import { ACTIONS } from "./UpdateProfessionalWebController";
+
 import { VerifyEmailCode } from "rsi-react-filipizen-components";
+import ProfessionList from "../components/ProfessionList";
 
 const svc = Service.lookup("OboProfessionalService", "obo");
 
-
 const Initial = ({
   partner,
-  onCancel,
-  onVerified
+  history,
+  moveNextStep,
 }) => {
+
+  const [ctx, dispatch] = useData();
+  const { professional } = ctx;
 
   const [mode, setMode] = useState("init");
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({});
-  const [professional, setProfessional] = useState({});
+  const [professionList, setProfessionList] = useState([]);
   const [key, setKey] = useState();
 
-  // const verifyEmail = async () => {
-  //   const emailSvc = Service.lookupAsync(`${partner.id}:VerifyEmailService`, "obo");
-  //   return emailSvc.invoke("verifyEmail", { email: info.email, mobileno: info.mobileno });
-  // };
+  const formRef = useRef();
 
   const onResendCode = (key) => {
     setKey(key);
   }
+
+  useEffect(() => {
+    svc.invoke("getProfessionList", null, (err, list) => {
+      setProfessionList(list);
+    })
+  }, []);
 
   const verifyEmail = async ({email, mobileno}) => {
     const emailSvc = Service.lookupAsync(`${partner.id}:VerifyEmailService`, "obo");
@@ -45,6 +54,8 @@ const Initial = ({
   };
 
   const verifyProfessional = () => {
+    if (!formRef.current.reportValidity()) return;
+
     setError(null);
     setLoading(true);
     svc.invoke("verifyProfessional", info, (err, professional) => {
@@ -54,7 +65,7 @@ const Initial = ({
         verifyEmail(professional)
           .then((data) => {
             setError(null);
-            setProfessional(professional);
+            dispatch({type: ACTIONS.SET_PROFESSIONAL, professional })
             setKey(data.key);
             setMode("verifyemail")
           })
@@ -68,16 +79,19 @@ const Initial = ({
 
   return (
     <React.Fragment>
-      <FormPanel visibleWhen={mode === "init"} context={info} handler={setInfo}>
-        <Subtitle>Please specify PRC Number</Subtitle>
-        <Spacer />
-        <Error msg={error} />
-        <MaskedInput name="prc.idno" caption="PRC No." required  autoFocus/>
-        <ActionBar>
-          <BackLink caption="Cancel" action={onCancel} />
-          <Button caption="Next" action={verifyProfessional} loading={loading} disableWhen={loading} />
-        </ActionBar>
-      </FormPanel>
+      <form ref={formRef}>
+        <FormPanel visibleWhen={mode === "init"} context={info} handler={setInfo}>
+          <Subtitle>Please specify PRC Number</Subtitle>
+          <Spacer />
+          <Error msg={error} />
+          <MaskedInput name="prc.idno" caption="PRC No." required  autoFocus/>
+          <ProfessionList caption="Profession (Copy profession in the PRC card)" name="profession" expr={item => item} professions={professionList} required={true} />
+          <ActionBar>
+            <BackLink caption="Cancel" action={() => history.goBack()} />
+            <Button caption="Next" action={verifyProfessional} loading={loading} disableWhen={loading} />
+          </ActionBar>
+        </FormPanel>
+      </form>
 
       <Panel visibleWhen={mode === "verifyemail"}>
         <Subtitle>Email Verification</Subtitle>
@@ -89,7 +103,7 @@ const Initial = ({
           hiddenCode={key}
           email={professional.email}
           onCancel={() => setMode("init")}
-          onVerified={() => onVerified(professional)}
+          onVerified={moveNextStep}
           onResendCode={onResendCode}
           width={200}
           connection="obo"
