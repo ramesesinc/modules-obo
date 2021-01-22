@@ -48,7 +48,7 @@
 
 		<background>
 			<band height="814"  isSplitAllowed="true" >
-				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+				<image  vAlign="Middle" hAlign="Center" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
 						x="0"
 						y="121"
