@@ -116,14 +116,14 @@ const BuildingPermitWebController = (props) => {
     }
   }
 
-  const moveNextStep = () => {
+  const moveNextStep = (state) => {
     const stepCompleted = step < app.step && step !== 1;
     if (stepCompleted) {
       const nextStep = step + 1;
       setStep(nextStep);
       handleStep(nextStep);
     } else {
-      svc.invoke("update", {appid: appno, step: step+1}, (err, updatedApp) => {
+      svc.invoke("update", {appid: appno, state, step: step+1}, (err, updatedApp) => {
         if (err) {
           setError(err);
         } else {

@@ -114,12 +114,12 @@ const OccupancyPermitWebController = (props) => {
     setMode("processing");
   }
 
-  const moveNextStep = () => {
+  const moveNextStep = (state) => {
     if (app.step == pages.length - 1) return;
 
     setError(null);
     const nextStep = step < app.step ? app.step : step + 1;
-    svc.invoke("update", {objid: appno, step: nextStep }, (err, updatedApp) => {
+    svc.invoke("update", {objid: appno, state, step: nextStep }, (err, updatedApp) => {
       if (!err) {
         setStep(nextStep);
         setApp({...app, step: nextStep});
@@ -155,7 +155,7 @@ const OccupancyPermitWebController = (props) => {
   }
 
   const onComplete = () => {
-    moveNextStep();
+    moveNextStep('END');
   }
 
   if (mode === "init" || loading) {

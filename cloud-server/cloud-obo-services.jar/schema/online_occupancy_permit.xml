@@ -1,6 +1,7 @@
 <schema>
 	<element tablename="online_occupancy_permit">
 		<field name="objid" primary="true"/>
+		<field name="state" />
 		<field name="orgcode" required="true"/>
 
 		<field name="apptype" required="true"/>
