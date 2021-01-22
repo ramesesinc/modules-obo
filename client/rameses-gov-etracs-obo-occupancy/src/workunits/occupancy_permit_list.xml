@@ -1,6 +1,6 @@
 <workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
-          processName="occupancy_permit" schemaName="vw_occupancy_permit"
-          allowDelete="false" allowNotify="false">
+        entitySchemaName="occupancy_permit"
+        processName="occupancy_permit" schemaName="vw_occupancy_permit">
     <invokers>
         <invoker folderid="menucategory/obo/occupancy" caption="View Occupancy Permit Application List"
              cols="appno,appdate,trackingno,applicant.name,title,task.state,task.assignee.name"

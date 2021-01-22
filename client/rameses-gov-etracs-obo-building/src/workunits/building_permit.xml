@@ -5,7 +5,10 @@
     <invokers>
         <invoker type="vw_building_permit:open" 
                  caption="Building Permit Application" action="open" />
-
+        
+        <invoker type="building_permit:open" 
+                 caption="Building Permit Application" action="open" />
+        
         <invoker type="appActions" 
                 caption="Reports"
                 icon="images/toolbars/reports.png"
