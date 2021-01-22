@@ -79,7 +79,22 @@
 	<field name="approver.signature" class="java.lang.Object"/>
 
 		<background>
-			<band height="0"  isSplitAllowed="true" >
+			<band height="1144"  isSplitAllowed="true" >
+				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="171"
+						width="584"
+						height="636"
+						key="image-27">
+							<printWhenExpression><![CDATA[$F{controlno} == null]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/draft.png"]]></imageExpression>
+				</image>
 			</band>
 		</background>
 		<title>

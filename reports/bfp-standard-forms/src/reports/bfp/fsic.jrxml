@@ -47,7 +47,22 @@
 	<field name="permittype" class="java.lang.String"/>
 
 		<background>
-			<band height="0"  isSplitAllowed="true" >
+			<band height="814"  isSplitAllowed="true" >
+				<image  vAlign="Middle" hAlign="Center" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="121"
+						width="566"
+						height="517"
+						key="image-8">
+							<printWhenExpression><![CDATA[$F{controlno} == null]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/draft.png"]]></imageExpression>
+				</image>
 			</band>
 		</background>
 		<title>
@@ -535,9 +550,9 @@
 				</line>
 				<line direction="TopDown">
 					<reportElement
-						x="135"
+						x="125"
 						y="142"
-						width="128"
+						width="154"
 						height="0"
 						forecolor="#FF0000"
 						key="line-12"/>
