@@ -1,0 +1,13 @@
+<workunit>
+    <invokers>
+         <!-- for building permit -->
+         <invoker type="obo_control:create" 
+                caption="Issue Control"
+                action="initNew"
+                target="popup"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboControlModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboControlPage" />
+    </pages>
+</workunit>

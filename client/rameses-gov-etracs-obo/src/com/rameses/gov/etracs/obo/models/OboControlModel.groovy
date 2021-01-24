@@ -25,6 +25,7 @@ public class OboControlModel {
     def controlno;
     def remarks;
     boolean showControlno = false;
+    def saveHandler;
     
     void init(def inv) {
         schemaName = inv.properties.schemaName;
@@ -43,6 +44,15 @@ public class OboControlModel {
         showControlno = true;
     }
 
+    void initNew() {
+        if(!schemaName) throw new Exception("schemaName is required");
+        if(!entity) throw new Exception("entity is required");        
+        doctypeid = entity.doctype?.objid;
+        objid = entity.objid;        
+        notificationid = schemaName+":"+doctypeid.toLowerCase();
+        showControlno = true;
+    }
+    
     def doOk() {
         def m = [:];
         m.doctypeid = doctypeid;
@@ -56,7 +66,12 @@ public class OboControlModel {
         z.controlid = entity.objid;
         z.controlno = entity.controlno;
         z.dtissued = entity.dtissued;
-        caller.reloadEntity();
+        if( saveHandler ) {
+            saveHandler();
+        }
+        else {
+            caller.reloadEntity();
+        }
         return "_close";
     }
     

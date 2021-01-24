@@ -42,6 +42,13 @@
 	<field name="profsanitary.name" class="java.lang.String"/>
 	<field name="supervisor.name" class="java.lang.String"/>
 	<field name="profplumbing.name" class="java.lang.String"/>
+	<field name="profarchitect.prc.idno" class="java.lang.String"/>
+	<field name="supervisor.prc.idno" class="java.lang.String"/>
+	<field name="profelectrical.prc.idno" class="java.lang.String"/>
+	<field name="profcivil.prc.idno" class="java.lang.String"/>
+	<field name="profmechanical.prc.idno" class="java.lang.String"/>
+	<field name="profsanitary.prc.idno" class="java.lang.String"/>
+	<field name="profplumbing.prc.idno" class="java.lang.String"/>
 
 		<background>
 			<band height="424"  isSplitAllowed="true" >
@@ -129,12 +136,14 @@
 						y="143"
 						width="195"
 						height="14"
-						key="textField"/>
+						key="textField">
+							<printWhenExpression><![CDATA[$F{supervisor.name} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
 						<font fontName="Arial" size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{contractor.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{supervisor.name} + " ( PRC " + $F{supervisor.prc.idno} + ")"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -142,12 +151,14 @@
 						y="200"
 						width="195"
 						height="13"
-						key="textField"/>
+						key="textField">
+							<printWhenExpression><![CDATA[$F{profarchitect.name} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="9"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profarchitect.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profarchitect.name} + " ( PRC " + $F{profarchitect.prc.idno} + ")"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -155,12 +166,14 @@
 						y="214"
 						width="195"
 						height="12"
-						key="textField"/>
+						key="textField">
+							<printWhenExpression><![CDATA[$F{profcivil.name} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="9"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profcivil.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profcivil.name} + " (PRC " + $F{profcivil.prc.idno} + ")"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -168,12 +181,14 @@
 						y="228"
 						width="195"
 						height="12"
-						key="textField"/>
+						key="textField">
+							<printWhenExpression><![CDATA[$F{profelectrical.name} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="9"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profelectrical.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profelectrical.name} + " (PRC " + $F{profelectrical.prc.idno} + ")"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -181,12 +196,14 @@
 						y="253"
 						width="195"
 						height="14"
-						key="textField"/>
+						key="textField">
+							<printWhenExpression><![CDATA[$F{profmechanical.name} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="9"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profmechanical.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profmechanical.name} + " (PRC " + $F{profmechanical.prc.idno} + ")"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -194,12 +211,14 @@
 						y="283"
 						width="195"
 						height="12"
-						key="textField"/>
+						key="textField">
+							<printWhenExpression><![CDATA[$F{profsanitary.name} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="9"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profsanitary.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profsanitary.name} + " (PRC " + $F{profsanitary.prc.idno} + ")"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -207,12 +226,14 @@
 						y="367"
 						width="195"
 						height="12"
-						key="textField"/>
+						key="textField">
+							<printWhenExpression><![CDATA[$F{supervisor.name} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="9"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{supervisor.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{supervisor.name} + " ( PRC " + $F{supervisor.prc.idno} + ")" ]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -220,12 +241,14 @@
 						y="305"
 						width="195"
 						height="11"
-						key="textField"/>
+						key="textField">
+							<printWhenExpression><![CDATA[$F{profplumbing.name} != null]]></printWhenExpression>
+						</reportElement>
 					<box></box>
 					<textElement verticalAlignment="Bottom">
-						<font fontName="Arial" size="9"/>
+						<font fontName="Arial" size="8"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profplumbing.name}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{profplumbing.name} + " (PRC " + $F{profplumbing.prc.idno} + ")"]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement
