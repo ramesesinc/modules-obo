@@ -67,6 +67,14 @@ class BuildingPermitModel extends WorkflowTaskModel  {
         }
     ];
     
+    public String getSchemaName() {
+        return "vw_building_permit";
+    }
+    
+    public String getEntitySchemaName() {
+        return "building_permit";
+    }
+    
     /*
     def viewApplicant() {
         def p = [:];

@@ -30,8 +30,10 @@
 		<field name="issuedby_name" />
 		<field name="issuedby_objid" />
 		<field name="expirydate" />
+		
 		<field name="template" />
-		<field name="issue_remarks"/>
+		<field name="endorserid" />
+		<field name="approverid" />
 
 		<field name="appstate" />
 		<field name="appuserid" />

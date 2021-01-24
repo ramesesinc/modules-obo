@@ -525,7 +525,7 @@
 					<graphicElement stretchType="NoStretch">
 					<pen lineWidth="0.0" lineStyle="Solid"/>
 </graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA[$F{approver.signature}]]></imageExpression>
+					<imageExpression class="java.io.InputStream"><![CDATA[$F{approver.signature}]]></imageExpression>
 				</image>
 				<rectangle>
 					<reportElement

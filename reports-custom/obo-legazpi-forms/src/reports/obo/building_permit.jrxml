@@ -41,13 +41,13 @@
 	<field name="certificate.dtissued" class="java.util.Date"/>
 	<field name="applicant.name" class="java.lang.String"/>
 	<field name="title" class="java.lang.String"/>
-	<field name="occupancytype.title" class="java.lang.String"/>
+	<field name="occupancytype.group.title" class="java.lang.String"/>
 	<field name="occupancytype.group" class="java.lang.String"/>
 	<field name="address.text" class="java.lang.String"/>
 	<field name="controlno" class="java.lang.String"/>
 	<field name="dtissued" class="java.util.Date"/>
 	<field name="fsec.controlno" class="java.lang.String"/>
-	<field name="fsec.dtisssued" class="java.util.Date"/>
+	<field name="fsec.dtissued" class="java.util.Date"/>
 	<field name="apptype" class="java.lang.String"/>
 	<field name="location.lotno" class="java.lang.String"/>
 	<field name="location.blockno" class="java.lang.String"/>
@@ -80,7 +80,7 @@
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.title}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{occupancytype.group.title}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -958,7 +958,7 @@ Referral Codes and its Terms and Conditions.
 					<textElement verticalAlignment="Middle">
 						<font fontName="Arial" size="10"/>
 					</textElement>
-				<textFieldExpression   class="java.util.Date"><![CDATA[$F{fsec.dtisssued}]]></textFieldExpression>
+				<textFieldExpression   class="java.util.Date"><![CDATA[$F{fsec.dtissued}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="MMMMM dd, yyyy" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
