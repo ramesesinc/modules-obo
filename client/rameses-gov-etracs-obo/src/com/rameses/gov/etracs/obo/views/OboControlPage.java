@@ -44,9 +44,7 @@ public class OboControlPage extends javax.swing.JPanel {
 
         xTextField1.setCaption("Control No");
         xTextField1.setName("controlno"); // NOI18N
-        xTextField1.setVisibleWhen("#{ showControlno == true }");
         xTextField1.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField1.setRequired(true);
         xFormPanel1.add(xTextField1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

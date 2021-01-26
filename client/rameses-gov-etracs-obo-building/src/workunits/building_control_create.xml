@@ -5,7 +5,7 @@
                 caption="Issue Building Permit"
                 schemaName="building_permit"
                 action="init"
-                visibleWhen="#{ entity.controlid == null &amp;&amp; task.state == 'releasing' &amp;&amp; userTaskAssignee == true}"
+                visibleWhen="#{ entity.controlid == null &amp;&amp; task.state == 'releasing' }"
                 target="popup"/>
 
        <!-- for documents -->        
@@ -13,7 +13,7 @@
                 caption="Issue Document Control"
                 schemaName="building_permit_doc"
                 action="initDoc"
-                visibleWhen="#{ entity.controlid == null &amp;&amp; entity.doctype.issuetype == 2  &amp;&amp; entity.app?.task?.state == 'releasing' }"
+                visibleWhen="#{ canIssueControl == true }"
                 target="popup"/>  
                 
     </invokers>

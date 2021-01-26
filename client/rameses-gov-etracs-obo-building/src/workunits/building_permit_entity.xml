@@ -5,6 +5,9 @@
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitEntityModel" />
     <pages>
+        <page template="com.rameses.gov.etracs.obo.views.ApplicantPage" />
+        <!--
         <page template="com.rameses.gov.etracs.obo.building.views.BuildingPermitEntityPage" />
+        -->
     </pages>
 </workunit>

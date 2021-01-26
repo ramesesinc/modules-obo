@@ -60,6 +60,7 @@ class BuildingPermitDocModel extends CrudFormModel {
         showInfos = true;
         showFees = true;
         reloadRefDocList();
+        //MsgBox.alert("role " + entity.doctype.role );
     }
     
     public void checkCanIssue() {

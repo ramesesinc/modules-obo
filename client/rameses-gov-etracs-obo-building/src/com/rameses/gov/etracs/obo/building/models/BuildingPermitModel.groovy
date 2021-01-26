@@ -75,7 +75,6 @@ class BuildingPermitModel extends WorkflowTaskModel  {
         return "building_permit";
     }
     
-    /*
     def viewApplicant() {
         def p = [:];
         p.editable = false;
@@ -83,7 +82,6 @@ class BuildingPermitModel extends WorkflowTaskModel  {
         p.entity = entity.applicant;
         return Inv.lookupOpener("building_permit_entity", p);
     }
-    */
     
     def viewReceipt() {
         if(!entity.payment.refid) throw new Exception("Payment refid is not specified for this payment");

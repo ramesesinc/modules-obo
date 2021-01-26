@@ -3,7 +3,7 @@
        <invoker type="vw_building_permit_doc:open" caption="Building Documents" action="open" target="popup"/>
         
        <invoker type="formActions" caption="Edit Remarks" 
-                action="editRemarks" visibleWhen="#{ task.state != 'end' &amp;&amp; userTaskAssignee == true}"/>
+                action="editRemarks" zvisibleWhen="#{ task.state != 'end' &amp;&amp; userTaskAssignee == true}"/>
     </invokers>
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitDocModel" />
     <pages>
