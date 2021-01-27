@@ -96,8 +96,8 @@ public class ApplicationSubTaskList extends AbstractComponent {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "task.dtcreated"}
-                , new Object[]{"caption", "Date Created"}
+                new Object[]{"name", "task.startdate"}
+                , new Object[]{"caption", "Start Date"}
                 , new Object[]{"width", 150}
                 , new Object[]{"minWidth", 150}
                 , new Object[]{"maxWidth", 200}

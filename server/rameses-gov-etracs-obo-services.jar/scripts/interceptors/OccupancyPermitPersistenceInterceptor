@@ -324,4 +324,19 @@ class OccupancyPermitPersistenceInterceptor {
 	}
 
 
+	@Before(pattern="PersistenceService.removeEntity", eval="#{ args[0]._schemaname == 'occupancy_permit' }")
+	public void beforeRemoveApp( def evt ) {
+		def p = evt.args[0];
+		def app = vwAppEm.find( [objid: p.objid]).first();
+		if( app.task.state != 'receiving') 
+			throw new Exception("Application can only be removed in receiving state");
+		/*	
+		appEm.find([objid: app.objid]).update( [applicantid: "{NULL}", taskid: "{NULL}" ] );
+		entityEm.find( [appid: app.objid] ).delete();
+		subdocEm.find( [appid: app.objid] ).delete();	
+		appTaskEm.find( [appid: app.objid] ).delete();
+		reqEm.find( [appid: app.objid] ).delete();
+		*/
+	} 
+
 }

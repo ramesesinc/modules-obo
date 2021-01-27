@@ -37,7 +37,7 @@ class ProfessionalLookupModel extends ComponentBean {
     def viewProfessional() {
         def p = [:];
         p.entity = entity;
-        return Inv.lookupOpener("vw_obo_professional:open", p);
+        return Inv.lookupOpener("vw_obo_professional_info:open", p);
     }
 
     public def addProfessional() {

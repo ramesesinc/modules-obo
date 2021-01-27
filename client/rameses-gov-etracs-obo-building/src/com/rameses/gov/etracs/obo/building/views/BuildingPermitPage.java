@@ -49,6 +49,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xLabel32 = new com.rameses.rcp.control.XLabel();
         xLabel36 = new com.rameses.rcp.control.XLabel();
         xLabel37 = new com.rameses.rcp.control.XLabel();
+        xLabel41 = new com.rameses.rcp.control.XLabel();
         xLabel34 = new com.rameses.rcp.control.XLabel();
         xLabel35 = new com.rameses.rcp.control.XLabel();
         xLabel15 = new com.rameses.rcp.control.XLabel();
@@ -189,6 +190,14 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         xLabel37.setNumberFormat("##0.00");
         xLabel37.setPreferredSize(new java.awt.Dimension(150, 20));
         xFormPanel1.add(xLabel37);
+
+        xLabel41.setCaption("Lot Area");
+        xLabel41.setExpression("#{entity.location.lotarea}");
+        xLabel41.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        xLabel41.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        xLabel41.setNumberFormat("##0.00");
+        xLabel41.setPreferredSize(new java.awt.Dimension(150, 20));
+        xFormPanel1.add(xLabel41);
 
         xLabel34.setCaption("Est. Project Cost");
         xLabel34.setExpression("#{entity.projectcost}");
@@ -537,6 +546,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel38;
     private com.rameses.rcp.control.XLabel xLabel39;
     private com.rameses.rcp.control.XLabel xLabel40;
+    private com.rameses.rcp.control.XLabel xLabel41;
     private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel55;
     private com.rameses.rcp.control.XLabel xLabel56;

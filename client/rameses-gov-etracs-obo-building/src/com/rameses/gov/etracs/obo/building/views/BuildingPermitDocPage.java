@@ -50,6 +50,7 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
         xLabel5 = new com.rameses.rcp.control.XLabel();
         xLabel10 = new com.rameses.rcp.control.XLabel();
         xLabel11 = new com.rameses.rcp.control.XLabel();
+        xLabel13 = new com.rameses.rcp.control.XLabel();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xLabel9 = new com.rameses.rcp.control.XLabel();
         xLabel12 = new com.rameses.rcp.control.XLabel();
@@ -58,13 +59,13 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
         xLabel17 = new com.rameses.rcp.control.XLabel();
         xLabel14 = new com.rameses.rcp.control.XLabel();
         xLabel18 = new com.rameses.rcp.control.XLabel();
-        xLabel13 = new com.rameses.rcp.control.XLabel();
         xPanel4 = new com.rameses.rcp.control.XPanel();
         xDataTable1 = new com.rameses.rcp.control.XDataTable();
         jPanel4 = new javax.swing.JPanel();
         xButton1 = new com.rameses.rcp.control.XButton();
+        xButton2 = new com.rameses.rcp.control.XButton();
 
-        setPreferredSize(new java.awt.Dimension(809, 488));
+        setPreferredSize(new java.awt.Dimension(1201, 539));
         setLayout(new java.awt.BorderLayout());
 
         jPanel2.setLayout(new java.awt.BorderLayout());
@@ -122,7 +123,7 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5), null));
         jPanel1.setPreferredSize(new java.awt.Dimension(766, 220));
 
-        xFormPanel1.setCaptionWidth(100);
+        xFormPanel1.setCaptionWidth(120);
 
         xLabel8.setCaption("Control No");
         xLabel8.setExpression("#{entity.controlno}");
@@ -149,16 +150,21 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
         xFormPanel1.add(xLabel5);
 
         xLabel10.setCaption("Design Prof");
-        xLabel10.setExpression("#{entity.designprofessional.name}");
-        xLabel10.setVisibleWhen("#{ entity.doctype.type == 'ANCILLARY'  }");
+        xLabel10.setExpression("#{entity.designprofessional.name} ( #{entity.designprofessional.prc.idno} )");
+        xLabel10.setVisibleWhen("#{ entity.designprofessional.objid !=null  }");
         xLabel10.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel10);
 
         xLabel11.setCaption("Super. In Charge");
-        xLabel11.setExpression("#{entity.supervisor.name}");
-        xLabel11.setVisibleWhen("#{ entity.doctype.type == 'ANCILLARY'  }");
+        xLabel11.setExpression("#{entity.supervisor.name} ( #{entity.designprofessional.prc.idno} )");
+        xLabel11.setVisibleWhen("#{ entity.supervisor.objid !=null  }");
         xLabel11.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel11);
+
+        xLabel13.setCaption("Remarks");
+        xLabel13.setExpression("#{entity.remarks}");
+        xLabel13.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xLabel13);
 
         xFormPanel2.setCaptionWidth(120);
 
@@ -188,7 +194,7 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
         xFormPanel2.add(xLabel17);
 
         xLabel14.setCaption("Occupancy Type");
-        xLabel14.setExpression("#{entity.occupancytypeid}");
+        xLabel14.setExpression("#{entity.app.occupancytype.group.title}");
         xLabel14.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel14);
 
@@ -197,11 +203,6 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
         xLabel18.setNumberFormat("#,##0.00");
         xLabel18.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel18);
-
-        xLabel13.setCaption("Remarks");
-        xLabel13.setExpression("#{entity.remarks}");
-        xLabel13.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel2.add(xLabel13);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -306,6 +307,12 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
         xButton1.setText("Open");
         jPanel4.add(xButton1);
 
+        xButton2.setDepends(new String[] {"selectedRefDoc"});
+        xButton2.setName("issueRefControlNo"); // NOI18N
+        xButton2.setVisibleWhen("#{  entity.app?.task?.state == 'releasing' && selectedRefDoc.controlno == null }");
+        xButton2.setText("Issue Control No");
+        jPanel4.add(xButton2);
+
         xPanel4.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
         xTabbedPane2.addTab("Related Documents", xPanel4);
@@ -324,6 +331,7 @@ public class BuildingPermitDocPage extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private com.rameses.rcp.control.XActionBar xActionBar3;
     private com.rameses.rcp.control.XButton xButton1;
+    private com.rameses.rcp.control.XButton xButton2;
     private com.rameses.rcp.control.XDataTable xDataTable1;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;

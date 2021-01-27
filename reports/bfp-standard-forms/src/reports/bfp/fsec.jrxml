@@ -44,9 +44,25 @@
 	<field name="approver.displayname" class="java.lang.String"/>
 	<field name="approver.position" class="java.lang.String"/>
 	<field name="approver.signature" class="java.lang.Object"/>
+	<field name="printable" class="java.lang.Boolean"/>
 
 		<background>
-			<band height="0"  isSplitAllowed="true" >
+			<band height="814"  isSplitAllowed="true" >
+				<image  vAlign="Middle" hAlign="Center" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="121"
+						width="566"
+						height="519"
+						key="image-8">
+							<printWhenExpression><![CDATA[$F{controlno} == null]]></printWhenExpression>
+						</reportElement>
+					<box></box>
+					<graphicElement stretchType="NoStretch">
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+</graphicElement>
+					<imageExpression class="java.lang.String"><![CDATA["images/draft.png"]]></imageExpression>
+				</image>
 			</band>
 		</background>
 		<title>
@@ -87,13 +103,13 @@
 						x="40"
 						y="252"
 						width="485"
-						height="14"
+						height="40"
 						key="staticText-10"/>
 					<box></box>
 					<textElement textAlignment="Justified">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false"/>
 					</textElement>
-				<text><![CDATA[                   By virtue of the provisions of RA 9514 otherwise known as the Fire Code of the Philippines of 2008,]]></text>
+				<text><![CDATA[        By virtue of the provisions of RA 9514 otherwise known as the Fire Code of the Philippines of 2008,]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -635,9 +651,9 @@
 				</line>
 				<line direction="TopDown">
 					<reportElement
-						x="135"
+						x="127"
 						y="142"
-						width="128"
+						width="154"
 						height="0"
 						forecolor="#FF0000"
 						key="line-12"/>
@@ -950,19 +966,6 @@
 					<box></box>
 					<graphicElement stretchType="NoStretch"/>
 					<imageExpression class="java.io.InputStream"><![CDATA[$F{endorser.signature}]]></imageExpression>
-				</image>
-				<image  vAlign="Middle" hAlign="Center" onErrorType="Blank" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
-					<reportElement
-						x="1"
-						y="116"
-						width="566"
-						height="490"
-						key="image-8"/>
-					<box></box>
-					<graphicElement stretchType="NoStretch">
-					<pen lineWidth="0.0" lineStyle="Solid"/>
-</graphicElement>
-					<imageExpression class="java.lang.String"><![CDATA["images/draft.png"]]></imageExpression>
 				</image>
 			</band>
 		</title>
