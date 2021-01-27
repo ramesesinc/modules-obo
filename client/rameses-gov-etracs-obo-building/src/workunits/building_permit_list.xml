@@ -1,9 +1,9 @@
 <workunit extends="com/rameses/seti2/templates/WorkflowTaskList.xml" 
-          processName="building_permit" schemaName="vw_building_permit"
-          allowDelete="false" allowNotify="false">
+          entitySchemaName="building_permit"
+          processName="building_permit" schemaName="vw_building_permit">
     <invokers>
         <invoker folderid="menucategory/obo/building" caption="View Building Application List"
-             cols="appno,appdate,trackingno,applicant.name,title,projectcost,task.state,task.assignee.name,permitno"
+             cols="appno,appdate,trackingno,controlno,applicant.name,title,projectcost,task.state,task.assignee.name,permitno"
                 action="init" index="10" notificationid="building_permit" />
     </invokers>
 </workunit>

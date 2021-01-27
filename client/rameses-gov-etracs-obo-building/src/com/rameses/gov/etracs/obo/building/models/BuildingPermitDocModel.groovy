@@ -60,6 +60,7 @@ class BuildingPermitDocModel extends CrudFormModel {
         showInfos = true;
         showFees = true;
         reloadRefDocList();
+        //MsgBox.alert("role " + entity.doctype.role );
     }
     
     public void checkCanIssue() {
@@ -127,24 +128,7 @@ class BuildingPermitDocModel extends CrudFormModel {
         return entity.worktypes.join(",");
     }
     
-    def editContractorName() {
-        def p = [:];
-        p.fields = [
-            [caption:'Contractor name', name:'contractorname' ]
-        ];
-        p.data = [
-            contractorname: entity.contractorname
-        ];
-        p.handler = { o->
-            def e = [_schemaname: schemaName];
-            e.objid = entity.objid;
-            e.contractorname = o.contractorname;
-            persistenceService.update(e);
-            entity.contractorname = o.contractorname;
-            binding.refresh();
-        }
-        return Inv.lookupOpener("dynamic:form", p );
-    }
+    
     
     def checklistHandler = [
         saveItems: { o->
@@ -159,11 +143,24 @@ class BuildingPermitDocModel extends CrudFormModel {
     ]
     */
     
+    def issueRefControlNo() {
+        if(!selectedRefDoc) throw new Exception("Please select a reference document");
+        def p = [:];
+        p.schemaName = "building_permit_doc";
+        p.entity = selectedRefDoc;
+        p.saveHandler = {
+            reloadRefDocList();
+            docListHandler.reload();
+        }
+        def op = Inv.lookupOpener("obo_control:create", p);
+        return op;
+    }
+    
     def openRefDoc() {
         if(!selectedRefDoc) return null;
-         def op = Inv.lookupOpener( "vw_building_permit_doc:open", [entity: selectedRefDoc] );
-         op.target = "popup";
-         return op;
+        def op = Inv.lookupOpener( "vw_building_permit_doc:open", [entity: selectedRefDoc] );
+        op.target = "popup";
+        return op;
     }
     
     def docListHandler = [

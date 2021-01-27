@@ -16,6 +16,9 @@ public class OboProfessionalService  {
 	@DataContext("obo_profession")	
 	def professionEm;
 
+	@Service("DateService")
+	def dtSvc;
+
 	@ProxyMethod
 	public def verifyInfo( def o ) {
 		if(! o.prc?.idno ) throw new Exception("prc idno is required");
@@ -91,14 +94,26 @@ public class OboProfessionalService  {
 
 	@ProxyMethod
 	public def verifyProfessional(params) {
-		def professional = vwProfEm.find( [prc_idno: params.prc.idno] ).first();
+		def professional = vwProfEm.find( [prc_idno: params.prc.idno, profession: params.profession] ).first();
 		if (!professional) throw new Exception("PRC does not exist.")
 		return professional;
 	}
 
 	@ProxyMethod
-	public def updateProfessional(professional) {
-		profInfoEm.find([objid: professional.objid]).update(professional);
-		return professional;
+	public def updateProfessional(profInfo) {
+		def professional = profEm.find([infoid: profInfo.objid]).first();
+		if (!professional) throw new Exception('Professional does not exist');
+
+		def updatedProfInfo = profInfoEm.read([objid: profInfo.objid])
+		updatedProfInfo.putAll(profInfo);
+		updatedProfInfo.objid = null;
+		updatedProfInfo.dtcreated = dtSvc.serverDate;
+		updatedProfInfo.createdby = profInfo.email;
+		updatedProfInfo = profInfoEm.create(updatedProfInfo);
+
+		professional.infoid = updatedProfInfo.objid;
+		profEm.update(professional);
+
+		return updatedProfInfo;
 	}
 }

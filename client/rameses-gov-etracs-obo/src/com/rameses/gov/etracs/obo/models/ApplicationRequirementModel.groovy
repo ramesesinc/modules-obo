@@ -152,5 +152,20 @@ class ApplicationRequirementModel {
         return "_close";
     }
     
-   
+    //do Pass
+    def doPass() {
+        info.state = 1;
+        save();
+    }
+    
+    //do 
+    def sendForRevision() {
+        info.state = 2;
+        save();
+    }
+    
+    def doNotApplicable() {
+        info.state = 3;
+        save();
+    }
 }

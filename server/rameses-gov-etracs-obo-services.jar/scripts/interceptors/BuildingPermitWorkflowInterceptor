@@ -161,7 +161,7 @@ class BuildingPermitWorkflowInterceptor {
 		def controlid = appEm.find( [objid: appid ]).select("controlid").val();
 		if( !controlid ) throw new Exception("Please issue the building permit first");
 
-		def docList = subdocEm.find( [appid: appid]).where(" controlid IS NULL AND doctype.issuetype = 2 ").select("doctype.title").list();
+		def docList = subdocEm.find( [appid: appid]).where(" controlid IS NULL AND doctype.issuetype = 2 AND doctype.refdoc IS NULL").select("doctype.title").list();
 		if( docList ) {
 			throw new Exception("The ff. documents are not yet issued: \n" + docList*.doctype.title.join("\n") );
 		}		

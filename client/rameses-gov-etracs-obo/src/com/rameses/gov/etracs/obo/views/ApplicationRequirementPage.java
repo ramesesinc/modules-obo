@@ -40,16 +40,15 @@ public class ApplicationRequirementPage extends javax.swing.JPanel {
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel1 = new com.rameses.rcp.control.XLabel();
-        xRadio1 = new com.rameses.rcp.control.XRadio();
-        xRadio2 = new com.rameses.rcp.control.XRadio();
-        xRadio3 = new com.rameses.rcp.control.XRadio();
-        xRadio4 = new com.rameses.rcp.control.XRadio();
         jScrollPane1 = new javax.swing.JScrollPane();
         xTextArea1 = new com.rameses.rcp.control.XTextArea();
         xLabel3 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
+        xLabel5 = new com.rameses.rcp.control.XLabel();
         jPanel1 = new javax.swing.JPanel();
-        xButton2 = new com.rameses.rcp.control.XButton();
+        xButton5 = new com.rameses.rcp.control.XButton();
+        xButton6 = new com.rameses.rcp.control.XButton();
+        xButton7 = new com.rameses.rcp.control.XButton();
         xButton3 = new com.rameses.rcp.control.XButton();
         xButton4 = new com.rameses.rcp.control.XButton();
         xButton1 = new com.rameses.rcp.control.XButton();
@@ -77,42 +76,6 @@ public class ApplicationRequirementPage extends javax.swing.JPanel {
         xLabel1.setPreferredSize(new java.awt.Dimension(0, 80));
         xFormPanel2.add(xLabel1);
 
-        xRadio1.setCaption("Status");
-        xRadio1.setName("info.state"); // NOI18N
-        xRadio1.setOptionValue(1);
-        xRadio1.setText("Pass");
-        xRadio1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xRadio1ActionPerformed(evt);
-            }
-        });
-        xFormPanel2.add(xRadio1);
-
-        xRadio2.setCaption("");
-        xRadio2.setName("info.state"); // NOI18N
-        xRadio2.setOptionValue(2);
-        xRadio2.setText("Send for Revision");
-        xFormPanel2.add(xRadio2);
-
-        xRadio3.setCaption("");
-        xRadio3.setName("info.state"); // NOI18N
-        xRadio3.setOptionValue(3);
-        xRadio3.setCellPadding(new java.awt.Insets(0, 0, 0, 20));
-        xRadio3.setText("Not applicable");
-        xFormPanel2.add(xRadio3);
-
-        xRadio4.setCaption("");
-        xRadio4.setName("info.state"); // NOI18N
-        xRadio4.setOptionValue(0);
-        xRadio4.setVisibleWhen("#{ false }");
-        xRadio4.setText("NA");
-        xRadio4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xRadio4ActionPerformed(evt);
-            }
-        });
-        xFormPanel2.add(xRadio4);
-
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 150));
 
         xTextArea1.setCaption("Remarks");
@@ -134,14 +97,30 @@ public class ApplicationRequirementPage extends javax.swing.JPanel {
         xLabel4.setDateFormat("yyyy-MM-dd");
         xFormPanel2.add(xLabel4);
 
+        xLabel5.setCaption("Status");
+        xLabel5.setExpression("#{ ['', 'Pass', 'For Revision', 'Not Applicable' ][info.state] }");
+        xLabel5.setVisibleWhen("#{ info.state != 0 }");
+        xLabel5.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
+        xFormPanel2.add(xLabel5);
+
         xPanel2.add(xFormPanel2, java.awt.BorderLayout.CENTER);
 
         jPanel1.setPreferredSize(new java.awt.Dimension(100, 30));
 
-        xButton2.setName("save"); // NOI18N
-        xButton2.setVisibleWhen("#{ editable == true }");
-        xButton2.setText("OK");
-        jPanel1.add(xButton2);
+        xButton5.setName("doPass"); // NOI18N
+        xButton5.setVisibleWhen("#{ editable == true }");
+        xButton5.setText("Pass");
+        jPanel1.add(xButton5);
+
+        xButton6.setName("sendForRevision"); // NOI18N
+        xButton6.setVisibleWhen("#{ editable == true }");
+        xButton6.setText("For Revision");
+        jPanel1.add(xButton6);
+
+        xButton7.setName("doNotApplicable"); // NOI18N
+        xButton7.setVisibleWhen("#{ editable == true }");
+        xButton7.setText("Not Applicable");
+        jPanel1.add(xButton7);
 
         xButton3.setName("supersede"); // NOI18N
         xButton3.setVisibleWhen("#{ overridable == true }");
@@ -163,32 +142,23 @@ public class ApplicationRequirementPage extends javax.swing.JPanel {
         add(xPanel2, "card2");
     }// </editor-fold>//GEN-END:initComponents
 
-    private void xRadio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xRadio1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_xRadio1ActionPerformed
-
-    private void xRadio4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xRadio4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_xRadio4ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.rameses.rcp.control.XButton xButton1;
-    private com.rameses.rcp.control.XButton xButton2;
     private com.rameses.rcp.control.XButton xButton3;
     private com.rameses.rcp.control.XButton xButton4;
+    private com.rameses.rcp.control.XButton xButton5;
+    private com.rameses.rcp.control.XButton xButton6;
+    private com.rameses.rcp.control.XButton xButton7;
     private com.rameses.rcp.control.XFormPanel xFormPanel2;
     private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLabel xLabel4;
+    private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XPanel xPanel2;
-    private com.rameses.rcp.control.XRadio xRadio1;
-    private com.rameses.rcp.control.XRadio xRadio2;
-    private com.rameses.rcp.control.XRadio xRadio3;
-    private com.rameses.rcp.control.XRadio xRadio4;
     private com.rameses.rcp.control.XTextArea xTextArea1;
     // End of variables declaration//GEN-END:variables
 }

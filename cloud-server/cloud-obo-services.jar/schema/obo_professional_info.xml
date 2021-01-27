@@ -5,6 +5,7 @@
 		<field name="middlename" required="true"/>
 		<field name="lastname" required="true"/>
 		<field name="resident" />
+		<field name="birthdate" />
 		<field name="address_text" />
 		<field name="address_unitno" />
 		<field name="address_bldgno" />
@@ -34,6 +35,10 @@
 
 		<!-- professional id. Link to obo_professional. this value is optional. If there is value it means there is an entry in obo_professional-->
 		<field name="profid" />
+		
+		<field name="changetype" />
+		<field name="createdby" />
+		<field name="dtcreated" />
 
 	</element>
 </schema>		

@@ -5,8 +5,7 @@
                 reportId="building_permit_assessment"
                 reportName="reports/obo/assessment.jasper"
                 action="preview"
-                vallowPrint="#{ task.state.matches('billing|payment') }"
-                xvisibleWhen="#{ task.state.matches('approval|billing|payment') }"/>
+                visibleWhen="#{ task.state.matches('assessment|approval|billing|payment|releasing|end') }"/>
 
     </invokers>
 </workunit>
