@@ -32,6 +32,7 @@ const Confirmation = ({
   }, [appno])
 
   const confirmPermit = () => {
+
     appService.invoke("update", app, (err, updatedApp) => {
       if (err) {
         setError(err)
@@ -54,14 +55,12 @@ const Confirmation = ({
           <Label style={styles.label}>Application for Occupancy Permit</Label>
           <Panel row>
             <PreviewReport href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/certificate_of_occupancy?refid=${appno}`} />
-            <DownloadReport href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/certificate_of_occupancy?refid=${appno}`}/>
           </Panel>
         </Panel>
         <Panel style={styles.row}>
           <Label style={styles.label}>Certificate of Completion</Label>
           <Panel row>
             <PreviewReport href={`/jreports/partner/${partner.group.name}_${partner.name}/obo/certificate_of_completion?refid=${appno}`} />
-            <DownloadReport href={`/jreports/download/partner/${partner.group.name}_${partner.name}/obo/certificate_of_completion?refid=${appno}`}/>
           </Panel>
         </Panel>
       </Panel>

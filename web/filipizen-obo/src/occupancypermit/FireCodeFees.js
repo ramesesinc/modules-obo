@@ -11,7 +11,7 @@ import {
   BackLink
 } from 'rsi-react-web-components';
 
-const FireSafetyCost = ({
+const FireCodeFees = ({
   appno,
   appService,
   moveNextStep,
@@ -86,4 +86,4 @@ const styles = {
   }
 }
 
-export default FireSafetyCost;
+export default FireCodeFees;

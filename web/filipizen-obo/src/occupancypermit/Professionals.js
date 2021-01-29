@@ -81,7 +81,7 @@ const Professionals = ({
               ) : (
                 <ProfessionalLookup
                   caption={`${prof.sectionid} Design Professional`}
-                  searchFieldTitle=""
+                  searchFieldTitle="Please input the 7-digit PRC ID Number and click search"
                   onSelect={(professional) => onSelectProfessional(professional, idx)}
                   role={prof.section.designprofessionalrole}
                 />
