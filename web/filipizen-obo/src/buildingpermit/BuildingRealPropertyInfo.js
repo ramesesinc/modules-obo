@@ -147,9 +147,10 @@ const BuildingRealPropertyInfo = ({
       <label>{`Tracking No. ${appno}`}</label>
       <Subtitle>Real Property Information</Subtitle>
       <Spacer />
+      <Error msg={error} />
+
       <Panel visibleWhen={mode === "view-rpus"}>
         <Subtitle2>Lot Information</Subtitle2>
-        <Error msg={error} />
         {rpus.map(rpu => (
           <Panel style={styles.locationContainer} key={rpu.tdno}>
             <div style={styles.tdno}>

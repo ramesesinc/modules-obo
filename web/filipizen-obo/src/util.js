@@ -1,11 +1,9 @@
-import React from "react";
-import {
-  Panel,
-  PreviewReport,
-  DownloadReport
-} from "rsi-react-web-components";
-
-export const getHeaderInfo = (contact={}, forms="") => {
+export const getHeaderInfo = (officeContact, forms="") => {
+  const contact = officeContact || {
+    officename: "<OFFICE>",
+    address1: "<ADDRESS1>",
+    address2: "<ADDRESS2>",
+  };
   let headerInfo = "";
   headerInfo += "Please download and print the " + forms + " forms, prepare the ";
   headerInfo += "requirements listed below, and submit at the receiving window of our ";

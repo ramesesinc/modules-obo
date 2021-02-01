@@ -117,13 +117,12 @@ const BuildingPermitWebController = (props) => {
   }
 
   const moveNextStep = (state) => {
-    const stepCompleted = step < app.step && step !== 1;
+    const stepCompleted = step < app.step && app.step !== 1;
     if (stepCompleted) {
-      const nextStep = step + 1;
-      setStep(nextStep);
-      handleStep(nextStep);
+      setStep(app.step);
+      handleStep(app.step);
     } else {
-      svc.invoke("update", {appid: appno, state, step: step+1}, (err, updatedApp) => {
+      svc.invoke("update", {appid: appno, state, step: step + 1}, (err, updatedApp) => {
         if (err) {
           setError(err);
         } else {
@@ -175,7 +174,7 @@ const BuildingPermitWebController = (props) => {
 
   return (
     <Page>
-      {app.step < 10 &&
+      {app.step < pages.length &&
         <Panel target="left" style={styles.stepperContainer} >
           <Stepper steps={pages} completedStep={app.step} activeStep={step} handleStep={handleStep} />
         </Panel>
