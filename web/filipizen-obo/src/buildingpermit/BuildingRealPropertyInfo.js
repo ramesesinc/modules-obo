@@ -197,7 +197,7 @@ const BuildingRealPropertyInfo = ({
         <FormPanel context={property} handler={setProperty}>
           <LotInformation editable={false} />
           <Spacer />
-          <OwnershipInfo name="owner" orgcode={partner.id} owner={property.owner} editable={false} />
+          <OwnershipInfo name="owner" orgcode={partner.id} owner={property.owner} editable={true} />
         </FormPanel>
         <ActionBar>
           <BackLink action={viewInitial} caption='Back' />
@@ -212,7 +212,7 @@ const BuildingRealPropertyInfo = ({
               <LotOwnershipType caption="Is lot owned or leased?" property={property} name="lotowned" row autoFocus={true} />
               <OwnershipInfo name="owner" owner={property.owner}
                 orgcode={partner.id}
-                editable={false}
+                editable={true}
                 showIdEntry={true}
                 editableAddress={true}
                 editableIdEntry={true}
