@@ -71,7 +71,7 @@
 		</complex> 
 
 		<field name="controlid" />
-		<field name="controlno" />
+		<field name="controlno" caption="Permit No" searchable="true" indexed="true"/>
 		<field name="dtissued" />
 		<field name="expirydate" />
 		<field name="issuedby_name" />

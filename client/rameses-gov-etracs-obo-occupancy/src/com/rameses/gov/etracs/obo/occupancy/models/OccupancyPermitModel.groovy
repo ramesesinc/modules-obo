@@ -13,6 +13,14 @@ class OccupancytPermitModel extends WorkflowTaskModel  {
     @Service("OccupancyApplicationService")
     def appSvc;
     
+    public String getSchemaName() {
+        return "vw_occupancy_permit";
+    }
+    
+    public String getEntitySchemaName() {
+        return "occupancy_permit";
+    }
+
     public String getTitle() {
         return "Occupancy Permit " + (entity.appno==null? 'Tracking No '+ entity.trackingno: 'App No ' + entity.appno) + " [" +  task?.title + "]" ;
     }

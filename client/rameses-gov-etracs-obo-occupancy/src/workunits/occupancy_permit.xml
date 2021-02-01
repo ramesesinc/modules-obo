@@ -6,6 +6,9 @@
         <invoker type="vw_occupancy_permit:open" 
                  caption="Occupancy Permit Application" action="open" />
         
+        <invoker type="occupancy_permit:open" 
+                 caption="Occupancy Permit Application" action="open" />
+        
         <invoker type="appActions" 
                 caption="Set Inspection Date"
                 action="setInspectionDate" 

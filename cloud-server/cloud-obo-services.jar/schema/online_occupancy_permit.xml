@@ -31,6 +31,7 @@
 		<field name="bldgpermit_totalfloorarea" type="decimal" />
 		<field name="bldgpermit_numfloors" type="integer" />
 		<field name="bldgpermit_numunits" type="integer" />
+		<field name="bldgpermit_txntype" />
 		<field name="bldgpermit_location_lotno" />
 		<field name="bldgpermit_location_blockno" />
 		<field name="bldgpermit_location_street" />
