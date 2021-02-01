@@ -46,7 +46,7 @@ class OccupancyPermitReportInterceptor {
 		profList.each{
 			def prof = (type == "designprofessional" ? it.designprofessional : it.supervisor);
 			professionals << [
-				section: it.section.objid,
+				section: it.section.title,
 				name: prof.firstname + (prof.middlename ? " " + prof.middlename + " " : " ")  + prof.lastname,
 				address: [text: prof.address.text],
 				prc: prof.prc,
