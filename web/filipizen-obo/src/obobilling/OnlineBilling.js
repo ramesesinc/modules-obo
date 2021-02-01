@@ -39,7 +39,7 @@ const OnlineBilling = ({
       txntype,
       origin: ORIGIN,
       orgcode: partner.id,
-      info: { data: bill },
+      info: { apptype, data: bill },
       paidby: bill.paidby,
       paidbyaddress: bill.paidbyaddress,
       amount: bill.amount,
