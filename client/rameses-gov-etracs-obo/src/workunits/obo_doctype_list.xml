@@ -1,5 +1,5 @@
 <workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" 
-          schemaName="obo_doctype" allowDelete="false" allowCreate="false">
+          schemaName="obo_doctype">
     <invokers>
         <invoker folderid="/explorer/master/obo" caption="Document Types" action="init"  
                  cols="objid,title,apptype,type,section.org.objid,template" 

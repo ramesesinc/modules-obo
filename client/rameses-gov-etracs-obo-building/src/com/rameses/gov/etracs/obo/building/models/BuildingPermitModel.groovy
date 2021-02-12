@@ -90,6 +90,9 @@ class BuildingPermitModel extends WorkflowTaskModel  {
         return op;
     }
     
+    def consolidateFindings() {
+        return Inv.lookupOpener("obo_consolidated_finding", [schemaName: "building_evaluation_finding", appid: entity.objid]);
+    }
     
 }
 

@@ -20,9 +20,12 @@
                 caption="Edit"
                 icon="images/toolbars/edit.png"
                 action="showMenu" 
-                context="edit" 
-                visibleWhen="#{ allowEdit == true }"/>             
-
+                context="edit" />   
+        
+        <invoker type="appActions"
+                caption="Consolidate Findings" 
+                action="consolidateFindings" 
+                visibleWhen="#{ task.state.matches('verification') }" />   
     </invokers>
     
     <code class="com.rameses.gov.etracs.obo.building.models.BuildingPermitModel" />

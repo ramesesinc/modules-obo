@@ -33,18 +33,26 @@ public class OboSectionPage extends javax.swing.JPanel {
 
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xLabel1 = new com.rameses.rcp.control.XLabel();
-        xLabel2 = new com.rameses.rcp.control.XLabel();
+        xTextField2 = new com.rameses.rcp.control.XTextField();
+        xTextField1 = new com.rameses.rcp.control.XTextField();
         xLookupField1 = new com.rameses.rcp.control.XLookupField();
 
         xLabel1.setCaption("ID");
         xLabel1.setExpression("#{ entity.objid }");
+        xLabel1.setVisibleWhen("#{ mode != 'create' }");
         xLabel1.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel1);
 
-        xLabel2.setCaption("Title ");
-        xLabel2.setExpression("#{ entity.title }");
-        xLabel2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xFormPanel1.add(xLabel2);
+        xTextField2.setCaption("ID");
+        xTextField2.setName("entity.objid"); // NOI18N
+        xTextField2.setVisibleWhen("#{ mode == 'create' }");
+        xTextField2.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xTextField2);
+
+        xTextField1.setCaption("Title");
+        xTextField1.setName("entity.title"); // NOI18N
+        xTextField1.setPreferredSize(new java.awt.Dimension(0, 20));
+        xFormPanel1.add(xTextField1);
 
         xLookupField1.setCaption("Org");
         xLookupField1.setExpression("#{ entity.org.name }");
@@ -76,7 +84,8 @@ public class OboSectionPage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XLabel xLabel1;
-    private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XLookupField xLookupField1;
+    private com.rameses.rcp.control.XTextField xTextField1;
+    private com.rameses.rcp.control.XTextField xTextField2;
     // End of variables declaration//GEN-END:variables
 }

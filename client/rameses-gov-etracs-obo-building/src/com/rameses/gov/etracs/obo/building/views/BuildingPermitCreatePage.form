@@ -60,7 +60,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[0, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XTextField" name="xTextField2">
@@ -70,7 +69,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[0, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Container class="com.rameses.rcp.control.XPanel" name="pnlLocation">
@@ -312,7 +310,6 @@
           <Properties>
             <Property name="caption" type="java.lang.String" value="Bldg Height (m)"/>
             <Property name="name" type="java.lang.String" value="entity.height" noResource="true"/>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XDecimalField" name="xDecimalField3">
@@ -483,7 +480,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[180, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XDateField" name="xDateField2">
@@ -493,7 +489,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[180, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XLookupField" name="xLookupField1">
@@ -753,7 +748,6 @@
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[180, 20]"/>
             </Property>
-            <Property name="required" type="boolean" value="true"/>
           </Properties>
         </Component>
         <Component class="com.rameses.rcp.control.XTextField" name="xTextField9">

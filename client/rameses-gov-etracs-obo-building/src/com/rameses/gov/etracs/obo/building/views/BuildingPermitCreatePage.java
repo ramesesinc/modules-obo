@@ -94,13 +94,11 @@ public class BuildingPermitCreatePage extends javax.swing.JPanel {
         xTextField1.setCaption("Project Title");
         xTextField1.setName("entity.title"); // NOI18N
         xTextField1.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField1.setRequired(true);
         xFormPanel1.add(xTextField1);
 
         xTextField2.setCaption("Project Description");
         xTextField2.setName("entity.description"); // NOI18N
         xTextField2.setPreferredSize(new java.awt.Dimension(0, 20));
-        xTextField2.setRequired(true);
         xFormPanel1.add(xTextField2);
 
         pnlLocation.setCaption("Location");
@@ -181,7 +179,6 @@ public class BuildingPermitCreatePage extends javax.swing.JPanel {
 
         xDecimalField2.setCaption("Bldg Height (m)");
         xDecimalField2.setName("entity.height"); // NOI18N
-        xDecimalField2.setRequired(true);
         xFormPanel1.add(xDecimalField2);
 
         xDecimalField3.setCaption("Project Cost");
@@ -220,13 +217,11 @@ public class BuildingPermitCreatePage extends javax.swing.JPanel {
         xDateField1.setName("entity.dtproposedconstruction"); // NOI18N
         xDateField1.setCellPadding(new java.awt.Insets(10, 0, 0, 0));
         xDateField1.setPreferredSize(new java.awt.Dimension(180, 20));
-        xDateField1.setRequired(true);
         xFormPanel1.add(xDateField1);
 
         xDateField2.setCaption("Est. Completion Date");
         xDateField2.setName("entity.dtexpectedcompletion"); // NOI18N
         xDateField2.setPreferredSize(new java.awt.Dimension(180, 20));
-        xDateField2.setRequired(true);
         xFormPanel1.add(xDateField2);
 
         xLookupField1.setCaption("Occupancy Type");
@@ -377,7 +372,6 @@ public class BuildingPermitCreatePage extends javax.swing.JPanel {
         xDateField4.setName("entity.permitexpirydate"); // NOI18N
         xDateField4.setVisibleWhen("#{ entity.txnmode == 'CAPTURE' && entity.task.state.matches('end|releasing') }");
         xDateField4.setPreferredSize(new java.awt.Dimension(180, 20));
-        xDateField4.setRequired(true);
         xFormPanel2.add(xDateField4);
 
         xTextField9.setCaption("Payment Ref No");

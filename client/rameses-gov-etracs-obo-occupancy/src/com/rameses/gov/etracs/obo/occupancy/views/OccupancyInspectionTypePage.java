@@ -38,6 +38,8 @@ public class OccupancyInspectionTypePage extends javax.swing.JPanel {
         xTextField2 = new com.rameses.rcp.control.XTextField();
         xComboBox7 = new com.rameses.rcp.control.XComboBox();
         xIntegerField1 = new com.rameses.rcp.control.XIntegerField();
+        xRadio1 = new com.rameses.rcp.control.XRadio();
+        xRadio2 = new com.rameses.rcp.control.XRadio();
         xLabel2 = new com.rameses.rcp.control.XLabel();
         xDataTable1 = new com.rameses.rcp.control.XDataTable();
         xPanel2 = new com.rameses.rcp.control.XPanel();
@@ -85,6 +87,18 @@ public class OccupancyInspectionTypePage extends javax.swing.JPanel {
         xIntegerField1.setPreferredSize(new java.awt.Dimension(50, 20));
         xIntegerField1.setRequired(true);
         xFormPanel1.add(xIntegerField1);
+
+        xRadio1.setCaption("");
+        xRadio1.setName("entity.required"); // NOI18N
+        xRadio1.setOptionValue(1);
+        xRadio1.setText("Activate always");
+        xFormPanel1.add(xRadio1);
+
+        xRadio2.setCaption("");
+        xRadio2.setName("entity.required"); // NOI18N
+        xRadio2.setOptionValue(0);
+        xRadio2.setText("Optional. Activate manually");
+        xFormPanel1.add(xRadio2);
 
         xLabel2.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
         xLabel2.setShowCaption(false);
@@ -178,6 +192,8 @@ public class OccupancyInspectionTypePage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XIntegerField xIntegerField1;
     private com.rameses.rcp.control.XLabel xLabel2;
     private com.rameses.rcp.control.XPanel xPanel2;
+    private com.rameses.rcp.control.XRadio xRadio1;
+    private com.rameses.rcp.control.XRadio xRadio2;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     private com.rameses.rcp.control.XTextField xTextField1;
     private com.rameses.rcp.control.XTextField xTextField2;
