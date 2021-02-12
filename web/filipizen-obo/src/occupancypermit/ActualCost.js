@@ -28,7 +28,8 @@ const ActualCost = ({
 
   const [error, setError] = useState();
   const [app, setApp] = useState({});
-  const [cost, setCost] = useState({items: costs})
+  const [cost, setCost] = useState({items: costs});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     appService.invoke("getApplication", {appid: appno}, (err, app) => {
@@ -50,12 +51,15 @@ const ActualCost = ({
     cost.items.forEach(item => {
       updatedApp[item.field] = item.value;
     });
+
+    setLoading(true);
     appService.invoke("update", updatedApp, (err, app) => {
       if (err) {
         setError(err)
       } else {
         moveNextStep();
       }
+      setLoading(false);
     })
   }
 
@@ -74,7 +78,7 @@ const ActualCost = ({
       </FormPanel>
       <ActionBar>
         <BackLink action={movePrevStep} />
-        <Button caption="Next" action={updatePermit} />
+        <Button caption="Next" action={updatePermit} disableWhen={loading} loading={loading} />
       </ActionBar>
     </Panel>
   )

@@ -40,7 +40,7 @@ public class OnlineBuildingPermitDownloadService  {
 		if( parm.orgcode != app.orgcode ) {
 			throw new Exception("This application is not for this organization");
 		}	
-		if( app.step < 9 ) {
+		if( app.state != 'END') {
 			throw new Exception("This application is not yet completed");
 		}
 

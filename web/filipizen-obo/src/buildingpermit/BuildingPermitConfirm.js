@@ -99,7 +99,7 @@ const BuildingPermitConfirm = ({
 
   const submit = () => {
     setConfirm(false);
-    moveNextStep();
+    moveNextStep('END');
   }
 
   const onCloseViewer = () => {

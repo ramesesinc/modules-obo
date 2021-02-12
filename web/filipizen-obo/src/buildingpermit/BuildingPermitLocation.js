@@ -105,7 +105,6 @@ const BuildingPermitLocation = (props) => {
             <Text name='lotno' caption='Lot No.' />
             <Text name='blockno' caption='Block No.' />
           </Panel>
-          <Decimal name="lotarea" caption="Lot Area (sq.m.)" textAlign="left" />
           <Panel row>
             <Text name='unitno' caption='Unit No.' />
             <Text name='bldgno' caption='Building No.' />
@@ -114,6 +113,7 @@ const BuildingPermitLocation = (props) => {
           <Text name='street' caption='Street' />
           <Text name='subdivision' caption='Subdivision' />
           <BarangayList barangays={barangays} name="barangay" caption='Barangay' />
+          <Decimal name="lotarea" caption="Lot Area (sq.m.)" textAlign="left" />
         </FormPanel>
         <ActionBar>
           <Button caption='Next' action={updateLocation} />
