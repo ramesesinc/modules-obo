@@ -1,0 +1,7 @@
+"xtitle|doctype" [ mode != 'read' ] {
+    enabled: true;
+}
+
+"xtitle|doctype" [ mode == 'read' ] {
+    enabled: false;
+}

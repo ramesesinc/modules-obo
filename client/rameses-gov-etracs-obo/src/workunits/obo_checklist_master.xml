@@ -1,0 +1,18 @@
+<workunit schemaName="obo_checklist_master" allowCreate="false">
+    <invokers>
+         <!-- for building permit -->
+         <invoker type="obo_checklist_master:create" 
+                caption="New CheckList Master"
+                action="create"
+                target="popup"/>
+         
+         <invoker type="obo_checklist_master:open" 
+                caption="CheckList Master"
+                action="open"
+                target="popup"/>
+    </invokers>
+    <code class="com.rameses.gov.etracs.obo.models.OboChecklistMasterModel" />
+    <pages>
+        <page template="com.rameses.gov.etracs.obo.views.OboChecklistMasterPage" />
+    </pages>
+</workunit>

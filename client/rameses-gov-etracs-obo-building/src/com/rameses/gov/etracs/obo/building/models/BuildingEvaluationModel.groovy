@@ -13,6 +13,8 @@ import com.rameses.gov.etracs.obo.models.*;
 
 class BuildingEvaluationModel extends WorkflowTaskModel {
 
+    
+    
     boolean getCanEdit() {
         return true;
         //return (userid == task.assignee?.objid);
@@ -54,6 +56,56 @@ class BuildingEvaluationModel extends WorkflowTaskModel {
         def op = Inv.lookupOpener("vw_building_permit:open", [entity: [objid: entity.appid]]);
         op.target = "popup";
         return op;
+    }
+    
+    
+    boolean _inited;
+    
+    @PropertyChangeListener
+    def listener = [
+        "selectedTask" : { o->
+            if(_inited) {
+                entity = [objid: o.objid];
+                println "running open";
+                open();
+                binding.refresh();
+            }
+            else {
+                _inited = true;
+            }
+        }
+    ];
+    
+    def taskList;
+    def selectedTask;
+    def appid;
+    def taskstate;
+    
+    public void afterOpen() {
+        if( !taskList ) {
+            appid = entity.appid;
+            taskstate = entity.task.state;
+            def m = [_schemaname: "vw_building_evaluation_consolidated"];
+            m.findBy = [appid:appid ];
+            def str = "state = :state AND (assignee.objid IS NULL OR assignee.objid = :userid ) "; 
+            def parms = [state:taskstate, userid: OsirisContext.env.USERID];
+            if( OsirisContext.env.ORGROOT == 1 ) {
+                str += " AND org.objid IS NULL";
+            }
+            else {
+                str += " AND org.objid = :orgid";
+                parms.orgid = OsirisContext.env.ORGID;
+            }
+            m.where = [str, parms];
+            m.orderBy = "sortindex";
+            taskList = queryService.getList(m);
+            /*
+            taskList.each {
+                println it;
+            }
+            */
+            selectedTask = taskList.find{ it.typeid == entity.typeid };
+        }
     }
     
 }

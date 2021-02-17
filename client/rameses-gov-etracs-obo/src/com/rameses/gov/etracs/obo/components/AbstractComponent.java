@@ -79,6 +79,31 @@ public class AbstractComponent extends XComponentPanel {
         }
     } 
     
+    public void reload() {
+        com.rameses.rcp.common.ComponentBean bean = (com.rameses.rcp.common.ComponentBean)getComponentBean();
+        if( getAppid()!=null ) {
+            bean.setProperty("appid", getProperty(getAppid()) );
+        }
+        if( getParentid()!=null ) {
+            bean.setProperty("parentid", getProperty(getParentid()) );
+        } 
+        if( getFilter()!=null ) {
+            bean.setProperty("filter", getProperty(getFilter()) );            
+        }
+        if( getHandler() !=null) {
+            bean.setProperty("handler", getProperty(getHandler()) );                        
+        }
+        afterInitComponent( bean );
+        try {
+            MethodResolver.getInstance().invoke(bean, "init",  new Object[]{});    
+        }
+        catch(Exception e) {
+            System.out.println("exception " + e.getMessage());
+            //do nothing
+        }
+    }
+    
+    
     public void beforeRefresh() { 
         try { 
             com.rameses.rcp.common.ComponentBean bean = (com.rameses.rcp.common.ComponentBean)getComponentBean();

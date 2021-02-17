@@ -5,14 +5,10 @@
  */
 package com.rameses.gov.etracs.obo.building.views;
 
-import com.rameses.rcp.ui.annotations.Template;
-import com.rameses.seti2.views.WorkflowTaskFormPage;
-
 /**
  *
  * @author elmonazareno
  */
-@Template(WorkflowTaskFormPage.class)
 public class BuildingEvaluationPage extends javax.swing.JPanel {
 
     /**
@@ -31,6 +27,13 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        xActionBar4 = new com.rameses.rcp.control.XActionBar();
+        xPanel1 = new com.rameses.rcp.control.XPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        xList1 = new com.rameses.rcp.control.XList();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         xTabbedPane1 = new com.rameses.rcp.control.XTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -55,10 +58,56 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         applicationDocumentList1 = new com.rameses.gov.etracs.obo.components.ApplicationDocumentList();
         xPanel2 = new com.rameses.rcp.control.XPanel();
         applicationFindingList2 = new com.rameses.gov.etracs.obo.components.ApplicationFindingList();
-        xActionBar4 = new com.rameses.rcp.control.XActionBar();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        xLabel1 = new com.rameses.rcp.control.XLabel();
+        xActionBar5 = new com.rameses.rcp.control.XActionBar();
 
-        setPreferredSize(new java.awt.Dimension(909, 627));
+        setPreferredSize(new java.awt.Dimension(1125, 627));
         setLayout(new java.awt.BorderLayout());
+
+        xActionBar4.setFormName("formName");
+        xActionBar4.setName("extActions"); // NOI18N
+        xActionBar4.setUseToolBar(false);
+        add(xActionBar4, java.awt.BorderLayout.NORTH);
+
+        xPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 5, 1, 5));
+        xPanel1.setPreferredSize(new java.awt.Dimension(200, 592));
+        xPanel1.setLayout(new java.awt.BorderLayout());
+
+        xList1.setExpression("#{ item.type.title }");
+        xList1.setItems("taskList");
+        xList1.setName("selectedTask"); // NOI18N
+        jScrollPane1.setViewportView(xList1);
+
+        xPanel1.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel4.setPreferredSize(new java.awt.Dimension(200, 40));
+
+        jLabel1.setText("Other Related Tasks");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
+        );
+
+        xPanel1.add(jPanel4, java.awt.BorderLayout.PAGE_START);
+
+        add(xPanel1, java.awt.BorderLayout.WEST);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
 
         xTabbedPane1.setItems("sections");
         xTabbedPane1.setDynamic(true);
@@ -98,11 +147,13 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         xLabel9.setCaption("Project Cost");
         xLabel9.setExpression("#{entity.app.projectcost}");
         xLabel9.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel9.setNumberFormat("#,##0.00");
         xLabel9.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel9);
 
         xLabel10.setCaption("Fixed Cost (computed)");
         xLabel10.setExpression("#{entity.app.fixedcost}");
+        xLabel10.setNumberFormat("#,##0.00");
         xLabel10.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel1.add(xLabel10);
 
@@ -156,9 +207,8 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         xLabel13.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel13);
 
-        xLabel17.setCaption("Section");
-        xLabel17.setExpression("#{entity.sectionid}");
-        xLabel17.setCellPadding(new java.awt.Insets(20, 0, 0, 0));
+        xLabel17.setCaption("Assignee");
+        xLabel17.setExpression("#{entity.task.assignee.name}");
         xLabel17.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel3.add(xLabel17);
 
@@ -171,7 +221,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(xFormPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +230,7 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 422, Short.MAX_VALUE)
                     .addComponent(xFormPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -207,28 +257,73 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
         applicationFindingList2.setParentid("entity.objid");
         applicationFindingList2.setSchemaName("building_evaluation_finding");
         applicationFindingList2.setSectionTitle("entity.type.title");
+        applicationFindingList2.setSectionType("entity.typeid");
         xPanel2.add(applicationFindingList2, java.awt.BorderLayout.CENTER);
 
         xTabbedPane1.addTab("Findings", xPanel2);
 
-        add(xTabbedPane1, java.awt.BorderLayout.CENTER);
+        jPanel5.add(xTabbedPane1, java.awt.BorderLayout.CENTER);
 
-        xActionBar4.setFormName("formName");
-        xActionBar4.setName("extActions"); // NOI18N
-        xActionBar4.setUseToolBar(false);
-        add(xActionBar4, java.awt.BorderLayout.NORTH);
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setPreferredSize(new java.awt.Dimension(925, 40));
+
+        xLabel1.setExpression("#{ title }");
+        xLabel1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 925, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(xLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(81, Short.MAX_VALUE)))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(xLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        jPanel7.add(jPanel8, java.awt.BorderLayout.NORTH);
+
+        xActionBar5.setFormName("formName");
+        xActionBar5.setName("formActions"); // NOI18N
+        xActionBar5.setDynamic(true);
+        xActionBar5.setUseToolBar(false);
+        jPanel7.add(xActionBar5, java.awt.BorderLayout.SOUTH);
+
+        jPanel5.add(jPanel7, java.awt.BorderLayout.NORTH);
+
+        add(jPanel5, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.gov.etracs.obo.components.ApplicationDocumentList applicationDocumentList1;
     private com.rameses.gov.etracs.obo.components.ApplicationFindingList applicationFindingList2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private com.rameses.rcp.control.XActionBar xActionBar4;
+    private com.rameses.rcp.control.XActionBar xActionBar5;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     private com.rameses.rcp.control.XFormPanel xFormPanel3;
+    private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLabel xLabel10;
     private com.rameses.rcp.control.XLabel xLabel12;
     private com.rameses.rcp.control.XLabel xLabel13;
@@ -244,6 +339,8 @@ public class BuildingEvaluationPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XLabel xLabel9;
+    private com.rameses.rcp.control.XList xList1;
+    private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel2;
     private com.rameses.rcp.control.XTabbedPane xTabbedPane1;
     // End of variables declaration//GEN-END:variables

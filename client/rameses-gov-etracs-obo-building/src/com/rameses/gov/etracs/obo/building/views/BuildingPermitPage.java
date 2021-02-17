@@ -90,6 +90,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
         professionalList1 = new com.rameses.gov.etracs.obo.components.ProfessionalList();
         xPanel7 = new com.rameses.rcp.control.XPanel();
         applicationFeeList1 = new com.rameses.gov.etracs.obo.components.ApplicationFeeList();
+        xPanel1 = new com.rameses.rcp.control.XPanel();
 
         setPreferredSize(new java.awt.Dimension(1050, 620));
         setLayout(new java.awt.BorderLayout());
@@ -495,6 +496,19 @@ public class BuildingPermitPage extends javax.swing.JPanel {
 
         xTabbedPane1.addTab("Assessment", xPanel7);
 
+        javax.swing.GroupLayout xPanel1Layout = new javax.swing.GroupLayout(xPanel1);
+        xPanel1.setLayout(xPanel1Layout);
+        xPanel1Layout.setHorizontalGroup(
+            xPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1125, Short.MAX_VALUE)
+        );
+        xPanel1Layout.setVerticalGroup(
+            xPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 667, Short.MAX_VALUE)
+        );
+
+        xTabbedPane1.addTab("Post Requirements", xPanel1);
+
         add(xTabbedPane1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -554,6 +568,7 @@ public class BuildingPermitPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XLabel xLabel9;
+    private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel2;
     private com.rameses.rcp.control.XPanel xPanel5;
     private com.rameses.rcp.control.XPanel xPanel6;

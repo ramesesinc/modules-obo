@@ -1,9 +1,9 @@
-"entity.*" [ editable == true ] {
+"entity.particulars" [ editable == true ] {
     enabled: true;
     editable : true;
 }
 
-"entity.*" [ editable == false ] {
+"entity.particulars" [ editable == false ] {
     enabled: false;
     editable: false;
 }

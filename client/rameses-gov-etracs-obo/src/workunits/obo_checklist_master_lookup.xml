@@ -7,5 +7,22 @@
                   rows="50"
                  customFilter="doctypeid = :typeid"
                  action="init" target="popup"/>
+        
+        <invoker type="obo_checklist_master_evaluation:lookup" caption="Add EvaluationChecklist Item" 
+                 cols="objid,title,category"
+                  multiSelect="true"
+                  maxRows="50"
+                  rows="50"
+                 customFilter="evaltypeid = :typeid"
+                 action="init" target="popup"/>
+
+        <invoker type="obo_checklist_master_inspection:lookup" caption="Add Checklist Item" 
+                 cols="objid,title,category"
+                  multiSelect="true"
+                  maxRows="50"
+                  rows="50"
+                 customFilter="inspectiontypeid = :typeid"
+                 action="init" target="popup"/>
+        
     </invokers>
 </workunit>

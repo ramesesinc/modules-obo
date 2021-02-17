@@ -20,5 +20,9 @@
 		</complex>	
 		<field name="attachment" />
 
+		<complex name="checklistitem" ref="obo_checklist_master" jointype="many-to-one" required="false">
+			<key field="checklistitemid" target="objid" />
+		</complex>	
+
 	</element>
 </schema>

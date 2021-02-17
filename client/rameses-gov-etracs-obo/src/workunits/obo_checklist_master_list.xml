@@ -1,8 +1,0 @@
-<workunit extends="com/rameses/seti2/templates/CrudNodeList.xml" schemaName="obo_checklist_master">
-    <invokers>
-        <invoker folderid="explorer/master/obo" caption="Obo Check List Master" action="init" 
-            index="20"
-            cols="objid,title,category" 
-                 role="MASTER" orderBy="indexno"/>
-    </invokers>
-</workunit>

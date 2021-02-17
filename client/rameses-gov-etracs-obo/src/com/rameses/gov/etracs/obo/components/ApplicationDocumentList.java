@@ -23,6 +23,12 @@ public class ApplicationDocumentList extends AbstractComponent {
         bean.setProperty("sectionid", getProperty(getSectionid()) ); 
     }
     
+    @Override
+    public void afterRefresh() {
+        super.reload();
+        super.afterRefresh(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     /**
     * @return the sectionid
     */
@@ -173,6 +179,7 @@ public class ApplicationDocumentList extends AbstractComponent {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.DateColumnHandler(null, "yyyy-MM-dd", null)}
             })
         });
+        xDataTable1.setDynamic(true);
         add(xDataTable1, java.awt.BorderLayout.CENTER);
 
         jPanel9.setPreferredSize(new java.awt.Dimension(100, 40));

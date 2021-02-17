@@ -37,6 +37,8 @@ public class ApplicationFindingPage extends javax.swing.JPanel {
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xLabel2 = new com.rameses.rcp.control.XLabel();
         xLabel3 = new com.rameses.rcp.control.XLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        xTextArea3 = new com.rameses.rcp.control.XTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         xTextArea2 = new com.rameses.rcp.control.XTextArea();
         xPanel3 = new com.rameses.rcp.control.XPanel();
@@ -70,12 +72,24 @@ public class ApplicationFindingPage extends javax.swing.JPanel {
         xLabel3.setPreferredSize(new java.awt.Dimension(0, 20));
         xFormPanel2.add(xLabel3);
 
-        jScrollPane2.setPreferredSize(new java.awt.Dimension(0, 150));
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(0, 120));
 
-        xTextArea2.setCaption("Particulars");
+        xTextArea3.setCaption("Subject");
+        xTextArea3.setEditable(false);
+        xTextArea3.setLineWrap(true);
+        xTextArea3.setName("entity.checklistitem.title"); // NOI18N
+        xTextArea3.setEnabled(false);
+        xTextArea3.setPreferredSize(new java.awt.Dimension(0, 60));
+        jScrollPane3.setViewportView(xTextArea3);
+
+        xFormPanel2.add(jScrollPane3);
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(0, 60));
+
+        xTextArea2.setCaption("Remarks");
         xTextArea2.setLineWrap(true);
         xTextArea2.setName("entity.particulars"); // NOI18N
-        xTextArea2.setPreferredSize(new java.awt.Dimension(0, 60));
+        xTextArea2.setPreferredSize(new java.awt.Dimension(0, 30));
         jScrollPane2.setViewportView(xTextArea2);
 
         xFormPanel2.add(jScrollPane2);
@@ -145,6 +159,7 @@ public class ApplicationFindingPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XButton addFile;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private com.rameses.rcp.control.XButton xButton1;
     private com.rameses.rcp.control.XButton xButton2;
     private com.rameses.rcp.control.XButton xButton3;
@@ -158,5 +173,6 @@ public class ApplicationFindingPage extends javax.swing.JPanel {
     private com.rameses.rcp.control.XPanel xPanel1;
     private com.rameses.rcp.control.XPanel xPanel3;
     private com.rameses.rcp.control.XTextArea xTextArea2;
+    private com.rameses.rcp.control.XTextArea xTextArea3;
     // End of variables declaration//GEN-END:variables
 }

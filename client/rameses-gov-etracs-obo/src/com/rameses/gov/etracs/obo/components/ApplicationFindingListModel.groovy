@@ -9,6 +9,8 @@ import com.rameses.seti2.models.*;
 class ApplicationFindingListModel extends AbstractComponentModel {
 
     String sectiontitle;
+    String sectiontypeid;
+        
     def viewType = "open";
     
     @PropertyChangeListener
@@ -36,7 +38,7 @@ class ApplicationFindingListModel extends AbstractComponentModel {
             if(!o.objid) {
                 o.appid = appid;
                 o.parentid = parentid;
-                persistenceService.create( o );
+                persistenceService.save( o );
             }
             else {
                 persistenceService.update( o );                
@@ -49,6 +51,27 @@ class ApplicationFindingListModel extends AbstractComponentModel {
     ]
     
     def addFinding() {
+        def t = null;
+        if( schemaName.matches(".*evaluation.*") ) {
+            t = "evaluation";
+        }
+        else {
+            t = "inspection";
+        }
+        def q = [query:[:]];
+        q.query.typeid = sectiontypeid;
+        q.onselect = { itms ->
+            itms.each {
+                def r = [:];
+                r.checklistitemid = it.objid;
+                r.state = 2;
+                handler.save(r);
+                listHandler.reload();
+            }
+        }
+        def op = Inv.lookupOpener("obo_checklist_master_"+t+":lookup", q);
+        return op;
+        /*
         def p = [:];
         p.handler = handler;
         p.title = "Finding";
@@ -57,6 +80,7 @@ class ApplicationFindingListModel extends AbstractComponentModel {
         def op = Inv.lookupOpener("application_finding:create", p );
         op.target = "popup";
         return op;
+        */
     }
     
     public def openItem(def o) {

@@ -15,11 +15,18 @@ import com.rameses.rcp.ui.annotations.ComponentBean;
 public class ApplicationFindingList extends AbstractComponent {
 
     private String sectionTitle;
+    private String sectionType;
     
     public void afterInitComponent( com.rameses.rcp.common.ComponentBean bean ) {
-        bean.setProperty("sectiontitle", getProperty(getSectionTitle()) );        
+        bean.setProperty("sectiontitle", getProperty(getSectionTitle()) );  
+        bean.setProperty("sectiontypeid", getProperty(getSectionType()) );
     }
     
+    @Override
+    public void afterRefresh() {
+        super.reload();
+        super.afterRefresh(); //To change body of generated methods, choose Tools | Templates.
+    }
     
     /**
      * Creates new form ApplicationFindingList
@@ -81,9 +88,24 @@ public class ApplicationFindingList extends AbstractComponent {
         xDataTable1.setName("selectedItem"); // NOI18N
         xDataTable1.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "particulars"}
+                new Object[]{"name", "parent.type.title"}
+                , new Object[]{"caption", "Type"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 100}
+                , new Object[]{"maxWidth", 150}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"visible", true}
+                , new Object[]{"visibleWhen", null}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "checklistitem.title"}
                 , new Object[]{"caption", "Particulars"}
-                , new Object[]{"width", 200}
+                , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
                 , new Object[]{"required", false}
@@ -93,44 +115,14 @@ public class ApplicationFindingList extends AbstractComponent {
                 , new Object[]{"visible", true}
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "parent.type.title"}
-                , new Object[]{"caption", "Type"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 200}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", null}
-                , new Object[]{"caption", "Status"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 100}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"expression", "#{ item.state == 1 ? 'CLOSED' : 'FOR-REVISION' }"}
+                , new Object[]{"expression", "<p style=\"vertical-align:top;\">#{ item.checklistitem.title } #{ item.particulars !=null ? item.particulars : ''  }</p>"}
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.LabelColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "createdby.name"}
                 , new Object[]{"caption", "Issued By"}
                 , new Object[]{"width", 200}
-                , new Object[]{"minWidth", 200}
+                , new Object[]{"minWidth", 150}
                 , new Object[]{"maxWidth", 200}
                 , new Object[]{"required", false}
                 , new Object[]{"resizable", true}
@@ -140,21 +132,6 @@ public class ApplicationFindingList extends AbstractComponent {
                 , new Object[]{"visibleWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "dtcreated"}
-                , new Object[]{"caption", "Date Issued"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 100}
-                , new Object[]{"maxWidth", 100}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"visible", true}
-                , new Object[]{"visibleWhen", null}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.DateColumnHandler(null, "yyyy-MM-dd", null)}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "transmittalid"}
@@ -172,6 +149,8 @@ public class ApplicationFindingList extends AbstractComponent {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
+        xDataTable1.setDynamic(true);
+        xDataTable1.setRowHeight(50);
         add(xDataTable1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -198,4 +177,19 @@ public class ApplicationFindingList extends AbstractComponent {
     public void setSectionTitle(String sectionTitle) {
         this.sectionTitle = sectionTitle;
     }
+
+    /**
+     * @return the sectionType
+     */
+    public String getSectionType() {
+        return sectionType;
+    }
+
+    /**
+     * @param sectionType the sectionType to set
+     */
+    public void setSectionType(String sectionType) {
+        this.sectionType = sectionType;
+    }
+
 }
