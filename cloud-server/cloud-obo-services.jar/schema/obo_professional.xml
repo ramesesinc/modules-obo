@@ -4,6 +4,7 @@
 		<field name="prcno" />
 		<field name="profession" />
 		<field name="infoid" />
+		<field name="orgcode" />
 	</element>
 </schema>		
 

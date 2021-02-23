@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Service,
   Stepper,
@@ -7,8 +7,7 @@ import {
   Title,
   Card,
   Error
-} from 'rsi-react-web-components';
-
+} from "rsi-react-web-components";
 
 import { Disclaimer } from "rsi-react-filipizen-components";
 
@@ -22,8 +21,8 @@ const steps = [
   { step: 1, name: "initial", caption: "Initial" },
   { step: 2, name: "newprofessional", caption: "New Professional" },
   { step: 3, name: "disclaimer", caption: "Disclaimer" },
-  { step: 4, name: "registered", caption: "Registered" },
-]
+  { step: 4, name: "registered", caption: "Registered" }
+];
 
 const ProfessionalWebController = (props) => {
   const [loading, setLoading] = useState(false);
@@ -40,40 +39,39 @@ const ProfessionalWebController = (props) => {
   const handleError = (err) => {
     setLoading(false);
     setError(err.toString());
-  }
+  };
 
   const moveNextStep = () => {
-    setStep(cs => cs+1);
-  }
+    setStep((cs) => cs + 1);
+  };
 
   const movePrevStep = () => {
-    setStep(cs => cs-1);
-  }
+    setStep((cs) => cs - 1);
+  };
 
   const activeStep = steps[step];
 
   const verifiedInfoHandler = (info) => {
     setInfo(info);
     moveNextStep();
-  }
-
+  };
 
   const getReconciledProfessional = () => {
-    const address = {...professional.entity.address};
+    const address = { ...professional.entity.address };
     if (professional.entity.resident) {
       address.citymunicipality = partner.title;
       address.province = partner.group.title;
     }
-    const entity = {...professional.entity, address};
-    const prof = {...entity, ...professional};
+    const entity = { ...professional.entity, address };
+    const prof = { ...entity, ...professional, orgcode: partner.id };
     delete prof.entity;
     return prof;
-  }
+  };
 
   const submitProfessional = (professional) => {
     setProfessional(professional);
     moveNextStep();
-  }
+  };
 
   const saveProfessional = () => {
     setLoading(true);
@@ -84,39 +82,51 @@ const ProfessionalWebController = (props) => {
       } else {
         moveNextStep();
       }
-    })
-  }
+    });
+  };
 
   return (
     <Page>
-      <Panel target="left" style={styles.stepperContainer} >
+      <Panel target="left" style={styles.stepperContainer}>
         <Stepper steps={steps} activeStep={step} />
       </Panel>
       <Card>
         <Title>{service.title}</Title>
         <Error msg={error} />
         <Panel visibleWhen={activeStep.name === "initial"}>
-          <Initial partner={partner} onCancel={history.goBack} onVerified={verifiedInfoHandler} />
+          <Initial
+            partner={partner}
+            onCancel={history.goBack}
+            onVerified={verifiedInfoHandler}
+          />
         </Panel>
         <Panel visibleWhen={activeStep.name === "newprofessional"}>
-          <NewProfessional partner={partner} info={info} onSubmit={submitProfessional} />
+          <NewProfessional
+            partner={partner}
+            info={info}
+            onSubmit={submitProfessional}
+          />
         </Panel>
         <Panel visibleWhen={activeStep.name === "disclaimer"}>
-          <Disclaimer partner={partner} onCancel={movePrevStep} onSubmit={saveProfessional} />
+          <Disclaimer
+            partner={partner}
+            onCancel={movePrevStep}
+            onSubmit={saveProfessional}
+          />
         </Panel>
         <Panel visibleWhen={activeStep.name === "registered"}>
           <Success onClose={() => history.goBack()} />
         </Panel>
       </Card>
     </Page>
-  )
-}
+  );
+};
 
 const styles = {
   stepperContainer: {
     paddingTop: 30,
-    paddingLeft: 40,
+    paddingLeft: 40
   }
-}
+};
 
-export default ProfessionalWebController
+export default ProfessionalWebController;

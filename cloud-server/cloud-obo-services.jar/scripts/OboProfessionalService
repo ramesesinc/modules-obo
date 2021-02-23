@@ -55,6 +55,7 @@ public class OboProfessionalService  {
 		p.infoid = m.objid;
 		p.profession = o.profession;
 		p.prcno = o.prc.idno;
+		p.orgcode = o.orgcode;
 		def z = profEm.create( p );
 
 		//update also the profid of progfessional after saving the professional
